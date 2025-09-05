@@ -24,7 +24,7 @@
 
 body {
   font-family: 'Poppins', sans-serif;
-  background: linear-gradient(135deg, #fdf8de 0%, #fdf8de 100%);
+  background: linear-gradient(135deg, #f0f0f0 0%, #fdf8de 100%);
   padding: 15px;
   margin: 0;
   color: #333;
@@ -411,11 +411,11 @@ footer {
       font-size: 20px;
     }
   </style>
-<body>
-  <a href="index.html">
-    <span class="icon">🏠</span> Home
-  </a>
-</body>
+    <!-- Centered Buttons -->
+    <div style="text-align: center; margin: 20px 0; display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;">
+      <a href="index.html" class="social-button">🏠 Home</a>
+      <a href="calculator.html" target="_blank" class="social-button" style="background: linear-gradient(45deg,#ff8008,#ffc837);">CGPA ⇆ Percentage Calculator</a>
+    </div>
 </html>
 
 
@@ -457,8 +457,8 @@ footer {
     <ul>
       <li>Max 5 grace marks</li>
       <li>Grace in max 3 subjects</li>
-      <li>Grace Marks will be given in <b>External Theory & Co-Curricular</b> only</li>
-      <li>No Grace in Practical/Skill Development/Viva/Project</li>
+      <li>Grace Marks will be given in <b>External Theory & Co-Curricular/Practical/Skill Development/Viva/Project</b> only</li>
+      <li>No Grace in Internal Exams</li>
       <li>Passing: Major/Minor = 25 External & 33 Total</li>
       <li>Passing: Skill/Project/Co-Curricular = 40 Total</li>
     </ul>
@@ -1298,8 +1298,8 @@ function updateAllDropdowns() {
     // Update all existing dropdowns
     populateDropdownGroup('#majorTheorySubjects', 'Major (Theory)');
     populateDropdownGroup('#majorPracticalSubjects', 'Major (Practical)');
-    populateDropdownGroup('.minorCode', 'Minor', true); // Updated
-    populateDropdownGroup('.skillCode', 'Skill Development', true); // Updated
+    populateDropdownGroup('.minorCode', 'Minor', true);
+    populateDropdownGroup('.skillCode', 'Skill Development', true);
     populateDropdownGroup('#projectSubjects', 'Project');
     populateDropdownGroup('.coCurricular', 'Co-Curricular', true);
 }
@@ -1311,7 +1311,6 @@ function getFilteredSubjects(subjectType) {
     if (!selectedClass || isNaN(selectedSem)) return [];
 
     return courseData.filter(course => {
-        // This line is corrected to properly match the selected class
         const classMatch = course.class.includes(selectedClass); 
         const typeMatch = course.subjectType === subjectType;
         
@@ -1329,7 +1328,7 @@ function getFilteredSubjects(subjectType) {
 
 function populateDropdown(selectElement, subjectType) {
     const subjects = getFilteredSubjects(subjectType);
-    selectElement.innerHTML = '<option value="">-- Select Subject --</option>'; // Clear existing options
+    selectElement.innerHTML = '<option value="">-- Select Subject --</option>';
     subjects.forEach(subject => {
         const option = document.createElement('option');
         option.value = subject.code;
@@ -1352,7 +1351,7 @@ function populateDropdownGroup(containerSelector, subjectType, isSingle = false)
 }
 
 
-function addSubject(containerId, name, extClass, intClass, subjectType, label1 = "EXT", label2 = "INT") {
+function addSubject(containerId, name, subjectType, fields) {
     const container = document.getElementById(containerId);
     container.style.display = "block";
     const div = document.createElement("div");
@@ -1360,54 +1359,134 @@ function addSubject(containerId, name, extClass, intClass, subjectType, label1 =
     
     let inputFieldsHTML = `<label>${name}:</label>
                            <select class="subjectCode" style="flex-grow:1;"><option value="">-- Select Subject --</option></select>`;
-
-    if (extClass) {
-        inputFieldsHTML += ` ${label1} <input type="number" class="${extClass}" min="0" max="99">`;
-    }
-    if (intClass) {
-        inputFieldsHTML += ` ${label2} <input type="number" class="${intClass}" min="0" max="99">`;
-    }
+    
+    fields.forEach(field => {
+        inputFieldsHTML += ` ${field.label} <input type="number" class="${field.class}" min="0" max="${field.max}">`;
+    });
 
     div.innerHTML = inputFieldsHTML;
     container.appendChild(div);
 
-    // Populate the newly added dropdown
     const newSelect = div.querySelector('.subjectCode');
     populateDropdown(newSelect, subjectType);
 }
 
-function addMajorTheory(){ majorTheoryCount++; addSubject("majorTheorySubjects","Major Theory "+majorTheoryCount,"majorTheoryExternal","majorTheoryInternal", "Major (Theory)"); }
-function addMajorPractical(){ majorPracticalCount++; addSubject("majorPracticalSubjects","Major Practical "+majorPracticalCount,"majorPracticalExternal","majorPracticalInternal", "Major (Practical)"); }
-function addProject(){ projectCount++; addSubject("projectSubjects","Project "+projectCount,"projectMarks",null, "Project", "Total", ""); }
+function addMajorTheory() {
+    majorTheoryCount++;
+    addSubject("majorTheorySubjects", "Major Theory " + majorTheoryCount, "Major (Theory)", [
+        { label: "EXT", class: "majorTheoryExternal", max: 75 },
+        { label: "INT", class: "majorTheoryInternal", max: 25 }
+    ]);
+}
+function addMajorPractical() {
+    majorPracticalCount++;
+    addSubject("majorPracticalSubjects", "Major Practical " + majorPracticalCount, "Major (Practical)", [
+        { label: "EXT", class: "majorPracticalExternal", max: 75 },
+        { label: "INT", class: "majorPracticalInternal", max: 25 }
+    ]);
+}
+function addProject() {
+    projectCount++;
+    addSubject("projectSubjects", "Project " + projectCount, "Project", [
+        { label: "Total", class: "projectMarks", max: 100 }
+    ]);
+}
+
+
+function showError(msg){
+  var el = document.getElementById('errorMsg');
+  if(el){ el.textContent = msg; el.className = 'error-blink'; el.style.display = 'block'; }
+}
+function hideError(){
+  var el = document.getElementById('errorMsg');
+  if(el){ el.style.display = 'none'; el.className = '';}
+}
+
+function validateMarks() {
+    let allValid = true;
+    const inputs = document.querySelectorAll('input[type="number"]');
+    inputs.forEach(input => {
+        const value = parseFloat(input.value);
+        const max = parseFloat(input.max);
+        if (!isNaN(value) && !isNaN(max) && value > max) {
+            allValid = false;
+        }
+    });
+    return allValid;
+}
+
 
 function calculateResult(){
+  hideError();
+
+  if (!validateMarks()) {
+      showError("Entered Marks are more than Max Marks");
+      return;
+  }
+
   const studentName = document.getElementById('studentName').value;
   const rollNumber = document.getElementById('rollNumber').value;
   const className = document.getElementById('className').value;
   const semester = document.getElementById('semester').value;
 
   if (!studentName || !rollNumber || !className || !semester) {
-    alert("Please fill in all Student Information, Class, and Semester.");
+    showError("Please fill in Student Name, Roll Number, Class, and Semester.");
     return;
   }
  
- // Check if at least one subject has marks entered
-const allInputs = document.querySelectorAll(
-  "#marksSection input[type=number]"
-);
-let anyMarksEntered = false;
-allInputs.forEach(inp => {
-  if (inp.value.trim() !== "" && !isNaN(inp.value)) {
-    anyMarksEntered = true;
+  // --- VALIDATION 1: Minimum 3 Major Theory & Co-Curricular Mandatory ---
+  let majorTheoryFilledCount = 0;
+  document.querySelectorAll('#majorTheorySubjects .subject').forEach(div => {
+      const extInput = div.querySelector('.majorTheoryExternal');
+      const intInput = div.querySelector('.majorTheoryInternal');
+      if (extInput && intInput && extInput.value.trim() !== '' && intInput.value.trim() !== '') {
+          majorTheoryFilledCount++;
+      }
+  });
+
+  const coExtInput = document.querySelector('#coCurricularSection .coExternal');
+  const coIntInput = document.querySelector('#coCurricularSection .coInternal');
+  const isCoCurricularFilled = coExtInput && coIntInput && coExtInput.value.trim() !== '' && coIntInput.value.trim() !== '';
+
+  if (majorTheoryFilledCount < 3) {
+      showError("Minimum 3 Major Theory subjects marks are mandatory.");
+      return;
   }
-});
-if (!anyMarksEntered) {
-  alert("Please enter marks for at least one subject.");
-  return;
-}
+  if (!isCoCurricularFilled) {
+      showError("Co-Curricular subject marks are mandatory.");
+      return;
+  }
+  // --- END VALIDATION 1 ---
 
+  // --- VALIDATION 2: Check for any selected subjects with empty marks ---
+  let isValid = true;
+  function validateEntries(containerSelector, inputs) {
+      const subjectDivs = document.querySelectorAll(containerSelector);
+      subjectDivs.forEach(div => {
+          const select = div.querySelector('select');
+          if (select && select.value !== '') { // If a subject is selected from dropdown
+              for (const inputClass of inputs) {
+                  const input = div.querySelector(`.${inputClass}`);
+                  if (input && input.value.trim() === '') { // Check if any linked input is empty
+                      isValid = false;
+                  }
+              }
+          }
+      });
+  }
+  validateEntries('#majorTheorySubjects .subject', ['majorTheoryExternal', 'majorTheoryInternal']);
+  validateEntries('#majorPracticalSubjects .subject', ['majorPracticalExternal', 'majorPracticalInternal']);
+  validateEntries('#minorSection .subject', ['minorExternal', 'minorInternal']);
+  validateEntries('#skillSection .subject', ['skillTheory', 'skillPractical']);
+  validateEntries('#coCurricularSection .subject', ['coExternal', 'coInternal']);
+  validateEntries('#projectSubjects .subject', ['projectMarks']);
 
-  const tbody=document.querySelector("#resultTable tbody"); tbody.innerHTML="";
+  if (!isValid) {
+      showError("Please enter marks for all subjects you have selected.");
+      return;
+  }
+  // --- END VALIDATION 2 ---
+  
   let graceLeft=maxGrace, remainingGraceSubjects=maxGraceSubjects;
   let subjects=[];
 
@@ -1450,11 +1529,8 @@ if (!anyMarksEntered) {
   processMultipleSubjects("#majorTheorySubjects", "majorTheory", "majorTheoryExternal", "majorTheoryInternal");
   processMultipleSubjects("#majorPracticalSubjects", "majorPractical", "majorPracticalExternal", "majorPracticalInternal");
   processMultipleSubjects("#projectSubjects", "project", "projectMarks", null);
-  
-  // Process single-entry subjects
   processSingleSubject("#minorSection .subject", "minor", "minorCode", "minorExternal", "minorInternal");
-  processSingleSubject("#skillSection .subject", "skill", "skillCode", "skillTheory", "skillPractical");
-  // FIX 2 of 2: Corrected the selector for the Co-Curricular section.
+  processSingleSubject("#skillSection .subject", "skill", "skillCode", "skillPractical", "skillTheory"); // Note: Skill Dev. has practical and theory, handled as ext and internal
   processSingleSubject("#coCurricularSection .subject", "coCurricular", "coCurricular", "coExternal", "coInternal");
 
   function checkPass(subj,extTotal){
@@ -1480,6 +1556,16 @@ if (!anyMarksEntered) {
   let anyFailAfterGrace=false;
   subjects.forEach(subj=>{ if(!checkPass(subj,subj.ext)) anyFailAfterGrace=true; });
 
+  const subjectTypeMap = {
+      majorTheory: 'Major (Theory)',
+      majorPractical: 'Major (Practical)',
+      minor: 'Minor',
+      skill: 'Skill Development',
+      coCurricular: 'Co-Curricular',
+      project: 'Project'
+  };
+
+  let tbodyHTML = '';
   subjects.forEach(subj=>{
     let total=subj.ext+subj.internal;
     let status=checkPass(subj,subj.ext)?"Pass":"Fail";
@@ -1496,83 +1582,167 @@ if (!anyMarksEntered) {
       } else { remark=`Need ${40-total} in Total`; }
     } else { remark="-"; }
     if(anyFailAfterGrace && subj.grace>0) remark = `Grace Cancelled - ${remark}`;
+    
+    // For skill dev, show TH and PR separately
+    let extMarks = subj.ext - subj.grace;
+    let intMarks = subj.internal;
+    if(subj.type === 'skill') {
+        extMarks = subj.ext; // Skill practical is in ext
+        intMarks = subj.internal; // Skill theory is in internal
+    }
 
-    const tr=document.createElement("tr");
-    tr.className=subj.grace>0?"graceApplied":"";
-    tr.innerHTML=`<td>${subj.code}</td><td>${subj.name}</td><td>${subj.ext-subj.grace}</td><td class="grace">${anyFailAfterGrace ? 0 : subj.grace}</td><td>${subj.ext}</td><td>${subj.internal}</td><td>${total}</td><td class="${status==='Pass'?'pass':'fail'}">${status}</td><td>${remark}</td>`;
-    tbody.appendChild(tr);
+    const trClass=subj.grace>0?"graceApplied":"";
+    const statusClass = status==='Pass'?'pass':'fail';
+    const subjectTypeText = subjectTypeMap[subj.type] || subj.type;
+    tbodyHTML += `<tr class="${trClass}"><td>${subjectTypeText}</td><td>${subj.code}</td><td>${subj.name}</td><td>${extMarks}</td><td class="grace">${anyFailAfterGrace ? 0 : subj.grace}</td><td>${subj.ext}</td><td>${intMarks}</td><td>${total}</td><td class="${statusClass}">${status}</td><td>${remark}</td></tr>`;
   });
 
   const selectedSemester = document.getElementById('semester').options[document.getElementById('semester').selectedIndex].text;
-  document.getElementById('studentDetails').innerHTML = `
-    <div><b>Name:</b> ${studentName}</div>
-    <div><b>Roll No:</b> ${rollNumber}</div>
-    <div><b>Program:</b> ${className} (NEP)</div>
-    <div><b>Semester:</b> ${selectedSemester}</div>
-  `;
- 
-  const overallDiv = document.getElementById("overall");
-  const congratsDiv = document.getElementById("congratsMsg");
-
+  const generationTime = new Date().toLocaleString('en-IN', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true });
+  const studentDetailsHTML = `<div><b>Name:</b> ${studentName}</div><div><b>Roll No:</b> ${rollNumber}</div><div><b>Program:</b> ${className} (NEP)</div><div><b>Semester:</b> ${selectedSemester}</div><div style="flex-basis: 100%; text-align: right; font-size: 0.8em; margin-top: 5px;"><b>Generated On:</b> ${generationTime}</div>`;
+  
+  let overallHTML, overallClassName, congratsHTML, playSound;
   if(anyFailAfterGrace){
     const failMessage='FAIL (ग्रेस मिलने के बाद भी यदि किसी भी विषय में बैक रहती है तो किसी भी विषय में ग्रेस नहीं मिलेगा)';
-    overallDiv.innerHTML=`Overall Result: <span class="fail">${failMessage}</span>`;
-    overallDiv.className = 'overall-fail';
-    congratsDiv.innerHTML = `<h2>Result</h2>`;
-    congratsDiv.classList.remove('flash-animation');
+    overallHTML=`Overall Result: <span class="fail">${failMessage}</span>`;
+    overallClassName = 'overall-fail';
+    congratsHTML = `<h2>Result</h2>`;
+    playSound = false;
   } else {
     let totalGraceApplied = subjects.reduce((sum,subj)=>sum+(anyFailAfterGrace ? 0 : subj.grace),0);
     if(totalGraceApplied>0){
-      overallDiv.innerHTML=`Overall Result: <span class="pass">PASS with Grace (${totalGraceApplied} Marks)</span>`;
+      overallHTML=`Overall Result: <span class="pass">PASS with Grace (${totalGraceApplied} Marks)</span>`;
     } else {
-      overallDiv.innerHTML=`Overall Result: <span class="pass">PASS</span>`;
+      overallHTML=`Overall Result: <span class="pass">PASS</span>`;
     }
-    overallDiv.className = 'overall-pass';
-    congratsDiv.innerHTML = `<h2>🎉 Congratulations! 🎉</h2>`;
-    congratsDiv.classList.add('flash-animation');
+    overallClassName = 'overall-pass';
+    congratsHTML = `<h2 class="flash-animation">🎉 Congratulations! 🎉</h2>`;
+    playSound = true;
   }
- 
-  openModal();
+
+  // --- Generate and open result in a new tab ---
+  openResultInNewTab(studentDetailsHTML, tbodyHTML, overallHTML, overallClassName, congratsHTML, studentName, rollNumber, playSound);
 }
 
-function openModal() { document.getElementById('resultModal').style.display = 'flex'; }
-function closeModal() { document.getElementById('resultModal').style.display = 'none'; }
-window.onclick = function(event) {
-  const modal = document.getElementById('resultModal');
-  if (event.target == modal) {
-    closeModal();
-  }
+function openResultInNewTab(studentDetailsHTML, tbodyHTML, overallHTML, overallClassName, congratsHTML, studentName, rollNumber, playSound) {
+    const css = `
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+        body { font-family: 'Poppins', sans-serif; background-color: #e9eff5; padding: 20px; color: #333; }
+        #gradeCard { background: #ffffff; padding: 25px; border-radius: 20px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); max-width: 900px; margin: 20px auto; border: 1px solid #ddd; }
+        .header-logo { display: flex; justify-content: center; align-items: center; border-bottom: 2px solid #f0f0f0; padding-bottom: 15px; margin-bottom: 15px; }
+        .header-logo img { max-width: 80px; margin-right: 15px; }
+        .header-logo .university-info { text-align: left; }
+        .header-logo h3 { margin: 0; color: #3498db; font-size: 1.5em; font-weight: 700; }
+        .header-logo h4 { margin: 5px 0 0; font-weight: 600; color: #555; font-size: 1.1em; }
+        #studentDetails { display: flex; justify-content: space-between; flex-wrap: wrap; margin-bottom: 20px; font-size: 0.95em; padding: 15px; background: #f9fafb; border-radius: 12px; border: 1px solid #e1e8ed; }
+        #studentDetails div { flex: 1 1 220px; margin: 5px; }
+        #studentDetails b { color: #34495e; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; font-size: 0.85em; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border-radius: 12px; overflow: hidden; }
+        thead { background: linear-gradient(90deg, #3498db, #2980b9); color: white; text-transform: uppercase; letter-spacing: 0.5px; }
+        th, td { border: 1px solid #e1e8ed; padding: 12px 10px; text-align: center; }
+        tbody tr:nth-child(even) { background-color: #f9fafb; }
+        tbody tr:hover { background-color: #f1f8ff; }
+        .pass { color: #27ae60; font-weight: bold; }
+        .fail { color: #e74c3c; font-weight: bold; }
+        .grace { color: #f39c12; font-weight: bold; }
+        .graceApplied { background-color: #fef9e7 !important; }
+        #overall { font-size: 1.3em; text-align: center; margin-top: 25px; padding: 15px; border-radius: 12px; font-weight: 700; }
+        .overall-pass { background-color: #eafaf1; border: 1px solid #27ae60; color: #27ae60; }
+        .overall-fail { background-color: #fdedec; border: 1px solid #e74c3c; color: #e74c3c; }
+        #note { margin-top: 25px; font-size: 0.8em; text-align: justify; color: #7f8c8d; background-color: #fcfcfc; padding: 15px; border-radius: 8px; border-left: 5px solid #bdc3c7; }
+        button { padding: 12px 25px; margin: 10px 5px; cursor: pointer; background: linear-gradient(45deg, #3498db, #2980b9); color: #fff; border: none; border-radius: 30px; font-size: 1em; font-weight: 600; transition: all 0.3s ease; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        button:hover { transform: translateY(-3px); box-shadow: 0 6px 15px rgba(0,0,0,0.2); }
+        @keyframes flash { 0%, 100% { transform: scale(1); color: #2980b9; } 50% { transform: scale(1.05); color: #3498db; } }
+        .flash-animation { animation: flash 1.5s infinite; text-align: center; }
+        @media print { body { padding: 0; background: #fff; } #gradeCard { box-shadow: none; border: none; margin: 0; max-width: 100%; border-radius: 0;} .action-buttons, #note { display: none; } }
+    `;
+
+    const js = `
+        function downloadPDF(){
+            const element = document.getElementById("gradeCard");
+            const studentName = "${studentName.replace(/[`"']/g, '')}" || 'student';
+            const rollNumber = "${rollNumber.replace(/[`"']/g, '')}" || '0000';
+            const opt = {
+                margin: 0.3,
+                filename: \`GradeCard_\${studentName.replace(/\\s/g, '_')}_\${rollNumber}.pdf\`,
+                 image:        { type: 'jpeg', quality: 1 }, // max image quality
+                html2canvas: { scale: 2, useCORS: true },
+                jsPDF: { unit: 'in', format: 'a4', orientation: 'landscape' }
+            };
+            html2pdf().set(opt).from(element).save();
+        }
+        window.onload = function() {
+            if (${playSound}) {
+                document.getElementById('successSound').play().catch(e => console.log("Audio playback failed. User interaction might be needed."));
+            }
+        };
+    `;
+
+    const newPageHTML = `
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <title>Grade Card for ${studentName}</title>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"><\/script>
+            <style>${css}</style>
+        </head>
+        <body>
+            <div id="gradeCard">
+                <div class="header-logo">
+                    <img src="Universityupdates.png" alt="Logo">
+                    <div class="university-info">
+                        <h3>University Updates</h3>
+                        <h4>Unofficial Grade Card (NEP)</h4>
+                    </div>
+                </div>
+                
+                <div id="congratsMsg">${congratsHTML}</div>
+                <div id="studentDetails">${studentDetailsHTML}</div>
+                
+                <table id="resultTable">
+                    <thead>
+                    <tr>
+                        <th>Subject Type</th>
+                        <th>Sub Code</th>
+                        <th>Subject</th>
+                        <th>Obtained Marks</th>
+                        <th>Grace</th>
+                        <th>Final Marks</th>
+                        <th>Internal</th>
+                        <th>Total</th>
+                        <th>Status</th>
+                        <th>Remarks</th>
+                    </tr>
+                    </thead>
+                    <tbody>${tbodyHTML}</tbody>
+                </table>
+                
+                <div id="overall" class="${overallClassName}">${overallHTML}</div>
+                
+                <div class="action-buttons" style="text-align:center; margin-top:20px;">
+                    <button onclick="downloadPDF()">Download as PDF</button>
+                    <button onclick="window.print()">Print</button>
+                    <button onclick="closeModal()">Close</button>
+                </div>
+                
+                <div id="note">
+                    <strong>Disclaimer:</strong> This is an unofficial grade card and is for informational purposes only. It is not an official document issued by Chaudhary Charan Singh University, Meerut. For any discrepancies, please refer to the official records of the University.
+                </div>
+            </div>
+            <audio id="successSound" src="https://www.soundjay.com/buttons/sounds/button-7.mp3" preload="auto"></audio>
+            <script>${js}<\/script>
+        </body>
+        </html>
+    `;
+
+    const blob = new Blob([newPageHTML], { type: 'text/html' });
+    const url = URL.createObjectURL(blob);
+    window.open(url, '_blank');
 }
 
-function setPrintDateTime() {
-  const now = new Date();
-  const formatted = now.toLocaleString('en-IN', {
-    dateStyle: 'full',
-    timeStyle: 'short'
-  });
-  document.getElementById("printDateTime").innerText = "Print Date & Time: " + formatted;
-}
 
-function showResult() {
-  setPrintDateTime(); // ensure it updates every time result opens
-  document.getElementById("resultModal").style.display = "flex";
-}
-
-function downloadPDF() {
-  setPrintDateTime(); // also include time in PDF
-
-  const element = document.getElementById("gradeCard");
-
-  const opt = {
-    margin:       [0.3, 0.3, 0.3, 0.3], // smaller margins for more content
-    filename:     'UniversityUpdates_GradeCard.pdf',
-    image:        { type: 'jpeg', quality: 1 }, // max image quality
-    html2canvas:  { scale: 4, useCORS: true, letterRendering: true }, // higher scale for FHD
-    jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
-  };
-
-  html2pdf().set(opt).from(element).save();
-}
+function resetForm(){ location.reload(); }
 
 </script>
 </body>
