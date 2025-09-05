@@ -19,57 +19,70 @@
       --green: #28a745;
       --red: #dc3545;
     }
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 15px;
+      text-align: center;
+      /* ✅ White gradient background with animated zigzag lines */
+      background: linear-gradient(135deg, #f0f0f0 100%, #f8f8f8 1000%);
+      background-image: repeating-linear-gradient(
+        45deg,
+        rgba(200,200,200,0.1) 0px,
+        rgba(200,200,200,0.1) 2px,
+        transparent 2px,
+        transparent 10px
+      );
+      background-size: 200% 200%;
+      animation: moveZigzag 20s linear infinite;
+    }
+   
 
-body {
-  font-family: 'Poppins', sans-serif;
-  background: #fff;   /* ✅ White background */
-  padding: 15px;
-  margin: 0;
-  color: #333;
-  text-align: center;
-}
+    header img {
+      height: 60px; /* ✅ Increased 1.5x */
+      margin-bottom: 5px;
+      filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.4));
+    }
+    header h1 {
+      margin: 5px 0;
+      font-size: 28px;
+      font-weight: bold;
+      text-shadow: 2px 2px 6px rgba(0,0,0,0.4));
+    }
 
-header img {
-  height: 100px; /* ✅ Reduced logo */
-  margin-bottom: 5px;
-  filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.4));
-}
-header h1 {
-  margin: 5px 0;
-  font-size: 28px;
-  font-weight: bold;
-  text-shadow: 2px 2px 6px rgba(0,0,0,0.4));
-}
+    /* ✅ Calculator Box */
+    .calculator {
+      background: #fff;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+      text-align: center;
+      height: 200px;
+      width: 400px;
+      margin: 60px auto;
+      border: 7px solid transparent;
+  justify-content: center;
+    }
 
-/* ✅ Calculator Box with Dynamic Border */
-.calculator {
-  background: #fff;
-  padding: 25px;
-  border-radius: 12px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-  text-align: center;
-  width: 330px;
-  margin: 60px auto;
-  border: 7px solid transparent; /* Default */
-}
+    h2 {
+      margin-bottom: 60px;
+      color: #333;
+    }
 
-h2 {
-  margin-bottom: 60px;
-  color: #333;
-}
+    input {
+      width: 90%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+      text-align: center;
+    }
 
-input {
-  width: 90%;
-  padding: 10px;
-  margin: 10px 0;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  font-size: 16px;
-  text-align: center;
-}
     .result {
       margin-top: 15px;
-      font-weight: bold; /* ✅ Bold text */
+      font-weight: bold;
       font-size: 18px;
     }
 
@@ -77,29 +90,29 @@ input {
     .green { color: var(--green); }
     .error { color: var(--red); font-size: 14px; margin-top: 5px; }
 
-footer {
-  margin-top: 25px;
-  font-weight: bold;
-  color: #007bff;
-}
+    footer {
+      margin-top: 25px;
+      font-weight: bold;
+      color: #007bff;
+    }
 
-    /* Home Button */
+    /* ✅ Home Button with Gradient */
     .home-btn {
-      margin-top: 20px; /* ✅ Margin before button */
+      margin-top: 20px;
       text-decoration: none;
       font-size: 18px;
       color: #fff;
-      background: var(--blue);
+      background: linear-gradient(90deg, #007BFF, #6610f2);
       padding: 10px 20px;
       border-radius: 8px;
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      transition: background 0.3s;
+      transition: opacity 0.3s;
     }
 
     .home-btn:hover {
-      background: #0056b3;
+      opacity: 0.85;
     }
 
     .icon { font-size: 20px; }
@@ -108,24 +121,24 @@ footer {
 <body>
 
 <header class="w-full border-b bg-white/70 sticky top-0 z-30"> 
-  <div class="max-w-6xl mx-auto flex items-center justify-center p-4">
+  <div class="max-w-6x1 mx-auto flex items-center justify-center p-4">
     <div class="flex items-center gap-3">
-      <img src="https://i.ibb.co/nMC0877T/UNIVERSITY-UPDATES-LOGO-removebg-preview.png" alt="Logo" class="h-10 w-auto"/>
+      <img src="https://i.ibb.co/nMC0877T/UNIVERSITY-UPDATES-LOGO-removebg-preview.png" alt="Logo" />
     </div>
   </div>
 </header>
 
-     <h1 class="font-bold">C.G.P.A. ⇆ PERCENTAGE CALCULATOR</h1>
+<h1 class="font-bold mt-[50px]">C.G.P.A. ⇆ PERCENTAGE CALCULATOR</h1>
 
-      
-<!-- Home Button -->
+
+<!-- ✅ Home Button -->
 <a href="index.html" class="home-btn">
   <span class="icon">🏠</span> Home
 </a>
 
 <!-- Calculator Box -->
 <div class="calculator" id="calculatorBox">
-  <h2>CGPA ⇆ Percentage</h2>
+ <h1 class="font-bold mt-[20px] mb-[30px]">C.G.P.A. ⇆ PERCENTAGE CALCULATOR</h1>
   <input type="number" id="inputValue" placeholder="Enter CGPA or %" step="any" oninput="convertValue()">
   <div class="result" id="result"></div>
   <div class="error" id="error"></div>
@@ -144,12 +157,12 @@ function convertValue() {
 
   result.innerText = "";
   error.innerText = "";
-  result.className = "result"; // reset
-  box.style.borderColor = "transparent"; // reset
+  result.className = "result"; 
+  box.style.borderColor = "transparent"; 
 
   if (isNaN(value)) return;
 
-  if (value <= 10) { // CGPA to %
+  if (value <= 10) { 
     if (value < 0) {
       error.innerText = "⚠️ CGPA cannot be negative";
       box.style.borderColor = "var(--red)";
@@ -160,9 +173,9 @@ function convertValue() {
     result.classList.add("blue");
     box.style.borderColor = "var(--blue)";
   } 
-  else if (value <= 100) { // % to CGPA
+  else if (value <= 100) { 
     let cgpa = (value / 9.5);
-    if (cgpa > 10) cgpa = 10; // ✅ Ensure CGPA does not exceed 10
+    if (cgpa > 10) cgpa = 10; 
     cgpa = cgpa.toFixed(2);
     result.innerHTML = `<b>🎓 Percentage = ${value}% → CGPA = ${cgpa}</b>`;
     result.classList.add("green");
