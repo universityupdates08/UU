@@ -1,19 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>CGPA ⇆ Percentage</title>
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
-
-:root {
-  --blue: #007BFF;
-  --green: #28a745;
-  --red: #dc3545;
-}
-
-* { box-sizing: border-box; }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admit Card Generator</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --card-bg: #ffffff; 
+      --ink: #111827;
+      --blue: #007BFF;
+      --green: #28a745;
+      --red: #dc3545;
+    }
 
 body {
   font-family: 'Poppins', sans-serif;
@@ -44,12 +49,12 @@ header h1 {
   box-shadow: 0 8px 20px rgba(0,0,0,0.15);
   text-align: center;
   width: 330px;
-  margin: 40px auto;
+  margin: 60px auto;
   border: 7px solid transparent; /* Default */
 }
 
 h2 {
-  margin-bottom: 20px;
+  margin-bottom: 60px;
   color: #333;
 }
 
@@ -62,75 +67,73 @@ input {
   font-size: 16px;
   text-align: center;
 }
+    .result {
+      margin-top: 15px;
+      font-weight: bold; /* ✅ Bold text */
+      font-size: 18px;
+    }
 
-.result {
-  margin-top: 15px;
-  font-weight: bold;
-  font-size: 18px;
-}
-
-.blue { color: var(--blue); }
-.green { color: var(--green); }
-.error { color: var(--red); font-size: 14px; margin-top: 5px; }
+    .blue { color: var(--blue); }
+    .green { color: var(--green); }
+    .error { color: var(--red); font-size: 14px; margin-top: 5px; }
 
 footer {
   margin-top: 25px;
   font-weight: bold;
   color: #007bff;
 }
-</style>
-</head>
-<body>
 
-  <div class="container">
-    <div class="main-header">
-      <header>
-        <img src="https://i.ibb.co/nMC0877T/UNIVERSITY-UPDATES-LOGO-removebg-preview.png" alt="Calculator Logo">
-        <h1>University Updates</h1>
-      </header>
-    </div>
-
-<!DOCTYPE html>
-<html lang="en">
-  <style>
-    a {
+    /* Home Button */
+    .home-btn {
+      margin-top: 20px; /* ✅ Margin before button */
       text-decoration: none;
       font-size: 18px;
       color: #fff;
-      background: #007BFF;
+      background: var(--blue);
       padding: 10px 20px;
       border-radius: 8px;
-      transition: background 0.3s;
       display: inline-flex;
       align-items: center;
       gap: 8px;
+      transition: background 0.3s;
     }
-    a:hover {
+
+    .home-btn:hover {
       background: #0056b3;
     }
-    .icon {
-      font-size: 20px;
-    }
-  </style>
-<body>
-  <a href="index.html">
-    <span class="icon">🏠</span> Home
-  </a>
-</body>
-</html>
 
-    <!-- ✅ Calculator Box -->
-    <div class="calculator" id="calculatorBox">
-      <h2>CGPA ⇆ Percentage</h2>
-      <input type="number" id="inputValue" placeholder="Enter CGPA or %" step="any" oninput="convertValue()">
-      <div class="result" id="result"></div>
-      <div class="error" id="error"></div>
+    .icon { font-size: 20px; }
+  </style>
+</head>
+<body>
+
+<header class="w-full border-b bg-white/70 sticky top-0 z-30"> 
+  <div class="max-w-6xl mx-auto flex items-center justify-center p-4">
+    <div class="flex items-center gap-3">
+      <img src="https://i.ibb.co/nMC0877T/UNIVERSITY-UPDATES-LOGO-removebg-preview.png" alt="Logo" class="h-10 w-auto"/>
     </div>
-    
-    <footer>
-      © 2025 | Designed by <b>Aditya Chaudhary💗</b>
-    </footer>
   </div>
+</header>
+
+     <h1 class="font-bold">C.G.P.A. ⇆ PERCENTAGE CALCULATOR</h1>
+
+      
+<!-- Home Button -->
+<a href="index.html" class="home-btn">
+  <span class="icon">🏠</span> Home
+</a>
+
+<!-- Calculator Box -->
+<div class="calculator" id="calculatorBox">
+  <h2>CGPA ⇆ Percentage</h2>
+  <input type="number" id="inputValue" placeholder="Enter CGPA or %" step="any" oninput="convertValue()">
+  <div class="result" id="result"></div>
+  <div class="error" id="error"></div>
+</div>
+
+<footer>
+  © 2025 | Designed by <b>Aditya Chaudhary💗</b>
+</footer>
 
 <script>
 function convertValue() {
@@ -141,25 +144,27 @@ function convertValue() {
 
   result.innerText = "";
   error.innerText = "";
-  result.className = "result"; // reset classes
-  box.style.borderColor = "transparent"; // reset border
+  result.className = "result"; // reset
+  box.style.borderColor = "transparent"; // reset
 
   if (isNaN(value)) return;
 
-  if (value <= 10) { // CGPA case
+  if (value <= 10) { // CGPA to %
     if (value < 0) {
       error.innerText = "⚠️ CGPA cannot be negative";
       box.style.borderColor = "var(--red)";
       return;
     }
     let percentage = (value * 9.5).toFixed(2);
-    result.innerText = `📘 CGPA = ${value} → Percentage = ${percentage}%`;
+    result.innerHTML = `<b>📘 CGPA = ${value} → Percentage = ${percentage}%</b>`;
     result.classList.add("blue");
     box.style.borderColor = "var(--blue)";
   } 
-  else if (value <= 100) { // Percentage case
-    let cgpa = (value / 9.5).toFixed(2);
-    result.innerText = `🎓 Percentage = ${value}% → CGPA = ${cgpa}`;
+  else if (value <= 100) { // % to CGPA
+    let cgpa = (value / 9.5);
+    if (cgpa > 10) cgpa = 10; // ✅ Ensure CGPA does not exceed 10
+    cgpa = cgpa.toFixed(2);
+    result.innerHTML = `<b>🎓 Percentage = ${value}% → CGPA = ${cgpa}</b>`;
     result.classList.add("green");
     box.style.borderColor = "var(--green)";
   } 
