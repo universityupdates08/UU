@@ -26,7 +26,7 @@
       padding: 15px;
       text-align: center;
       /* ✅ White gradient background with animated zigzag lines */
-      background: linear-gradient(135deg, #ffffff 0%, #f8f8f8 100%);
+      background: linear-gradient(135deg, #f0f0f0 100%, #f8f8f8 1000%);
       background-image: repeating-linear-gradient(
         45deg,
         rgba(200,200,200,0.1) 0px,
@@ -105,7 +105,8 @@
 
     .ccsu { background: linear-gradient(45deg, #6a11cb 0%, #2575fc 100%) }
     .msu { background: linear-gradient(45deg, #e52d27 0%, #b31217 100%) }
-    .calculator { background: linear-gradient(45deg, #6a11cb 0%, #2575fc 100%) }
+    .calculator { background: linear-gradient(45deg, #FFD700 0%, #b31217 100%);
+ }
 
     /* ✅ Section titles bold + 2x bigger */
     h2 {
@@ -120,8 +121,49 @@
       font-weight: bold;
       color: #007bff;
     }
-  </style>
+    
+    <style>
+  /* Page background light grey */
+  body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 15px;
+    text-align: center;
+    background-color: #f0f0f0; /* Light grey */
+  }
+
+  .box {
+    background: var(--card-bg);
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(31,38,135,0.1);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Admin Team box with orange side strips */
+  .admin-box {
+    border-left: 7px solid #FFA500; /* Orange */
+    border-right: 7px solid #FFA500;
+  }
+
+  /* Disclaimer box with blue side strips */
+  .disclaimer-box {
+    border-left: 7px solid #007BFF; /* Blue */
+    border-right: 7px solid #007BFF;
+  }
+
+  /* Section titles bold + 2x bigger */
+  h2, .box h1 {
+    font-size: 1em;
+    font-weight: 700;
+    margin-bottom: 15px;
+  }
+</style>
 </head>
+
 <body>
   <header class="w-full border-b bg-white/70 sticky top-0 z-30"> 
     <div class="max-w-6xl mx-auto flex items-center justify-center p-4">
@@ -134,41 +176,44 @@
       <h1>UNIVERSITY UPDATES</h1>
     </div>
 
-    <div class="box">
-    <h1 class="font-bold text-1xl">Meet Our Admin Team</h1>
-      <p><b>Aditya Chaudhary</b> (Owner) | <b>Chetan Joshi</b> (Co-Owner) | 
-      <b>DM, PC, AP, AM, GS, SS, SK, NC, VC, VJ</b> (Admin Team)</p>
-    </div>
+  <div class="box admin-box">
+  <h1 class="font-bold text-1xl">Meet Our Admin Team</h1>
+  <p><b>Aditya Chaudhary</b> (Owner) | <b>Chetan Joshi</b> (Co-Owner) | 
+  <b>DM, PC, AP, AM, GS, SS, SK, NC, VC, VJ</b> (Admin Team)</p>
+</div>
 
-    <div class="box">
-         <h1 class="font-bold text-1xl">Disclaimer</h1>
-      <p style="color:#007bff;"><b>Note:</b> This is not an Official Website of <b>Maa Shakumbhari University, Saharanpur & Chaudhary Charan Singh University, Meerut</b>.</p>
-    </div>
+<div class="box disclaimer-box">
+  <h1 class="font-bold text-1xl">Disclaimer</h1>
+  <p style="color:#007bff;"><b>Note:</b> This is not an Official Website of <b>Maa Shakumbhari University, Saharanpur & Chaudhary Charan Singh University, Meerut</b>.</p>
+</div>
 
-<div class="max-w-6xl mx-auto mt-10 grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="max-w-6xl mx-auto mt-10 text-center">
+  <h1 class="font-bold text-2xl mb-6">Select University</h1>
 
-  <h1 class="font-bold text-2xl">Select University</h1>
-  <!-- University 1 Card -->
-  <div class="bg-white shadow-lg rounded-lg p-6 flex flex-col items-center hover:shadow-2xl transition">
-    <img src="images/ccsu.png" alt="CCSU Logo" class="h-24 w-auto mb-4">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <!-- University 1 Card -->
+    <div class="bg-white shadow-lg rounded-lg p-6 flex flex-col items-center hover:shadow-2xl transition">
+      <img src="images/ccsu.png" alt="CCSU Logo" class="h-24 w-auto mb-4">
     <a href="ccsugrace.html" class="card ccsu" target="_blank">
       <img src="images/ccsu.png" alt="CCSU Logo">
       Chaudhary Charan Singh University, Meerut
     </a>
-  </div>
+    </div>
 
-  <!-- University 2 Card -->
-  <div class="bg-white shadow-lg rounded-lg p-6 flex flex-col items-center hover:shadow-2xl transition">
-    <img src="images/msu.png" alt="MSU Logo" class="h-24 w-auto mb-4">
+    <!-- University 2 Card -->
+    <div class="bg-white shadow-lg rounded-lg p-6 flex flex-col items-center hover:shadow-2xl transition">
+      <img src="images/msu.png" alt="MSU Logo" class="h-24 w-auto mb-4">
     <a href="msugrace.html" class="card msu" target="_blank">
       <img src="images/msu.png" alt="MSU Logo">
       Maa Shakumbhari University, Saharanpur
     </a>
+    </div>
   </div>
 </div>
-    
 
-   <h1 class="font-bold text-2xl">CGPA ⇆ Percentage Calculator</h1>
+    
+<div class="max-w-6xl mx-auto mt-10 text-center">
+  <h1 class="font-bold text-2xl mb-6">CGPA ⇆ Percentage Calculator</h1>
     <a href="calculator.html" class="card calculator" target="_blank">
       CGPA ⇆ Percentage Calculator
     </a>
