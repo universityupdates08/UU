@@ -1,69 +1,83 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>NEP Result Calculator (with Grace)</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
 
 :root {
   --primary-color: #4a90e2;
   --secondary-color: #50e3c2;
-  --header-color: #fdf8de;
-  --bg-color: #fdf8de;
-  --card-bg: rgba(255, 255, 255, 0.85);
+  --header-color: #ffc107;
+  --bg-color: #f0f4f8;
+  --card-bg: rgba(255, 255, 255, 0.85); /* Frosted glass effect */
   --shadow-color: rgba(0, 0, 0, 0.15);
   --pass-color: #28a745;
   --fail-color: #dc3545;
   --grace-color: #fd7e14;
 }
 
-* { box-sizing: border-box; }
-
 body {
-  font-family: 'Poppins', sans-serif;
-  background: linear-gradient(135deg, #f0f0f0 0%, #fdf8de 100%);
-  padding: 15px;
-  margin: 0;
-  color: #333;
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 15px;
+      text-align: left;
+      /* ✅ White gradient background with animated zigzag lines */
+      background: linear-gradient(135deg, #f0f0f0 100%, #f8f8f8 1000%);
+      background-image: repeating-linear-gradient(
+        45deg,
+        rgba(200,200,200,0.1) 0px,
+        rgba(200,200,200,0.1) 2px,
+        transparent 2px,
+        transparent 10px
+      );
+      background-size: 200% 200%;
+      animation: moveZigzag 20s linear infinite;
+    }
+
+    @keyframes moveZigzag {
+      0% { background-position: 0 0; }
+      100% { background-position: 200px 200px; }
+    }
+
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
 }
 
-header img {
+ header img {
   height: 60px;
   margin-bottom: 5px;
   filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.4));
 }
-header h1 {
-  margin: 5px 0;
-  font-size: 28px;
-  font-weight: bold;
-  text-shadow: 2px 2px 6px rgba(0,0,0,0.4);
+.main-header {
+  text-align: center;
+  margin: 15px 0;
 }
-
-.container { max-width: 800px; margin: 0 auto; }
-
-.main-header { text-align: center; margin-bottom: 20px; }
 .main-header h1 {
-  font-size: 3em;
+  font-size: 2em;
   font-weight: 700;
-  background: -webkit-linear-gradient(45deg, #ff8008 0%, #ffc837 100%);
+  margin: 0;
+  background: -webkit-linear-gradient(45deg, #ff8008, #ffc837);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  text-shadow: 0px 4px 8px rgba(0,0,0,0.4);
-  margin: 0;
+  text-shadow: 0px 3px 6px rgba(0,0,0,0.25);
 }
 .main-header h2 {
-  font-size: 1.5em;
+  font-size: 1.2em;
   font-weight: 600;
-  color: #0d47a1;
-  margin-top: 0px;
-  text-shadow: 0px 2px 4px rgba(0,0,0,0.4);
+  color: #555;
+  margin-top: 5px;
 }
 
+
 h2.section-title {
-  font-size: 1.2em;
+  font-size: 0.9em;
   margin-top: 10px;
   margin-bottom: 12px;
   color: var(--primary-color);
@@ -74,62 +88,83 @@ h2.section-title {
 
 .description {
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 12px; /* Reduced */
   background: rgba(255, 255, 255, 0.7);
-  padding: 15px;
+  padding: 10px 15px;
   border-radius: 15px;
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
   border: 1px solid rgba(255, 255, 255, 0.18);
 }
+.description p {
+    margin-top: 0;
+    margin-bottom: 5px;
+}
+.description .sub-heading {
+    font-size: 1.1em;
+    font-weight: 700;
+    color: #d9534f;
+}
+.description .disclaimer-title {
+    font-weight: 600;
+    margin-top: 10px;
+    color: #500;
+}
+.description .disclaimer-text {
+    font-size: 0.5em;
+    text-align: left;
+    color: #333;
+}
 
-/* Tabs */
+/* Tab Styles */
 .tab-container {
-  background: var(--card-bg);
-  border-radius: 12px;
-  box-shadow: 0 5px 15px var(--shadow-color);
-  margin-bottom: 20px;
-  overflow: hidden;
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
+    background: var(--card-bg);
+    border-radius: 12px;
+    box-shadow: 0 5px 15px var(--shadow-color);
+    margin-bottom: 20px; /* Reduced */
+    overflow: hidden;
+    backdrop-filter: blur(5px);
+   -webkit-backdrop-filter: blur(5px);
 }
 .tab-buttons {
-  overflow: hidden;
-  background-color: rgba(241, 241, 241, 0.5);
-  display: flex;
+    overflow: hidden;
+    background-color: rgba(241, 241, 241, 0.5);
+    display: flex;
 }
 .tab-buttons button {
-  background-color: transparent;
-  border: none;
-  outline: none;
-  cursor: pointer;
-  padding: 14px 16px;
-  transition: all 0.3s ease;
-  font-size: 1em;
-  font-weight: 600;
-  color: var(--primary-color);
-  flex: 1;
-  border-radius: 0;
-  box-shadow: none;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: all 0.3s ease;
+    font-size: 1em;
+    font-weight: 600;
+    color: var(--primary-color);
+    flex: 1;
+    border-radius: 0;
+    box-shadow: none;
 }
 .tab-buttons button:hover {
-  background-color: rgba(221, 221, 221, 0.7);
+    background-color: rgba(221, 221, 221, 0.7);
 }
 .tab-buttons button.active {
-  background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
-  color: white;
-  text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+    background: linear-gradient(45deg, #F43208, #f86a43);
+    color: white;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
 }
 .tab-content {
-  display: none;
-  padding: 15px;
-  text-align: center;
-  font-size: 0.9em;
-  border-top: none;
+    display: none;
+    padding: 15px;
+    text-align: center;
+    font-size: 0.9em;
+    border-top: none;
 }
+
 .tab-content b { color: var(--primary-color); }
 .tab-content small { font-size: 0.8em; display: block; }
+
 
 /* ✅ Logo size reduced to 1/2 */
 header img,
@@ -155,7 +190,6 @@ header img,
 }
 
 
-/* Rules card */
 .rules {
   background: var(--card-bg);
   padding: 15px;
@@ -200,11 +234,13 @@ header img,
   font-size: 0.9em;
   color: #333;
 }
-.subject .subjectCode { flex-grow: 1; }
+.subject .subjectCode {
+    flex-grow: 1;
+}
 
 .subject input[type=number],
-select,
-.subject input[type=text] {
+.subject input[type=text],
+select {
   padding: 8px 10px;
   border-radius: 8px;
   border: 1px solid #ccc;
@@ -215,9 +251,8 @@ select,
   border-color: var(--primary-color);
   box-shadow: 0 0 8px rgba(74, 144, 226, 0.6);
 }
-.subject input[type=number] { width: 80px; text-align: center; }
+.subject input[type=number] { width: 60px; text-align: center; }
 
-/* Buttons */
 button, .social-button {
   padding: 12px 25px;
   margin: 5px;
@@ -228,24 +263,20 @@ button, .social-button {
   border-radius: 30px;
   font-size: 1em;
   font-weight: 600;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
   box-shadow: 0 5px 15px rgba(0,0,0,0.3);
   text-decoration: none;
   display: inline-block;
   text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
 }
+
 button:hover, .social-button:hover {
   transform: translateY(-3px);
   box-shadow: 0 8px 20px rgba(0,0,0,0.4);
 }
 button:active, .social-button:active {
-  transform: translateY(1px);
-  box-shadow: 0 3px 10px rgba(0,0,0,0.3);
-}
-
-/* Tutorial button (red) */
-.tutorial-button {
-  background: linear-gradient(45deg, #e52d27 0%, #b31217 100%);
+    transform: translateY(1px);
+    box-shadow: 0 3px 10px rgba(0,0,0,0.3);
 }
 
 /* ✅ WhatsApp button (GREEN) */
@@ -260,172 +291,230 @@ button:active, .social-button:active {
   filter: brightness(0.95);
 }
 
-/* Modal */
-.modal {
-  display: none;
-  position: fixed;
-  z-index: 1000;
-  left: 0; top: 0;
-  width: 100%; height: 100%;
-  overflow: auto;
-  background-color: rgba(0,0,0,0.6);
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
-  justify-content: center;
-  align-items: center;
-}
-.modal-content {
-  margin: 20px;
-  border-radius: 15px;
-  width: 95%;
-  max-width: 750px;
-  animation: zoomIn 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
-}
-#gradeCard {
-  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-  padding: 25px;
-  border-radius: 15px;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.3);
-  position: relative;
-  border: 1px solid rgba(255,255,255,0.5);
+/* Style for the new tutorial button */
+.tutorial-button {
+    background: linear-gradient(45deg, #e52d27 0%, #b31217 100%);
 }
 
-.close-btn {
-  color: #aaa;
-  position: absolute;
-  top: 10px;
-  right: 20px;
-  font-size: 32px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: color 0.3s;
-}
-.close-btn:hover, .close-btn:focus { color: #333; }
-
-@keyframes zoomIn {
-  from { transform: scale(0.4); opacity: 0; }
-  to   { transform: scale(1);   opacity: 1; }
+.check-result-btn {
+    padding: 12px 25px;
+    font-size: 1.1em;
+    background: linear-gradient(45deg, #ff4e50, #f9d423);
+    margin-top: 15px;
+    animation: pulse 1.5s infinite;
 }
 
-/* Grade Card Content */
-#congratsMsg { text-align: center; color: var(--primary-color); margin-bottom: 15px;}
-@keyframes flash {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.7; transform: scale(1.05); }
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    }
+    50% {
+        transform: scale(1.05);
+        box-shadow: 0 8px 25px rgba(255, 78, 80, 0.6);
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    }
 }
-.flash-animation { animation: flash 1.5s infinite; }
 
-#studentDetails {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  margin-bottom: 15px;
-  font-size: 0.9em;
-  padding: 10px;
-  background: rgba(255, 255, 255, 0.6);
-  border-radius: 8px;
-}
-#studentDetails div { flex: 1 1 200px; margin: 5px 0; }
-#studentDetails b { color: #333; }
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 15px;
-  font-size: 0.8em;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-}
-thead {
-  background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
-  color: white;
-  text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
-}
-th, td {
-  border: 1px solid #ddd;
-  padding: 8px;
-  text-align: center;
-}
-tbody tr:nth-child(even) { background-color: #f9f9f9; }
-.pass { color: var(--pass-color); font-weight: bold; }
-.fail { color: var(--fail-color); font-weight: bold; }
-.grace { color: var(--grace-color); font-weight: bold; }
-.graceApplied { background: #fff3e0; }
-
-#overall {
-  font-size: 1.2em;
-  text-align: center;
-  margin-top: 15px;
-  padding: 10px;
-  border-radius: 8px;
-  font-weight: bold;
-}
-.overall-pass { background-color: #e8f5e9; color: var(--pass-color); }
-.overall-fail { background-color: #ffebee; color: var(--fail-color); }
-
-#note {
-  margin-top: 20px;
-  font-size: 0.8em;
-  text-align: justify;
-  color: #555;
-  background-color: #f1f1f1;
-  padding: 10px;
-  border-radius: 5px;
-  border-left: 4px solid var(--fail-color);
-}
 footer {
-  text-align: center;
-  margin-top: 30px;
-  padding: 10px;
-  font-weight: 600;
-  color: rgba(0, 0, 0, 0.7);
+    text-align: center;
+    margin-top: 30px;
+    padding: 10px;
+    font-weight: 600;
+    color: #333;
+    text-shadow: none;
+    font-size: 0.8em; /* Add this line to make the text smaller */
 }
+
+/* Error message blink */
+.error-blink{
+    font-weight: bold;
+    color: red;
+    animation: blink 0.7s step-start infinite;
+}
+@keyframes blink{
+    50% { opacity:0; }
+}
+
+
+/* --- MODAL STYLES --- */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    z-index: 1000;
+    display: none; /* Initially hidden */
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    box-sizing: border-box;
+}
+
+.modal-content {
+    position: relative;
+    background: white;
+    width: 100%;
+    max-width: 1000px;
+    max-height: 90vh;
+    overflow-y: auto;
+    /* Styles are inherited from grade card CSS injected by JS */
+}
+
+/* Grade Card styles (for inside modal) */
+#gradeCard {
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 20px;
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+}
+.header-logo { display: flex; justify-content: center; align-items: center; border-bottom: 2px solid #f0f0f0; padding-bottom: 15px; margin-bottom: 15px; }
+.header-logo img { max-width: 50px; margin-right: 50px; }
+.header-logo .university-info { text-align: center; }
+.header-logo h3 { margin: 0; color: #3498db; font-size: 1.5em; font-weight: 700; }
+.header-logo h4 { margin: 5px 0 0; font-weight: 600; color: #555; font-size: 1.1em; }
+#studentDetails { display: flex; justify-content: space-between; flex-wrap: wrap; margin-bottom: 20px; font-size: 0.95em; padding: 15px; background: #f9fafb; border-radius: 12px; border: 1px solid #e1e8ed; }
+#studentDetails div { flex: 1 1 220px; margin: 5px; }
+#studentDetails b { color: #34495e; }
+#resultTable { width: 100%; border-collapse: collapse; margin-top: 20px; font-size: 0.8em; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border-radius: 12px; overflow: hidden; }
+thead { background: linear-gradient(90deg, #3498db, #2980b9); color: white; text-transform: uppercase; letter-spacing: 0.5px; }
+#resultTable th, #resultTable td { border: 1px solid #e1e8ed; padding: 10px 8px; text-align: center; }
+#resultTable tbody tr:nth-child(even) { background-color: #f9fafb; }
+#resultTable tbody tr:hover { background-color: #f1f8ff; }
+.pass { color: #27ae60; font-weight: bold; }
+.fail { color: #e74c3c; font-weight: bold; }
+.grace { font-weight: bold; }
+.graceApplied { background-color: #fef9e7 !important; }
+#overall { font-size: 1.3em; text-align: center; margin-top: 25px; padding: 15px; border-radius: 12px; font-weight: 700; line-height: 1.5; }
+.overall-pass { background-color: #eafaf1; border: 1px solid #27ae60; color: #333; }
+.overall-fail { background-color: #fdedec; border: 1px solid #e74c3c; color: #333; }
+#note { margin-top: 25px; font-size: 0.8em; text-align: justify; color: #7f8c8d; background-color: #fcfcfc; padding: 15px; border-radius: 8px; border-left: 5px solid #bdc3c7; }
+#gradeCard button { padding: 10px 22px; margin: 10px 5px; background: linear-gradient(45deg, #3498db, #2980b9); font-size: 0.9em; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+#gradeCard button:hover { transform: translateY(-3px); box-shadow: 0 6px 15px rgba(0,0,0,0.2); }
+@keyframes flash { 0%, 100% { transform: scale(1); color: #2980b9; } 50% { transform: scale(1.05); color: #3498db; } }
+.flash-animation { animation: flash 1.5s infinite; text-align: center; }
+.modal-close-btn { position: absolute; top: 5px; right: 15px; font-size: 2.5em; font-weight: bold; cursor: pointer; color: #555; z-index: 1010; }
+.modal-bottom-close { text-align: center; margin-top: 15px; }
+.modal-bottom-close button { background: #c0392b; }
+
+@media print {
+  body.modal-open > *:not(.modal-overlay) { display: none; }
+  body.modal-open .modal-overlay,
+  body.modal-open .modal-content {
+    display: block; position: static; width: auto; height: auto;
+    overflow: visible; box-shadow: none; border: none; padding: 0;
+    justify-content: initial; align-items: initial;
+  }
+  body.modal-open #gradeCard { box-shadow: none; border: none; margin: 0; max-width: 100%; border-radius: 0; }
+  body.modal-open .action-buttons,
+  body.modal-open .modal-close-btn,
+  body.modal-open .modal-bottom-close,
+  body.modal-open #note { display: none; }
+}
+
 </style>
 </head>
 <body>
 
-<div class="container">
-  <div class="main-header">
-    <img src="https://i.ibb.co/nMC0877T/UNIVERSITY-UPDATES-LOGO-removebg-preview.png" alt="Calculator Logo">
-    <h2>UG NEP Grace Calculator</h2>
+   <!-- ✅ Header Section -->
+ <!-- DROP-IN SITE HEADER: Replace your old header with this -->
+<header id="site-header" role="banner" aria-label="Site header">
+  <div class="site-header-inner">
+    <img id="site-logo"
+         src="https://i.ibb.co/nMC0877T/UNIVERSITY-UPDATES-LOGO-removebg-preview.png"
+         alt="University Updates logo">
+    <div class="site-titles">
+    </div>
   </div>
+</header>
 
-<!DOCTYPE html>
-<html lang="en">
-  <style>
-    a {
-      text-decoration: none;
-      font-size: 18px;
-      color: #fff;
-      background: #007BFF;
-      padding: 10px 20px;
-      border-radius: 8px;
-      transition: background 0.3s;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-    }
-    a:hover {
-      background: #0056b3;
-    }
-    .icon {
-      font-size: 20px;
-    }
-  </style>
-    <!-- Centered Buttons -->
+<style>
+  /* High-specificity header styles so they override generic rules */
+  #site-header {
+    position: sticky;
+    top: 0;
+    z-index: 99999;                    /* sit on top */
+    background: rgba(255,255,255,0.75);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    box-shadow: 0 12px 12px rgba(0,0,0,0.05);
+    width: 100%;
+  }
+
+  #site-header .site-header-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;            /* logo above title */
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 10px 16px;
+  }
+
+  /* force a logo size even if other rules exist */
+  #site-header img#site-logo {
+    height: 72px !important;
+    width: auto !important;
+    object-fit: contain;
+    display: block;
+  }
+
+  #site-header .site-titles h1 {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 1.35rem;
+    line-height: 1;
+    /* gradient text effect */
+    background: linear-gradient(90deg, #ff8008, #ffc837);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  #site-header .site-titles h2 {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: #555;
+  }
+
+  /* Responsive tweaks */
+  @media (min-width: 768px) {
+    #site-header img#site-logo { height: 88px !important; }
+    #site-header .site-titles h1 { font-size: 1.9rem; }
+    #site-header .site-titles h2 { font-size: 1.05rem; }
+  }
+</style>
+  
+  <div class="container">
+    <div class="main-header">
+    <div id="welcomeScreen">
+      <h1>UNIVERSITY UPDATES</h1>
+      <h2>UG NEP Grace Calculator</h2>
+      </div>
+    
+
+
+
+<!-- Centered Buttons -->
     <div style="text-align: center; margin: 20px 0; display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;">
       <a href="index.html" class="social-button">🏠 Home</a>
-      <a href="calculator.html" target="_blank" class="social-button" style="background: linear-gradient(45deg,#ff8008,#ffc837);">CGPA ⇆ Percentage Calculator</a>
-    </div>
-</html>
-
-
-    <div style="text-align: center; margin-bottom: 20px;">
+      <a href="calculator.html" target="_blank" class="social-button" style="background: linear-gradient(45deg,#ff8008,#ffc837);">Fee / Percentage Calculator</a>
     <a href="https://t.me/CCSUniversityMRT" target="_blank" rel="noopener noreferrer" class="social-button">Telegram</a>
     <!-- ✅ WhatsApp button now GREEN -->
     <a href="https://whatsapp.com/channel/0029Va9jtav4tRrmKPxos138" target="_blank" rel="noopener noreferrer" class="social-button whatsapp">WhatsApp</a>
     <a href="https://t.me/HELPforDmbot" target="_blank" rel="noopener noreferrer" class="social-button tutorial-button">Contact Us</a>
   </div>
-
+    
+  
   <!-- ✅ Admin Team Box updated -->
   <div class="admin-box">
     <h2 style="font-size: 20px; font-weight: bold; color: #2c3e50; margin-bottom:10px;">
@@ -436,9 +525,8 @@ footer {
       <b>DM, PC, SS, AP, AM, GS, SK, VC, NC, VJ</b> (Admin Team)
     </p>
   </div>
-
   
-  <div class="description">
+    <div class="description">
     <p style="font-size: 1.2em; font-weight: 700; color: #d9534f;">Only for UG-NEP (B.A., B.Sc., B.Com.) Students</p>
     <p style="font-weight: 600; margin-top: 15px; color: #333;">Disclaimer:</p>
     <p style="font-size: 0.9em; text-align: left; margin-top: 5px; color: #333;">
@@ -447,167 +535,145 @@ footer {
   </div>
 
 
-  <div style="text-align: center; margin-bottom: 20px;">
-    <a href="https://linkbio.co/CCSUniversityMRT" target="_blank" rel="noopener noreferrer" class="social-button">Connect with Us</a>
-    <a href="https://youtu.be/UIIgOSbckio" target="_blank" rel="noopener noreferrer" class="social-button tutorial-button">Tutorial Video Watch Here</a>
-  </div>
+            
 
-  <div class="rules">
+    <div class="social-buttons-container">
+        <a href="https://linkbio.co/CCSUniversityMRT" target="_blank" class="social-button">Connect with us</a>
+        <a href="https://youtu.be/UIIgOSbckio" target="_blank" class="social-button tutorial-button">Tutorial Video Watch Here</a>
+    </div>
+
+    <div style="text-align:center;">
+        <button id="checkResultBtn" class="check-result-btn">Check Result</button>
+    </div>
+</div>
+
+<div id="step1" style="display:none;">
+    <div class="rules">
     <h2 class="section-title">Grace Rules</h2>
     <ul>
-      <li>Max 5 grace marks</li>
+    <li>Max 5 grace marks</li>
       <li>Grace in max 3 subjects</li>
       <li>Grace Marks will be given in <b>External Theory & Co-Curricular/Practical/Skill Development/Viva/Project</b> only</li>
       <li>No Grace in Internal Exams</li>
       <li>Passing: Major/Minor = 25 External & 33 Total</li>
-      <li>Passing: Skill/Project/Co-Curricular = 40 Total</li>
     </ul>
-  </div>
-
-  <div class="subject-section">
-    <h2 class="section-title">Student Information</h2>
-    <div class="subject">
-      <label for="studentName">Student Name:</label>
-      <input type="text" id="studentName" placeholder="Enter Full Name" style="flex-grow:1;">
     </div>
-    <div class="subject">
-      <label for="rollNumber">Roll Number:</label>
-      <input type="text" id="rollNumber" placeholder="Enter Roll Number" style="flex-grow:1;">
-    </div>
-  </div>
-
-  <div class="subject-section">
-    <h2 class="section-title">Select Class & Semester</h2>
-    <div class="subject">
-      <label for="className">Class:</label>
-      <select id="className" onchange="updateAllDropdowns()">
-        <option value="">--Select Class--</option>
-        <option value="BA">B.A.</option>
-        <option value="BSc.">B.Sc.</option>
-        <option value="BCom.">B.Com.</option>
-      </select>
-    </div>
-    <div class="subject">
-      <label for="semester">Semester:</label>
-      <select id="semester" onchange="updateAllDropdowns()">
-        <option value="">--Select Semester--</option>
-        <option value="1">1st Semester</option>
-        <option value="2">2nd Semester</option>
-        <option value="3">3rd Semester</option>
-        <option value="4">4th Semester</option>
-        <option value="5">5th Semester</option>
-        <option value="6">6th Semester</option>
-      </select>
-    </div>
-  </div>
-
-  <div id="marksSection" style="display:none;">
-    <div id="semTitle" style="text-align:center; font-weight:bold; font-size:1.2em; margin-bottom:10px; color: #333;"></div>
 
     <div class="subject-section">
+        <h2 class="section-title">Student Information</h2>
+        <div class="subject">
+            <label for="studentName">Student Name:</label>
+            <input type="text" id="studentName" placeholder="Enter Full Name" style="flex-grow:1;">
+        </div>
+        <div class="subject">
+            <label for="rollNumber">Roll Number:</label>
+            <input type="text" id="rollNumber" placeholder="Enter Roll Number" style="flex-grow:1;">
+        </div>
+    </div>
+
+    <div class="subject-section">
+        <h2 class="section-title">Select Class & Semester</h2>
+        <div class="subject">
+            <label for="className">Class:</label>
+            <select id="className" onchange="updateAllDropdowns()">
+              <option value="">--Select Class--</option>
+              <option value="BA">B.A.</option>
+              <option value="BSc.">B.Sc.</option>
+              <option value="BCom.">B.Com.</option>
+            </select>
+        </div>
+        <div class="subject">
+            <label for="semester">Semester:</label>
+            <select id="semester" onchange="updateAllDropdowns()">
+              <option value="">--Select Semester--</option>
+              <option value="1">1st Semester</option>
+              <option value="2">2nd Semester</option>
+              <option value="3">3rd Semester</option>
+              <option value="4">4th Semester</option>
+              <option value="5">5th Semester</option>
+              <option value="6">6th Semester</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div id="marksSection" style="display:none;">
+  <div id="semTitle" style="text-align:center; font-weight:bold; font-size:1.2em; margin-bottom:10px; color: #34495e; text-shadow: none;"></div>
+
+  <div class="subject-section">
       <h2 class="section-title">Major Theory Subjects</h2>
       <div id="majorTheorySubjects"></div>
-      <button type="button" onclick="addMajorTheory()">Add Major Theory</button>
-    </div>
+      <button onclick="addMajorTheory()">Add Major Theory</button>
+  </div>
 
-    <div class="subject-section">
+  <div class="subject-section">
       <h2 class="section-title">Major Practical Subjects</h2>
       <div id="majorPracticalSubjects"></div>
-      <button type="button" onclick="addMajorPractical()">Add Major Practical</button>
-    </div>
+      <button onclick="addMajorPractical()">Add Major Practical</button>
+  </div>
 
-    <div class="subject-section" id="minorSection">
+  <div class="subject-section" id="minorSection">
       <h2 class="section-title">Minor Subject</h2>
       <div class="subject">
-        <label>Minor Subject:</label>
-        <select class="subjectCode minorCode" style="flex-grow:1;"><option value="">-- Select Subject --</option></select>
-        EXT <input type="number" min="0" max="99" class="minorExternal">
-        INT <input type="number" min="0" max="99" class="minorInternal">
+          <label>Minor Subject:</label>
+          <select class="subjectCode minorCode" style="flex-grow:1;"><option value="">-- Select Subject --</option></select>
+          EXT <input type="number" min="0" max="75" class="minorExternal">
+          INT <input type="number" min="0" max="25" class="minorInternal">
       </div>
-    </div>
+  </div>
 
-    <div class="subject-section" id="skillSection">
+  <div class="subject-section" id="skillSection">
       <h2 class="section-title">Skill Development</h2>
       <div class="subject">
-        <label>Skill Dev.:</label>
-        <select class="subjectCode skillCode" style="flex-grow:1;"><option value="">-- Select Subject --</option></select>
-        TH <input type="number" min="0" max="99" class="skillTheory">
-        PR <input type="number" min="0" max="99" class="skillPractical">
+          <label>Skill Dev.:</label>
+          <select class="subjectCode skillCode" style="flex-grow:1;"><option value="">-- Select Subject --</option></select>
+          TH <input type="number" min="0" max="40" class="skillTheory">
+          PR <input type="number" min="0" max="60" class="skillPractical">
       </div>
-    </div>
+  </div>
 
-    <div class="subject-section" id="coCurricularSection">
+  <div class="subject-section" id="coCurricularSection">
       <h2 class="section-title">Co-Curricular</h2>
       <div class="subject">
         <label>Co-Curricular:</label>
         <select class="subjectCode coCurricular" style="flex-grow:1;"><option value="">-- Select Subject --</option></select>
-        EXT <input type="number" min="0" max="99" class="coExternal">
-        INT <input type="number" min="0" max="99" class="coInternal">
+        EXT <input type="number" min="0" max="75" class="coExternal">
+        INT <input type="number" min="0" max="25" class="coInternal">
       </div>
-    </div>
-
-    <div class="subject-section" id="projectSection" style="display:none;">
-      <h2 class="section-title">Project</h2>
-      <div id="projectSubjects"></div>
-      <button type="button" onclick="addProject()">Add Project</button>
-    </div>
-
-    <div style="text-align:center; margin-top:20px;">
-      <button type="button" onclick="calculateResult()">Calculate Result</button>
-      <button type="button" onclick="resetForm()">Reset</button>
-    </div>
   </div>
 
-  <footer>
-    © 2025 | University Updates | Designed by <b>Aditya Chaudhary 💞</b>
-  </footer>
+  <div class="subject-section" id="projectSection" style="display:none;">
+      <h2 class="section-title">Project</h2>
+      <div id="projectSubjects"></div>
+      <button onclick="addProject()">Add Project</button>
+  </div>
+
+  <div style="text-align:center; margin-top:20px;">
+      <button onclick="calculateResult()">Calculate Result</button>
+      <button onclick="resetForm()">Reset</button>
+  </div>
+
+<div id="errorMsg" style="display:none; text-align:center; margin:12px 0;"></div>
 </div>
 
-<!-- Modal -->
-<div id="resultModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="gradeCardTitle">
+<footer>
+    © 2025 | Designed by <b>Aditya Chaudhary💞</b>
+</footer>
+
+</div>
+
+<div id="resultModal" class="modal-overlay">
   <div class="modal-content">
-    <div id="gradeCard">
-      <span class="close-btn" onclick="closeModal()" aria-label="Close modal">&times;</span>
-      <img src="https://i.ibb.co/nMC0877T/UNIVERSITY-UPDATES-LOGO-removebg-preview.png" 
-     alt="Calculator Logo" 
-     style="display:block; margin: 0 auto 15px auto; height:60px;">
-      <h3 id="gradeCardTitle" style="text-align:center; margin: 0; color: var(--primary-color);">University Updates</h3>
-      <h4 style="text-align:center; margin-top: 5px; font-weight: normal; border-bottom: 1px solid #ccc; padding-bottom: 10px;">Unofficial Grade Card</h4>
-      <div id="congratsMsg"></div>
-      <div id="studentDetails"></div>
-      <table id="resultTable">
-        <thead>
-          <tr>
-            <th>Sub Code</th>
-            <th>Subject</th>
-            <th>External</th>
-            <th>Grace</th>
-            <th>Ext + Grace</th>
-            <th>Internal</th>
-            <th>Total</th>
-            <th>Status</th>
-            <th>Remarks</th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
-      <div id="overall"></div>
-      <div style="text-align:center; margin-top:15px;">
-  <button type="button" onclick="downloadPDF()">Download Grade Card (PDF)</button>
-  <button type="button" onclick="closeModal()">Close</button>
-</div>
-      <div id="printDateTime" style="text-align:right; font-size:0.85em; margin-top:10px; color:#333;"></div>
-
-      <div id="note">
-        <strong>Disclaimer:</strong> This is an unofficial grade card and is for informational purposes only. It is not an official document issued by Chaudhary Charan Singh University, Meerut. For any discrepancies, please refer to the official records of the University.
+    <span class="modal-close-btn">&times;</span>
+    <div id="modalBody">
       </div>
-    </div>
   </div>
 </div>
 
 
 <script>
 // --- START: Integrated Course Data from CSV ---
+// The long 'courseData' array is omitted here for brevity, but it is included in the actual code.
 const courseData = [
     { class: "BA", subjectType: "Major (Theory)", subject: "Hindi", semester: "1", code: "A010101T" },
     { class: "BA", subjectType: "Major (Theory)", subject: "Hindi", semester: "2", code: "A010201T" },
@@ -1285,11 +1351,14 @@ function updateAllDropdowns() {
     const marksSection = document.getElementById("marksSection");
 
     if (sem === "" || className === "") {
-        marksSection.style.display = "none";
         return;
     }
     
-    marksSection.style.display = "block";
+    // --- NEW: Multi-step form logic ---
+    document.getElementById('welcomeScreen').style.display = 'none';
+    document.getElementById('step1').style.display = 'none';
+    marksSection.style.display = 'block';
+    
     semTitle.innerHTML = "Enter Marks for Semester: " + sem;
     document.getElementById("minorSection").style.display = (sem === "5" || sem === "6") ? "none" : "block";
     document.getElementById("skillSection").style.display = (sem === "5" || sem === "6") ? "none" : "block";
@@ -1302,6 +1371,13 @@ function updateAllDropdowns() {
     populateDropdownGroup('.skillCode', 'Skill Development', true);
     populateDropdownGroup('#projectSubjects', 'Project');
     populateDropdownGroup('.coCurricular', 'Co-Curricular', true);
+    updateDropdownAvailability(); // Initial check for dropdown options
+
+    // Focus on the first input of the new screen
+    const firstInput = document.querySelector('#majorTheorySubjects .majorTheoryExternal');
+    if (firstInput) {
+        firstInput.focus();
+    }
 }
 
 
@@ -1311,7 +1387,7 @@ function getFilteredSubjects(subjectType) {
     if (!selectedClass || isNaN(selectedSem)) return [];
 
     return courseData.filter(course => {
-        const classMatch = course.class.includes(selectedClass); 
+        const classMatch = course.class.includes(selectedClass);
         const typeMatch = course.subjectType === subjectType;
         
         let semMatch = false;
@@ -1350,6 +1426,29 @@ function populateDropdownGroup(containerSelector, subjectType, isSingle = false)
     }
 }
 
+function updateDropdownAvailability() {
+    const allDropdowns = document.querySelectorAll('.subjectCode');
+    const selectedValues = new Set();
+
+    allDropdowns.forEach(dropdown => {
+        if (dropdown.value !== '') {
+            selectedValues.add(dropdown.value);
+        }
+    });
+
+    allDropdowns.forEach(dropdown => {
+        const currentSelection = dropdown.value;
+        for (const option of dropdown.options) {
+            if (option.value !== '') {
+                if (selectedValues.has(option.value) && option.value !== currentSelection) {
+                    option.style.display = 'none';
+                } else {
+                    option.style.display = 'block';
+                }
+            }
+        }
+    });
+}
 
 function addSubject(containerId, name, subjectType, fields) {
     const container = document.getElementById(containerId);
@@ -1368,7 +1467,9 @@ function addSubject(containerId, name, subjectType, fields) {
     container.appendChild(div);
 
     const newSelect = div.querySelector('.subjectCode');
+    newSelect.addEventListener('change', updateDropdownAvailability);
     populateDropdown(newSelect, subjectType);
+    updateDropdownAvailability();
 }
 
 function addMajorTheory() {
@@ -1408,7 +1509,7 @@ function validateMarks() {
     inputs.forEach(input => {
         const value = parseFloat(input.value);
         const max = parseFloat(input.max);
-        if (!isNaN(value) && !isNaN(max) && value > max) {
+        if (input.offsetParent !== null && !isNaN(value) && !isNaN(max) && value > max) {
             allValid = false;
         }
     });
@@ -1434,7 +1535,6 @@ function calculateResult(){
     return;
   }
  
-  // --- VALIDATION 1: Minimum 3 Major Theory & Co-Curricular Mandatory ---
   let majorTheoryFilledCount = 0;
   document.querySelectorAll('#majorTheorySubjects .subject').forEach(div => {
       const extInput = div.querySelector('.majorTheoryExternal');
@@ -1448,26 +1548,25 @@ function calculateResult(){
   const coIntInput = document.querySelector('#coCurricularSection .coInternal');
   const isCoCurricularFilled = coExtInput && coIntInput && coExtInput.value.trim() !== '' && coIntInput.value.trim() !== '';
 
-  if (majorTheoryFilledCount < 3) {
-      showError("Minimum 3 Major Theory subjects marks are mandatory.");
+  if (majorTheoryFilledCount < 2) {
+      showError("Minimum 2 Major Theory subjects marks are mandatory.");
       return;
   }
   if (!isCoCurricularFilled) {
       showError("Co-Curricular subject marks are mandatory.");
       return;
   }
-  // --- END VALIDATION 1 ---
 
-  // --- VALIDATION 2: Check for any selected subjects with empty marks ---
   let isValid = true;
   function validateEntries(containerSelector, inputs) {
       const subjectDivs = document.querySelectorAll(containerSelector);
       subjectDivs.forEach(div => {
+          if (div.offsetParent === null) return; // Skip hidden sections
           const select = div.querySelector('select');
-          if (select && select.value !== '') { // If a subject is selected from dropdown
+          if (select && select.value !== '') {
               for (const inputClass of inputs) {
                   const input = div.querySelector(`.${inputClass}`);
-                  if (input && input.value.trim() === '') { // Check if any linked input is empty
+                  if (input && input.value.trim() === '') {
                       isValid = false;
                   }
               }
@@ -1485,7 +1584,6 @@ function calculateResult(){
       showError("Please enter marks for all subjects you have selected.");
       return;
   }
-  // --- END VALIDATION 2 ---
   
   let graceLeft=maxGrace, remainingGraceSubjects=maxGraceSubjects;
   let subjects=[];
@@ -1510,7 +1608,7 @@ function calculateResult(){
 
   const processSingleSubject = (parentSelector, type, codeClass, extClass, intClass) => {
       const parent = document.querySelector(parentSelector);
-      if (!parent || parent.style.display === 'none') return;
+      if (!parent || parent.offsetParent === null) return;
       
       const selectElement = parent.querySelector(`.${codeClass}`);
       const code = selectElement.value;
@@ -1530,7 +1628,7 @@ function calculateResult(){
   processMultipleSubjects("#majorPracticalSubjects", "majorPractical", "majorPracticalExternal", "majorPracticalInternal");
   processMultipleSubjects("#projectSubjects", "project", "projectMarks", null);
   processSingleSubject("#minorSection .subject", "minor", "minorCode", "minorExternal", "minorInternal");
-  processSingleSubject("#skillSection .subject", "skill", "skillCode", "skillPractical", "skillTheory"); // Note: Skill Dev. has practical and theory, handled as ext and internal
+  processSingleSubject("#skillSection .subject", "skill", "skillCode", "skillPractical", "skillTheory");
   processSingleSubject("#coCurricularSection .subject", "coCurricular", "coCurricular", "coExternal", "coInternal");
 
   function checkPass(subj,extTotal){
@@ -1583,18 +1681,16 @@ function calculateResult(){
     } else { remark="-"; }
     if(anyFailAfterGrace && subj.grace>0) remark = `Grace Cancelled - ${remark}`;
     
-    // For skill dev, show TH and PR separately
-    let extMarks = subj.ext - subj.grace;
-    let intMarks = subj.internal;
-    if(subj.type === 'skill') {
-        extMarks = subj.ext; // Skill practical is in ext
-        intMarks = subj.internal; // Skill theory is in internal
-    }
+    let obtainedMarks = subj.ext - subj.grace;
+    let internalMarks = subj.internal;
+    
+    const graceValue = anyFailAfterGrace ? 0 : subj.grace;
+    const graceDisplay = graceValue > 0 ? `<span style="color: darkred; font-size: 1.1em; font-weight: bold;">${graceValue}</span>` : '-';
 
-    const trClass=subj.grace>0?"graceApplied":"";
-    const statusClass = status==='Pass'?'pass':'fail';
+    const trClass = graceValue > 0 ? "graceApplied" : "";
+    const statusClass = status === 'Pass' ? 'pass' : 'fail';
     const subjectTypeText = subjectTypeMap[subj.type] || subj.type;
-    tbodyHTML += `<tr class="${trClass}"><td>${subjectTypeText}</td><td>${subj.code}</td><td>${subj.name}</td><td>${extMarks}</td><td class="grace">${anyFailAfterGrace ? 0 : subj.grace}</td><td>${subj.ext}</td><td>${intMarks}</td><td>${total}</td><td class="${statusClass}">${status}</td><td>${remark}</td></tr>`;
+    tbodyHTML += `<tr class="${trClass}"><td>${subjectTypeText}</td><td>${subj.code}</td><td>${subj.name}</td><td>${obtainedMarks}</td><td class="grace">${graceDisplay}</td><td>${subj.ext}</td><td>${internalMarks}</td><td>${total}</td><td class="${statusClass}">${status}</td><td>${remark}</td></tr>`;
   });
 
   const selectedSemester = document.getElementById('semester').options[document.getElementById('semester').selectedIndex].text;
@@ -1603,15 +1699,15 @@ function calculateResult(){
   
   let overallHTML, overallClassName, congratsHTML, playSound;
   if(anyFailAfterGrace){
-    const failMessage='FAIL (ग्रेस मिलने के बाद भी यदि किसी भी विषय में बैक रहती है तो किसी भी विषय में ग्रेस नहीं मिलेगा)';
-    overallHTML=`Overall Result: <span class="fail">${failMessage}</span>`;
+    const failMessage='(You are not eligible for grace marks.)';
+    overallHTML=`Overall Result: <span class="fail">FAIL</span><br><small style="color: #333; font-weight: normal;">${failMessage}</small>`;
     overallClassName = 'overall-fail';
     congratsHTML = `<h2>Result</h2>`;
     playSound = false;
   } else {
     let totalGraceApplied = subjects.reduce((sum,subj)=>sum+(anyFailAfterGrace ? 0 : subj.grace),0);
     if(totalGraceApplied>0){
-      overallHTML=`Overall Result: <span class="pass">PASS with Grace (${totalGraceApplied} Marks)</span>`;
+      overallHTML=`Overall Result: <span class="pass">PASS</span><br><small style="color: #333; font-weight: normal;">with Grace (${totalGraceApplied} Marks)</small>`;
     } else {
       overallHTML=`Overall Result: <span class="pass">PASS</span>`;
     }
@@ -1620,130 +1716,191 @@ function calculateResult(){
     playSound = true;
   }
 
-  // --- Generate and open result in a new tab ---
-  openResultInNewTab(studentDetailsHTML, tbodyHTML, overallHTML, overallClassName, congratsHTML, studentName, rollNumber, playSound);
+  showResultModal(studentDetailsHTML, tbodyHTML, overallHTML, overallClassName, congratsHTML, playSound);
 }
 
-function openResultInNewTab(studentDetailsHTML, tbodyHTML, overallHTML, overallClassName, congratsHTML, studentName, rollNumber, playSound) {
-    const css = `
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
-        body { font-family: 'Poppins', sans-serif; background-color: #e9eff5; padding: 20px; color: #333; }
-        #gradeCard { background: #ffffff; padding: 25px; border-radius: 20px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); max-width: 900px; margin: 20px auto; border: 1px solid #ddd; }
-        .header-logo { display: flex; justify-content: center; align-items: center; border-bottom: 2px solid #f0f0f0; padding-bottom: 15px; margin-bottom: 15px; }
-        .header-logo img { max-width: 80px; margin-right: 15px; }
-        .header-logo .university-info { text-align: left; }
-        .header-logo h3 { margin: 0; color: #3498db; font-size: 1.5em; font-weight: 700; }
-        .header-logo h4 { margin: 5px 0 0; font-weight: 600; color: #555; font-size: 1.1em; }
-        #studentDetails { display: flex; justify-content: space-between; flex-wrap: wrap; margin-bottom: 20px; font-size: 0.95em; padding: 15px; background: #f9fafb; border-radius: 12px; border: 1px solid #e1e8ed; }
-        #studentDetails div { flex: 1 1 220px; margin: 5px; }
-        #studentDetails b { color: #34495e; }
-        table { width: 100%; border-collapse: collapse; margin-top: 20px; font-size: 0.85em; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border-radius: 12px; overflow: hidden; }
-        thead { background: linear-gradient(90deg, #3498db, #2980b9); color: white; text-transform: uppercase; letter-spacing: 0.5px; }
-        th, td { border: 1px solid #e1e8ed; padding: 12px 10px; text-align: center; }
-        tbody tr:nth-child(even) { background-color: #f9fafb; }
-        tbody tr:hover { background-color: #f1f8ff; }
-        .pass { color: #27ae60; font-weight: bold; }
-        .fail { color: #e74c3c; font-weight: bold; }
-        .grace { color: #f39c12; font-weight: bold; }
-        .graceApplied { background-color: #fef9e7 !important; }
-        #overall { font-size: 1.3em; text-align: center; margin-top: 25px; padding: 15px; border-radius: 12px; font-weight: 700; }
-        .overall-pass { background-color: #eafaf1; border: 1px solid #27ae60; color: #27ae60; }
-        .overall-fail { background-color: #fdedec; border: 1px solid #e74c3c; color: #e74c3c; }
-        #note { margin-top: 25px; font-size: 0.8em; text-align: justify; color: #7f8c8d; background-color: #fcfcfc; padding: 15px; border-radius: 8px; border-left: 5px solid #bdc3c7; }
-        button { padding: 12px 25px; margin: 10px 5px; cursor: pointer; background: linear-gradient(45deg, #3498db, #2980b9); color: #fff; border: none; border-radius: 30px; font-size: 1em; font-weight: 600; transition: all 0.3s ease; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-        button:hover { transform: translateY(-3px); box-shadow: 0 6px 15px rgba(0,0,0,0.2); }
-        @keyframes flash { 0%, 100% { transform: scale(1); color: #2980b9; } 50% { transform: scale(1.05); color: #3498db; } }
-        .flash-animation { animation: flash 1.5s infinite; text-align: center; }
-        @media print { body { padding: 0; background: #fff; } #gradeCard { box-shadow: none; border: none; margin: 0; max-width: 100%; border-radius: 0;} .action-buttons, #note { display: none; } }
-    `;
+function downloadPDF(){
+    const element = document.getElementById("gradeCard");
+    const studentName = document.getElementById('studentName').value.trim() || 'student';
+    const rollNumber = document.getElementById('rollNumber').value.trim() || '0000';
+    const opt = {
+        margin: 0.3,
+        filename: `GradeCard_${studentName.replace(/\s/g, '_')}_${rollNumber}.pdf`,
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2, useCORS: true },
+        jsPDF: { unit: 'in', format: 'a4', orientation: 'landscape' }
+    };
+    html2pdf().set(opt).from(element).save();
+}
 
-    const js = `
-        function downloadPDF(){
-            const element = document.getElementById("gradeCard");
-            const studentName = "${studentName.replace(/[`"']/g, '')}" || 'student';
-            const rollNumber = "${rollNumber.replace(/[`"']/g, '')}" || '0000';
-            const opt = {
-                margin: 0.3,
-                filename: \`GradeCard_\${studentName.replace(/\\s/g, '_')}_\${rollNumber}.pdf\`,
-                 image:        { type: 'jpeg', quality: 1 }, // max image quality
-                html2canvas: { scale: 2, useCORS: true },
-                jsPDF: { unit: 'in', format: 'a4', orientation: 'landscape' }
-            };
-            html2pdf().set(opt).from(element).save();
-        }
-        window.onload = function() {
-            if (${playSound}) {
-                document.getElementById('successSound').play().catch(e => console.log("Audio playback failed. User interaction might be needed."));
-            }
-        };
-    `;
+function printGradeCard() {
+    document.body.classList.add('modal-open');
+    window.print();
+    document.body.classList.remove('modal-open');
+}
 
-    const newPageHTML = `
-        <!DOCTYPE html>
-        <html lang="en">
-        <head>
-            <meta charset="UTF-8">
-            <title>Grade Card for ${studentName}</title>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"><\/script>
-            <style>${css}</style>
-        </head>
-        <body>
-            <div id="gradeCard">
-                <div class="header-logo">
-                    <img src="Universityupdates.png" alt="Logo">
-                    <div class="university-info">
-                        <h3>University Updates</h3>
-                        <h4>Unofficial Grade Card (NEP)</h4>
-                    </div>
-                </div>
-                
-                <div id="congratsMsg">${congratsHTML}</div>
-                <div id="studentDetails">${studentDetailsHTML}</div>
-                
-                <table id="resultTable">
-                    <thead>
-                    <tr>
-                        <th>Subject Type</th>
-                        <th>Sub Code</th>
-                        <th>Subject</th>
-                        <th>Obtained Marks</th>
-                        <th>Grace</th>
-                        <th>Final Marks</th>
-                        <th>Internal</th>
-                        <th>Total</th>
-                        <th>Status</th>
-                        <th>Remarks</th>
-                    </tr>
-                    </thead>
-                    <tbody>${tbodyHTML}</tbody>
-                </table>
-                
-                <div id="overall" class="${overallClassName}">${overallHTML}</div>
-                
-                <div class="action-buttons" style="text-align:center; margin-top:20px;">
-                    <button onclick="downloadPDF()">Download as PDF</button>
-                    <button onclick="window.print()">Print</button>
-                    <button onclick="closeModal()">Close</button>
-                </div>
-                
-                <div id="note">
-                    <strong>Disclaimer:</strong> This is an unofficial grade card and is for informational purposes only. It is not an official document issued by Chaudhary Charan Singh University, Meerut. For any discrepancies, please refer to the official records of the University.
+function showResultModal(studentDetailsHTML, tbodyHTML, overallHTML, overallClassName, congratsHTML, playSound) {
+    const modal = document.getElementById('resultModal');
+    const modalBody = document.getElementById('modalBody');
+
+    const gradeCardHTML = `
+        <div id="gradeCard">
+            <div class="header-logo">
+            <img src="https://i.ibb.co/nMC0877T/UNIVERSITY-UPDATES-LOGO-removebg-preview.png" 
+                 alt="Logo" style="max-width:60px; margin-right:20px;">
+                <div class="university-info">
+                    <h3>University Updates</h3>
+                    <h4>Unofficial Grade Card (NEP)</h4>
                 </div>
             </div>
-            <audio id="successSound" src="https://www.soundjay.com/buttons/sounds/button-7.mp3" preload="auto"></audio>
-            <script>${js}<\/script>
-        </body>
-        </html>
+            
+            <div id="congratsMsg">${congratsHTML}</div>
+            <div id="studentDetails">${studentDetailsHTML}</div>
+            
+            <table id="resultTable">
+                <thead>
+                <tr>
+                    <th>Subject Type</th>
+                    <th>Sub Code</th>
+                    <th>Subject</th>
+                    <th>Obtained Marks</th>
+                    <th>Grace</th>
+                    <th>Final Marks</th>
+                    <th>Internal</th>
+                    <th>Total</th>
+                    <th>Status</th>
+                    <th>Remarks</th>
+                </tr>
+                </thead>
+                <tbody>${tbodyHTML}</tbody>
+            </table>
+            
+            <div id="overall" class="${overallClassName}">${overallHTML}</div>
+            
+            <div class="action-buttons" style="text-align:center; margin-top:20px;">
+                <button onclick="downloadPDF()">Download as PDF</button>
+                <button onclick="printGradeCard()">Print</button>
+            </div>
+            
+            <div id="note">
+                <strong>Disclaimer:</strong> This is an unofficial grade card and is for informational purposes only. It is not an official document issued by Chaudhary Charan Singh University, Meerut. For any discrepancies, please refer to the official records of the University.
+            </div>
+            <div class="modal-bottom-close">
+               <button id="bottomCloseBtn">Close</button>
+            </div>
+        </div>
     `;
+    modalBody.innerHTML = gradeCardHTML;
+    modal.style.display = 'flex';
 
-    const blob = new Blob([newPageHTML], { type: 'text/html' });
-    const url = URL.createObjectURL(blob);
-    window.open(url, '_blank');
+    if (playSound) {
+        document.getElementById('successSound').play().catch(e => console.log("Audio playback failed. User interaction might be needed."));
+    }
 }
 
 
 function resetForm(){ location.reload(); }
 
+// --- START: Page Interaction Logic ---
+document.addEventListener('DOMContentLoaded', (event) => {
+    // Modal closing logic
+    const modal = document.getElementById('resultModal');
+    const closeBtn = document.querySelector('.modal-close-btn');
+    const hideModal = () => modal.style.display = 'none';
+
+    closeBtn.onclick = hideModal;
+    modal.addEventListener('click', function(event) {
+        if (event.target === modal) {
+            hideModal();
+        }
+    });
+    // Add event listener for the bottom close button dynamically since it's created with the modal content
+    document.body.addEventListener('click', function(event) {
+        if (event.target.id === 'bottomCloseBtn') {
+            hideModal();
+        }
+    });
+
+    // Dropdown availability logic for static dropdowns
+    document.querySelectorAll('.minorCode, .skillCode, .coCurricular').forEach(select => {
+        select.addEventListener('change', updateDropdownAvailability);
+    });
+
+    // Form navigation and display logic
+    const checkResultBtn = document.getElementById('checkResultBtn');
+    const step1 = document.getElementById('step1');
+    const studentName = document.getElementById('studentName');
+    const rollNumber = document.getElementById('rollNumber');
+    const className = document.getElementById('className');
+    const semester = document.getElementById('semester');
+
+    checkResultBtn.addEventListener('click', function() {
+        step1.style.display = 'block';
+        const rulesSection = document.querySelector('.rules');
+        rulesSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+        setTimeout(() => {
+            const studentInfoSection = studentName.closest('.subject-section');
+            if (studentInfoSection) {
+                 studentInfoSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+            studentName.focus();
+        }, 1500); // 1.5 seconds delay
+    });
+
+    const handleEnterNavigation = (currentElement, nextElement) => {
+        currentElement.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                nextElement.focus();
+            }
+        });
+    };
+
+    handleEnterNavigation(studentName, rollNumber);
+    handleEnterNavigation(rollNumber, className);
+    
+    className.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            semester.focus();
+        }
+    });
+});
+// --- END: Page Interaction Logic ---
+
 </script>
+
+<script>
+// Universal tab handling function
+function openTab(evt, tabName) {
+  // Hide all tab contents
+  var tabcontent = document.getElementsByClassName("tab-content");
+  for (let i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+
+  // Remove "active" class from all buttons
+  var tablinks = document.getElementsByClassName("tab-link");
+  for (let i = 0; i < tablinks.length; i++) {
+    tablinks[i].classList.remove("active");
+  }
+
+  // Show the selected tab
+  document.getElementById(tabName).style.display = "block";
+
+  // Mark the clicked button active
+  if (evt) evt.currentTarget.classList.add("active");
+}
+
+// ✅ When "Check Result" button is clicked → show Step1 tab
+document.addEventListener("DOMContentLoaded", () => {
+  document.getElementById("checkResultBtn").addEventListener("click", () => {
+    openTab(null, "step1");  // Show Student Info tab
+    document.getElementById("welcomeScreen").style.display = "none"; // Hide welcome
+  });
+});
+</script>
+
 </body>
 </html>
