@@ -460,7 +460,7 @@ thead { background: linear-gradient(90deg, #3498db, #2980b9); color: white; text
 
   /* force a logo size even if other rules exist */
   #site-header img#site-logo {
-    height: 72px !important;
+    height: 60px !important;
     width: auto !important;
     object-fit: contain;
     display: block;
@@ -1746,8 +1746,8 @@ function showResultModal(studentDetailsHTML, tbodyHTML, overallHTML, overallClas
     const gradeCardHTML = `
         <div id="gradeCard">
             <div class="header-logo">
-            <img src="https://i.ibb.co/nMC0877T/UNIVERSITY-UPDATES-LOGO-removebg-preview.png" 
-                 alt="Logo" style="max-width:60px; margin-right:20px;">
+                <img src="https://i.ibb.co/nMC0877T/UNIVERSITY-UPDATES-LOGO-removebg-preview.png" 
+                     alt="Logo" style="max-width:60px; margin-right:20px;">
                 <div class="university-info">
                     <h3>University Updates</h3>
                     <h4>Unofficial Grade Card (NEP)</h4>
@@ -1783,20 +1783,36 @@ function showResultModal(studentDetailsHTML, tbodyHTML, overallHTML, overallClas
             </div>
             
             <div id="note">
-                <strong>Disclaimer:</strong> This is an unofficial grade card and is for informational purposes only. It is not an official document issued by Chaudhary Charan Singh University, Meerut. For any discrepancies, please refer to the official records of the University.
+                <strong>Disclaimer:</strong> This is an unofficial grade card and is for informational purposes only. 
+                It is not an official document issued by Chaudhary Charan Singh University, Meerut. 
+                For any discrepancies, please refer to the official records of the University.
             </div>
             <div class="modal-bottom-close">
                <button id="bottomCloseBtn">Close</button>
             </div>
         </div>
     `;
+
     modalBody.innerHTML = gradeCardHTML;
     modal.style.display = 'flex';
 
+    // ✅ Reattach close button events every time
+    const closeBtn = document.querySelector('.modal-close-btn');
+    const hideModal = () => modal.style.display = 'none';
+    if (closeBtn) closeBtn.onclick = hideModal;
+
+    const bottomCloseBtn = document.getElementById('bottomCloseBtn');
+    if (bottomCloseBtn) bottomCloseBtn.onclick = hideModal;
+
+    modal.addEventListener('click', function(event) {
+        if (event.target === modal) hideModal();
+    });
+
     if (playSound) {
-        document.getElementById('successSound').play().catch(e => console.log("Audio playback failed. User interaction might be needed."));
+        document.getElementById('successSound')?.play().catch(() => {});
     }
 }
+
 
 
 function resetForm(){ location.reload(); }
@@ -1825,6 +1841,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     document.querySelectorAll('.minorCode, .skillCode, .coCurricular').forEach(select => {
         select.addEventListener('change', updateDropdownAvailability);
     });
+
 
     // Form navigation and display logic
     const checkResultBtn = document.getElementById('checkResultBtn');
