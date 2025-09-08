@@ -56,14 +56,9 @@
       border-radius: 12px;
       box-shadow: 0 8px 20px rgba(0,0,0,0.15);
       text-align: center;
-      width: 400px;
-      margin: 40px auto;
+      width: 350px;
+      margin: 20px;
       border: 7px solid transparent;
-    }
-
-    h2 {
-      margin-bottom: 60px;
-      color: #333;
     }
 
     input {
@@ -128,27 +123,32 @@
   </div>
 </header>
 
-<h1 class="font-bold mt-[50px]">PERCENTAGE CALCULATOR</h1>
+<h1 class="font-bold mt-[30px]">C.G.P.A. ⇆ PERCENTAGE CALCULATOR</h1>
 
 <a href="index.html" class="home-btn">
   <span class="icon">🏠</span> Home
 </a>
 
-<!-- CGPA ⇆ Percentage Calculator -->
-<div class="calculator" id="calculatorBox">
-  <h1 class="font-bold mt-[20px] mb-[30px]">C.G.P.A. ⇆ PERCENTAGE CALCULATOR</h1>
-  <input type="number" id="inputValue" placeholder="Enter CGPA or %" step="any" oninput="convertValue()">
-  <div class="result" id="result"></div>
-  <div class="error" id="error"></div>
-</div>
+<!-- Flex container for both calculators -->
+<div class="flex flex-wrap justify-center mt-10">
+  
+  <!-- CGPA ⇆ Percentage Calculator -->
+  <div class="calculator" id="calculatorBox">
+    <h2 class="font-bold mb-4">C.G.P.A. ⇆ PERCENTAGE</h2>
+    <input type="number" id="inputValue" placeholder="Enter CGPA or %" step="any" oninput="convertValue()">
+    <div class="result" id="result"></div>
+    <div class="error" id="error"></div>
+  </div>
 
-<!-- Marks to Percentage Calculator -->
-<div class="calculator" id="marksCalculatorBox">
-  <h1 class="font-bold mt-[20px] mb-[30px]">MARKS ⇆ PERCENTAGE CALCULATOR</h1>
-  <input type="number" id="marksObtained" placeholder="Enter Marks Obtained" step="any" oninput="calculateMarksPercentage()">
-  <input type="number" id="maxMarks" placeholder="Enter Maximum Marks" step="any" oninput="calculateMarksPercentage()">
-  <div class="result" id="marksResult"></div>
-  <div class="error" id="marksError"></div>
+  <!-- Marks ⇆ Percentage Calculator -->
+  <div class="calculator" id="marksCalculatorBox">
+    <h2 class="font-bold mb-4">MARKS ⇆ PERCENTAGE</h2>
+    <input type="number" id="marksObtained" placeholder="Enter Marks Obtained" step="any" oninput="calculateMarksPercentage()">
+    <input type="number" id="maxMarks" placeholder="Enter Maximum Marks" step="any" oninput="calculateMarksPercentage()">
+    <div class="result" id="marksResult"></div>
+    <div class="error" id="marksError"></div>
+  </div>
+
 </div>
 
 <footer>
