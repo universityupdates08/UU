@@ -10,22 +10,21 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-  
+
   <style>
     :root {
-      --card-bg: #ffffff; 
+      --card-bg: #ffffff;
       --ink: #111827;
       --blue: #007BFF;
       --green: #28a745;
       --red: #dc3545;
     }
-    
+
     body {
       font-family: 'Poppins', sans-serif;
       margin: 0;
       padding: 15px;
       text-align: center;
-      /* ✅ White gradient background with animated zigzag lines */
       background: linear-gradient(135deg, #f0f0f0 100%, #f8f8f8 1000%);
       background-image: repeating-linear-gradient(
         45deg,
@@ -37,32 +36,29 @@
       background-size: 200% 200%;
       animation: moveZigzag 20s linear infinite;
     }
-   
 
     header img {
-      height: 60px; /* ✅ Increased 1.5x */
+      height: 60px;
       margin-bottom: 5px;
       filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.4));
     }
+
     header h1 {
       margin: 5px 0;
       font-size: 28px;
       font-weight: bold;
-      text-shadow: 2px 2px 6px rgba(0,0,0,0.4));
+      text-shadow: 2px 2px 6px rgba(0,0,0,0.4);
     }
 
-    /* ✅ Calculator Box */
     .calculator {
       background: #fff;
       padding: 25px;
       border-radius: 12px;
       box-shadow: 0 8px 20px rgba(0,0,0,0.15);
       text-align: center;
-      height: 200px;
       width: 400px;
-      margin: 60px auto;
+      margin: 40px auto;
       border: 7px solid transparent;
-  justify-content: center;
     }
 
     h2 {
@@ -96,7 +92,6 @@
       color: #007bff;
     }
 
-    /* ✅ Home Button with Gradient */
     .home-btn {
       margin-top: 20px;
       text-decoration: none;
@@ -116,6 +111,11 @@
     }
 
     .icon { font-size: 20px; }
+
+    @keyframes moveZigzag {
+      from { background-position: 0 0; }
+      to { background-position: 100% 100%; }
+    }
   </style>
 </head>
 <body>
@@ -128,20 +128,27 @@
   </div>
 </header>
 
-<h1 class="font-bold mt-[50px]">C.G.P.A. ⇆ PERCENTAGE CALCULATOR</h1>
+<h1 class="font-bold mt-[50px]">PERCENTAGE CALCULATOR</h1>
 
-
-<!-- ✅ Home Button -->
 <a href="index.html" class="home-btn">
   <span class="icon">🏠</span> Home
 </a>
 
-<!-- Calculator Box -->
+<!-- CGPA ⇆ Percentage Calculator -->
 <div class="calculator" id="calculatorBox">
- <h1 class="font-bold mt-[20px] mb-[30px]">C.G.P.A. ⇆ PERCENTAGE CALCULATOR</h1>
+  <h1 class="font-bold mt-[20px] mb-[30px]">C.G.P.A. ⇆ PERCENTAGE CALCULATOR</h1>
   <input type="number" id="inputValue" placeholder="Enter CGPA or %" step="any" oninput="convertValue()">
   <div class="result" id="result"></div>
   <div class="error" id="error"></div>
+</div>
+
+<!-- Marks to Percentage Calculator -->
+<div class="calculator" id="marksCalculatorBox">
+  <h1 class="font-bold mt-[20px] mb-[30px]">MARKS ⇆ PERCENTAGE CALCULATOR</h1>
+  <input type="number" id="marksObtained" placeholder="Enter Marks Obtained" step="any" oninput="calculateMarksPercentage()">
+  <input type="number" id="maxMarks" placeholder="Enter Maximum Marks" step="any" oninput="calculateMarksPercentage()">
+  <div class="result" id="marksResult"></div>
+  <div class="error" id="marksError"></div>
 </div>
 
 <footer>
@@ -149,43 +156,81 @@
 </footer>
 
 <script>
-function convertValue() {
-  let value = parseFloat(document.getElementById("inputValue").value);
-  let result = document.getElementById("result");
-  let error = document.getElementById("error");
-  let box = document.getElementById("calculatorBox");
+  function convertValue() {
+    let value = parseFloat(document.getElementById("inputValue").value);
+    let result = document.getElementById("result");
+    let error = document.getElementById("error");
+    let box = document.getElementById("calculatorBox");
 
-  result.innerText = "";
-  error.innerText = "";
-  result.className = "result"; 
-  box.style.borderColor = "transparent"; 
+    result.innerText = "";
+    error.innerText = "";
+    result.className = "result"; 
+    box.style.borderColor = "transparent"; 
 
-  if (isNaN(value)) return;
+    if (isNaN(value)) return;
 
-  if (value <= 10) { 
-    if (value < 0) {
-      error.innerText = "⚠️ CGPA cannot be negative";
+    if (value <= 10) { 
+      if (value < 0) {
+        error.innerText = "⚠️ CGPA cannot be negative";
+        box.style.borderColor = "var(--red)";
+        return;
+      }
+      let percentage = (value * 9.5).toFixed(2);
+      result.innerHTML = `<b>📘 CGPA = ${value} → Percentage = ${percentage}%</b>`;
+      result.classList.add("blue");
+      box.style.borderColor = "var(--blue)";
+    } 
+    else if (value <= 100) { 
+      let cgpa = (value / 9.5);
+      if (cgpa > 10) cgpa = 10; 
+      cgpa = cgpa.toFixed(2);
+      result.innerHTML = `<b>🎓 Percentage = ${value}% → CGPA = ${cgpa}</b>`;
+      result.classList.add("green");
+      box.style.borderColor = "var(--green)";
+    } 
+    else {
+      error.innerText = "⚠️ Enter a valid number (CGPA ≤ 10 or % ≤ 100)";
+      box.style.borderColor = "var(--red)";
+    }
+  }
+
+  function calculateMarksPercentage() {
+    let obtained = parseFloat(document.getElementById("marksObtained").value);
+    let max = parseFloat(document.getElementById("maxMarks").value);
+    let result = document.getElementById("marksResult");
+    let error = document.getElementById("marksError");
+    let box = document.getElementById("marksCalculatorBox");
+
+    result.innerText = "";
+    error.innerText = "";
+    result.className = "result"; 
+    box.style.borderColor = "transparent";
+
+    if (isNaN(obtained) || isNaN(max)) return;
+
+    if (max <= 0) {
+      error.innerText = "⚠️ Maximum marks must be greater than 0";
       box.style.borderColor = "var(--red)";
       return;
     }
-    let percentage = (value * 9.5).toFixed(2);
-    result.innerHTML = `<b>📘 CGPA = ${value} → Percentage = ${percentage}%</b>`;
-    result.classList.add("blue");
-    box.style.borderColor = "var(--blue)";
-  } 
-  else if (value <= 100) { 
-    let cgpa = (value / 9.5);
-    if (cgpa > 10) cgpa = 10; 
-    cgpa = cgpa.toFixed(2);
-    result.innerHTML = `<b>🎓 Percentage = ${value}% → CGPA = ${cgpa}</b>`;
+
+    if (obtained < 0) {
+      error.innerText = "⚠️ Obtained marks cannot be negative";
+      box.style.borderColor = "var(--red)";
+      return;
+    }
+
+    if (obtained > max) {
+      error.innerText = "⚠️ Obtained marks cannot be greater than maximum marks";
+      box.style.borderColor = "var(--red)";
+      return;
+    }
+
+    let percentage = ((obtained / max) * 100).toFixed(2);
+    result.innerHTML = `<b>✅ Marks Obtained = ${obtained} / ${max} → Percentage = ${percentage}%</b>`;
     result.classList.add("green");
     box.style.borderColor = "var(--green)";
-  } 
-  else {
-    error.innerText = "⚠️ Enter a valid number (CGPA ≤ 10 or % ≤ 100)";
-    box.style.borderColor = "var(--red)";
   }
-}
 </script>
 
 </body>
