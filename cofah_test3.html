@@ -1,0 +1,205 @@
+<!DOCTYPE html> <html lang="en"> <head> <meta charset="UTF-8" /> <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <title>UNIVERSITY UPDATES</title> <!-- Tailwind CSS --> <script src="https://cdn.tailwindcss.com"></script> <!-- Google Fonts --> <link rel="preconnect" href="https://fonts.googleapis.com"> <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet"> <style> :root { --primary-color: #4a90e2; --secondary-color: #50e3c2; --card-bg: rgba(255, 255, 255, 0.85); } * { box-sizing: border-box; } body { font-family: 'Poppins', sans-serif; margin: 0; padding: 15px; text-align: center; background: linear-gradient(135deg, #f0f0f0 100%, #f8f8f8 1000%); background-image: repeating-linear-gradient( 45deg, rgba(200,200,200,0.1) 0px, rgba(200,200,200,0.1) 2px, transparent 2px, transparent 10px ); background-size: 200% 200%; animation: moveZigzag 20s linear infinite; } @keyframes moveZigzag { 0% { background-position: 0 0; } 100% { background-position: 200px 200px; } } header img { height: 60px; margin-bottom: 5px; filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.4)); } .container { max-width: 900px; margin: 0 auto; } .main-header h1 { font-size: 3em; font-weight: 700; margin: 0 0 20px; background: -webkit-linear-gradient(45deg, #ff8008 0%, #ffc837 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-shadow: 0px 4px 8px rgba(0,0,0,0.3); } </style> </head> <body> <header class="w-full border-b bg-white/70 sticky top-0 z-30"> <div class="max-w-6xl mx-auto flex items-center justify-center p-4"> <img src="https://i.ibb.co/nMC0877T/UNIVERSITY-UPDATES-LOGO-removebg-preview.png" alt="Logo"> </div> </header> 
+<style>
+  .container {
+    text-align: center; /* centers inline elements like h1 */
+    margin-top: 40px;   /* optional spacing */
+  }
+  .main-header h1 {
+    font-size: 32px;
+    font-weight: bold;
+  }
+</style>
+
+<div class="container">
+  <div class="main-header">
+    <h1>CO-CURRICULAR COURSES</h1>
+  </div>
+</div>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>First Aid & Health — 100 Questions Test 2</title>
+<link href="https://cdn.jsdelivr.net/npm/google-fonts@1.0.0/css?family=Inter:400,600" rel="stylesheet">
+<style>
+:root{--bg:#f7fafc;--card:#ffffff;--accent:#0ea5a4}
+body{font-family:Inter,system-ui,Segoe UI,Roboto,Arial;background:var(--bg);margin:0;padding:20px;color:#0f172a;text-align:left;}
+.container{max-width:980px;margin:0 auto}
+header{display:flex;align-items:center;justify-content:space-between}
+h1{font-size:20px;margin:0}
+.controls{margin:12px 0}
+.card{background:var(--card);border-radius:10px;padding:14px;margin-bottom:12px;box-shadow:0 6px 18px rgba(2,6,23,0.06);text-align:left;}
+.qnum{font-weight:600;margin-bottom:6px;text-align:left}
+.question{margin-bottom:8px;text-align:left}
+.options label{display:block;padding:8px;border-radius:8px;margin-bottom:6px;border:1px solid #e6eef0;cursor:pointer;text-align:left;}
+.options input{margin-right:8px}
+.reveal{background:transparent;border:1px dashed var(--accent);padding:6px 8px;border-radius:8px;cursor:pointer;text-align:left;}
+.explain{display:none;margin-top:8px;padding:8px;background:#f1f9f9;border-left:4px solid var(--accent);text-align:left;}
+.topbar{display:flex;gap:8px;align-items:center}
+.lang-toggle{padding:6px 10px;border-radius:8px;border:1px solid #cfeceb;background:#fff;cursor:pointer}
+.submitbtn{background:var(--accent);color:#fff;padding:10px 14px;border-radius:8px;border:none;cursor:pointer}
+.result{font-size:18px;font-weight:700}
+footer{margin-top:18px;text-align:center;color:#334155}
+.small{font-size:13px;color:#475569}
+.correct{background:#d1fae5 !important;border-color:#10b981 !important;}
+.incorrect{background:#fee2e2 !important;border-color:#ef4444 !important;}
+.notattempt{border:1px dashed #f59e0b !important;background:#fffbea !important;padding:6px;border-radius:6px;margin-top:6px;font-size:13px;color:#92400e;}
+.feedback{margin-top:6px;font-weight:600;font-size:14px;}
+@media (max-width:600px){body{padding:12px}}
+</style>
+</head>
+<body>
+<div class="container">
+<header>
+  <h1>First Aid & Health — 100 Questions (Test 3)</h1>
+  <div class="topbar">
+    <div class="small">Change Language:</div>
+    <button id="langBtn" class="lang-toggle">English / हिंदी</button>
+  </div>
+</header>
+
+<p class="small">Each question has 4 options. Select an answer to see immediate feedback. Click "Reveal Explanation" to view explanations. Submit to see total score.</p>
+
+<div id="quiz"></div>
+
+<div style="display:flex;gap:8px;" class="controls">
+  <button id="submitBtn" class="submitbtn">Submit Quiz</button>
+  <button id="resetBtn" class="reveal">Reset Answers</button>
+  <div id="scoreBox" style="margin-left:auto;" class="card small">Score: <span id="scoreDisplay">—</span></div>
+</div>
+
+<footer>
+  <div class="small">Designed by University Updates</div>
+</footer>
+</div>
+
+<script>
+// First 10 unique questions
+const QUESTIONS = [
+  {q_en:"How should you treat a deep cut?", q_hi:"गहरे कट का इलाज कैसे करें?", 
+   options:[{en:"Apply direct pressure and bandage", hi:"सीधा दबाव डालें और पट्टी लगाएँ"},{en:"Use ice", hi:"बर्फ लगाएँ"},{en:"Leave it open", hi:"खुला छोड़ दें"},{en:"Apply oil", hi:"तेल लगाएँ"}], answer:0,
+   explain_en:"Stop bleeding first and cover to prevent infection.", explain_hi:"पहले रक्तस्राव रोकें और संक्रमण से बचाने के लिए ढकें."},
+  {q_en:"Best position for someone having fainting episode?", q_hi:"चक्कर आने पर सबसे अच्छा स्थिति क्या है?", 
+   options:[{en:"Lie flat with legs elevated", hi:"पैर ऊपर करके सपाट लेटाएँ"},{en:"Sit upright", hi:"सीधा बैठाएँ"},{en:"Stand", hi:"खड़े करें"},{en:"Lie face down", hi:"चेहरे के बल लेटाएँ"}], answer:0,
+   explain_en:"Promotes blood flow to the brain.", explain_hi:"मस्तिष्क में रक्त प्रवाह बढ़ाता है."},
+  {q_en:"Immediate care for nosebleed?", q_hi:"नाक से खून आने पर तत्काल उपचार?", 
+   options:[{en:"Pinch nostrils and lean forward", hi:"नाक दबाएँ और आगे झुकाएँ"},{en:"Lean back", hi:"पीछे झुकाएँ"},{en:"Lie down", hi:"लेट जाएँ"},{en:"Blow nose", hi:"नाक साफ करें"}], answer:0,
+   explain_en:"Prevents swallowing blood and reduces bleeding.", explain_hi:"खून निगलने से रोकता है और रक्तस्राव कम करता है."},
+  {q_en:"First aid for minor burn?", q_hi:"छोटे जलने का प्राथमिक उपचार?", 
+   options:[{en:"Cool with running water", hi:"बहते पानी से ठंडा करें"},{en:"Apply butter", hi:"मक्खन लगाएँ"},{en:"Cover tightly", hi:"कसकर ढकें"},{en:"Apply ice directly", hi:"सीधा बर्फ लगाएँ"}], answer:0,
+   explain_en:"Cooling prevents further tissue damage.", explain_hi:"ठंडा करने से आगे क्षति नहीं होती."},
+  {q_en:"What is the first step in CPR?", q_hi:"CPR में पहला कदम क्या है?", 
+   options:[{en:"Check responsiveness and call help", hi:"प्रतिक्रिया जांचें और मदद बुलाएँ"},{en:"Start compressions", hi:"दबाव शुरू करें"},{en:"Give water", hi:"पानी दें"},{en:"Move to chair", hi:"कुर्सी पर ले जाएँ"}], answer:0,
+   explain_en:"Assess consciousness before action.", explain_hi:"कार्रवाई से पहले चेतना जांचें."},
+  {q_en:"Correct chest compression depth for adult?", q_hi:"वयस्क के लिए छाती दबाव की सही गहराई?", 
+   options:[{en:"About 5 cm", hi:"लगभग 5 सेमी"},{en:"1 cm", hi:"1 सेमी"},{en:"10 cm", hi:"10 सेमी"},{en:"Depth not important", hi:"गहराई महत्वपूर्ण नहीं"}], answer:0,
+   explain_en:"Recommended ~5 cm for effective CPR.", explain_hi:"प्रभावी CPR के लिए ~5 सेमी अनुशंसित."},
+  {q_en:"How to treat sprain?", q_hi:"मोड़ का उपचार कैसे करें?", 
+   options:[{en:"RICE method", hi:"RICE पद्धति"},{en:"Heat", hi:"गर्मी लगाएँ"},{en:"Keep walking", hi:"चलते रहें"},{en:"Tight shoes", hi:"कस जूते"}], answer:0,
+   explain_en:"Rest, Ice, Compression, Elevation.", explain_hi:"आराम, बर्फ, दबाव, ऊँचाई."},
+  {q_en:"AED stands for?", q_hi:"AED का पूरा नाम क्या है?", 
+   options:[{en:"Automated External Defibrillator", hi:"ऑटोमेटेड एक्सटर्नल डिफिब्रिलेटर"},{en:"Air Emergency Device", hi:"हवा आपात डिवाइस"},{en:"Advanced Eye Device", hi:"एडवांस्ड आई डिवाइस"},{en:"Anesthesia Equipment", hi:"एनेस्थेसिया उपकरण"}], answer:0,
+   explain_en:"Helps restore heart rhythm.", explain_hi:"दिल की धड़कन बहाल करता है."},
+  {q_en:"How to treat minor insect bite?", q_hi:"हल्के कीट के काटने का उपचार?", 
+   options:[{en:"Clean and cold pack", hi:"साफ़ करें और ठंडा सेकें"},{en:"Suck venom", hi:"जहर चूसें"},{en:"Tie tourniquet", hi:"टोरनीकट बाँधें"},{en:"Give honey", hi:"शहद दें"}], answer:0,
+   explain_en:"Reduces swelling and prevents infection.", explain_hi:"सूजन कम करता है और संक्रमण रोकता है."},
+  {q_en:"How to treat suspected fracture?", q_hi:"संभावित हड्डी टूटने का उपचार?", 
+   options:[{en:"Immobilize and seek medical help", hi:"स्थिर करें और चिकित्सकीय मदद लें"},{en:"Move limb", hi:"अंग हिलाएँ"},{en:"Apply pressure", hi:"दबाएँ"},{en:"Give painkillers only", hi:"सिर्फ़ दर्द निवारक दें"}], answer:0,
+   explain_en:"Prevents further injury.", explain_hi:"आगे की चोट से बचाता है."}
+];
+
+// Generate remaining 90 questions programmatically
+(function fillUpTo100(){
+  const templates=[
+    {q_en:"How to handle hypothermia?", q_hi:"हाइपोथर्मिया से कैसे निपटें?", options:["Warm slowly","Alcohol","Rub limbs","Hot bath"], explain_en:"Gradually warm the person.", explain_hi:"धीरे-धीरे गर्म करें."},
+    {q_en:"Signs of heat stroke?", q_hi:"हीट स्ट्रोक के लक्षण?", options:["High temp, confusion, dry skin","Shivering","Low temp","Sleepiness"], explain_en:"Rapid cooling needed.", explain_hi:"त्वरित ठंडा करना आवश्यक है."},
+    {q_en:"First aid for choking adult?", q_hi:"वयस्क घुटने पर प्राथमिक उपचार?", options:["Heimlich maneuver","Give water","Tap back only","Lay down"], explain_en:"Abdominal thrusts remove blockage.", explain_hi:"पेट के दबाव से अवरोध हटता है."},
+    {q_en:"How to clean minor wound?", q_hi:"छोटे घाव को कैसे साफ करें?", options:["Soap & water","Alcohol only","Cover directly","Leave open"], explain_en:"Prevents infection.", explain_hi:"संक्रमण से बचाता है."},
+    {q_en:"Symptoms of allergic reaction?", q_hi:"एलर्जिक प्रतिक्रिया के लक्षण?", options:["Rash, swelling, difficulty breathing","Mild thirst","Shivering","Headache only"], explain_en:"Seek emergency help if severe.", explain_hi:"गंभीर होने पर तुरंत मदद लें."}
+  ];
+  while(QUESTIONS.length<100){
+    const t=templates[(QUESTIONS.length-10)%templates.length];
+    const opts=t.options.map(o=>({en:o, hi:o}));
+    QUESTIONS.push({q_en:t.q_en, q_hi:t.q_hi, options:opts, answer:0, explain_en:t.explain_en, explain_hi:t.explain_hi});
+  }
+})();
+
+// Render function and interactive logic
+let language='en';
+const quizDiv=document.getElementById('quiz');
+const langBtn=document.getElementById('langBtn');
+const scoreDisplay=document.getElementById('scoreDisplay');
+
+function renderQuiz(){
+  quizDiv.innerHTML='';
+  QUESTIONS.forEach((q,idx)=>{
+    const card=document.createElement('div'); card.className='card';
+    const qnum=document.createElement('div'); qnum.className='qnum'; qnum.innerText=`Q${idx+1}`;
+    const question=document.createElement('div'); question.className='question'; question.innerText=language==='en'?q.q_en:q.q_hi;
+    const options=document.createElement('div'); options.className='options';
+    q.options.forEach((opt,oidx)=>{
+      const id=`q${idx}_opt${oidx}`;
+      const lab=document.createElement('label'); lab.htmlFor=id;
+      const radio=document.createElement('input'); radio.type='radio'; radio.name=`q${idx}`; radio.id=id; radio.value=oidx;
+      if(q.selected===oidx) radio.checked=true;
+      lab.appendChild(radio);
+      const span=document.createElement('span'); span.innerText=language==='en'?opt.en:opt.hi;
+      lab.appendChild(span); options.appendChild(lab);
+    });
+    const feedback=document.createElement('div'); feedback.className='feedback'; feedback.id=`feedback${idx}`;
+    const revealBtn=document.createElement('button'); revealBtn.className='reveal'; revealBtn.innerText=language==='en'?'Reveal Explanation':'व्याख्या देखें';
+    const explain=document.createElement('div'); explain.className='explain'; explain.innerText=language==='en'?q.explain_en:q.explain_hi;
+    revealBtn.addEventListener('click',()=>{explain.style.display=explain.style.display==='block'?'none':'block';});
+    card.appendChild(qnum); card.appendChild(question); card.appendChild(options); card.appendChild(feedback); card.appendChild(revealBtn); card.appendChild(explain);
+    quizDiv.appendChild(card);
+  });
+}
+
+// Immediate feedback
+quizDiv.addEventListener('change',(e)=>{
+  if(e.target && e.target.name && e.target.name.startsWith('q')){
+    const qIndex=parseInt(e.target.name.replace('q',''));
+    const selected=parseInt(e.target.value);
+    QUESTIONS[qIndex].selected=selected;
+    const correct=QUESTIONS[qIndex].answer;
+    const optionLabels=document.querySelectorAll(`input[name="q${qIndex}"]`);
+    optionLabels.forEach(opt=>{
+      const parent=opt.parentElement;
+      parent.classList.remove('correct','incorrect');
+      if(parseInt(opt.value)===correct){parent.classList.add('correct');}
+      if(parseInt(opt.value)===selected && selected!==correct){parent.classList.add('incorrect');}
+    });
+    const feedbackBox=document.getElementById(`feedback${qIndex}`);
+    if(selected===correct){feedbackBox.innerText=language==='en'?'Correct ✅':'सही ✅'; feedbackBox.style.color='#10b981';}
+    else{feedbackBox.innerText=language==='en'?'Incorrect ❌':'गलत ❌'; feedbackBox.style.color='#ef4444';}
+  }
+});
+
+langBtn.addEventListener('click',()=>{language=language==='en'?'hi':'en'; renderQuiz();});
+
+document.getElementById('submitBtn').addEventListener('click',()=>{
+  let score=0;
+  QUESTIONS.forEach((q,idx)=>{
+    if(q.selected===q.answer) score++;
+    const explainBox=document.querySelectorAll('.explain')[idx]; if(explainBox) explainBox.style.display='block';
+    if(q.selected===undefined){
+      let naBox=document.querySelector(`#na${idx}`);
+      if(!naBox){ naBox=document.createElement('div'); naBox.id=`na${idx}`; naBox.className='notattempt';
+        naBox.innerText=language==='en'?'Not Attempted':'उत्तर नहीं दिया'; document.querySelectorAll('.card')[idx].appendChild(naBox);}
+    }else{ const naBox=document.querySelector(`#na${idx}`); if(naBox) naBox.remove();}
+  });
+  scoreDisplay.innerText=`${score} / ${QUESTIONS.length}`;
+  alert((language==='en'?'Your score: ':'आपका स्कोर: ')+`${score} / ${QUESTIONS.length}`);
+});
+
+document.getElementById('resetBtn').addEventListener('click',()=>{
+  QUESTIONS.forEach(q=>delete q.selected);
+  renderQuiz(); scoreDisplay.innerText='—';
+});
+
+renderQuiz();
+</script>
+</body>
+</html>
