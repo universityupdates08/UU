@@ -51,7 +51,7 @@
     .container { max-width: 900px; margin: 0 auto; }
 
     .main-header h1 {
-      font-size: 3em;
+      font-size: 2em;
       font-weight: 700;
       margin: 0 0 20px;
       background: -webkit-linear-gradient(45deg, #ff8008 0%, #ffc837 100%);
@@ -116,7 +116,7 @@
 
     footer {
       margin-top: 30px;
-      font-weight: bold;
+      font-weight: normal;
       color: #007bff;
     }
 
@@ -130,6 +130,22 @@
       50% { opacity: 0.3; transform: translateY(4px); }
       100% { opacity: 1; transform: translateY(0); }
     }
+    
+     .greeting-blink {
+    font-weight: bold;
+    margin-top: 10px;
+    font-size: 1rem;
+    animation: colorBlink 2s infinite;
+  }
+
+  @keyframes colorBlink {
+    0%   { color: maroon; }
+    25%  { color: darkblue; }
+    50%  { color: green; }
+    75%  { color: darkorange; }
+    100% { color: maroon; }
+  }
+  
   </style>
 </head>
 
@@ -145,6 +161,12 @@
       <h1>UNIVERSITY UPDATES</h1>
     </div>
 
+ <!-- Blinking Greeting Line -->
+  <p class="greeting-blink">
+    सभी विद्यार्थियों को आगामी विषम सेमेस्टर परीक्षायें (दिसम्बर-2025) की अग्रिम बधाई एवं शुभकामनायें...!!! - आदित्य चौधरी
+  </p>
+</div>
+
     <!-- Founders Box -->
     <div class="box admin-box">
       <h1 class="font-bold text-1xl">Our Founders</h1>
@@ -154,9 +176,10 @@
 
     <!-- Select Course Box -->
     <div class="box">
-      <h1 class="font-bold text-2xl mb-6 flex justify-center items-center gap-2">
+      <h1 class="font-bold text-2xl mb-1 flex justify-center items-center gap-2">
         <span class="finger">👇</span> Select Course <span class="finger">👇</span>
       </h1>
+      <h2>(For MCQ Sample Papers)</h2>
       <div class="grid grid-cols-1 md:grid-cols-4 gap-6 text-center">
         <div class="bg-white shadow-lg rounded-lg p-6 flex flex-col items-center hover:shadow-2xl transition">
           <img src="images/BA.png" alt="Bachelor of Arts Logo" class="h-24 w-auto mb-4">
@@ -182,7 +205,8 @@
 
     <!-- Select University Box -->
     <div class="box">
-      <h1 class="font-bold text-2xl mb-6">Select University</h1>
+      <h1 class="font-bold text-2xl mb-1">Select University</h1>
+      <h2>(For Grace)</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div class="bg-white shadow-lg rounded-lg p-6 flex flex-col items-center hover:shadow-2xl transition">
           <img src="images/ccsu.png" alt="CCSU Logo" class="h-24 w-auto mb-4">
@@ -213,7 +237,7 @@
     </div>
 
     <footer>
-      © 2025 | Designed by <b>Aditya Chaudhary💗</b>
+      © 2025 | Designed by <b>Admin Team💗</b>
     </footer>
   </div>
 </body>
