@@ -174,6 +174,22 @@
       background-color: #b22222;
       transform: scale(1.1);
     }
+    
+     html {
+    scroll-behavior: smooth;
+  }
+
+  /* Animation setup */
+  .fade-slide {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease-out;
+  }
+  .fade-slide.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
   </style>
 </head>
 
@@ -199,20 +215,20 @@
             <button class="hover:text-yellow-300">About Us ▾</button>
             <div class="absolute left-0 mt-2 w-64 bg-white text-black rounded shadow-lg hidden group-hover:block">
               <a href="#our-journey" class="block px-4 py-2 hover:bg-gray-200">Our Journey</a>
-              <a href="#" class="block px-4 py-2 hover:bg-gray-200">Mission & Vision</a>
+              <a href="#mission-vision" class="block px-4 py-2 hover:bg-gray-200">Mission & Vision</a>
             </div>
           </div>
           <span class="mx-2">|</span>
 
-          <a href="#" class="hover:text-yellow-300">Administrations</a>
+          <a href="#administrations" class="hover:text-yellow-300">Administrations</a>
           <span class="mx-2">|</span>
 
           <div class="relative group">
             <button class="hover:text-yellow-300">Other Project ▾</button>
             <div class="absolute left-0 mt-2 w-64 bg-white text-black rounded shadow-lg hidden group-hover:block">
-              <a href="#" class="block px-4 py-2 hover:bg-gray-200">myLibrary (University Study Materials)</a>
-              <a href="#" class="block px-4 py-2 hover:bg-gray-200">Government Job Hub</a>
-              <a href="#" class="block px-4 py-2 hover:bg-gray-200">ExamHelper</a>
+              <a href="#mylibrary" class="block px-4 py-2 hover:bg-gray-200">myLibrary (University Study Materials)</a>
+              <a href="#govjobhub" class="block px-4 py-2 hover:bg-gray-200">Government Job Hub</a>
+              <a href="#examhelper" class="block px-4 py-2 hover:bg-gray-200">ExamHelper</a>
             </div>
           </div>
           <span class="mx-2">|</span>
@@ -252,18 +268,18 @@
           <button id="btn-about" class="w-full text-left hover:text-yellow-300">About Us ▾</button>
           <div class="pl-4 hidden" id="mobile-about">
             <a href="#our-journey" class="block px-2 py-1 hover:bg-gray-200 text-black">Our Journey</a>
-            <a href="#" class="block px-2 py-1 hover:bg-gray-200 text-black">Mission & Vision</a>
+            <a href="#mission-vision" class="block px-2 py-1 hover:bg-gray-200 text-black">Mission & Vision</a>
           </div>
         </div>
 
-        <a href="#" class="block hover:text-yellow-300">Administrations</a>
+        <a href="#administrations" class="block hover:text-yellow-300">Administrations</a>
 
         <div>
           <button id="btn-project" class="w-full text-left hover:text-yellow-300">Other Project ▾</button>
           <div class="pl-4 hidden" id="mobile-project">
-            <a href="#" class="block px-2 py-1 hover:bg-gray-200">myLibrary (University Study Materials)</a>
-            <a href="#" class="block px-2 py-1 hover:bg-gray-200">Government Job Hub</a>
-            <a href="#" class="block px-2 py-1 hover:bg-gray-200">ExamHelper</a>
+            <a href="#mylibrary" class="block px-2 py-1 hover:bg-gray-200">myLibrary (University Study Materials)</a>
+            <a href="#govjobhub" class="block px-2 py-1 hover:bg-gray-200">Government Job Hub</a>
+            <a href="#examhelper" class="block px-2 py-1 hover:bg-gray-200">ExamHelper</a>
           </div>
         </div>
 
@@ -395,28 +411,121 @@
 </div>
 
 
+<!-- Mission & Vision Section -->
+<div id="mission-vision" class="box">
+  <h1 class="font-bold text-2xl mb-6">Our Mission & Vision</h1>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <!-- Mission -->
+    <div class="bg-white shadow-lg rounded-lg p-6 flex flex-col items-center text-center hover:shadow-2xl transition">
+      <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Mission Icon" class="h-20 w-20 mb-4">
+      <h2 class="font-bold text-xl mb-2 text-[#800000]">Our Mission</h2>
+      <p class="text-gray-700 text-sm leading-relaxed">
+        Our mission is to <b>provide free study materials</b> and academic support 
+        to every student. We aim to create a platform that reduces barriers to 
+        quality education by offering easy access to resources, guidance, and updates.
+      </p>
+    </div>
+
+    <!-- Vision -->
+    <div class="bg-white shadow-lg rounded-lg p-6 flex flex-col items-center text-center hover:shadow-2xl transition">
+      <img src="https://cdn-icons-png.flaticon.com/512/3135/3135789.png" alt="Vision Icon" class="h-20 w-20 mb-4">
+      <h2 class="font-bold text-xl mb-2 text-[#800000]">Our Vision</h2>
+      <p class="text-gray-700 text-sm leading-relaxed">
+        Our vision is to become a <b>trusted companion for students</b> in their educational journey,
+        helping them achieve success in academics and beyond. We believe in the 
+        motto: <span class="italic font-semibold text-blue-600">"Education for All, Knowledge without Limits"</span>.
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- Administrations Section -->
+<div id="administrations" class="box">
+  <h1 class="font-bold text-2xl mb-6">Administrations</h1>
+
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <!-- Founder -->
+    <div class="bg-white shadow-lg rounded-lg p-6 flex flex-col items-center hover:shadow-2xl transition">
+      <img src="images/user.png" alt="Founder" class="h-24 w-24 mb-2 rounded-full">
+      <p class="font-bold">Aditya Chaudhary</p>
+      <p class="text-sm text-gray-600">Founder & Owner</p>
+    </div>
+
+    <!-- Co-Founder -->
+    <div class="bg-white shadow-lg rounded-lg p-6 flex flex-col items-center hover:shadow-2xl transition">
+      <img src="images/user.png" alt="Co-Founder" class="h-24 w-24 mb-2 rounded-full">
+      <p class="font-bold">Chetan Joshi</p>
+      <p class="text-sm text-gray-600">Co-Founder</p>
+    </div>
+
+    <!-- Core Admins -->
+    <div class="bg-white shadow-lg rounded-lg p-6 flex flex-col items-center hover:shadow-2xl transition">
+      <img src="images/user.png" alt="Admins" class="h-24 w-24 mb-2 rounded-full">
+      <p class="font-bold">Core Administrators</p>
+      <p class="text-sm text-gray-600 leading-relaxed">
+        DM, Preeti Chauhan, Abhishek Pundir, Arjoo Malik, 
+        Gaurav Sachdeva, SS, Sanjeev Kumar, Nitya Chaudhary, 
+        VC, Vanshika Jain, Naman Bindal
+      </p>
+    </div>
+  </div>
+
+  <!-- Motto line -->
+  <p class="mt-6 font-semibold italic text-[#800000]">
+    “Working together to empower students with knowledge & guidance.”
+  </p>
+</div>
+
+<!-- Our Other Projects Section -->
+<div id="other-projects" class="box">
+  <h1 class="font-bold text-2xl mb-6">Our Other Projects</h1>
+
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+    <!-- myLibrary -->
+    <div id="mylibrary" class="fade-slide bg-white shadow-lg rounded-lg p-6 flex flex-col items-center hover:shadow-2xl transition">
+      <img src="images/library.png" alt="myLibrary Logo" class="h-20 w-20 mb-4">
+      <h2 class="font-bold text-xl text-[#800000] mb-2">myLibrary</h2>
+      <p class="text-sm text-gray-700 leading-relaxed mb-3">
+        Formerly known as <b>University Study Materials</b>, <b>myLibrary</b> provides 
+        <u>free study resources</u> including notes, sample papers, guides, and reference 
+        materials to help students prepare for their exams with ease.
+      </p>
+      <a href="#" target="_blank" class="bg-[#800000] text-white px-4 py-2 rounded-lg shadow hover:bg-red-700 transition">📚 Click Here to Join</a>
+    </div>
+
+    <!-- Government Job Hub -->
+    <div id="govjobhub" class="fade-slide bg-white shadow-lg rounded-lg p-6 flex flex-col items-center hover:shadow-2xl transition">
+      <img src="images/job.png" alt="Gov Job Hub Logo" class="h-20 w-20 mb-4">
+      <h2 class="font-bold text-xl text-[#800000] mb-2">Government Job Hub</h2>
+      <p class="text-sm text-gray-700 leading-relaxed mb-3">
+        A dedicated hub for <b>competitive exams</b> and <b>job updates</b>. Students and 
+        aspirants can get real-time alerts, notifications, and guidance to prepare 
+        for government exams and secure their future careers.
+      </p>
+      <a href="https://t.me/GovJobHub_IN" target="_blank" class="bg-[#800000] text-white px-4 py-2 rounded-lg shadow hover:bg-red-700 transition">📝 Explore Updates</a>
+    </div>
+
+    <!-- ExamHelper -->
+    <div id="examhelper" class="fade-slide bg-white shadow-lg rounded-lg p-6 flex flex-col items-center hover:shadow-2xl transition">
+      <img src="images/bot.png" alt="ExamHelper Logo" class="h-20 w-20 mb-4">
+      <h2 class="font-bold text-xl text-[#800000] mb-2">ExamHelper</h2>
+      <p class="text-sm text-gray-700 leading-relaxed mb-3">
+        A unique <b>Telegram Bot</b> created to <u>donate study materials</u> into 
+        <b>myLibrary</b> and help students with <b>self-practice</b> for upcoming exams.  
+        It ensures quick access to shared resources anytime, anywhere.
+      </p>
+      <a href="https://t.me/PaperHelpingBot" target="_blank" class="bg-[#800000] text-white px-4 py-2 rounded-lg shadow hover:bg-red-700 transition">🤖 Try ExamHelper</a>
+    </div>
+
+  </div>
+</div>
 
 
 <!-- Our Team Section -->
 <div id="our-team" class="box">
-  <h1 class="font-bold text-2xl mb-4">Our Team</h1>
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-    <div class="bg-white shadow-lg rounded-lg p-4 flex flex-col items-center">
-      <img src="images/user.png" alt="Aditya Chaudhary" class="h-24 w-24 mb-2 rounded-full">
-      <p class="font-bold">Aditya Chaudhary</p>
-      <p>Owner</p>
-    </div>
-    <div class="bg-white shadow-lg rounded-lg p-4 flex flex-col items-center">
-      <img src="images/user.png" alt="Chetan Joshi" class="h-24 w-24 mb-2 rounded-full">
-      <p class="font-bold">Chetan Joshi</p>
-      <p>Co-Owner</p>
-    </div>
-    <div class="bg-white shadow-lg rounded-lg p-4 flex flex-col items-center">
-    <img src="images/user.png" alt="Chetan Joshi" class="h-24 w-24 mb-2 rounded-full">
-      <p class="font-bold">Admin Team</p>
-      <p>DM, Preeti Chauhan, Abhishek Pundir, Arjoo Malik, Gaurav Sachdeva, SS, Sanjeev Kumar, Nitya Chaudhary, VC, Vanshika Jain, Naman Bindal</p>
-    </div>
-  </div>
+  <h1 class="font-bold text-2xl mb-4">Our Team - Will be updated soon</h1>
 </div>
 
 
@@ -481,6 +590,24 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   });
 });
 
+// Intersection Observer for fade-slide effect
+  const faders = document.querySelectorAll('.fade-slide');
+  const appearOptions = {
+    threshold: 0.2
+  };
+
+  const appearOnScroll = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    });
+  }, appearOptions);
+
+  faders.forEach(fadeEl => {
+    appearOnScroll.observe(fadeEl);
+  });
+  
   </script>
 
 </body>
