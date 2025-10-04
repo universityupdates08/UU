@@ -301,6 +301,11 @@
     </div>
   </nav>
 
+<!-- Live Date & Time -->
+<div id="datetime" class="bg-white/80 text-[#800000] text-lg font-semibold py-2 shadow-md">
+  <span id="liveDate"></span> | <span id="liveTime"></span>
+</div>
+
   <!-- Blinking Greeting Line -->
   <p class="greeting-blink">
     सभी विद्यार्थियों को आगामी विषम सेमेस्टर परीक्षायें (दिसम्बर-2025) की अग्रिम बधाई एवं शुभकामनायें...!!!
@@ -741,6 +746,22 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       document.getElementById('newLaunchModal').classList.add('hidden');
     }
   });
+  
+  //Timer
+  function updateDateTime() {
+    const now = new Date();
+    const optionsDate = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    const date = now.toLocaleDateString('en-IN', optionsDate);
+    const time = now.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+
+    document.getElementById("liveDate").textContent = date;
+    document.getElementById("liveTime").textContent = time;
+  }
+
+  // Update every second
+  setInterval(updateDateTime, 1000);
+  updateDateTime();
+
 
   </script>
 
