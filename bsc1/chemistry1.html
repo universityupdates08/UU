@@ -1,0 +1,816 @@
+
+
+<!DOCTYPE html> <html lang="en"> <head> <meta charset="UTF-8" /> <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <title>UNIVERSITY UPDATES</title> <!-- Tailwind CSS --> <script src="https://cdn.tailwindcss.com"></script> <!-- Google Fonts --> <link rel="preconnect" href="https://fonts.googleapis.com"> <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet"> <style> :root { --primary-color: #4a90e2; --secondary-color: #50e3c2; --card-bg: rgba(255, 255, 255, 0.85); } * { box-sizing: border-box; } body { font-family: 'Poppins', sans-serif; margin: 0; padding: 15px; text-align: left; background: linear-gradient(135deg, #f0f0f0 100%, #f8f8f8 1000%); background-image: repeating-linear-gradient( 45deg, rgba(200,200,200,0.1) 0px, rgba(200,200,200,0.1) 2px, transparent 2px, transparent 10px ); background-size: 200% 200%; animation: moveZigzag 20s linear infinite; } @keyframes moveZigzag { 0% { background-position: 0 0; } 100% { background-position: 200px 200px; } } header img { height: 60px; margin-bottom: 5px; filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.4)); } .container { max-width: 900px; margin: 0 auto; } .main-header h1 { font-size: 3em; font-weight: 700; margin: 0 0 20px; background: -webkit-linear-gradient(45deg, #ff8008 0%, #ffc837 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-shadow: 0px 4px 8px rgba(0,0,0,0.3); } </style> </head> <body> <header class="w-full border-b bg-white/70 sticky top-0 z-30"> <div class="max-w-6xl mx-auto flex items-center justify-center p-4"> <img src="https://i.ibb.co/nMC0877T/UNIVERSITY-UPDATES-LOGO-removebg-preview.png" alt="Logo"> </div> </header> 
+<style>
+  .container {
+    text-align: center; /* centers inline elements like h1 */
+    margin-top: 20px;   /* optional spacing */
+  }
+  .main-header h1 {
+    font-size: 32px;
+    font-weight: bold;
+  }
+  .topbar{display:flex;gap:8px;align-items:center}
+</style>
+
+<div class="container">
+  <div class="main-header">
+    <h1>Fundamentals of Chemistry (B.Sc. NEP 1st Semester)</h1>
+  </div>
+</div>
+
+
+    <p class="small">Each question has 4 options. Select an answer to see immediate feedback. Click "Reveal Explanation" to view explanations. Submit to see total score.</p>
+    
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Fundamentals of Chemistry</title>
+  <style>
+    :root{--accent:#2563eb}
+    body{font-family:Inter,system-ui,Segoe UI,Roboto,Arial;background:#f9fafb;color:#0f172a;max-width:1100px;margin:20px auto;padding:18px}
+    header{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+    h1{font-size:24px;margin:0;text-align:center;width:100%}
+    .tabs{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:16px 0}
+    .tabBtn{padding:8px 14px;border-radius:8px;border:none;background:#94a3b8;color:white;cursor:pointer;font-weight:700}
+    .tabBtn.active{background:var(--accent)}
+    .controls{display:flex;gap:8px;align-items:center;justify-content:center;flex-wrap:wrap;margin-bottom:14px}
+    .action{padding:8px 12px;border-radius:8px;border:none;background:var(--accent);color:white;cursor:pointer;font-weight:600}
+    .small{font-size:13px;color:#475569}
+    #scoreDisplay{font-weight:700;margin-left:12px}
+    #quiz{margin-top:12px}
+    .card{background:white;border-radius:10px;padding:12px;margin-bottom:12px;box-shadow:0 6px 18px rgba(2,6,23,0.06);text-align:left}
+    .qnum{font-weight:700;margin-bottom:6px}
+    .question{margin-bottom:8px}
+    .options label{display:block;padding:8px;border-radius:8px;margin-bottom:6px;border:1px solid #e6eef0;cursor:pointer}
+    .options input{margin-right:8px}
+    .reveal{background:transparent;border:1px dashed var(--accent);padding:6px 8px;border-radius:8px;cursor:pointer}
+    .explain{display:none;margin-top:8px;padding:8px;background:#f1f9f9;border-left:4px solid var(--accent)}
+    .feedback{margin-top:6px;font-weight:700}
+    .correct{background:#d1fae5 !important;border-color:#10b981 !important}
+    .incorrect{background:#fee2e2 !important;border-color:#ef4444 !important}
+    .notattempt{border:1px dashed #f59e0b !important;background:#fffbea !important;padding:6px;border-radius:6px;margin-top:6px;font-size:13px;color:#92400e}
+    @media (max-width:700px){body{padding:12px}}
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Fundamentals of Chemistry</h1>
+  </header>
+
+  <div class="tabs" role="tablist" aria-label="Quizzes">
+    <button class="tabBtn active" data-quiz="1">Quiz 1 — Fundamentals and Bonding theory</button>
+    <button class="tabBtn" data-quiz="2">Quiz 2 — Periodic & Bonding</button>
+    <button class="tabBtn" data-quiz="3">Quiz 3 — Stoichiometry & Mole</button>
+    <button class="tabBtn" data-quiz="4">Quiz 4 — Organic Chemistry</button>
+  </div>
+
+  <div class="controls">
+    <button id="langBtn" class="action">Switch to हिंदी</button>
+  </div>
+
+  <div id="quiz" aria-live="polite"></div>
+  
+  <div class="controls">
+      <button id="submitBtn" class="action">Submit Quiz</button>
+    <button id="resetBtn" class="action">Reset Quiz</button>
+    <div id="scoreDisplay" class="small">Score: —</div>
+    </div>
+
+<script>
+/* -------------------------
+   Question templates per quiz
+   Each quiz has its own templates array.
+   We expand to 100 questions per quiz by cycling templates (so each quiz is different).
+   ------------------------- */
+
+function clone(obj){ return JSON.parse(JSON.stringify(obj)); }
+
+
+/* QUIZ 1: Fundamentals (Atomic structure, basic concepts) */
+const TEMPLATES_Q1 = [
+{q_en:"Resonance occurs when:", q_hi:"रेज़ोनेंस कब होता है?", options:["Electrons are localized","Electrons are delocalized over two or more structures","Nuclei vibrate in phase","Only single bonds are present"], answer:1, explain_en:"Resonance is the delocalization of electrons over multiple contributing structures.", explain_hi:"रेज़ोनेंस इलेक्ट्रॉनों का कई संरचनाओं में विस्थापन है।"},
+
+{q_en:"The structure with lower energy among resonance forms contributes:", q_hi:"रेज़ोनेंस रूपों में कम ऊर्जा वाली संरचना का योगदान:", options:["Less","More","Equal","None"], answer:1, explain_en:"More stable (lower energy) resonance form contributes more to the hybrid.", explain_hi:"अधिक स्थिर (कम ऊर्जा) रेज़ोनेंस रूप का योगदान अधिक होता है।"},
+
+{q_en:"Resonance energy is:", q_hi:"रेज़ोनेंस ऊर्जा क्या है?", options:["Difference between actual molecule and most stable resonance form","Difference between two arbitrary resonance forms","Energy of bond formation","Ionization energy"], answer:0, explain_en:"Resonance energy = Energy difference between real structure and most stable canonical form.", explain_hi:"रेज़ोनेंस ऊर्जा = वास्तविक संरचना और सबसे स्थिर कैनोनिकल रूप के बीच ऊर्जा का अंतर।"},
+
+{q_en:"Benzene’s resonance energy is approximately:", q_hi:"बेंज़ीन की रेज़ोनेंस ऊर्जा लगभग कितनी होती है?", options:["36 kcal/mol","150 kcal/mol","100 kcal/mol","36 eV"], answer:0, explain_en:"Benzene’s resonance energy ≈ 36 kcal/mol.", explain_hi:"बेंज़ीन की रेज़ोनेंस ऊर्जा ≈ 36 kcal/mol होती है।"},
+
+{q_en:"Formal charge formula is:", q_hi:"औपचारिक आवेश का सूत्र क्या है?", options:["Valence electrons – (Lone pair electrons + ½ Bonding electrons)","Valence electrons – Lone pair electrons only","Bond electrons – Lone pair electrons","Valence electrons + Bonding electrons"], answer:0, explain_en:"Formal charge = Valence electrons – (Lone pair e⁻ + ½ Bonding e⁻).", explain_hi:"औपचारिक आवेश = संयोजक इलेक्ट्रॉन – (अकेले इलेक्ट्रॉन + ½ बंध इलेक्ट्रॉन)।"},
+
+{q_en:"Formal charge of oxygen in O3 (central atom) is:", q_hi:"O3 में केंद्रीय ऑक्सीजन का औपचारिक आवेश क्या है?", options:["0","+1","-1","+2"], answer:1, explain_en:"In O3, the central O has +1 formal charge.", explain_hi:"O3 में केंद्रीय O पर +1 औपचारिक आवेश होता है।"},
+
+{q_en:"Which resonance form is most stable?", q_hi:"कौन सा रेज़ोनेंस रूप सबसे स्थिर होता है?", options:["One with maximum charge separation","One with minimum charge separation","One with more positive charges on electronegative atoms","All contribute equally"], answer:1, explain_en:"Resonance form with least charge separation and complete octets is most stable.", explain_hi:"सबसे कम आवेश विभाजन और पूर्ण ऑक्टेट वाला रूप सबसे स्थिर होता है।"},
+
+{q_en:"Resonance hybrid is:", q_hi:"रेज़ोनेंस हाइब्रिड क्या है?", options:["An imaginary form","Less stable than canonical forms","More stable than any canonical form","Equal to most unstable structure"], answer:2, explain_en:"The resonance hybrid is more stable than any individual canonical structure.", explain_hi:"रेज़ोनेंस हाइब्रिड किसी भी व्यक्तिगत कैनोनिकल संरचना से अधिक स्थिर होता है।"},
+{q_en:"Van der Waals forces are generally:", q_hi:"वैन डर वॉल्स बल सामान्यतः कैसे होते हैं?", options:["Strong chemical bonds","Weak intermolecular forces","Electrostatic ionic bonds","Nuclear forces"], answer:1, explain_en:"Van der Waals forces are weak intermolecular forces of attraction.", explain_hi:"वैन डर वॉल्स बल कमजोर अण्तराअणुक आकर्षण बल होते हैं।"},
+
+{q_en:"Ion-dipole interactions occur between:", q_hi:"आयन-डाइपोल अभिक्रियाएँ किसके बीच होती हैं?", options:["Two ions","Ion and polar molecule","Two nonpolar molecules","Two neutral atoms"], answer:1, explain_en:"Ion-dipole forces arise between an ion and a polar molecule.", explain_hi:"आयन-डाइपोल बल एक आयन और ध्रुवीय अणु के बीच उत्पन्न होते हैं।"},
+
+{q_en:"Dipole-dipole forces are stronger when:", q_hi:"डाइपोल-डाइपोल बल कब अधिक मजबूत होते हैं?", options:["Molecules are nonpolar","Dipole moment is high","Molecules are far apart","Temperature is very high"], answer:1, explain_en:"Stronger dipole-dipole interactions occur with higher dipole moment.", explain_hi:"उच्च डाइपोल मोमेंट वाले अणुओं में डाइपोल-डाइपोल बल अधिक होते हैं।"},
+
+{q_en:"London dispersion forces are also called:", q_hi:"लंदन विसरण बलों को और किस नाम से जाना जाता है?", options:["Permanent dipole forces","Induced dipole forces","Hydrogen bonds","Ionic bonds"], answer:1, explain_en:"London dispersion = temporary induced dipole–induced dipole forces.", explain_hi:"लंदन विसरण बल अस्थायी प्रेरित डाइपोल–डाइपोल बल होते हैं।"},
+
+{q_en:"Dipole moment (μ) is defined as:", q_hi:"डाइपोल मोमेंट (μ) को कैसे परिभाषित किया जाता है?", options:["Charge × Distance","Mass × Distance","Energy ÷ Charge","Distance ÷ Charge"], answer:0, explain_en:"Dipole moment μ = q × r (charge × separation).", explain_hi:"डाइपोल मोमेंट μ = q × r (आवेश × दूरी)।"},
+
+{q_en:"Dipole moment is measured in:", q_hi:"डाइपोल मोमेंट की इकाई क्या है?", options:["Tesla","Debye","Coulomb","Newton"], answer:1, explain_en:"Dipole moment is measured in Debye (D).", explain_hi:"डाइपोल मोमेंट की इकाई डिबाई (D) होती है।"},
+
+{q_en:"Which molecule has zero dipole moment?", q_hi:"किस अणु का डाइपोल मोमेंट शून्य होता है?", options:["H2O","CO2","NH3","HF"], answer:1, explain_en:"CO2 is linear and symmetric → net dipole moment = 0.", explain_hi:"CO2 रैखिक और सममित है → डाइपोल मोमेंट = 0।"},
+
+{q_en:"Which molecule has maximum dipole moment?", q_hi:"किस अणु का डाइपोल मोमेंट सबसे अधिक होता है?", options:["HCl","HF","NH3","H2O"], answer:1, explain_en:"HF has very high dipole moment due to high electronegativity difference.", explain_hi:"HF में अधिक विद्युतऋणात्मकता अंतर के कारण डाइपोल मोमेंट बहुत अधिक होता है।"},
+
+{q_en:"In H2O, the bond angle is approximately:", q_hi:"H2O में बंध कोण लगभग कितना होता है?", options:["109.5°","104.5°","120°","90°"], answer:1, explain_en:"Water has bent structure with bond angle ≈ 104.5°.", explain_hi:"जल का झुका हुआ आकार होता है, बंध कोण ≈ 104.5°।"},
+
+{q_en:"Which molecule is linear?", q_hi:"कौन सा अणु रैखिक है?", options:["H2O","CO2","SO2","NH3"], answer:1, explain_en:"CO2 has a linear geometry (O=C=O).", explain_hi:"CO2 का रैखिक ज्यामिति (O=C=O) होता है।"},
+
+{q_en:"NH3 has a geometry of:", q_hi:"NH3 की ज्यामिति क्या है?", options:["Linear","Trigonal planar","Trigonal pyramidal","Bent"], answer:2, explain_en:"NH3 has trigonal pyramidal geometry due to lone pair repulsion.", explain_hi:"NH3 का त्रिकोणीय पिरामिडीय आकार होता है क्योंकि अकेला युग्म प्रतिकर्षण करता है।"},
+
+{q_en:"SO2 molecule has geometry:", q_hi:"SO2 अणु की ज्यामिति क्या है?", options:["Linear","Trigonal planar","Bent","Tetrahedral"], answer:2, explain_en:"SO2 has bent geometry due to lone pair on sulfur.", explain_hi:"SO2 का आकार झुका हुआ होता है क्योंकि सल्फर पर अकेला युग्म होता है।"},
+
+{q_en:"Which has higher boiling point due to strong hydrogen bonding?", q_hi:"किसका क्वथनांक उच्च होता है क्योंकि इसमें मजबूत हाइड्रोजन बॉन्डिंग होती है?", options:["H2S","H2O","HCl","CO2"], answer:1, explain_en:"H2O has highest boiling point due to strong hydrogen bonding.", explain_hi:"H2O का क्वथनांक सबसे अधिक होता है क्योंकि इसमें मजबूत हाइड्रोजन बॉन्डिंग होती है।"},
+
+{q_en:"Which interaction explains solubility of NaCl in water?", q_hi:"NaCl की जल में विलेयता किस बल से समझाई जाती है?", options:["Dipole-dipole","Ion-dipole","London dispersion","Van der Waals"], answer:1, explain_en:"Na+ and Cl– interact with polar H2O molecules via ion-dipole interactions.", explain_hi:"Na+ और Cl– जल अणुओं से आयन-डाइपोल बलों द्वारा क्रिया करते हैं।"},
+
+{q_en:"Polarizability is:", q_hi:"ध्रुवणशीलता क्या है?", options:["Ability of electron cloud to be distorted","Permanent dipole moment","Bond energy","Nuclear stability"], answer:0, explain_en:"Polarizability = ease of distortion of electron cloud.", explain_hi:"ध्रुवणशीलता = इलेक्ट्रॉन बादल के विकृत होने की क्षमता।"},
+
+{q_en:"Which has highest dipole moment?", q_hi:"किसका डाइपोल मोमेंट सबसे अधिक है?", options:["NH3","BF3","CO2","CCl4"], answer:0, explain_en:"NH3 has high dipole moment due to trigonal pyramidal shape.", explain_hi:"NH3 का डाइपोल मोमेंट अधिक होता है क्योंकि इसका त्रिकोणीय पिरामिडीय आकार होता है।"},
+{q_en:"Percentage ionic character can be estimated using:", q_hi:"प्रतिशत आयनिक चरित्र का आकलन किससे किया जा सकता है?", options:["Dipole moment","Electronegativity","Bond length","All of these"], answer:3, explain_en:"Ionic character depends on dipole moment, bond length, and electronegativity difference.", explain_hi:"आयनिक चरित्र डाइपोल मोमेंट, बंध लंबाई और विद्युतऋणात्मकता पर निर्भर करता है।"},
+
+{q_en:"Formula for percentage ionic character using dipole moment is:", q_hi:"डाइपोल मोमेंट का उपयोग करके प्रतिशत आयनिक चरित्र का सूत्र क्या है?", options:["(μobs/μtheo)×100","(μtheo/μobs)×100","μobs+μtheo","μobs−μtheo"], answer:0, explain_en:"% ionic character = (observed dipole moment / theoretical dipole moment) × 100.", explain_hi:"% आयनिक चरित्र = (प्रेक्षित डाइपोल मोमेंट / सैद्धांतिक डाइपोल मोमेंट) × 100।"},
+
+{q_en:"Theoretical dipole moment is calculated assuming:", q_hi:"सैद्धांतिक डाइपोल मोमेंट की गणना किस आधार पर की जाती है?", options:["Partial charges","Complete charge separation","Induced dipoles","No bond"], answer:1, explain_en:"Theoretical dipole assumes complete electron transfer (100% ionic).", explain_hi:"सैद्धांतिक डाइपोल पूर्ण इलेक्ट्रॉन स्थानांतरण (100% आयनिक) मानकर गणना की जाती है।"},
+
+{q_en:"Li+ has higher polarizing power than Na+ because:", q_hi:"Li+ का ध्रुवीकरण बल Na+ से अधिक क्यों है?", options:["It has higher charge","It has smaller size","It has more electrons","It is heavier"], answer:1, explain_en:"Smaller cations like Li+ have higher charge density → stronger polarizing power.", explain_hi:"छोटे आयन जैसे Li+ का आवेश घनत्व अधिक होता है → अधिक ध्रुवीकरण बल।"},
+
+{q_en:"Fajan’s rule relates to:", q_hi:"फजान का नियम किससे संबंधित है?", options:["Ionic radius only","Polarizing power and polarizability","Lattice energy","Dipole moment"], answer:1, explain_en:"Fajan’s rules describe polarizing power of cations and polarizability of anions.", explain_hi:"फजान के नियम कैटायन की ध्रुवीकरण शक्ति और एनायन की ध्रुवणशीलता से संबंधित हैं।"},
+
+{q_en:"Polarizing power of a cation increases with:", q_hi:"कैटायन की ध्रुवीकरण शक्ति कब बढ़ती है?", options:["Large size, low charge","Small size, high charge","High mass, large size","None"], answer:1, explain_en:"Small size + high charge = high polarizing power.", explain_hi:"छोटा आकार + उच्च आवेश = उच्च ध्रुवीकरण शक्ति।"},
+
+{q_en:"Polarizability of an anion increases with:", q_hi:"एनायन की ध्रुवणशीलता कब बढ़ती है?", options:["Smaller size","Larger size","Higher electronegativity","Higher nuclear charge"], answer:1, explain_en:"Larger anions with diffuse electron clouds are more polarizable.", explain_hi:"बड़े एनायन जिनमें इलेक्ट्रॉन बादल फैला हुआ होता है, अधिक ध्रुवणशील होते हैं।"},
+
+{q_en:"Among Cl–, Br–, I– which has highest polarizability?", q_hi:"Cl–, Br–, I– में किसकी ध्रुवणशीलता सबसे अधिक है?", options:["Cl–","Br–","I–","All equal"], answer:2, explain_en:"I– is largest and most easily polarizable.", explain_hi:"I– सबसे बड़ा है और सबसे अधिक ध्रुवणशील है।"},
+
+{q_en:"Covalent character in ionic compounds increases when:", q_hi:"आयनिक यौगिकों में सहसंयोजक चरित्र कब बढ़ता है?", options:["Cation is small, highly charged","Cation is large, low charged","Anion is small","Both ions are small"], answer:0, explain_en:"Small, highly charged cation + large anion → more covalent character.", explain_hi:"छोटा, उच्च आवेश वाला कैटायन + बड़ा एनायन → अधिक सहसंयोजक चरित्र।"},
+
+{q_en:"Which has the highest % ionic character?", q_hi:"किसमें सबसे अधिक % आयनिक चरित्र है?", options:["HF","HCl","HBr","HI"], answer:0, explain_en:"HF has the largest electronegativity difference → maximum ionic character.", explain_hi:"HF में विद्युतऋणात्मकता का अंतर सबसे अधिक है → अधिकतम आयनिक चरित्र।"},
+{q_en:"Fajan’s rules are used to predict:", q_hi:"फजान के नियम का उपयोग किसकी भविष्यवाणी के लिए किया जाता है?", options:["Lattice energy","Ionic or covalent character","Bond length","Molecular geometry"], answer:1, explain_en:"Fajan’s rules help predict whether a bond is more ionic or covalent.", explain_hi:"फजान के नियम यह अनुमान लगाने में मदद करते हैं कि बंध अधिक आयनिक है या सहसंयोजक।"},
+
+{q_en:"Polarizing power of a cation increases when:", q_hi:"कैटायन का ध्रुवीकरण बल कब बढ़ता है?", options:["Large size, low charge","Small size, high charge","Large size, high charge","Small size, low charge"], answer:1, explain_en:"Smaller cations with higher charge have greater polarizing power.", explain_hi:"छोटे आकार और उच्च आवेश वाले कैटायन का ध्रुवीकरण बल अधिक होता है।"},
+
+{q_en:"Polarizability of an anion increases with:", q_hi:"एनायन की ध्रुवणशीलता कब बढ़ती है?", options:["Smaller size","Larger size","Higher electronegativity","High nuclear charge"], answer:1, explain_en:"Larger anions with diffuse electron clouds are more polarizable.", explain_hi:"बड़े एनायन जिनका इलेक्ट्रॉन बादल फैला होता है, अधिक ध्रुवणशील होते हैं।"},
+
+{q_en:"According to Fajan’s rules, LiI is more covalent than LiF because:", q_hi:"फजान के नियम के अनुसार, LiI LiF से अधिक सहसंयोजक क्यों है?", options:["I– is larger and more polarizable","Li+ is smaller in LiI","F– is more electronegative","Bond length is shorter in LiI"], answer:0, explain_en:"I– is larger and more polarizable than F–, giving LiI more covalent character.", explain_hi:"I– बड़ा और अधिक ध्रुवणशील है → LiI में अधिक सहसंयोजक चरित्र।"},
+
+{q_en:"Consequences of polarization include:", q_hi:"ध्रुवण के परिणामों में क्या शामिल है?", options:["Increase in covalent character","Decrease in ionic character","Change in melting point and solubility","All of these"], answer:3, explain_en:"Polarization increases covalent character, reduces ionic character, affects melting point & solubility.", explain_hi:"ध्रुवण से सहसंयोजक चरित्र बढ़ता है, आयनिक घटता है, गलनांक और विलेयता बदलते हैं।"},
+
+{q_en:"Covalent character increases when:", q_hi:"सहसंयोजक चरित्र कब बढ़ता है?", options:["Cation is large, anion is small","Cation is small, highly charged, anion is large","Both ions are small","Anion has low polarizability"], answer:1, explain_en:"Small, highly charged cation + large, polarizable anion → high covalent character.", explain_hi:"छोटा, उच्च आवेश वाला कैटायन + बड़ा ध्रुवणशील एनायन → अधिक सहसंयोजक चरित्र।"},
+
+{q_en:"Which halide of Al has maximum covalent character?", q_hi:"Al का कौन सा हैलाइड सबसे अधिक सहसंयोजक चरित्र रखता है?", options:["AlF3","AlCl3","AlBr3","AlI3"], answer:3, explain_en:"AlI3 has maximum covalent character due to large, polarizable I–.", explain_hi:"AlI3 में सबसे अधिक सहसंयोजक चरित्र होता है क्योंकि I– बड़ा और ध्रुवणशील है।"},
+
+{q_en:"Polarization effect explains why:", q_hi:"ध्रुवण प्रभाव किसे समझाता है?", options:["AgCl is white","AgI is more covalent than AgCl","NaCl dissolves in water","CaF2 is ionic"], answer:1, explain_en:"AgI is more covalent than AgCl because I– is larger and more polarizable.", explain_hi:"AgI AgCl से अधिक सहसंयोजक है क्योंकि I– बड़ा और अधिक ध्रुवणशील है।"},
+{q_en:"Hydrogen bonding is strongest when:", q_hi:"हाइड्रोजन बॉन्डिंग सबसे मजबूत कब होती है?", options:["Hydrogen is attached to N, O, or F","Hydrogen is attached to C","Hydrogen is attached to metals","Hydrogen is free"], answer:0, explain_en:"Hydrogen bond is strongest when H is covalently bonded to highly electronegative atoms (N, O, F).", explain_hi:"हाइड्रोजन बंध सबसे मजबूत तब होता है जब H N, O, या F से जुड़ा हो।"},
+
+{q_en:"Which of the following shows intermolecular hydrogen bonding?", q_hi:"निम्न में से किसमें अण्तराअणुक हाइड्रोजन बॉन्डिंग होती है?", options:["Ortho-nitrophenol","Para-nitrophenol","Salicylic acid","All of these"], answer:1, explain_en:"Para-nitrophenol shows intermolecular hydrogen bonding, leading to higher boiling point.", explain_hi:"पैरा-नाइट्रोफिनॉल में अण्तराअणुक हाइड्रोजन बॉन्डिंग होती है, जिससे क्वथनांक अधिक होता है।"},
+
+{q_en:"Which molecule has intramolecular hydrogen bonding?", q_hi:"किस अणु में अण्तराअण्विक हाइड्रोजन बॉन्डिंग होती है?", options:["Ortho-nitrophenol","Para-nitrophenol","Phenol","Ethanol"], answer:0, explain_en:"Ortho-nitrophenol forms intramolecular hydrogen bonding within the molecule.", explain_hi:"ऑर्थो-नाइट्रोफिनॉल में अण्तराअण्विक हाइड्रोजन बॉन्डिंग होती है।"},
+
+{q_en:"Van der Waals forces include:", q_hi:"वैन डर वॉल्स बलों में क्या शामिल हैं?", options:["Dipole-dipole","Dipole-induced dipole","London dispersion","All of these"], answer:3, explain_en:"Van der Waals forces include dipole-dipole, dipole-induced dipole, and London dispersion.", explain_hi:"वैन डर वॉल्स बलों में डाइपोल-डाइपोल, प्रेरित डाइपोल, और लंदन विसरण बल शामिल हैं।"},
+
+{q_en:"Ion-dipole forces are important in:", q_hi:"आयन-डाइपोल बल किसमें महत्वपूर्ण हैं?", options:["Gas phase","Solid metals","Salt dissolution in water","Nonpolar liquids"], answer:2, explain_en:"Ion-dipole forces stabilize ions in solution, e.g., NaCl in water.", explain_hi:"आयन-डाइपोल बल घोल में आयनों को स्थिर करते हैं, जैसे NaCl का पानी में घुलना।"},
+
+{q_en:"Dipole-dipole interaction strength depends on:", q_hi:"डाइपोल-डाइपोल बल की शक्ति किस पर निर्भर करती है?", options:["Bond length","Dipole moment and orientation","Atomic mass","Nuclear size"], answer:1, explain_en:"Dipole-dipole strength depends on dipole moment magnitude and relative orientation.", explain_hi:"डाइपोल-डाइपोल बल डाइपोल मोमेंट और अणुओं के अभिविन्यास पर निर्भर करता है।"},
+
+{q_en:"London dispersion forces are stronger in:", q_hi:"लंदन विसरण बल किसमें अधिक मजबूत होते हैं?", options:["Smaller atoms","Lighter molecules","Heavier, larger atoms","Nonpolar gases only"], answer:2, explain_en:"London forces increase with molecular size and mass.", explain_hi:"लंदन बल परमाणु के बड़े और भारी होने पर अधिक मजबूत होते हैं।"},
+
+{q_en:"Dipole-induced dipole forces occur when:", q_hi:"डाइपोल-प्रेरित डाइपोल बल कब उत्पन्न होते हैं?", options:["Nonpolar molecule induces dipole in polar","Polar molecule induces dipole in nonpolar","Between two ions","Between two polar molecules"], answer:1, explain_en:"Polar molecules can distort nonpolar molecules → induced dipole interaction.", explain_hi:"ध्रुवीय अणु अध्रुवीय अणु को विकृत कर डाइपोल प्रेरित करते हैं।"},
+
+{q_en:"Hydrogen bonding causes:", q_hi:"हाइड्रोजन बॉन्डिंग का क्या प्रभाव होता है?", options:["Lower boiling point","Higher boiling point","No effect on boiling point","Destroys polarity"], answer:1, explain_en:"Hydrogen bonding increases boiling point (e.g., H2O vs H2S).", explain_hi:"हाइड्रोजन बॉन्डिंग क्वथनांक बढ़ाती है (जैसे H2O बनाम H2S)।"},
+
+{q_en:"Which has strongest hydrogen bonding?", q_hi:"किसमें सबसे मजबूत हाइड्रोजन बॉन्डिंग होती है?", options:["NH3","HF","H2O","CH4"], answer:1, explain_en:"HF has very strong H-bond due to high electronegativity of F.", explain_hi:"HF में F की उच्च विद्युतऋणात्मकता के कारण सबसे मजबूत H-बॉन्ड होता है।"},
+
+{q_en:"Boiling point order due to hydrogen bonding is:", q_hi:"हाइड्रोजन बॉन्डिंग के कारण क्वथनांक का क्रम क्या है?", options:["NH3 < H2O > HF","HF < NH3 < H2O","H2O < NH3 < HF","CH4 > NH3 > H2O"], answer:0, explain_en:"Boiling point: NH3 (–33°C) < H2O (100°C) > HF (20°C).", explain_hi:"क्वथनांक क्रम: NH3 (–33°C) < H2O (100°C) > HF (20°C)।"},
+
+{q_en:"Dipole-dipole interactions are weaker than:", q_hi:"डाइपोल-डाइपोल बल किससे कमजोर होते हैं?", options:["Hydrogen bonds","London dispersion forces","Nuclear forces","None"], answer:0, explain_en:"Hydrogen bonds are stronger than ordinary dipole-dipole forces.", explain_hi:"हाइड्रोजन बॉन्ड सामान्य डाइपोल-डाइपोल बलों से अधिक मजबूत होते हैं।"},
+
+{q_en:"Ion-dipole interaction energy is proportional to:", q_hi:"आयन-डाइपोल बल की ऊर्जा किसके समानुपाती होती है?", options:["Ion charge × Dipole moment","Molecular mass","Bond length","Temperature"], answer:0, explain_en:"Ion-dipole energy ∝ q × μ (charge × dipole moment).", explain_hi:"आयन-डाइपोल ऊर्जा ∝ q × μ (आवेश × डाइपोल मोमेंट)।"},
+
+{q_en:"Van der Waals forces are maximum in:", q_hi:"वैन डर वॉल्स बल किसमें अधिकतम होते हैं?", options:["Helium","Neon","Argon","Xenon"], answer:3, explain_en:"Heavier noble gases (Xe) show strongest Van der Waals forces.", explain_hi:"भारी निष्क्रिय गैसें (Xe) में वैन डर वॉल्स बल सबसे मजबूत होते हैं।"},
+
+{q_en:"Hydrogen bonding is absent in:", q_hi:"किसमें हाइड्रोजन बॉन्डिंग नहीं होती है?", options:["NH3","H2O","HF","CH4"], answer:3, explain_en:"CH4 is nonpolar and cannot form hydrogen bonds.", explain_hi:"CH4 अध्रुवीय है और हाइड्रोजन बॉन्डिंग नहीं करता।"},
+
+{q_en:"Which property is explained by hydrogen bonding in ice?", q_hi:"बर्फ की किस विशेषता को हाइड्रोजन बॉन्डिंग से समझाया जाता है?", options:["High density of ice","Low density of ice","High conductivity","Color"], answer:1, explain_en:"Open hexagonal hydrogen-bonded structure makes ice less dense than water.", explain_hi:"खुले षट्कोणीय हाइड्रोजन-बॉन्ड संरचना बर्फ को पानी से कम घनत्व वाला बनाती है।"},
+
+{q_en:"Van der Waals forces are generally:", q_hi:"वैन डर वॉल्स बल सामान्यतः कैसे होते हैं?", options:["Stronger than ionic bonds","Weaker than covalent bonds","Same as metallic bonds","Equal to nuclear forces"], answer:1, explain_en:"Van der Waals forces are weaker than covalent and ionic bonds.", explain_hi:"वैन डर वॉल्स बल सहसंयोजक और आयनिक बंधों से कमजोर होते हैं।"}
+];
+
+/* QUIZ 2: Periodic table & Bonding */
+const TEMPLATES_Q2 = [
+{q_en:"Shape of p-orbital is:", q_hi:"p-कक्षा का आकार क्या होता है?", options:["Spherical","Dumbbell","Planar","Cylindrical"], answer:1, explain_en:"p-orbitals have a dumbbell shape with lobes along axes.", explain_hi:"p-कक्षाओं का आकार डंबल जैसा होता है और अक्षों के साथ फैला होता है।"},
+
+{q_en:"According to Aufbau principle, which orbital fills first?", q_hi:"आउफबाउ सिद्धांत के अनुसार कौन सी कक्षा पहले भरती है?", options:["3d","4s","3p","4p"], answer:1, explain_en:"Aufbau principle: orbitals fill in order of increasing energy → 4s fills before 3d.", explain_hi:"आउफबाउ सिद्धांत: कक्षाएँ ऊर्जा के बढ़ते क्रम में भरती हैं → 4s 3d से पहले भरती है।"},
+
+{q_en:"Number of orbitals in the d-subshell is:", q_hi:"d-उपकक्षा में कितनी कक्षाएँ होती हैं?", options:["3","5","7","9"], answer:1, explain_en:"d-subshell has 5 orbitals (ml = -2, -1, 0, +1, +2).", explain_hi:"d-उपकक्षा में 5 कक्षाएँ होती हैं (ml = -2, -1, 0, +1, +2)।"},
+
+{q_en:"σ bond is formed by:", q_hi:"σ बंध किससे बनता है?", options:["Sidewise overlap","End-to-end overlap","No overlap","Magnetic interaction"], answer:1, explain_en:"σ bond = head-on (end-to-end) overlap of orbitals.", explain_hi:"σ बंध कक्षाओं के सिरा-सिरा अभिसरण से बनता है।"},
+
+{q_en:"π bond is formed by:", q_hi:"π बंध किससे बनता है?", options:["Head-on overlap","Sidewise overlap of p-orbitals","Mixing of s and p","No overlap"], answer:1, explain_en:"π bond = sideways overlap of parallel p-orbitals.", explain_hi:"π बंध समानांतर p-कक्षाओं के पार्श्व अभिसरण से बनता है।"},
+
+{q_en:"Bond order in O2 molecule according to VBT is:", q_hi:"VBT के अनुसार O2 अणु का बंध क्रम क्या है?", options:["1","2","3","1.5"], answer:1, explain_en:"O2 has bond order 2 (double bond, one σ and one π).", explain_hi:"O2 में बंध क्रम 2 है (एक σ और एक π बंध)।"},
+
+{q_en:"Bond length is inversely proportional to:", q_hi:"बंध लंबाई किसके व्युत्क्रमानुपाती है?", options:["Bond order","Molecular mass","Bond angle","Electronegativity"], answer:0, explain_en:"Higher bond order → shorter bond length.", explain_hi:"अधिक बंध क्रम → छोटी बंध लंबाई।"},
+
+{q_en:"Which has the shortest bond length?", q_hi:"किसमें सबसे छोटी बंध लंबाई होती है?", options:["C–C","C=C","C≡C","All equal"], answer:2, explain_en:"C≡C (triple bond) has highest bond order → shortest bond length.", explain_hi:"C≡C (त्रि-बंध) का बंध क्रम सबसे अधिक होता है → बंध लंबाई सबसे कम।"},
+
+{q_en:"Which molecule is paramagnetic according to VBT?", q_hi:"VBT के अनुसार कौन सा अणु पैरामैग्नेटिक है?", options:["N2","O2","CO2","H2O"], answer:1, explain_en:"O2 has two unpaired electrons in π* orbitals → paramagnetic.", explain_hi:"O2 में π* कक्षाओं में दो अपविकसित इलेक्ट्रॉन होते हैं → पैरामैग्नेटिक।"},
+
+{q_en:"Hybridization in CH4 according to VBT is:", q_hi:"VBT के अनुसार CH4 में संकरण क्या है?", options:["sp","sp2","sp3","dsp2"], answer:2, explain_en:"CH4 has tetrahedral geometry with sp3 hybridization.", explain_hi:"CH4 में चतुर्भुजाकार संरचना होती है और sp3 संकरण होता है।"},
+{q_en:"Hybridization in BF3 molecule is:", q_hi:"BF3 अणु में संकरण क्या है?", options:["sp","sp2","sp3","sp3d"], answer:1, explain_en:"BF3 is trigonal planar with sp2 hybridization.", explain_hi:"BF3 त्रिकोणीय समतलीय होता है और इसमें sp2 संकरण होता है।"},
+
+{q_en:"Geometry of sp3 hybridized molecule without lone pairs is:", q_hi:"sp3 संकरण वाले अणु का ज्यामिति (बिना अकेले युग्म के) क्या है?", options:["Trigonal planar","Tetrahedral","Trigonal bipyramidal","Octahedral"], answer:1, explain_en:"sp3 hybridization → tetrahedral geometry.", explain_hi:"sp3 संकरण → चतुर्भुजाकार ज्यामिति।"},
+
+{q_en:"Bent’s rule states:", q_hi:"बेंट का नियम क्या कहता है?", options:["More s-character goes towards more electronegative substituent","More p-character goes towards more electronegative substituent","Hybrid orbitals are always equivalent","No effect of electronegativity"], answer:0, explain_en:"Bent’s rule: orbital directed towards more electronegative atom has more s-character.", explain_hi:"बेंट का नियम: अधिक विद्युतऋणात्मक परमाणु की ओर अधिक s-चरित्र होता है।"},
+
+{q_en:"Hybridization in PCl5 is:", q_hi:"PCl5 में संकरण क्या है?", options:["sp3","sp2","sp3d","sp3d2"], answer:2, explain_en:"PCl5 has trigonal bipyramidal structure with sp3d hybridization.", explain_hi:"PCl5 का त्रिकोणीय द्विपिरामिडीय संरचना होती है और इसमें sp3d संकरण होता है।"},
+
+{q_en:"VSEPR theory predicts geometry on the basis of:", q_hi:"VSEPR सिद्धांत किसके आधार पर ज्यामिति बताता है?", options:["Bond energy","Electron pair repulsion","Atomic mass","Bond order"], answer:1, explain_en:"VSEPR theory → geometry depends on repulsions among bonding and lone electron pairs.", explain_hi:"VSEPR सिद्धांत → ज्यामिति बंध और अकेले इलेक्ट्रॉन युग्मों के प्रतिकर्षण पर निर्भर करती है।"},
+
+{q_en:"According to VSEPR, geometry of NH3 is:", q_hi:"VSEPR के अनुसार NH3 का ज्यामिति क्या है?", options:["Tetrahedral","Trigonal pyramidal","Trigonal planar","Bent"], answer:1, explain_en:"NH3 has sp3 hybridization but one lone pair → trigonal pyramidal.", explain_hi:"NH3 में sp3 संकरण होता है और एक अकेला युग्म → त्रिकोणीय पिरामिडीय।"},
+
+{q_en:"According to VSEPR, geometry of H2O is:", q_hi:"VSEPR के अनुसार H2O का ज्यामिति क्या है?", options:["Linear","Bent","Trigonal planar","Tetrahedral"], answer:1, explain_en:"H2O has two lone pairs → bent structure.", explain_hi:"H2O में दो अकेले युग्म होते हैं → झुकी हुई संरचना।"},
+
+{q_en:"sp hybridization leads to geometry:", q_hi:"sp संकरण किस ज्यामिति की ओर ले जाता है?", options:["Linear","Trigonal planar","Tetrahedral","Square planar"], answer:0, explain_en:"sp hybridization gives linear geometry (e.g., BeCl2).", explain_hi:"sp संकरण से रैखिक संरचना मिलती है (जैसे BeCl2)।"},
+
+{q_en:"Hybridization of central atom in XeF2 is:", q_hi:"XeF2 में केंद्रीय परमाणु का संकरण क्या है?", options:["sp3","sp3d","sp3d2","sp2"], answer:1, explain_en:"XeF2 has linear geometry with sp3d hybridization.", explain_hi:"XeF2 का रैखिक ज्यामिति होता है और इसमें sp3d संकरण होता है।"},
+
+{q_en:"Which one is NOT correctly predicted by VSEPR?", q_hi:"निम्न में से कौन सा VSEPR द्वारा सही अनुमानित नहीं है?", options:["CH4 – Tetrahedral","BF3 – Trigonal planar","XeF4 – Square planar","NH3 – Square planar"], answer:3, explain_en:"NH3 is trigonal pyramidal, not square planar.", explain_hi:"NH3 त्रिकोणीय पिरामिडीय है, न कि वर्गाकार समतलीय।"},
+{q_en:"According to VSEPR, the shape of H2O molecule is:", q_hi:"VSEPR के अनुसार H2O अणु का आकार क्या है?", options:["Linear","Bent","Trigonal planar","Tetrahedral"], answer:1, explain_en:"H2O has two lone pairs and two bond pairs → bent geometry.", explain_hi:"H2O में दो अकेले और दो बंध युग्म होते हैं → झुका हुआ आकार।"},
+
+{q_en:"The bond angle in H2O is approximately:", q_hi:"H2O में बंध कोण लगभग कितना होता है?", options:["120°","109.5°","104.5°","90°"], answer:2, explain_en:"Due to lone pair repulsion, H2O has bond angle ≈ 104.5°.", explain_hi:"अकेले युग्म के प्रतिकर्षण के कारण H2O में बंध कोण ≈ 104.5° होता है।"},
+
+{q_en:"The geometry of NH3 molecule is:", q_hi:"NH3 अणु का ज्यामिति क्या है?", options:["Trigonal planar","Trigonal pyramidal","Tetrahedral","Bent"], answer:1, explain_en:"NH3 has sp3 hybridization with one lone pair → trigonal pyramidal.", explain_hi:"NH3 में sp3 संकरण और एक अकेला युग्म होता है → त्रिकोणीय पिरामिडीय।"},
+
+{q_en:"The bond angle in NH3 is approximately:", q_hi:"NH3 में बंध कोण लगभग कितना होता है?", options:["109.5°","107°","120°","100°"], answer:1, explain_en:"NH3 bond angle is ≈ 107° due to lone pair–bond pair repulsion.", explain_hi:"NH3 में बंध कोण ≈ 107° होता है क्योंकि अकेले-बंध युग्म प्रतिकर्षण होता है।"},
+
+{q_en:"The geometry of PCl5 is:", q_hi:"PCl5 का ज्यामिति क्या है?", options:["Tetrahedral","Trigonal bipyramidal","Octahedral","Square planar"], answer:1, explain_en:"PCl5 has sp3d hybridization → trigonal bipyramidal geometry.", explain_hi:"PCl5 में sp3d संकरण होता है → त्रिकोणीय द्विपिरामिडीय ज्यामिति।"},
+
+{q_en:"In PCl5, the bond angles are:", q_hi:"PCl5 में बंध कोण कितने होते हैं?", options:["90° and 120°","109.5°","60°","180° only"], answer:0, explain_en:"Trigonal bipyramidal geometry → 90° (axial-equatorial) and 120° (equatorial).", explain_hi:"त्रिकोणीय द्विपिरामिडीय → 90° (अक्षीय-समतलीय) और 120° (समतलीय)।"},
+
+{q_en:"The geometry of SF6 is:", q_hi:"SF6 का ज्यामिति क्या है?", options:["Trigonal bipyramidal","Octahedral","Square planar","Tetrahedral"], answer:1, explain_en:"SF6 has sp3d2 hybridization → octahedral geometry.", explain_hi:"SF6 में sp3d2 संकरण होता है → अष्टफलीय ज्यामिति।"},
+
+{q_en:"In SF6, the bond angle is:", q_hi:"SF6 में बंध कोण कितना होता है?", options:["120°","90°","109.5°","180° only"], answer:1, explain_en:"Octahedral geometry → all F–S–F bond angles are 90° (and 180° axial).", explain_hi:"अष्टफलीय ज्यामिति → सभी F–S–F कोण 90° (और 180° अक्षीय) होते हैं।"},
+
+{q_en:"The geometry of SF4 molecule is:", q_hi:"SF4 अणु का ज्यामिति क्या है?", options:["Trigonal planar","See-saw","Square planar","Octahedral"], answer:1, explain_en:"SF4 has sp3d hybridization with one lone pair → see-saw shape.", explain_hi:"SF4 में sp3d संकरण और एक अकेला युग्म होता है → सी-सॉ आकार।"},
+
+{q_en:"In SF4, the bond angles are approximately:", q_hi:"SF4 में बंध कोण लगभग कितने होते हैं?", options:["90° and 120°","109.5°","60°","180°"], answer:0, explain_en:"See-saw geometry gives bond angles close to 90° and 120°.", explain_hi:"सी-सॉ ज्यामिति में बंध कोण लगभग 90° और 120° होते हैं।"},
+{q_en:"According to MOT, the bond order of N2 is:", q_hi:"MOT के अनुसार N2 का बंध क्रम क्या है?", options:["2","3","1","2.5"], answer:1, explain_en:"Bond order = (Nb − Na)/2 = (10−4)/2 = 3.", explain_hi:"बंध क्रम = (Nb − Na)/2 = (10−4)/2 = 3।"},
+
+{q_en:"The magnetic property of N2 is:", q_hi:"N2 की चुम्बकीय प्रकृति क्या है?", options:["Paramagnetic","Diamagnetic","Ferromagnetic","Antiferromagnetic"], answer:1, explain_en:"N2 has all paired electrons → diamagnetic.", explain_hi:"N2 में सभी युग्मित इलेक्ट्रॉन होते हैं → डायमैग्नेटिक।"},
+
+{q_en:"Bond order of O2 molecule according to MOT is:", q_hi:"MOT के अनुसार O2 का बंध क्रम क्या है?", options:["1","2","3","2.5"], answer:1, explain_en:"Bond order = (Nb − Na)/2 = (10−6)/2 = 2.", explain_hi:"बंध क्रम = (Nb − Na)/2 = (10−6)/2 = 2।"},
+
+{q_en:"O2 is paramagnetic because:", q_hi:"O2 पैरामैग्नेटिक क्यों है?", options:["Unpaired electrons in π* orbitals","All electrons paired","Electrons in σ* orbital only","Resonance effect"], answer:0, explain_en:"O2 has two unpaired electrons in degenerate π* orbitals.", explain_hi:"O2 में π* कक्षाओं में दो अपविकसित इलेक्ट्रॉन होते हैं।"},
+
+{q_en:"Bond order of O2+ ion is:", q_hi:"O2+ आयन का बंध क्रम क्या है?", options:["2","2.5","3","1.5"], answer:1, explain_en:"Removing one electron from π* orbital → bond order (11−6)/2 = 2.5.", explain_hi:"एक इलेक्ट्रॉन π* से हटाने पर → बंध क्रम (11−6)/2 = 2.5।"},
+
+{q_en:"Bond order of O2− ion is:", q_hi:"O2− आयन का बंध क्रम क्या है?", options:["1.5","2","2.5","3"], answer:0, explain_en:"Adding one electron to π* orbital → bond order (10−7)/2 = 1.5.", explain_hi:"एक इलेक्ट्रॉन π* में जोड़ने पर → बंध क्रम (10−7)/2 = 1.5।"},
+
+{q_en:"Bond order of O2²− ion is:", q_hi:"O2²− आयन का बंध क्रम क्या है?", options:["1","2","3","0"], answer:0, explain_en:"Adding two electrons to π* orbitals → bond order (10−8)/2 = 1.", explain_hi:"दो इलेक्ट्रॉन π* में जोड़ने पर → बंध क्रम (10−8)/2 = 1।"},
+
+{q_en:"Bond order of C2 molecule is:", q_hi:"C2 अणु का बंध क्रम क्या है?", options:["1","2","3","4"], answer:1, explain_en:"Bond order = (Nb − Na)/2 = (8−4)/2 = 2.", explain_hi:"बंध क्रम = (Nb − Na)/2 = (8−4)/2 = 2।"},
+
+{q_en:"C2 is:", q_hi:"C2 कैसा है?", options:["Paramagnetic","Diamagnetic","Ferromagnetic","None"], answer:1, explain_en:"C2 has all paired electrons → diamagnetic.", explain_hi:"C2 में सभी इलेक्ट्रॉन युग्मित होते हैं → डायमैग्नेटिक।"},
+
+{q_en:"Bond order of B2 molecule is:", q_hi:"B2 अणु का बंध क्रम क्या है?", options:["0","1","2","3"], answer:1, explain_en:"Bond order = (Nb − Na)/2 = (6−4)/2 = 1.", explain_hi:"बंध क्रम = (Nb − Na)/2 = (6−4)/2 = 1।"},
+
+{q_en:"B2 is paramagnetic because:", q_hi:"B2 पैरामैग्नेटिक क्यों है?", options:["Unpaired electrons in π orbitals","All paired electrons","Resonance effect","Charge separation"], answer:0, explain_en:"B2 has two unpaired electrons in π2px and π2py orbitals.", explain_hi:"B2 में π2px और π2py में दो अपविकसित इलेक्ट्रॉन होते हैं।"},
+
+{q_en:"Bond order of F2 is:", q_hi:"F2 का बंध क्रम क्या है?", options:["1","2","3","0"], answer:0, explain_en:"Bond order = (Nb − Na)/2 = (8−6)/2 = 1.", explain_hi:"बंध क्रम = (Nb − Na)/2 = (8−6)/2 = 1।"},
+
+{q_en:"CO molecule has bond order:", q_hi:"CO अणु का बंध क्रम क्या है?", options:["2","2.5","3","3.5"], answer:2, explain_en:"Bond order = (Nb − Na)/2 = (10−4)/2 = 3.", explain_hi:"बंध क्रम = (Nb − Na)/2 = (10−4)/2 = 3।"},
+
+{q_en:"NO molecule has bond order:", q_hi:"NO अणु का बंध क्रम क्या है?", options:["2","2.5","3","1.5"], answer:1, explain_en:"Bond order = (Nb − Na)/2 = (8−3)/2 = 2.5.", explain_hi:"बंध क्रम = (Nb − Na)/2 = (8−3)/2 = 2.5।"},
+
+{q_en:"Which among N2, O2, F2 has the shortest bond length?", q_hi:"N2, O2, F2 में किसका बंध लंबाई सबसे कम है?", options:["N2","O2","F2","All equal"], answer:0, explain_en:"Bond order: N2 = 3 (shortest), O2 = 2, F2 = 1.", explain_hi:"बंध क्रम: N2 = 3 (सबसे छोटा), O2 = 2, F2 = 1।"},
+{q_en:"Effective nuclear charge (Zeff) is:", q_hi:"प्रभावी नाभिकीय आवेश (Zeff) क्या है?", options:["Actual nuclear charge","Net positive charge felt by an electron","Always equal to atomic number","Independent of electrons"], answer:1, explain_en:"Zeff = net positive charge experienced by an electron after shielding.", explain_hi:"Zeff = परिरक्षण के बाद इलेक्ट्रॉन द्वारा महसूस किया गया शुद्ध धनात्मक आवेश।"},
+
+{q_en:"Slater’s rules are used to calculate:", q_hi:"स्लेटर के नियम किसकी गणना के लिए होते हैं?", options:["Electronegativity","Effective nuclear charge","Bond order","Lattice energy"], answer:1, explain_en:"Slater’s rules help calculate effective nuclear charge.", explain_hi:"स्लेटर के नियम प्रभावी नाभिकीय आवेश की गणना करते हैं।"},
+
+{q_en:"Shielding effect is caused by:", q_hi:"शील्डिंग प्रभाव किसके कारण होता है?", options:["Nucleus","Inner shell electrons repelling outer electrons","Protons","Neutrons"], answer:1, explain_en:"Inner electrons shield outer electrons from full nuclear attraction.", explain_hi:"भीतरी इलेक्ट्रॉन बाहरी इलेक्ट्रॉनों को नाभिक के आकर्षण से परिरक्षित करते हैं।"},
+
+{q_en:"Across a period, effective nuclear charge generally:", q_hi:"एक आवर्त में Zeff सामान्यतः:", options:["Decreases","Increases","Remains constant","Becomes zero"], answer:1, explain_en:"Across a period, Zeff increases as nuclear charge rises but shielding is nearly constant.", explain_hi:"आवर्त में Zeff बढ़ता है क्योंकि नाभिकीय आवेश बढ़ता है और शील्डिंग लगभग समान रहती है।"},
+
+{q_en:"Down a group, effective nuclear charge felt by valence electrons:", q_hi:"समूह में नीचे जाने पर संयोजक इलेक्ट्रॉनों द्वारा महसूस किया गया Zeff:", options:["Increases strongly","Remains almost constant","Decreases to zero","Becomes negative"], answer:1, explain_en:"Down a group, Zeff changes little because added shells increase shielding.", explain_hi:"समूह में नीचे जाने पर Zeff लगभग स्थिर रहता है क्योंकि नए शेल परिरक्षण बढ़ाते हैं।"},
+
+{q_en:"Shielding effect is stronger for:", q_hi:"शील्डिंग प्रभाव किसके लिए अधिक होता है?", options:["s-electrons","p-electrons","d-electrons","f-electrons"], answer:3, explain_en:"Order of shielding: s > p > d > f (f-electrons shield least).", explain_hi:"शील्डिंग क्रम: s > p > d > f (f-इलेक्ट्रॉन सबसे कम परिरक्षित करते हैं)।"},
+
+{q_en:"Which electrons provide maximum shielding?", q_hi:"कौन से इलेक्ट्रॉन अधिकतम परिरक्षण करते हैं?", options:["s-electrons","p-electrons","d-electrons","f-electrons"], answer:0, explain_en:"s-electrons are closest to nucleus and shield outer electrons most effectively.", explain_hi:"s-इलेक्ट्रॉन नाभिक के सबसे पास होते हैं और सबसे अधिक परिरक्षण करते हैं।"},
+
+{q_en:"Which electrons provide poorest shielding?", q_hi:"कौन से इलेक्ट्रॉन सबसे कम परिरक्षण करते हैं?", options:["s-electrons","p-electrons","d-electrons","f-electrons"], answer:3, explain_en:"f-electrons shield outer electrons very poorly.", explain_hi:"f-इलेक्ट्रॉन बाहरी इलेक्ट्रॉनों को बहुत कमजोर परिरक्षण देते हैं।"},
+
+{q_en:"Zeff is always:", q_hi:"Zeff हमेशा:", options:["Greater than actual nuclear charge","Less than or equal to actual nuclear charge","Equal to atomic mass","Independent of Z"], answer:1, explain_en:"Zeff ≤ Z because of shielding by other electrons.", explain_hi:"Zeff ≤ Z होता है क्योंकि अन्य इलेक्ट्रॉन परिरक्षण करते हैं।"},
+
+{q_en:"For Na (Z=11), Zeff for outer electron is close to:", q_hi:"Na (Z=11) में बाहरी इलेक्ट्रॉन के लिए Zeff लगभग कितना होता है?", options:["1","5","11","0"], answer:0, explain_en:"Valence electron in Na feels net Zeff ≈ 1 after shielding.", explain_hi:"Na में संयोजक इलेक्ट्रॉन परिरक्षण के बाद Zeff ≈ 1 महसूस करता है।"},
+
+{q_en:"As Zeff increases across a period, atomic size:", q_hi:"Zeff बढ़ने पर आवर्त में परमाणु आकार:", options:["Increases","Decreases","Remains constant","Doubles"], answer:1, explain_en:"Higher Zeff pulls electrons closer → smaller size.", explain_hi:"उच्च Zeff इलेक्ट्रॉनों को पास खींचता है → छोटा आकार।"},
+
+{q_en:"As shielding increases down a group, atomic size:", q_hi:"समूह में नीचे जाने पर शील्डिंग बढ़ने से परमाणु आकार:", options:["Decreases","Remains same","Increases","Becomes zero"], answer:2, explain_en:"More shells and shielding → larger size down group.", explain_hi:"अधिक शेल और शील्डिंग → समूह में नीचे जाने पर आकार बड़ा।"},
+
+{q_en:"Ionization energy across a period increases because:", q_hi:"आवर्त में आयनीकरण ऊर्जा क्यों बढ़ती है?", options:["Zeff decreases","Zeff increases","Shielding increases","Atomic size increases"], answer:1, explain_en:"Greater Zeff → more energy needed to remove electron.", explain_hi:"Zeff बढ़ने पर इलेक्ट्रॉन हटाने के लिए अधिक ऊर्जा चाहिए।"},
+
+{q_en:"Ionization energy down a group decreases because:", q_hi:"समूह में नीचे जाने पर आयनीकरण ऊर्जा क्यों घटती है?", options:["Shielding increases and electrons are farther","Zeff increases strongly","Electrons are massless","Nucleus weakens"], answer:0, explain_en:"Down group, increased distance + shielding → lower ionization energy.", explain_hi:"समूह में नीचे, दूरी और परिरक्षण बढ़ने से आयनीकरण ऊर्जा कम हो जाती है।"},
+
+{q_en:"Electron affinity across a period generally:", q_hi:"आवर्त में इलेक्ट्रॉन अभिरुचि सामान्यतः:", options:["Increases","Decreases","Remains same","Becomes zero"], answer:0, explain_en:"Zeff increases → higher attraction for added electron.", explain_hi:"Zeff बढ़ने से अतिरिक्त इलेक्ट्रॉन के लिए आकर्षण बढ़ता है।"},
+
+{q_en:"Electron affinity down a group generally:", q_hi:"समूह में नीचे जाने पर इलेक्ट्रॉन अभिरुचि सामान्यतः:", options:["Increases","Decreases","Remains same","Becomes negative"], answer:1, explain_en:"Larger size + shielding → electron affinity decreases.", explain_hi:"आकार और परिरक्षण बढ़ने से इलेक्ट्रॉन अभिरुचि घटती है।"},
+
+{q_en:"Electronegativity across a period:", q_hi:"आवर्त में विद्युतऋणात्मकता:", options:["Decreases","Increases","Constant","Random"], answer:1, explain_en:"Zeff increases across a period → higher electronegativity.", explain_hi:"आवर्त में Zeff बढ़ने से विद्युतऋणात्मकता बढ़ती है।"},
+
+{q_en:"Electronegativity down a group:", q_hi:"समूह में विद्युतऋणात्मकता:", options:["Increases","Decreases","Constant","Doubles"], answer:1, explain_en:"Down group, shielding increases, size increases → electronegativity decreases.", explain_hi:"समूह में नीचे, परिरक्षण और आकार बढ़ने से विद्युतऋणात्मकता घटती है।"},
+
+{q_en:"Which series shows increasing Zeff?", q_hi:"कौन सी श्रेणी बढ़ते Zeff को दर्शाती है?", options:["Li < Be < B < C","C < B < Be < Li","Na < Mg < Al < Si","Cl < S < P < Si"], answer:0, explain_en:"Across period, Zeff increases left to right → Li < Be < B < C.", explain_hi:"आवर्त में बाएँ से दाएँ Zeff बढ़ता है → Li < Be < B < C।"},
+
+{q_en:"Which series shows strongest shielding effect?", q_hi:"कौन सी श्रेणी सबसे अधिक शील्डिंग प्रभाव दिखाती है?", options:["s > p > d > f","f > d > p > s","p > s > d > f","d > f > s > p"], answer:0, explain_en:"Shielding power: s > p > d > f.", explain_hi:"शील्डिंग शक्ति: s > p > d > f।"},
+{q_en:"Slater’s rules are applied to calculate:", q_hi:"स्लेटर के नियम किसकी गणना के लिए होते हैं?", options:["Atomic radius","Effective nuclear charge (Zeff)","Ionization enthalpy","Electron affinity"], answer:1, explain_en:"Slater’s rules are used to determine Zeff experienced by electrons.", explain_hi:"स्लेटर के नियम इलेक्ट्रॉनों द्वारा महसूस किए गए Zeff की गणना करते हैं।"},
+
+{q_en:"According to Slater’s rules, shielding constant depends on:", q_hi:"स्लेटर के नियमों के अनुसार परिरक्षण स्थिरांक किस पर निर्भर करता है?", options:["Nuclear charge only","Position of electron and other electrons in shells","Atomic mass","Isotopic abundance"], answer:1, explain_en:"Shielding depends on electron position and distribution in different shells.", explain_hi:"परिरक्षण इलेक्ट्रॉनों की स्थिति और शेल में वितरण पर निर्भर करता है।"},
+
+{q_en:"Atomic radius across a period:", q_hi:"आवर्त में परमाणु त्रिज्या:", options:["Increases","Decreases","Remains constant","Becomes zero"], answer:1, explain_en:"Across a period, Zeff increases → electrons pulled closer → smaller size.", explain_hi:"आवर्त में Zeff बढ़ने से इलेक्ट्रॉन पास खिंचते हैं → छोटा आकार।"},
+
+{q_en:"Atomic radius down a group:", q_hi:"समूह में नीचे जाने पर परमाणु त्रिज्या:", options:["Increases","Decreases","Constant","Doubles"], answer:0, explain_en:"More shells are added → atomic radius increases down a group.", explain_hi:"समूह में शेल बढ़ने से परमाणु त्रिज्या बढ़ती है।"},
+
+{q_en:"Cationic radius is always:", q_hi:"धनायनिक त्रिज्या हमेशा:", options:["Smaller than parent atom","Larger than parent atom","Equal to parent atom","Unchanged"], answer:0, explain_en:"Loss of electrons → less repulsion → cation smaller than parent atom.", explain_hi:"इलेक्ट्रॉन खोने से प्रतिकर्षण घटता है → धनायन मूल परमाणु से छोटा होता है।"},
+
+{q_en:"Anionic radius is always:", q_hi:"ऋणायनिक त्रिज्या हमेशा:", options:["Smaller than parent atom","Larger than parent atom","Equal to parent atom","Unchanged"], answer:1, explain_en:"Gain of electrons → more repulsion → anion larger than parent atom.", explain_hi:"इलेक्ट्रॉन पाने से प्रतिकर्षण बढ़ता है → ऋणायन मूल परमाणु से बड़ा होता है।"},
+
+{q_en:"Electronegativity is defined as:", q_hi:"विद्युतऋणात्मकता की परिभाषा क्या है?", options:["Energy of removing electron","Tendency of an atom to attract shared electrons","Energy released in adding electron","Ability to donate electron"], answer:1, explain_en:"Electronegativity = tendency of atom in a molecule to attract bonding electrons.", explain_hi:"विद्युतऋणात्मकता = अणु में इलेक्ट्रॉनों को आकर्षित करने की प्रवृत्ति।"},
+
+{q_en:"On Pauling scale, the most electronegative element is:", q_hi:"पॉलिंग पैमाने पर सबसे अधिक विद्युतऋणात्मक तत्व कौन सा है?", options:["Oxygen","Nitrogen","Chlorine","Fluorine"], answer:3, explain_en:"Fluorine (χ = 4.0) is most electronegative on Pauling scale.", explain_hi:"फ्लोरीन (χ = 4.0) पॉलिंग पैमाने पर सबसे अधिक विद्युतऋणात्मक है।"},
+
+{q_en:"Allred–Rochow scale defines electronegativity based on:", q_hi:"ऑलरेड–रोचो स्केल विद्युतऋणात्मकता को किस आधार पर परिभाषित करता है?", options:["Bond energies","Electrostatic force of nucleus on valence electrons","Ionization enthalpy","Electron affinity"], answer:1, explain_en:"Allred–Rochow scale uses effective nuclear charge and atomic radius.", explain_hi:"ऑलरेड–रोचो स्केल प्रभावी नाभिकीय आवेश और परमाणु त्रिज्या पर आधारित है।"},
+
+{q_en:"Ionization enthalpy is:", q_hi:"आयनीकरण एंथैल्पी क्या है?", options:["Energy released when electron is added","Energy required to remove electron from gaseous atom","Energy change in bond breaking","Energy required to break nucleus"], answer:1, explain_en:"Ionization enthalpy = energy to remove electron from gaseous atom in ground state.", explain_hi:"आयनीकरण एंथैल्पी = गैसीय परमाणु से इलेक्ट्रॉन हटाने हेतु आवश्यक ऊर्जा।"},
+
+{q_en:"Ionization enthalpy across a period:", q_hi:"आवर्त में आयनीकरण एंथैल्पी:", options:["Increases","Decreases","Constant","Becomes zero"], answer:0, explain_en:"Zeff increases across a period → ionization enthalpy increases.", explain_hi:"आवर्त में Zeff बढ़ने से आयनीकरण एंथैल्पी बढ़ती है।"},
+
+{q_en:"Ionization enthalpy down a group:", q_hi:"समूह में नीचे जाने पर आयनीकरण एंथैल्पी:", options:["Increases","Decreases","Constant","Becomes infinite"], answer:1, explain_en:"More shielding + larger size → ionization enthalpy decreases.", explain_hi:"अधिक शील्डिंग और बड़ा आकार → आयनीकरण एंथैल्पी घटती है।"},
+
+{q_en:"Electron gain enthalpy is:", q_hi:"इलेक्ट्रॉन गेन एंथैल्पी क्या है?", options:["Energy required to remove electron","Energy change when atom gains an electron","Energy to break bond","Energy of lattice"], answer:1, explain_en:"Electron gain enthalpy = energy released/absorbed when atom gains electron.", explain_hi:"इलेक्ट्रॉन गेन एंथैल्पी = इलेक्ट्रॉन मिलने पर परमाणु द्वारा उत्सर्जित/अवशोषित ऊर्जा।"},
+
+{q_en:"Which element has the most negative electron gain enthalpy?", q_hi:"सबसे अधिक ऋणात्मक इलेक्ट्रॉन गेन एंथैल्पी किसकी है?", options:["Chlorine","Fluorine","Oxygen","Nitrogen"], answer:0, explain_en:"Chlorine has most negative electron gain enthalpy (more than F).", explain_hi:"क्लोरीन की इलेक्ट्रॉन गेन एंथैल्पी फ्लोरीन से भी अधिक ऋणात्मक है।"},
+
+{q_en:"Electron gain enthalpy across a period generally:", q_hi:"आवर्त में इलेक्ट्रॉन गेन एंथैल्पी सामान्यतः:", options:["Becomes more negative","Becomes more positive","Remains constant","Becomes zero"], answer:0, explain_en:"Across a period, Zeff increases → electron gain enthalpy becomes more negative.", explain_hi:"आवर्त में Zeff बढ़ने से इलेक्ट्रॉन गेन एंथैल्पी अधिक ऋणात्मक हो जाती है।"}
+
+];
+
+/* QUIZ 3: Stoichiometry, Mole, Reactions */
+const TEMPLATES_Q3 = [
+{q_en:"Isomers are compounds that:", q_hi:"समावयवी वे यौगिक होते हैं जो:", options:["Have same molecular formula but different structures","Have different molecular formula","Are always optical active","Have same boiling points"], answer:0, explain_en:"Isomers have same molecular formula but different arrangements of atoms.", explain_hi:"समावयवी का आणविक सूत्र समान होता है लेकिन संरचना अलग होती है।"},
+
+{q_en:"Two types of isomerism are:", q_hi:"समावयविता के दो प्रकार कौन से हैं?", options:["Structural and stereoisomerism","Geometrical and mechanical","Optical and positional only","Only chain isomerism"], answer:0, explain_en:"Isomerism is broadly classified into structural and stereoisomerism.", explain_hi:"समावयविता मुख्य रूप से संरचनात्मक और स्थिरीय समावयविता में बाँटी जाती है।"},
+
+{q_en:"Geometrical isomerism arises due to:", q_hi:"ज्यामितीय समावयविता किस कारण से उत्पन्न होती है?", options:["Restricted rotation around double bond","Free rotation around single bond","Different molecular formula","Resonance"], answer:0, explain_en:"Geometrical isomerism occurs due to restricted rotation about double bond or ring.", explain_hi:"ज्यामितीय समावयविता डबल बंध या चक्र में घूमने की रुकावट से उत्पन्न होती है।"},
+
+{q_en:"A molecule is chiral if:", q_hi:"एक अणु चिरल होता है यदि:", options:["It has a plane of symmetry","It is superimposable on its mirror image","It lacks symmetry and has a stereogenic center","It is linear"], answer:2, explain_en:"Chiral molecules are non-superimposable on their mirror images and often have a stereogenic center.", explain_hi:"चिरल अणु अपने दर्पण प्रतिबिंब पर आरोपित नहीं होते और अक्सर स्टिरियोजेनिक केंद्र रखते हैं।"},
+
+{q_en:"Enantiomers are:", q_hi:"एनेन्टियोमर क्या होते हैं?", options:["Same molecules","Superimposable mirror images","Non-superimposable mirror images","Different molecular formula"], answer:2, explain_en:"Enantiomers are non-superimposable mirror image isomers.", explain_hi:"एनेन्टियोमर असुपरइम्पोज़ेबल दर्पण प्रतिबिंब समावयवी होते हैं।"},
+
+{q_en:"A carbon with four different substituents is called:", q_hi:"चार अलग-अलग उपस्थापनों वाला कार्बन क्या कहलाता है?", options:["Stereogenic center","Symmetric center","Achiral center","Geometric center"], answer:0, explain_en:"A carbon with four different substituents is a stereogenic (chiral) center.", explain_hi:"चार अलग-अलग उपस्थापन वाला कार्बन स्टिरियोजेनिक (चिरल) केंद्र कहलाता है।"},
+
+{q_en:"Optical activity is measured using:", q_hi:"प्रकाशीय सक्रियता किससे मापी जाती है?", options:["Spectrometer","Polarimeter","Colorimeter","Refractometer"], answer:1, explain_en:"Optical activity is measured with a polarimeter.", explain_hi:"प्रकाशीय सक्रियता पोलारीमीटर से मापी जाती है।"},
+
+{q_en:"An optically active compound rotates plane-polarized light:", q_hi:"प्रकाशीय सक्रिय यौगिक क्या करता है?", options:["Absorbs it","Reflects it","Rotates it","Destroys it"], answer:2, explain_en:"Optically active compounds rotate plane-polarized light either clockwise or anticlockwise.", explain_hi:"प्रकाशीय सक्रिय यौगिक ध्रुवित प्रकाश को घड़ी की दिशा या विपरीत दिशा में घुमाते हैं।"},
+
+{q_en:"Which of the following does NOT show optical isomerism?", q_hi:"निम्न में से कौन प्रकाशीय समावयविता नहीं दिखाता?", options:["CHClBrI","CH3CHClBr","CH2Cl2","Lactic acid"], answer:2, explain_en:"CH2Cl2 has no stereogenic center → no optical isomerism.", explain_hi:"CH2Cl2 में स्टिरियोजेनिक केंद्र नहीं है → प्रकाशीय समावयविता नहीं।"},
+
+{q_en:"The specific rotation [α] is defined as:", q_hi:"विशिष्ट घूर्णन [α] को कैसे परिभाषित किया जाता है?", options:["Observed rotation / (concentration × path length)","Observed rotation × concentration × path length","Observed rotation / wavelength","Observed rotation × wavelength"], answer:0, explain_en:"[α] = α_obs / (c × l), where c = concentration, l = path length.", explain_hi:"[α] = α_obs / (c × l), जहाँ c = सांद्रता, l = पथ लंबाई।"},
+{q_en:"Enantiomers have identical:", q_hi:"एनेन्टियोमर में समान क्या होता है?", options:["Melting point and boiling point","Optical rotation direction","Biological activity","Solubility in chiral solvents"], answer:0, explain_en:"Enantiomers have identical physical properties (mp, bp, density) except optical rotation.", explain_hi:"एनेन्टियोमर के भौतिक गुण (गलनांक, क्वथनांक, घनत्व) समान होते हैं, केवल प्रकाशीय घूर्णन अलग होता है।"},
+
+{q_en:"Enantiomers differ in:", q_hi:"एनेन्टियोमर किसमें भिन्न होते हैं?", options:["Optical activity","Molecular formula","Bond length","Molar mass"], answer:0, explain_en:"Enantiomers rotate plane-polarized light in opposite directions.", explain_hi:"एनेन्टियोमर ध्रुवित प्रकाश को विपरीत दिशाओं में घुमाते हैं।"},
+
+{q_en:"A molecule with two stereogenic centers can be:", q_hi:"दो स्टिरियोजेनिक केंद्र वाले अणु कैसे हो सकते हैं?", options:["Only chiral","Only achiral","Chiral or achiral","Neither"], answer:2, explain_en:"Such molecules may be chiral, achiral (meso), or give diastereomers.", explain_hi:"ऐसे अणु चिरल, अचिरल (मेसो) या डाएस्टिरियोमर दे सकते हैं।"},
+
+{q_en:"Diastereomers are:", q_hi:"डाएस्टिरियोमर क्या होते हैं?", options:["Superimposable mirror images","Non-superimposable mirror images","Stereoisomers not related as mirror images","Isomers with different formulas"], answer:2, explain_en:"Diastereomers are stereoisomers that are not mirror images.", explain_hi:"डाएस्टिरियोमर वे स्थिरीय समावयवी हैं जो दर्पण प्रतिबिंब नहीं होते।"},
+
+{q_en:"Threo and erythro terms are used for:", q_hi:"थ्रियो और एरिथ्रो शब्द किसके लिए उपयोग होते हैं?", options:["Chain isomerism","Alkanes","Diastereomers with two adjacent stereogenic centers","Enantiomers"], answer:2, explain_en:"Threo and erythro describe relative positions of substituents in diastereomers.", explain_hi:"थ्रियो और एरिथ्रो समीपवर्ती स्टिरियोजेनिक केंद्रों वाले डाएस्टिरियोमर के लिए प्रयुक्त होते हैं।"},
+
+{q_en:"Erythro isomer has substituents on:", q_hi:"एरिथ्रो समावयवी में उपस्थापन कहाँ होते हैं?", options:["Same side","Opposite sides","One axial, one equatorial","Different carbons"], answer:0, explain_en:"Erythro → two similar groups on same side in Fischer projection.", explain_hi:"एरिथ्रो → फिशर प्रक्षेप में समान समूह एक ही ओर होते हैं।"},
+
+{q_en:"Threo isomer has substituents on:", q_hi:"थ्रियो समावयवी में उपस्थापन कहाँ होते हैं?", options:["Same side","Opposite sides","One axial, one equatorial","Different atoms"], answer:1, explain_en:"Threo → two similar groups on opposite sides in Fischer projection.", explain_hi:"थ्रियो → फिशर प्रक्षेप में समान समूह विपरीत ओर होते हैं।"},
+
+{q_en:"Meso compounds are:", q_hi:"मेसो यौगिक क्या होते हैं?", options:["Optically active compounds","Achiral compounds with stereogenic centers","Always enantiomers","Always diastereomers"], answer:1, explain_en:"Meso compounds are achiral despite having stereogenic centers (due to internal symmetry).", explain_hi:"मेसो यौगिक अचिरल होते हैं यद्यपि इनमें स्टिरियोजेनिक केंद्र होते हैं (आंतरिक सममिति के कारण)।"},
+
+{q_en:"Meso compounds show:", q_hi:"मेसो यौगिक क्या दिखाते हैं?", options:["Optical inactivity","High optical rotation","Always cis-trans isomerism","No stereoisomerism"], answer:0, explain_en:"Meso compounds are optically inactive due to internal compensation.", explain_hi:"मेसो यौगिक आंतरिक प्रतिपूर्ति के कारण प्रकाशीय निष्क्रिय होते हैं।"},
+
+{q_en:"Which pair is an example of diastereomers?", q_hi:"कौन सी जोड़ी डाएस्टिरियोमर का उदाहरण है?", options:["(+)-glucose and (–)-glucose","cis-2-butene and trans-2-butene","(R,R)-tartaric acid and (R,S)-tartaric acid","CH2Cl2 and CHCl3"], answer:2, explain_en:"(R,R) and (R,S) tartaric acid are diastereomers.", explain_hi:"(R,R) और (R,S) टार्टरिक अम्ल डाएस्टिरियोमर हैं।"},
+
+{q_en:"Enantiomers always occur in:", q_hi:"एनेन्टियोमर हमेशा किसमें आते हैं?", options:["Single molecules","Pairs","Groups of three","Groups of four"], answer:1, explain_en:"Enantiomers always exist in pairs of mirror-image isomers.", explain_hi:"एनेन्टियोमर हमेशा दर्पण प्रतिबिंब युग्म के रूप में आते हैं।"},
+
+{q_en:"A racemic mixture contains:", q_hi:"रेसीमिक मिश्रण में क्या होता है?", options:["Only one enantiomer","Two enantiomers in equal amounts","Only diastereomers","Achiral molecules only"], answer:1, explain_en:"Racemic mixture = equimolar mixture of both enantiomers, optically inactive.", explain_hi:"रेसीमिक मिश्रण = दोनों एनेन्टियोमर का सममोल मिश्रण → प्रकाशीय निष्क्रिय।"},
+{q_en:"Resolution of enantiomers means:", q_hi:"एनेन्टियोमर का रेज़ोल्यूशन का अर्थ है:", options:["Separation of racemic mixture into pure enantiomers","Mixing of enantiomers","Conversion into diastereomers","Measuring optical rotation"], answer:0, explain_en:"Resolution = separation of racemic mixture into individual enantiomers.", explain_hi:"रेज़ोल्यूशन = रैसीमिक मिश्रण को शुद्ध एनेन्टियोमर में विभाजित करना।"},
+
+{q_en:"Inversion of configuration means:", q_hi:"संरचना का इनवर्ज़न का क्या अर्थ है?", options:["Retention of stereochemistry","Complete change in configuration at chiral center","Loss of optical activity","Mixing of stereoisomers"], answer:1, explain_en:"Inversion = configuration at stereogenic center changes completely (Walden inversion).", explain_hi:"इनवर्ज़न = स्टिरियोजेनिक केंद्र की संरचना का पूर्ण परिवर्तन (वाल्डेन इनवर्ज़न)।"},
+
+{q_en:"Retention of configuration means:", q_hi:"संरचना का रिटेंशन का क्या अर्थ है?", options:["No change in configuration","Complete inversion","Formation of meso compound","Loss of stereogenic center"], answer:0, explain_en:"Retention = configuration at stereogenic center remains same.", explain_hi:"रिटेंशन = स्टिरियोजेनिक केंद्र पर संरचना अपरिवर्तित रहती है।"},
+
+{q_en:"Racemization is:", q_hi:"रेसीमाइजेशन क्या है?", options:["Formation of diastereomers","Conversion of enantiomer into racemic mixture","Loss of molecular symmetry","Conversion of cis into trans"], answer:1, explain_en:"Racemization = conversion of pure enantiomer into 1:1 mixture of enantiomers.", explain_hi:"रेसीमाइजेशन = शुद्ध एनेन्टियोमर को 1:1 रैसीमिक मिश्रण में बदलना।"},
+
+{q_en:"Relative configuration describes:", q_hi:"सापेक्ष संरचना क्या बताती है?", options:["Exact 3D arrangement","Relation of configuration of one compound with respect to another","Always absolute stereochemistry","Optical rotation direction"], answer:1, explain_en:"Relative configuration compares stereochemistry of one molecule with a reference compound.", explain_hi:"सापेक्ष संरचना एक अणु की स्थिरिकी को दूसरे के सापेक्ष बताती है।"},
+
+{q_en:"Absolute configuration describes:", q_hi:"पूर्ण संरचना क्या बताती है?", options:["Comparison with another compound","Exact 3D arrangement of groups around chiral center","Only optical rotation direction","Bond length and bond angle"], answer:1, explain_en:"Absolute configuration = exact 3D spatial arrangement (R/S system).", explain_hi:"पूर्ण संरचना = चिरल केंद्र के चारों ओर समूहों की सटीक 3D व्यवस्था (R/S प्रणाली)।"},
+
+{q_en:"Cahn–Ingold–Prelog (CIP) sequence rules are used for:", q_hi:"कैन–इंगोल्ड–प्रेलॉग (CIP) क्रम नियम किसके लिए उपयोग होते हैं?", options:["Determining polarity","Assigning R/S configuration","Finding bond order","Naming cis/trans isomers"], answer:1, explain_en:"CIP rules decide R/S configuration at stereogenic centers.", explain_hi:"CIP नियम स्टिरियोजेनिक केंद्र पर R/S संरचना तय करने के लिए उपयोग होते हैं।"},
+
+{q_en:"In CIP rules, priority is assigned based on:", q_hi:"CIP नियमों में प्राथमिकता किस आधार पर दी जाती है?", options:["Electronegativity","Mass number","Atomic number","Bond length"], answer:2, explain_en:"Higher atomic number atom gets higher priority.", explain_hi:"उच्च परमाणु संख्या वाले परमाणु को उच्च प्राथमिकता मिलती है।"},
+
+{q_en:"D and L nomenclature system is based on:", q_hi:"D और L नामकरण प्रणाली किस पर आधारित है?", options:["Optical rotation direction","Configuration relative to glyceraldehyde","Bond order","Hybridization"], answer:1, explain_en:"D/L system compares configuration with D- and L-glyceraldehyde.", explain_hi:"D/L प्रणाली का आधार D- और L-ग्लिसरैल्डिहाइड के सापेक्ष संरचना है।"},
+
+{q_en:"R and S system gives:", q_hi:"R और S प्रणाली क्या बताती है?", options:["Relative configuration","Absolute configuration","Bond polarity","Optical rotation sign"], answer:1, explain_en:"R/S system assigns absolute configuration using CIP rules.", explain_hi:"R/S प्रणाली CIP नियमों द्वारा पूर्ण संरचना बताती है।"},
+
+{q_en:"A compound showing inversion and racemization will become:", q_hi:"एक यौगिक जिसमें इनवर्ज़न और रैसीमाइजेशन हो, वह कैसा हो जाएगा?", options:["Optically pure","Optically inactive","Always enantiomeric","Always meso"], answer:1, explain_en:"Inversion + racemization leads to racemic mixture → optically inactive.", explain_hi:"इनवर्ज़न + रैसीमाइजेशन → रैसीमिक मिश्रण → प्रकाशीय निष्क्रिय।"},
+
+{q_en:"Which is true about enantiomers?", q_hi:"एनेन्टियोमर के बारे में कौन सा सत्य है?", options:["Same R/S configuration","Opposite R/S configuration","Always meso","Have no stereogenic center"], answer:1, explain_en:"Enantiomers have opposite R/S configuration at each stereogenic center.", explain_hi:"एनेन्टियोमर में प्रत्येक स्टिरियोजेनिक केंद्र पर विपरीत R/S संरचना होती है।"},
+{q_en:"Geometrical isomerism arises due to:", q_hi:"ज्यामितीय समावयविता किस कारण से उत्पन्न होती है?", options:["Free rotation around single bond","Restricted rotation around double bond or ring","Presence of chiral center","Presence of resonance"], answer:1, explain_en:"Geometrical isomerism occurs due to restricted rotation in C=C or cyclic systems.", explain_hi:"ज्यामितीय समावयविता C=C या चक्रीय प्रणालियों में घूमने की रुकावट के कारण होती है।"},
+
+{q_en:"cis-isomer means:", q_hi:"cis-समावयवी का अर्थ है:", options:["Substituents on opposite sides","Substituents on same side","Random orientation","No substituents"], answer:1, explain_en:"cis-isomer = same side arrangement of substituents.", explain_hi:"cis-समावयवी = उपस्थापन एक ही ओर होते हैं।"},
+
+{q_en:"trans-isomer means:", q_hi:"trans-समावयवी का अर्थ है:", options:["Substituents on same side","Substituents on opposite sides","No rotation","One axial, one equatorial"], answer:1, explain_en:"trans-isomer = substituents on opposite sides of double bond or ring.", explain_hi:"trans-समावयवी = उपस्थापन डबल बंध/चक्रीय रिंग के विपरीत ओर होते हैं।"},
+
+{q_en:"E and Z system is based on:", q_hi:"E और Z प्रणाली किस पर आधारित है?", options:["Electronegativity","Cahn–Ingold–Prelog priority rules","Bond polarity","Optical rotation"], answer:1, explain_en:"E/Z nomenclature uses CIP rules to assign priorities.", explain_hi:"E/Z नामकरण CIP नियमों पर आधारित है।"},
+
+{q_en:"Z isomer means:", q_hi:"Z-समावयवी का अर्थ है:", options:["High-priority groups on same side","High-priority groups on opposite sides","No difference","Always trans"], answer:0, explain_en:"Z = zusammen (together) → high-priority groups on same side.", explain_hi:"Z = zusammen (साथ) → उच्च-प्राथमिकता समूह एक ही ओर।"},
+
+{q_en:"E isomer means:", q_hi:"E-समावयवी का अर्थ है:", options:["High-priority groups on same side","High-priority groups on opposite sides","Always cis","Symmetric arrangement"], answer:1, explain_en:"E = entgegen (opposite) → high-priority groups on opposite sides.", explain_hi:"E = entgegen (विपरीत) → उच्च-प्राथमिकता समूह विपरीत ओर।"},
+
+{q_en:"Which compound can show geometrical isomerism?", q_hi:"कौन सा यौगिक ज्यामितीय समावयविता दिखा सकता है?", options:["CH2=CH2","CHCl=CHBr","CH3-CH3","CHCl3"], answer:1, explain_en:"CHCl=CHBr has different substituents on both double-bonded carbons → cis/trans possible.", explain_hi:"CHCl=CHBr में दोनों कार्बनों पर भिन्न उपस्थापन होते हैं → cis/trans संभव।"},
+
+{q_en:"Geometrical isomerism in oximes arises due to:", q_hi:"ऑक्सीम्स में ज्यामितीय समावयविता किस कारण से होती है?", options:["Restricted rotation around C=N bond","Restricted rotation around C=C bond","Optical activity","Hydrogen bonding"], answer:0, explain_en:"Oximes show syn/anti (cis/trans) isomerism due to restricted rotation about C=N.", explain_hi:"ऑक्सीम्स C=N बंध में घूमने की रुकावट के कारण syn/anti समावयविता दिखाते हैं।"},
+
+{q_en:"Syn and anti oximes correspond to:", q_hi:"syn और anti ऑक्सीम किसके अनुरूप होते हैं?", options:["E and Z isomers","cis and trans isomers","Diastereomers","Enantiomers"], answer:1, explain_en:"syn-oxime = cis; anti-oxime = trans arrangement with respect to –OH and –H.", explain_hi:"syn-ऑक्सीम = cis; anti-ऑक्सीम = trans व्यवस्था (–OH और –H के अनुसार)।"},
+
+{q_en:"Which alicyclic compound can show cis-trans isomerism?", q_hi:"कौन सा ऐलिसाइक्लिक यौगिक cis-trans समावयविता दिखा सकता है?", options:["Cyclopropane","Cyclobutane","Cyclohexane with substituents","Cyclohexane itself"], answer:2, explain_en:"Substituted cyclohexane (e.g., 1,2-disubstituted) can show cis-trans isomerism.", explain_hi:"प्रतिस्थापित साइक्लोहेक्सेन (जैसे 1,2-डिसब्स्टीट्यूटेड) cis-trans समावयविता दिखाते हैं।"},
+
+{q_en:"Geometrical isomers have:", q_hi:"ज्यामितीय समावयवी में क्या होता है?", options:["Same physical and chemical properties","Different physical properties but similar chemical properties","Different molecular formulas","Different functional groups"], answer:1, explain_en:"Geometrical isomers differ in physical properties (mp, bp, solubility) but have similar chemical nature.", explain_hi:"ज्यामितीय समावयवी भौतिक गुणों (गलनांक, क्वथनांक, विलेयता) में भिन्न होते हैं पर रासायनिक रूप से समान।"},
+
+{q_en:"Which pair represents E and Z isomers?", q_hi:"कौन सी जोड़ी E और Z समावयवियों का प्रतिनिधित्व करती है?", options:["cis-2-butene and trans-2-butene","CH3CH=CHCl with Cl and CH3 on opposite or same side","Cyclopropane and cyclobutane","CH3OH and CH3Cl"], answer:1, explain_en:"CH3CH=CHCl can exist as E/Z depending on CIP priorities.", explain_hi:"CH3CH=CHCl CIP प्राथमिकताओं के अनुसार E/Z रूप में होता है।"},
+{q_en:"Conformational isomers differ due to:", q_hi:"संरूप समावयवी किसके कारण भिन्न होते हैं?", options:["Bond breaking","Free rotation about single bonds","Different molecular formulas","Different functional groups"], answer:1, explain_en:"Conformers differ by rotation around single (σ) bonds, without breaking bonds.", explain_hi:"संरूप समावयवी एकल (σ) बंधों के चारों ओर घूर्णन से भिन्न होते हैं, बिना बंध तोड़े।"},
+
+{q_en:"Ethane shows conformational isomerism due to rotation about:", q_hi:"एथेन में संरूप समावयविता किस बंध के घूर्णन के कारण होती है?", options:["C=C bond","C–C bond","C=O bond","C–H bond"], answer:1, explain_en:"Ethane conformers arise from rotation about the C–C σ bond.", explain_hi:"एथेन में संरूप समावयवी C–C σ बंध के घूर्णन से उत्पन्न होते हैं।"},
+
+{q_en:"Most stable conformation of ethane is:", q_hi:"एथेन का सबसे स्थिर संरूप कौन सा है?", options:["Eclipsed","Staggered","Boat","Chair"], answer:1, explain_en:"Staggered conformation is most stable due to minimum torsional strain.", explain_hi:"स्टैगर्ड संरूप सबसे स्थिर होता है क्योंकि इसमें न्यूनतम टॉर्शनल तनाव होता है।"},
+
+{q_en:"Least stable conformation of ethane is:", q_hi:"एथेन का सबसे कम स्थिर संरूप कौन सा है?", options:["Staggered","Eclipsed","Chair","Boat"], answer:1, explain_en:"Eclipsed conformation is least stable due to maximum torsional strain.", explain_hi:"ईक्लिप्स्ड संरूप सबसे कम स्थिर होता है क्योंकि इसमें अधिकतम टॉर्शनल तनाव होता है।"},
+
+{q_en:"In n-butane, the anti conformation is:", q_hi:"n-ब्यूटेन में एंटी संरूप कैसा होता है?", options:["Most stable","Least stable","Intermediate","Nonexistent"], answer:0, explain_en:"Anti conformation (180° apart) is most stable in n-butane.", explain_hi:"एंटी संरूप (180° दूरी पर) n-ब्यूटेन में सबसे स्थिर होता है।"},
+
+{q_en:"In n-butane, the gauche conformation is:", q_hi:"n-ब्यूटेन में गॉश संरूप कैसा होता है?", options:["Most stable","Less stable than anti","Same as eclipsed","Nonexistent"], answer:1, explain_en:"Gauche (60° apart) is less stable than anti due to steric repulsion.", explain_hi:"गॉश (60° दूरी पर) एंटी से कम स्थिर होता है क्योंकि इसमें स्थानिक प्रतिकर्षण होता है।"},
+
+{q_en:"In n-butane, eclipsed conformations are:", q_hi:"n-ब्यूटेन में ईक्लिप्स्ड संरूप कैसे होते हैं?", options:["Most stable","Least stable","Equal to anti","More stable than gauche"], answer:1, explain_en:"Eclipsed conformations are least stable due to torsional and steric strain.", explain_hi:"ईक्लिप्स्ड संरूप सबसे कम स्थिर होते हैं क्योंकि इनमें टॉर्शनल और स्थानिक तनाव होता है।"},
+
+{q_en:"The most stable conformation of cyclohexane is:", q_hi:"साइक्लोहेक्सेन का सबसे स्थिर संरूप कौन सा है?", options:["Boat","Chair","Twist-boat","Planar"], answer:1, explain_en:"Chair form of cyclohexane is most stable due to minimum strain.", explain_hi:"साइक्लोहेक्सेन का चेयर रूप सबसे स्थिर होता है क्योंकि इसमें न्यूनतम तनाव होता है।"},
+
+{q_en:"The least stable conformation of cyclohexane is:", q_hi:"साइक्लोहेक्सेन का सबसे कम स्थिर संरूप कौन सा है?", options:["Chair","Boat","Twist-boat","All equal"], answer:1, explain_en:"Boat form is least stable due to steric repulsion (flagpole interactions).", explain_hi:"बोट रूप सबसे कम स्थिर होता है क्योंकि इसमें स्थानिक प्रतिकर्षण (फ्लैगपोल इंटरैक्शन) होता है।"},
+
+{q_en:"In chair cyclohexane, hydrogens are of two types:", q_hi:"चेयर साइक्लोहेक्सेन में हाइड्रोजन कितने प्रकार के होते हैं?", options:["Only one type","Axial and equatorial","Cis and trans only","All identical"], answer:1, explain_en:"Chair cyclohexane has axial and equatorial hydrogens.", explain_hi:"चेयर साइक्लोहेक्सेन में अक्षीय और भूमध्य रेखीय हाइड्रोजन होते हैं।"},
+
+{q_en:"Axial hydrogens in cyclohexane are oriented:", q_hi:"साइक्लोहेक्सेन में अक्षीय हाइड्रोजन किस दिशा में उन्मुख होते हैं?", options:["In the plane of the ring","Parallel to ring axis (up and down)","Randomly","Always horizontal"], answer:1, explain_en:"Axial hydrogens alternate up and down, parallel to the ring axis.", explain_hi:"अक्षीय हाइड्रोजन रिंग अक्ष के समानांतर ऊपर-नीचे बारी-बारी से होते हैं।"},
+
+{q_en:"Equatorial hydrogens in cyclohexane are oriented:", q_hi:"साइक्लोहेक्सेन में भूमध्यरेखीय हाइड्रोजन किस दिशा में उन्मुख होते हैं?", options:["Along the equator of the ring","Parallel to axis","Randomly","Above the ring"], answer:0, explain_en:"Equatorial hydrogens are directed outward along the ring equator.", explain_hi:"भूमध्यरेखीय हाइड्रोजन रिंग की भूमध्यरेखा के साथ बाहर की ओर होते हैं।"},
+{q_en:"In monosubstituted cyclohexane, the substituent is more stable in:", q_hi:"मोनोसबस्टीट्यूटेड साइक्लोहेक्सेन में प्रतिस्थापन अधिक स्थिर कहाँ होता है?", options:["Axial position","Equatorial position","Both equal","Random"], answer:1, explain_en:"Bulky substituents prefer equatorial position due to less steric repulsion.", explain_hi:"भारी उपस्थापन भूमध्यरेखीय स्थिति में अधिक स्थिर होता है क्योंकि इसमें कम स्थानिक प्रतिकर्षण होता है।"},
+
+{q_en:"1,3-diaxial interaction occurs when:", q_hi:"1,3-डायक्सियल प्रतिकर्षण कब होता है?", options:["Substituent is equatorial","Substituent is axial","Both positions","No substituent present"], answer:1, explain_en:"Axial substituents face steric clash with hydrogens at 1,3-positions → 1,3-diaxial interaction.", explain_hi:"अक्षीय उपस्थापन 1,3-स्थित हाइड्रोजन से टकराते हैं → 1,3-डायक्सियल प्रतिकर्षण।"},
+
+{q_en:"Most stable conformation of methylcyclohexane is when CH3 is:", q_hi:"मेथाइलसाइक्लोहेक्सेन का सबसे स्थिर संरूप कब होता है?", options:["Axial","Equatorial","Both same","Planar"], answer:1, explain_en:"CH3 is more stable in equatorial position due to avoidance of 1,3-diaxial repulsion.", explain_hi:"CH3 भूमध्यरेखीय स्थिति में अधिक स्थिर होता है क्योंकि 1,3-डायक्सियल प्रतिकर्षण नहीं होता।"},
+
+{q_en:"Newman projection is used to represent:", q_hi:"न्यूमैन प्रक्षेप का उपयोग किसे दर्शाने के लिए किया जाता है?", options:["Cycloalkanes","Conformation along a bond axis","Absolute configuration","Functional groups"], answer:1, explain_en:"Newman projection shows conformations viewed along a C–C bond axis.", explain_hi:"न्यूमैन प्रक्षेप C–C बंध अक्ष के साथ देखी गई संरूपों को दर्शाता है।"},
+
+{q_en:"In Newman projection of ethane, staggered conformation is:", q_hi:"एथेन के न्यूमैन प्रक्षेप में स्टैगर्ड संरूप कैसा होता है?", options:["Most stable","Least stable","Same as eclipsed","Impossible"], answer:0, explain_en:"Staggered conformation is most stable due to minimized torsional strain.", explain_hi:"स्टैगर्ड संरूप सबसे स्थिर होता है क्योंकि इसमें न्यूनतम टॉर्शनल तनाव होता है।"},
+
+{q_en:"Sawhorse projection is drawn by:", q_hi:"सॉहॉर्स प्रक्षेप कैसे बनाया जाता है?", options:["Looking along the bond axis","Viewing molecule diagonally","Placing groups in tetrahedral form","Using mirror plane"], answer:1, explain_en:"Sawhorse projection = diagonal view showing groups on two carbons connected by a bond.", explain_hi:"सॉहॉर्स प्रक्षेप = दो कार्बनों को जोड़ने वाले बंध पर समूहों का तिरछा दृश्य।"},
+
+{q_en:"Fischer projection represents:", q_hi:"फिशर प्रक्षेप क्या दर्शाता है?", options:["3D tetrahedral molecule in 2D","Newman projection","Sawhorse view","Planar molecule only"], answer:0, explain_en:"Fischer projection is a 2D representation of 3D molecules (commonly carbohydrates).", explain_hi:"फिशर प्रक्षेप 3D अणुओं (मुख्यतः कार्बोहाइड्रेट) का 2D रूप है।"},
+
+{q_en:"In Fischer projection, horizontal lines represent:", q_hi:"फिशर प्रक्षेप में क्षैतिज रेखाएँ किसे दर्शाती हैं?", options:["Bonds going behind the plane","Bonds coming out of the plane","Axial bonds","π bonds"], answer:1, explain_en:"Horizontal lines in Fischer projection = bonds projecting towards observer.", explain_hi:"फिशर प्रक्षेप में क्षैतिज रेखाएँ प्रेक्षक की ओर आने वाले बंध दर्शाती हैं।"},
+
+{q_en:"Flying wedge formula is used to represent:", q_hi:"फ्लाइंग वेज सूत्र का उपयोग किसके लिए होता है?", options:["Absolute stereochemistry in 3D","Geometrical isomerism","Bond energy","Resonance"], answer:0, explain_en:"Flying wedge (solid & dashed wedges) shows 3D orientation at stereogenic center.", explain_hi:"फ्लाइंग वेज (ठोस और डैश्ड वेज) स्टिरियोजेनिक केंद्र पर 3D व्यवस्था दर्शाता है।"},
+
+{q_en:"In wedge formula, dashed line represents:", q_hi:"वेज सूत्र में डैश्ड रेखा क्या दर्शाती है?", options:["Bond in plane","Bond coming out","Bond going behind plane","Double bond"], answer:2, explain_en:"Dashed wedge = bond going behind the plane.", explain_hi:"डैश्ड वेज = समतल के पीछे जाने वाला बंध।"},
+
+{q_en:"Configuration refers to:", q_hi:"कॉन्फ़िगरेशन किसे कहते हैं?", options:["Spatial arrangement fixed by bond breaking","Rotation around single bond","Temporary arrangement","Energy profile"], answer:0, explain_en:"Configuration = fixed spatial arrangement, can only be changed by bond breaking.", explain_hi:"कॉन्फ़िगरेशन = स्थिर 3D व्यवस्था, केवल बंध तोड़कर बदली जा सकती है।"},
+
+{q_en:"Conformation refers to:", q_hi:"कन्फ़र्मेशन किसे कहते हैं?", options:["Fixed 3D structure","Temporary arrangement by bond rotation","Different molecular formulas","Optical activity"], answer:1, explain_en:"Conformation = temporary arrangement obtained by rotation about single bonds.", explain_hi:"कन्फ़र्मेशन = एकल बंधों के घूर्णन से मिलने वाली अस्थायी व्यवस्था।"},
+
+{q_en:"Which is true about configuration and conformation?", q_hi:"कॉन्फ़िगरेशन और कन्फ़र्मेशन के बारे में कौन सा सत्य है?", options:["Both change without bond breaking","Configuration needs bond breaking, conformation doesn’t","Both are permanent","Both are temporary"], answer:1, explain_en:"Configuration requires bond breaking, conformation arises by bond rotation.", explain_hi:"कॉन्फ़िगरेशन बदलने हेतु बंध तोड़ना पड़ता है, कन्फ़र्मेशन केवल बंध घूर्णन से बदलता है।"},
+
+{q_en:"Most stable conformation of monosubstituted cyclohexane is:", q_hi:"मोनोसबस्टीट्यूटेड साइक्लोहेक्सेन का सबसे स्थिर संरूप कौन सा है?", options:["Substituent axial","Substituent equatorial","Both equal","Random"], answer:1, explain_en:"Equatorial substituent avoids 1,3-diaxial interactions, hence most stable.", explain_hi:"भूमध्यरेखीय उपस्थापन 1,3-डायक्सियल प्रतिकर्षण से बचाता है, इसलिए सबसे स्थिर है।"},
+
+{q_en:"Newman projection of butane shows anti conformation when dihedral angle is:", q_hi:"ब्यूटेन का न्यूमैन प्रक्षेप एंटी संरूप कब दिखाता है?", options:["0°","60°","120°","180°"], answer:3, explain_en:"Anti conformation occurs at 180° dihedral angle.", explain_hi:"एंटी संरूप 180° डायहिड्रल कोण पर होता है।"}
+];
+
+/* QUIZ 4: Organic Chemistry */
+const TEMPLATES_Q4 = [
+{q_en:"Hybridization of carbon in methane (CH4) is:", q_hi:"मीथेन (CH4) में कार्बन का संकरण क्या है?", options:["sp","sp2","sp3","sp3d"], answer:2, explain_en:"Carbon in CH4 undergoes sp3 hybridization → tetrahedral geometry.", explain_hi:"CH4 में कार्बन sp3 संकरण करता है → चतुर्भुजाकार ज्यामिति।"},
+
+{q_en:"Bond angle in methane is approximately:", q_hi:"मीथेन में बंध कोण लगभग कितना होता है?", options:["90°","109.5°","120°","180°"], answer:1, explain_en:"sp3 hybridization → tetrahedral angle ≈ 109.5°.", explain_hi:"sp3 संकरण → चतुर्भुजाकार कोण ≈ 109.5°।"},
+
+{q_en:"Bond angle in ethene (C2H4) is approximately:", q_hi:"एथीन (C2H4) में बंध कोण लगभग कितना होता है?", options:["90°","109.5°","120°","180°"], answer:2, explain_en:"sp2 hybridization → trigonal planar geometry → 120°.", explain_hi:"sp2 संकरण → त्रिकोणीय समतलीय ज्यामिति → 120°।"},
+
+{q_en:"Hybridization of carbon in ethyne (C2H2) is:", q_hi:"एथाइन (C2H2) में कार्बन का संकरण क्या है?", options:["sp","sp2","sp3","sp3d"], answer:0, explain_en:"In C2H2, carbon atoms are sp hybridized → linear geometry.", explain_hi:"C2H2 में कार्बन परमाणु sp संकरित होते हैं → रैखिक ज्यामिति।"},
+
+{q_en:"Bond length order (shortest to longest) is:", q_hi:"बंध लंबाई क्रम (सबसे छोटा से सबसे बड़ा):", options:["C–C > C=C > C≡C","C≡C < C=C < C–C","C=C < C≡C < C–C","All equal"], answer:1, explain_en:"Bond order ↑ → bond length ↓ → C≡C < C=C < C–C.", explain_hi:"बंध क्रम बढ़ने पर बंध लंबाई घटती है → C≡C < C=C < C–C।"},
+
+{q_en:"Bond energy order (highest to lowest) is:", q_hi:"बंध ऊर्जा क्रम (सबसे अधिक से कम):", options:["C–C > C=C > C≡C","C≡C > C=C > C–C","C=C > C≡C > C–C","All equal"], answer:1, explain_en:"Bond order ↑ → bond strength ↑ → C≡C > C=C > C–C.", explain_hi:"बंध क्रम बढ़ने पर बंध शक्ति बढ़ती है → C≡C > C=C > C–C।"},
+
+{q_en:"Localized bonding means:", q_hi:"स्थानीयकृत बंधन का अर्थ है:", options:["Electrons confined between two atoms","Electrons spread over many atoms","Resonance structures only","No electron sharing"], answer:0, explain_en:"Localized bond = bonding electrons shared only between two atoms.", explain_hi:"स्थानीयकृत बंध = इलेक्ट्रॉन केवल दो परमाणुओं के बीच साझा होते हैं।"},
+
+{q_en:"Delocalized bonding occurs in:", q_hi:"अस्थानीयकृत बंधन कहाँ होता है?", options:["Benzene","Methane","Ethane","HCl"], answer:0, explain_en:"Benzene has delocalized π-electrons over 6 carbons.", explain_hi:"बेंजीन में π-इलेक्ट्रॉन 6 कार्बनों पर अस्थानीयकृत होते हैं।"},
+
+{q_en:"Bond angle in CO2 molecule is:", q_hi:"CO2 अणु में बंध कोण कितना होता है?", options:["120°","109.5°","180°","90°"], answer:2, explain_en:"CO2 is linear → bond angle = 180°.", explain_hi:"CO2 रैखिक है → बंध कोण = 180°।"},
+
+{q_en:"Resonance structures explain:", q_hi:"रेज़ोनेंस संरचनाएँ किसे समझाती हैं?", options:["Localized bonding","Exact real structure","Delocalized electron distribution","Nuclear forces"], answer:2, explain_en:"Resonance shows delocalized bonding not confined to one structure.", explain_hi:"रेज़ोनेंस अस्थानीयकृत बंधन को दर्शाता है जो किसी एक संरचना में सीमित नहीं।"},
+
+{q_en:"Hybridization of oxygen in H2O is:", q_hi:"H2O में ऑक्सीजन का संकरण क्या है?", options:["sp","sp2","sp3","sp3d"], answer:2, explain_en:"Oxygen has 2 bond pairs + 2 lone pairs → sp3 hybridization.", explain_hi:"ऑक्सीजन में 2 बंध युग्म + 2 अकेले युग्म → sp3 संकरण।"},
+
+{q_en:"Delocalization of π-electrons increases:", q_hi:"π-इलेक्ट्रॉनों का अस्थानीयकरण क्या बढ़ाता है?", options:["Stability of molecule","Bond length differences","Bond breaking","Reactivity only"], answer:0, explain_en:"Delocalization increases stability (e.g., benzene resonance energy).", explain_hi:"अस्थानीयकरण स्थिरता बढ़ाता है (जैसे बेंजीन की रेज़ोनेंस ऊर्जा)।"},
+{q_en:"Van der Waals interactions are:", q_hi:"वैन डर वॉल्स अंतःक्रियाएँ क्या होती हैं?", options:["Strong covalent bonds","Weak intermolecular forces","Nuclear forces","Always ionic"], answer:1, explain_en:"Van der Waals interactions are weak intermolecular forces including dipole-dipole, induced dipole, and dispersion.", explain_hi:"वैन डर वॉल्स अंतःक्रियाएँ कमजोर अण्तराअणुक बल होती हैं जिनमें डाइपोल-डाइपोल, प्रेरित डाइपोल और विसरण बल शामिल हैं।"},
+
+{q_en:"London dispersion forces are a type of:", q_hi:"लंदन विसरण बल किस प्रकार के होते हैं?", options:["Permanent dipole interaction","Induced dipole-induced dipole interaction","Hydrogen bond","Ionic interaction"], answer:1, explain_en:"London dispersion forces are induced dipole–induced dipole attractions.", explain_hi:"लंदन विसरण बल प्रेरित डाइपोल–डाइपोल आकर्षण होते हैं।"},
+
+{q_en:"Inclusion compounds are:", q_hi:"इन्क्लूजन यौगिक क्या होते हैं?", options:["Covalent bonded compounds","Host-guest complexes without strong bonding","Charge transfer complexes","Metal oxides"], answer:1, explain_en:"Inclusion compounds are host–guest complexes where one molecule traps another without strong bonding.", explain_hi:"इन्क्लूजन यौगिक होस्ट–गेस्ट कॉम्प्लेक्स होते हैं जहाँ एक अणु दूसरे को बिना मजबूत बंधन के फँसाता है।"},
+
+{q_en:"Clathrates are:", q_hi:"क्लैथरेट्स क्या होते हैं?", options:["Covalent compounds","Molecules trapped in cage-like host structure","Charge transfer salts","Isotopes of metals"], answer:1, explain_en:"Clathrates are compounds where guest molecules are trapped in cage-like frameworks (e.g., CH4·H2O).", explain_hi:"क्लैथरेट्स वे यौगिक हैं जहाँ अतिथि अणु पिंजरे जैसी संरचना में फँस जाते हैं (जैसे CH4·H2O)।"},
+
+{q_en:"Charge-transfer complexes involve:", q_hi:"चार्ज ट्रांसफर कॉम्प्लेक्स किसमें शामिल होते हैं?", options:["Electron transfer from donor to acceptor","Complete covalent bond formation","Only ionic bonds","Nuclear forces"], answer:0, explain_en:"Charge-transfer complexes arise when electrons are partially transferred from donor to acceptor species.", explain_hi:"चार्ज ट्रांसफर कॉम्प्लेक्स तब बनते हैं जब इलेक्ट्रॉन आंशिक रूप से दाता से ग्राही की ओर जाते हैं।"},
+
+{q_en:"Example of a charge-transfer complex is:", q_hi:"चार्ज ट्रांसफर कॉम्प्लेक्स का उदाहरण कौन सा है?", options:["NaCl","I2·starch complex","CH4","CO2"], answer:1, explain_en:"I2 forms a deep blue charge-transfer complex with starch.", explain_hi:"I2 स्टार्च के साथ गहरे नीले रंग का चार्ज ट्रांसफर कॉम्प्लेक्स बनाता है।"},
+
+{q_en:"Hyperconjugation is also called:", q_hi:"हाइपरकंजुगेशन को और क्या कहते हैं?", options:["No-bond resonance","Partial ionic bond","Steric hindrance","Charge transfer"], answer:0, explain_en:"Hyperconjugation is sometimes called 'no-bond resonance'.", explain_hi:"हाइपरकंजुगेशन को 'नो-बॉन्ड रेज़ोनेंस' भी कहा जाता है।"},
+
+{q_en:"Hyperconjugation stabilizes:", q_hi:"हाइपरकंजुगेशन किसे स्थिर करता है?", options:["Carbocations","Carbanions","Radicals","Only molecules with lone pairs"], answer:0, explain_en:"Hyperconjugation delocalizes electrons from C–H bonds to empty p-orbital → stabilizes carbocations.", explain_hi:"हाइपरकंजुगेशन C–H बंध से इलेक्ट्रॉनों को खाली p-कक्षा में फैलाता है → कार्बोकैशन को स्थिर करता है।"},
+
+{q_en:"Which alkene is more stable due to hyperconjugation?", q_hi:"कौन सा एल्कीन हाइपरकंजुगेशन के कारण अधिक स्थिर है?", options:["Ethene","Propene","2-butene","Ethane"], answer:2, explain_en:"2-butene has more hyperconjugative structures → more stability.", explain_hi:"2-ब्यूटीन में अधिक हाइपरकंजुगेटिव संरचनाएँ होती हैं → अधिक स्थिरता।"},
+
+{q_en:"Hyperconjugation affects:", q_hi:"हाइपरकंजुगेशन किसे प्रभावित करता है?", options:["Bond length and dipole moment","Only bond polarity","Only nuclear attraction","Nothing"], answer:0, explain_en:"Hyperconjugation affects bond length (slight increase in C–C) and dipole moment.", explain_hi:"हाइपरकंजुगेशन बंध लंबाई (C–C में हल्की वृद्धि) और द्विध्रुव आघूर्ण को प्रभावित करता है।"},
+{q_en:"Dipole moment (μ) is defined as:", q_hi:"डायपोल आघूर्ण (μ) को कैसे परिभाषित किया जाता है?", options:["Charge × Distance","Mass × Distance","Charge / Distance","Energy × Distance"], answer:0, explain_en:"Dipole moment = product of charge and distance between charges (μ = q × d).", explain_hi:"डायपोल आघूर्ण = आवेश × दूरी (μ = q × d)।"},
+
+{q_en:"Dipole moment of CO2 molecule is:", q_hi:"CO2 अणु का डायपोल आघूर्ण क्या है?", options:["Zero","2.3 D","4.0 D","1.0 D"], answer:0, explain_en:"CO2 is linear and symmetrical → net dipole moment = 0.", explain_hi:"CO2 रैखिक और सममित है → शुद्ध डायपोल आघूर्ण = 0।"},
+
+{q_en:"Inductive effect arises due to:", q_hi:"इंडक्टिव प्रभाव किस कारण से होता है?", options:["Displacement of electrons through σ-bonds due to electronegativity","Complete transfer of electrons","Movement of nuclei","Free radical mechanism"], answer:0, explain_en:"Inductive effect = electron displacement along σ-bonds caused by electronegativity difference.", explain_hi:"इंडक्टिव प्रभाव = σ-बंध के साथ इलेक्ट्रॉनों का विस्थापन, विद्युतऋणात्मकता के कारण।"},
+
+{q_en:"Electromeric effect occurs in:", q_hi:"इलेक्ट्रोमेरिक प्रभाव कहाँ होता है?", options:["Only in saturated compounds","In presence of attacking reagent in unsaturated compounds","In ionic solids","In metals"], answer:1, explain_en:"Electromeric effect = complete electron transfer in π-bonds under attack of reagent.", explain_hi:"इलेक्ट्रोमेरिक प्रभाव = अभिकारक की उपस्थिति में π-बंध में इलेक्ट्रॉनों का पूर्ण विस्थापन।"},
+
+{q_en:"Resonance effect involves:", q_hi:"रेज़ोनेंस प्रभाव किससे संबंधित है?", options:["σ-electrons","Delocalization of π-electrons and lone pairs","Protons","Nuclear forces"], answer:1, explain_en:"Resonance effect arises due to delocalization of π-electrons or lone pairs.", explain_hi:"रेज़ोनेंस प्रभाव π-इलेक्ट्रॉनों या अकेले युग्मों के अस्थानीयकरण के कारण होता है।"},
+
+{q_en:"Mesomeric effect (+M) is shown by:", q_hi:"मेसोमेरिक प्रभाव (+M) कौन दिखाता है?", options:["–NO2 group","–OH group","–CN group","–COOH group"], answer:1, explain_en:"+M groups (like –OH, –OR, –NH2) donate electrons via resonance.", explain_hi:"+M समूह (जैसे –OH, –OR, –NH2) रेज़ोनेंस द्वारा इलेक्ट्रॉन दान करते हैं।"},
+
+{q_en:"–M effect is shown by:", q_hi:"–M प्रभाव कौन दिखाता है?", options:["–CH3","–OH","–NO2","–NH2"], answer:2, explain_en:"–M groups (like –NO2, –CN, –COOH) withdraw electrons via resonance.", explain_hi:"–M समूह (जैसे –NO2, –CN, –COOH) रेज़ोनेंस द्वारा इलेक्ट्रॉन खींचते हैं।"},
+
+{q_en:"Inductive effect decreases with:", q_hi:"इंडक्टिव प्रभाव किसके साथ घटता है?", options:["Distance from the group","Electronegativity","Bond polarity","Nuclear charge"], answer:0, explain_en:"Inductive effect weakens rapidly as distance from the substituent increases.", explain_hi:"इंडक्टिव प्रभाव प्रतिस्थापन से दूरी बढ़ने पर तेजी से घटता है।"},
+
+{q_en:"Application of inductive effect is in:", q_hi:"इंडक्टिव प्रभाव का अनुप्रयोग कहाँ होता है?", options:["Acid strength of carboxylic acids","Melting point","Color change","Nuclear stability"], answer:0, explain_en:"Electron-withdrawing groups increase acidity of carboxylic acids via –I effect.", explain_hi:"इलेक्ट्रॉन खींचने वाले समूह –I प्रभाव से कार्बोक्सिलिक अम्लों की अम्लता बढ़ाते हैं।"},
+
+{q_en:"Resonance effect explains:", q_hi:"रेज़ोनेंस प्रभाव किसे समझाता है?", options:["Equal bond length in benzene","Different boiling points","Nuclear binding energy","Ionic radii"], answer:0, explain_en:"In benzene, resonance causes all C–C bonds to have equal length.", explain_hi:"बेंजीन में रेज़ोनेंस सभी C–C बंधों को समान लंबाई का बनाता है।"},
+{q_en:"Curved arrow notation in organic chemistry represents:", q_hi:"कार्बनिक रसायन में वक्रित तीर संकेतन क्या दर्शाता है?", options:["Movement of nuclei","Movement of electrons","Movement of protons","Molecular rotation"], answer:1, explain_en:"Curved arrows show electron movement, not nuclei.", explain_hi:"वक्रित तीर इलेक्ट्रॉनों की गति को दर्शाते हैं, न कि नाभिक की।"},
+
+{q_en:"A double-headed curved arrow indicates:", q_hi:"डबल-हेडेड वक्रित तीर क्या दर्शाता है?", options:["Movement of one electron","Movement of electron pair","Movement of proton","No electron transfer"], answer:1, explain_en:"Double-headed arrow shows movement of an electron pair.", explain_hi:"डबल-हेडेड तीर एक इलेक्ट्रॉन युग्म की गति दर्शाता है।"},
+
+{q_en:"A half-headed curved arrow (fishhook) indicates:", q_hi:"हाफ-हेडेड वक्रित तीर (फिशहुक) क्या दर्शाता है?", options:["Movement of electron pair","Movement of single electron","Movement of proton","Bond breaking only"], answer:1, explain_en:"Half-headed arrow shows the movement of a single electron.", explain_hi:"हाफ-हेडेड तीर एक इलेक्ट्रॉन की गति को दर्शाता है।"},
+
+{q_en:"Homolytic bond fission produces:", q_hi:"होमोलेटिक बंध विच्छेदन से क्या बनता है?", options:["Carbocations","Carbanions","Free radicals","Ions"], answer:2, explain_en:"Homolytic fission → bond breaks evenly, one electron to each atom → radicals.", explain_hi:"होमोलेटिक विच्छेदन → बंध समान रूप से टूटता है, प्रत्येक परमाणु को एक इलेक्ट्रॉन → मुक्त मूलक।"},
+
+{q_en:"Heterolytic bond fission produces:", q_hi:"हेटेरोलेटिक बंध विच्छेदन से क्या बनता है?", options:["Radicals","Ions (cation and anion)","Only carbocations","Only carbanions"], answer:1, explain_en:"Heterolytic fission → both electrons go to one atom → cation + anion.", explain_hi:"हेटेरोलेटिक विच्छेदन → दोनों इलेक्ट्रॉन एक ही परमाणु को → कैटायन + एनायन।"},
+
+{q_en:"Curved arrows are always drawn from:", q_hi:"वक्रित तीर हमेशा कहाँ से खींचे जाते हैं?", options:["Electrophile to nucleophile","Nucleophile to electrophile","Positive charge to negative charge","Atom to nucleus"], answer:1, explain_en:"Curved arrows go from electron-rich (nucleophile) to electron-poor (electrophile).", explain_hi:"वक्रित तीर इलेक्ट्रॉन-समृद्ध (न्यूक्लियोफाइल) से इलेक्ट्रॉन-गरीब (इलेक्ट्रोफाइल) की ओर जाते हैं।"},
+
+{q_en:"Which bond fission requires more energy?", q_hi:"कौन सा बंध विच्छेदन अधिक ऊर्जा लेता है?", options:["Homolytic","Heterolytic","Both equal","Neither"], answer:1, explain_en:"Heterolytic fission usually requires more energy because it forms ions.", explain_hi:"हेटेरोलेटिक विच्छेदन अधिक ऊर्जा लेता है क्योंकि यह आयन बनाता है।"},
+
+{q_en:"Homolytic fission is common in:", q_hi:"होमोलेटिक विच्छेदन सामान्यतः कहाँ होता है?", options:["Polar solvents","Non-polar solvents and high temperature","Only aqueous solutions","Ionic solids"], answer:1, explain_en:"Homolytic cleavage is favored in non-polar media, UV light, or high temperature.", explain_hi:"होमोलेटिक विच्छेदन गैर-ध्रुवीय माध्यम, UV प्रकाश या उच्च तापमान पर होता है।"},
+
+{q_en:"Heterolytic fission is common in:", q_hi:"हेटेरोलेटिक विच्छेदन सामान्यतः कहाँ होता है?", options:["Non-polar solvents","Polar solvents","Only gases","Radicals"], answer:1, explain_en:"Heterolytic cleavage is favored in polar solvents which stabilize ions.", explain_hi:"हेटेरोलेटिक विच्छेदन ध्रुवीय विलायकों में होता है जो आयनों को स्थिर करते हैं।"},
+
+{q_en:"In curved arrow notation, arrows should not be drawn from:", q_hi:"वक्रित तीर संकेतन में तीर कहाँ से नहीं खींचे जाने चाहिए?", options:["Bond or lone pair","Empty orbital","Positive charge","Nucleus"], answer:3, explain_en:"Arrows represent electron movement, so never drawn from nucleus.", explain_hi:"तीर इलेक्ट्रॉन गति दर्शाते हैं, इसलिए नाभिक से कभी नहीं खींचे जाते।"},
+{q_en:"Electrophiles are:", q_hi:"इलेक्ट्रोफाइल क्या होते हैं?", options:["Electron pair donors","Electron pair acceptors","Always negatively charged","Neutral and inert"], answer:1, explain_en:"Electrophiles accept an electron pair (e.g., H+, NO2+).", explain_hi:"इलेक्ट्रोफाइल इलेक्ट्रॉन युग्म स्वीकार करते हैं (जैसे H+, NO2+)।"},
+
+{q_en:"Nucleophiles are:", q_hi:"न्यूक्लियोफाइल क्या होते हैं?", options:["Electron pair acceptors","Electron pair donors","Always positively charged","Always neutral"], answer:1, explain_en:"Nucleophiles donate an electron pair (e.g., OH–, NH3).", explain_hi:"न्यूक्लियोफाइल इलेक्ट्रॉन युग्म दान करते हैं (जैसे OH–, NH3)।"},
+
+{q_en:"Which of the following is an electrophile?", q_hi:"निम्न में से कौन इलेक्ट्रोफाइल है?", options:["Cl–","NH3","NO2+","OH–"], answer:2, explain_en:"NO2+ lacks electrons → acts as an electrophile.", explain_hi:"NO2+ इलेक्ट्रॉनों की कमी वाला होता है → इलेक्ट्रोफाइल।"},
+
+{q_en:"Which of the following is a nucleophile?", q_hi:"निम्न में से कौन न्यूक्लियोफाइल है?", options:["BF3","AlCl3","H+","CN–"], answer:3, explain_en:"CN– has a lone pair → nucleophilic.", explain_hi:"CN– में अकेला युग्म होता है → न्यूक्लियोफाइल।"},
+
+{q_en:"Addition reactions are common in:", q_hi:"एडिशन अभिक्रियाएँ सामान्यतः कहाँ होती हैं?", options:["Alkanes","Alkenes and alkynes","Aromatic compounds","Ionic salts"], answer:1, explain_en:"Alkenes and alkynes have π bonds which undergo addition reactions.", explain_hi:"एल्कीन और एल्काइन में π-बंध होते हैं जो एडिशन अभिक्रियाएँ करते हैं।"},
+
+{q_en:"Substitution reactions involve:", q_hi:"सब्स्टीट्यूशन अभिक्रियाएँ किससे जुड़ी होती हैं?", options:["Breaking and adding without replacement","Replacement of one atom or group by another","Loss of electrons only","Only rearrangement"], answer:1, explain_en:"Substitution = one atom/group replaced by another.", explain_hi:"सब्स्टीट्यूशन = एक परमाणु/समूह को दूसरे से बदलना।"},
+
+{q_en:"Elimination reactions involve:", q_hi:"एलीमिनेशन अभिक्रियाएँ किससे जुड़ी होती हैं?", options:["Loss of small molecule from substrate","Addition of groups to substrate","Exchange of ions","Formation of salts only"], answer:0, explain_en:"Elimination = removal of small molecule (H2O, HX) from substrate.", explain_hi:"एलीमिनेशन = सब्सट्रेट से छोटे अणु (H2O, HX) का हटना।"},
+
+{q_en:"Rearrangement reactions involve:", q_hi:"रीएरेंजमेंट अभिक्रियाएँ किससे जुड़ी होती हैं?", options:["Atoms remain in same positions","Reorganization of bonds and atoms","No change in connectivity","Only ionic intermediates"], answer:1, explain_en:"Rearrangement = shifting of bonds/atoms within same molecule.", explain_hi:"रीएरेंजमेंट = एक ही अणु में बंध/परमाणुओं का पुनर्गठन।"},
+
+{q_en:"SN1 reaction mechanism involves:", q_hi:"SN1 अभिक्रिया तंत्र किससे जुड़ा होता है?", options:["Unimolecular rate-determining step","Bimolecular rate-determining step","Free radical mechanism","Concerted mechanism"], answer:0, explain_en:"SN1 = unimolecular nucleophilic substitution (rate depends only on substrate).", explain_hi:"SN1 = एक-अणुक न्यूक्लियोफिलिक प्रतिस्थापन (दर केवल सब्सट्रेट पर निर्भर)।"},
+
+{q_en:"SN2 reaction mechanism involves:", q_hi:"SN2 अभिक्रिया तंत्र किससे जुड़ा होता है?", options:["Unimolecular rate-determining step","Bimolecular rate-determining step","Free radical attack","Electrocyclic mechanism"], answer:1, explain_en:"SN2 = bimolecular nucleophilic substitution, one-step mechanism.", explain_hi:"SN2 = द्वि-अणुक न्यूक्लियोफिलिक प्रतिस्थापन, एक-चरणीय तंत्र।"},
+{q_en:"Carbocations are stabilized by:", q_hi:"कार्बोकैशन किससे स्थिर होते हैं?", options:["Inductive effect and hyperconjugation","Only resonance","Steric hindrance","Electronegativity"], answer:0, explain_en:"Carbocations are stabilized by electron-donating groups through +I and hyperconjugation.", explain_hi:"कार्बोकैशन इलेक्ट्रॉन दान करने वाले समूहों से +I और हाइपरकंजुगेशन द्वारा स्थिर होते हैं।"},
+
+{q_en:"Order of carbocation stability is:", q_hi:"कार्बोकैशन की स्थिरता का क्रम क्या है?", options:["1° > 2° > 3°","3° > 2° > 1°","2° > 3° > 1°","Methyl > 1° > 2° > 3°"], answer:1, explain_en:"Stability order: 3° > 2° > 1° > methyl.", explain_hi:"स्थिरता क्रम: 3° > 2° > 1° > मिथाइल।"},
+
+{q_en:"Carbanions are stabilized by:", q_hi:"कार्बऐनायन किससे स्थिर होते हैं?", options:["Electron withdrawing groups","Electron donating groups","Steric hindrance","Hyperconjugation"], answer:0, explain_en:"Carbanions are stabilized by –I groups (e.g., –NO2).", explain_hi:"कार्बऐनायन –I समूहों (जैसे –NO2) से स्थिर होते हैं।"},
+
+{q_en:"Order of carbanion stability is:", q_hi:"कार्बऐनायन की स्थिरता का क्रम क्या है?", options:["3° > 2° > 1°","1° > 2° > 3°","Methyl > 1° > 2° > 3°","Equal for all"], answer:1, explain_en:"Carbanion stability: methyl > 1° > 2° > 3°.", explain_hi:"कार्बऐनायन स्थिरता: मिथाइल > 1° > 2° > 3°।"},
+
+{q_en:"Free radicals are stabilized by:", q_hi:"मुक्त मूलक किससे स्थिर होते हैं?", options:["Hyperconjugation and resonance","Steric hindrance only","Electronegativity","No stabilization"], answer:0, explain_en:"Free radicals are stabilized by delocalization through hyperconjugation or resonance.", explain_hi:"मुक्त मूलक हाइपरकंजुगेशन या रेज़ोनेंस द्वारा स्थिर होते हैं।"},
+
+{q_en:"Order of free radical stability is:", q_hi:"मुक्त मूलक की स्थिरता का क्रम क्या है?", options:["1° > 2° > 3°","3° > 2° > 1°","Methyl > 1° > 2° > 3°","Equal for all"], answer:1, explain_en:"Free radical stability order: 3° > 2° > 1° > methyl.", explain_hi:"मुक्त मूलक स्थिरता क्रम: 3° > 2° > 1° > मिथाइल।"},
+
+{q_en:"Carbenes are:", q_hi:"कार्बीन क्या होते हैं?", options:["Divalent neutral species","Positively charged ions","Negatively charged ions","Radical cations"], answer:0, explain_en:"Carbenes are neutral species with divalent carbon and two nonbonded electrons.", explain_hi:"कार्बीन न्यूट्रल प्रजाति होते हैं जिनमें द्विसंयोजी कार्बन और दो असंयोजित इलेक्ट्रॉन होते हैं।"},
+
+{q_en:"Arynes are generated by:", q_hi:"आराइन्स किससे उत्पन्न होते हैं?", options:["Addition reactions","Elimination from aryl halides","Oxidation","Hydrolysis"], answer:1, explain_en:"Arynes (like benzyne) form by elimination from aryl halides under strong base.", explain_hi:"आराइन (जैसे बेंजाइन) एरिल हैलाइड से प्रबल क्षार में एलीमिनेशन द्वारा बनते हैं।"},
+
+{q_en:"Nitrenes are:", q_hi:"नाइट्रीन क्या होते हैं?", options:["Neutral species with divalent nitrogen","Cations","Anions","Radicals only"], answer:0, explain_en:"Nitrenes are neutral reactive species with divalent nitrogen having 6 valence electrons.", explain_hi:"नाइट्रीन न्यूट्रल प्रतिक्रियाशील प्रजातियाँ होती हैं जिनमें द्विसंयोजी नाइट्रोजन और 6 संयोजक इलेक्ट्रॉन होते हैं।"},
+
+{q_en:"Example of a nitrene generation is:", q_hi:"नाइट्रीन बनने का उदाहरण क्या है?", options:["Decomposition of azides","Hydrolysis of esters","Oxidation of alcohols","Combustion of methane"], answer:0, explain_en:"Nitrenes are generated by thermal or photolysis of azides.", explain_hi:"नाइट्रीन अजाइड्स के ऊष्मीय या प्रकाशीय अपघटन से बनते हैं।"}
+];
+
+
+
+/* Helper: create 100-question quiz by cycling through templates of that quiz.
+   We clone each template as a new question instance and, to reduce identical wording,
+   we append an index suffix to the question where helpful (keeps uniqueness across quizzes). */
+
+function makeQuizFromTemplates(templates, quizNumber) {
+  // Guard: expected an array
+  if (!Array.isArray(templates)) {
+    console.warn('makeQuizFromTemplates: templates must be an array');
+    return [];
+  }
+
+  // Helper: deep clone (use structuredClone when available; otherwise fall back to JSON)
+  const deepClone = (obj) => {
+    if (typeof structuredClone === 'function') return structuredClone(obj);
+    try { return JSON.parse(JSON.stringify(obj)); } catch (e) { return { ...(obj || {}) }; }
+  };
+
+  const seen = new Set();
+  const qlist = [];
+
+  for (let i = 0; i < templates.length; i++) {
+    const orig = templates[i];
+    if (!orig) continue;
+
+    const q = deepClone(orig);
+
+    // Do NOT append "(Qn)" or force a "?" — you asked to display "as is".
+    // But ensure question fields exist
+    q.q_en = (typeof q.q_en === 'string') ? q.q_en : '';
+    q.q_hi = (typeof q.q_hi === 'string') ? q.q_hi : '';
+
+    // De-duplicate by the exact pair of English+Hindi question text
+    const key = q.q_en + '||' + q.q_hi;
+    if (seen.has(key)) continue;
+    seen.add(key);
+
+    // Normalize options: make it an array and stringify null/undefined;
+    // if an option is an object, keep it (so you can support richer option objects)
+    if (!Array.isArray(q.options)) q.options = [];
+    q.options = q.options.map(opt => {
+      if (opt === null || opt === undefined) return '';
+      if (typeof opt === 'object') return opt; // keep object options intact
+      return String(opt);
+    });
+
+    // Ensure answer index is a number and within bounds; if not, set -1 (no answer)
+    if (typeof q.answer !== 'number' || q.answer < 0 || q.answer >= q.options.length) {
+      q.answer = -1;
+    }
+
+    qlist.push(q);
+  }
+
+  return qlist;
+}
+
+/* Build all five quizzes with unique templates sets */
+const QUIZ_DATA = {
+  1: makeQuizFromTemplates(TEMPLATES_Q1, 1),
+  2: makeQuizFromTemplates(TEMPLATES_Q2, 2),
+  3: makeQuizFromTemplates(TEMPLATES_Q3, 3),
+  4: makeQuizFromTemplates(TEMPLATES_Q4, 4),
+};
+
+/* State */
+let currentQuiz = 1;
+let language = 'en';
+const quizDiv = document.getElementById('quiz');
+const scoreDisplay = document.getElementById('scoreDisplay');
+
+/* Render function */
+function renderQuiz(){
+  const QUESTIONS = QUIZ_DATA[currentQuiz];
+  quizDiv.innerHTML = '';
+  QUESTIONS.forEach((q, idx) => {
+    const card = document.createElement('div'); card.className = 'card';
+    const qnum = document.createElement('div'); qnum.className = 'qnum'; qnum.innerText = `Q${idx+1}`;
+    const question = document.createElement('div'); question.className = 'question'; question.innerText = language==='en' ? q.q_en : q.q_hi;
+    const options = document.createElement('div'); options.className = 'options';
+    q.options.forEach((opt, oidx) => {
+      const id = `quiz${currentQuiz}_q${idx}_opt${oidx}`;
+      const lab = document.createElement('label'); lab.htmlFor = id;
+      const radio = document.createElement('input'); radio.type='radio'; radio.name=`quiz${currentQuiz}_q${idx}`; radio.id=id; radio.value=oidx;
+      if (q.selected === oidx) radio.checked = true;
+      lab.appendChild(radio);
+      const span = document.createElement('span'); span.innerText = opt;
+      lab.appendChild(span);
+      options.appendChild(lab);
+    });
+    const feedback = document.createElement('div'); feedback.className='feedback'; feedback.id=`feedback${idx}`;
+    const revealBtn = document.createElement('button'); revealBtn.className='reveal'; revealBtn.innerText = language==='en' ? 'Reveal Explanation' : 'व्याख्या देखें';
+    const explain = document.createElement('div'); explain.className='explain'; explain.innerText = language==='en' ? q.explain_en : q.explain_hi;
+    revealBtn.addEventListener('click', ()=>{ explain.style.display = explain.style.display === 'block' ? 'none' : 'block'; });
+    card.appendChild(qnum); card.appendChild(question); card.appendChild(options); card.appendChild(feedback); card.appendChild(revealBtn); card.appendChild(explain);
+    quizDiv.appendChild(card);
+  });
+}
+
+/* Immediate feedback on select */
+quizDiv.addEventListener('change', (e) => {
+  if (!e.target || !e.target.name) return;
+  const name = e.target.name; // like "quiz3_q5"
+  const match = name.match(/quiz(\d+)_q(\d+)/);
+  if (!match) return;
+  const qz = parseInt(match[1],10);
+  const qIndex = parseInt(match[2],10);
+  const selected = parseInt(e.target.value,10);
+  const QUESTIONS = QUIZ_DATA[qz];
+  QUESTIONS[qIndex].selected = selected;
+  const correct = QUESTIONS[qIndex].answer;
+  const optionNodes = document.querySelectorAll(`input[name="quiz${qz}_q${qIndex}"]`);
+  optionNodes.forEach(opt => {
+    const parent = opt.parentElement;
+    parent.classList.remove('correct','incorrect');
+    if (parseInt(opt.value,10) === correct) parent.classList.add('correct');
+    if (parseInt(opt.value,10) === selected && selected !== correct) parent.classList.add('incorrect');
+  });
+  const fb = document.getElementById(`feedback${qIndex}`);
+  if (selected === correct) { fb.innerText = language==='en' ? 'Correct ✅' : 'सही ✅'; fb.style.color='#10b981'; }
+  else { fb.innerText = language==='en' ? 'Incorrect ❌' : 'गलत ❌'; fb.style.color='#ef4444'; }
+});
+
+/* Language toggle */
+document.getElementById('langBtn').addEventListener('click', ()=>{
+  language = language==='en' ? 'hi' : 'en';
+  document.getElementById('langBtn').innerText = language==='en' ? 'Language: Switch to हिंदी' : 'भाषा: Switch to English';
+  renderQuiz();
+});
+
+/* Submit logic */
+document.getElementById('submitBtn').addEventListener('click', ()=>{
+  const QUESTIONS = QUIZ_DATA[currentQuiz];
+  let score = 0;
+  QUESTIONS.forEach((q, idx) => {
+    if (q.selected === q.answer) score++;
+    // reveal explanations
+    const explainBoxes = document.querySelectorAll('.explain');
+    if (explainBoxes[idx]) explainBoxes[idx].style.display = 'block';
+    // mark not attempted
+    if (q.selected === undefined){
+      const card = document.querySelectorAll('.card')[idx];
+      if (card && !card.querySelector(`#na${idx}`)){
+        const na = document.createElement('div'); na.id=`na${idx}`; na.className='notattempt';
+        na.innerText = language==='en' ? 'Not Attempted' : 'उत्तर नहीं दिया';
+        card.appendChild(na);
+      }
+    } else {
+      const na = document.getElementById(`na${idx}`);
+      if (na) na.remove();
+    }
+  });
+  scoreDisplay.innerText = `Score: ${score} / ${QUESTIONS.length}`;
+  alert((language==='en' ? 'Your score: ' : 'आपका स्कोर: ') + `${score} / ${QUESTIONS.length}`);
+});
+
+/* Reset: clears selected answers for current quiz only */
+document.getElementById('resetBtn').addEventListener('click', ()=>{
+  const QUESTIONS = QUIZ_DATA[currentQuiz];
+  QUESTIONS.forEach(q => { delete q.selected; });
+  scoreDisplay.innerText = 'Score: —';
+  renderQuiz();
+});
+
+/* Tab switching */
+document.querySelectorAll('.tabBtn').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    document.querySelectorAll('.tabBtn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    currentQuiz = parseInt(btn.dataset.quiz,10);
+    scoreDisplay.innerText = 'Score: —';
+    renderQuiz();
+    // update lang button text according to current language
+    document.getElementById('langBtn').innerText = language==='en' ? 'Language: Switch to हिंदी' : 'भाषा: Switch to English';
+  });
+});
+
+/* Initialize */
+renderQuiz();
+</script>
+</body>
+</html>
