@@ -361,13 +361,16 @@
     <header class="w-full border-b bg-white/70 sticky top-0 z-30 shadow-lg">
         <div class="max-w-6xl mx-auto flex items-center justify-center p-4">
             <div class="flex items-center gap-3">
-                <img src="https://i.ibb.co/nMC0877T/UNIVERSITY-UPDATES-LOGO-removebg-preview.png" alt="Logo" class="h-10 w-auto" />
+                <img src="https://i.ibb.co/nMC0877T/UNIVERSITY-UPDATES-LOGO-removebg-preview.png" alt="Logo" class="h-10 w-auto rounded-full" />
+                <h1 class="text-xl md:text-2xl font-bold tracking-tight text-gray-800">
+                    Admit Card Generator
+                </h1>
             </div>
         </div>
     </header>
 
     <div id="form-container" class="mt-10 mx-auto bg-white rounded-xl shadow-lg p-8 w-full max-w-5xl">
-        <h1 class="text-3xl font-extrabold mb-6 text-center text-gray-800">ADMIT CARD GENERATOR</h1>
+        <h1 class="text-3xl font-extrabold mb-6 text-center text-gray-800">Exam Details Form</h1>
         <div class="entry-toggle flex justify-center mb-8">
             <button class="toggle-btn active rounded-l-md" id="manualBtn">Manual Entry</button>
             <button class="toggle-btn rounded-r-md" id="autoBtn">Auto-fill from Upload</button>
@@ -481,7 +484,7 @@
         <div id="admit-card-content">
             <div class="header">
                 <img src="https://i.ibb.co/nMC0877T/UNIVERSITY-UPDATES-LOGO-removebg-preview.png">
-                <h3><b>UNIVERSITY UPDATES</b></h3>
+                <h3>UNIVERSITY UPDATES</h3>
                 <div class="header-right"></div>
             </div>
             <div class="sub-header" style="text-align:center; margin-bottom:10px;">
@@ -747,6 +750,9 @@
             return result.data.text;
         }
 
+        /**
+         * @description Extracts and cleans student and exam metadata from the provided text.
+         */
         function parseExamFormText(text) {
             const cleanText = text.replace(/[\r\n]+/g, ' ').replace(/\s{2,}/g, ' ').toUpperCase();
 
@@ -799,6 +805,10 @@
 
             // --- 5. COLLEGE NAME FIX (Non-greedy and robust) ---
             const collegeName = getMatch(/COLLEGE\s*NAME:[:\-\n\s]*?([\s\S]*?)(?=EXAMINATION\s*CENTER|SUBJECT)/i) || getMatch(/ADMITTED\s*COLLEGE:?\s*([\s\S]*?)(?=ADMITTED\s*SUBJECT|EXAMINATION\s*CENTER)/i);
+            
+            // --- FIX: SUBJECT NAME (Exclude 'NOTE' and subsequent text like PAPER) ---
+            // Pattern looks for 'SUBJECT:' followed by content, stopping before the next label (NOTE or PAPER).
+            const subject = getMatch(/SUBJECT:[:\-\n\s]*?([A-Z\s]+?)(?=NOTE|PAPER\s*\d+)/i) || getMatch(/ADMITTED\s*SUBJECT[:\-\n\s]*?([A-Z\s,]+)/i);
 
 
             return {
@@ -813,36 +823,64 @@
                 examType: examType, // FIX: Improved logic
                 collegeName: collegeName, // FIX: Improved pattern
                 examinationCenter: getMatch(/EXAMINATION\s*CENTER:[:\-\n\s]*?([\s\S]*?)(?=SUBJECT|NOTE|PAPER)/i),
-                subject: getMatch(/SUBJECT[:\-\n\s]*?([A-Z\s]+)/i) || getMatch(/ADMITTED\s*SUBJECT[:\-\n\s]*?([A-Z\s,]+)/i),
+                subject: subject, // FIX: Subject extraction improved to exclude NOTE
                 papers: extractPapers(text.toUpperCase())
             };
         }
 
+        /**
+         * @description Extracts and cleans paper details from the provided text.
+         */
         function extractPapers(text) {
             const papers = [];
             // Pattern: PAPER X <CODE> <NAME> <TYPE>
-            const regex = /PAPER\s*\d+\s*([A-Z0-9]+)\s*([\s\S]*?)(THEORY|PRACTICAL|MINNOR|VOCATIONAL|CO CURRICULAR)[\s,]*?(INTERNAL|EXTERNAL)?/gi;
+            const regex = /PAPER\s*\d+\s*([A-Z0-9]+)\s*([\s\S]*?)(THEORY|PRACTICAL|MINNOR|VOCATIONAL|CO CURRICULAR|INTERNAL|EXTERNAL)[\s,]*?(INTERNAL|EXTERNAL)?/gi;
             let match;
+            
+            // Array of words to filter out if they appear as the first word of the paper name
+            const filterWords = ['BOTANY', 'COMMERCE', 'SUBJECT', 'MINOR', 'VOCATIONAL', 'CO', 'PHYSICS', 'CHEMISTRY', 'MATHEMATICS', 'PRACTICAL:', 'LAB', 'ALGAE,'];
 
             while ((match = regex.exec(text)) !== null) {
                 const rawNameArea = match[2].trim().replace(/[\n\t\r]+/g, ' ').replace(/\s{2,}/g, ' ');
                 const code = match[1].trim();
-                const type1 = match[3].trim();
-                const type2 = match[4] ? match[4].trim() : '';
+                let type1 = match[3].trim();
+                let type2 = match[4] ? match[4].trim() : '';
 
                 // Clean up the raw name area by filtering common subject words
-                let name = rawNameArea.split(/\s+/)
-                    .filter(p => p.length > 0)
-                    .filter(p => !['COMMERCE', 'SUBJECT', 'MINOR', 'VOCATIONAL', 'CO', 'PHYSICS', 'CHEMISTRY', 'MATHEMATICS'].includes(p.toUpperCase()))
-                    .join(' ');
+                let nameParts = rawNameArea.split(/\s+/).filter(p => p.length > 0);
+                
+                // FIX: Loop to remove common subject name (like "BOTANY") from the start of the paper name
+                let cleanedNameParts = [];
+                let removeNext = true;
+                for (const part of nameParts) {
+                    if (removeNext && filterWords.includes(part)) {
+                        continue; // Skip the word
+                    } else {
+                        // Once a non-filter word is hit, stop filtering the start
+                        removeNext = false;
+                        cleanedNameParts.push(part);
+                    }
+                }
+                nameParts = cleanedNameParts;
+
+                // Final cleanup for phrases like 'BOTANY MICROBILOGY' where 'BOTANY' is removed
+                let name = nameParts.join(' ');
+                
+                // If name is empty after stripping, use a fallback
+                if(name.length === 0 && code.endsWith('P')) {
+                     name = 'PRACTICAL';
+                } else if (name.length === 0) {
+                    name = 'GENERAL PAPER';
+                }
 
                 papers.push({
                     code: code,
                     name: name.toUpperCase(),
-                    type: (type1 + (type2 ? `, ${type2}` : '')).toUpperCase()
+                    // Clean up paper type from internal/external mentions that might be repeated
+                    type: type1.toUpperCase().replace(/,?\s*EXTERNAL/g, '').replace(/,?\s*INTERNAL/g, '').replace(/\s{2,}/g, ' ')
                 });
             }
-
+            
             // Final check: Extracting single paper from Exam Form table (Pattern: CODE NAME TYPE)
             if (papers.length === 0) {
                 const singlePaperMatch = text.match(/PAPER\s*1\s*([A-Z0-9]+)\s*([\s\S]+?)(THEORY|PRACTICAL|INTERNAL|EXTERNAL)/i);
