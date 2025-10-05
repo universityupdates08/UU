@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -367,7 +368,7 @@
     </header>
 
     <div id="form-container" class="mt-10 mx-auto bg-white rounded-xl shadow-lg p-8 w-full max-w-5xl">
-        <h1 class="text-3xl font-extrabold mb-6 text-center text-gray-800">ADMIT CATD GENERATOR</h1>
+        <h1 class="text-3xl font-extrabold mb-6 text-center text-gray-800">ADMIT CARD GENERATOR</h1>
         <div class="entry-toggle flex justify-center mb-8">
             <button class="toggle-btn active rounded-l-md" id="manualBtn">Manual Entry</button>
             <button class="toggle-btn rounded-r-md" id="autoBtn">Auto-fill from Upload</button>
@@ -375,7 +376,7 @@
 
         <div id="auto-fill-section" style="display:none;" class="border-2 border-dashed border-blue-300 bg-blue-50 p-6 rounded-lg text-center mb-8">
             <label for="admitCardUpload" class="block text-lg font-semibold text-blue-700 mb-3">
-                Upload Admit Card (PDF/Image) to Auto-Fill Details
+                Upload Admit Card/Exam Form (PDF/Image) to Auto-Fill Details
             </label>
             <input type="file" id="admitCardUpload" accept=".pdf,.png,.jpg,.jpeg" class="p-2 border border-gray-300 rounded-md w-full max-w-md mx-auto block">
             <p id="upload-status" class="mt-3 text-blue-600 font-semibold"></p>
@@ -468,8 +469,11 @@
             </form>
         </div>
     </div>
+    
+    
 
-    <div class="action-buttons flex flex-wrap justify-center gap-4 mt-6 mb-10 w-full max-w-5xl px-4">
+  <!-- ===== Action Buttons (Top of Form) ===== -->
+  <div class="action-buttons flex flex-wrap justify-center gap-4 mt-6 mb-10 w-full max-w-5xl px-4">
         <button type="button" id="generateBtn" class="gradient-button">Generate Admit Card</button>
         <button type="button" id="resetBtn" class="gradient-button">Reset Form</button>
         <button type="button" id="printBtn" class="gradient-button" style="display:none;">Print Admit Card</button>
@@ -477,80 +481,83 @@
     </div>
 
 
-    <div id="admit-card-wrapper" style="display:none;">
-        <div id="admit-card-content">
-            <div class="header">
-                <img src="https://i.ibb.co/nMC0877T/UNIVERSITY-UPDATES-LOGO-removebg-preview.png">
-                <h3>UNIVERSITY UPDATES</h3>
-                <div class="header-right"></div>
-            </div>
-            <div class="sub-header" style="text-align:center; margin-bottom:10px;">
-                <h4 style="font-weight:bold; font-size:16px;">
-                    औपबंधिक प्रवेश-पत्र / PROVISIONAL ADMIT CARD
-                </h4>
-            </div>
 
-
-
-            <p id="exam-type-sem" style="text-align:center; font-weight:bold; font-size:16px; margin-bottom:15px; color:#d32f2f;">
-            </p>
-
-            <table class="details-table">
-                <tr>
-                    <td class="label">Roll Number:</td>
-                    <td class="value" id="ac-rollNumber"></td>
-                    <td class="label">Enrollment No:</td>
-                    <td class="value" id="ac-enrollmentNumber"></td>
-                </tr>
-                <tr>
-                    <td class="label">Candidate Name:</td>
-                    <td class="value" id="ac-candidateName"></td>
-                    <td class="label">Father's/Mother's Name:</td>
-                    <td class="value" id="ac-fatherMotherName"></td>
-                </tr>
-                <tr>
-                    <td class="label">Course:</td>
-                    <td class="value" id="ac-course"></td>
-                    <td class="label">Gender:</td>
-                    <td class="value" id="ac-gender"></td>
-                </tr>
-                <tr>
-                    <td class="label">College Name:</td>
-                    <td class="value" id="ac-collegeName" colspan="3"></td>
-                </tr>
-                <tr>
-                    <td class="label">Examination Center:</td>
-                    <td class="value" id="ac-examinationCenter" colspan="3"></td>
-                </tr>
-                <tr>
-                    <td class="label">Subject:</td>
-                    <td class="value" colspan="3" id="ac-subject"></td>
-                </tr>
-            </table>
-            <table class="papers-table" id="ac-papers-table">
-                <thead>
-                    <tr>
-                        <th>S. No.</th>
-                        <th>PAPER CODE</th>
-                        <th>PAPER NAME</th>
-                        <th>PAPER TYPE</th>
-                        <th>EXAM DATE</th>
-                        <th>DAY</th>
-                        <th>SHIFT</th>
-                    </tr>
-                </thead>
-                <tbody></tbody>
-            </table>
-            <div class="mt-8 text-xs text-gray-600 leading-relaxed border-t pt-4">
-                <p><strong>Note:</strong> Candidate must carry this admit card and a valid ID proof to the examination center.</p>
-                <p class="mt-1"><strong>Disclaimer:</strong> This admit card is system-generated and does not require a physical signature or stamp.</p>
-                <div class="text-right mt-2">
-                    <p class="text-xs text-gray-500 font-semibold">Generated On:</p>
-                    <p class="text-sm font-mono text-gray-800" id="generatedTime"></p>
-                </div>
-            </div>
-        </div>
+<!-- ===== Admit Card Output ===== -->
+<div id="admit-card-wrapper" style="display:none;">
+  <div id="admit-card-content">
+    <div class="header">
+      <img src="https://i.ibb.co/nMC0877T/UNIVERSITY-UPDATES-LOGO-removebg-preview.png">
+      <h3><b>UNIVERSITY UPDATES</b></h3>
+      <div class="header-right"></div>
     </div>
+
+    <div class="sub-header" style="text-align:center; margin-bottom:10px;">
+      <h4 style="font-weight:bold; font-size:16px;">
+        औपबंधिक प्रवेश-पत्र / PROVISIONAL ADMIT CARD
+      </h4>
+    </div>
+
+    <p id="exam-type-sem" style="text-align:center; font-weight:bold; font-size:16px; margin-bottom:15px; color:#d32f2f;"></p>
+
+    <table class="details-table">
+      <tr>
+        <td class="label">Roll Number:</td>
+        <td class="value" id="ac-rollNumber"></td>
+        <td class="label">Enrollment No:</td>
+        <td class="value" id="ac-enrollmentNumber"></td>
+      </tr>
+      <tr>
+        <td class="label">Candidate Name:</td>
+        <td class="value" id="ac-candidateName"></td>
+        <td class="label">Father's/Mother's Name:</td>
+        <td class="value" id="ac-fatherMotherName"></td>
+      </tr>
+      <tr>
+        <td class="label">Course:</td>
+        <td class="value" id="ac-course"></td>
+        <td class="label">Gender:</td>
+        <td class="value" id="ac-gender"></td>
+      </tr>
+      <tr>
+        <td class="label">College Name:</td>
+        <td class="value" id="ac-collegeName" colspan="3"></td>
+      </tr>
+      <tr>
+        <td class="label">Examination Center:</td>
+        <td class="value" id="ac-examinationCenter" colspan="3"></td>
+      </tr>
+      <tr>
+        <td class="label">Subject:</td>
+        <td class="value" colspan="3" id="ac-subject"></td>
+      </tr>
+    </table>
+
+    <table class="papers-table" id="ac-papers-table">
+      <thead>
+        <tr>
+          <th>S. No.</th>
+          <th>PAPER CODE</th>
+          <th>PAPER NAME</th>
+          <th>PAPER TYPE</th>
+          <th>EXAM DATE</th>
+          <th>DAY</th>
+          <th>SHIFT</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    <div class="mt-8 text-xs text-gray-600 leading-relaxed border-t pt-4">
+      <p><strong>नोट:</strong> यह औपबंधिक प्रवेश पत्र आधिकारिक तौर पर स्वीकृत नहीं है। इसको बनाने का मात्र उद्देश्य सम्बन्धित छात्रों को परीक्षा तिथि और समय की जानकारी उपलब्ध कराना है। अधिक जानकारी के लिए विश्वविद्यालय की अधिकृत वेबसाइट www.ccsuniversity.ac.in का अवलोकन करें। उक्त प्रवेश पत्र विश्वविद्यालय के पत्रांक संख्या 01 दिनाँक 05.10.2025 के अनुसार है।</p>
+
+      <div class="text-right mt-2">
+        <p class="text-xs text-gray-500 font-semibold">Generated On:</p>
+        <p class="text-sm font-mono text-gray-800" id="generatedTime"></p>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 
     <script>
@@ -801,11 +808,16 @@
                 '4'; // Default to 4
 
             // --- 5. COLLEGE NAME FIX (Non-greedy and robust) ---
-            const collegeName = getMatch(/COLLEGE\s*NAME:[:\-\n\s]*?([\s\S]*?)(?=EXAMINATION\s*CENTER|SUBJECT)/i) || getMatch(/ADMITTED\s*COLLEGE:?\s*([\s\S]*?)(?=ADMITTED\s*SUBJECT|EXAMINATION\s*CENTER)/i);
+            const collegeName =
+  getMatch(/COLLEGE\s*NAME:[:\-\n\s]*?([\s\S]*?)(?=EXAMINATION\s*CENTER|SUBJECT|NOTE|PAPER|PAYMENT|DECLARATION)/i) ||
+  getMatch(/ADMITTED\s*COLLEGE:[:\-\n\s]*?([\s\S]*?)(?=PAPER|PAYMENT|NOTE|DECLARATION|PROJECT|COURSE|ROLL|GENDER)/i);
             
             // --- FIX: SUBJECT NAME (Exclude 'NOTE' and subsequent text like PAPER) ---
             // Pattern looks for 'SUBJECT:' followed by content, stopping before the next label (NOTE or PAPER).
-            const subject = getMatch(/SUBJECT:[:\-\n\s]*?([A-Z\s]+?)(?=NOTE|PAPER\s*\d+)/i) || getMatch(/ADMITTED\s*SUBJECT[:\-\n\s]*?([A-Z\s,]+)/i);
+            const subject =
+  getMatch(/SUBJECT:[:\-\n\s]*?([A-Z0-9,\s]+?)(?=NOTE|ADMITTED\s*COLLEGE|PAPER\s*\d+)/i) ||
+  getMatch(/ADMITTED\s*SUBJECT[:\-\n\s]*?([A-Z0-9,\s]+?)(?=ADMITTED\s*COLLEGE|NOTE|PAPER\s*\d+)/i);
+
 
 
             return {
@@ -962,6 +974,7 @@
 
         /**
          * @description Clears all fields in the manual entry form.
+           * @description Clears all fields in the manual entry form.
          */
         function resetForm() {
             document.getElementById('admitCardForm').reset();
