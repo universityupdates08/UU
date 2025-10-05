@@ -580,28 +580,35 @@
   </div>
 </div>
 
-<div id="disclaimer-modal" class="fixed inset-0 bg-gray-600 bg-opacity-75 flex items-center justify-center z-50 transition-opacity duration-300" style="opacity: 1;">
-    <div class="bg-white rounded-lg shadow-2xl p-8 max-w-lg mx-4 transform transition-all">
-        <h2 class="text-2xl font-bold mb-4 text-red-600 border-b pb-2">DISCLAIMER & IMPORTANT NOTE</h2>
-        <p class="text-gray-700 mb-4 text-sm leading-relaxed">
+<div id="disclaimer-modal" class="fixed inset-0 bg-gray-600 bg-opacity-75 flex items-center justify-center z-50 p-2">
+    <div class="bg-white rounded-lg shadow-2xl p-3 sm:p-4 max-w-xs sm:max-w-sm md:max-w-md w-full mx-auto">
+        <h2 class="text-base sm:text-sm font-bold mb-2 text-red-600 border-b pb-1 text-center">
+            DISCLAIMER & IMPORTANT NOTE
+        </h2>
+
+        <p class="text-gray-700 mb-2 text-[10px] sm:text-xs leading-tight text-justify">
             This <b>ADMIT CARD GENERATOR</b> is a non-official tool designed for educational and informational purposes only. The provisional admit card generated here is based on user input and pre-defined exam datesheet data.
         </p>
-        <ul class="list-disc list-inside text-gray-700 mb-6 text-sm leading-relaxed space-y-2">
+
+        <ul class="list-disc list-inside text-gray-700 mb-2 text-[10px] sm:text-xs leading-tight space-y-1 text-justify">
             <li>The content is <b>NOT</b> officially sanctioned by any University.</li>
             <li>Always refer to the official University website for your final, legally valid admit card, exam center, and schedule.</li>
             <li>The accuracy of the generated card depends entirely on the accuracy of the data you provide or the data extracted via OCR.</li>
-            <li>यह केवल परीक्षा की तिथि की जानकारी हेतु है, यह कोई आधिकारिक दस्तावेज नहीं है। </li>
+            <li>यह केवल परीक्षा की तिथि की जानकारी हेतु है, यह कोई आधिकारिक दस्तावेज नहीं है।</li>
         </ul>
-        <p class="text-center font-semibold text-sm text-gray-800">
+
+        <p class="text-gray-800 font-semibold text-[10px] sm:text-xs text-justify">
             By clicking 'I Understand', you acknowledge that this is a mock document, and you accept full responsibility for verifying all details with the official University sources.
         </p>
-        <div class="mt-6 flex justify-center">
-            <button id="understand-btn" class="gradient-button bg-green-500 hover:bg-green-600 transition duration-150">
+
+        <div class="mt-3 flex justify-center">
+            <button id="understand-btn" class="gradient-button bg-green-500 hover:bg-green-600 transition duration-150 px-2 py-1 text-[10px] sm:text-xs rounded">
                 I Understand and Accept
             </button>
         </div>
     </div>
 </div>
+
 
 <script>
         // --- DATA (Datesheet for fetching Date, Day, and Shift) ---
