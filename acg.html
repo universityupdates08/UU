@@ -366,8 +366,33 @@
         </div>
     </header>
 
-    <div id="form-container" class="mt-10 mx-auto bg-white rounded-xl shadow-lg p-8 w-full max-w-5xl">
-        <h1 class="text-3xl font-extrabold mb-6 text-center text-gray-800">ADMIT CARD GENERATOR</h1>
+
+<h1 class="mt-3 mx-auto text-3xl font-extrabold text-center text-gray-800">ADMIT CARD GENERATOR</h1>
+
+
+<!-- How to Use Section -->
+<div class="flex justify-center mt-6">
+  <div class="w-full max-w-3xl text-center bg-gradient-to-r from-blue-50 to-blue-100 shadow-lg border border-blue-300 rounded-lg p-4">
+    <div class="flex justify-center items-center gap-3 mb-2">
+      <img src="https://cdn-icons-png.flaticon.com/512/595/595067.png" 
+           alt="Disclaimer Icon" 
+           class="h-8 w-8">
+      <h2 class="text-lg font-bold text-blue-800">HOW TO USE?</h2>
+    </div>
+    <p class="text-sm text-gray-700 leading-relaxed">
+      <b>Step 1:</b> Fill the Manual Entry according to Exam Form.</p>  
+      <b>OR</b>
+      <p class="text-sm text-gray-700 leading-relaxed">
+      <b>Step 2:</b> Upload your Exam Form/Admit Card (PDF Recommended) </p>
+      <p class="text-sm text-gray-700 leading-relaxed"> (a) Verify your details. If any error seems then correct it manually.</p>
+      <p class="text-sm text-gray-700 leading-relaxed"> (b) Click on Generate Admit Card.
+    </p>
+  </div>
+</div>
+
+
+    <div id="form-container" class="mt-5 mx-auto bg-white rounded-xl shadow-lg p-8 w-full max-w-5xl">
+        
         <div class="entry-toggle flex justify-center mb-8">
             <button class="toggle-btn active rounded-l-md" id="manualBtn">Manual Entry</button>
             <button class="toggle-btn rounded-r-md" id="autoBtn">Auto-fill from Upload</button>
@@ -555,7 +580,7 @@
   </div>
 </div>
 
-<div id="disclaimer-modal" class="fixed inset-0 bg-gray-600 bg-opacity-75 flex items-center justify-center z-50">
+<div id="disclaimer-modal" class="fixed inset-0 bg-gray-600 bg-opacity-75 flex items-center justify-center z-50 transition-opacity duration-300" style="opacity: 1;">
     <div class="bg-white rounded-lg shadow-2xl p-8 max-w-lg mx-4 transform transition-all">
         <h2 class="text-2xl font-bold mb-4 text-red-600 border-b pb-2">DISCLAIMER & IMPORTANT NOTE</h2>
         <p class="text-gray-700 mb-4 text-sm leading-relaxed">
