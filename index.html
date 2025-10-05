@@ -1,13 +1,10 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>UNIVERSITY UPDATES</title>
-  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
@@ -17,14 +14,13 @@
       --primary-color: #4a90e2;
       --secondary-color: #50e3c2;
       --card-bg: rgba(255, 255, 255, 0.85);
+      --base-font-size: 16px; /* Base for font controls */
     }
-
     * { box-sizing: border-box; }
-
     body {
       font-family: 'Poppins', sans-serif;
       margin: 0;
-      padding: 15px;
+      padding: 0; /* Changed from 15px to 0 to wrap utility bar nicely */
       text-align: center;
       background: linear-gradient(135deg, #f0f0f0 100%, #f8f8f8 1000%);
       background-image: repeating-linear-gradient(
@@ -36,21 +32,18 @@
       );
       background-size: 200% 200%;
       animation: moveZigzag 20s linear infinite;
+      font-size: var(--base-font-size); /* Use CSS variable for control */
     }
-
     @keyframes moveZigzag {
       0% { background-position: 0 0; }
       100% { background-position: 200px 200px; }
     }
-
     header img {
       height: 60px;
       margin-bottom: 5px;
       filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.4));
     }
-
     .container { max-width: 900px; margin: 0 auto; }
-
     .main-header h1 {
       font-size: 2em;
       font-weight: 700;
@@ -60,7 +53,6 @@
       -webkit-text-fill-color: transparent;
       text-shadow: 0px 4px 8px rgba(0,0,0,0.3);
     }
-
     .box {
       background: var(--card-bg);
       padding: 20px;
@@ -71,7 +63,6 @@
       position: relative;
       overflow: hidden;
     }
-
     .card {
       display: flex;
       align-items: center;
@@ -88,7 +79,6 @@
       transition: 0.3s;
       max-width: 600px;
     }
-
     .card img {
       height: 45px;
       width: 45px;
@@ -97,41 +87,34 @@
       border-radius: 50%;
       padding: 5px;
     }
-
     .card:hover {
       transform: scale(1.05);
       box-shadow: 0 8px 20px rgba(0,0,0,0.35);
     }
-
     .ccsu { background: linear-gradient(45deg, #6a11cb 0%, #2575fc 100%) }
     .msu { background: linear-gradient(45deg, #e52d27 0%, #b31217 100%) }
     .calculator { background: linear-gradient(45deg, #FFD700 0%, #b31217 100%) }
     .co { background: linear-gradient(45deg, #00b09b 0%, #96c93d 100%) }
-
     h2 {
       font-size: 2.5em;
       font-weight: 700;
       margin: 30px 0 15px;
       color: #2c3e50;
     }
-
     footer {
       margin-top: 30px;
       font-weight: normal;
       color: #8000000;
     }
-
     /* Admin Team + Disclaimer styling */
     .admin-box { border-left: 7px solid #FFA500; border-right: 7px solid #FFA500; }
     .disclaimer-box { border-left: 7px solid #007BFF; border-right: 7px solid #007BFF; }
-
     .finger { display: inline-block; animation: blink 1.2s infinite; }
     @keyframes blink {
       0% { opacity: 1; transform: translateY(0); }
       50% { opacity: 0.3; transform: translateY(4px); }
       100% { opacity: 1; transform: translateY(0); }
     }
-    
     .greeting-blink {
       font-weight: bold;
       margin-top: 20px;
@@ -139,7 +122,6 @@
       font-size: 1rem;
       animation: colorBlink 2s infinite;
     }
-
     @keyframes colorBlink {
       0%   { color: maroon; }
       25%  { color: darkblue; }
@@ -147,11 +129,9 @@
       75%  { color: darkorange; }
       100% { color: maroon; }
     }
-  
     /* Dropdown positioning */
     nav { position: relative; z-index: 50; }
     nav .group:hover div { display: block !important; z-index: 60; }
-
     /* Go To Top Button */
     #topBtn {
       display: none;
@@ -174,39 +154,73 @@
       background-color: #b22222;
       transform: scale(1.1);
     }
-    
-     html {
-    scroll-behavior: smooth;
-  }
+    html {
+      scroll-behavior: smooth;
+    }
+    /* Animation setup */
+    .fade-slide {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease-out;
+    }
+    .fade-slide.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
 
-  /* Animation setup */
-  .fade-slide {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: all 0.8s ease-out;
-  }
-  .fade-slide.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  
+    /* --- NEW CSS FOR MARQUEE --- */
+    .marquee-container {
+      overflow: hidden;
+      background-color: #fcebeb; /* Light red/maroon background */
+      border-top: 1px solid #ff4d4d;
+      border-bottom: 1px solid #ff4d4d;
+      white-space: nowrap;
+    }
+    .marquee-content {
+      display: inline-block;
+      padding-left: 100%; /* Start off-screen */
+      animation: marquee 35s linear infinite; /* Increased duration for smoother scroll */
+      font-weight: 600;
+      color: #800000; /* Maroon color */
+      padding: 5px 0;
+      font-size: 0.9rem;
+    }
+    @keyframes marquee {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(-100%, 0); } /* Scrolls right-to-left */
+    }
+
+    /* Google Translate fix for styling */
+    #google_translate_element .goog-te-gadget-simple {
+        background-color: #fff;
+        border: 1px solid #800000 !important;
+        border-radius: 8px;
+        padding: 4px 8px;
+    }
+    #google_translate_element .goog-te-menu-value span:first-child {
+        color: #800000;
+    }
+    
+    /* Search highlighting style */
+    .highlight {
+      background-color: yellow;
+      padding: 2px 0;
+      border-radius: 2px;
+    }
+
   </style>
 </head>
 
 <body class="bg-gray-100">
-
-  <!-- Header Logo -->
-  <header class="w-full border-b bg-white/70 sticky top-0 z-30"> 
+  <header class="w-full border-b bg-white/70 sticky top-0 z-30">
     <div class="max-w-6xl mx-auto flex items-center justify-center p-4">
       <img src="https://i.ibb.co/nMC0877T/UNIVERSITY-UPDATES-LOGO-removebg-preview.png" alt="Logo">
     </div>
   </header>
 
-  <!-- Navigation Bar -->
   <nav class="bg-[#800000] text-white">
     <div class="max-w-7xl mx-auto px-4">
       <div class="flex justify-between items-center py-1">
-        <!-- Desktop Menu -->
         <div class="hidden md:flex items-center space-x-3 text-sm font-small">
           <a href="index.html" class="hover:text-yellow-300">Home</a>
           <span class="mx-2">|</span>
@@ -214,7 +228,7 @@
           <div class="relative group">
             <button class="hover:text-yellow-300">About Us ▾</button>
             <div class="absolute left-0 mt-2 w-64 bg-white text-black rounded shadow-lg hidden group-hover:block">
-            <a href="#about-us" class="block px-4 py-2 hover:bg-gray-200">About Us</a>
+              <a href="#about-us" class="block px-4 py-2 hover:bg-gray-200">About Us</a>
               <a href="#our-journey" class="block px-4 py-2 hover:bg-gray-200">Our Journey</a>
               <a href="#mission-vision" class="block px-4 py-2 hover:bg-gray-200">Mission & Vision</a>
             </div>
@@ -250,23 +264,20 @@
           <span class="mx-2">|</span>
 
           <a href="#contact-us" class="hover:text-yellow-300">Contact Us</a>
-          
         </div>
 
-        <!-- Mobile Menu Button -->
         <div class="md:hidden">
           <button id="menu-btn" class="focus:outline-none text-2xl">☰</button>
         </div>
       </div>
 
-      <!-- Mobile Menu -->
       <div id="mobile-menu" class="hidden md:hidden bg-[#800000] text-white px-4 pb-3 space-y-2">
         <a href="#" class="block hover:text-yellow-300">Home</a>
 
         <div>
           <button id="btn-about" class="w-full text-left hover:text-yellow-300">About Us ▾</button>
           <div class="pl-4 hidden" id="mobile-about">
-          <a href="#about-us" class="block px-2 py-1 hover:bg-gray-200">About Us</a>
+            <a href="#about-us" class="block px-2 py-1 hover:bg-gray-200">About Us</a>
             <a href="#our-journey" class="block px-2 py-1 hover:bg-gray-200">Our Journey</a>
             <a href="#mission-vision" class="block px-2 py-1 hover:bg-gray-200">Mission & Vision</a>
           </div>
@@ -295,68 +306,81 @@
             <a href="https://t.me/myMSUSre" class="block px-2 py-1 hover:bg-gray-200">MSU Telegram</a>
           </div>
         </div>
-
         <a href="#contact-us" class="block hover:text-yellow-300">Contact Us</a>
       </div>
     </div>
   </nav>
 
-<!-- Live Date & Time -->
-<div id="datetime" class="bg-white/80 text-[#800000] text-lg font-semibold py-2 shadow-md">
+  <div class="bg-gray-200 py-3 shadow-inner">
+    <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-3">
+      <div class="w-full md:w-1/3 relative">
+        <input type="text" id="site-search" placeholder="Search website content..." class="w-full p-2 pl-10 border border-gray-400 rounded-lg text-sm focus:ring-[#800000] focus:border-[#800000]">
+        <svg class="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+      </div>
+ <div id="datetime" class="text-[#800000] text-lg font-semibold py-2">
   <span id="liveDate"></span> | <span id="liveTime"></span>
 </div>
+      <div class="flex items-center space-x-2 text-sm">
+        <span class="text-gray-700 font-medium">Font Size:</span>
+        <button onclick="changeFontSize(-1)" class="bg-white text-[#800000] border border-[#800000] px-3 py-1 rounded-lg hover:bg-[#800000] hover:text-white transition duration-200 font-bold">A-</button>
+        <button onclick="changeFontSize(1)" class="bg-white text-[#800000] border border-[#800000] px-3 py-1 rounded-lg hover:bg-[#800000] hover:text-white transition duration-200 font-bold">A+</button>
+      </div>
+    </div>
+  </div>
+  <div class="marquee-container">
+    <div class="marquee-content">
+      📢 Welcome to UNIVERSITY UPDATES | ⚠️ Admit Card Generator Tool Updated for better compatibility | 📝 New MCQ Sample Papers for BA/BSc/BCom are available now! | myLibrary will be available for all from 20 October, 2025 onwards!
+    </div>
+  </div>
+ 
 
-  <!-- Blinking Greeting Line -->
   <p class="greeting-blink">
     सभी विद्यार्थियों को आगामी विषम सेमेस्टर परीक्षायें (दिसम्बर-2025) की अग्रिम बधाई एवं शुभकामनायें...!!!
   </p>
-  
-<!-- ADMIT CARD -->
-    <div class="box">
+
+<div class="container p-4 pt-0"> <div class="box fade-slide">
       <a href="acg.html" class="card ccsu" target="_blank">CCSU ADMIT CARD GENERATOR</a>
     </div>
-  
-  <!-- Select Course Box -->
-  <div class="box">
+
+    <div class="box fade-slide">
     <h1 class="font-bold text-2xl mb-1 flex justify-center items-center gap-2">
       <span class="finger">👇</span> Select Course <span class="finger">👇</span>
     </h1>
     <h2>(For MCQ Sample Papers)</h2>
     <div class="grid grid-cols-1 md:grid-cols-4 gap-6 text-center">
-      <div class="bg-white shadow-lg rounded-lg p-6 flex flex-col items-center hover:shadow-2xl transition">
+      <div class="bg-white shadow-lg rounded-lg p-6 flex flex-col items-center hover:shadow-2xl transition fade-slide">
         <img src="images/BA.png" alt="Bachelor of Arts Logo" class="h-24 w-auto mb-4">
         <a href="BA.html" class="card calculator w-full justify-center whitespace-nowrap" target="_blank">Bachelor of Arts</a>
       </div>
 
-      <div class="bg-white shadow-lg rounded-lg p-6 flex flex-col items-center hover:shadow-2xl transition">
+      <div class="bg-white shadow-lg rounded-lg p-6 flex flex-col items-center hover:shadow-2xl transition fade-slide">
         <img src="images/BSC.png" alt="Bachelor of Science Logo" class="h-24 w-auto mb-4">
         <a href="bsc.html" class="card ccsu w-full justify-center whitespace-nowrap" target="_blank">Bachelor of Science</a>
       </div>
 
-      <div class="bg-white shadow-lg rounded-lg p-6 flex flex-col items-center hover:shadow-2xl transition">
+      <div class="bg-white shadow-lg rounded-lg p-6 flex flex-col items-center hover:shadow-2xl transition fade-slide">
         <img src="images/Bcom.png" alt="Bachelor of Commerce Logo" class="h-24 w-auto mb-4">
         <a href="bcom.html" class="card msu w-full justify-center whitespace-nowrap" target="_blank">Bachelor of Commerce</a>
       </div>
 
-      <div class="bg-white shadow-lg rounded-lg p-6 flex flex-col items-center hover:shadow-2xl transition">
+      <div class="bg-white shadow-lg rounded-lg p-6 flex flex-col items-center hover:shadow-2xl transition fade-slide">
         <img src="images/CO.png" alt="Co-Curricular Logo" class="h-24 w-auto mb-4">
         <a href="co.html" class="card co w-full justify-center whitespace-nowrap" target="_blank">Co-Curricular</a>
       </div>
     </div>
   </div>
 
-  <!-- Select University Box -->
-  <div class="box">
+  <div class="box fade-slide">
     <h1 class="font-bold text-2xl mb-1">Select University</h1>
     <h2>(For Grace)</h2>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <div class="bg-white shadow-lg rounded-lg p-6 flex flex-col items-center hover:shadow-2xl transition">
+      <div class="bg-white shadow-lg rounded-lg p-6 flex flex-col items-center hover:shadow-2xl transition fade-slide">
         <img src="images/ccsu.png" alt="CCSU Logo" class="h-24 w-auto mb-4">
         <a href="ccsugrace.html" class="card ccsu" target="_blank">
           <img src="images/ccsu.png" alt="CCSU Logo"> Chaudhary Charan Singh University, Meerut
         </a>
       </div>
-      <div class="bg-white shadow-lg rounded-lg p-6 flex flex-col items-center hover:shadow-2xl transition">
+      <div class="bg-white shadow-lg rounded-lg p-6 flex flex-col items-center hover:shadow-2xl transition fade-slide">
         <img src="images/msu.png" alt="MSU Logo" class="h-24 w-auto mb-4">
         <a href="msugrace.html" class="card msu" target="_blank">
           <img src="images/msu.png" alt="MSU Logo"> Maa Shakumbhari University, Saharanpur
@@ -365,33 +389,27 @@
     </div>
   </div>
 
-<!-- Calculator Box -->
-    <div class="box">
+<div class="box fade-slide">
       <h1 class="font-bold text-2xl mb-4">CGPA ⇆ Percentage Calculator</h1>
       <a href="calculator.html" class="card calculator" target="_blank">CGPA ⇆ Percentage Calculator</a>
     </div>
 
-
-<!-- About Us Section -->
-<div id="about-us" class="box">
+<div id="about-us" class="box fade-slide">
   <h1 class="font-bold text-2xl text-center mb-10">About Us</h1>
 
-  <!-- Intro -->
-  <div class="text-center max-w-3xl mx-auto mb-10 fade-slide">
+  <div class="text-justify mx-auto mb-10 fade-slide">
     <p class="text-gray-700 text-lg leading-relaxed">
-      We are a student-driven initiative dedicated to <b>providing free study resources</b>, 
-      <b>competitive exam support</b>, and <b>digital learning tools</b>.  
-      What started as <span class="text-[#800000] font-semibold">University Study Materials</span> 
-      has now grown into a complete ecosystem of projects like 
-      <b>myLibrary</b>, <b>Government Job Hub</b>, and <b>ExamHelper Bot</b>, 
+      We are a student-driven initiative dedicated to <b>providing free study resources</b>,
+      <b>competitive exam support</b>, and <b>digital learning tools</b>.
+      What started as <span class="text-[#800000] font-semibold">University Study Materials</span>
+      has now grown into a complete ecosystem of projects like
+      <b>myLibrary</b>, <b>Government Job Hub</b>, and <b>ExamHelper Bot</b>,
       empowering thousands of learners across India.
     </p>
   </div>
 
-  <!-- Highlights Grid -->
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 text-center">
 
-    <!-- Free Study Materials -->
     <div class="bg-white shadow-lg rounded-lg p-6 fade-slide hover:shadow-2xl transition">
       <div class="text-4xl mb-3">📚</div>
       <h2 class="font-bold text-lg text-[#800000]">Free Study Materials</h2>
@@ -400,7 +418,6 @@
       </p>
     </div>
 
-    <!-- Competitive Exams -->
     <div class="bg-white shadow-lg rounded-lg p-6 fade-slide hover:shadow-2xl transition">
       <div class="text-4xl mb-3">📝</div>
       <h2 class="font-bold text-lg text-[#800000]">Govt. Exam Help</h2>
@@ -409,7 +426,6 @@
       </p>
     </div>
 
-    <!-- Telegram Bot -->
     <div class="bg-white shadow-lg rounded-lg p-6 fade-slide hover:shadow-2xl transition">
       <div class="text-4xl mb-3">🤖</div>
       <h2 class="font-bold text-lg text-[#800000]">Smart Bot</h2>
@@ -418,7 +434,6 @@
       </p>
     </div>
 
-    <!-- Community Support -->
     <div class="bg-white shadow-lg rounded-lg p-6 fade-slide hover:shadow-2xl transition">
       <div class="text-4xl mb-3">🌐</div>
       <h2 class="font-bold text-lg text-[#800000]">Community Support</h2>
@@ -426,18 +441,13 @@
         Join a large community of learners helping each other succeed.
       </p>
     </div>
-
   </div>
 </div>
 
-
-<!-- Our Journey Section -->
-<div id="our-journey" class="box">
+<div id="our-journey" class="box fade-slide">
   <h1 class="font-bold text-2xl text-center mb-10">🚀 Our Journey</h1>
 
   <div class="relative border-l-4 border-[#800000] ml-4">
-    
-    <!-- 2022 -->
     <div class="mb-10 ml-6 fade-slide">
       <div class="absolute -left-5 flex items-center justify-center w-10 h-10 rounded-full bg-[#800000] text-white">
         📖
@@ -445,14 +455,11 @@
       <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-2xl transition">
         <h2 class="font-bold text-lg text-[#800000]">2022 – Beginning</h2>
         <p class="text-sm text-gray-700 mt-2">
-          Our vision started with <b>University Study Materials</b>, a small initiative 
-          to share free notes and guides with students. This laid the foundation of 
-          what later became <b>myLibrary</b>.
+          Our vision started with <b>University Channels & Groups</b>, a small initiative
+          to share informations, free notes and guides with students. 
         </p>
       </div>
     </div>
-
-    <!-- 2023 -->
     <div class="mb-10 ml-6 fade-slide">
       <div class="absolute -left-5 flex items-center justify-center w-10 h-10 rounded-full bg-[#800000] text-white">
         🌐
@@ -460,14 +467,12 @@
       <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-2xl transition">
         <h2 class="font-bold text-lg text-[#800000]">2023 – Growth</h2>
         <p class="text-sm text-gray-700 mt-2">
-          We expanded resources, added <b>Government Job Hub</b> to help aspirants 
-          with exam updates, and reached thousands of students through online 
+          We expanded resources, added <b>Government Job Hub</b> to help aspirants
+          with exam updates, and reached thousands of students through online
           platforms.
         </p>
       </div>
     </div>
-
-    <!-- 2024 -->
     <div class="mb-10 ml-6 fade-slide">
       <div class="absolute -left-5 flex items-center justify-center w-10 h-10 rounded-full bg-[#800000] text-white">
         🤖
@@ -475,14 +480,14 @@
       <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-2xl transition">
         <h2 class="font-bold text-lg text-[#800000]">2024 – Innovation</h2>
         <p class="text-sm text-gray-700 mt-2">
-          We launched <b>ExamHelper Bot</b>, a Telegram-based tool that allows 
-          students to donate materials and self-practice, making study resources 
-          more accessible than ever.
+          We launched <b>ExamHelper Bot</b>, a Telegram-based tool that allows
+          students to donate materials and self-practice, making study resources
+          more accessible than ever. 
+          Also launch University Study Materials, This laid the foundation of
+          what later became <b>myLibrary</b>.
         </p>
       </div>
     </div>
-
-    <!-- 2025 -->
     <div class="mb-10 ml-6 fade-slide">
       <div class="absolute -left-5 flex items-center justify-center w-10 h-10 rounded-full bg-[#800000] text-white">
         🚀
@@ -490,189 +495,245 @@
       <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-2xl transition">
         <h2 class="font-bold text-lg text-[#800000]">2025 – New Launch</h2>
         <p class="text-sm text-gray-700 mt-2">
-          Continuing our mission, we are introducing <b>new projects and 
-          advanced digital tools</b> to support students and aspirants worldwide.
+          Continuing our mission, we are introducing <b>new projects and
+          advanced digital tools</b> to support students and aspirants worldwide. Like - University Updates YouTube Channel
         </p>
       </div>
     </div>
-
   </div>
 </div>
 
-
-<!-- Mission & Vision Section -->
-<div id="mission-vision" class="box">
+<div id="mission-vision" class="box fade-slide">
   <h1 class="font-bold text-2xl mb-6">Our Mission & Vision</h1>
 
   <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-    <!-- Mission -->
     <div class="bg-white shadow-lg rounded-lg p-6 flex flex-col items-center text-center hover:shadow-2xl transition">
       <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Mission Icon" class="h-20 w-20 mb-4">
       <h2 class="font-bold text-xl mb-2 text-[#800000]">Our Mission</h2>
       <p class="text-gray-700 text-sm leading-relaxed">
-        Our mission is to <b>provide free study materials</b> and academic support 
-        to every student. We aim to create a platform that reduces barriers to 
+        Our mission is to <b>provide free study materials</b> and academic support
+        to every student. We aim to create a platform that reduces barriers to
         quality education by offering easy access to resources, guidance, and updates.
       </p>
     </div>
 
-    <!-- Vision -->
     <div class="bg-white shadow-lg rounded-lg p-6 flex flex-col items-center text-center hover:shadow-2xl transition">
       <img src="https://cdn-icons-png.flaticon.com/512/3135/3135789.png" alt="Vision Icon" class="h-20 w-20 mb-4">
       <h2 class="font-bold text-xl mb-2 text-[#800000]">Our Vision</h2>
       <p class="text-gray-700 text-sm leading-relaxed">
         Our vision is to become a <b>trusted companion for students</b> in their educational journey,
-        helping them achieve success in academics and beyond. We believe in the 
+        helping them achieve success in academics and beyond. We believe in the
         motto: <span class="italic font-semibold text-blue-600">"Education for All, Knowledge without Limits"</span>.
       </p>
     </div>
   </div>
 </div>
 
-<!-- Administrations Section -->
-<div id="administrations" class="box">
+<div id="administrations" class="box fade-slide">
   <h1 class="font-bold text-2xl mb-6">Administrations</h1>
 
   <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-    <!-- Founder -->
     <div class="bg-white shadow-lg rounded-lg p-6 flex flex-col items-center hover:shadow-2xl transition">
       <img src="images/user.png" alt="Founder" class="h-24 w-24 mb-2 rounded-full">
       <p class="font-bold">Aditya Chaudhary</p>
       <p class="text-sm text-gray-600">Founder & Owner</p>
     </div>
 
-    <!-- Co-Founder -->
     <div class="bg-white shadow-lg rounded-lg p-6 flex flex-col items-center hover:shadow-2xl transition">
       <img src="images/user.png" alt="Co-Founder" class="h-24 w-24 mb-2 rounded-full">
       <p class="font-bold">Chetan Joshi</p>
       <p class="text-sm text-gray-600">Co-Founder</p>
     </div>
 
-    <!-- Core Admins -->
     <div class="bg-white shadow-lg rounded-lg p-6 flex flex-col items-center hover:shadow-2xl transition">
       <img src="images/user.png" alt="Admins" class="h-24 w-24 mb-2 rounded-full">
       <p class="font-bold">Core Administrators</p>
       <p class="text-sm text-gray-600 leading-relaxed">
-        DM, Preeti Chauhan, Abhishek Pundir, Arjoo Malik, 
-        Gaurav Sachdeva, SS, Sanjeev Kumar, Nitya Chaudhary, 
+        DM, Preeti Chauhan, Abhishek Pundir, Arjoo Malik,
+        Gaurav Sachdeva, SS, Sanjeev Kumar, Nitya Chaudhary,
         VC, Vanshika Jain, Naman Bindal
       </p>
     </div>
   </div>
 
-  <!-- Motto line -->
   <p class="mt-6 font-semibold italic text-[#800000]">
     “Working together to empower students with knowledge & guidance.”
   </p>
 </div>
 
-<!-- Our Other Projects Section -->
-<div id="other-projects" class="box">
+<div id="other-projects" class="box fade-slide">
   <h1 class="font-bold text-2xl mb-6">Our Other Projects</h1>
 
   <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
 
-    <!-- myLibrary -->
     <div id="mylibrary" class="fade-slide bg-white shadow-lg rounded-lg p-6 flex flex-col items-center hover:shadow-2xl transition">
       <img src="images/library.png" alt="myLibrary Logo" class="h-20 w-20 mb-4">
       <h2 class="font-bold text-xl text-[#800000] mb-2">myLibrary</h2>
       <p class="text-sm text-gray-700 leading-relaxed mb-3">
-        Formerly known as <b>University Study Materials</b>, <b>myLibrary</b> provides 
-        <u>free study resources</u> including notes, sample papers, guides, and reference 
+        Formerly known as <b>University Study Materials</b>, <b>myLibrary</b> provides
+        <u>free study resources</u> including notes, sample papers, guides, and reference
         materials to help students prepare for their exams with ease.
       </p>
       <a href="#" target="_blank" class="bg-[#800000] text-white px-4 py-2 rounded-lg shadow hover:bg-red-700 transition">📚 Click Here to Join</a>
     </div>
 
-    <!-- Government Job Hub -->
     <div id="govjobhub" class="fade-slide bg-white shadow-lg rounded-lg p-6 flex flex-col items-center hover:shadow-2xl transition">
       <img src="images/job.png" alt="Gov Job Hub Logo" class="h-20 w-20 mb-4">
       <h2 class="font-bold text-xl text-[#800000] mb-2">Government Job Hub</h2>
       <p class="text-sm text-gray-700 leading-relaxed mb-3">
-        A dedicated hub for <b>competitive exams</b> and <b>job updates</b>. Students and 
-        aspirants can get real-time alerts, notifications, and guidance to prepare 
+        A dedicated hub for <b>competitive exams</b> and <b>job updates</b>. Students and
+        aspirants can get real-time alerts, notifications, and guidance to prepare
         for government exams and secure their future careers.
       </p>
       <a href="https://t.me/GovJobHub_IN" target="_blank" class="bg-[#800000] text-white px-4 py-2 rounded-lg shadow hover:bg-red-700 transition">📝 Explore Updates</a>
     </div>
 
-    <!-- ExamHelper -->
     <div id="examhelper" class="fade-slide bg-white shadow-lg rounded-lg p-6 flex flex-col items-center hover:shadow-2xl transition">
       <img src="images/bot.png" alt="ExamHelper Logo" class="h-20 w-20 mb-4">
       <h2 class="font-bold text-xl text-[#800000] mb-2">ExamHelper</h2>
       <p class="text-sm text-gray-700 leading-relaxed mb-3">
-        A unique <b>Telegram Bot</b> created to <u>donate study materials</u> into 
-        <b>myLibrary</b> and help students with <b>self-practice</b> for upcoming exams.  
+        A unique <b>Telegram Bot</b> created to <u>donate study materials</u> into
+        <b>myLibrary</b> and help students with <b>self-practice</b> for upcoming exams.
         It ensures quick access to shared resources anytime, anywhere.
       </p>
       <a href="https://t.me/PaperHelpingBot" target="_blank" class="bg-[#800000] text-white px-4 py-2 rounded-lg shadow hover:bg-red-700 transition">🤖 Try ExamHelper</a>
     </div>
-
   </div>
 </div>
 
 
-
-<!-- Contact Us Section -->
-<div id="contact-us" class="box">
+<div id="contact-us" class="box fade-slide">
   <h1 class="font-bold text-2xl mb-4">Contact Us</h1>
-  <p>📧 <b>Admin Support</b></p>
- <a href="https://t.me/HelpforDMBot" target="_blank">Click here to redirect on Telegram (Admin Support)</a>
+  <p>📧 <b>Admin Support</b></p> <a href="https://t.me/HelpforDMBot" target="_blank">Click here to redirect on Telegram (Admin Support)</a>
 </div>
 
 
-
-<!-- Disclaimer Section -->
 <div class="flex justify-center mt-6">
-  <div class="w-full max-w-3xl text-center bg-gradient-to-r from-blue-50 to-blue-100 shadow-lg border border-blue-300 rounded-lg p-4">
+  <div class="w-full text-center bg-gradient-to-r from-blue-50 to-blue-100 shadow-lg border border-blue-300 rounded-lg p-4">
     <div class="flex justify-center items-center gap-3 mb-2">
-      <img src="https://cdn-icons-png.flaticon.com/512/595/595067.png" 
-           alt="Disclaimer Icon" 
-           class="h-8 w-8">
+      <img src="https://cdn-icons-png.flaticon.com/512/595/595067.png"
+            alt="Disclaimer Icon"
+            class="h-8 w-8">
       <h2 class="text-lg font-bold text-blue-800">Disclaimer</h2>
     </div>
     <p class="text-sm text-gray-700 leading-relaxed">
-      This website is developed <b>for educational purposes only</b>.  
-      All the study materials, updates, and information provided here are 
-      based on respective university guidelines and sources.  
-      We do not claim any official affiliation with universities.  
-      Students are advised to verify information through the official university notifications.  
+      This website is developed <b>for educational purposes only</b>.
+      All the study materials, updates, and information provided here are
+      based on respective university guidelines and sources.
+      We do not claim any official affiliation with universities.
+      Students are advised to verify information through the official university notifications.
     </p>
   </div>
 </div>
 
+</div> <footer class="text-center py-2 bg-gray-200 mt-3">
+  © 2025 | Designed by <b>University Updates</b>
+</footer>
 
-    <footer class="text-center py-2 bg-gray-200 mt-3">
-    © 2025 | Designed by <b>University Updates</b>
-  </footer>
-  
-  <!-- New Launch Modal -->
 <div id="newLaunchModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
   <div class="bg-white rounded-xl shadow-2xl w-11/12 max-w-md p-6 relative">
-    
-    <!-- Close Button -->
     <button id="closeModal" class="absolute top-3 right-3 text-gray-500 hover:text-gray-800 text-2xl font-bold">&times;</button>
-    
-    <!-- Modal Content -->
     <div class="text-center">
       <img src="images/Universityupdates.png" alt="New Launch Logo" class="mx-auto h-24 w-24 mb-4">
       <h2 class="text-2xl font-bold text-[#800000] mb-2">🎉 University Updates on YouTube</h2>
       <p class="text-gray-700 mb-4">
-        We are excited to announce our <b>new YouTube Channel</b>!  
+        We are excited to announce our <b>new YouTube Channel</b>!
         Get free study materials, tips, and guidance for upcoming exams.
       </p>
-      <a href="https://www.youtube.com/@University-Updates-UU" target="_blank" 
-         class="bg-[#800000] text-white px-6 py-2 rounded-lg hover:bg-[#b22222] transition">
+      <a href="https://www.youtube.com/@University-Updates-UU" target="_blank"
+          class="bg-[#800000] text-white px-6 py-2 rounded-lg hover:bg-[#b22222] transition">
         Subscribe Now!
       </a>
     </div>
   </div>
 </div>
 
+<button onclick="topFunction()" id="topBtn" title="Go to top">↑</button>
 
-  <button onclick="topFunction()" id="topBtn" title="Go to top">↑</button>
 
-  <script>
+
+<script>
+    // --- FONT SIZE CONTROLS (NEW) ---
+    let currentFontSize = 16;
+    const MIN_FONT_SIZE = 14;
+    const MAX_FONT_SIZE = 20;
+    const bodyElement = document.body;
+
+    function changeFontSize(direction) {
+        // direction: 1 for increase, -1 for decrease
+        let newSize = currentFontSize + direction;
+
+        if (newSize >= MIN_FONT_SIZE && newSize <= MAX_FONT_SIZE) {
+            currentFontSize = newSize;
+            bodyElement.style.fontSize = `${currentFontSize}px`;
+        }
+    }
+
+
+    // --- WEBSITE CONTENT SEARCH (NEW) ---
+    const searchInput = document.getElementById('site-search');
+    // Debounce function to limit how often the search runs
+    const debounce = (func, delay) => {
+        let timeoutId;
+        return function(...args) {
+            clearTimeout(timeoutId);
+            timeoutId = setTimeout(() => func.apply(this, args), delay);
+        };
+    };
+
+    function performSearch() {
+        const query = searchInput.value.trim().toLowerCase();
+        const mainContent = document.querySelector('.container');
+        
+        // 1. Clear previous highlights
+        const highlighted = mainContent.querySelectorAll('.highlight');
+        highlighted.forEach(el => {
+            el.outerHTML = el.textContent; // Replace the <span> with its content
+        });
+
+        if (query.length === 0) return;
+
+        // 2. Search and highlight
+        const walker = document.createTreeWalker(mainContent, NodeFilter.SHOW_TEXT, null, false);
+        let node;
+        let matchCount = 0;
+
+        while ((node = walker.nextNode())) {
+            // Skip script, style, and already translated nodes
+            if (node.parentElement.closest('script, style, #google_translate_element, .goog-te-spinner-pos')) continue;
+            
+            const text = node.nodeValue;
+            const index = text.toLowerCase().indexOf(query);
+
+            if (index > -1) {
+                // Split the text node: [Text before match] + [Match] + [Text after match]
+                const before = text.substring(0, index);
+                const matchText = text.substring(index, index + query.length);
+                const after = text.substring(index + query.length);
+
+                // Create the highlight span
+                const highlightSpan = document.createElement('span');
+                highlightSpan.className = 'highlight';
+                highlightSpan.textContent = matchText;
+
+                // Replace the original text node with the three parts
+                node.nodeValue = after; // Update the current node to be the remaining text
+                node.parentNode.insertBefore(highlightSpan, node);
+                node.parentNode.insertBefore(document.createTextNode(before), highlightSpan);
+                
+                // Advance the walker past the inserted elements
+                walker.currentNode = node;
+                matchCount++;
+            }
+        }
+    }
+
+    // Attach debounced function to input
+    searchInput.addEventListener('input', debounce(performSearch, 300));
+
+
+    // --- EXISTING SCRIPT LOGIC (KEPT AS IS) ---
+
     // Mobile Menu Toggle
     document.getElementById('menu-btn').addEventListener('click', () => {
       document.getElementById('mobile-menu').classList.toggle('hidden');
@@ -701,73 +762,69 @@
       document.body.scrollTop = 0;
       document.documentElement.scrollTop = 0;
     }
-    
+
     // Smooth scrolling for anchor links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener('click', function (e) {
-    e.preventDefault();
-    const target = document.querySelector(this.getAttribute('href'));
-    if(target) {
-      target.scrollIntoView({ behavior: 'smooth' });
-    }
-  });
-});
-
-// Intersection Observer for fade-slide effect
-  const faders = document.querySelectorAll('.fade-slide');
-  const appearOptions = {
-    threshold: 0.2
-  };
-
-  const appearOnScroll = new IntersectionObserver((entries, observer) => {
-    entries.forEach(entry => {
-      if (!entry.isIntersecting) return;
-      entry.target.classList.add('visible');
-      observer.unobserve(entry.target);
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if(target) {
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
     });
-  }, appearOptions);
 
-  faders.forEach(fadeEl => {
-    appearOnScroll.observe(fadeEl);
-  });
-  
-  
-  
-  // popuuuuuuuuup
-  // Show modal on page load
-  window.addEventListener('load', () => {
-    document.getElementById('newLaunchModal').classList.remove('hidden');
-  });
+    // Intersection Observer for fade-slide effect
+    const faders = document.querySelectorAll('.fade-slide');
+    const appearOptions = {
+      threshold: 0.2
+    };
 
-  // Close modal on click
-  document.getElementById('closeModal').addEventListener('click', () => {
-    document.getElementById('newLaunchModal').classList.add('hidden');
-  });
+    const appearOnScroll = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      });
+    }, appearOptions);
 
-  // Close modal if clicked outside content
-  document.getElementById('newLaunchModal').addEventListener('click', (e) => {
-    if(e.target === document.getElementById('newLaunchModal')) {
+    faders.forEach(fadeEl => {
+      appearOnScroll.observe(fadeEl);
+    });
+
+    // popuuuuuuuuup
+    // Show modal on page load
+    window.addEventListener('load', () => {
+      document.getElementById('newLaunchModal').classList.remove('hidden');
+    });
+
+    // Close modal on click
+    document.getElementById('closeModal').addEventListener('click', () => {
       document.getElementById('newLaunchModal').classList.add('hidden');
+    });
+
+    // Close modal if clicked outside content
+    document.getElementById('newLaunchModal').addEventListener('click', (e) => {
+      if(e.target === document.getElementById('newLaunchModal')) {
+        document.getElementById('newLaunchModal').classList.add('hidden');
+      }
+    });
+
+    //Timer
+    function updateDateTime() {
+      const now = new Date();
+      const optionsDate = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+      const date = now.toLocaleDateString('en-IN', optionsDate);
+      const time = now.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+
+      document.getElementById("liveDate").textContent = date;
+      document.getElementById("liveTime").textContent = time;
     }
-  });
-  
-  //Timer
-  function updateDateTime() {
-    const now = new Date();
-    const optionsDate = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-    const date = now.toLocaleDateString('en-IN', optionsDate);
-    const time = now.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
 
-    document.getElementById("liveDate").textContent = date;
-    document.getElementById("liveTime").textContent = time;
-  }
+    // Update every second
+    setInterval(updateDateTime, 1000);
+    updateDateTime();
 
-  // Update every second
-  setInterval(updateDateTime, 1000);
-  updateDateTime();
-
-
-  </script>
-
+</script>
 </body>
 </html>
