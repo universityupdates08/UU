@@ -1336,11 +1336,11 @@
         function extractPapers(text) {
             const papers = [];
             // Pattern: PAPER X <CODE> <NAME> <TYPE>
-            const regex = /PAPER\s*\d+\s*([A-Z0-9]+)\s*([\s\S]*?)(THEORY|PRACTICAL|MINNOR|VOCATIONAL|CO CURRICULAR|INTERNAL|EXTERNAL)[\s,]*?(INTERNAL|EXTERNAL)?/gi;
+            const regex = /PAPER\s*\d+\s*([A-Z0-9]+)\s*([\s\S]*?)(THEORY|PRACTICAL|PROJECT|MINNOR|VOCATIONAL|CO CURRICULAR|INTERNAL|EXTERNAL)[\s,]*?(INTERNAL|EXTERNAL)?/gi;
             let match;
             
             // Array of words to filter out if they appear as the first word of the paper name
-            const filterWords = ['BOTANY', 'COMMERCE', 'SUBJECT', 'MINOR', 'VOCATIONAL', 'CO', 'PHYSICS', 'CHEMISTRY', 'MATHEMATICS', 'PRACTICAL:', 'LAB', 'ALGAE,'];
+            const filterWords = ['BOTANY', 'SUBJECT', 'VOCATIONAL', 'CO', 'PHYSICS', 'CHEMISTRY', 'MATHEMATICS', 'PRACTICAL:', 'LAB', 'ALGAE,'];
 
             while ((match = regex.exec(text)) !== null) {
                 const rawNameArea = match[2].trim().replace(/[\n\t\r]+/g, ' ').replace(/\s{2,}/g, ' ');
@@ -1385,7 +1385,7 @@
             
             // Final check: Extracting single paper from Exam Form table (Pattern: CODE NAME TYPE)
             if (papers.length === 0) {
-                const singlePaperMatch = text.match(/PAPER\s*1\s*([A-Z0-9]+)\s*([\s\S]+?)(THEORY|PRACTICAL|INTERNAL|EXTERNAL)/i);
+                const singlePaperMatch = text.match(/PAPER\s*1\s*([A-Z0-9]+)\s*([\s\S]+?)(THEORY|PRACTICAL|PROJECT|INTERNAL|EXTERNAL)/i);
                 if (singlePaperMatch) {
                     // Try to clean up the name part
                     let name = singlePaperMatch[2].trim().replace(/[\n\t\r]+/g, ' ').replace(/\s{2,}/g, ' ');
