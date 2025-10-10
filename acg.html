@@ -299,6 +299,7 @@
 
         .papers-table th {
             background-color: #f2f2f2;
+            text-align: center;
             font-weight: bold;
         }
         
@@ -405,7 +406,7 @@
 
         <div id="auto-fill-section" style="display:none;" class="border-2 border-dashed border-blue-300 bg-blue-50 p-6 rounded-lg text-center mb-8">
             <label for="admitCardUpload" class="block text-lg font-semibold text-blue-700 mb-3">
-                Upload Admit Card/Exam Form (PDF/Image) to Auto-Fill Details
+                Upload Admit Card/Exam Form (PDF/Image) to Auto-Fill Details (PDF Recommended)
             </label>
             <input type="file" id="admitCardUpload" accept=".pdf,.png,.jpg,.jpeg" class="p-2 border border-gray-300 rounded-md w-full max-w-md mx-auto block">
             <p id="upload-status" class="mt-3 text-blue-600 font-semibold"></p>
@@ -575,7 +576,8 @@
     </table>
 
     <div class="mt-8 text-xs text-gray-600 leading-relaxed border-t pt-4">
-      <p><strong>नोट:</strong> यह औपबंधिक प्रवेश पत्र आधिकारिक तौर पर स्वीकृत नहीं है। इसको बनाने का मात्र उद्देश्य सम्बन्धित छात्रों को परीक्षा तिथि और समय की जानकारी उपलब्ध कराना है। अधिक जानकारी के लिए विश्वविद्यालय की अधिकृत वेबसाइट www.ccsuniversity.ac.in का अवलोकन करें। उक्त प्रवेश पत्र विश्वविद्यालय के पत्रांक संख्या <b>परीक्षा/डी०आर०/9856</b> दिनाँक 09.10.2025 के अनुसार है।</p>
+      <p class="text-justify"><strong>नोट:</strong> यह औपबंधिक प्रवेश पत्र आधिकारिक तौर पर स्वीकृत नहीं है। इसको बनाने का मात्र उद्देश्य सम्बन्धित छात्रों को परीक्षा तिथि और समय की जानकारी उपलब्ध कराना है। अधिक जानकारी के लिए विश्वविद्यालय की अधिकृत वेबसाइट www.ccsuniversity.ac.in का अवलोकन करें। उक्त प्रवेश पत्र विश्वविद्यालय के पत्रांक संख्या <b>परीक्षा/डी०आर०/9856</b> दिनाँक 09.10.2025 के अनुसार है।</p>
+
 
       <div class="text-right mt-2">
         <p class="text-xs text-gray-500 font-semibold">Generated On:</p>
@@ -1262,11 +1264,15 @@
                 return '';
             };
 
-            // --- 1. EXAM TYPE FIX (More robust) ---
+             // --- 1. EXAM TYPE FIX (More robust) ---
             let examType = 'MAIN EXAM';
-            if (cleanText.includes('SPECIAL BACK PAPER') || cleanText.includes('BACK PAPER')) {
+            // --- MODIFICATION START (C) ---
+            if (cleanText.includes('SPECIAL BACK PAPER')) {
+                examType = 'BACK EXAM'; // Use BACK EXAM to select the correct dropdown option
+            } else if (cleanText.includes('BACK PAPER')) {
                 examType = 'BACK EXAM';
             } else if (cleanText.includes('EX-STUDENT')) {
+            // --- MODIFICATION END (C) ---
                 examType = 'EX-STUDENT EXAM';
             } else {
                 const typeMatch = cleanText.match(/COLLEGE\s*EXAMINATION\s*\/\s*([A-Z\s]+)\s*\/\s*(\d+)/i);
@@ -1498,7 +1504,10 @@
                 course = document.getElementById('course').value,
                 gender = document.getElementById('gender').value,
                 semester = document.getElementById('semester').value,
-                examType = document.getElementById('examType').value,
+                // Detect if the form is for SPECIAL BACK PAPER (a specific requirement)
+                rawExamType = document.getElementById('examType').value,
+                examType = rawExamType === 'BACK EXAM' ? 'SPECIAL BACK EXAM' : rawExamType,
+                // --- MODIFICATION END (A) ---
                 collegeName = document.getElementById('collegeName').value,
                 examinationCenter = document.getElementById('examinationCenter').value,
                 subject = document.getElementById('subject').value;
@@ -1535,11 +1544,17 @@
                     scheduleHTML = `<td colspan="3" style="text-align: center; font-weight: bold; color: #f57c00;">Visit ccsuniversity.ac.in to confirm the exam schedule</td>`;
                 } else {
                     // Normal entry found
+                   // --- MODIFICATION START (B) ---
+                    const [shiftName, shiftTime] = details.shift.split('('); // Split "Shift 1 (10:00 AM...)"
                     scheduleHTML = `
                         <td>${details.date}</td>
                         <td>${details.day}</td>
-                        <td>${details.shift}</td>
+                        <td>
+                            ${shiftName.trim()}<br>
+                            ${shiftTime ? `(${shiftTime}` : ''}
+                        </td>
                     `;
+                    // --- MODIFICATION END (B) ---
                 }
 
                 return `
