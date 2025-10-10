@@ -166,7 +166,7 @@
     .marquee-content {
       display: inline-block;
       padding-left: 100%; /* Start off-screen */
-      animation: marquee 35s linear infinite; /* Increased duration for smoother scroll */
+      animation: marquee 45s linear infinite; /* Increased duration for smoother scroll */
       font-weight: 600;
       color: #800000; /* Maroon color */
       padding: 5px 0;
@@ -177,6 +177,52 @@
       100% { transform: translate(-100%, 0); } /* Scrolls right-to-left */
     }
 
+/* Dropdown positioning */
+    nav { position: relative; z-index: 50; }
+    nav .group:hover div { display: block !important; z-index: 60; }
+    /* Go To Top Button */
+    #topBtn {
+      display: none;
+      position: fixed;
+      bottom: 20px;
+      right:25px;
+      z-index: 50;
+      font-size: 15px;
+      border: none;
+      outline: none;
+      background-color: maroon;
+      color: white;
+      cursor: pointer;
+      padding: 12px 16px;
+      border-radius: 50%;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+      transition: 0.3s;
+    }
+    /* Add a specific rule for the dropdown container if it is absolutely positioned */
+nav .group > div { 
+    /* This rule assumes the dropdown content is the direct child div of the .group */
+    position: absolute; 
+    left: 0;           /* Aligns the left edge with the start of the containing element */
+    right: 0;          /* Aligns the right edge with the end of the containing element */
+    /* If the dropdown div itself has the max-w-7xl class, this will ensure it's centered */
+}
+    #topBtn:hover {
+      background-color: #b22222;
+      transform: scale(1.1);
+    }
+    html {
+      scroll-behavior: smooth;
+    }
+    /* Animation setup */
+    .fade-slide {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease-out;
+    }
+    .fade-slide.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
 
 
         /* Gradient Button Styles */
@@ -392,6 +438,49 @@
         </div>
     </header>
 
+
+ <nav class="bg-[#800000] text-white">
+    <div class="max-w-7x1 mx-auto px-4">
+      <div class="flex justify-between items-center py-1">
+        <div class="hidden md:flex items-center space-x-3 text-sm font-small">
+          <a href="index.html" class="hover:text-yellow-300">Home</a>
+          <span class="mx-2">|</span>
+
+          <a href="https://t.me/CCSUniversityMRT" class="hover:text-yellow-300">Telegram</a>
+          <span class="mx-2">|</span>
+
+          <a href="https://www.youtube.com/@University-Updates-UU" class="hover:text-yellow-300">YouTube</a>
+          <span class="mx-2">|</span>
+          
+          <a href="https://www.Instagram.com/@UniversityUpdates_UU" class="hover:text-yellow-300">Instagram</a>
+          <span class="mx-2">|</span>
+          
+          <a href="https://whatsapp.com/channel/0029Va4irjP23n3Vh4HMcx00" class="hover:text-yellow-300">Whatsapp</a>
+          <span class="mx-2">|</span>
+
+
+          <a href="https://t.me/HelpforDmbot" class="hover:text-yellow-300">Contact Us</a>
+        </div>
+
+        <div class="md:hidden">
+          <button id="menu-btn" class="focus:outline-none text-2xl">☰</button>
+        </div>
+      </div>
+
+      <div id="mobile-menu" class="hidden md:hidden bg-[#800000] text-white px-4 pb-3 space-y-2">
+        <a href="#index.html" class="block hover:text-yellow-300">Home</a>
+
+        <a href="https://t.me/CCSUniversityMRT" class="block hover:text-yellow-300">Telegram</a>
+        <a href="https://www.youtube.com/@University-Updates-UU" class="block hover:text-yellow-300">YouTube</a>
+        <a href="https://www.instagram.com/@UniversityUpdates_UU" class="block hover:text-yellow-300">Instagram</a>
+        <a href="https://whatsapp.com/channel/0029Va4irjP23n3Vh4HMcx00" class="block hover:text-yellow-300">Whatsapp</a>
+
+     
+        <a href="https://t.me/HelpforDmbot" class="block hover:text-yellow-300">Contact Us</a>
+      </div>
+    </div>
+  </nav>
+  
   <div class="marquee-container">
     <div class="marquee-content">
       📢 Welcome to UNIVERSITY UPDATES | ⚠️ Admit Card Generator Tool Updated for better compatibility | 📝 Only works with Special Back Exams!
@@ -1668,6 +1757,21 @@
         document.getElementById('generateBtn').addEventListener('click', generateAdmitCard);
         document.getElementById('resetBtn').addEventListener('click', resetForm);
         document.getElementById('printBtn').addEventListener('click', printAdmitCard);
+        
+        // Mobile Menu Toggle
+    document.getElementById('menu-btn').addEventListener('click', () => {
+      document.getElementById('mobile-menu').classList.toggle('hidden');
+    });
+    document.getElementById('btn-about').addEventListener('click', () => {
+      document.getElementById('mobile-about').classList.toggle('hidden');
+    });
+    document.getElementById('btn-project').addEventListener('click', () => {
+      document.getElementById('mobile-project').classList.toggle('hidden');
+    });
+    document.getElementById('btn-social').addEventListener('click', () => {
+      document.getElementById('mobile-social').classList.toggle('hidden');
+    });
+    
     </script>
 </body>
 </html>
