@@ -777,24 +777,7 @@
       appearOnScroll.observe(fadeEl);
     });
 
-    // popuuuuuuuuup
-    // Show modal on page load
-    window.addEventListener('load', () => {
-      document.getElementById('newLaunchModal').classList.remove('hidden');
-    });
-
-    // Close modal on click
-    document.getElementById('closeModal').addEventListener('click', () => {
-      document.getElementById('newLaunchModal').classList.add('hidden');
-    });
-
-    // Close modal if clicked outside content
-    document.getElementById('newLaunchModal').addEventListener('click', (e) => {
-      if(e.target === document.getElementById('newLaunchModal')) {
-        document.getElementById('newLaunchModal').classList.add('hidden');
-      }
-    });
-
+    
     //Timer
     function updateDateTime() {
       const now = new Date();
