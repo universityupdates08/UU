@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -1578,7 +1579,7 @@
             document.getElementById('admit-card-wrapper').scrollIntoView({
                 behavior: 'smooth'
             });
-            showFloatingMessage('Admit Card generated! 📄', 'bg-green-600');
+            showFloatingMessage('Admit Card Generated! 📄', 'bg-green-600');
         }
 
 
@@ -1596,11 +1597,12 @@
                 filename: filename,
                 image: {
                     type: 'jpeg',
-                    quality: 0.98
+                    quality: 1
                 },
                 html2canvas: {
-                    scale: 2,
-                    letterRendering: true
+                    scale: 4,
+                    letterRendering: true,
+                   useCORS: true
                 },
                 jsPDF: {
                     unit: 'in',
