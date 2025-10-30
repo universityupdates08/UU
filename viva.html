@@ -87,7 +87,7 @@
         /* Result Card Styling */
         #result-card {
             margin-top: 40px;
-            padding: 30px;
+            padding: 30px; 
             border-radius: 12px;
             color: white;
             /* Gradient for an exciting look */
@@ -98,6 +98,9 @@
             opacity: 0;
             transform: translateY(20px);
             transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+            /* Added position: relative for absolute positioning of branding/note */
+            position: relative; 
+            padding-bottom: 75px; /* INCREASED SPACE for two separate lines at the bottom */
         }
         #result-card.show {
             opacity: 1;
@@ -106,21 +109,50 @@
         .result-title {
             font-size: 1.8rem;
             font-weight: 700;
-            margin-bottom: 10px;
+            margin-bottom: 15px; 
             text-shadow: 0 2px 4px rgba(0,0,0,0.3);
         }
         .result-item {
-            font-size: 1.1rem;
+            font-size: 1.1rem; /* Base font size */
             font-weight: 400;
-            margin-bottom: 8px;
+            margin-bottom: 12px; /* Increased margin for better vertical separation */
             display: flex;
-            align-items: center;
+            align-items: flex-start; /* Aligns content to the top if it wraps */
+            line-height: 1.4; /* Improved readability for wrapped text */
         }
         .result-item i {
             margin-right: 10px;
             color: #FFD700; /* Gold color for icons */
+            width: 20px; /* Fixed width for alignment */
+            text-align: center;
+            margin-top: 3px; /* Adjust alignment */
         }
         
+        /* STYLES for Branding (BOTTOM LINE) */
+        #result-branding {
+            position: absolute;
+            bottom: 10px; /* Closer to the bottom */
+            right: 20px;
+            font-size: 0.75rem; /* Small size */
+            font-style: italic; /* Italic */
+            color: rgba(255, 255, 255, 0.7); /* Slightly transparent white */
+            pointer-events: none; /* Prevents interaction */
+        }
+
+        /* STYLES for Centered Note (LINE ABOVE BRANDING) */
+        #result-note {
+            position: absolute;
+            bottom: 35px; /* Positioned above the branding */
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-size: 0.8rem; 
+            font-style: italic;
+            color: rgba(255, 255, 255, 0.85);
+            pointer-events: none;
+            padding: 0 20px; 
+        }
+
         /* New Utility Bar & Footer Styles */
         .utility-bar {
             background-color: var(--primary-color);
@@ -146,6 +178,57 @@
         .social-icon:hover {
             color: var(--primary-color); /* Hover effect using primary color */
         }
+        
+        /* --- MOBILE-SPECIFIC STYLES FOR RESPONSIVENESS --- */
+        @media (max-width: 640px) {
+            /* Reduce overall padding on smaller screens */
+            .container {
+                padding: 20px;
+                margin: 20px auto;
+            }
+            /* Reduce padding and font sizes for a compact result card */
+            #result-card {
+                padding: 20px; 
+                padding-bottom: 65px; /* Adjusted padding for two lines on mobile */
+            }
+            .result-title {
+                font-size: 1.5rem; 
+                margin-bottom: 10px;
+            }
+            .result-item {
+                font-size: 1rem; /* Smaller text for better fit */
+                margin-bottom: 8px; 
+            }
+            .result-item i {
+                 font-size: 1rem; /* Match icon size to text size */
+            }
+            /* Structure for label (bold) and value to prevent overflow */
+            .result-item b {
+                display: block; 
+                min-width: 80px; /* Minimum width for label */
+                margin-right: 5px; 
+                flex-shrink: 0; 
+            }
+            .result-item > p:last-child {
+                /* Ensures the value part flows correctly and wraps long text */
+                flex-grow: 1; 
+                word-wrap: break-word; 
+                overflow-wrap: break-word;
+            }
+            /* Adjust branding position for smaller screens */
+            #result-branding {
+                right: 15px;
+                bottom: 8px;
+                font-size: 0.65rem;
+            }
+            /* Adjust note position for smaller screens */
+            #result-note {
+                font-size: 0.7rem;
+                bottom: 25px; /* Position above branding */
+                padding: 0 10px; /* Minimal side padding */
+            }
+        }
+        /* --- END OF MOBILE-SPECIFIC STYLES --- */
     </style>
 </head>
 <body>
@@ -227,6 +310,8 @@
                 <p class="result-title"><i class="fas fa-check-circle"></i> Viva Examination Details</p>
                 <div id="result-content">
                     </div>
+                <div id="result-note"><b>Note:</b> Always confirm dates and centers with your respective college/center administration.</div>
+                <div id="result-branding">Powered by University Updates</div>
             </div>
 
         </div>
@@ -650,17 +735,19 @@
             }
             
             // Construct Result HTML
+            // Note: The structure uses <p> inside <div>.
+            const timeDisplay = result.time ? `${result.time}` : 'Not Specified';
+
             resultContent.innerHTML = `
-                <p class="result-item"><i class="fas fa-graduation-cap"></i> <b>Course:</b> ${course} (${subjectInfo.name})</p>
-                <p class="result-item"><i class="fas fa-tag"></i> <b>Subject Code:</b> ${subjectInfo.code}</p>
-                <p class="result-item"><i class="fas fa-university"></i> <b>College:</b> ${collegeData.name} </p>
-                <p class="result-item"><i class="fas fa-map-marker-alt"></i> <b>Viva Center:</b> ${result.center}</p>
-                <p class="result-item"><i class="fas fa-calendar-day"></i> <b>Date:</b> ${result.date} </p>
-                <p class="result-item"><i class="fas fa-clock"></i> <b>Reporting Time:</b> ${result.time}</p>
-                <p class="result-item mt-4 text-sm font-semibold text-yellow-300">
-                    <b>*NOTE:</b>  Dates/Centers are based on recent notices. Please confirm details from the respective college/viva center.
-                </p>
+                <div class="result-item"><i class="fas fa-graduation-cap"></i> <p><b>Course:</b> ${course} (${subjectInfo.name})</p></div>
+                <div class="result-item"><i class="fas fa-tag"></i> <p><b>Subject Code:</b> ${subjectInfo.code}</p></div>
+                <div class="result-item"><i class="fas fa-university"></i> <p><b>College:</b> ${collegeData.name} </p></div>
+                <div class="result-item"><i class="fas fa-map-marker-alt"></i> <p><b>Viva Center:</b> ${result.center}</p></div>
+                <div class="result-item"><i class="fas fa-calendar-day"></i> <p><b>Date:</b> ${result.date} </p></div>
+                <div class="result-item"><i class="fas fa-clock"></i> <p><b>Reporting Time:</b> ${timeDisplay}</p></div>
+                
             `;
+
 
             // Display the Card
             resultCard.classList.remove('hidden');
