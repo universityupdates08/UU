@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Viva Center Finder - University Updates</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-color: #EF3C3C; /* Crimson Red */
+            --secondary-color: #2C4B9E; /* Deep Blue */
+            --bg-color: #f8f9fa;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-color);
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+        }
+        h1 {
+            color: var(--secondary-color);
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+        }
+        .form-label {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+            display: block;
+        }
+        .form-select, .form-input {
+            width: 100%;
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #fff;
+            appearance: none;
+            cursor: pointer;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        .form-select:focus, .form-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(239, 60, 60, 0.2);
+        }
+        
+        /* Custom Chevron for Select */
+        .select-wrapper {
+            position: relative;
+        }
+        .select-wrapper::after {
+            content: "\f0d7"; /* Font Awesome chevron-down */
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            top: 50%;
+            right: 15px;
+            transform: translateY(-50%);
+            color: #aaa;
+            pointer-events: none;
+        }
+
+        /* Result Card Styling */
+        #result-card {
+            margin-top: 40px;
+            padding: 30px;
+            border-radius: 12px;
+            color: white;
+            /* Gradient for an exciting look */
+            background: linear-gradient(135deg, #FF6B6B 0%, #E63946 100%); 
+            box-shadow: 0 10px 20px rgba(230, 57, 70, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.5); /* Inner shine */
+            text-align: left;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+        }
+        #result-card.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .result-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        .result-item {
+            font-size: 1.1rem;
+            font-weight: 400;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+        }
+        .result-item i {
+            margin-right: 10px;
+            color: #FFD700; /* Gold color for icons */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1 class="text-center flex items-center justify-center gap-2">
+            <i class="fas fa-search-location"></i> Viva Center Finder
+        </h1>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            
+            <div class="select-wrapper">
+                <label for="course" class="form-label">1. Select Course</label>
+                <select id="course" class="form-select">
+                    <option value="">-- Select Course --</option>
+                    <option value="MCom">M.Com.</option>
+                    <option value="MA">M.A.</option>
+                </select>
+            </div>
+            
+            <div class="select-wrapper">
+                <label for="district" class="form-label">2. Select District</label>
+                <select id="district" class="form-select" disabled>
+                    <option value="">-- Select District (Choose Course First) --</option>
+                    <option value="Baghpat">Baghpat</option>
+                    <option value="Bulandshahar">Bulandshahar</option>
+                    <option value="GautamBuddhNagar">Gautam Buddh Nagar (Noida)</option>
+                    <option value="Ghaziabad">Ghaziabad</option>
+                    <option value="Hapur">Hapur</option>
+                    <option value="Meerut">Meerut</option>
+                </select>
+            </div>
+
+            <div class="select-wrapper">
+                <label for="college" class="form-label">3. Select College</label>
+                <select id="college" class="form-select" disabled>
+                    <option value="">-- Select College (Choose District First) --</option>
+                </select>
+            </div>
+            
+            <div class="select-wrapper">
+                <label for="subject" class="form-label">4. Select Subject</label>
+                <select id="subject" class="form-select" disabled>
+                    <option value="">-- Select Subject (Choose College First) --</option>
+                </select>
+            </div>
+
+            
+            <button id="search-btn" class="md:col-span-2 mt-4 py-3 px-6 text-white font-semibold rounded-lg shadow-md transition transform hover:scale-[1.02]" 
+                    style="background-color: var(--secondary-color); hover: background-color: #203a7a;">
+                <i class="fas fa-calendar-alt mr-2"></i> Find Viva Center & Date
+            </button>
+        </div>
+
+        <div id="result-card" class="hidden">
+            <p class="result-title"><i class="fas fa-check-circle"></i> Viva Examination Details</p>
+            <div id="result-content">
+                </div>
+        </div>
+
+    </div>
+
+    <script>
+        // --- MASTER DATA STRUCTURE ---
+        const MASTER_SUBJECTS = {
+            "MCom": [
+                { name: "Commerce", code: "I-304", key: "MComCommerce" }
+            ],
+            "MA": [
+                { name: "Defence Studies", code: "G-895", key: "MADefence" },
+                { name: "Economics", code: "G-806", key: "MAEconomics" },
+                { name: "Education", code: "G-803", key: "MAEducation" },
+                { name: "English", code: "G-812", key: "MAEnglish" },
+                { name: "Hindi", code: "G-825", key: "MAHindi" },
+                { name: "History", code: "G-837", key: "MAHistory" },
+                { name: "Mathematics", code: "G-850", key: "MAMathematics" },
+                { name: "Philosophy", code: "G-845", key: "MAPhilosophy" },
+                { name: "Political Science", code: "G-870", key: "MAPoliticalScience" },
+                { name: "Sanskrit", code: "G-882", key: "MASanskrit" },
+                { name: "Sociology", code: "G-887", key: "MASociology" },
+                { name: "Urdu", code: "G-862", key: "MAUrdu" }
+            ]
+        };
+        
+        // Helper map to quickly find subject info by its key
+        const SUBJECT_KEY_MAP = {};
+        Object.keys(MASTER_SUBJECTS).forEach(course => {
+            MASTER_SUBJECTS[course].forEach(subj => {
+                SUBJECT_KEY_MAP[subj.key] = subj;
+            });
+        });
+
+
+        // --- COLLEGE DATA (INTEGRATED LIVE NOTICE DATA) ---
+        // key: [College Code] - [College Name]
+        // courses: array of subject keys (e.g., "MAHistory")
+        // viva: object where keys are subject keys, and value is { center: "...", date: "..." }
+        const DATA = {
+            "Baghpat": {
+                "003-DJ College, Baraut": {
+                    name: "003-DJ College, Baraut",
+                    courses: ["MAHistory", "MAEnglish", "MAHindi", "MASanskrit", "MAMathematics", "MADefence", "MA Economics", "MComCommerce"],
+                    viva: { 
+                        "MAHistory": { center: "DJ College, Baraut", date: "20.05.2025" },
+                        "MAEnglish": { center: "DJ College, Baraut", date: "02.06.2025" },
+                        "MAHindi": { center: "DJ College, Baraut", date: "11.06.2025" },
+                        "MASanskrit": { center: "DJ College, Baraut", date: "06.06.2025" },
+                        "MAMathematics": { center: "DJ College, Baraut", date: "09.06.2025" },
+                        "MComCommerce": { center: "DJ College, Baraut", date: "09.06.2025" }
+                    }
+                },
+                "095-Janta Vedic College, Baraut": {
+                    name: "Janta Vedic College, Baraut",
+                    courses: ["MAPoliticalScience", "MAHindi", "MASociology"],
+                    viva: { 
+                        "MAPoliticalScience": { center: "Janta Vedic College, Baraut", date: "26.05.2025" },
+                        "MAHindi": { center: "Janta Vedic College, Baraut", date: "28.05.2025" },
+                        "MASociology": { center: "Janta Vedic College, Baraut", date: "09 & 10 June 2025" }
+                    }
+                }
+            },
+            "Bulandshahar": {
+                "0001-D.P.B.S. Degree College, Anoopshahar": {
+                    name: "D.P.B.S. Degree College, Anoopshahar",
+                    courses: ["MASanskrit", "MComCommerce"],
+                    viva: { "MASanskrit": { center: "D.P.B.S. Degree College, Anoopshahar", date: "28.04.2025" } }
+                },
+                "0006-DAV PG College, Bulandshahr": {
+                    name: "DAV PG College, Bulandshahr",
+                    courses: ["MAHistory", "MAEconomics", "MAPoliticalScience", "MAEnglish", "MAHindi", "MComCommerce"],
+                    viva: { 
+                        "MAHistory": { center: "DAV PG College, Bulandshahr", date: "02.05.2025" },
+                        "MAEconomics": { center: "DAV PG College, Bulandshahr", date: "03.05.2025" },
+                        "MAPoliticalScience": { center: "DAV PG College, Bulandshahr", date: "05.05.2025" },
+                        "MAEnglish": { center: "DAV PG College, Bulandshahr", date: "06.05.2025" },
+                        "MAHindi": { center: "DAV PG College, Bulandshahr", date: "07.05.2025" }
+                    }
+                },
+                "0007-IP College, Bulandshahr": {
+                    name: "IP College, Bulandshahr",
+                    courses: ["MComCommerce"],
+                    viva: { "MComCommerce": { center: "IP College, Bulandshahar", date: "05.05.2025" } }
+                },
+                "0042-NREC College, Khurja": {
+                    name: "NREC College, Khurja",
+                    courses: ["MASociology", "MAHistory", "MAPoliticalScience", "MAHindi", "MAMathematics", "MAEnglish", "MComCommerce"],
+                    viva: { 
+                        "MASociology": { center: "NREC College, Khurja", date: "30.04.2025 (for College Code 0006 & 0042)" },
+                        "MAHistory": { center: "NREC College, Khurja", date: "03.05.2025 (For College code 0042)" },
+                        "MAPoliticalScience": { center: "NREC College, Khurja", date: "08.05.2025" },
+                        "MAHindi": { center: "NREC College, Khurja", date: "14.05.2025" },
+                        "MAMathematics": { center: "NREC College, Khurja", date: "16.05.2025" },
+                        "MAEnglish": { center: "NREC College, Khurja", date: "16.05.2025" },
+                        "MComCommerce": { center: "NREC College, Khurja", date: "15.05.2025" }
+                    }
+                },
+                "0093-Agrasen PG College, Bulandshahar": {
+                    name: "Agrasen PG College, Bulandshahar",
+                    courses: ["MComCommerce"],
+                    viva: { "MComCommerce": { center: "Agrasen PG College, Bulandshahar", date: "05.05.2025" } }
+                }
+            },
+            "GautamBuddhNagar": {
+                // Mocking a placeholder, linking to Ghaziabad center dates as per common practice.
+                "100-Placeholder College, Noida": {
+                    name: "Placeholder College, Noida",
+                    courses: ["MComCommerce", "MAEconomics", "MAEnglish"],
+                    viva: { 
+                         "MComCommerce": { center: "M.M.H. College, Ghaziabad", date: "08.05.2025 (Other Colleges)" },
+                         "MAEnglish": { center: "M.M.H. College, Ghaziabad", date: "16.05.2025" },
+                         "MAEconomics": { center: "M.M.H. College, Ghaziabad", date: "21.05.2025" }
+                    }
+                }
+            },
+            "Ghaziabad": {
+                "0024-S.D. PG College, Ghaziabad": {
+                    name: "S.D. PG College, Ghaziabad",
+                    courses: ["MAHistory", "MASociology", "MAHindi", "MAPoliticalScience", "MComCommerce"],
+                    viva: { 
+                        "MAHistory": { center: "S.D. PG College, Ghaziabad", date: "26.04.2025" },
+                        "MASociology": { center: "S.D. PG College, Ghaziabad", date: "26.04.2025" },
+                        "MAHindi": { center: "S.D. PG College, Ghaziabad", date: "26.04.2025" },
+                        "MAPoliticalScience": { center: "S.D. PG College, Ghaziabad", date: "26.04.2025" }
+                    }
+                },
+                "0019-M.M.H. College, Ghaziabad": {
+                    name: "M.M.H. College, Ghaziabad",
+                    courses: ["MComCommerce", "MASociology", "MAHistory", "MAPoliticalScience", "MASanskrit", "MAEnglish", "MAHindi", "MAMathematics", "MAEconomics"],
+                    viva: { 
+                        "MComCommerce": { center: "M.M.H. College, Ghaziabad", date: "07.05.2025 (For College Code 019)" },
+                        "MASociology": { center: "M.M.H. College, Ghaziabad", date: "07.05.2025" },
+                        "MAHistory": { center: "M.M.H. College, Ghaziabad", date: "14 & 15 May 2025" },
+                        "MAPoliticalScience": { center: "M.M.H. College, Ghaziabad", date: "13.05.2025" },
+                        "MASanskrit": { center: "M.M.H. College, Ghaziabad", date: "08.05.2025" },
+                        "MAEnglish": { center: "M.M.H. College, Ghaziabad", date: "16.05.2025" },
+                        "MAHindi": { center: "M.M.H. College, Ghaziabad", date: "15.05.2025" },
+                        "MAMathematics": { center: "M.M.H. College, Ghaziabad", date: "15.05.2025" },
+                        "MAEconomics": { center: "M.M.H. College, Ghaziabad", date: "21.05.2025" }
+                    }
+                },
+                "0029-LR College, Ghaziabad": {
+                    name: "LR College, Ghaziabad",
+                    courses: ["MComCommerce"],
+                    viva: { "MComCommerce": { center: "LR College, Ghaziabad", date: "16.05.2025 (for LR College)" } }
+                },
+                "0035-VMLG College, Ghaziabad": {
+                    name: "VMLG College, Ghaziabad",
+                    courses: ["MAPoliticalScience", "MComCommerce"],
+                    viva: { "MAPoliticalScience": { center: "VMLG College, Ghaziabad", date: "14.05.2025" } }
+                }
+            },
+            "Hapur": {
+                "0028-SSV College, Hapur": {
+                    name: "SSV College, Hapur",
+                    courses: ["MAEconomics", "MAMathematics", "MAPoliticalScience", "MAEnglish", "MComCommerce", "MAHindi", "MAEducation"],
+                    viva: { 
+                        "MAEconomics": { center: "SSV College, Hapur", date: "15.05.2025" },
+                        "MAMathematics": { center: "SSV College, Hapur", date: "14.05.2025" },
+                        "MAPoliticalScience": { center: "SSV College, Hapur", date: "20 & 21 May 2025" },
+                        "MAEnglish": { center: "SSV College, Hapur", date: "23.05.2025" },
+                        "MComCommerce": { center: "SSV College, Hapur", date: "21.05.2025" },
+                        "MAHindi": { center: "SSV College, Hapur", date: "26 & 27 May, 2025" }
+                    }
+                },
+                "0041-Arya Kanya PG College, Hapur": {
+                    name: "Arya Kanya PG College, Hapur",
+                    courses: ["MAEducation"],
+                    viva: { "MAEducation": { center: "Arya Kanya PG College, Hapur", date: "18.05.2025" } }
+                }
+            },
+            "Meerut": {
+                "0055-Meerut College, Meerut": {
+                    name: "Meerut College, Meerut",
+                    courses: Object.keys(SUBJECT_KEY_MAP), // Assume all subjects for "All Subject" notice
+                    viva: { 
+                        "MAHistory": { center: "Meerut College, Meerut", date: "27.04.2025" },
+                        "MComCommerce": { center: "Meerut College, Meerut", date: "27.04.2025" },
+                        "MAEnglish": { center: "Meerut College, Meerut", date: "27.04.2025" },
+                        "MAPoliticalScience": { center: "Meerut College, Meerut", date: "27.04.2025" },
+                        "MAEconomics": { center: "Meerut College, Meerut", date: "27.04.2025" },
+                        "MASociology": { center: "Meerut College, Meerut", date: "27.04.2025" },
+                        "MAHindi": { center: "Meerut College, Meerut", date: "27.04.2025" },
+                        "MAMathematics": { center: "Meerut College, Meerut", date: "27.04.2025" },
+                        "MASanskrit": { center: "Meerut College, Meerut", date: "27.04.2025" },
+                        "MADefence": { center: "Meerut College, Meerut", date: "27.04.2025" },
+                        "MAEducation": { center: "Meerut College, Meerut", date: "27.04.2025" },
+                        "MAPhilosophy": { center: "Meerut College, Meerut", date: "27.04.2025" },
+                        "MAUrdu": { center: "Meerut College, Meerut", date: "27.04.2025" }
+                    }
+                },
+                "0062-Multanimal Modi College, Modinagar": {
+                    name: "Multanimal Modi College, Modinagar",
+                    courses: ["MComCommerce", "MAHistory", "MAPoliticalScience", "MAEnglish", "MAEconomics"],
+                    viva: { 
+                        "MComCommerce": { center: "Multanimal Modi College, Modinagar", date: "28.04.2025" },
+                        "MAHistory": { center: "Multanimal Modi College, Modinagar", date: "20.05.2025 (Revised)" },
+                        "MAPoliticalScience": { center: "Multanimal Modi College, Modinagar", date: "21.05.2025" },
+                        "MAEnglish": { center: "Multanimal Modi College, Modinagar", date: "26.05.2025" },
+                        "MAEconomics": { center: "Multanimal Modi College, Modinagar", date: "26.05.2025" }
+                    }
+                },
+                "0058-RG PG College, Meerut": {
+                    name: "RG PG College, Meerut",
+                    courses: ["MAPoliticalScience", "MAEconomics", "MAEnglish", "MASociology", "MAHindi", "MAHistory"],
+                    viva: { 
+                        "MAPoliticalScience": { center: "RG PG College, Meerut", date: "02.05.2025 (For College Code - 058, 060, 070, 085, 098)" },
+                        "MAEconomics": { center: "RG PG College, Meerut", date: "06.05.2025" },
+                        "MAEnglish": { center: "RG PG College, Meerut", date: "06 & 07 May 2025" },
+                        "MASociology": { center: "RG PG College, Meerut", date: "07 & 08 May 2025" },
+                        "MAHindi": { center: "RG PG College, Meerut", date: "05.05.2025" },
+                        "MAHistory": { center: "RG PG College, Meerut", date: "09.05.2025" }
+                    }
+                },
+                "0053-IN PG College, Meerut": {
+                    name: "IN PG College, Meerut",
+                    courses: ["MAUrdu"],
+                    viva: { "MAUrdu": { center: "IN PG College, Meerut", date: "09.05.2025" } }
+                },
+                "0048-DN PG College, Meerut": {
+                    name: "DN PG College, Meerut",
+                    courses: ["MComCommerce"],
+                    viva: { "MComCommerce": { center: "DN PG College, Meerut", date: "30.05.2025" } }
+                }
+            }
+        };
+
+        // --- DOM Elements ---
+        const courseSelect = document.getElementById('course');
+        const districtSelect = document.getElementById('district');
+        const collegeSelect = document.getElementById('college');
+        const subjectSelect = document.getElementById('subject');
+        const searchBtn = document.getElementById('search-btn');
+        const resultCard = document.getElementById('result-card');
+        const resultContent = document.getElementById('result-content');
+
+        // --- HELPER FUNCTION: Reset all fields after a change ---
+        function resetFields(level) {
+            resultCard.classList.remove('show');
+            resultCard.classList.add('hidden');
+
+            if (level === 'course') {
+                districtSelect.value = "";
+                districtSelect.disabled = true;
+                collegeSelect.innerHTML = '<option value="">-- Select College (Choose District First) --</option>';
+                collegeSelect.disabled = true;
+                subjectSelect.innerHTML = '<option value="">-- Select Subject (Choose College First) --</option>';
+                subjectSelect.disabled = true;
+            } 
+            if (level === 'district') {
+                collegeSelect.innerHTML = '<option value="">-- Select College (Choose District First) --</option>';
+                collegeSelect.disabled = true;
+                subjectSelect.innerHTML = '<option value="">-- Select Subject (Choose College First) --</option>';
+                subjectSelect.disabled = true;
+            } 
+            if (level === 'college') {
+                subjectSelect.innerHTML = '<option value="">-- Select Subject (Choose College First) --</option>';
+                subjectSelect.disabled = true;
+            }
+        }
+
+        // --- FUNCTIONS ---
+
+        // 1. Enable District Selection after Course is chosen
+        function enableDistrictSelection() {
+            const course = courseSelect.value;
+            resetFields('course');
+
+            if (course) {
+                districtSelect.disabled = false;
+                districtSelect.value = ""; // Force reset district to select placeholder
+            }
+        }
+
+        // 2. Update College Dropdown based on Course AND District
+        function updateColleges() {
+            const course = courseSelect.value;
+            const district = districtSelect.value;
+            
+            resetFields('district');
+
+            if (district && course) {
+                const colleges = DATA[district];
+                let collegesFound = false;
+
+                for (const key in colleges) {
+                    const collegeData = colleges[key];
+                    
+                    // Filter colleges: A college must offer *any* subject under the selected Course (M.A. or M.Com)
+                    const relevantSubjects = MASTER_SUBJECTS[course];
+                    const offersCourse = relevantSubjects.some(subj => collegeData.courses.includes(subj.key));
+
+                    if (offersCourse) {
+                        const option = document.createElement('option');
+                        option.value = key; // College Key (Code-Name)
+                        option.textContent = collegeData.name;
+                        collegeSelect.appendChild(option);
+                        collegesFound = true;
+                    }
+                }
+                
+                if (collegesFound) {
+                    collegeSelect.disabled = false;
+                } else {
+                    collegeSelect.innerHTML = '<option value="">-- No Colleges in this District offer this course --</option>';
+                }
+            }
+        }
+
+        // 3. Update Subject Dropdown based on College selection
+        function updateSubjects() {
+            const course = courseSelect.value;
+            const collegeKey = collegeSelect.value;
+            const district = districtSelect.value;
+
+            resetFields('college');
+
+            if (district && collegeKey && course) {
+                const collegeData = DATA[district][collegeKey];
+                const availableSubjectKeys = collegeData.courses;
+                const relevantSubjects = MASTER_SUBJECTS[course];
+                
+                subjectSelect.innerHTML = '<option value="">-- Select Subject --</option>';
+                let subjectsFound = false;
+
+                // Iterate through the master list of subjects for the selected course (M.A. or M.Com)
+                relevantSubjects.forEach(masterSubj => {
+                    // Check if this specific college offers this specific subject key
+                    if (availableSubjectKeys.includes(masterSubj.key)) {
+                        const option = document.createElement('option');
+                        option.value = masterSubj.key; // Subject Key (e.g., MAHistory)
+                        option.textContent = `${masterSubj.name} (${masterSubj.code})`;
+                        subjectSelect.appendChild(option);
+                        subjectsFound = true;
+                    }
+                });
+
+                if (subjectsFound) {
+                    subjectSelect.disabled = false;
+                } else {
+                    subjectSelect.innerHTML = '<option value="">-- No Subjects found for this course at this college --</option>';
+                }
+            }
+        }
+
+        // 4. Display Viva Result
+        function findVivaCenter() {
+            const course = courseSelect.value;
+            const subjectKey = subjectSelect.value;
+            const district = districtSelect.value;
+            const collegeKey = collegeSelect.value;
+
+            resultCard.classList.remove('show');
+            resultCard.classList.add('hidden');
+            
+            // Validation
+            if (!course || !subjectKey || !district || !collegeKey) {
+                alert("Please make a selection for all four fields.");
+                return;
+            }
+
+            // Get subject details
+            const subjectInfo = SUBJECT_KEY_MAP[subjectKey];
+
+            // Fetch result data
+            const collegeData = DATA[district][collegeKey];
+            const result = collegeData.viva[subjectKey];
+
+            if (!result) {
+                alert(`Error: Viva date not found for ${subjectInfo.name} at ${collegeData.name}.`);
+                return;
+            }
+            
+            // Construct Result HTML
+            resultContent.innerHTML = `
+                <p class="result-item"><i class="fas fa-graduation-cap"></i> <b>Course:</b> ${course} (${subjectInfo.name})</p>
+                <p class="result-item"><i class="fas fa-tag"></i> <b>Subject Code:</b> ${subjectInfo.code}</p>
+                <p class="result-item"><i class="fas fa-university"></i> <b>College:</b> ${collegeData.name} </p>
+                <p class="result-item"><i class="fas fa-map-marker-alt"></i> <b>Viva Center:</b> ${result.center}</p>
+                <p class="result-item"><i class="fas fa-calendar-day"></i> <b>Date:</b> ${result.date} </p>
+                <p class="result-item mt-4 text-sm font-semibold text-yellow-300">
+                    <b>*NOTE:</b>  Dates/Centers are based on recent notices. Please confirm details from the respective college/viva center.
+                </p>
+            `;
+
+            // Display the Card
+            resultCard.classList.remove('hidden');
+            resultCard.classList.add('show');
+        }
+
+        // --- EVENT LISTENERS ---
+        courseSelect.addEventListener('change', enableDistrictSelection);
+        districtSelect.addEventListener('change', updateColleges);
+        collegeSelect.addEventListener('change', updateSubjects); // New primary trigger for subjects
+        
+        subjectSelect.addEventListener('change', () => {
+             // Simply resets result card when subject selection changes
+             resultCard.classList.remove('show');
+             resultCard.classList.add('hidden');
+        });
+        
+        searchBtn.addEventListener('click', findVivaCenter);
+    </script>
+</body>
+</html>
