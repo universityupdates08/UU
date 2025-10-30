@@ -13,10 +13,22 @@
             --primary-color: #EF3C3C; /* Crimson Red */
             --secondary-color: #2C4B9E; /* Deep Blue */
             --bg-color: #f8f9fa;
+            --text-color: #333;
+            --footer-bg: #2C4B9E; /* Deep Blue for footer */
+            --footer-text: #ffffff;
         }
         body {
             font-family: 'Poppins', sans-serif;
             background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0; /* Remove default body margin */
+            padding: 0; /* Remove default body padding */
+            min-height: 100vh; /* Ensure full height for sticky footer effect */
+            display: flex;
+            flex-direction: column;
+        }
+        .main-content {
+            flex-grow: 1; /* Allows main content to fill space */
             padding: 20px;
         }
         .container {
@@ -108,67 +120,161 @@
             margin-right: 10px;
             color: #FFD700; /* Gold color for icons */
         }
+        
+        /* New Utility Bar & Footer Styles */
+        .utility-bar {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 8px 20px;
+            font-size: 0.9rem;
+        }
+        .utility-link:hover {
+            text-decoration: underline;
+            opacity: 0.8;
+        }
+        .footer {
+            background-color: var(--footer-bg);
+            color: var(--footer-text);
+            padding: 40px 20px 20px 20px;
+            margin-top: 40px;
+        }
+        .social-icon {
+            color: white;
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+        .social-icon:hover {
+            color: var(--primary-color); /* Hover effect using primary color */
+        }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <h1 class="text-center flex items-center justify-center gap-2">
-            <i class="fas fa-search-location"></i> Viva Center Finder
-        </h1>
-        
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            
-            <div class="select-wrapper">
-                <label for="course" class="form-label">1. Select Course</label>
-                <select id="course" class="form-select">
-                    <option value="">-- Select Course --</option>
-                    <option value="MCom">M.Com.</option>
-                    <option value="MA">M.A.</option>
-                </select>
+    <header class="utility-bar">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex space-x-4">
+                <a href="#" class="utility-link"><i class="fas fa-home mr-1"></i> Home</a>
+                <a href="https://t.me/HelpforDMBot" class="utility-link"><i class="fas fa-headset mr-1"></i> Contact Us</a>
             </div>
-            
-            <div class="select-wrapper">
-                <label for="district" class="form-label">2. Select District</label>
-                <select id="district" class="form-select" disabled>
-                    <option value="">-- Select District (Choose Course First) --</option>
-                    <option value="Baghpat">Baghpat</option>
-                    <option value="Bulandshahar">Bulandshahar</option>
-                    <option value="GautamBuddhNagar">Gautam Buddh Nagar (Noida)</option>
-                    <option value="Ghaziabad">Ghaziabad</option>
-                    <option value="Hapur">Hapur</option>
-                    <option value="Meerut">Meerut</option>
-                </select>
+            <div class="flex items-center space-x-4">
+                <a href="https://t.me/CCSUniversityMRT" class="social-icon text-sm hover:text-gray-300 transition"><i class="fab fa-telegram"></i></a>
+                <span class="mx-2">|</span>
+                <a href="https://whatsapp.com/channel/0029Va9jtav4tRrmKPxos138" class="social-icon text-sm hover:text-gray-300 transition"><i class="fab fa-whatsapp"></i></a>
+                <span class="mx-2">|</span>
+                <a href="https://instagram.com/universityupdate_uu" class="social-icon text-sm hover:text-gray-300 transition"><i class="fab fa-instagram"></i></a>
+                <span class="mx-2">|</span>
+                <a href="https://www.youtube.com/@University-Updates-UU" class="social-icon text-sm hover:text-gray-300 transition"><i class="fab fa-youtube"></i></a>
+                <span class="mx-2">|</span>
+                <button id="theme-toggle" class="utility-link p-1 rounded hover:bg-white hover:text-primary-color transition" title="Toggle Day/Night Mode">
+                    <i class="fas fa-moon" id="theme-icon"></i>
+                </button>
             </div>
-
-            <div class="select-wrapper">
-                <label for="college" class="form-label">3. Select College</label>
-                <select id="college" class="form-select" disabled>
-                    <option value="">-- Select College (Choose District First) --</option>
-                </select>
-            </div>
-            
-            <div class="select-wrapper">
-                <label for="subject" class="form-label">4. Select Subject</label>
-                <select id="subject" class="form-select" disabled>
-                    <option value="">-- Select Subject (Choose College First) --</option>
-                </select>
-            </div>
-
-            
-            <button id="search-btn" class="md:col-span-2 mt-4 py-3 px-6 text-white font-semibold rounded-lg shadow-md transition transform hover:scale-[1.02]" 
-                    style="background-color: var(--secondary-color); hover: background-color: #203a7a;">
-                <i class="fas fa-calendar-alt mr-2"></i> Find Viva Center & Date
-            </button>
         </div>
+    </header>
 
-        <div id="result-card" class="hidden">
-            <p class="result-title"><i class="fas fa-check-circle"></i> Viva Examination Details</p>
-            <div id="result-content">
+    <div class="main-content">
+        <div class="container">
+            <h1 class="text-center flex items-center justify-center gap-2">
+                <i class="fas fa-search-location"></i> Viva Center Finder
+            </h1>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                
+                <div class="select-wrapper">
+                    <label for="course" class="form-label">1. Select Course</label>
+                    <select id="course" class="form-select">
+                        <option value="">-- Select Course --</option>
+                        <option value="MCom">M.Com.</option>
+                        <option value="MA">M.A.</option>
+                    </select>
                 </div>
-        </div>
+                
+                <div class="select-wrapper">
+                    <label for="district" class="form-label">2. Select District</label>
+                    <select id="district" class="form-select" disabled>
+                        <option value="">-- Select District (Choose Course First) --</option>
+                        <option value="Baghpat">Baghpat</option>
+                        <option value="Bulandshahar">Bulandshahar</option>
+                        <option value="GautamBuddhNagar">Gautam Buddh Nagar (Noida)</option>
+                        <option value="Ghaziabad">Ghaziabad</option>
+                        <option value="Hapur">Hapur</option>
+                        <option value="Meerut">Meerut</option>
+                    </select>
+                </div>
 
+                <div class="select-wrapper">
+                    <label for="college" class="form-label">3. Select College</label>
+                    <select id="college" class="form-select" disabled>
+                        <option value="">-- Select College (Choose District First) --</option>
+                    </select>
+                </div>
+                
+                <div class="select-wrapper">
+                    <label for="subject" class="form-label">4. Select Subject</label>
+                    <select id="subject" class="form-select" disabled>
+                        <option value="">-- Select Subject (Choose College First) --</option>
+                    </select>
+                </div>
+
+                
+                <button id="search-btn" class="md:col-span-2 mt-4 py-3 px-6 text-white font-semibold rounded-lg shadow-md transition transform hover:scale-[1.02]" 
+                        style="background-color: var(--secondary-color); hover: background-color: #203a7a;">
+                    <i class="fas fa-calendar-alt mr-2"></i> Find Viva Center & Date
+                </button>
+            </div>
+
+            <div id="result-card" class="hidden">
+                <p class="result-title"><i class="fas fa-check-circle"></i> Viva Examination Details</p>
+                <div id="result-content">
+                    </div>
+            </div>
+
+        </div>
     </div>
+
+
+    <footer class="footer">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-6">
+                
+                <div><div class="text-center">
+                    <h3 class="text-xl font-bold mb-3 border-b-2 border-primary-color pb-1 inline-block">Disclaimer</h3>
+                    <div class="text-justify">
+                    <p class="text-sm opacity-90">
+                        The Viva Center and Date information provided here is sourced from the college's & center's recent official notices and is for informational purposes only. Students must <b>always confirm</b> the details from their respective college administration. We are not responsible for any last-minute changes or inaccuracies. Not affiliated with or endorsed by CCSU.
+                    </p>
+                </div></div></div>
+
+                <div>
+                <div class="text-center">
+                    <h3 class="text-xl font-bold mb-3 border-b-2 border-primary-color pb-1 inline-block">Quick Links</h3>
+                    <ul class="space-y-1 text-sm">
+                        <li><a href="#" class="hover:text-primary-color transition">Center List</a></li>
+                        <li><a href="https://ccsuniversity.ac.in" class="hover:text-primary-color transition">University Official Website</a></li>
+                        <li><a href="https://t.me/HelpforDMBot" class="hover:text-primary-color transition">Contact Us</a></li>
+                        </ul>
+                </div></div>
+
+
+                <div><div class="text-center">
+                    <h3 class="text-xl font-bold mb-3 border-b-2 border-primary-color pb-1 inline-block">Connect With Us</h3>
+                    <div class="flex space-x-4 justify-center">
+                        <a href="https://whatsapp.com/channel/0029Va9jtav4tRrmKPxos138" class="social-icon" title="Whatsapp"><i class="fab fa-whatsapp"></i></a>
+                        <a href="https://t.me/CCSUniversityMRT" class="social-icon" title="Telegram"><i class="fab fa-telegram-plane"></i></a>
+                        <a href="https://instagram.com/universityupdate_uu" class="social-icon" title="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.youtube.com/@University-Updates-UU" class="social-icon" title="YouTube"><i class="fab fa-youtube"></i></a>
+                    </div></div>
+                </div>
+            </div>
+
+            <div class="text-center pt-4 border-t border-white border-opacity-30">
+                <p class="text-sm opacity-70">
+                    &copy; 2025 University Updates. All rights reserved.
+                </p>
+            </div>
+        </div>
+    </footer>
+
 
     <script>
         // --- MASTER DATA STRUCTURE ---
@@ -365,8 +471,8 @@
                         "MComCommerce": { center: "Multanimal Modi College, Modinagar", date: "28.04.2025" },
                         "MAHistory": { center: "Multanimal Modi College, Modinagar", date: "20.05.2025 (Revised)" },
                         "MAPoliticalScience": { center: "Multanimal Modi College, Modinagar", date: "21.05.2025" },
-                        "MAEnglish": { center: "Multanimal Modi College, Modinagar", date: "26.05.2025" },
-                        "MAEconomics": { center: "Multanimal Modi College, Modinagar", date: "26.05.2025" }
+                        "MAEnglish": { center: "Multanimal Modi College, Modinagar", date: "26.05.2025", time: "10:00 AM" },
+                        "MAEconomics": { center: "Multanimal Modi College, Modinagar", date: "26.05.2025", time: "10:00 AM" }
                     }
                 },
                 "0058-RG PG College, Meerut": {
@@ -374,22 +480,22 @@
                     courses: ["MAPoliticalScience", "MAEconomics", "MAEnglish", "MASociology", "MAHindi", "MAHistory"],
                     viva: { 
                         "MAPoliticalScience": { center: "RG PG College, Meerut", date: "02.05.2025 (For College Code - 058, 060, 070, 085, 098)" },
-                        "MAEconomics": { center: "RG PG College, Meerut", date: "06.05.2025" },
-                        "MAEnglish": { center: "RG PG College, Meerut", date: "06 & 07 May 2025" },
-                        "MASociology": { center: "RG PG College, Meerut", date: "07 & 08 May 2025" },
-                        "MAHindi": { center: "RG PG College, Meerut", date: "05.05.2025" },
-                        "MAHistory": { center: "RG PG College, Meerut", date: "09.05.2025" }
+                        "MAEconomics": { center: "RG PG College, Meerut", date: "06.05.2025", time: "10:00 AM" },
+                        "MAEnglish": { center: "RG PG College, Meerut", date: "06 & 07 May 2025", time: "10:00 AM" },
+                        "MASociology": { center: "RG PG College, Meerut", date: "07 & 08 May 2025", time: "10:00 AM" },
+                        "MAHindi": { center: "RG PG College, Meerut", date: "05.05.2025", time: "10:00 AM" },
+                        "MAHistory": { center: "RG PG College, Meerut", date: "09.05.2025", time: "10:00 AM" }
                     }
                 },
                 "0053-IN PG College, Meerut": {
                     name: "IN PG College, Meerut",
                     courses: ["MAUrdu"],
-                    viva: { "MAUrdu": { center: "IN PG College, Meerut", date: "09.05.2025" } }
+                    viva: { "MAUrdu": { center: "IN PG College, Meerut", date: "09.05.2025", time: "10:00 AM" } }
                 },
                 "0048-DN PG College, Meerut": {
                     name: "DN PG College, Meerut",
                     courses: ["MComCommerce"],
-                    viva: { "MComCommerce": { center: "DN PG College, Meerut", date: "30.05.2025" } }
+                    viva: { "MComCommerce": { center: "DN PG College, Meerut", date: "30.05.2025", time: "10:00 AM" } }
                 }
             }
         };
@@ -402,6 +508,9 @@
         const searchBtn = document.getElementById('search-btn');
         const resultCard = document.getElementById('result-card');
         const resultContent = document.getElementById('result-content');
+        // New DOM Elements for Utility Bar
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
 
         // --- HELPER FUNCTION: Reset all fields after a change ---
         function resetFields(level) {
@@ -547,6 +656,7 @@
                 <p class="result-item"><i class="fas fa-university"></i> <b>College:</b> ${collegeData.name} </p>
                 <p class="result-item"><i class="fas fa-map-marker-alt"></i> <b>Viva Center:</b> ${result.center}</p>
                 <p class="result-item"><i class="fas fa-calendar-day"></i> <b>Date:</b> ${result.date} </p>
+                <p class="result-item"><i class="fas fa-clock"></i> <b>Reporting Time:</b> ${result.time}</p>
                 <p class="result-item mt-4 text-sm font-semibold text-yellow-300">
                     <b>*NOTE:</b>  Dates/Centers are based on recent notices. Please confirm details from the respective college/viva center.
                 </p>
@@ -557,6 +667,54 @@
             resultCard.classList.add('show');
         }
 
+        // --- NEW: Theme Toggle Functionality ---
+        function toggleTheme() {
+            const isDark = document.body.classList.toggle('dark-mode');
+            
+            if (isDark) {
+                // Apply dark mode styles by changing CSS variables
+                document.documentElement.style.setProperty('--bg-color', '#1f2937'); /* Dark Gray */
+                document.documentElement.style.setProperty('--text-color', '#f8f9fa'); /* Light White */
+                document.documentElement.style.setProperty('--footer-bg', '#111827'); /* Even Darker Gray for Footer */
+                
+                // Update specific elements that need styling adjustment
+                document.querySelector('.container').style.backgroundColor = '#374151'; // Slightly lighter dark container
+                document.querySelector('.container').style.boxShadow = '0 10px 30px rgba(255, 255, 255, 0.1)';
+                document.querySelector('h1').style.color = '#bfdbfe'; // Light Blue for heading
+                document.querySelectorAll('.form-label').forEach(el => el.style.color = '#f8f9fa');
+                document.querySelectorAll('.form-select, .form-input').forEach(el => {
+                    el.style.backgroundColor = '#4b5563';
+                    el.style.borderColor = '#6b7280';
+                    el.style.color = '#f8f9fa';
+                });
+
+                // Update icon
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+
+            } else {
+                // Reset to light mode styles
+                document.documentElement.style.setProperty('--bg-color', '#f8f9fa');
+                document.documentElement.style.setProperty('--text-color', '#333');
+                document.documentElement.style.setProperty('--footer-bg', '#2C4B9E'); 
+
+                // Reset specific elements
+                document.querySelector('.container').style.backgroundColor = '#ffffff';
+                document.querySelector('.container').style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.1)';
+                document.querySelector('h1').style.color = 'var(--secondary-color)';
+                document.querySelectorAll('.form-label').forEach(el => el.style.color = '#333');
+                document.querySelectorAll('.form-select, .form-input').forEach(el => {
+                    el.style.backgroundColor = '#fff';
+                    el.style.borderColor = '#ddd';
+                    el.style.color = '#333';
+                });
+
+                // Update icon
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+            }
+        }
+        
         // --- EVENT LISTENERS ---
         courseSelect.addEventListener('change', enableDistrictSelection);
         districtSelect.addEventListener('change', updateColleges);
@@ -569,6 +727,9 @@
         });
         
         searchBtn.addEventListener('click', findVivaCenter);
+
+        // New Event Listener for Theme Toggle
+        themeToggle.addEventListener('click', toggleTheme);
     </script>
 </body>
 </html>
