@@ -21,14 +21,14 @@
             font-family: 'Poppins', sans-serif;
             background-color: var(--bg-color);
             color: var(--text-color);
-            margin: 0; /* Remove default body margin */
-            padding: 0; /* Remove default body padding */
-            min-height: 100vh; /* Ensure full height for sticky footer effect */
+            margin: 0; 
+            padding: 0; 
+            min-height: 100vh; 
             display: flex;
             flex-direction: column;
         }
         .main-content {
-            flex-grow: 1; /* Allows main content to fill space */
+            flex-grow: 1; 
             padding: 20px;
         }
         .container {
@@ -73,7 +73,7 @@
             position: relative;
         }
         .select-wrapper::after {
-            content: "\f0d7"; /* Font Awesome chevron-down */
+            content: "\f0d7"; 
             font-family: 'Font Awesome 6 Free';
             font-weight: 900;
             position: absolute;
@@ -84,23 +84,26 @@
             pointer-events: none;
         }
 
-        /* Result Card Styling */
+        /* Result Card Styling (UPDATED) */
         #result-card {
             margin-top: 40px;
             padding: 30px; 
             border-radius: 12px;
             color: white;
-            /* Gradient for an exciting look */
-            background: linear-gradient(135deg, #FF6B6B 0%, #E63946 100%); 
-            box-shadow: 0 10px 20px rgba(230, 57, 70, 0.3);
-            border: 2px solid rgba(255, 255, 255, 0.5); /* Inner shine */
+            
+            /* GRADIENT BACKGROUND (Crimson Red & Deep Blue) */
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%); 
+            
+            /* REMOVED background-image (watermark) */
+            
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.5); 
             text-align: left;
             opacity: 0;
             transform: translateY(20px);
             transition: opacity 0.5s ease-out, transform 0.5s ease-out;
-            /* Added position: relative for absolute positioning of branding/note */
             position: relative; 
-            padding-bottom: 75px; /* INCREASED SPACE for two separate lines at the bottom */
+            padding-bottom: 75px; 
         }
         #result-card.show {
             opacity: 1;
@@ -113,36 +116,36 @@
             text-shadow: 0 2px 4px rgba(0,0,0,0.3);
         }
         .result-item {
-            font-size: 1.1rem; /* Base font size */
+            font-size: 1.1rem; 
             font-weight: 400;
-            margin-bottom: 12px; /* Increased margin for better vertical separation */
+            margin-bottom: 12px; 
             display: flex;
-            align-items: flex-start; /* Aligns content to the top if it wraps */
-            line-height: 1.4; /* Improved readability for wrapped text */
+            align-items: flex-start; 
+            line-height: 1.4; 
         }
         .result-item i {
             margin-right: 10px;
-            color: #FFD700; /* Gold color for icons */
-            width: 20px; /* Fixed width for alignment */
+            color: #FFD700; 
+            width: 20px; 
             text-align: center;
-            margin-top: 3px; /* Adjust alignment */
+            margin-top: 3px; 
         }
         
         /* STYLES for Branding (BOTTOM LINE) */
         #result-branding {
             position: absolute;
-            bottom: 10px; /* Closer to the bottom */
+            bottom: 10px; 
             right: 20px;
-            font-size: 0.75rem; /* Small size */
-            font-style: italic; /* Italic */
-            color: rgba(255, 255, 255, 0.7); /* Slightly transparent white */
-            pointer-events: none; /* Prevents interaction */
+            font-size: 0.75rem; 
+            font-style: italic; 
+            color: rgba(255, 255, 255, 0.7); 
+            pointer-events: none; 
         }
 
         /* STYLES for Centered Note (LINE ABOVE BRANDING) */
         #result-note {
             position: absolute;
-            bottom: 35px; /* Positioned above the branding */
+            bottom: 35px; 
             left: 0;
             right: 0;
             text-align: center;
@@ -176,56 +179,51 @@
             transition: color 0.3s;
         }
         .social-icon:hover {
-            color: var(--primary-color); /* Hover effect using primary color */
+            color: var(--primary-color); 
         }
         
         /* --- MOBILE-SPECIFIC STYLES FOR RESPONSIVENESS --- */
         @media (max-width: 640px) {
-            /* Reduce overall padding on smaller screens */
             .container {
                 padding: 20px;
                 margin: 20px auto;
             }
-            /* Reduce padding and font sizes for a compact result card */
             #result-card {
                 padding: 20px; 
-                padding-bottom: 65px; /* Adjusted padding for two lines on mobile */
+                padding-bottom: 65px; 
+                /* Removed background-size adjustment since image is gone */
             }
             .result-title {
                 font-size: 1.5rem; 
                 margin-bottom: 10px;
             }
             .result-item {
-                font-size: 1rem; /* Smaller text for better fit */
+                font-size: 1rem; 
                 margin-bottom: 8px; 
             }
             .result-item i {
-                 font-size: 1rem; /* Match icon size to text size */
+                 font-size: 1rem; 
             }
-            /* Structure for label (bold) and value to prevent overflow */
             .result-item b {
                 display: block; 
-                min-width: 80px; /* Minimum width for label */
+                min-width: 80px; 
                 margin-right: 5px; 
                 flex-shrink: 0; 
             }
             .result-item > p:last-child {
-                /* Ensures the value part flows correctly and wraps long text */
                 flex-grow: 1; 
                 word-wrap: break-word; 
                 overflow-wrap: break-word;
             }
-            /* Adjust branding position for smaller screens */
             #result-branding {
                 right: 15px;
                 bottom: 8px;
                 font-size: 0.65rem;
             }
-            /* Adjust note position for smaller screens */
             #result-note {
                 font-size: 0.7rem;
-                bottom: 25px; /* Position above branding */
-                padding: 0 10px; /* Minimal side padding */
+                bottom: 25px; 
+                padding: 0 10px; 
             }
         }
         /* --- END OF MOBILE-SPECIFIC STYLES --- */
@@ -735,7 +733,6 @@
             }
             
             // Construct Result HTML
-            // Note: The structure uses <p> inside <div>.
             const timeDisplay = result.time ? `${result.time}` : 'Not Specified';
 
             resultContent.innerHTML = `
@@ -745,7 +742,8 @@
                 <div class="result-item"><i class="fas fa-map-marker-alt"></i> <p><b>Viva Center:</b> ${result.center}</p></div>
                 <div class="result-item"><i class="fas fa-calendar-day"></i> <p><b>Date:</b> ${result.date} </p></div>
                 <div class="result-item"><i class="fas fa-clock"></i> <p><b>Reporting Time:</b> ${timeDisplay}</p></div>
-                
+                <p class="result-item mt-4 text-sm font-semibold text-yellow-300 hidden">
+                    
             `;
 
 
@@ -760,14 +758,14 @@
             
             if (isDark) {
                 // Apply dark mode styles by changing CSS variables
-                document.documentElement.style.setProperty('--bg-color', '#1f2937'); /* Dark Gray */
-                document.documentElement.style.setProperty('--text-color', '#f8f9fa'); /* Light White */
-                document.documentElement.style.setProperty('--footer-bg', '#111827'); /* Even Darker Gray for Footer */
+                document.documentElement.style.setProperty('--bg-color', '#1f2937'); 
+                document.documentElement.style.setProperty('--text-color', '#f8f9fa'); 
+                document.documentElement.style.setProperty('--footer-bg', '#111827'); 
                 
                 // Update specific elements that need styling adjustment
-                document.querySelector('.container').style.backgroundColor = '#374151'; // Slightly lighter dark container
+                document.querySelector('.container').style.backgroundColor = '#374151'; 
                 document.querySelector('.container').style.boxShadow = '0 10px 30px rgba(255, 255, 255, 0.1)';
-                document.querySelector('h1').style.color = '#bfdbfe'; // Light Blue for heading
+                document.querySelector('h1').style.color = '#bfdbfe'; 
                 document.querySelectorAll('.form-label').forEach(el => el.style.color = '#f8f9fa');
                 document.querySelectorAll('.form-select, .form-input').forEach(el => {
                     el.style.backgroundColor = '#4b5563';
@@ -805,10 +803,9 @@
         // --- EVENT LISTENERS ---
         courseSelect.addEventListener('change', enableDistrictSelection);
         districtSelect.addEventListener('change', updateColleges);
-        collegeSelect.addEventListener('change', updateSubjects); // New primary trigger for subjects
+        collegeSelect.addEventListener('change', updateSubjects); 
         
         subjectSelect.addEventListener('change', () => {
-             // Simply resets result card when subject selection changes
              resultCard.classList.remove('show');
              resultCard.classList.add('hidden');
         });
