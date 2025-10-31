@@ -32,6 +32,7 @@
             flex-grow: 1; 
             padding: 20px;
         }
+        /* Applied to both the Finder and News cards */
         .container {
             max-width: 800px;
             margin: 5px auto;
@@ -198,14 +199,7 @@
         }
 
         /* --- STYLES FOR NEWS SECTION (Simplified) --- */
-        #news-container {
-            margin-top: 30px;
-            padding: 20px;
-            background-color: #fff;
-            border: 1px solid #e0e0e0;
-            border-radius: 10px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-        }
+        /* News container styling is now primarily handled by the .container class */
         #news-title {
             color: var(--primary-color); 
             font-size: 1.5rem;
@@ -275,10 +269,7 @@
             border-color: #6b7280;
             color: #f8f9fa;
         }
-        body.dark-mode #news-container {
-            background-color: #374151; 
-            border-color: #4b5563;
-        }
+        /* News card dark mode styling (now uses .container style) */
         body.dark-mode #news-title {
             color: #EF3C3C; 
             border-bottom-color: #4b5563;
@@ -339,8 +330,8 @@
         </div>
     </nav>
 
-
     <div class="main-content">
+
         <div class="container">
             <h1 class="text-center flex items-center justify-center gap-2">
                 <i class="fas fa-search-location"></i> Viva Center Finder
@@ -391,41 +382,6 @@
                 </button>
             </div>
 
-            <div id="news-container">
-                <div id="news-title" class="flex items-center gap-2">
-                    <i class="fas fa-bullhorn"></i> Important Notices
-                </div>
-                <ul class="news-list">
-                    <li>
-                        <i class="fas fa-chevron-right"></i>
-                        
-                       <img src="https://msuniversity.ac.in/assets/images/new.gif" alt="NEW" class="news-gif"> <a href="#" class="news-link">M.A. Sociology Viva for colleges 0006 & 0042 at NREC College, Khurja on April 30, 2025.</a>
-                        <span class="news-date">Apr 29</span>
-                    </li>
-                    <li>
-                        <i class="fas fa-chevron-right"></i>
-                       <img src="https://msuniversity.ac.in/assets/images/new.gif" alt="NEW" class="news-gif">
-                        <a href="#" class="news-link">M.Com Viva for college 0019 at M.M.H. College, Ghaziabad on May 07, 2025.</a>
-                        <span class="news-date">Apr 27</span>
-                    </li>
-                    <li>
-                        <i class="fas fa-chevron-right"></i>
-                        <a href="#" class="news-link">Last date for all viva fee submission extended to May 10, 2025 (Check Portal).</a>
-                        <span class="news-date">Apr 25</span>
-                    </li>
-                    <li>
-                        <i class="fas fa-chevron-right"></i>
-                        <a href="#" class="news-link">MA History Viva at RG PG College, Meerut on May 09, 2025 at 10:00 AM.</a>
-                        <span class="news-date">Apr 22</span>
-                    </li>
-                    <li>
-                        <i class="fas fa-chevron-right"></i>
-                        <a href="#" class="news-link">University to issue official Viva Admit Cards next week (Expected).</a>
-                        <span class="news-date">Apr 20</span>
-                    </li>
-                </ul>
-            </div>
-
             <div id="result-card" class="hidden">
                 <p class="result-title"><i class="fas fa-check-circle"></i> Viva Examination Details</p>
                 <div id="result-content">
@@ -435,9 +391,43 @@
             </div>
 
         </div>
+
+        <div class="container mt-6"> 
+            <div id="news-title" class="flex items-center gap-2">
+                <i class="fas fa-bullhorn"></i> Important Notices
+            </div>
+            <ul class="news-list">
+                <li>
+                    <i class="fas fa-chevron-right"></i>
+                    
+                   <img src="https://msuniversity.ac.in/assets/images/new.gif" alt="NEW" class="news-gif"> <a href="#" class="news-link">M.A. Sociology Viva for colleges 0006 & 0042 at NREC College, Khurja on April 30, 2025.</a> 
+                    <span class="news-date">Apr 29</span>
+                </li>
+                <li>
+                    <i class="fas fa-chevron-right"></i>
+                   <img src="https://msuniversity.ac.in/assets/images/new.gif" alt="NEW" class="news-gif">
+                    <a href="#" class="news-link">Test.</a>
+                    <span class="news-date">Apr 27</span>
+                </li>
+                <li>
+                    <i class="fas fa-chevron-right"></i>
+                    <a href="#" class="news-link">Test (Check Portal).</a>
+                    <span class="news-date">Apr 25</span>
+                </li>
+                <li>
+                    <i class="fas fa-chevron-right"></i>
+                    <a href="#" class="news-link">Aditya Chaudhary</a>
+                    <span class="news-date">Apr 22</span>
+                </li>
+                <li>
+                    <i class="fas fa-chevron-right"></i>
+                    <a href="#" class="news-link">Deepali Malik</a>
+                    <span class="news-date">Apr 20</span>
+                </li>
+            </ul>
+        </div>
+        
     </div>
-
-
     <footer class="footer">
         <div class="max-w-7xl mx-auto">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-6">
@@ -868,8 +858,11 @@
                 document.documentElement.style.setProperty('--footer-bg', '#111827'); 
                 document.documentElement.style.setProperty('--navbar-bg', '#374151'); 
                 
-                document.querySelector('.container').style.backgroundColor = '#374151'; 
-                document.querySelector('.container').style.boxShadow = '0 10px 30px rgba(255, 255, 255, 0.1)';
+                document.querySelectorAll('.container').forEach(el => {
+                    el.style.backgroundColor = '#374151';
+                    el.style.boxShadow = '0 10px 30px rgba(255, 255, 255, 0.1)';
+                });
+                
                 document.querySelector('h1').style.color = '#bfdbfe'; 
                 document.querySelectorAll('.form-label').forEach(el => el.style.color = '#f8f9fa');
                 document.querySelectorAll('.form-select, .form-input').forEach(el => {
@@ -887,8 +880,11 @@
                 document.documentElement.style.setProperty('--footer-bg', '#2C4B9E'); 
                 document.documentElement.style.setProperty('--navbar-bg', '#ffffff');
 
-                document.querySelector('.container').style.backgroundColor = '#ffffff';
-                document.querySelector('.container').style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.1)';
+                document.querySelectorAll('.container').forEach(el => {
+                    el.style.backgroundColor = '#ffffff';
+                    el.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.1)';
+                });
+                
                 document.querySelector('h1').style.color = 'var(--secondary-color)';
                 document.querySelectorAll('.form-label').forEach(el => el.style.color = '#333');
                 document.querySelectorAll('.form-select, .form-input').forEach(el => {
