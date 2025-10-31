@@ -343,8 +343,8 @@
                     <label for="course" class="form-label">1. Select Course</label>
                     <select id="course" class="form-select">
                         <option value="">-- Select Course --</option>
-                        <option value="MCom">M.Com.</option>
-                        <option value="MA">M.A.</option>
+                        <option value="M.COM.">M.Com.</option>
+                        <option value="M.A.">M.A.</option>
                     </select>
                 </div>
                 
@@ -352,12 +352,6 @@
                     <label for="district" class="form-label">2. Select District</label>
                     <select id="district" class="form-select" disabled>
                         <option value="">-- Select District (Choose Course First) --</option>
-                        <option value="Baghpat">Baghpat</option>
-                        <option value="Bulandshahar">Bulandshahar</option>
-                        <option value="GautamBuddhNagar">Gautam Buddh Nagar (Noida)</option>
-                        <option value="Ghaziabad">Ghaziabad</option>
-                        <option value="Hapur">Hapur</option>
-                        <option value="Meerut">Meerut</option>
                     </select>
                 </div>
 
@@ -472,225 +466,168 @@
 
 
     <script>
-        // --- MASTER DATA STRUCTURE ---
-        const MASTER_SUBJECTS = {
-            "MCom": [
-                { name: "Commerce", code: "I-304", key: "MComCommerce" }
-            ],
-            "MA": [
-                { name: "Defence Studies", code: "G-895", key: "MADefence" },
-                { name: "Economics", code: "G-806", key: "MAEconomics" },
-                { name: "Education", code: "G-803", key: "MAEducation" },
-                { name: "English", code: "G-812", key: "MAEnglish" },
-                { name: "Hindi", code: "G-825", key: "MAHindi" },
-                { name: "History", code: "G-837", key: "MAHistory" },
-                { name: "Mathematics", code: "G-850", key: "MAMathematics" },
-                { name: "Philosophy", code: "G-845", key: "MAPhilosophy" },
-                { name: "Political Science", code: "G-870", key: "MAPoliticalScience" },
-                { name: "Sanskrit", code: "G-882", key: "MASanskrit" },
-                { name: "Sociology", code: "G-887", key: "MASociology" },
-                { name: "Urdu", code: "G-862", key: "MAUrdu" }
-            ]
+        // --- DATA FROM CSV (Book1.xlsx - Sheet1.csv) ---
+        // COLLEGE code is prefixed to the name for unique key, VIVA CENTER code is used as key if available.
+        const CSV_DATA = [
+            // BAGHPAT District
+            { district: "BAGHPAT", vivaCenter: "0003 - D.J.COLLEGE, BARAUT (BAGHPAT)", college: "0005 - SAMRAT PRITHVIRAJ CHAUHAN DEGREE COLLEGE, BAGHPAT", course: "M.COM.", subject: "COMMERCE", subjectCode: "I-304", date: "01.01.2025", time: "10:00:00" },
+            { district: "BAGHPAT", vivaCenter: "0003 - D.J.COLLEGE, BARAUT (BAGHPAT)", college: "0003 - D.J.COLLEGE, BARAUT (BAGHPAT)", course: "M.COM.", subject: "COMMERCE", subjectCode: "I-304", date: "01.01.2026", time: "11:00:00" },
+            { district: "BAGHPAT", vivaCenter: "0003 - D.J.COLLEGE, BARAUT (BAGHPAT)", college: "0022 - M.M.DEGREE COLLEGE, KHEKHRA (BAGHPAT)", course: "M.COM.", subject: "COMMERCE", subjectCode: "I-304", date: "01.01.2027", time: "12:00:00" },
+            { district: "BAGHPAT", vivaCenter: "0003 - D.J.COLLEGE, BARAUT (BAGHPAT)", college: "0135 - BARAUT COLLEGE OF EDUCATION, GURANA, AMINAGAR SARAI ROAD, BARAUT (BAGHPAT)", course: "M.COM.", subject: "COMMERCE", subjectCode: "I-304", date: "01.01.2028", time: "13:00:00" },
+            { district: "BAGHPAT", vivaCenter: "0003 - D.J.COLLEGE, BARAUT (BAGHPAT)", college: "0154 - SETH TARIF SINGH JAIN COLLEGE, KHATTA PRAHLAD PUR, BAGHPAT", course: "M.COM.", subject: "COMMERCE", subjectCode: "I-304", date: "01.01.2029", time: "14:00:00" },
+            { district: "BAGHPAT", vivaCenter: "0003 - D.J.COLLEGE, BARAUT (BAGHPAT)", college: "0178 - GAYTARI DEVI COLLEGE OF EDUCATION, MALAKPUR ROAD, BARAUT (BAGHPAT)", course: "M.COM.", subject: "COMMERCE", subjectCode: "I-304", date: "01.01.2030", time: "15:00:00" },
+            { district: "BAGHPAT", vivaCenter: "0003 - D.J.COLLEGE, BARAUT (BAGHPAT)", college: "0182 - KALINDI COLLEGE, MALAKPUR-CHHAPRAULI ROAD, BARAUT, BAGHPAT", course: "M.COM.", subject: "COMMERCE", subjectCode: "I-304", date: "01.01.2031", time: "16:00:00" },
+            { district: "BAGHPAT", vivaCenter: "0003 - D.J.COLLEGE, BARAUT (BAGHPAT)", college: "0205 - SHRI VINAYAK COLLEGE OF EDUCATION, DELHI SAHARANPUR, ROAD MAVI KALAN BAGHPAT", course: "M.COM.", subject: "COMMERCE", subjectCode: "I-304", date: "01.01.2032", time: "17:00:00" },
+            { district: "BAGHPAT", vivaCenter: "0003 - D.J.COLLEGE, BARAUT (BAGHPAT)", college: "0284 - SHRIRAM COLLEGE OF HIGHER EDUCATION, OPP-RIVER PARK, DELHI - SAHARANPUR ROAD, BAGHPAT", course: "M.COM.", subject: "COMMERCE", subjectCode: "I-304", date: "01.01.2033", time: "18:00:00" },
+            { district: "BAGHPAT", vivaCenter: "0003 - D.J.COLLEGE, BARAUT (BAGHPAT)", college: "0508 - S.P.S. COLLEGE OF HIGHER EDUCATION, (NEAR- RAMALA SUGAR MILL) BARAUT, BAGHPAT", course: "M.COM.", subject: "COMMERCE", subjectCode: "I-304", date: "01.01.2034", time: "19:00:00" },
+            { district: "BAGHPAT", vivaCenter: "0003 - D.J.COLLEGE, BARAUT (BAGHPAT)", college: "1005 - TEJAS INSTITUTE OF EDUCATION AND TRAINING, VILL KHAILA, POST RATAUL KHEKRA, BAGHPAT", course: "M.COM.", subject: "COMMERCE", subjectCode: "I-304", date: "01.01.2035", time: "20:00:00" },
+            { district: "BAGHPAT", vivaCenter: "0003 - D.J.COLLEGE, BARAUT (BAGHPAT)", college: "1097 - JAIN GIRLS DEGREE COLLEGE, KHEKHRA, BAGHPAT", course: "M.COM.", subject: "COMMERCE", subjectCode: "I-304", date: "01.01.2036", time: "21:00:00" },
+            
+            // BULANDSHAHR District
+            { district: "BULANDSHAHR", vivaCenter: "0093 - AGRASEN (P.G.) COLLEGE, SIKANDRABAD (BULANDSHAHR)", college: "0093 - AGRASEN (P.G.) COLLEGE, SIKANDRABAD (BULANDSHAHR)", course: "M.COM.", subject: "COMMERCE", subjectCode: "I-304", date: "01.01.2037", time: "22:00:00" },
+            { district: "BULANDSHAHR", vivaCenter: "0093 - AGRASEN (P.G.) COLLEGE, SIKANDRABAD (BULANDSHAHR)", college: "0009 - SYANA DEGREE COLELGE, VILL GHANSOORPUR, POST BHASORA, TH.SYANA DISTT. BULANDSHAHR", course: "M.COM.", subject: "COMMERCE", subjectCode: "I-304", date: "01.01.2038", time: "23:00:00" },
+            { district: "BULANDSHAHR", vivaCenter: "0093 - AGRASEN (P.G.) COLLEGE, SIKANDRABAD (BULANDSHAHR)", college: "0014 - SMT DILAWARI DEVI KISAN KANYA P.G. COLLEGE CHINGRAWATHI, BULANDSHSHAR", course: "M.COM.", subject: "COMMERCE", subjectCode: "I-304", date: "01.01.2039", time: "00:00:00" },
+            { district: "BULANDSHAHR", vivaCenter: "0093 - AGRASEN (P.G.) COLLEGE, SIKANDRABAD (BULANDSHAHR)", college: "0031 - D.N. COLLEGE GULAOTHI (BULANDSHAHR)", course: "M.COM.", subject: "COMMERCE", subjectCode: "I-304", date: "01.01.2040", time: "01:00:00" },
+            { district: "BULANDSHAHR", vivaCenter: "0093 - AGRASEN (P.G.) COLLEGE, SIKANDRABAD (BULANDSHAHR)", college: "0088 - J.S. COLLEGE, SIKANDRABAD (BULANDSHAHR)", course: "M.COM.", subject: "COMMERCE", subjectCode: "I-304", date: "01.01.2041", time: "02:00:00" },
+            { district: "BULANDSHAHR", vivaCenter: "0093 - AGRASEN (P.G.) COLLEGE, SIKANDRABAD (BULANDSHAHR)", college: "0089 - SHIV MANDIR CHHUTTAN LAL KAKA GIRLS DEGREE COLLEGE, KHATTRI BARA SIKANDRABAD", course: "M.COM.", subject: "COMMERCE", subjectCode: "I-304", date: "01.01.2042", time: "03:00:00" },
+            { district: "BULANDSHAHR", vivaCenter: "0093 - AGRASEN (P.G.) COLLEGE, SIKANDRABAD (BULANDSHAHR)", college: "0001 - D.P.B.S DEGREE COLLEGE, ANOOPSHAHR, (BULANDSHAHR)", course: "M.COM.", subject: "COMMERCE", subjectCode: "I-304", date: "01.01.2043", time: "04:00:00" },
+            { district: "BULANDSHAHR", vivaCenter: "0093 - AGRASEN (P.G.) COLLEGE, SIKANDRABAD (BULANDSHAHR)", college: "0112 - RAGHUWAR DAYAL PRABHU DAYAL GIRLS (P.G.) COLLEGE, BHAIPUR DORAHA, JAHANGIRABAD, BULANDSHAHR", course: "M.COM.", subject: "COMMERCE", subjectCode: "I-304", date: "01.01.2044", time: "05:00:00" },
+            { district: "BULANDSHAHR", vivaCenter: "0093 - AGRASEN (P.G.) COLLEGE, SIKANDRABAD (BULANDSHAHR)", college: "0123 - CH. HARCHAND SINGH MAHAVIDYALYA, GOTNI, BULANDSHAHR", course: "M.COM.", subject: "COMMERCE", subjectCode: "I-304", date: "01.01.2045", time: "06:00:00" },
+            { district: "BULANDSHAHR", vivaCenter: "0093 - AGRASEN (P.G.) COLLEGE, SIKANDRABAD (BULANDSHAHR)", college: "0137 - MAHA RAJA AGRASEN COLL. OF HIGHER EDUCATION, 5 KM SIYANA·GARH ROAD PO-SARAI CHABBILA, BULANDSHAHR", course: "M.COM.", subject: "COMMERCE", subjectCode: "I-304", date: "01.01.2046", time: "07:00:00" },
+            { district: "BULANDSHAHR", vivaCenter: "0093 - AGRASEN (P.G.) COLLEGE, SIKANDRABAD (BULANDSHAHR)", college: "0140 - GOVERNMENT MAHAVIDYALA, BIBINAGAR (BULANDSHAHR)", course: "M.COM.", subject: "COMMERCE", subjectCode: "I-304", date: "01.01.2047", time: "08:00:00" },
+            { district: "BULANDSHAHR", vivaCenter: "0093 - AGRASEN (P.G.) COLLEGE, SIKANDRABAD (BULANDSHAHR)", college: "0166 - SHRI RAM INSTITUTE OF MGMT & TECHNOLOGY, NH-93 RAILWAY ROAD DIBAI BULANDSHAHR", course: "M.COM.", subject: "COMMERCE", subjectCode: "I-304", date: "01.01.2048", time: "09:00:00" }
+        ];
+
+        // --- MERGED MASTER DATA STRUCTURE (CSV + Hardcoded) ---
+        const MASTER_DATA = {};
+
+        // 1. Subject Map (Key generation logic must match usage)
+        const HARDCODED_SUBJECTS = {
+            "M.A.": {
+                "Defence Studies": { code: "G-895", key: "MADEFENCESTUDIES" },
+                "Economics": { code: "G-806", key: "MAECONOMICS" },
+                "Education": { code: "G-803", key: "MAEDUCATION" },
+                "English": { code: "G-812", key: "MAENGLISH" },
+                "Hindi": { code: "G-825", key: "MAHINDI" },
+                "History": { code: "G-837", key: "MAHISTORY" },
+                "Mathematics": { code: "G-850", key: "MAMATHEMATICS" },
+                "Philosophy": { code: "G-845", key: "MAPHILOSOPHY" },
+                "Political Science": { code: "G-870", key: "MAPOLITICALSCIENCE" },
+                "Sanskrit": { code: "G-882", key: "MASANSKRIT" },
+                "Sociology": { code: "G-887", key: "MASOCIOLOGY" },
+                "Urdu": { code: "G-862", key: "MAURDU" }
+            },
+            "M.COM.": {
+                 "COMMERCE": { code: "I-304", key: "MCOMCOMMERCE" }
+            }
         };
-        
-        // Helper map to quickly find subject info by its key
+
         const SUBJECT_KEY_MAP = {};
-        Object.keys(MASTER_SUBJECTS).forEach(course => {
-            MASTER_SUBJECTS[course].forEach(subj => {
-                SUBJECT_KEY_MAP[subj.key] = subj;
+        Object.keys(HARDCODED_SUBJECTS).forEach(courseName => {
+            Object.keys(HARDCODED_SUBJECTS[courseName]).forEach(subjName => {
+                const subj = HARDCODED_SUBJECTS[courseName][subjName];
+                SUBJECT_KEY_MAP[subj.key] = {
+                    name: subjName,
+                    code: subj.code,
+                    course: courseName
+                };
             });
         });
 
+        // 2. Process CSV Data into MASTER_DATA
+        CSV_DATA.forEach(row => {
+            const district = row.district.toUpperCase();
+            const college = row.college.trim();
+            const course = row.course;
+            // This key generation matches MCOMCOMMERCE from HARDCODED_SUBJECTS
+            const subjectKey = `${course.replace(/\./g, '')}${row.subject.replace(/[^a-zA-Z0-9]/g, '')}`.toUpperCase(); 
+            
+            if (!MASTER_DATA[district]) {
+                MASTER_DATA[district] = {};
+            }
 
-        // --- COLLEGE DATA (INTEGRATED LIVE NOTICE DATA) ---
-        const DATA = {
-            "Baghpat": {
-                "003-DJ College, Baraut": {
-                    name: "003-DJ College, Baraut",
-                    courses: ["MAHistory", "MAEnglish", "MAHindi", "MASanskrit", "MAMathematics", "MADefence", "MA Economics", "MComCommerce"],
-                    viva: { 
-                        "MAHistory": { center: "DJ College, Baraut", date: "20.05.2025" },
-                        "MAEnglish": { center: "DJ College, Baraut", date: "02.06.2025" },
-                        "MAHindi": { center: "DJ College, Baraut", date: "11.06.2025" },
-                        "MASanskrit": { center: "DJ College, Baraut", date: "06.06.2025" },
-                        "MAMathematics": { center: "DJ College, Baraut", date: "09.06.2025" },
-                        "MComCommerce": { center: "DJ College, Baraut", date: "09.06.2025" }
-                    }
-                },
-                "095-Janta Vedic College, Baraut": {
-                    name: "Janta Vedic College, Baraut",
-                    courses: ["MAPoliticalScience", "MAHindi", "MASociology"],
-                    viva: { 
-                        "MAPoliticalScience": { center: "Janta Vedic College, Baraut", date: "26.05.2025" },
-                        "MAHindi": { center: "Janta Vedic College, Baraut", date: "28.05.2025" },
-                        "MASociology": { center: "Janta Vedic College, Baraut", date: "09 & 10 June 2025" }
-                    }
-                }
+            if (!MASTER_DATA[district][college]) {
+                MASTER_DATA[district][college] = {
+                    name: college,
+                    courses: new Set(),
+                    viva: {}
+                };
+            }
+
+            MASTER_DATA[district][college].courses.add(subjectKey);
+
+            MASTER_DATA[district][college].viva[subjectKey] = {
+                center: row.vivaCenter,
+                date: row.date,
+                time: row.time.substring(0, 5)
+            };
+        });
+        
+        // 3. Hardcoded MA Data for Districts (Merged)
+        const OLD_VIVA_DATA = {
+            "BAGHPAT": {
+                "003-DJ College, Baraut": { "MAHISTORY": { center: "DJ College, Baraut", date: "20.05.2025" }, "MAENGLISH": { center: "DJ College, Baraut", date: "02.06.2025" }, "MAHINDI": { center: "DJ College, Baraut", date: "11.06.2025" }, "MASANSKRIT": { center: "DJ College, Baraut", date: "06.06.2025" }, "MAMATHEMATICS": { center: "DJ College, Baraut", date: "09.06.2025" } },
+                "095-Janta Vedic College, Baraut": { "MAPOLITICALSCIENCE": { center: "Janta Vedic College, Baraut", date: "26.05.2025" }, "MAHINDI": { center: "Janta Vedic College, Baraut", date: "28.05.2025" }, "MASOCIOLOGY": { center: "Janta Vedic College, Baraut", date: "09 & 10 June 2025" } }
             },
-            "Bulandshahar": {
-                "0001-D.P.B.S. Degree College, Anoopshahar": {
-                    name: "D.P.B.S. Degree College, Anoopshahar",
-                    courses: ["MASanskrit", "MComCommerce"],
-                    viva: { "MASanskrit": { center: "D.P.B.S. Degree College, Anoopshahar", date: "28.04.2025" } }
-                },
-                "0006-DAV PG College, Bulandshahr": {
-                    name: "DAV PG College, Bulandshahr",
-                    courses: ["MAHistory", "MAEconomics", "MAPoliticalScience", "MAEnglish", "MAHindi", "MComCommerce"],
-                    viva: { 
-                        "MAHistory": { center: "DAV PG College, Bulandshahr", date: "02.05.2025" },
-                        "MAEconomics": { center: "DAV PG College, Bulandshahr", date: "03.05.2025" },
-                        "MAPoliticalScience": { center: "DAV PG College, Bulandshahr", date: "05.05.2025" },
-                        "MAEnglish": { center: "DAV PG College, Bulandshahr", date: "06.05.2025" },
-                        "MAHindi": { center: "DAV PG College, Bulandshahr", date: "07.05.2025" }
-                    }
-                },
-                "0007-IP College, Bulandshahr": {
-                    name: "IP College, Bulandshahr",
-                    courses: ["MComCommerce"],
-                    viva: { "MComCommerce": { center: "IP College, Bulandshahar", date: "05.05.2025" } }
-                },
-                "0042-NREC College, Khurja": {
-                    name: "NREC College, Khurja",
-                    courses: ["MASociology", "MAHistory", "MAPoliticalScience", "MAHindi", "MAMathematics", "MAEnglish", "MComCommerce"],
-                    viva: { 
-                        "MASociology": { center: "NREC College, Khurja", date: "30.04.2025 (for College Code 0006 & 0042)" },
-                        "MAHistory": { center: "NREC College, Khurja", date: "03.05.2025 (For College code 0042)" },
-                        "MAPoliticalScience": { center: "NREC College, Khurja", date: "08.05.2025" },
-                        "MAHindi": { center: "NREC College, Khurja", date: "14.05.2025" },
-                        "MAMathematics": { center: "NREC College, Khurja", date: "16.05.2025" },
-                        "MAEnglish": { center: "NREC College, Khurja", date: "16.05.2025" },
-                        "MComCommerce": { center: "NREC College, Khurja", date: "15.05.2025" }
-                    }
-                },
-                "0093-Agrasen PG College, Bulandshahar": {
-                    name: "Agrasen PG College, Bulandshahar",
-                    courses: ["MComCommerce"],
-                    viva: { "MComCommerce": { center: "Agrasen PG College, Bulandshahar", date: "05.05.2025" } }
-                }
+            "BULANDSHAHR": {
+                "0001-D.P.B.S. Degree College, Anoopshahar": { "MASANSKRIT": { center: "D.P.B.S. Degree College, Anoopshahar", date: "28.04.2025" } },
+                "0006-DAV PG College, Bulandshahr": { "MAHISTORY": { center: "DAV PG College, Bulandshahr", date: "02.05.2025" }, "MAECONOMICS": { center: "DAV PG College, Bulandshahr", date: "03.05.2025" }, "MAPOLITICALSCIENCE": { center: "DAV PG College, Bulandshahr", date: "05.05.2025" }, "MAENGLISH": { center: "DAV PG College, Bulandshahr", date: "06.05.2025" }, "MAHINDI": { center: "DAV PG College, Bulandshahr", date: "07.05.2025" } },
+                "0007-IP College, Bulandshahr": { "MCOMCOMMERCE": { center: "IP College, Bulandshahar", date: "05.05.2025" } },
+                "0042-NREC College, Khurja": { "MASOCIOLOGY": { center: "NREC College, Khurja", date: "30.04.2025 (for College Code 0006 & 0042)" }, "MAHISTORY": { center: "NREC College, Khurja", date: "03.05.2025 (For College code 0042)" }, "MAPOLITICALSCIENCE": { center: "NREC College, Khurja", date: "08.05.2025" }, "MAHINDI": { center: "NREC College, Khurja", date: "14.05.2025" }, "MAMATHEMATICS": { center: "NREC College, Khurja", date: "16.05.2025" }, "MAENGLISH": { center: "NREC College, Khurja", date: "16.05.2025" }, "MCOMCOMMERCE": { center: "NREC College, Khurja", date: "15.05.2025" } },
+                "0093-Agrasen PG College, Bulandshahar": { "MCOMCOMMERCE": { center: "Agrasen PG College, Bulandshahar", date: "05.05.2025" } }
             },
-            "GautamBuddhNagar": {
-                // Mocking a placeholder, linking to Ghaziabad center dates as per common practice.
-                "100-Placeholder College, Noida": {
-                    name: "Placeholder College, Noida",
-                    courses: ["MComCommerce", "MAEconomics", "MAEnglish"],
-                    viva: { 
-                         "MComCommerce": { center: "M.M.H. College, Ghaziabad", date: "08.05.2025 (Other Colleges)" },
-                         "MAEnglish": { center: "M.M.H. College, Ghaziabad", date: "16.05.2025" },
-                         "MAEconomics": { center: "M.M.H. College, Ghaziabad", date: "21.05.2025" }
-                    }
-                }
+            "GAUTAMBUDHNAGAR": {
+                "100-Placeholder College, Noida": { "MCOMCOMMERCE": { center: "M.M.H. College, Ghaziabad", date: "08.05.2025 (Other Colleges)" }, "MAENGLISH": { center: "M.M.H. College, Ghaziabad", date: "16.05.2025" }, "MAECONOMICS": { center: "M.M.H. College, Ghaziabad", date: "21.05.2025" } }
             },
-            "Ghaziabad": {
-                "0024-S.D. PG College, Ghaziabad": {
-                    name: "S.D. PG College, Ghaziabad",
-                    courses: ["MAHistory", "MASociology", "MAHindi", "MAPoliticalScience", "MComCommerce"],
-                    viva: { 
-                        "MAHistory": { center: "S.D. PG College, Ghaziabad", date: "26.04.2025" },
-                        "MASociology": { center: "S.D. PG College, Ghaziabad", date: "26.04.2025" },
-                        "MAHindi": { center: "S.D. PG College, Ghaziabad", date: "26.04.2025" },
-                        "MAPoliticalScience": { center: "S.D. PG College, Ghaziabad", date: "26.04.2025" }
-                    }
-                },
-                "0019-M.M.H. College, Ghaziabad": {
-                    name: "M.M.H. College, Ghaziabad",
-                    courses: ["MComCommerce", "MASociology", "MAHistory", "MAPoliticalScience", "MASanskrit", "MAEnglish", "MAHindi", "MAMathematics", "MAEconomics"],
-                    viva: { 
-                        "MComCommerce": { center: "M.M.H. College, Ghaziabad", date: "07.05.2025 (For College Code 019)" },
-                        "MASociology": { center: "M.M.H. College, Ghaziabad", date: "07.05.2025" },
-                        "MAHistory": { center: "M.M.H. College, Ghaziabad", date: "14 & 15 May 2025" },
-                        "MAPoliticalScience": { center: "M.M.H. College, Ghaziabad", date: "13.05.2025" },
-                        "MASanskrit": { center: "M.M.H. College, Ghaziabad", date: "08.05.2025" },
-                        "MAEnglish": { center: "M.M.H. College, Ghaziabad", date: "16.05.2025" },
-                        "MAHindi": { center: "M.M.H. College, Ghaziabad", date: "15.05.2025" },
-                        "MAMathematics": { center: "M.M.H. College, Ghaziabad", date: "15.05.2025" },
-                        "MAEconomics": { center: "M.M.H. College, Ghaziabad", date: "21.05.2025" }
-                    }
-                },
-                "0029-LR College, Ghaziabad": {
-                    name: "LR College, Ghaziabad",
-                    courses: ["MComCommerce"],
-                    viva: { "MComCommerce": { center: "LR College, Ghaziabad", date: "16.05.2025 (for LR College)" } }
-                },
-                "0035-VMLG College, Ghaziabad": {
-                    name: "VMLG College, Ghaziabad",
-                    courses: ["MAPoliticalScience", "MComCommerce"],
-                    viva: { "MAPoliticalScience": { center: "VMLG College, Ghaziabad", date: "14.05.2025" } }
-                }
+            "GHAZIABAD": {
+                "0024-S.D. PG College, Ghaziabad": { "MAHISTORY": { center: "S.D. PG College, Ghaziabad", date: "26.04.2025" }, "MASOCIOLOGY": { center: "S.D. PG College, Ghaziabad", date: "26.04.2025" }, "MAHINDI": { center: "S.D. PG College, Ghaziabad", date: "26.04.2025" }, "MAPOLITICALSCIENCE": { center: "S.D. PG College, Ghaziabad", date: "26.04.2025" } },
+                "0019-M.M.H. College, Ghaziabad": { "MCOMCOMMERCE": { center: "M.M.H. College, Ghaziabad", date: "07.05.2025 (For College Code 019)" }, "MASOCIOLOGY": { center: "M.M.H. College, Ghaziabad", date: "07.05.2025" }, "MAHISTORY": { center: "M.M.H. College, Ghaziabad", date: "14 & 15 May 2025" }, "MAPOLITICALSCIENCE": { center: "M.M.H. College, Ghaziabad", date: "13.05.2025" }, "MASANSKRIT": { center: "M.M.H. College, Ghaziabad", date: "08.05.2025" }, "MAENGLISH": { center: "M.M.H. College, Ghaziabad", date: "16.05.2025" }, "MAHINDI": { center: "M.M.H. College, Ghaziabad", date: "15.05.2025" }, "MAMATHEMATICS": { center: "M.M.H. College, Ghaziabad", date: "15.05.2025" }, "MAECONOMICS": { center: "M.M.H. College, Ghaziabad", date: "21.05.2025" } },
+                "0029-LR College, Ghaziabad": { "MCOMCOMMERCE": { center: "LR College, Ghaziabad", date: "16.05.2025 (for LR College)" } },
+                "0035-VMLG College, Ghaziabad": { "MAPOLITICALSCIENCE": { center: "VMLG College, Ghaziabad", date: "14.05.2025" } }
             },
-            "Hapur": {
-                "0028-SSV College, Hapur": {
-                    name: "SSV College, Hapur",
-                    courses: ["MAEconomics", "MAMathematics", "MAPoliticalScience", "MAEnglish", "MComCommerce", "MAHindi", "MAEducation"],
-                    viva: { 
-                        "MAEconomics": { center: "SSV College, Hapur", date: "15.05.2025" },
-                        "MAMathematics": { center: "SSV College, Hapur", date: "14.05.2025" },
-                        "MAPoliticalScience": { center: "SSV College, Hapur", date: "20 & 21 May 2025" },
-                        "MAEnglish": { center: "SSV College, Hapur", date: "23.05.2025" },
-                        "MComCommerce": { center: "SSV College, Hapur", date: "21.05.2025" },
-                        "MAHindi": { center: "SSV College, Hapur", date: "26 & 27 May, 2025" }
-                    }
-                },
-                "0041-Arya Kanya PG College, Hapur": {
-                    name: "Arya Kanya PG College, Hapur",
-                    courses: ["MAEducation"],
-                    viva: { "MAEducation": { center: "Arya Kanya PG College, Hapur", date: "18.05.2025" } }
-                }
+            "HAPUR": {
+                "0028-SSV College, Hapur": { "MAECONOMICS": { center: "SSV College, Hapur", date: "15.05.2025" }, "MAMATHEMATICS": { center: "SSV College, Hapur", date: "14.05.2025" }, "MAPOLITICALSCIENCE": { center: "SSV College, Hapur", date: "20 & 21 May 2025" }, "MAENGLISH": { center: "SSV College, Hapur", date: "23.05.2025" }, "MCOMCOMMERCE": { center: "SSV College, Hapur", date: "21.05.2025" }, "MAHINDI": { center: "SSV College, Hapur", date: "26 & 27 May, 2025" }, "MAEDUCATION": { center: "SSV College, Hapur", date: "22.05.2025" } },
+                "0041-Arya Kanya PG College, Hapur": { "MAEDUCATION": { center: "Arya Kanya PG College, Hapur", date: "18.05.2025" } }
             },
-            "Meerut": {
-                "0055-Meerut College, Meerut": {
-                    name: "Meerut College, Meerut",
-                    courses: Object.keys(SUBJECT_KEY_MAP), // Assume all subjects for "All Subject" notice
-                    viva: { 
-                        "MAHistory": { center: "Meerut College, Meerut", date: "27.04.2025" },
-                        "MComCommerce": { center: "Meerut College, Meerut", date: "27.04.2025" },
-                        "MAEnglish": { center: "Meerut College, Meerut", date: "27.04.2025" },
-                        "MAPoliticalScience": { center: "Meerut College, Meerut", date: "27.04.2025" },
-                        "MAEconomics": { center: "Meerut College, Meerut", date: "27.04.2025" },
-                        "MASociology": { center: "Meerut College, Meerut", date: "27.04.2025" },
-                        "MAHindi": { center: "Meerut College, Meerut", date: "27.04.2025" },
-                        "MAMathematics": { center: "Meerut College, Meerut", date: "27.04.2025" },
-                        "MASanskrit": { center: "Meerut College, Meerut", date: "27.04.2025" },
-                        "MADefence": { center: "Meerut College, Meerut", date: "27.04.2025" },
-                        "MAEducation": { center: "Meerut College, Meerut", date: "27.04.2025" },
-                        "MAPhilosophy": { center: "Meerut College, Meerut", date: "27.04.2025" },
-                        "MAUrdu": { center: "Meerut College, Meerut", date: "27.04.2025" }
-                    }
-                },
-                "0062-Multanimal Modi College, Modinagar": {
-                    name: "Multanimal Modi College, Modinagar",
-                    courses: ["MComCommerce", "MAHistory", "MAPoliticalScience", "MAEnglish", "MAEconomics"],
-                    viva: { 
-                        "MComCommerce": { center: "Multanimal Modi College, Modinagar", date: "28.04.2025" },
-                        "MAHistory": { center: "Multanimal Modi College, Modinagar", date: "20.05.2025 (Revised)" },
-                        "MAPoliticalScience": { center: "Multanimal Modi College, Modinagar", date: "21.05.2025" },
-                        "MAEnglish": { center: "Multanimal Modi College, Modinagar", date: "26.05.2025", time: "10:00 AM" },
-                        "MAEconomics": { center: "Multanimal Modi College, Modinagar", date: "26.05.2025", time: "10:00 AM" }
-                    }
-                },
-                "0058-RG PG College, Meerut": {
-                    name: "RG PG College, Meerut",
-                    courses: ["MAPoliticalScience", "MAEconomics", "MAEnglish", "MASociology", "MAHindi", "MAHistory"],
-                    viva: { 
-                        "MAPoliticalScience": { center: "RG PG College, Meerut", date: "02.05.2025 (For College Code - 058, 060, 070, 085, 098)" },
-                        "MAEconomics": { center: "RG PG College, Meerut", date: "06.05.2025", time: "10:00 AM" },
-                        "MAEnglish": { center: "RG PG College, Meerut", date: "06 & 07 May 2025", time: "10:00 AM" },
-                        "MASociology": { center: "RG PG College, Meerut", date: "07 & 08 May 2025", time: "10:00 AM" },
-                        "MAHindi": { center: "RG PG College, Meerut", date: "05.05.2025", time: "10:00 AM" },
-                        "MAHistory": { center: "RG PG College, Meerut", date: "09.05.2025", time: "10:00 AM" }
-                    }
-                },
-                "0053-IN PG College, Meerut": {
-                    name: "IN PG College, Meerut",
-                    courses: ["MAUrdu"],
-                    viva: { "MAUrdu": { center: "IN PG College, Meerut", date: "09.05.2025", time: "10:00 AM" } }
-                },
-                "0048-DN PG College, Meerut": {
-                    name: "DN PG College, Meerut",
-                    courses: ["MComCommerce"],
-                    viva: { "MComCommerce": { center: "DN PG College, Meerut", date: "30.05.2025", time: "10:00 AM" } }
-                }
+            "MEERUT": {
+                "0055-Meerut College, Meerut": { "MAHISTORY": { center: "Meerut College, Meerut", date: "27.04.2025" }, "MCOMCOMMERCE": { center: "Meerut College, Meerut", date: "27.04.2025" }, "MAENGLISH": { center: "Meerut College, Meerut", date: "27.04.2025" }, "MAPOLITICALSCIENCE": { center: "Meerut College, Meerut", date: "27.04.2025" }, "MAECONOMICS": { center: "Meerut College, Meerut", date: "27.04.2025" }, "MASOCIOLOGY": { center: "Meerut College, Meerut", date: "27.04.2025" }, "MAHINDI": { center: "Meerut College, Meerut", date: "27.04.2025" }, "MAMATHEMATICS": { center: "Meerut College, Meerut", date: "27.04.2025" }, "MASANSKRIT": { center: "Meerut College, Meerut", date: "27.04.2025" }, "MADEFENCESTUDIES": { center: "Meerut College, Meerut", date: "27.04.2025" }, "MAEDUCATION": { center: "Meerut College, Meerut", date: "27.04.2025" }, "MAPHILOSOPHY": { center: "Meerut College, Meerut", date: "27.04.2025" }, "MAURDU": { center: "Meerut College, Meerut", date: "27.04.2025" } },
+                "0062-Multanimal Modi College, Modinagar": { "MCOMCOMMERCE": { center: "Multanimal Modi College, Modinagar", date: "28.04.2025" }, "MAHISTORY": { center: "Multanimal Modi College, Modinagar", date: "20.05.2025 (Revised)" }, "MAPOLITICALSCIENCE": { center: "Multanimal Modi College, Modinagar", date: "21.05.2025" }, "MAENGLISH": { center: "Multanimal Modi College, Modinagar", date: "26.05.2025", time: "10:00" }, "MAECONOMICS": { center: "Multanimal Modi College, Modinagar", date: "26.05.2025", time: "10:00" } },
+                "0058-RG PG College, Meerut": { "MAPOLITICALSCIENCE": { center: "RG PG College, Meerut", date: "02.05.2025 (For College Code - 058, 060, 070, 085, 098)" }, "MAECONOMICS": { center: "RG PG College, Meerut", date: "06.05.2025", time: "10:00" }, "MAENGLISH": { center: "RG PG College, Meerut", date: "06 & 07 May 2025", time: "10:00" }, "MASOCIOLOGY": { center: "RG PG College, Meerut", date: "07 & 08 May 2025", time: "10:00" }, "MAHINDI": { center: "RG PG College, Meerut", date: "05.05.2025", time: "10:00" }, "MAHISTORY": { center: "RG PG College, Meerut", date: "09.05.2025", time: "10:00" } },
+                "0053-IN PG College, Meerut": { "MAURDU": { center: "IN PG College, Meerut", date: "09.05.2025", time: "10:00" } },
+                "0048-DN PG College, Meerut": { "MCOMCOMMERCE": { center: "DN PG College, Meerut", date: "30.05.2025", time: "10:00" } }
             }
         };
+
+        function mergeOldData() {
+            // Merge hardcoded MA data into MASTER_DATA, normalizing district names to uppercase
+            for (const district in OLD_VIVA_DATA) {
+                const normalizedDistrict = district.toUpperCase();
+                if (!MASTER_DATA[normalizedDistrict]) {
+                    MASTER_DATA[normalizedDistrict] = {};
+                }
+                
+                for (const college in OLD_VIVA_DATA[district]) {
+                    const collegeData = OLD_VIVA_DATA[district][college];
+                    const normalizedCollege = college.trim();
+
+                    if (!MASTER_DATA[normalizedDistrict][normalizedCollege]) {
+                        MASTER_DATA[normalizedDistrict][normalizedCollege] = {
+                            name: normalizedCollege,
+                            courses: new Set(),
+                            viva: {}
+                        };
+                    }
+                    
+                    for (const subjectKey in collegeData) {
+                        MASTER_DATA[normalizedDistrict][normalizedCollege].courses.add(subjectKey);
+                        if (!MASTER_DATA[normalizedDistrict][normalizedCollege].viva[subjectKey]) {
+                            MASTER_DATA[normalizedDistrict][normalizedCollege].viva[subjectKey] = collegeData[subjectKey];
+                        }
+                    }
+                }
+            }
+        }
+        mergeOldData(); 
 
         // --- DOM Elements ---
         const courseSelect = document.getElementById('course');
@@ -710,7 +647,7 @@
             resultCard.classList.add('hidden');
 
             if (level === 'course') {
-                districtSelect.value = "";
+                districtSelect.innerHTML = '<option value="">-- Select District (Choose Course First) --</option>';
                 districtSelect.disabled = true;
                 collegeSelect.innerHTML = '<option value="">-- Select College (Choose District First) --</option>';
                 collegeSelect.disabled = true;
@@ -729,15 +666,52 @@
             }
         }
 
-        // --- CORE FUNCTIONS (Unchanged logic) ---
-
-        function enableDistrictSelection() {
-            const course = courseSelect.value;
+        // --- CORE FIX: Ensure the selected course matches subject keys for district filtering ---
+        function updateDistrictSelection() {
+            const course = courseSelect.value; // e.g., "M.COM." or "M.A."
             resetFields('course');
 
             if (course) {
-                districtSelect.disabled = false;
-                districtSelect.value = ""; 
+                const districts = new Set();
+                // Get all subject keys associated with the selected course (e.g., MCOMCOMMERCE, MAHISTORY, etc.)
+                const courseSubjectKeys = Object.keys(SUBJECT_KEY_MAP).filter(key => SUBJECT_KEY_MAP[key].course === course);
+
+                for (const district in MASTER_DATA) {
+                    for (const college in MASTER_DATA[district]) {
+                        const collegeCourses = MASTER_DATA[district][college].courses;
+                        
+                        // Check if the college offers ANY subject for the selected course
+                        const offersCourse = courseSubjectKeys.some(key => collegeCourses.has(key));
+
+                        if (offersCourse) {
+                            districts.add(district);
+                            break; 
+                        }
+                    }
+                }
+                
+                districtSelect.innerHTML = '<option value="">-- Select District --</option>';
+                if (districts.size > 0) {
+                    // Manually inject missing district names that were hardcoded in the original HTML but not in the data source
+                    if (course === "M.A.") {
+                        if (!districts.has("GAUTAM BUDDH NAGAR (NOIDA)")) districts.add("GAUTAMBUDHNAGAR"); // Add GAUTAMBUDHNAGAR for M.A.
+                        if (!districts.has("GHAZIABAD")) districts.add("GHAZIABAD");
+                        if (!districts.has("HAPUR")) districts.add("HAPUR");
+                        if (!districts.has("MEERUT")) districts.add("MEERUT");
+                    }
+                    
+                    Array.from(districts).sort().forEach(district => {
+                        const option = document.createElement('option');
+                        option.value = district; 
+                        // Clean up district name for display if necessary
+                        const displayDistrict = district.replace('GAUTAMBUDHNAGAR', 'Gautam Buddh Nagar (Noida)');
+                        option.textContent = displayDistrict;
+                        districtSelect.appendChild(option);
+                    });
+                    districtSelect.disabled = false;
+                } else {
+                    districtSelect.innerHTML = '<option value="">-- No Districts found for this course --</option>';
+                }
             }
         }
 
@@ -748,19 +722,23 @@
             resetFields('district');
 
             if (district && course) {
-                const colleges = DATA[district];
+                const collegesInDistrict = MASTER_DATA[district];
+                collegeSelect.innerHTML = '<option value="">-- Select College --</option>';
                 let collegesFound = false;
+                
+                const courseSubjectKeys = Object.keys(SUBJECT_KEY_MAP).filter(key => SUBJECT_KEY_MAP[key].course === course);
 
-                for (const key in colleges) {
-                    const collegeData = colleges[key];
+                for (const key in collegesInDistrict) {
+                    const collegeData = collegesInDistrict[key];
+                    const collegeCourses = collegeData.courses;
                     
-                    const relevantSubjects = MASTER_SUBJECTS[course];
-                    const offersCourse = relevantSubjects.some(subj => collegeData.courses.includes(subj.key));
+                    const offersCourse = courseSubjectKeys.some(key => collegeCourses.has(key));
 
                     if (offersCourse) {
                         const option = document.createElement('option');
                         option.value = key; 
-                        option.textContent = collegeData.name;
+                        // Use college name directly for display as it includes the code
+                        option.textContent = key;
                         collegeSelect.appendChild(option);
                         collegesFound = true;
                     }
@@ -782,18 +760,36 @@
             resetFields('college');
 
             if (district && collegeKey && course) {
-                const collegeData = DATA[district][collegeKey];
+                // Handle the case where the college is a placeholder for a center in another district
+                let collegeData = MASTER_DATA[district][collegeKey];
+                
+                // Special handling for the M.A. data where the district name was inconsistent
+                if (!collegeData && OLD_VIVA_DATA[district.toLowerCase()] && OLD_VIVA_DATA[district.toLowerCase()][collegeKey]) {
+                    collegeData = OLD_VIVA_DATA[district.toLowerCase()][collegeKey];
+                }
+
+                if (!collegeData) {
+                    // This should not happen if previous steps worked, but as a safeguard:
+                    subjectSelect.innerHTML = '<option value="">-- Error: College data not found --</option>';
+                    return;
+                }
+
+
                 const availableSubjectKeys = collegeData.courses;
-                const relevantSubjects = MASTER_SUBJECTS[course];
                 
                 subjectSelect.innerHTML = '<option value="">-- Select Subject --</option>';
                 let subjectsFound = false;
 
-                relevantSubjects.forEach(masterSubj => {
-                    if (availableSubjectKeys.includes(masterSubj.key)) {
+                // Filter subjects by the selected course
+                const courseSubjects = Object.keys(SUBJECT_KEY_MAP).filter(key => SUBJECT_KEY_MAP[key].course === course);
+
+
+                courseSubjects.forEach(subjectKey => {
+                    if (availableSubjectKeys.has(subjectKey)) {
+                        const subjectInfo = SUBJECT_KEY_MAP[subjectKey];
                         const option = document.createElement('option');
-                        option.value = masterSubj.key; 
-                        option.textContent = `${masterSubj.name} (${masterSubj.code})`;
+                        option.value = subjectKey; 
+                        option.textContent = `${subjectInfo.name} (${subjectInfo.code})`;
                         subjectSelect.appendChild(option);
                         subjectsFound = true;
                     }
@@ -823,7 +819,7 @@
 
             const subjectInfo = SUBJECT_KEY_MAP[subjectKey];
 
-            const collegeData = DATA[district][collegeKey];
+            const collegeData = MASTER_DATA[district][collegeKey];
             const result = collegeData.viva[subjectKey];
 
             if (!result) {
@@ -833,10 +829,15 @@
             
             const timeDisplay = result.time ? `${result.time}` : 'Not Specified';
 
+            // College name display uses the collegeKey directly (which includes the code and name)
+            const collegeNameDisplay = collegeKey;
+            const districtDisplay = district.replace('GAUTAMBUDHNAGAR', 'Gautam Buddh Nagar (Noida)');
+
+
             resultContent.innerHTML = `
                 <div class="result-item"><i class="fas fa-graduation-cap"></i> <p><b>Course:</b> ${course} (${subjectInfo.name})</p></div>
                 <div class="result-item"><i class="fas fa-tag"></i> <p><b>Subject Code:</b> ${subjectInfo.code}</p></div>
-                <div class="result-item"><i class="fas fa-university"></i> <p><b>College:</b> ${collegeData.name} </p></div>
+                <div class="result-item"><i class="fas fa-university"></i> <p><b>College (District: ${districtDisplay}):</b> ${collegeNameDisplay} </p></div>
                 <div class="result-item"><i class="fas fa-map-marker-alt"></i> <p><b>Viva Center:</b> ${result.center}</p></div>
                 <div class="result-item"><i class="fas fa-calendar-day"></i> <p><b>Date:</b> ${result.date} </p></div>
                 <div class="result-item"><i class="fas fa-clock"></i> <p><b>Reporting Time:</b> ${timeDisplay}</p></div>
@@ -848,7 +849,7 @@
             resultCard.classList.add('show');
         }
 
-        // --- Theme Toggle Functionality ---
+        // --- Theme Toggle Functionality (Unchanged) ---
         function toggleTheme() {
             const isDark = document.body.classList.toggle('dark-mode');
             
@@ -899,7 +900,7 @@
         }
         
         // --- EVENT LISTENERS ---
-        courseSelect.addEventListener('change', enableDistrictSelection);
+        courseSelect.addEventListener('change', updateDistrictSelection);
         districtSelect.addEventListener('change', updateColleges);
         collegeSelect.addEventListener('change', updateSubjects); 
         
@@ -911,6 +912,9 @@
         searchBtn.addEventListener('click', findVivaCenter);
 
         themeToggle.addEventListener('click', toggleTheme);
+
+        // Initial setup for courses
+        updateDistrictSelection();
     </script>
 </body>
 </html>
