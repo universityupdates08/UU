@@ -2201,13 +2201,24 @@
                 };
 
                 let scheduleHTML;
-                const paperTypeCleaned = paper.type.toUpperCase().replace(/\s{2,}/g, ' ');
+                const paperCodeUpper = paper.code.toUpperCase(); // New
+                const paperTypeCleaned = paper.type.toUpperCase().replace(/\s{2,}/g, ' '); // New
+                let customMessage = ''; // New
 
-                if (details.date === 'N/A') {
-                    // For R/P/Project papers where date is college-decided
-                    scheduleHTML = `<td colspan="3" style="text-align: center; font-weight: bold; color: #d32f2f;">Contact the college for exam date (Paper is ${paperTypeCleaned})</td>`;
-                } else if (details.date === 'SCHEDULE NOT FOUND') {
-                    // For codes not found in the datesheet array
+                // --- START NEW LOGIC FOR P, R, V PAPERS ---
+                if (paperCodeUpper.endsWith('P')) {
+                    customMessage = 'Contact the college for Exam Date (Paper is Practical)';
+                } else if (paperCodeUpper.endsWith('R')) {
+                    customMessage = 'Contact the college for Exam Date (Paper is Research Project)';
+                } else if (paperCodeUpper.startsWith('V')) {
+                    customMessage = 'Contact the college for Exam Date (Paper is Skill Development)';
+                }
+                // --- END NEW LOGIC FOR P, R, V PAPERS ---
+
+                if (customMessage) { // Check if a custom message was set (for P, R, V codes)
+                    scheduleHTML = `<td colspan="3" style="text-align: center; font-weight: bold; color: #d32f2f;">${customMessage}</td>`;
+                } else if (details.date === 'SCHEDULE NOT FOUND' || details.date === 'N/A') {
+                    // For codes not found in the datesheet array (and are not P, R, or V)
                     scheduleHTML = `<td colspan="3" style="text-align: center; font-weight: bold; color: #f57c00;">Visit ccsuniversity.ac.in to confirm the exam schedule</td>`;
                 } else {
                     // Normal entry found
