@@ -674,1113 +674,1332 @@
 
 
 <script>
-        // --- DATA (Datesheet for fetching Date, Day, and Shift) ---
+        // --- DATA (Datesheet for fetching Date, Day, Shift, and Name) ---
         const examDatesheet = {
             'A040101T': {
                 date: '26-Nov-2025',
                 day: 'Wed',
-                shift: 'Shift I (10:00 AM - 01:00 PM)'
+                shift: 'Shift I (10:00 AM - 01:00 PM)',
+                name: 'English Prose and Writing Skills' 
             },
             'A020501T': {
                 date: '26-Nov-2025',
                 day: 'Wed',
-                shift: 'Shift I (10:00 AM - 01:00 PM)'
+                shift: 'Shift I (10:00 AM - 01:00 PM)',
+                name: 'Vedic Vadhya Avm Bhartiya Darshan'
             },
             'C010101T': {
                 date: '26-Nov-2025',
                 day: 'Wed',
-                shift: 'Shift II (02:00 PM - 05:00 PM)'
+                shift: 'Shift II (02:00 PM - 05:00 PM)',
+                name: 'Business Organisation'
             },
             'B010101T': {
                 date: '26-Nov-2025',
                 day: 'Wed',
-                shift: 'Shift II (02:00 PM - 05:00 PM)'
+                shift: 'Shift II (02:00 PM - 05:00 PM)',
+                name: 'Mathematical Physics & Newtonian Mechanics'
             },
             'B040101T': {
                 date: '26-Nov-2025',
                 day: 'Wed',
-                shift: 'Shift II (02:00 PM - 05:00 PM)'
+                shift: 'Shift II (02:00 PM - 05:00 PM)',
+                name: 'Microbiology & Plant Pathology'
             },
             'A040301T': {
                 date: '27-Nov-2025',
                 day: 'Thu',
-                shift: 'Shift I (10:00 AM - 01:00 PM)'
+                shift: 'Shift I (10:00 AM - 01:00 PM)',
+                name: 'British and American Drama'
             },
             'B010301T': {
                 date: '27-Nov-2025',
                 day: 'Thu',
-                shift: 'Shift II (02:00 PM - 05:00 PM)'
+                shift: 'Shift I (10:00 AM - 01:00 PM)',
+                name: 'Electromagnetic Theory & Modern Optics'
             },
             'C010301T': {
                 date: '27-Nov-2025',
                 day: 'Thu',
-                shift: 'Shift II (02:00 PM - 05:00 PM)'
+                shift: 'Shift II (02:00 PM - 05:00 PM)',
+                name: 'Company Law'
             },
             'B040301T': {
                 date: '27-Nov-2025',
                 day: 'Thu',
-                shift: 'Shift II (02:00 PM - 05:00 PM)'
+                shift: 'Shift II (02:00 PM - 05:00 PM)',
+                name: 'Flowering Plans Identification & Aesthetic Characteristics'
             },
             'A020502T': {
                 date: '27-Nov-2025',
                 day: 'Thu',
-                shift: 'Shift II (02:00 PM - 05:00 PM)'
+                shift: 'Shift II (02:00 PM - 05:00 PM)',
+                name: 'Vyakaran Avm Bhasha Vigyan'
             },
             'A050101T': {
                 date: '28-Nov-2025',
                 day: 'Fri',
-                shift: 'Shift I (10:00 AM - 01:00 PM)'
+                shift: 'Shift I (10:00 AM - 01:00 PM)',
+                name: 'Ancient and Early Medival India (Till 1206 A.D.)'
             },
             'A300501T': {
                 date: '28-Nov-2025',
                 day: 'Fri',
-                shift: 'Shift I (10:00 AM - 01:00 PM)'
+                shift: 'Shift I (10:00 AM - 01:00 PM)',
+                name: 'Theoretical and Analytical study of Ragas, Talas & Applied theory of Indian Classical Music'
             },
             'A310501T': {
                 date: '28-Nov-2025',
                 day: 'Fri',
-                shift: 'Shift I (10:00 AM - 01:00 PM)'
+                shift: 'Shift I (10:00 AM - 01:00 PM)',
+                name: 'Aesthetical aspects of Tabla'
             },
             'A320501T': {
                 date: '28-Nov-2025',
                 day: 'Fri',
-                shift: 'Shift I (10:00 AM - 01:00 PM)'
+                shift: 'Shift I (10:00 AM - 01:00 PM)',
+                name: 'Study of Western Music and Style of'
             },
             'A120501T': {
                 date: '28-Nov-2025',
                 day: 'Fri',
-                shift: 'Shift I (10:00 AM - 01:00 PM)'
+                shift: 'Shift I (10:00 AM - 01:00 PM)',
+                name: 'Indian Defence Mechanism'
             },
             'C010501T': {
                 date: '28-Nov-2025',
                 day: 'Fri',
-                shift: 'Shift II (02:00 PM - 05:00 PM)'
+                shift: 'Shift II (02:00 PM - 05:00 PM)',
+                name: 'Corporate Accounting'
             },
             'B030101T': {
                 date: '28-Nov-2025',
                 day: 'Fri',
-                shift: 'Shift II (02:00 PM - 05:00 PM)'
+                shift: 'Shift II (02:00 PM - 05:00 PM)',
+                name: 'Differential Calculus & Integral Calculus'
             },
             'B050101T': {
                 date: '28-Nov-2025',
                 day: 'Fri',
-                shift: 'Shift II (02:00 PM - 05:00 PM)'
+                shift: 'Shift II (02:00 PM - 05:00 PM)',
+                name: 'Cytology, Genetics and Infectious Diseases'
             },
             'B058101T': {
                 date: '28-Nov-2025',
                 day: 'Fri',
-                shift: 'Shift II (02:00 PM - 05:00 PM)'
+                shift: 'Shift II (02:00 PM - 05:00 PM)',
+                name: 'Basic Nutrition, Sanitation & Hygiene'
             },
             'B010502T': {
                 date: '28-Nov-2025',
                 day: 'Fri',
-                shift: 'Shift II (02:00 PM - 05:00 PM)'
+                shift: 'Shift II (02:00 PM - 05:00 PM)',
+                name: 'Quantum Mechanics & Spectroscopy'
             },
             'B040502T': {
                 date: '28-Nov-2025',
                 day: 'Fri',
-                shift: 'Shift II (02:00 PM - 05:00 PM)'
+                shift: 'Shift II (02:00 PM - 05:00 PM)',
+                name: 'Molecular Biology & Bioinformatics'
             },
             'A050301T': {
                 date: '29-Nov-2025',
                 day: 'Sat',
-                shift: 'Shift I (10:00 AM - 01:00 PM)'
+                shift: 'Shift I (10:00 AM - 01:00 PM)',
+                name: 'History of Modern India (1757A.D.- 1950A.D.)'
             },
             'C010102T': {
                 date: '29-Nov-2025',
                 day: 'Sat',
-                shift: 'Shift II (02:00 PM - 05:00 PM)'
+                shift: 'Shift II (02:00 PM - 05:00 PM)',
+                name: 'Business Statistics'
             },
             'B030301T': {
                 date: '29-Nov-2025',
                 day: 'Sat',
-                shift: 'Shift II (02:00 PM - 05:00 PM)'
+                shift: 'Shift II (02:00 PM - 05:00 PM)',
+                name: 'Algebra & Mathematical Methods'
             },
             'B050301T': {
                 date: '29-Nov-2025',
                 day: 'Sat',
-                shift: 'Shift II (02:00 PM - 05:00 PM)'
+                shift: 'Shift II (02:00 PM - 05:00 PM)',
+                name: 'Molecular Biology, Bioinstrumentation & Bio techniques'
             },
             'B058301T': {
                 date: '29-Nov-2025',
                 day: 'Sat',
-                shift: 'Shift II (02:00 PM - 05:00 PM)'
+                shift: 'Shift II (02:00 PM - 05:00 PM)',
+                name: 'Food Process Technology & Food Microbiology'
             },
             'A120502T': {
                 date: '29-Nov-2025',
                 day: 'Sat',
-                shift: 'Shift II (02:00 PM - 05:00 PM)'
+                shift: 'Shift II (02:00 PM - 05:00 PM)',
+                name: 'National Security of India'
             },
             'A060101T': {
                 date: '01-Dec-2025',
                 day: 'Mon',
-                shift: 'Shift I (10:00 AM - 01:00 PM)'
+                shift: 'Shift I (10:00 AM - 01:00 PM)',
+                name: 'Indian National Movement & Constitution of India'
             },
             'E010501T': {
                 date: '01-Dec-2025',
                 day: 'Mon',
-                shift: 'Shift I (10:00 AM - 01:00 PM)'
+                shift: 'Shift I (10:00 AM - 01:00 PM)',
+                name: 'Educational Assessment'
             },
             'A090501T': {
                 date: '01-Dec-2025',
                 day: 'Mon',
-                shift: 'Shift I (10:00 AM - 01:00 PM)'
+                shift: 'Shift I (10:00 AM - 01:00 PM)',
+                name: 'Life Span Human Development'
             },
             'C010302T': {
                 date: '01-Dec-2025',
                 day: 'Mon',
-                shift: 'Shift II (02:00 PM - 05:00 PM)'
+                shift: 'Shift II (02:00 PM - 05:00 PM)',
+                name: 'Cost Accounting'
             },
             'B020101T': {
                 date: '01-Dec-2025',
                 day: 'Mon',
-                shift: 'Shift II (02:00 PM - 05:00 PM)'
+                shift: 'Shift II (02:00 PM - 05:00 PM)',
+                name: 'Fundamentals of Chemistry'
             },
             'B030501T': {
                 date: '01-Dec-2025',
                 day: 'Mon',
-                shift: 'Shift II (02:00 PM - 05:00 PM)'
+                shift: 'Shift II (02:00 PM - 05:00 PM)',
+                name: 'Group and Ring The ory & Linear Algebra'
             },
             'B050501T': {
                 date: '01-Dec-2025',
                 day: 'Mon',
-                shift: 'Shift II (02:00 PM - 05:00 PM)'
+                shift: 'Shift II (02:00 PM - 05:00 PM)',
+                name: 'Diversity of Non-Chordates, Parasitology and Economic Zoology'
             },
             'B058501T': {
                 date: '01-Dec-2025',
                 day: 'Mon',
-                shift: 'Shift II (02:00 PM - 05:00 PM)'
+                shift: 'Shift II (02:00 PM - 05:00 PM)',
+                name: 'Food Analysis'
             },
             'A060301T': {
                 date: '02-Dec-2025',
                 day: 'Tue',
-                shift: 'Shift I (10:00 AM - 01:00 PM)'
+                shift: 'Shift I (10:00 AM - 01:00 PM)',
+                name: 'Political Process in India'
             },
             'C010502T': {
                 date: '02-Dec-2025',
                 day: 'Tue',
-                shift: 'Shift II (02:00 PM - 05:00 PM)'
+                shift: 'Shift II (02:00 PM - 05:00 PM)',
+                name: 'Goods and Service Tax'
             },
             'B020301T': {
                 date: '02-Dec-2025',
                 day: 'Tue',
-                shift: 'Shift II (02:00 PM - 05:00 PM)'
+                shift: 'Shift II (02:00 PM - 05:00 PM)',
+                name: 'Chemical Dynamics & Coordination Chemistry'
             },
             'A090502T': {
                 date: '02-Dec-2025',
                 day: 'Tue',
-                shift: 'Shift II (02:00 PM - 05:00 PM)'
+                shift: 'Shift II (02:00 PM - 05:00 PM)',
+                name: 'Positive Psychology'
             },
             'A010101T': {
                 date: '03-Dec-2025',
                 day: 'Wed',
-                shift: 'Shift I (10:00 AM - 01:00 PM)'
+                shift: 'Shift I (10:00 AM - 01:00 PM)',
+                name: 'Hindi Kavya'
             },
             'A180501T': {
                 date: '03-Dec-2025',
                 day: 'Wed',
-                shift: 'Shift I (10:00 AM - 01:00 PM)'
+                shift: 'Shift I (10:00 AM - 01:00 PM)',
+                name: 'Library Classification'
             },
             'A030501T': {
                 date: '03-Dec-2025',
                 day: 'Wed',
-                shift: 'Shift I (10:00 AM - 01:00 PM)'
+                shift: 'Shift I (10:00 AM - 01:00 PM)',
+                name: 'Urdu Ghazal Aur Nazm'
             },
             'E010502T': {
                 date: '03-Dec-2025',
                 day: 'Wed',
-                shift: 'Shift II (02:00 PM - 05:00 PM)'
+                shift: 'Shift II (02:00 PM - 05:00 PM)',
+                name: 'Educational Statistics'
             },
             'C010103T': {
                 date: '03-Dec-2025',
                 day: 'Wed',
-                shift: 'Shift II (02:00 PM - 05:00 PM)'
+                shift: 'Shift II (02:00 PM - 05:00 PM)',
+                name: 'Business Communication'
             },
             'B190101T': {
                 date: '03-Dec-2025',
                 day: 'Wed',
-                shift: 'Shift II (02:00 PM - 05:00 PM)'
+                shift: 'Shift II (02:00 PM - 05:00 PM)',
+                name: 'Fundamentals of Industrial Chemistry'
             },
             'B070101T': {
                 date: '03-Dec-2025',
                 day: 'Wed',
-                shift: 'Shift II (02:00 PM - 05:00 PM)'
+                shift: 'Shift II (02:00 PM - 05:00 PM)',
+                name: 'Problem Solving using Computer'
             },
             'B050502T': {
                 date: '03-Dec-2025',
                 day: 'Wed',
-                shift: 'Shift II (02:00 PM - 05:00 PM)'
+                shift: 'Shift II (02:00 PM - 05:00 PM)',
+                name: 'Diversity of Chordates and Comparative Anatomy'
             },
             'B058502T': {
                 date: '03-Dec-2025',
                 day: 'Wed',
-                shift: 'Shift II (02:00 PM - 05:00 PM)'
+                shift: 'Shift II (02:00 PM - 05:00 PM)',
+                name: 'Food Manufacturing & Packaging'
             },
             'A010301T': {
                 date: '04-Dec-2025',
                 day: 'Thu',
-                shift: 'Shift I (10:00 AM - 01:00 PM)'
+                shift: 'Shift I (10:00 AM - 01:00 PM)',
+                name: 'Hindi Gadhya'
             },
             'C010303T': {
                 date: '04-Dec-2025',
                 day: 'Thu',
-                shift: 'Shift II (02:00 PM - 05:00 PM)'
+                shift: 'Shift II (02:00 PM - 05:00 PM)',
+                name: 'Business Regulatory Framework'
             },
             'B190301T': {
                 date: '04-Dec-2025',
                 day: 'Thu',
-                shift: 'Shift II (02:00 PM - 05:00 PM)'
+                shift: 'Shift II (02:00 PM - 05:00 PM)',
+                name: 'Process Instrumentation and Industrial Chemical Analysis'
             },
             'B070301T': {
                 date: '04-Dec-2025',
                 day: 'Thu',
-                shift: 'Shift II (02:00 PM - 05:00 PM)'
+                shift: 'Shift II (02:00 PM - 05:00 PM)',
+                name: 'Operating Systems'
             },
             'A030502T': {
                 date: '04-Dec-2025',
                 day: 'Thu',
-                shift: 'Shift II (02:00 PM - 05:00 PM)'
+                shift: 'Shift II (02:00 PM - 05:00 PM)',
+                name: 'Qasida, Masnavi Aur Marsia'
             },
             'A180503T': {
                 date: '04-Dec-2025',
                 day: 'Thu',
-                shift: 'Shift II (02:00 PM - 05:00 PM)'
+                shift: 'Shift II (02:00 PM - 05:00 PM)',
+                name: 'Library Cataloguing'
             },
             'A070101T': {
                 date: '05-Dec-2025',
                 day: 'Fri',
-                shift: 'Shift I (10:00 AM - 01:00 PM)'
+                shift: 'Shift I (10:00 AM - 01:00 PM)',
+                name: 'Introduction to Basic Concepts of Sociology'
             },
             'A070102T': {
                 date: '05-Dec-2025',
                 day: 'Fri',
-                shift: 'Shift I (10:00 AM - 01:00 PM)'
+                shift: 'Shift I (10:00 AM - 01:00 PM)',
+                name: 'Concepts of Rural Sociology'
             },
             'A070104T': {
                 date: '05-Dec-2025',
                 day: 'Fri',
-                shift: 'Shift I (10:00 AM - 01:00 PM)'
+                shift: 'Shift I (10:00 AM - 01:00 PM)',
+                name: 'Basic Concepts in Sociology'
             },
             'E020501T': {
                 date: '05-Dec-2025',
                 day: 'Fri',
-                shift: 'Shift I (10:00 AM - 01:00 PM)'
+                shift: 'Shift I (10:00 AM - 01:00 PM)',
+                name: 'Athletic Injuries and Physiotherapy'
             },
             'A100501T': {
                 date: '05-Dec-2025',
                 day: 'Fri',
-                shift: 'Shift I (10:00 AM - 01:00 PM)'
+                shift: 'Shift I (10:00 AM - 01:00 PM)',
+                name: 'Problems of Philosophy (Indian and Western)'
             },
             'C010503T': {
                 date: '05-Dec-2025',
                 day: 'Fri',
-                shift: 'Shift II (02:00 PM - 05:00 PM)'
+                shift: 'Shift II (02:00 PM - 05:00 PM)',
+                name: 'Business Finance'
             },
             'B080101T': {
                 date: '05-Dec-2025',
                 day: 'Fri',
-                shift: 'Shift II (02:00 PM - 05:00 PM)'
+                shift: 'Shift II (02:00 PM - 05:00 PM)',
+                name: 'General Microbiology'
             },
             'B017101T': {
                 date: '05-Dec-2025',
                 day: 'Fri',
-                shift: 'Shift II (02:00 PM - 05:00 PM)'
+                shift: 'Shift II (02:00 PM - 05:00 PM)',
+                name: 'Fundamentals of Industrial Microbiology'
             },
             'B060101T': {
                 date: '05-Dec-2025',
                 day: 'Fri',
-                shift: 'Shift II (02:00 PM - 05:00 PM)'
+                shift: 'Shift II (02:00 PM - 05:00 PM)',
+                name: 'Descriptive Statistics (Univariate) and Theory of Probability'
             },
             'B020501T': {
                 date: '05-Dec-2025',
                 day: 'Fri',
-                shift: 'Shift II (02:00 PM - 05:00 PM)'
+                shift: 'Shift II (02:00 PM - 05:00 PM)',
+                name: 'Organic Synthesis-A'
             },
             'A070301T': {
                 date: '06-Dec-2025',
                 day: 'Sat',
-                shift: 'Shift I (10:00 AM - 01:00 PM)'
+                shift: 'Shift I (10:00 AM - 01:00 PM)',
+                name: 'Social Change & Social Movements'
             },
             'A070302T': {
                 date: '06-Dec-2025',
                 day: 'Sat',
-                shift: 'Shift I (10:00 AM - 01:00 PM)'
+                shift: 'Shift I (10:00 AM - 01:00 PM)',
+                name: 'Population and Society'
             },
             'A070304T': {
                 date: '06-Dec-2025',
                 day: 'Sat',
-                shift: 'Shift I (10:00 AM - 01:00 PM)'
+                shift: 'Shift I (10:00 AM - 01:00 PM)',
+                name: 'Tribes in India'
             },
             'C010104T': {
                 date: '06-Dec-2025',
                 day: 'Sat',
-                shift: 'Shift II (02:00 PM - 05:00 PM)'
+                shift: 'Shift II (02:00 PM - 05:00 PM)',
+                name: 'Introduction to Computer Application'
             },
             'B080301T': {
                 date: '06-Dec-2025',
                 day: 'Sat',
-                shift: 'Shift II (02:00 PM - 05:00 PM)'
+                shift: 'Shift II (02:00 PM - 05:00 PM)',
+                name: 'Basic Bio Chemistry and Microbial Physiology'
             },
             'B017301T': {
                 date: '06-Dec-2025',
                 day: 'Sat',
-                shift: 'Shift II (02:00 PM - 05:00 PM)'
+                shift: 'Shift II (02:00 PM - 05:00 PM)',
+                name: 'Fermentation Technology'
             },
             'B060301T': {
                 date: '06-Dec-2025',
                 day: 'Sat',
-                shift: 'Shift II (02:00 PM - 05:00 PM)'
+                shift: 'Shift II (02:00 PM - 05:00 PM)',
+                name: 'Theory of Estimation and Sampling Survey'
             },
             'A080101T': {
                 date: '08-Dec-2025',
                 day: 'Mon',
-                shift: 'Shift I (10:00 AM - 01:00 PM)'
+                shift: 'Shift I (10:00 AM - 01:00 PM)',
+                name: 'Principle of Micro Economics'
             },
             'A210501T': {
                 date: '08-Dec-2025',
                 day: 'Mon',
-                shift: 'Shift I (10:00 AM - 01:00 PM)'
+                shift: 'Shift I (10:00 AM - 01:00 PM)',
+                name: 'History of Indian Art-Rajsthani, Mughal & PahariStyle'
             },
             'A100502T': {
                 date: '08-Dec-2025',
                 day: 'Mon',
-                shift: 'Shift I (10:00 AM - 01:00 PM)'
+                shift: 'Shift I (10:00 AM - 01:00 PM)',
+                name: 'Applied Philosophy'
             },
             'E020502T': {
                 date: '08-Dec-2025',
                 day: 'Mon',
-                shift: 'Shift I (10:00 AM - 01:00 PM)'
+                shift: 'Shift I (10:00 AM - 01:00 PM)',
+                name: 'Kinesiology and Biomechanics in Sports'
             },
             'C010304T': {
                 date: '08-Dec-2025',
                 day: 'Mon',
-                shift: 'Shift II (02:00 PM - 05:00 PM)'
+                shift: 'Shift II (02:00 PM - 05:00 PM)',
+                name: 'Inventory Management'
             },
             'B020502T': {
                 date: '08-Dec-2025',
                 day: 'Mon',
-                shift: 'Shift II (02:00 PM - 05:00 PM)'
+                shift: 'Shift II (02:00 PM - 05:00 PM)',
+                name: 'Rearrangements and Chemistry of Group Elements'
             },
             'A080301T': {
                 date: '09-Dec-2025',
                 day: 'Tue',
-                shift: 'Shift I (10:00 AM - 01:00 PM)'
+                shift: 'Shift I (10:00 AM - 01:00 PM)',
+                name: 'History of Economic Thought'
             },
             'C010504T': {
                 date: '09-Dec-2025',
                 day: 'Tue',
-                shift: 'Shift II (02:00 PM - 05:00 PM)'
+                shift: 'Shift II (02:00 PM - 05:00 PM)',
+                name: 'Principles and Practices of Insurance'
             },
             'B010501T': {
                 date: '09-Dec-2025',
                 day: 'Tue',
-                shift: 'Shift II (02:00 PM - 05:00 PM)'
+                shift: 'Shift II (02:00 PM - 05:00 PM)',
+                name: 'Classical & Statistical Mechanics'
             },
             'B040501T': {
                 date: '09-Dec-2025',
                 day: 'Tue',
-                shift: 'Shift II (02:00 PM - 05:00 PM)'
+                shift: 'Shift II (02:00 PM - 05:00 PM)',
+                name: 'Plant Physiology, Metabolism & Bio Chemistry'
             },
             'A210502T': {
                 date: '09-Dec-2025',
                 day: 'Tue',
-                shift: 'Shift II (02:00 PM - 05:00 PM)'
+                shift: 'Shift II (02:00 PM - 05:00 PM)',
+                name: 'History of Indian art- Development of Modern Art'
             },
             'A110101T': {
                 date: '10-Dec-2025',
                 day: 'Wed',
-                shift: 'Shift I (10:00 AM - 01:00 PM)'
+                shift: 'Shift I (10:00 AM - 01:00 PM)',
+                name: 'Physical Geogrphy'
             },
             'A130501T': {
                 date: '10-Dec-2025',
                 day: 'Wed',
-                shift: 'Shift I (10:00 AM - 01:00 PM)'
+                shift: 'Shift I (10:00 AM - 01:00 PM)',
+                name: 'Surface Ornamentation of Fabrics'
             },
             'B190501T': {
                 date: '10-Dec-2025',
                 day: 'Wed',
-                shift: 'Shift II (02:00 PM - 05:00 PM)'
+                shift: 'Shift II (02:00 PM - 05:00 PM)',
+                name: 'Industrial Chemicals'
             },
             'B070501T': {
                 date: '10-Dec-2025',
                 day: 'Wed',
-                shift: 'Shift II (02:00 PM - 05:00 PM)'
+                shift: 'Shift II (02:00 PM - 05:00 PM)',
+                name: 'Analysis of Algorithms and Data Structures'
             },
             'A110301T': {
                 date: '11-Dec-2025',
                 day: 'Thu',
-                shift: 'Shift I (10:00 AM - 01:00 PM)'
+                shift: 'Shift I (10:00 AM - 01:00 PM)',
+                name: 'Environment, Disaster Management and Climate Change'
             },
             'A300301T': {
                 date: '11-Dec-2025',
                 day: 'Thu',
-                shift: 'Shift I (10:00 AM - 01:00 PM)'
+                shift: 'Shift I (10:00 AM - 01:00 PM)',
+                name: 'Theoretical and Analytical study of Ragas, Talas & Descriptive theory of Indian Classical Music'
             },
             'A310301T': {
                 date: '11-Dec-2025',
                 day: 'Thu',
-                shift: 'Shift I (10:00 AM - 01:00 PM)'
+                shift: 'Shift I (10:00 AM - 01:00 PM)',
+                name: 'History of Tabla'
             },
             'A320301T': {
                 date: '11-Dec-2025',
                 day: 'Thu',
-                shift: 'Shift I (10:00 AM - 01:00 PM)'
+                shift: 'Shift I (10:00 AM - 01:00 PM)',
+                name: 'Contribution of Ancient, Medieval and Modern Scholars to Indian Music'
             },
             'C010505T': {
                 date: '11-Dec-2025',
                 day: 'Thu',
-                shift: 'Shift II (02:00 PM - 05:00 PM)'
+                shift: 'Shift II (02:00 PM - 05:00 PM)',
+                name: 'Monetary Theory and Banking in India'
             },
             'B030502T': {
                 date: '11-Dec-2025',
                 day: 'Thu',
-                shift: 'Shift II (02:00 PM - 05:00 PM)'
+                shift: 'Shift II (02:00 PM - 05:00 PM)',
+                name: 'Number Theory & Game Theory'
             },
             'B030503T': {
                 date: '11-Dec-2025',
                 day: 'Thu',
-                shift: 'Shift II (02:00 PM - 05:00 PM)'
+                shift: 'Shift II (02:00 PM - 05:00 PM)',
+                name: 'Graph Theory & Discrete'
             },
             'B030504T': {
                 date: '11-Dec-2025',
                 day: 'Thu',
-                shift: 'Shift II (02:00 PM - 05:00 PM)'
+                shift: 'Shift II (02:00 PM - 05:00 PM)',
+                name: 'Differential Geometry and Tensor Analysis'
             },
             'A130502T': {
                 date: '11-Dec-2025',
                 day: 'Thu',
-                shift: 'Shift II (02:00 PM - 05:00 PM)'
+                shift: 'Shift II (02:00 PM - 05:00 PM)',
+                name: 'Community Development & Programme Planning'
             },
             'E020101T': {
                 date: '12-Dec-2025',
                 day: 'Fri',
-                shift: 'Shift I (10:00 AM - 01:00 PM)'
+                shift: 'Shift I (10:00 AM - 01:00 PM)',
+                name: 'Elements of Physical Education'
             },
             'A070502T': {
                 date: '12-Dec-2025',
                 day: 'Fri',
-                shift: 'Shift I (10:00 AM - 01:00 PM)'
+                shift: 'Shift I (10:00 AM - 01:00 PM)',
+                name: 'Research Methodology in Social Sciences'
             },
             'B190502T': {
                 date: '12-Dec-2025',
                 day: 'Fri',
-                shift: 'Shift II (02:00 PM - 05:00 PM)'
+                shift: 'Shift II (02:00 PM - 05:00 PM)',
+                name: 'Pollution, its Management and Industrial Economics'
             },
             'B070502T': {
                 date: '12-Dec-2025',
                 day: 'Fri',
-                shift: 'Shift II (02:00 PM - 05:00 PM)'
+                shift: 'Shift II (02:00 PM - 05:00 PM)',
+                name: 'Soft Computing'
             },
             'E020301T': {
                 date: '13-Dec-2025',
                 day: 'Sat',
-                shift: 'Shift I (10:00 AM - 01:00 PM)'
+                shift: 'Shift I (10:00 AM - 01:00 PM)',
+                name: 'Anatomy & exercise Physiology'
             },
             'A060501T': {
                 date: '13-Dec-2025',
                 day: 'Sat',
-                shift: 'Shift II (02:00 PM - 05:00 PM)'
+                shift: 'Shift II (02:00 PM - 05:00 PM)',
+                name: 'Comparative Government and Politics'
             },
             'Z010101': {
                 date: '15-Dec-2025',
                 day: 'Mon',
-                shift: 'Shift I (10:00 AM - 01:00 PM)'
+                shift: 'Shift I (10:00 AM - 01:00 PM)',
+                name: 'Food Nutrition and Hygiene'
             },
             'Z050501': {
                 date: '15-Dec-2025',
                 day: 'Mon',
-                shift: 'Shift II (02:00 PM - 05:00 PM)'
+                shift: 'Shift II (02:00 PM - 05:00 PM)',
+                name: 'Analytic Ability and Digital Awareness'
             },
             'Z030301': {
                 date: '16-Dec-2025',
                 day: 'Tue',
-                shift: 'Shift I (10:00 AM - 01:00 PM)'
+                shift: 'Shift I (10:00 AM - 01:00 PM)',
+                name: 'Human Values and Environment Studies'
             },
             'Q10001': {
                 date: '17-Dec-2025',
                 day: 'Wed',
-                shift: 'Shift I (10:00 AM - 01:00 PM)'
+                shift: 'Shift I (10:00 AM - 01:00 PM)',
+                name: 'Kuru Kingdom Through The Ages (3000 BC-2000BC)'
             },
             'Q10003': {
                 date: '17-Dec-2025',
                 day: 'Wed',
-                shift: 'Shift I (10:00 AM - 01:00 PM)'
+                shift: 'Shift I (10:00 AM - 01:00 PM)',
+                name: 'Applied Ethics'
             },
             'Q10004': {
                 date: '17-Dec-2025',
                 day: 'Wed',
-                shift: 'Shift I (10:00 AM - 01:00 PM)'
+                shift: 'Shift I (10:00 AM - 01:00 PM)',
+                name: 'Basic Economics'
             },
             'Q10005': {
                 date: '17-Dec-2025',
                 day: 'Wed',
-                shift: 'Shift I (10:00 AM - 01:00 PM)'
+                shift: 'Shift I (10:00 AM - 01:00 PM)',
+                name: 'Health Personal & Environmental'
             },
             'Q10006': {
                 date: '17-Dec-2025',
                 day: 'Wed',
-                shift: 'Shift I (10:00 AM - 01:00 PM)'
+                shift: 'Shift I (10:00 AM - 01:00 PM)',
+                name: 'Disaster Management System in India'
             },
             'Q10007': {
                 date: '17-Dec-2025',
                 day: 'Wed',
-                shift: 'Shift I (10:00 AM - 01:00 PM)'
+                shift: 'Shift I (10:00 AM - 01:00 PM)',
+                name: 'Earths Atmosphere and Climate Change'
             },
             'Q10008': {
                 date: '17-Dec-2025',
                 day: 'Wed',
-                shift: 'Shift I (10:00 AM - 01:00 PM)'
+                shift: 'Shift I (10:00 AM - 01:00 PM)',
+                name: 'Environment and Public Health Challenges'
             },
             'Q10010': {
                 date: '17-Dec-2025',
                 day: 'Wed',
-                shift: 'Shift I (10:00 AM - 01:00 PM)'
+                shift: 'Shift I (10:00 AM - 01:00 PM)',
+                name: 'Public Health and Hygiene'
             },
             'Q10030': {
                 date: '17-Dec-2025',
                 day: 'Wed',
-                shift: 'Shift I (10:00 AM - 01:00 PM)'
+                shift: 'Shift I (10:00 AM - 01:00 PM)',
+                name: 'Promoting Personal Growth and Relationship Through Psychology'
             },
             'Q10018': {
                 date: '17-Dec-2025',
                 day: 'Wed',
-                shift: 'Shift I (10:00 AM - 01:00 PM)'
+                shift: 'Shift I (10:00 AM - 01:00 PM)',
+                name: 'Road Safety: Laws, Policies & Practices'
             },
             'Q10037': {
                 date: '17-Dec-2025',
                 day: 'Wed',
-                shift: 'Shift I (10:00 AM - 01:00 PM)'
+                shift: 'Shift I (10:00 AM - 01:00 PM)',
+                name: 'Business Communication'
             },
             'Q10038': {
                 date: '17-Dec-2025',
                 day: 'Wed',
-                shift: 'Shift I (10:00 AM - 01:00 PM)'
+                shift: 'Shift I (10:00 AM - 01:00 PM)',
+                name: 'Sanskrit Sahitya Mein Rashtra Chintan'
             },
             'Q10039': {
                 date: '17-Dec-2025',
                 day: 'Wed',
-                shift: 'Shift I (10:00 AM - 01:00 PM)'
+                shift: 'Shift I (10:00 AM - 01:00 PM)',
+                name: 'Quantitative Mathematics'
             },
             'Q10040': {
                 date: '17-Dec-2025',
                 day: 'Wed',
-                shift: 'Shift I (10:00 AM - 01:00 PM)'
+                shift: 'Shift I (10:00 AM - 01:00 PM)',
+                name: 'Maternal and Child Nutrition'
             },
             'Q10032': {
                 date: '18-Dec-2025',
                 day: 'Thu',
-                shift: 'Shift I (10:00 AM - 01:00 PM)'
+                shift: 'Shift I (10:00 AM - 01:00 PM)',
+                name: 'Yoga for All'
             },
             'Q10034': {
                 date: '18-Dec-2025',
                 day: 'Thu',
-                shift: 'Shift I (10:00 AM - 01:00 PM)'
+                shift: 'Shift I (10:00 AM - 01:00 PM)',
+                name: 'Psychology of Everyday Life'
             },
             'Q10035': {
                 date: '18-Dec-2025',
                 day: 'Thu',
-                shift: 'Shift I (10:00 AM - 01:00 PM)'
+                shift: 'Shift I (10:00 AM - 01:00 PM)',
+                name: 'Renewable Energy Sources'
             },
             'Q10036': {
                 date: '18-Dec-2025',
                 day: 'Thu',
-                shift: 'Shift I (10:00 AM - 01:00 PM)'
+                shift: 'Shift I (10:00 AM - 01:00 PM)',
+                name: 'Scientific Progress and Environmental Awareness in India'
             },
             'Q10020': {
                 date: '18-Dec-2025',
                 day: 'Thu',
-                shift: 'Shift I (10:00 AM - 01:00 PM)'
+                shift: 'Shift I (10:00 AM - 01:00 PM)',
+                name: 'An Introduction to Indian Jurists'
             },
             'Q10012': {
                 date: '18-Dec-2025',
                 day: 'Thu',
-                shift: 'Shift I (10:00 AM - 01:00 PM)'
+                shift: 'Shift I (10:00 AM - 01:00 PM)',
+                name: 'Applied Yoga'
             },
             'Q10033': {
                 date: '18-Dec-2025',
                 day: 'Thu',
-                shift: 'Shift I (10:00 AM - 01:00 PM)'
+                shift: 'Shift I (10:00 AM - 01:00 PM)',
+                name: 'Fundamentals of Indian Economy'
             },
             'Q10029': {
                 date: '18-Dec-2025',
                 day: 'Thu',
-                shift: 'Shift I (10:00 AM - 01:00 PM)'
+                shift: 'Shift I (10:00 AM - 01:00 PM)',
+                name: 'Food and Food Sources'
             },
             'Q30001': {
                 date: '18-Dec-2025',
                 day: 'Thu',
-                shift: 'Shift I (10:00 AM - 01:00 PM)'
+                shift: 'Shift I (10:00 AM - 01:00 PM)',
+                name: 'Business Regulatory Frame work'
             },
             'Q30002': {
                 date: '18-Dec-2025',
                 day: 'Thu',
-                shift: 'Shift I (10:00 AM - 01:00 PM)'
+                shift: 'Shift I (10:00 AM - 01:00 PM)',
+                name: 'Inventory Management'
             },
             'Q30003': {
                 date: '18-Dec-2025',
                 day: 'Thu',
-                shift: 'Shift I (10:00 AM - 01:00 PM)'
+                shift: 'Shift I (10:00 AM - 01:00 PM)',
+                name: 'Bhartiya Gaurav Evam Arthkavya'
             },
             'Q30004': {
                 date: '18-Dec-2025',
                 day: 'Thu',
-                shift: 'Shift I (10:00 AM - 01:00 PM)'
+                shift: 'Shift I (10:00 AM - 01:00 PM)',
+                name: 'Optimization Technique'
             },
             'A020101T': {
                 date: '19-Dec-2025',
                 day: 'Fri',
-                shift: 'Shift I (10:00 AM - 01:00 PM)'
+                shift: 'Shift I (10:00 AM - 01:00 PM)',
+                name: 'Sanskrit-Padya Sahitya Avm Vyakaran'
             },
             'A040501T': {
                 date: '19-Dec-2025',
                 day: 'Fri',
-                shift: 'Shift I (10:00 AM - 01:00 PM)'
+                shift: 'Shift I (10:00 AM - 01:00 PM)',
+                name: 'Classical Literature & History of English Literature'
             },
             'B080501T': {
                 date: '19-Dec-2025',
                 day: 'Fri',
-                shift: 'Shift II (02:00 PM - 05:00 PM)'
+                shift: 'Shift II (02:00 PM - 05:00 PM)',
+                name: 'Medical Microbiology'
             },
             'B017501T': {
                 date: '19-Dec-2025',
                 day: 'Fri',
-                shift: 'Shift II (02:00 PM - 05:00 PM)'
+                shift: 'Shift II (02:00 PM - 05:00 PM)',
+                name: 'Industrial Food Microbiology'
             },
             'B060501T': {
                 date: '19-Dec-2025',
                 day: 'Fri',
-                shift: 'Shift II (02:00 PM - 05:00 PM)'
+                shift: 'Shift II (02:00 PM - 05:00 PM)',
+                name: 'Multivariate Analysis and Non-parametric Methods'
             },
             'A020301T': {
                 date: '20-Dec-2025',
                 day: 'Sat',
-                shift: 'Shift I (10:00 AM - 01:00 PM)'
+                shift: 'Shift I (10:00 AM - 01:00 PM)',
+                name: 'Sanskrit-Natak Avm Vyakaran'
             },
-            'A040502T': {
+            'A040502Τ': {
                 date: '20-Dec-2025',
                 day: 'Sat',
-                shift: 'Shift II (02:00 PM - 05:00 PM)'
+                shift: 'Shift II (02:00 PM - 05:00 PM)',
+                name: 'Fiction'
             },
             'E010101T': {
                 date: '22-Dec-2025',
                 day: 'Mon',
-                shift: 'Shift I (10:00 AM - 01:00 PM)'
+                shift: 'Shift I (10:00 AM - 01:00 PM)',
+                name: 'Conceptual Frame work of Education'
             },
             'B080502T': {
                 date: '22-Dec-2025',
                 day: 'Mon',
-                shift: 'Shift II (02:00 PM - 05:00 PM)'
+                shift: 'Shift II (02:00 PM - 05:00 PM)',
+                name: 'Immunology'
             },
             'B017502T': {
                 date: '22-Dec-2025',
                 day: 'Mon',
-                shift: 'Shift II (02:00 PM - 05:00 PM)'
+                shift: 'Shift II (02:00 PM - 05:00 PM)',
+                name: 'Immunology & Medical Microbiology'
             },
             'B060502T': {
                 date: '22-Dec-2025',
                 day: 'Mon',
-                shift: 'Shift II (02:00 PM - 05:00 PM)'
+                shift: 'Shift II (02:00 PM - 05:00 PM)',
+                name: 'Analysis of Variance and Design of Experiment'
             },
             'E010301T': {
                 date: '24-Dec-2025',
                 day: 'Wed',
-                shift: 'Shift I (10:00 AM - 01:00 PM)'
+                shift: 'Shift I (10:00 AM - 01:00 PM)',
+                name: 'Philosophical-Sociological-Political- Economic Perspectives of Education'
             },
             'A060502T': {
                 date: '24-Dec-2025',
                 day: 'Wed',
-                shift: 'Shift II (02:00 PM - 05:00 PM)'
+                shift: 'Shift II (02:00 PM - 05:00 PM)',
+                name: 'Principles of Public Administration'
             },
             'A100301T': {
                 date: '26-Dec-2025',
                 day: 'Fri',
-                shift: 'Shift I (10:00 AM - 01:00 PM)'
+                shift: 'Shift I (10:00 AM - 01:00 PM)',
+                name: 'Ethics(Indian and Western)'
             },
             'A180101T': {
                 date: '26-Dec-2025',
                 day: 'Fri',
-                shift: 'Shift I (10:00 AM - 01:00 PM)'
+                shift: 'Shift I (10:00 AM - 01:00 PM)',
+                name: 'Fundamentals of Librarianship'
             },
             'A010501T': {
                 date: '26-Dec-2025',
                 day: 'Fri',
-                shift: 'Shift II (02:00 PM - 05:00 PM)'
+                shift: 'Shift II (02:00 PM - 05:00 PM)',
+                name: 'Sahitya shastra and Hind iAalochana'
             },
             'A180301T': {
                 date: '27-Dec-2025',
                 day: 'Sat',
-                shift: 'Shift I (10:00 AM - 01:00 PM)'
+                shift: 'Shift I (10:00 AM - 01:00 PM)',
+                name: 'Library Management'
             },
             'A030301T': {
                 date: '27-Dec-2025',
                 day: 'Sat',
-                shift: 'Shift I (10:00 AM - 01:00 PM)'
+                shift: 'Shift I (10:00 AM - 01:00 PM)',
+                name: 'Sahafat Aur Tarjuma Nigari Ka Fun Aur Riwayat'
             },
             'A010502T': {
                 date: '27-Dec-2025',
                 day: 'Sat',
-                shift: 'Shift II (02:00 PM - 05:00 PM)'
+                shift: 'Shift II (02:00 PM - 05:00 PM)',
+                name: 'Hindi Ka Rastriya Ka Vya'
             },
             'A210101T': {
                 date: '29-Dec-2025',
                 day: 'Mon',
-                shift: 'Shift I (10:00 AM - 01:00 PM)'
+                shift: 'Shift I (10:00 AM - 01:00 PM)',
+                name: 'History of Art: Pre Historic to Rashtrakuta'
             },
             'A080501T': {
                 date: '29-Dec-2025',
                 day: 'Mon',
-                shift: 'Shift I (10:00 AM - 01:00 PM)'
+                shift: 'Shift I (10:00 AM - 01:00 PM)',
+                name: 'Economic Growth and Development'
             },
             'A210301T': {
                 date: '30-Dec-2025',
                 day: 'Tue',
-                shift: 'Shift I (10:00 AM - 01:00 PM)'
+                shift: 'Shift I (10:00 AM - 01:00 PM)',
+                name: 'History of Indian Art-Palato Pandya & Nayaka Period'
             },
             'A080502T': {
                 date: '30-Dec-2025',
                 day: 'Tue',
-                shift: 'Shift II (02:00 PM - 05:00 PM)'
+                shift: 'Shift II (02:00 PM - 05:00 PM)',
+                name: 'Environmental Economics'
             },
             'A080503T': {
                 date: '30-Dec-2025',
                 day: 'Tue',
-                shift: 'Shift II (02:00 PM - 05:00 PM)'
+                shift: 'Shift II (02:00 PM - 05:00 PM)',
+                name: 'International Economics'
             },
             'A130101T': {
                 date: '31-Dec-2025',
                 day: 'Wed',
-                shift: 'Shift I (10:00 AM - 01:00 PM)'
+                shift: 'Shift I (10:00 AM - 01:00 PM)',
+                name: 'Fundamentals of Nutrition and Human Development'
             },
             'A110501T': {
                 date: '31-Dec-2025',
                 day: 'Wed',
-                shift: 'Shift I (10:00 AM - 01:00 PM)'
+                shift: 'Shift I (10:00 AM - 01:00 PM)',
+                name: 'Regional Geography'
             },
             'A130301T': {
                 date: '01-Jan-2026',
                 day: 'Thu',
-                shift: 'Shift I (10:00 AM - 01:00 PM)'
+                shift: 'Shift I (10:00 AM - 01:00 PM)',
+                name: 'Advance Nutrition and Human Development'
             },
             'A110502T': {
                 date: '01-Jan-2026',
                 day: 'Thu',
-                shift: 'Shift II (02:00 PM - 05:00 PM)'
+                shift: 'Shift II (02:00 PM - 05:00 PM)',
+                name: 'Basics of Remote Sensing and GIS'
             },
             'A090101T': {
                 date: '01-Jan-2026',
                 day: 'Thu',
-                shift: 'Shift II (02:00 PM - 05:00 PM)'
+                shift: 'Shift II (02:00 PM - 05:00 PM)',
+                name: 'Basic Psychological Processes'
             },
             'A100101T': {
                 date: '02-Jan-2026',
                 day: 'Fri',
-                shift: 'Shift I (10:00 AM - 01:00 PM)'
+                shift: 'Shift I (10:00 AM - 01:00 PM)',
+                name: 'Indian Philosophy'
             },
             'A070501T': {
                 date: '02-Jan-2026',
                 day: 'Fri',
-                shift: 'Shift I (10:00 AM - 01:00 PM)'
+                shift: 'Shift I (10:00 AM - 01:00 PM)',
+                name: 'Classical Sociological Thought'
             },
             'A120101T': {
                 date: '02-Jan-2026',
                 day: 'Fri',
-                shift: 'Shift I (10:00 AM - 01:00 PM)'
+                shift: 'Shift I (10:00 AM - 01:00 PM)',
+                name: 'Conceptual Aspect of war'
             },
             'A310101T': {
                 date: '02-Jan-2026',
                 day: 'Fri',
-                shift: 'Shift I (10:00 AM - 01:00 PM)'
+                shift: 'Shift I (10:00 AM - 01:00 PM)',
+                name: 'Basic Fundamental of Tabla'
             },
             'A320101T': {
                 date: '02-Jan-2026',
                 day: 'Fri',
-                shift: 'Shift I (10:00 AM - 01:00 PM)'
+                shift: 'Shift I (10:00 AM - 01:00 PM)',
+                name: 'Introduction to Indian Music'
             },
             'A300101T': {
                 date: '02-Jan-2026',
                 day: 'Fri',
-                shift: 'Shift I (10:00 AM - 01:00 PM)'
+                shift: 'Shift I (10:00 AM - 01:00 PM)',
+                name: 'Theoretical and Analytical study of Ragas, Talas and general theory of'
             },
             'A090301T': {
                 date: '02-Jan-2026',
                 day: 'Fri',
-                shift: 'Shift II (02:00 PM - 05:00 PM)'
+                shift: 'Shift II (02:00 PM - 05:00 PM)',
+                name: 'Psychology of Social Behavior'
             },
             'A050501T': {
                 date: '05-Jan-2026',
                 day: 'Mon',
-                shift: 'Shift II (02:00 PM - 05:00 PM)'
+                shift: 'Shift II (02:00 PM - 05:00 PM)',
+                name: 'Nationalism in India'
             },
             'A120301T': {
                 date: '06-Jan-2026',
                 day: 'Tue',
-                shift: 'Shift II (02:00 PM - 05:00 PM)'
+                shift: 'Shift II (02:00 PM - 05:00 PM)',
+                name: 'National Security-Conceptual Aspects'
             },
             'A030101T': {
                 date: '07-Jan-2026',
                 day: 'Wed',
-                shift: 'Shift I (10:00 AM - 01:00 PM)'
+                shift: 'Shift I (10:00 AM - 01:00 PM)',
+                name: 'Urdu Zaban-o-Adab aur Qwaid-o Insha'
             },
             'A050502T': {
                 date: '07-Jan-2026',
                 day: 'Wed',
-                shift: 'Shift II (02:00 PM - 05:00 PM)'
+                shift: 'Shift II (02:00 PM - 05:00 PM)',
+                name: 'History of Modern Europe (1815A.D.-1870A.D.)'
             },
             'A050503T': {
                 date: '07-Jan-2026',
                 day: 'Wed',
-                shift: 'Shift II (02:00 PM - 05:00 PM)'
+                shift: 'Shift II (02:00 PM - 05:00 PM)',
+                name: 'Socio-Cultural and Economic History of Medieval India (1200A.D.-1700A.D.)'
             },
             'A050504T': {
                 date: '07-Jan-2026',
                 day: 'Wed',
-                shift: 'Shift II (02:00 PM - 05:00 PM)'
+                shift: 'Shift II (02:00 PM - 05:00 PM)',
+                name: 'Ethicsin History'
             },
             
             
-            // Non-scheduled / Placeholder Entries (Retained from original HTML)
+            // Non-scheduled / Placeholder Entries
             'C010403P': {
                 date: 'N/A',
                 day: 'N/A',
-                shift: 'N/A'
+                shift: 'N/A',
+                name: 'Practical'
             }, // Practical - Date decided by college
             'A010603R': {
                 date: 'N/A',
                 day: 'N/A',
-                shift: 'N/A'
+                shift: 'N/A',
+                name: 'Research Project'
             },
             'A020607R': {
                 date: 'N/A',
                 day: 'N/A',
-                shift: 'N/A'
+                shift: 'N/A',
+                name: 'Research Project'
             },
             'A030607R': {
                 date: 'N/A',
                 day: 'N/A',
-                shift: 'N/A'
+                shift: 'N/A',
+                name: 'Research Project'
             },
             'A040604R': {
                 date: 'N/A',
                 day: 'N/A',
-                shift: 'N/A'
+                shift: 'N/A',
+                name: 'Research Project'
             },
             'A050605R': {
                 date: 'N/A',
                 day: 'N/A',
-                shift: 'N/A'
+                shift: 'N/A',
+                name: 'Research Project'
             },
             'A060603R': {
                 date: 'N/A',
                 day: 'N/A',
-                shift: 'N/A'
+                shift: 'N/A',
+                name: 'Research Project'
             },
             'A070606R': {
                 date: 'N/A',
                 day: 'N/A',
-                shift: 'N/A'
+                shift: 'N/A',
+                name: 'Research Project'
             },
             'A070603R': {
                 date: 'N/A',
                 day: 'N/A',
-                shift: 'N/A'
+                shift: 'N/A',
+                name: 'Research Project'
             },
             'A080604R': {
                 date: 'N/A',
                 day: 'N/A',
-                shift: 'N/A'
+                shift: 'N/A',
+                name: 'Research Project'
             },
             'A090604R': {
                 date: 'N/A',
                 day: 'N/A',
-                shift: 'N/A'
+                shift: 'N/A',
+                name: 'Research Project'
             },
             'A090603P': {
                 date: 'N/A',
                 day: 'N/A',
-                shift: 'N/A'
+                shift: 'N/A',
+                name: 'Practical'
             },
             'A100603P': {
                 date: 'N/A',
                 day: 'N/A',
-                shift: 'N/A'
+                shift: 'N/A',
+                name: 'Practical'
             },
             'A100604R': {
                 date: 'N/A',
                 day: 'N/A',
-                shift: 'N/A'
+                shift: 'N/A',
+                name: 'Research Project'
             },
             'A110603P': {
                 date: 'N/A',
                 day: 'N/A',
-                shift: 'N/A'
+                shift: 'N/A',
+                name: 'Practical'
             },
             'A110604R': {
                 date: 'N/A',
                 day: 'N/A',
-                shift: 'N/A'
+                shift: 'N/A',
+                name: 'Research Project'
             },
             'A120603P': {
                 date: 'N/A',
                 day: 'N/A',
-                shift: 'N/A'
+                shift: 'N/A',
+                name: 'Practical'
             },
             'A120604R': {
                 date: 'N/A',
                 day: 'N/A',
-                shift: 'N/A'
+                shift: 'N/A',
+                name: 'Research Project'
             },
             'A130603P': {
                 date: 'N/A',
                 day: 'N/A',
-                shift: 'N/A'
+                shift: 'N/A',
+                name: 'Practical'
             },
             'A130604R': {
                 date: 'N/A',
                 day: 'N/A',
-                shift: 'N/A'
+                shift: 'N/A',
+                name: 'Research Project'
             },
             'A180603P': {
                 date: 'N/A',
                 day: 'N/A',
-                shift: 'N/A'
+                shift: 'N/A',
+                name: 'Practical'
             },
             'A180604R': {
                 date: 'N/A',
                 day: 'N/A',
-                shift: 'N/A'
+                shift: 'N/A',
+                name: 'Research Project'
             },
             'A210603P': {
                 date: 'N/A',
                 day: 'N/A',
-                shift: 'N/A'
+                shift: 'N/A',
+                name: 'Practical'
             },
             'A210604R': {
                 date: 'N/A',
                 day: 'N/A',
-                shift: 'N/A'
+                shift: 'N/A',
+                name: 'Research Project'
             },
             'E010603P': {
                 date: 'N/A',
                 day: 'N/A',
-                shift: 'N/A'
+                shift: 'N/A',
+                name: 'Practical'
             },
             'E010604R': {
                 date: 'N/A',
                 day: 'N/A',
-                shift: 'N/A'
+                shift: 'N/A',
+                name: 'Research Project'
             },
             'E020603P': {
                 date: 'N/A',
                 day: 'N/A',
-                shift: 'N/A'
+                shift: 'N/A',
+                name: 'Practical'
             },
             'E020604R': {
                 date: 'N/A',
                 day: 'N/A',
-                shift: 'N/A'
+                shift: 'N/A',
+                name: 'Research Project'
             },
             'B010603P': {
                 date: 'N/A',
                 day: 'N/A',
-                shift: 'N/A'
+                shift: 'N/A',
+                name: 'Practical'
             },
             'B010604R': {
                 date: 'N/A',
                 day: 'N/A',
-                shift: 'N/A'
+                shift: 'N/A',
+                name: 'Research Project'
             },
             'B020603P': {
                 date: 'N/A',
                 day: 'N/A',
-                shift: 'N/A'
+                shift: 'N/A',
+                name: 'Practical'
             },
             'B020604R': {
                 date: 'N/A',
                 day: 'N/A',
-                shift: 'N/A'
+                shift: 'N/A',
+                name: 'Research Project'
             },
             'B030603P': {
                 date: 'N/A',
                 day: 'N/A',
-                shift: 'N/A'
+                shift: 'N/A',
+                name: 'Practical'
             },
             'B030604R': {
                 date: 'N/A',
                 day: 'N/A',
-                shift: 'N/A'
+                shift: 'N/A',
+                name: 'Research Project'
             },
             'B040603P': {
                 date: 'N/A',
                 day: 'N/A',
-                shift: 'N/A'
+                shift: 'N/A',
+                name: 'Practical'
             },
             'B040604R': {
                 date: 'N/A',
                 day: 'N/A',
-                shift: 'N/A'
+                shift: 'N/A',
+                name: 'Research Project'
             },
             'B050603P': {
                 date: 'N/A',
                 day: 'N/A',
-                shift: 'N/A'
+                shift: 'N/A',
+                name: 'Practical'
             },
             'B050604R': {
                 date: 'N/A',
                 day: 'N/A',
-                shift: 'N/A'
+                shift: 'N/A',
+                name: 'Research Project'
             },
             'B060603P': {
                 date: 'N/A',
                 day: 'N/A',
-                shift: 'N/A'
+                shift: 'N/A',
+                name: 'Practical'
             },
             'B060604R': {
                 date: 'N/A',
                 day: 'N/A',
-                shift: 'N/A'
+                shift: 'N/A',
+                name: 'Research Project'
             },
             'C010603P': {
                 date: 'N/A',
                 day: 'N/A',
-                shift: 'N/A'
+                shift: 'N/A',
+                name: 'Practical'
             },
             'C010607R': {
                 date: 'N/A',
                 day: 'N/A',
-                shift: 'N/A'
+                shift: 'N/A',
+                name: 'Research Project'
             },
             'Q10021': {
                 date: '22-May-2025',
                 day: 'Thu',
-                shift: 'Shift 1 (8:00 AM - 11:00 AM)'
+                shift: 'Shift 1 (8:00 AM - 11:00 AM)',
+                name: 'Elective Paper'
             },
             'V0001015P': {
                 date: 'N/A',
                 day: 'N/A',
-                shift: 'N/A'
+                shift: 'N/A',
+                name: 'Practical/Vocational'
             }, // Practical/Vocational
             'V0001015T': {
                 date: '23-May-2025',
                 day: 'Fri',
-                shift: 'Shift 1 (8:00 AM - 11:00 AM)'
+                shift: 'Shift 1 (8:00 AM - 11:00 AM)',
+                name: 'Vocational Theory'
             }, // Assuming T means Theory
             'Z060601': {
                 date: '14-Oct-2025',
                 day: 'Tue',
-                shift: 'Shift 1 (10:00 AM - 12:00 PM)'
+                shift: 'Shift 1 (10:00 AM - 12:00 PM)',
+                name: 'Co-Curricular'
             },
             
-            // Added B010601T from Neha Sagar's form for date lookup
+            // Added codes
             'D010601T': {
                 date: '06-May-2025',
                 day: 'Tue',
-                shift: 'Shift 2 (11:00 AM - 2:00 PM)'
+                shift: 'Shift 2 (11:00 AM - 2:00 PM)',
+                name: 'Added Theory Paper'
             },
-            // Added B010201T from Somiya's Admit Card
             'D010201T': {
                 date: '01-May-2025',
                 day: 'Thu',
-                shift: 'Shift 1 (8:00 AM - 11:00 AM)'
+                shift: 'Shift 1 (8:00 AM - 11:00 AM)',
+                name: 'Added Theory Paper 2'
             },
         };
 
@@ -1986,6 +2205,11 @@
   getMatch(/ADMITTED\s*SUBJECT[:\-\n\s]*?([A-Z0-9,\s]+?)(?=ADMITTED\s*COLLEGE|NOTE|PAPER\s*\d+)/i);
 
 
+            // --- FIX: Examination Center (Required User Modification) ---
+            const examinationCenter = 
+                getMatch(/EXAMINATION\s*CENTER:[:\-\n\s]*?([\s\S]*?)(?=SUBJECT|NOTE|PAPER)/i) || 
+                "Visit the official site to view the examination center";
+
 
             return {
                 // Updated to use combined logic
@@ -1998,7 +2222,7 @@
                 semester: semester, // FIX: Improved pattern
                 examType: examType, // FIX: Improved logic
                 collegeName: collegeName, // FIX: Improved pattern
-                examinationCenter: getMatch(/EXAMINATION\s*CENTER:[:\-\n\s]*?([\s\S]*?)(?=SUBJECT|NOTE|PAPER)/i),
+                examinationCenter: examinationCenter, // **UPDATED**
                 subject: subject, // FIX: Subject extraction improved to exclude NOTE
                 papers: extractPapers(text.toUpperCase())
             };
@@ -2096,8 +2320,8 @@
             set('semester', data.semester);
             set('examType', ['MAIN EXAM', 'BACK EXAM', 'EX-STUDENT EXAM'].includes(data.examType) ? data.examType : 'MAIN EXAM');
             set('collegeName', data.collegeName);
-            // Fallback for Exam Center if not found on Exam Form (assumes college is center)
-            set('examinationCenter', data.examinationCenter || data.collegeName);
+            // Uses the extracted or defaulted examinationCenter value
+            set('examinationCenter', data.examinationCenter); 
             set('subject', data.subject);
 
             paperEntriesContainer.innerHTML = '';
@@ -2141,7 +2365,6 @@
 
         /**
          * @description Clears all fields in the manual entry form.
-           * @description Clears all fields in the manual entry form.
          */
         function resetForm() {
             document.getElementById('admitCardForm').reset();
@@ -2171,10 +2394,8 @@
                 course = document.getElementById('course').value,
                 gender = document.getElementById('gender').value,
                 semester = document.getElementById('semester').value,
-                // Detect if the form is for SPECIAL BACK PAPER (a specific requirement)
                 rawExamType = document.getElementById('examType').value,
                 examType = rawExamType === 'BACK EXAM' ? 'SPECIAL BACK EXAM' : rawExamType,
-                // --- MODIFICATION END (A) ---
                 collegeName = document.getElementById('collegeName').value,
                 examinationCenter = document.getElementById('examinationCenter').value,
                 subject = document.getElementById('subject').value;
@@ -2195,17 +2416,21 @@
             // Build papers table HTML
             let papersHtml = paperEntries.map((paper, index) => {
                 const details = examDatesheet[paper.code] || {
-                    date: 'SCHEDULE NOT FOUND', // Changed default to better reflect the issue
+                    date: 'SCHEDULE NOT FOUND', 
                     day: 'SCHEDULE NOT FOUND',
-                    shift: 'SCHEDULE NOT FOUND'
+                    shift: 'SCHEDULE NOT FOUND',
+                    name: paper.name // Use manually entered name as fallback
                 };
 
-                let scheduleHTML;
-                const paperCodeUpper = paper.code.toUpperCase(); // New
-                const paperTypeCleaned = paper.type.toUpperCase().replace(/\s{2,}/g, ' '); // New
-                let customMessage = ''; // New
+                // *** NEW/UPDATED: Use the name from the datesheet if available, otherwise use manual entry ***
+                const finalPaperName = details.name && details.name !== 'N/A' ? details.name.toUpperCase() : paper.name;
 
-                // --- START NEW LOGIC FOR P, R, V PAPERS ---
+                let scheduleHTML;
+                const paperCodeUpper = paper.code.toUpperCase();
+                const paperTypeCleaned = paper.type.toUpperCase().replace(/\s{2,}/g, ' '); 
+                let customMessage = ''; 
+
+                // --- START LOGIC FOR P, R, V PAPERS ---
                 if (paperCodeUpper.endsWith('P')) {
                     customMessage = 'Contact the college for Exam Date (Paper is Practical)';
                 } else if (paperCodeUpper.endsWith('R')) {
@@ -2213,7 +2438,7 @@
                 } else if (paperCodeUpper.startsWith('V')) {
                     customMessage = 'Contact the college for Exam Date (Paper is Skill Development)';
                 }
-                // --- END NEW LOGIC FOR P, R, V PAPERS ---
+                // --- END LOGIC FOR P, R, V PAPERS ---
 
                 if (customMessage) { // Check if a custom message was set (for P, R, V codes)
                     scheduleHTML = `<td colspan="3" style="text-align: center; font-weight: bold; color: #d32f2f;">${customMessage}</td>`;
@@ -2222,8 +2447,7 @@
                     scheduleHTML = `<td colspan="3" style="text-align: center; font-weight: bold; color: #f57c00;">Visit ccsuniversity.ac.in to confirm the exam schedule</td>`;
                 } else {
                     // Normal entry found
-                   // --- MODIFICATION START (B) ---
-                    const [shiftName, shiftTime] = details.shift.split('('); // Split "Shift 1 (10:00 AM...)"
+                    const [shiftName, shiftTime] = details.shift.split('('); 
                     scheduleHTML = `
                         <td>${details.date}</td>
                         <td>${details.day}</td>
@@ -2232,15 +2456,13 @@
                             ${shiftTime ? `(${shiftTime}` : ''}
                         </td>
                     `;
-                    // --- MODIFICATION END (B) ---
                 }
 
                 return `
                 <tr>
                     <td style="text-align: center;">${index + 1}</td> 
                     <td>${paper.code}</td>
-                    <td>${paper.name}</td>
-                    <td>${paper.type}</td>
+                    <td>${finalPaperName}</td> <td>${paper.type}</td>
                     ${scheduleHTML}
                 </tr>`;
             }).join('');
