@@ -345,12 +345,12 @@
         }
         
         /* FIX: Re-enforce column widths using percentages for automatic device/print sizing */
-        .papers-table th:nth-child(1), .papers-table td:nth-child(1) { width: 5%; text-align: center; }  /* S. No. - Center aligned */
+        .papers-table th:nth-child(1), .papers-table td:nth-child(1) { width: 4%; text-align: center; }  /* S. No. - Center aligned */
         .papers-table th:nth-child(2), .papers-table td:nth-child(2) { width: 12%; } /* PAPER CODE */
-        .papers-table th:nth-child(3), .papers-table td:nth-child(3) { width: 30%; } /* PAPER NAME (Increased width) */
-        .papers-table th:nth-child(4), .papers-table td:nth-child(4) { width: 13%; } /* PAPER TYPE */
+        .papers-table th:nth-child(3), .papers-table td:nth-child(3) { width: 35%; } /* PAPER NAME (Increased width) */
+        .papers-table th:nth-child(4), .papers-table td:nth-child(4) { width: 12%; } /* PAPER TYPE */
         .papers-table th:nth-child(5), .papers-table td:nth-child(5) { width: 12%; } /* EXAM DATE */
-        .papers-table th:nth-child(6), .papers-table td:nth-child(6) { width: 8%; } /* DAY (Reduced width) */
+        .papers-table th:nth-child(6), .papers-table td:nth-child(6) { width: 5%; } /* DAY (Reduced width) */
         .papers-table th:nth-child(7), .papers-table td:nth-child(7) { width: 20%; } /* SHIFT */
 
 
@@ -377,7 +377,8 @@
             }
 
             #admit-card-wrapper {
-                margin: 0 !important;
+                /* FIX: Use standard print margins to avoid cutting off content */
+                margin: 0.5in auto !important; 
                 padding: 0 !important;
                 box-shadow: none !important;
                 max-width: 100% !important;
@@ -386,9 +387,27 @@
 
             #admit-card-content {
                 border: 1px solid black !important;
-                margin: 0;
+                /* FIX: Allow some internal padding for text clearance and set a max content width */
+                margin: 0 auto; 
                 padding: 10px;
+                width: 7.5in; 
+                max-width: 100%;
             }
+            
+            /* FIX: Reset table-layout to auto in print to allow proportional shrinking */
+            .papers-table {
+                table-layout: auto !important; 
+                font-size: 10px; /* Reduce font size for print-out readability */
+            }
+            
+            /* Ensure specific print widths are proportional and small */
+            .papers-table th:nth-child(1), .papers-table td:nth-child(1) { width: 4%; }
+            .papers-table th:nth-child(2), .papers-table td:nth-child(2) { width: 12%; }
+            .papers-table th:nth-child(3), .papers-table td:nth-child(3) { width: 35%; }
+            .papers-table th:nth-child(4), .papers-table td:nth-child(4) { width: 12%; }
+            .papers-table th:nth-child(5), .papers-table td:nth-child(5) { width: 12%; }
+            .papers-table th:nth-child(6), .papers-table td:nth-child(6) { width: 5%; }
+            .papers-table th:nth-child(7), .papers-table td:nth-child(7) { width: 20%; }
         }
     </style>
 
@@ -2113,7 +2132,8 @@
             });
             
             // Initial setup for the theme toggle (light mode by default)
-            document.getElementById('theme-toggle').addEventListener('click', toggleTheme);
+            // Note: theme-toggle element is not present in the HTML, so this line will likely fail but is kept for context integrity.
+            // document.getElementById('theme-toggle').addEventListener('click', toggleTheme);
         });
         
         // --- THEME TOGGLE FUNCTIONALITY (Copied from viva.html) ---
@@ -2153,8 +2173,10 @@
                 updateStyles('.papers-table th', { backgroundColor: '#4b5563', color: '#f8fafc' });
 
                 // Update icon
-                themeIcon.classList.remove('fa-moon');
-                themeIcon.classList.add('fa-sun');
+                if(themeIcon) {
+                    themeIcon.classList.remove('fa-moon');
+                    themeIcon.classList.add('fa-sun');
+                }
 
             } else {
                 // Reset to light mode styles
@@ -2177,8 +2199,10 @@
                  updateStyles('.papers-table th', { backgroundColor: '#f2f2f2', color: '#111827' });
 
                 // Update icon
-                themeIcon.classList.remove('fa-sun');
-                themeIcon.classList.add('fa-moon');
+                if(themeIcon) {
+                    themeIcon.classList.remove('fa-sun');
+                    themeIcon.classList.add('fa-moon');
+                }
             }
         }
         
