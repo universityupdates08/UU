@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admit Card Generator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --card-bg: #ffffff;
+            --ink: #111827;
+            --primary-color: #EF3C3C;
+            --secondary-color: #2C4B9E;
+        }
+
+        /* Base Styles & Inter Font */
+        html,
+        body {
+            font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+            background: #f8fafc;
+            color: var(--ink);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* Utility Bar (Included for button style definitions) */
+        .utility-bar {
+            display: none; /* Hide utility bar for this specific output */
+        }
+        
+        /* Form Layout Styles */
+        h1,
+        h2 {
+            color: #333;
+            text-align: center;
+        }
+
+        #form-container {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 900px;
+            margin-bottom: 20px;
+        }
+
+        .entry-toggle {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .toggle-btn {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            background-color: #f0f0f0;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            color: #555;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .toggle-btn.active {
+            background-color: #007BFF;
+            color: white;
+        }
+
+        #auto-fill-section {
+            text-align: center;
+            padding: 20px;
+            border: 2px dashed #ccc;
+            border-radius: 8px;
+        }
+
+        #auto-fill-section label {
+            font-weight: bold;
+            font-size: 18px;
+            display: block;
+            margin-bottom: 15px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        .form-group input,
+        .form-group select {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        #papers-container {
+            margin-top: 20px;
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+        }
+
+        .paper-entry {
+            display: grid;
+            grid-template-columns: 1fr 3fr 1.5fr 40px;
+            gap: 10px;
+            align-items: center;
+            margin-bottom: 10px;
+            background: #f9f9f9;
+            padding: 10px;
+            border-radius: 4px;
+        }
+        
+        /* YouTube Button Custom Style */
+        .youtube-btn {
+            background-color: #FF0000;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: inline-flex;
+            align-items: center;
+        }
+        .youtube-btn:hover {
+            background-color: #CC0000;
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+            transform: translateY(-1px);
+        }
+        
+        /* Utility to ensure fixed width for card/form alignment */
+        .max-w-5xl {
+            max-width: 900px; /* Equivalent to max-w-5xl from original file's #form-container */
+        }
+        
+        /* Minimal print styles to avoid cutoff if printing this snippet */
+         @media print {
+            body { background: white !important; margin: 0; padding: 0; }
+            .max-w-5xl { max-width: 100% !important; }
+            #form-container { box-shadow: none; border: 1px solid #ccc; }
+        }
+        
+    </style>
+</head>
+<body class="flex flex-col items-center p-4">
+    
+    <header class="w-full border-b bg-white/70 shadow-lg mb-4">
+        <div class="max-w-6xl mx-auto flex items-center justify-center p-4">
+            <div class="flex items-center gap-3">
+                <img src="https://i.ibb.co/nMC0877T/UNIVERSITY-UPDATES-LOGO-removebg-preview.png" alt="Logo" class="h-10 w-auto" />
+            </div>
+        </div> 
+    </header> 
+  
+    <h1 class="mt-3 mx-auto text-3xl font-extrabold text-center text-gray-800">ADMIT CARD GENERATOR</h1>
+
+
+<div class="flex justify-center mt-6 px-2 w-full max-w-5xl mx-auto">
+  <div class="w-full bg-white shadow-xl border border-gray-200 rounded-xl p-4 sm:p-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    
+        <div class="bg-gradient-to-r from-blue-50 to-blue-100 shadow-md border border-blue-300 rounded-lg p-4 flex flex-col justify-between">
+          <div>
+            <div class="flex justify-start items-center gap-2 sm:gap-3 mb-3">
+              <i class="fas fa-keyboard text-xl sm:text-2xl text-blue-800"></i>
+              <h2 class="text-base sm:text-lg md:text-xl font-bold text-blue-800">Option 1: Manual Entry</h2>
+            </div>
+            <p class="text-[10px] sm:text-sm text-gray-700 leading-relaxed mb-1">
+              <b>Step 1:</b> Select the **Manual Entry** tab below.
+            </p>  
+            <p class="text-[10px] sm:text-sm text-gray-700 leading-relaxed mb-1">
+              <b>Step 2:</b> Fill in all the fields according to your **Exam Form** or previous Admit Card.
+            </p>
+            <p class="text-[10px] sm:text-sm text-gray-700 leading-relaxed mb-1">
+              <b>Step 3:</b> Click on **Generate Admit Card**.
+            </p>
+          </div>
+        </div>
+
+        <div class="bg-gradient-to-r from-green-50 to-green-100 shadow-md border border-green-300 rounded-lg p-4 flex flex-col justify-between">
+          <div>
+            <div class="flex justify-start items-center gap-2 sm:gap-3 mb-3">
+              <i class="fas fa-file-upload text-xl sm:text-2xl text-green-800"></i>
+              <h2 class="text-base sm:text-lg md:text-xl font-bold text-green-800">Option 2: Auto-fill from Upload</h2>
+            </div>
+            <p class="text-[10px] sm:text-sm text-gray-700 leading-relaxed mb-1">
+              <b>Step 1:</b> Select the **Auto-fill from Upload** tab below.
+            </p>
+            <p class="text-[10px] sm:text-sm text-gray-700 leading-relaxed mb-1">
+              <b>Step 2:</b> Upload your **Exam Form/Admit Card** (PDF Recommended).
+            </p>
+            <p class="text-[10px] sm:text-sm text-gray-700 leading-relaxed mb-1">
+              <b>Step 3:</b> Review and manually correct any auto-filled details.
+            </p>
+            <p class="text-[10px] sm:text-sm text-gray-700 leading-relaxed mb-1">
+              <b>Step 4:</b> Click on **Generate Admit Card**.
+            </p>
+          </div>
+        </div>
+    </div>
+  </div>
+</div>
+
+<div class="max-w-5xl w-full mx-auto px-4 mt-2">
+    <p class="text-[10px] sm:text-sm text-center text-red-600 italic font-semibold">
+        **Disclaimer:** The data extraction feature is experimental. Always verify all auto-filled details, especially the Paper Codes and Names.
+    </p>
+</div>
+<div class="flex justify-center mt-6 w-full max-w-5xl px-4">
+    <a href="https://youtu.be/QekxFTFbtEk" target="_blank" class="youtube-btn">
+        <i class="fab fa-youtube mr-2"></i> Watch Tutorial on YouTube
+    </a>
+</div>
+<div id="form-container" class="mt-5 mx-auto bg-white rounded-xl shadow-lg p-8 w-full max-w-5xl">
+    
+    <div class="entry-toggle flex justify-center mb-8">
+        <button class="toggle-btn active rounded-l-md" id="manualBtn">Manual Entry</button>
+        <button class="toggle-btn rounded-r-md" id="autoBtn">Auto-fill from Upload</button>
+    </div>
+
+    <div id="auto-fill-section" style="display:none;" class="border-2 border-dashed border-blue-300 bg-blue-50 p-6 rounded-lg text-center mb-8">
+        <label for="admitCardUpload" class="block text-lg font-semibold text-blue-700 mb-3">
+            Upload Admit Card/Exam Form (PDF/Image) to Auto-Fill Details (PDF Recommended)
+        </label>
+        <input type="file" id="admitCardUpload" accept=".pdf,.png,.jpg,.jpeg" class="p-2 border border-gray-300 rounded-md w-full max-w-md mx-auto block">
+        <p id="upload-status" class="mt-3 text-blue-600 font-semibold"></p>
+    </div>
+
+    <div id="manual-form">
+        <form id="admitCardForm" class="space-y-8">
+
+            <div>
+                <h2 class="text-xl font-semibold mb-4 border-b-2 border-gray-300 pb-2 text-gray-700">Student Details</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                    <div class="form-group">
+                        <label for="candidateName">Candidate Name:</label>
+                        <input type="text" id="candidateName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="fatherMotherName">Father's/Mother's Name:</label>
+                        <input type="text" id="fatherMotherName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="rollNumber">Roll Number:</label>
+                        <input type="text" id="rollNumber" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="enrollmentNumber">Enrollment Number:</label>
+                        <input type="text" id="enrollmentNumber" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="course">Course:</label>
+                        <input type="text" id="course" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="gender">Gender:</label>
+                        <select id="gender" required>
+                            <option value="">Select</option>
+                            <option value="FEMALE">FEMALE</option>
+                            <option value="MALE">MALE</option>
+                            <option value="OTHER">OTHER</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="semester">Semester:</label>
+                        <select id="semester" required>
+                            <option value="">Select Semester</option>
+                            <option value="1">1st</option>
+                            <option value="2">2nd</option>
+                            <option value="3">3rd</option>
+                            <option value="4">4th</option>
+                            <option value="5">5th</option>
+                            <option value="6">6th</option>
+                            <option value="7">7th</option>
+                            <option value="8">8th</option>
+                            <option value="9">9th</option>
+                            <option value="10">10th</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="examType">Exam Type:</label>
+                        <select id="examType" required>
+                            <option value="">Select Exam Type</option>
+                            <option value="MAIN EXAM">Main</option>
+                            <option value="BACK EXAM">Back</option>
+                            <option value="EX-STUDENT EXAM">Ex-Student</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="collegeName">College Name:</label>
+                        <input type="text" id="collegeName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="examinationCenter">Examination Center:</label>
+                        <input type="text" id="examinationCenter" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Main Subject:</label>
+                        <input type="text" id="subject" required>
+                    </div>
+                </div>
+            </div>
+
+            <div id="papers-container">
+                <h2 class="text-xl font-semibold mb-4 border-b-2 border-gray-300 pb-2 text-gray-700">Paper Details</h2>
+                <div id="paper-entries" class="space-y-3"></div>
+                <div class="text-center mt-4">
+                    <button type="button" id="addPaperBtn" class="bg-indigo-600 hover:bg-indigo-700 text-white text-sm py-2 px-5 rounded-full shadow-md transition">
+                        + Add Paper
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="action-buttons flex flex-wrap justify-center gap-4 mt-6 mb-10 w-full max-w-5xl px-4">
+    <button type="button" id="generateBtn" class="gradient-button">Generate Admit Card</button>
+    <button type="button" id="resetBtn" class="gradient-button">Reset Form</button>
+    <button type="button" id="printBtn" class="gradient-button" style="display:none;">Print Admit Card</button>
+    <button type="button" id="downloadBtn" class="gradient-button" style="display:none;">Download as PDF</button>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+<script>
+    // Minimal definitions for core functionality (toggle, add paper)
+    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
+    
+    // Placeholder functions for core logic (must be present to avoid console errors)
+    const examDatesheet = {};
+    const paperEntriesContainer = document.getElementById('paper-entries');
+
+    function addPaperEntry(paper = { code: '', name: '', type: '' }) {
+        const div = document.createElement('div');
+        div.className = 'paper-entry';
+        div.innerHTML = `
+            <input type="text" placeholder="Paper Code" value="${paper.code}" required>
+            <input type="text" placeholder="Paper Name" value="${paper.name}" required>
+            <input type="text" placeholder="Paper Type (Theory, Practical)" value="${paper.type}" required>
+            <button type="button" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-1 text-xs rounded" title="Remove Paper">X</button>`;
+        div.querySelector('button').addEventListener('click', () => {
+            if (paperEntriesContainer.children.length > 1) {
+                paperEntriesContainer.removeChild(div);
+            }
+        });
+        paperEntriesContainer.appendChild(div);
+    }
+    
+    function switchToManualMode() {
+        document.getElementById('manual-form').style.display = 'block';
+        document.getElementById('auto-fill-section').style.display = 'none';
+        document.getElementById('manualBtn').classList.add('active');
+        document.getElementById('autoBtn').classList.remove('active');
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        // Mock modal behavior for snippet
+        document.getElementById('form-container').style.display = 'block';
+        document.querySelector('.action-buttons').style.display = 'flex';
+        addPaperEntry(); // Add initial paper row
+        
+        document.getElementById('addPaperBtn').addEventListener('click', () => addPaperEntry());
+        document.getElementById('manualBtn').addEventListener('click', switchToManualMode);
+        document.getElementById('autoBtn').addEventListener('click', () => {
+            document.getElementById('manual-form').style.display = 'none';
+            document.getElementById('auto-fill-section').style.display = 'block';
+            document.getElementById('manualBtn').classList.remove('active');
+            document.getElementById('autoBtn').classList.add('active');
+        });
+    });
+
+    // Stub out functions to prevent errors
+    function generateAdmitCard() {}
+    function resetForm() {}
+    function printAdmitCard() {window.print();}
+    function handleFileUpload() {} 
+    
+    // Minimal gradient button styles (since full styles are not included in this snippet)
+    const gradBtns = document.querySelectorAll('.gradient-button');
+    gradBtns.forEach(btn => {
+        if (btn.id === 'generateBtn') btn.style.backgroundImage = 'linear-gradient(to right, #1E3A8A, #3B82F6)';
+        if (btn.id === 'resetBtn') btn.style.backgroundImage = 'linear-gradient(to right, #EF4444, #F97316)';
+        if (btn.id === 'printBtn') btn.style.backgroundImage = 'linear-gradient(to right, #9333EA, #A855F7)';
+        if (btn.id === 'downloadBtn') btn.style.backgroundImage = 'linear-gradient(to right, #10B981, #059669)';
+    });
+
+</script>
+</body>
+</html>
