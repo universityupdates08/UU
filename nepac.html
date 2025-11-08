@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admit Card Generator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --card-bg: #ffffff;
+            --ink: #111827;
+        }
+
+        /* Base Styles & Inter Font */
+        html,
+        body {
+            font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+            background: #f8fafc;
+            color: var(--ink);
+        }
+
+        /* Utility Classes */
+        .glass {
+            background: rgba(255, 255, 255, .8);
+            backdrop-filter: blur(10px);
+        }
+
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Form Layout Styles */
+        h1,
+        h2 {
+            color: #333;
+            text-align: center;
+        }
+
+        #form-container {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 900px;
+            margin-bottom: 20px;
+        }
+
+        .entry-toggle {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .toggle-btn {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            background-color: #f0f0f0;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            color: #555;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .toggle-btn.active {
+            background-color: #007BFF;
+            color: white;
+        }
+
+        #auto-fill-section {
+            text-align: center;
+            padding: 20px;
+            border: 2px dashed #ccc;
+            border-radius: 8px;
+        }
+
+        #auto-fill-section label {
+            font-weight: bold;
+            font-size: 18px;
+            display: block;
+            margin-bottom: 15px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        .form-group input,
+        .form-group select {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        #papers-container {
+            margin-top: 20px;
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+        }
+
+        /* Paper Entry Grid for responsiveness (FIXED to prevent unnecessary stacking) */
+        .paper-entry {
+            /* FIX: Use flexible units (fr) to make columns adapt automatically.
+               Paper Code (1fr), Paper Name (3fr), Paper Type (1.5fr), Remove Button (40px fixed) */
+            display: grid;
+            grid-template-columns: 1fr 3fr 1.5fr 40px;
+            gap: 10px;
+            align-items: center;
+            margin-bottom: 10px;
+            background: #f9f9f9;
+            padding: 10px;
+            border-radius: 4px;
+        }
+
+        @media (max-width: 900px) {
+            .paper-entry {
+                /* Adjust ratio slightly for medium screens */
+                grid-template-columns: 1fr 2.5fr 1.5fr 40px; 
+            }
+        }
+
+        @media (max-width: 640px) {
+            .paper-entry {
+                /* Stack on small screens for form inputs to be readable */
+                grid-template-columns: 1fr;
+                gap: 5px;
+            }
+
+            .paper-entry button {
+                width: 100%;
+            }
+        }
+
+
+ 
+/* Dropdown positioning */
+    nav { position: relative; z-index: 50; }
+    nav .group:hover div { display: block !important; z-index: 60; }
+    
+        /* Gradient Button Styles */
+        .gradient-button {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .gradient-button:hover {
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+            transform: translateY(-1px);
+        }
+
+        #generateBtn {
+            background-image: linear-gradient(to right, #1E3A8A, #3B82F6);
+        }
+
+        #generateBtn:hover {
+            background-image: linear-gradient(to right, #1D4ED8, #2563EB);
+        }
+
+        #downloadBtn {
+            background-image: linear-gradient(to right, #10B981, #059669);
+        }
+
+        #downloadBtn:hover {
+            background-image: linear-gradient(to right, #06B6D4, #14B8A6);
+        }
+
+        #printBtn {
+            background-image: linear-gradient(to right, #9333EA, #A855F7);
+        }
+
+        #printBtn:hover {
+            background-image: linear-gradient(to right, #7C3AED, #8B5CF6);
+        }
+
+        #resetBtn {
+            background-image: linear-gradient(to right, #EF4444, #F97316);
+        }
+
+        #resetBtn:hover {
+            background-image: linear-gradient(to right, #DC2626, #F97316);
+        }
+
+
+        /* Admit Card Styles */
+        #admit-card-wrapper {
+            width: 100%;
+            max-width: 800px;
+            margin-top: 20px;
+            padding: 20px;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        #admit-card-content {
+            border: 2px solid black;
+            padding: 15px;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 2px solid black;
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+        }
+
+        .header img {
+            height: 60px;
+            width: auto;
+        }
+
+        .header h3 {
+            flex: 1;
+            text-align: center;
+            margin: 0;
+            font-size: 20px;
+        }
+
+        .header-right {
+            width: 60px;
+        }
+
+        .sub-header {
+            text-align: center;
+            font-weight: bold;
+            padding: 5px 0;
+            margin-bottom: 10px;
+        }
+
+        .sub-header h4 {
+            margin: 0;
+            padding: 5px 10px;
+            border: 1px solid black;
+            border-radius: 5px;
+            display: inline-block;
+        }
+
+        .details-table {
+            width: 100%;
+            margin-top: 10px;
+            border-collapse: collapse;
+        }
+
+        .details-table td {
+            padding: 5px;
+            font-size: 14px;
+            vertical-align: top;
+        }
+
+        .details-table .label {
+            font-weight: bold;
+            width: 25%;
+        }
+
+        /* FIX: Paper Table Widths for better print layout */
+        .papers-table {
+            width: 100%;
+            margin-top: 15px;
+            border-collapse: collapse;
+            font-size: 12px;
+            /* Ensure fixed layout for consistent column widths */
+            table-layout: fixed; 
+        }
+
+        .papers-table th,
+        .papers-table td {
+            border: 1px solid black;
+            padding: 6px;
+            text-align: left;
+            word-wrap: break-word; /* Allows long names to wrap */
+        }
+
+        .papers-table th {
+            background-color: #f2f2f2;
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        /* FIX: Re-enforce column widths using percentages for automatic device/print sizing */
+        .papers-table th:nth-child(1), .papers-table td:nth-child(1) { width: 5%; text-align: center; }  /* S. No. - Center aligned */
+        .papers-table th:nth-child(2), .papers-table td:nth-child(2) { width: 12%; } /* PAPER CODE */
+        .papers-table th:nth-child(3), .papers-table td:nth-child(3) { width: 30%; } /* PAPER NAME (Increased width) */
+        .papers-table th:nth-child(4), .papers-table td:nth-child(4) { width: 13%; } /* PAPER TYPE */
+        .papers-table th:nth-child(5), .papers-table td:nth-child(5) { width: 12%; } /* EXAM DATE */
+        .papers-table th:nth-child(6), .papers-table td:nth-child(6) { width: 8%; } /* DAY (Reduced width) */
+        .papers-table th:nth-child(7), .papers-table td:nth-child(7) { width: 20%; } /* SHIFT */
+
+
+        .footer-note {
+            font-size: 12px;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        /* Improved Printed Date/Time Display */
+        #generatedTime {
+            font-size: 11px;
+            font-style: italic;
+            color: #4B5563;
+            /* Darker gray for better print contrast */
+            padding-top: 10px;
+            border-top: 1px dashed #D1D5DB;
+        }
+
+        /* Print-specific styles to hide elements */
+        @media print {
+            body>*:not(#admit-card-wrapper) {
+                display: none !important;
+            }
+
+            #admit-card-wrapper {
+                margin: 0 !important;
+                padding: 0 !important;
+                box-shadow: none !important;
+                max-width: 100% !important;
+                width: 100% !important;
+            }
+
+            #admit-card-content {
+                border: 1px solid black !important;
+                margin: 0;
+                padding: 10px;
+            }
+        }
+    </style>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+    <script>
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
+</head>
+<body class="flex flex-col items-center">
+    <header class="w-full border-b bg-white/70 sticky top-0 z-30 shadow-lg">
+        <div class="max-w-6xl mx-auto flex items-center justify-center p-4">
+            <div class="flex items-center gap-3">
+                <img src="https://i.ibb.co/nMC0877T/UNIVERSITY-UPDATES-LOGO-removebg-preview.png" alt="Logo" class="h-10 w-auto" />
+            </div>
+              </div> 
+       
+
+
+ <nav class="bg-[#800000] text-white">
+    <div class="max-w-6xl mx-auto flex items-center justify-center p-1">
+      <div class="flex justify-between items-center py-1">
+        <div class="hidden md:flex items-center space-x-3 text-sm font-small">
+          <a href="index.html" class="hover:text-yellow-300">Home</a>
+          <span class="mx-2">|</span>
+
+          <a href="https://t.me/CCSUniversityMRT" class="hover:text-yellow-300">Telegram</a>
+          <span class="mx-2">|</span>
+
+          <a href="https://www.youtube.com/@University-Updates-UU" class="hover:text-yellow-300">YouTube</a>
+          <span class="mx-2">|</span>
+          
+          <a href="https://www.instagram.com/@UniversityUpdates_UU" class="hover:text-yellow-300">Instagram</a>
+          <span class="mx-2">|</span>
+          
+          <a href="https://www.whatsapp.com/channel/0029Va9jtav4tRrmKPxos138" class="hover:text-yellow-300">Whatsapp</a>
+          <span class="mx-2">|</span>
+
+
+          <a href="https://t.me/HelpforDmbot" class="hover:text-yellow-300">Contact Us</a>
+        </div> </div> 
+        
+        <div class="md:hidden">
+          <button id="menu-btn" class="focus:outline-none text-2xl">☰</button>
+        </div>     
+      </div> 
+
+
+      <div id="mobile-menu" class="hidden md:hidden bg-[#800000] text-white px-4 pb-3 space-y-2">
+        <a href="#index.html" class="block hover:text-yellow-300">Home</a>
+
+        <a href="https://t.me/CCSUniversityMRT" class="block hover:text-yellow-300">Telegram</a>
+        <a href="https://www.youtube.com/@University-Updates-UU" class="block hover:text-yellow-300">YouTube</a>
+        <a href="https://www.instagram.com/@UniversityUpdates_UU" class="block hover:text-yellow-300">Instagram</a>
+        <a href="https://www.whatsapp.com/channel/0029Va9jtav4tRrmKPxos138" class="block hover:text-yellow-300">Whatsapp</a>
+
+     
+        <a href="https://t.me/HelpforDmbot" class="block hover:text-yellow-300">Contact Us</a>
+      </div>
+       
+  </nav>
+    </header> 
+  
+     
+  
+  
+<h1 class="mt-3 mx-auto text-3xl font-extrabold text-center text-gray-800">ADMIT CARD GENERATOR</h1>
+
+
+<div class="flex justify-center mt-6 px-2">
+  <div class="w-full max-w-sm sm:max-w-md md:max-w-3xl mx-auto text-center bg-gradient-to-r from-blue-50 to-blue-100 shadow-lg border border-blue-300 rounded-lg p-4 sm:p-6">
+    <div class="flex justify-center items-center gap-2 sm:gap-3 mb-2">
+      <img src="https://cdn-icons-png.flaticon.com/512/595/595067.png" 
+           alt="Disclaimer Icon" 
+           class="h-6 w-6 sm:h-8 sm:w-8">
+      <h2 class="text-base sm:text-lg md:text-xl font-bold text-blue-800">HOW TO USE?</h2>
+    </div>
+    <p class="text-[10px] sm:text-sm text-gray-700 leading-relaxed mb-1">
+      <b>Step 1:</b> Fill the Manual Entry according to Exam Form.
+    </p>  
+    <p class="text-[10px] sm:text-sm text-gray-700 leading-relaxed mb-1"><b>OR</b></p>
+    <p class="text-[10px] sm:text-sm text-gray-700 leading-relaxed mb-1">
+      <b>Step 2:</b> Upload your Exam Form/Admit Card (PDF Recommended)
+    </p>
+    <p class="text-[10px] sm:text-sm text-gray-700 leading-relaxed mb-1">
+      (a) Verify your details. If any error seems then correct it manually.
+    </p>
+    <p class="text-[10px] sm:text-sm text-gray-700 leading-relaxed">
+      (b) Click on Generate Admit Card.
+    </p>
+  </div>
+</div>
+
+
+    <div id="form-container" class="mt-5 mx-auto bg-white rounded-xl shadow-lg p-8 w-full max-w-5xl">
+        
+        <div class="entry-toggle flex justify-center mb-8">
+            <button class="toggle-btn active rounded-l-md" id="manualBtn">Manual Entry</button>
+            <button class="toggle-btn rounded-r-md" id="autoBtn">Auto-fill from Upload</button>
+        </div>
+
+        <div id="auto-fill-section" style="display:none;" class="border-2 border-dashed border-blue-300 bg-blue-50 p-6 rounded-lg text-center mb-8">
+            <label for="admitCardUpload" class="block text-lg font-semibold text-blue-700 mb-3">
+                Upload Admit Card/Exam Form (PDF/Image) to Auto-Fill Details (PDF Recommended)
+            </label>
+            <input type="file" id="admitCardUpload" accept=".pdf,.png,.jpg,.jpeg" class="p-2 border border-gray-300 rounded-md w-full max-w-md mx-auto block">
+            <p id="upload-status" class="mt-3 text-blue-600 font-semibold"></p>
+        </div>
+
+        <div id="manual-form">
+            <form id="admitCardForm" class="space-y-8">
+
+                <div>
+                    <h2 class="text-xl font-semibold mb-4 border-b-2 border-gray-300 pb-2 text-gray-700">Student Details</h2>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                        <div class="form-group">
+                            <label for="candidateName">Candidate Name:</label>
+                            <input type="text" id="candidateName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="fatherMotherName">Father's/Mother's Name:</label>
+                            <input type="text" id="fatherMotherName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="rollNumber">Roll Number:</label>
+                            <input type="text" id="rollNumber" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="enrollmentNumber">Enrollment Number:</label>
+                            <input type="text" id="enrollmentNumber" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="course">Course:</label>
+                            <input type="text" id="course" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="gender">Gender:</label>
+                            <select id="gender" required>
+                                <option value="">Select</option>
+                                <option value="FEMALE">FEMALE</option>
+                                <option value="MALE">MALE</option>
+                                <option value="OTHER">OTHER</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="semester">Semester:</label>
+                            <select id="semester" required>
+                                <option value="">Select Semester</option>
+                                <option value="1">1st</option>
+                                <option value="2">2nd</option>
+                                <option value="3">3rd</option>
+                                <option value="4">4th</option>
+                                <option value="5">5th</option>
+                                <option value="6">6th</option>
+                                <option value="7">7th</option>
+                                <option value="8">8th</option>
+                                <option value="9">9th</option>
+                                <option value="10">10th</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="examType">Exam Type:</label>
+                            <select id="examType" required>
+                                <option value="">Select Exam Type</option>
+                                <option value="MAIN EXAM">Main</option>
+                                <option value="BACK EXAM">Back</option>
+                                <option value="EX-STUDENT EXAM">Ex-Student</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="collegeName">College Name:</label>
+                            <input type="text" id="collegeName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="examinationCenter">Examination Center:</label>
+                            <input type="text" id="examinationCenter" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Main Subject:</label>
+                            <input type="text" id="subject" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="papers-container">
+                    <h2 class="text-xl font-semibold mb-4 border-b-2 border-gray-300 pb-2 text-gray-700">Paper Details</h2>
+                    <div id="paper-entries" class="space-y-3"></div>
+                    <div class="text-center mt-4">
+                        <button type="button" id="addPaperBtn" class="bg-indigo-600 hover:bg-indigo-700 text-white text-sm py-2 px-5 rounded-full shadow-md transition">
+                            + Add Paper
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    
+
+  <div class="action-buttons flex flex-wrap justify-center gap-4 mt-6 mb-10 w-full max-w-5xl px-4">
+        <button type="button" id="generateBtn" class="gradient-button">Generate Admit Card</button>
+        <button type="button" id="resetBtn" class="gradient-button">Reset Form</button>
+        <button type="button" id="printBtn" class="gradient-button" style="display:none;">Print Admit Card</button>
+        <button type="button" id="downloadBtn" class="gradient-button" style="display:none;">Download as PDF</button>
+    </div>
+
+
+
+<div id="admit-card-wrapper" style="display:none;">
+  <div id="admit-card-content">
+    <div class="header">
+      <img src="https://i.ibb.co/nMC0877T/UNIVERSITY-UPDATES-LOGO-removebg-preview.png">
+      <h3><b>UNIVERSITY UPDATES</b></h3>
+      <div class="header-right"></div>
+    </div>
+
+    <div class="sub-header" style="text-align:center; margin-bottom:10px;">
+      <h4 style="font-weight:bold; font-size:16px;">
+        औपबंधिक प्रवेश-पत्र / PROVISIONAL ADMIT CARD
+      </h4>
+    </div>
+    <div class="sub-header" style="text-align:justify; margin-bottom:10px;">
+      <h4 style="font-weight:bold; color:#d32f2f; font-size:16px;">
+        यह प्रवेश पत्र केवल आपकी सुविधा एवं जानकारी हेतु है, परीक्षाओ के लिए यह वैध नहीं है। यह सीसीएसयू से संबद्ध या समर्थित नहीं है। वैध प्रवेश पत्र के लिए ccsuniversityweb.in पर विजिट करें। 
+      </h4>
+    </div>
+
+    <p id="exam-type-sem" style="text-align:center; font-weight:bold; font-size:16px; margin-bottom:15px; color:#d32f2f;"></p>
+
+    <table class="details-table">
+      <tr>
+        <td class="label">Roll Number:</td>
+        <td class="value" id="ac-rollNumber"></td>
+        <td class="label">Enrollment No:</td>
+        <td class="value" id="ac-enrollmentNumber"></td>
+      </tr>
+      <tr>
+        <td class="label">Candidate Name:</td>
+        <td class="value" id="ac-candidateName"></td>
+        <td class="label">Father's/Mother's Name:</td>
+        <td class="value" id="ac-fatherMotherName"></td>
+      </tr>
+      <tr>
+        <td class="label">Course:</td>
+        <td class="value" id="ac-course"></td>
+        <td class="label">Gender:</td>
+        <td class="value" id="ac-gender"></td>
+      </tr>
+      <tr>
+        <td class="label">College Name:</td>
+        <td class="value" id="ac-collegeName" colspan="3"></td>
+      </tr>
+      <tr>
+        <td class="label">Examination Center:</td>
+        <td class="value" id="ac-examinationCenter" colspan="3"></td>
+      </tr>
+      <tr>
+        <td class="label">Subject:</td>
+        <td class="value" colspan="3" id="ac-subject"></td>
+      </tr>
+    </table>
+
+    <table class="papers-table" id="ac-papers-table">
+      <thead>
+        <tr>
+          <th>S. No.</th>
+          <th>PAPER CODE</th>
+          <th>PAPER NAME</th>
+          <th>PAPER TYPE</th>
+          <th>EXAM DATE</th>
+          <th>DAY</th>
+          <th>SHIFT</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    <div class="mt-8 text-xs text-gray-600 leading-relaxed border-t pt-4">
+      <p class="text-justify"><strong>नोट:</strong> यह औपबंधिक प्रवेश पत्र आधिकारिक तौर पर स्वीकृत नहीं है। इसको बनाने का मात्र उद्देश्य सम्बन्धित छात्रों को परीक्षा तिथि और समय की जानकारी उपलब्ध कराना है। अधिक जानकारी के लिए विश्वविद्यालय की अधिकृत वेबसाइट www.ccsuniversity.ac.in का अवलोकन करें। उक्त प्रवेश पत्र विश्वविद्यालय के पत्रांक संख्या <b>परीक्षा/डी०आर०/9906</b> दिनाँक 07.11.2025 के अनुसार है।</p>
+
+
+      <div class="text-right mt-2">
+        <p class="text-xs text-gray-500 font-semibold">Generated On:</p>
+        <p class="text-sm font-mono text-gray-800" id="generatedTime"></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="disclaimer-modal" class="fixed inset-0 bg-gray-600 bg-opacity-75 flex items-center justify-center z-50 p-2">
+    <div class="bg-white rounded-lg shadow-2xl p-3 sm:p-4 max-w-xs sm:max-w-sm md:max-w-md w-full mx-auto">
+        <h2 class="text-base sm:text-sm font-bold mb-2 text-red-600 border-b pb-1 text-center">
+            DISCLAIMER & IMPORTANT NOTE
+        </h2>
+
+        <p class="text-gray-700 mb-2 text-[10px] sm:text-xs leading-tight text-justify">
+            This <b>ADMIT CARD GENERATOR</b> is a non-official tool designed for educational and informational purposes only. The provisional admit card generated here is based on user input and pre-defined exam datesheet data.
+        </p>
+
+        <ul class="list-disc list-inside text-gray-700 mb-2 text-[10px] sm:text-xs leading-tight space-y-1 text-justify">
+            <li>The content is <b>NOT</b> officially sanctioned by any University.</li>
+            <li>Always refer to the official University website for your final, legally valid admit card, exam center, and schedule.</li>
+            <li>The accuracy of the generated card depends entirely on the accuracy of the data you provide or the data extracted via OCR.</li>
+            <li>यह केवल परीक्षा की तिथि की जानकारी हेतु है, यह कोई आधिकारिक दस्तावेज नहीं है।</li>
+        </ul>
+
+        <p class="text-gray-800 font-semibold text-[10px] sm:text-xs text-justify">
+            By clicking 'I Understand', you acknowledge that this is a mock document, and you accept full responsibility for verifying all details with the official University sources.
+        </p>
+
+        <div class="mt-3 flex justify-center">
+            <button id="understand-btn" class="gradient-button bg-green-500 hover:bg-green-600 transition duration-150 px-2 py-1 text-[10px] sm:text-xs rounded">
+                I Understand and Accept
+            </button>
+        </div>
+    </div>
+</div>
+
+
+<script> defer="defer" src="/nepac.js"
+       </script>
+</body>
+</html>
