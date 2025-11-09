@@ -250,7 +250,7 @@
         #admit-card-wrapper {
             width: 100%;
             max-width: 800px;
-            margin-top: 20px;
+            margin-top: 15px;
             padding: 20px;
             background: white;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -304,13 +304,13 @@
 
         .details-table {
             width: 100%;
-            margin-top: 10px;
+            margin-top: 5px;
             border-collapse: collapse;
         }
 
         .details-table td {
             padding: 5px;
-            font-size: 14px;
+            font-size: 12px;
             vertical-align: top;
         }
 
@@ -322,9 +322,9 @@
         /* FIX: Paper Table Widths for better print layout */
         .papers-table {
             width: 100%;
-            margin-top: 15px;
+            margin-top: 10px;
             border-collapse: collapse;
-            font-size: 12px;
+            font-size: 10px;
             /* Ensure fixed layout for consistent column widths */
             table-layout: fixed; 
         }
@@ -344,24 +344,24 @@
         }
         
         /* FIX: Re-enforce column widths using percentages for automatic device/print sizing */
-        .papers-table th:nth-child(1), .papers-table td:nth-child(1) { width: 4%; text-align: center; }  /* S. No. - Center aligned */
+        .papers-table th:nth-child(1), .papers-table td:nth-child(1) { width: 5%; text-align: center; }  /* S. No. - Center aligned */
         .papers-table th:nth-child(2), .papers-table td:nth-child(2) { width: 12%; } /* PAPER CODE */
-        .papers-table th:nth-child(3), .papers-table td:nth-child(3) { width: 35%; } /* PAPER NAME (Increased width) */
-        .papers-table th:nth-child(4), .papers-table td:nth-child(4) { width: 12%; } /* PAPER TYPE */
-        .papers-table th:nth-child(5), .papers-table td:nth-child(5) { width: 12%; } /* EXAM DATE */
-        .papers-table th:nth-child(6), .papers-table td:nth-child(6) { width: 5%; } /* DAY (Reduced width) */
-        .papers-table th:nth-child(7), .papers-table td:nth-child(7) { width: 20%; } /* SHIFT */
+        .papers-table th:nth-child(3), .papers-table td:nth-child(3) { width: 30%; } /* PAPER NAME (Increased width) */
+        .papers-table th:nth-child(4), .papers-table td:nth-child(4) { width: 14%; } /* PAPER TYPE */
+        .papers-table th:nth-child(5), .papers-table td:nth-child(5) { width: 14%; } /* EXAM DATE */
+        .papers-table th:nth-child(6), .papers-table td:nth-child(6) { width: 8%; } /* DAY (Reduced width) */
+        .papers-table th:nth-child(7), .papers-table td:nth-child(7) { width: 18%; } /* SHIFT */
 
 
         .footer-note {
-            font-size: 12px;
-            margin-top: 10px;
+            font-size: 10px;
+            margin-top: 5px;
             font-weight: bold;
         }
 
         /* Improved Printed Date/Time Display */
         #generatedTime {
-            font-size: 11px;
+            font-size: 10px;
             font-style: italic;
             color: #4B5563;
             /* Darker gray for better print contrast */
@@ -377,7 +377,7 @@
 
             #admit-card-wrapper {
                 /* FIX: Use standard print margins to avoid cutting off content */
-                margin: 0.5in auto !important; 
+                margin: 0.2in auto !important; 
                 padding: 0 !important;
                 box-shadow: none !important;
                 max-width: 100% !important;
@@ -396,17 +396,17 @@
             /* FIX: Reset table-layout to auto in print to allow proportional shrinking */
             .papers-table {
                 table-layout: auto !important; 
-                font-size: 10px; /* Reduce font size for print-out readability */
+                font-size: 8px; /* Reduce font size for print-out readability */
             }
             
             /* Ensure specific print widths are proportional and small */
-            .papers-table th:nth-child(1), .papers-table td:nth-child(1) { width: 4%; }
+            .papers-table th:nth-child(1), .papers-table td:nth-child(1) { width: 5%; }
             .papers-table th:nth-child(2), .papers-table td:nth-child(2) { width: 12%; }
-            .papers-table th:nth-child(3), .papers-table td:nth-child(3) { width: 35%; }
-            .papers-table th:nth-child(4), .papers-table td:nth-child(4) { width: 12%; }
-            .papers-table th:nth-child(5), .papers-table td:nth-child(5) { width: 12%; }
-            .papers-table th:nth-child(6), .papers-table td:nth-child(6) { width: 5%; }
-            .papers-table th:nth-child(7), .papers-table td:nth-child(7) { width: 20%; }
+            .papers-table th:nth-child(3), .papers-table td:nth-child(3) { width: 30%; }
+            .papers-table th:nth-child(4), .papers-table td:nth-child(4) { width: 14%; }
+            .papers-table th:nth-child(5), .papers-table td:nth-child(5) { width: 14%; }
+            .papers-table th:nth-child(6), .papers-table td:nth-child(6) { width: 8%; }
+            .papers-table th:nth-child(7), .papers-table td:nth-child(7) { width: 18%; }
         }
 
         /* Go To Top Button Styles from index (1).html */
