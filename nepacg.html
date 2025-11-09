@@ -246,7 +246,6 @@
             background-image: linear-gradient(to right, #DC2626, #F97316);
         }
 
-
         /* Admit Card Styles */
         #admit-card-wrapper {
             width: 100%;
@@ -408,6 +407,32 @@
             .papers-table th:nth-child(5), .papers-table td:nth-child(5) { width: 12%; }
             .papers-table th:nth-child(6), .papers-table td:nth-child(6) { width: 5%; }
             .papers-table th:nth-child(7), .papers-table td:nth-child(7) { width: 20%; }
+        }
+
+        /* Go To Top Button Styles from index (1).html */
+        #topBtn {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 25px;
+            z-index: 50;
+            font-size: 15px;
+            border: none;
+            outline: none;
+            background-color: var(--primary-color); /* Primary Red */
+            color: white;
+            cursor: pointer;
+            padding: 12px 16px;
+            border-radius: 50%;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            transition: 0.3s;
+        }
+        #topBtn:hover {
+            background-color: #C63333; /* Darker Red */
+            transform: scale(1.1);
+        }
+        html {
+            scroll-behavior: smooth;
         }
     </style>
 
@@ -769,7 +794,11 @@
                         <a href="https://t.me/CCSUniversityMRT" class="social-icon" title="Telegram"><i class="fab fa-telegram-plane"></i></a>
                         <a href="https://www.instagram.com/@UniversityUpdates_UU" class="social-icon" title="Instagram"><i class="fab fa-instagram"></i></a>
                         <a href="https://www.youtube.com/@University-Updates-UU" class="social-icon" title="YouTube"><i class="fab fa-youtube"></i></a>
-                    </div></div>
+                    </div>
+                    <div id="datetime" class="text-white text-sm font-semibold mt-3">
+                        <span id="liveDate"></span> | <span id="liveTime"></span>
+                    </div>
+                    </div>
                 </div>
             </div>
 
@@ -780,7 +809,9 @@
             </div>
         </div>
     </footer>
-<script>
+    
+    <button onclick="topFunction()" id="topBtn" title="Go to top">↑</button>
+    <script>
         // --- DATA (Datesheet for fetching Date, Day, Shift, and Name) ---
         const examDatesheet = {
             'A040101T': {
@@ -2135,6 +2166,13 @@
 
                 // Initial setup for the form (Add one paper entry)
                 addPaperEntry();
+                
+                // Start live date/time update
+                updateDateTime();
+                setInterval(updateDateTime, 1000); // Update every second
+                
+                // Add scroll listener for top button
+                window.onscroll = scrollFunction;
             });
             
             // Initial setup for the theme toggle (light mode by default)
@@ -2532,16 +2570,23 @@
         }
 
         /**
-         * @description Formats and updates the printed date and time on the admit card.
+         * @description Formats and updates the printed date and time on the admit card and footer.
          */
         function updateDateTime() {
             const now = dayjs();
-            const dateStr = now.format('DD-MMM-YYYY'); // e.g., 04-Oct-2025
-            const timeStr = now.format('hh:mm:ss A'); // e.g., 09:31:57 PM
-            const timezoneStr = now.format('ZZ').replace(/(\d{2})(\d{2})/, '$1:$2'); // e.g., +05:30 (manual formatting for better readability)
-
+            
+            // For Admit Card Content
+            const dateStrAC = now.format('DD-MMM-YYYY'); // e.g., 04-Oct-2025
+            const timeStrAC = now.format('hh:mm:ss A'); // e.g., 09:31:57 PM
+            const timezoneStrAC = now.format('ZZ').replace(/(\d{2})(\d{2})/, '$1:$2'); // e.g., +05:30 (manual formatting for better readability)
             document.getElementById('generatedTime').innerHTML =
-                `${dateStr} ${timeStr} IST ${timezoneStr}`;
+                `${dateStrAC} ${timeStrAC} IST ${timezoneStrAC}`;
+                
+            // For Footer (Live Clock)
+            const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            const timeOptions = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true };
+            document.getElementById('liveDate').textContent = new Date().toLocaleDateString('en-IN', dateOptions);
+            document.getElementById('liveTime').textContent = new Date().toLocaleTimeString('en-IN', timeOptions);
         }
 
         /**
@@ -2715,6 +2760,23 @@
                 showFloatingMessage('PDF download initiated. 📥', 'bg-green-500');
             }, 500);
         });
+
+        // --- GO TO TOP BUTTON FUNCTIONS ---
+        let mybutton = document.getElementById("topBtn");
+
+        function scrollFunction() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                mybutton.style.display = "block";
+            } else {
+                mybutton.style.display = "none";
+            }
+        }
+
+        function topFunction() {
+            document.body.scrollTop = 0; // For Safari
+            document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+        }
+        mybutton.addEventListener('click', topFunction);
 
         // --- BUTTON EVENT LISTENERS ---
         document.getElementById('generateBtn').addEventListener('click', generateAdmitCard);
