@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -16,6 +15,14 @@
             --text-color: #333;
             --footer-bg: #2C4B9E; /* Deep Blue for footer */
             --footer-text: #ffffff;
+        }
+        /* Use Inter font */
+        body {
+            font-family: "Inter", sans-serif;
+        }
+        /* Hide a-tab elements */
+        .a-tab-hidden {
+            display: none;
         }
         body {
             font-family: 'Poppins', sans-serif;
@@ -39,123 +46,6 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             padding: 30px;
         }
-        h1 {
-            color: var(--secondary-color);
-            font-size: 2.2rem;
-            font-weight: 800;
-            margin-bottom: 30px;
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
-        }
-        .form-label {
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 5px;
-            display: block;
-        }
-        .form-select, .form-input {
-            width: 100%;
-            padding: 10px 15px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            background-color: #fff;
-            appearance: none;
-            cursor: pointer;
-            transition: border-color 0.3s, box-shadow 0.3s;
-        }
-        .form-select:focus, .form-input:focus {
-            outline: none;
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(239, 60, 60, 0.2);
-        }
-        
-        /* Custom Chevron for Select */
-        .select-wrapper {
-            position: relative;
-        }
-        .select-wrapper::after {
-            content: "\f0d7"; 
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            position: absolute;
-            top: 50%;
-            right: 15px;
-            transform: translateY(-50%);
-            color: #aaa;
-            pointer-events: none;
-        }
-
-        /* Result Card Styling (UPDATED) */
-        #result-card {
-            margin-top: 40px;
-            padding: 30px; 
-            border-radius: 12px;
-            color: white;
-            
-            /* GRADIENT BACKGROUND (Crimson Red & Deep Blue) */
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%); 
-            
-            /* REMOVED background-image (watermark) */
-            
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-            border: 2px solid rgba(255, 255, 255, 0.5); 
-            text-align: left;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
-            position: relative; 
-            padding-bottom: 75px; 
-        }
-        #result-card.show {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .result-title {
-            font-size: 1.8rem;
-            font-weight: 700;
-            margin-bottom: 15px; 
-            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
-        }
-        .result-item {
-            font-size: 1.1rem; 
-            font-weight: 400;
-            margin-bottom: 12px; 
-            display: flex;
-            align-items: flex-start; 
-            line-height: 1.4; 
-        }
-        .result-item i {
-            margin-right: 10px;
-            color: #FFD700; 
-            width: 20px; 
-            text-align: center;
-            margin-top: 3px; 
-        }
-        
-        /* STYLES for Branding (BOTTOM LINE) */
-        #result-branding {
-            position: absolute;
-            bottom: 10px; 
-            right: 20px;
-            font-size: 0.75rem; 
-            font-style: italic; 
-            color: rgba(255, 255, 255, 0.7); 
-            pointer-events: none; 
-        }
-
-        /* STYLES for Centered Note (LINE ABOVE BRANDING) */
-        #result-note {
-            position: absolute;
-            bottom: 35px; 
-            left: 0;
-            right: 0;
-            text-align: center;
-            font-size: 0.8rem; 
-            font-style: italic;
-            color: rgba(255, 255, 255, 0.85);
-            pointer-events: none;
-            padding: 0 20px; 
-        }
-
         /* New Utility Bar & Footer Styles */
         .utility-bar {
             background-color: var(--primary-color);
@@ -171,7 +61,7 @@
             background-color: var(--footer-bg);
             color: var(--footer-text);
             padding: 40px 20px 20px 20px;
-            margin-top: 40px;
+            margin-top: 40px; /* Ensures footer is pushed down */
         }
         .social-icon {
             color: white;
@@ -182,51 +72,7 @@
             color: var(--primary-color); 
         }
         
-        /* --- MOBILE-SPECIFIC STYLES FOR RESPONSIVENESS --- */
-        @media (max-width: 640px) {
-            .container {
-                padding: 20px;
-                margin: 20px auto;
-            }
-            #result-card {
-                padding: 20px; 
-                padding-bottom: 65px; 
-                /* Removed background-size adjustment since image is gone */
-            }
-            .result-title {
-                font-size: 1.5rem; 
-                margin-bottom: 10px;
-            }
-            .result-item {
-                font-size: 1rem; 
-                margin-bottom: 8px; 
-            }
-            .result-item i {
-                 font-size: 1rem; 
-            }
-            .result-item b {
-                display: block; 
-                min-width: 80px; 
-                margin-right: 5px; 
-                flex-shrink: 0; 
-            }
-            .result-item > p:last-child {
-                flex-grow: 1; 
-                word-wrap: break-word; 
-                overflow-wrap: break-word;
-            }
-            #result-branding {
-                right: 15px;
-                bottom: 8px;
-                font-size: 0.65rem;
-            }
-            #result-note {
-                font-size: 0.7rem;
-                bottom: 25px; 
-                padding: 0 10px; 
-            }
-        }
-        /* --- END OF MOBILE-SPECIFIC STYLES --- */
+        
     </style>
 </head>
 <body>
@@ -245,78 +91,132 @@
                 <a href="https://instagram.com/universityupdate_uu" class="social-icon text-sm hover:text-gray-300 transition"><i class="fab fa-instagram"></i></a>
                 <span class="mx-2">|</span>
                 <a href="https://www.youtube.com/@University-Updates-UU" class="social-icon text-sm hover:text-gray-300 transition"><i class="fab fa-youtube"></i></a>
-                <span class="mx-2">|</span>
-                <button id="theme-toggle" class="utility-link p-1 rounded hover:bg-white hover:text-primary-color transition" title="Toggle Day/Night Mode">
-                    <i class="fas fa-moon" id="theme-icon"></i>
-                </button>
+                
             </div>
         </div>
     </header>
 
-    <div class="main-content">
-        <div class="container">
-            <h1 class="text-center flex items-center justify-center gap-2">
-                <i class="fas fa-search-location"></i> Viva Center Finder
-            </h1>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                
-                <div class="select-wrapper">
-                    <label for="course" class="form-label">1. Select Course</label>
-                    <select id="course" class="form-select">
-                        <option value="">-- Select Course --</option>
-                        <option value="MCom">M.Com.</option>
-                        <option value="MA">M.A.</option>
-                    </select>
-                </div>
-                
-                <div class="select-wrapper">
-                    <label for="district" class="form-label">2. Select District</label>
-                    <select id="district" class="form-select" disabled>
-                        <option value="">-- Select District (Choose Course First) --</option>
-                        <option value="Baghpat">Baghpat</option>
-                        <option value="Bulandshahar">Bulandshahar</option>
-                        <option value="GautamBuddhNagar">Gautam Buddh Nagar (Noida)</option>
-                        <option value="Ghaziabad">Ghaziabad</option>
-                        <option value="Hapur">Hapur</option>
-                        <option value="Meerut">Meerut</option>
-                    </select>
-                </div>
-
-                <div class="select-wrapper">
-                    <label for="college" class="form-label">3. Select College</label>
-                    <select id="college" class="form-select" disabled>
-                        <option value="">-- Select College (Choose District First) --</option>
-                    </select>
-                </div>
-                
-                <div class="select-wrapper">
-                    <label for="subject" class="form-label">4. Select Subject</label>
-                    <select id="subject" class="form-select" disabled>
-                        <option value="">-- Select Subject (Choose College First) --</option>
-                    </select>
-                </div>
-
-                
-                <button id="search-btn" class="md:col-span-2 mt-4 py-3 px-6 text-white font-semibold rounded-lg shadow-md transition transform hover:scale-[1.02]" 
-                        style="background-color: var(--secondary-color); hover: background-color: #203a7a;">
-                    <i class="fas fa-calendar-alt mr-2"></i> Find Viva Center & Date
-                </button>
-            </div>
-
-            <div id="result-card" class="hidden">
-                <p class="result-title"><i class="fas fa-check-circle"></i> Viva Examination Details</p>
-                <div id="result-content">
-                    </div>
-                <div id="result-note"><b>Note:</b> Always confirm dates and centers with your respective college/center administration.</div>
-                <div id="result-branding">Powered by University Updates</div>
-            </div>
-
-        </div>
+    <div class="max-w-6xl mx-auto flex items-center justify-center p-4">
+        <img src="https://i.ibb.co/nMC0877T/UNIVERSITY-UPDATES-LOGO-removebg-preview.png" alt="Logo" class="w-1/4">
     </div>
+        
+<p style="color: white; font-style: italic; font-size: 15px; background-color: crimson; display: flex; align-items: center; height: 25px;">
+    <marquee onmouseover="this.stop();" direction="left" onmouseout="this.start();">
+        <b style="color: white">➤</b> 📢 Welcome to Viva Voce Center Finder - UNIVERSITY UPDATES (Designed by CCSU Private Courses)
+    </marquee>
+</p>
 
 
-    <footer class="footer">
+    <main class="flex-grow w-full flex flex-col justify-center items-center p-4 md:p-8">
+
+        <div id="initialLoader" class="text-center p-8">
+            <svg class="animate-spin h-12 w-12 text-blue-600 mx-auto" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            </svg>
+            <p class="text-gray-600 text-lg mt-4">Loading all viva data...</p>
+        </div>
+
+        <div id="mainContent" class="a-tab-hidden bg-white shadow-2xl rounded-xl p-6 md:p-10 w-full max-w-3xl">
+            
+            <div class="text-center mb-8">
+                <h1 class="text-3xl md:text-4xl font-bold text-gray-800">
+                    <i class="fas fa-search-location text-blue-600 mr-3"></i>Viva Voce Center Finder
+                </h1>
+                <p id="header-branding" class="text-sm text-gray-500 italic mt-2">Powered by University Updates</p>
+            </div>
+
+            <div class="space-y-6">
+
+                <div>
+                    <label for="courseSelect" class="block text-sm font-medium text-gray-700 mb-1">1. Select Course</label>
+                    <select id="courseSelect" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none transition duration-150 ease-in-out">
+                        <option value="">-- Select a Course --</option>
+                        <option value="M.Com.">M.Com.</option>
+                        <option value="M.A.">M.A.</option>
+                    </select>
+                </div>
+
+                <div id="subjectGroup" class="a-tab-hidden">
+                    <label for="subjectSelect" class="block text-sm font-medium text-gray-700 mb-1">2. Select Subject</label>
+                    <select id="subjectSelect" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none transition duration-150 ease-in-out">
+                    </select>
+                </div>
+
+                <div id="districtGroup" class="a-tab-hidden">
+                    <label for="districtSelect" class="block text-sm font-medium text-gray-700 mb-1">3. Select District</label>
+                    <select id="districtSelect" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none transition duration-150 ease-in-out">
+                    </select>
+                </div>
+
+                <div id="collegeGroup" class="a-tab-hidden">
+                    <label for="collegeSelect" class="block text-sm font-medium text-gray-700 mb-1">4. Select Your College</label>
+                    <select id="collegeSelect" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none transition duration-150 ease-in-out">
+                    </select>
+                </div>
+
+            </div>
+
+            <div id="resultsCard" class="a-tab-hidden mt-8 bg-blue-50 border-l-4 border-blue-500 p-6 rounded-lg shadow-inner">
+                
+                <h2 class="text-2xl font-semibold text-blue-800 mb-4 flex items-center">
+                    <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                    Viva Examination Details
+                </h2>
+                
+                <div class="space-y-2 mb-4 border-b border-blue-200 pb-4">
+                    <div>
+                        <h3 class="flex items-center text-sm font-medium text-gray-500 uppercase tracking-wider">
+                            <i class="fas fa-graduation-cap fa-fw mr-2"></i> <span>Course</span>
+                        </h3>
+                        <p id="resultCourse" class="text-lg font-medium text-gray-900 pl-7"></p> </div>
+                    <div>
+                        <h3 class="flex items-center text-sm font-medium text-gray-500 uppercase tracking-wider">
+                            <i class="fas fa-school fa-fw mr-2"></i> <span>College</span>
+                        </h3>
+                        <p id="resultCollege" class="text-lg font-medium text-gray-900 pl-7"></p> </div>
+                </div>
+                <div class="space-y-3">
+                    <div>
+                        <h3 class="flex items-center text-sm font-medium text-gray-500 uppercase tracking-wider">
+                            <i class="fas fa-university fa-fw mr-2"></i> <span>Viva Center</span>
+                        </h3>
+                        <p id="resultCenter" class="text-lg font-medium text-gray-900 pl-7"></p> </div>
+                    <div>
+                        <h3 class="flex items-center text-sm font-medium text-gray-500 uppercase tracking-wider">
+                            <i class="fas fa-calendar-alt fa-fw mr-2"></i> <span>Date</span>
+                        </h3>
+                        <p id="resultDate" class="text-lg font-medium text-gray-900 pl-7"></p> </div>
+                    <div>
+                        <h3 class="flex items-center text-sm font-medium text-gray-500 uppercase tracking-wider">
+                            <i class="fas fa-clock fa-fw mr-2"></i> <span>Time</span>
+                        </h3>
+                        <p id="resultTime" class="text-lg font-medium text-gray-900 pl-7"></p> </div>
+                </div>
+
+                <div class="mt-6 border-t border-blue-200 pt-4">
+                    <p class="text-sm text-blue-700">
+                        <b>Note:</b> Always confirm dates and centers with your respective <b>College / Center</b> administration.
+                    </p>
+                    <p id="result-branding" class="text-xs text-blue-600 italic mt-3">
+                        Powered by University Updates
+                    </p>
+                </div>
+            </div>
+            <div id="errorCard" class="a-tab-hidden mt-8 bg-red-50 border-l-4 border-red-500 p-6 rounded-lg shadow-inner">
+                <h2 class="text-xl font-semibold text-red-800 mb-2">Error</h2>
+                <p id="errorMessage" class="text-red-700"></p>
+            </div>
+
+            <div class="text-center mt-8">
+                <p class="text-xs text-gray-500">
+                    <strong>Important:</strong> University Updates
+                </p>
+            </div>
+        </div>
+    </main>
+    
+ <footer class="footer">
         <div class="max-w-7xl mx-auto">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-6">
                 
@@ -332,21 +232,28 @@
                 <div class="text-center">
                     <h3 class="text-xl font-bold mb-3 border-b-2 border-primary-color pb-1 inline-block">Quick Links</h3>
                     <ul class="space-y-1 text-sm">
-                        <li><a href="#" class="hover:text-primary-color transition">Center List</a></li>
-                        <li><a href="https://ccsuniversity.ac.in" class="hover:text-primary-color transition">University Official Website</a></li>
-                        <li><a href="https://t.me/HelpforDMBot" class="hover:text-primary-color transition">Contact Us</a></li>
+                        <li><i class="fas fa-circle-notch text-xs text-yellow-500 mr-2"></i><a href="#" class="hover:text-primary-color transition"><b>Center List</b></a></li>
+                        
                         </ul>
                 </div></div>
 
 
-                <div><div class="text-center">
-                    <h3 class="text-xl font-bold mb-3 border-b-2 border-primary-color pb-1 inline-block">Connect With Us</h3>
-                    <div class="flex space-x-4 justify-center">
-                        <a href="https://whatsapp.com/channel/0029Va9jtav4tRrmKPxos138" class="social-icon" title="Whatsapp"><i class="fab fa-whatsapp"></i></a>
-                        <a href="https://t.me/CCSUniversityMRT" class="social-icon" title="Telegram"><i class="fab fa-telegram-plane"></i></a>
-                        <a href="https://instagram.com/universityupdate_uu" class="social-icon" title="Instagram"><i class="fab fa-instagram"></i></a>
-                        <a href="https://www.youtube.com/@University-Updates-UU" class="social-icon" title="YouTube"><i class="fab fa-youtube"></i></a>
-                    </div></div>
+                <div>
+                    <div class="text-center">
+                        <h3 class="text-xl font-bold mb-3 border-b-2 border-primary-color pb-1 inline-block">Connect With Us</h3>
+                        
+                        <div class="flex space-x-4 justify-center">
+                            <a href="https://whatsapp.com/channel/0029Va9jtav4tRrmKPxos138" class="social-icon" title="Whatsapp"><i class="fab fa-whatsapp"></i></a>
+                            <a href="https://t.me/CCSUniversityMRT" class="social-icon" title="Telegram"><i class="fab fa-telegram-plane"></i></a>
+                            <a href="https://instagram.com/universityupdate_uu" class="social-icon" title="Instagram"><i class="fab fa-instagram"></i></a>
+                            <a href="https://www.youtube.com/@University-Updates-UU" class="social-icon" title="YouTube"><i class="fab fa-youtube"></i></a>
+                        </div>
+
+                        <div class="mt-4 text-center">
+                             <p id="live-footer-time" class="text-sm text-gray-200 font-medium tracking-wide flex items-center justify-center gap-2">
+                                </p>
+                        </div>
+                        </div>
                 </div>
             </div>
 
@@ -357,463 +264,418 @@
             </div>
         </div>
     </footer>
-
-
     <script>
-        // --- MASTER DATA STRUCTURE ---
-        const MASTER_SUBJECTS = {
-            "MCom": [
-                { name: "Commerce", code: "I-304", key: "MComCommerce" }
-            ],
-            "MA": [
-                { name: "Defence Studies", code: "G-895", key: "MADefence" },
-                { name: "Economics", code: "G-806", key: "MAEconomics" },
-                { name: "Education", code: "G-803", key: "MAEducation" },
-                { name: "English", code: "G-812", key: "MAEnglish" },
-                { name: "Hindi", code: "G-825", key: "MAHindi" },
-                { name: "History", code: "G-837", key: "MAHistory" },
-                { name: "Mathematics", code: "G-850", key: "MAMathematics" },
-                { name: "Philosophy", code: "G-845", key: "MAPhilosophy" },
-                { name: "Political Science", code: "G-870", key: "MAPoliticalScience" },
-                { name: "Sanskrit", code: "G-882", key: "MASanskrit" },
-                { name: "Sociology", code: "G-887", key: "MASociology" },
-                { name: "Urdu", code: "G-862", key: "MAUrdu" }
-            ]
-        };
-        
-        // Helper map to quickly find subject info by its key
-        const SUBJECT_KEY_MAP = {};
-        Object.keys(MASTER_SUBJECTS).forEach(course => {
-            MASTER_SUBJECTS[course].forEach(subj => {
-                SUBJECT_KEY_MAP[subj.key] = subj;
-            });
-        });
+        // --- IMPORTANT ---
+        // This HTML file loads data from 13 separate .csv files.
+        // Due to web security rules (CORS), you CANNOT just open this file
+        // by double-clicking it (e.g., from a 'file:///' path).
+        //
+        // TO MAKE IT WORK:
+        // 1. Upload this 'index.html' file to a web server.
+        // 2. Upload all 13 '.csv' files to the SAME directory as the 'index.html' file.
+        // 3. Access the page through its web URL (e.g., 'http://...' or 'https://...').
+        //
+        // If you are using GitHub Pages, this will work automatically once all
+        // files are in your repository.
+        // ---
 
-
-        // --- COLLEGE DATA (INTEGRATED LIVE NOTICE DATA) ---
-        // key: [College Code] - [College Name]
-        // courses: array of subject keys (e.g., "MAHistory")
-        // viva: object where keys are subject keys, and value is { center: "...", date: "..." }
-        const DATA = {
-            "Baghpat": {
-                "003-DJ College, Baraut": {
-                    name: "003-DJ College, Baraut",
-                    courses: ["MAHistory", "MAEnglish", "MAHindi", "MASanskrit", "MAMathematics", "MADefence", "MA Economics", "MComCommerce"],
-                    viva: { 
-                        "MAHistory": { center: "DJ College, Baraut", date: "20.05.2025" },
-                        "MAEnglish": { center: "DJ College, Baraut", date: "02.06.2025" },
-                        "MAHindi": { center: "DJ College, Baraut", date: "11.06.2025" },
-                        "MASanskrit": { center: "DJ College, Baraut", date: "06.06.2025" },
-                        "MAMathematics": { center: "DJ College, Baraut", date: "09.06.2025" },
-                        "MComCommerce": { center: "DJ College, Baraut", date: "09.06.2025" }
-                    }
-                },
-                "095-Janta Vedic College, Baraut": {
-                    name: "Janta Vedic College, Baraut",
-                    courses: ["MAPoliticalScience", "MAHindi", "MASociology"],
-                    viva: { 
-                        "MAPoliticalScience": { center: "Janta Vedic College, Baraut", date: "26.05.2025" },
-                        "MAHindi": { center: "Janta Vedic College, Baraut", date: "28.05.2025" },
-                        "MASociology": { center: "Janta Vedic College, Baraut", date: "09 & 10 June 2025" }
-                    }
-                }
+        // Store all data in one place
+        const config = {
+            subjectMap: {
+                "M.Com.": [
+                    { text: "M.Com. (I-304)", value: "I-304" }
+                ],
+                "M.A.": [
+                    { text: "Defence Studies (G-895)", value: "G-895" },
+                    { text: "Economics (G-806)", value: "G-806" },
+                    { text: "Education (G-803)", value: "G-803" },
+                    { text: "Education (G-804)", value: "G-804" },
+                    { text: "English (G-812)", value: "G-812" },
+                    { text: "Hindi (G-825)", value: "G-825" },
+                    { text: "History (G-837)", value: "G-837" },
+                    { text: "Mathematics (G-850)", value: "G-850" },
+                    { text: "Philosophy (G-845)", value: "G-845" },
+                    { text: "Political Science (G-870)", value: "G-870" },
+                    { text: "Sanskrit (G-882)", value: "G-882" },
+                    { text: "Sociology (G-887)", value: "G-887" },
+                    { text: "Urdu (G-862)", value: "G-862" }
+                ]
             },
-            "Bulandshahar": {
-                "0001-D.P.B.S. Degree College, Anoopshahar": {
-                    name: "D.P.B.S. Degree College, Anoopshahar",
-                    courses: ["MASanskrit", "MComCommerce"],
-                    viva: { "MASanskrit": { center: "D.P.B.S. Degree College, Anoopshahar", date: "28.04.2025" } }
-                },
-                "0006-DAV PG College, Bulandshahr": {
-                    name: "DAV PG College, Bulandshahr",
-                    courses: ["MAHistory", "MAEconomics", "MAPoliticalScience", "MAEnglish", "MAHindi", "MComCommerce"],
-                    viva: { 
-                        "MAHistory": { center: "DAV PG College, Bulandshahr", date: "02.05.2025" },
-                        "MAEconomics": { center: "DAV PG College, Bulandshahr", date: "03.05.2025" },
-                        "MAPoliticalScience": { center: "DAV PG College, Bulandshahr", date: "05.05.2025" },
-                        "MAEnglish": { center: "DAV PG College, Bulandshahr", date: "06.05.2025" },
-                        "MAHindi": { center: "DAV PG College, Bulandshahr", date: "07.05.2025" }
-                    }
-                },
-                "0007-IP College, Bulandshahr": {
-                    name: "IP College, Bulandshahr",
-                    courses: ["MComCommerce"],
-                    viva: { "MComCommerce": { center: "IP College, Bulandshahar", date: "05.05.2025" } }
-                },
-                "0042-NREC College, Khurja": {
-                    name: "NREC College, Khurja",
-                    courses: ["MASociology", "MAHistory", "MAPoliticalScience", "MAHindi", "MAMathematics", "MAEnglish", "MComCommerce"],
-                    viva: { 
-                        "MASociology": { center: "NREC College, Khurja", date: "30.04.2025 (for College Code 0006 & 0042)" },
-                        "MAHistory": { center: "NREC College, Khurja", date: "03.05.2025 (For College code 0042)" },
-                        "MAPoliticalScience": { center: "NREC College, Khurja", date: "08.05.2025" },
-                        "MAHindi": { center: "NREC College, Khurja", date: "14.05.2025" },
-                        "MAMathematics": { center: "NREC College, Khurja", date: "16.05.2025" },
-                        "MAEnglish": { center: "NREC College, Khurja", date: "16.05.2025" },
-                        "MComCommerce": { center: "NREC College, Khurja", date: "15.05.2025" }
-                    }
-                },
-                "0093-Agrasen PG College, Bulandshahar": {
-                    name: "Agrasen PG College, Bulandshahar",
-                    courses: ["MComCommerce"],
-                    viva: { "MComCommerce": { center: "Agrasen PG College, Bulandshahar", date: "05.05.2025" } }
-                }
+            fileMap: {
+                "I-304": "VIVA CENTER.xlsx - M.Com.csv",
+                "G-895": "VIVA CENTER.xlsx - G-895.csv",
+                "G-806": "VIVA CENTER.xlsx - G-806.csv",
+                "G-803": "VIVA CENTER.xlsx - G-803,G-804.csv",
+                "G-804": "VIVA CENTER.xlsx - G-803,G-804.csv",
+                "G-812": "VIVA CENTER.xlsx - G-812.csv",
+                "G-825": "VIVA CENTER.xlsx - G-825.csv",
+                "G-837": "VIVA CENTER.xlsx - G-837.csv",
+                "G-850": "VIVA CENTER.xlsx - G-850.csv",
+                "G-845": "VIVA CENTER.xlsx - G-845.csv",
+                "G-870": "VIVA CENTER.xlsx - G-870.csv",
+                "G-882": "VIVA CENTER.xlsx - G-882.csv",
+                "G-887": "VIVA CENTER.xlsx - G-887.csv",
+                "G-862": "VIVA CENTER.xlsx - G-862.csv"
             },
-            "GautamBuddhNagar": {
-                // Mocking a placeholder, linking to Ghaziabad center dates as per common practice.
-                "100-Placeholder College, Noida": {
-                    name: "Placeholder College, Noida",
-                    courses: ["MComCommerce", "MAEconomics", "MAEnglish"],
-                    viva: { 
-                         "MComCommerce": { center: "M.M.H. College, Ghaziabad", date: "08.05.2025 (Other Colleges)" },
-                         "MAEnglish": { center: "M.M.H. College, Ghaziabad", date: "16.05.2025" },
-                         "MAEconomics": { center: "M.M.H. College, Ghaziabad", date: "21.05.2025" }
-                    }
-                }
-            },
-            "Ghaziabad": {
-                "0024-S.D. PG College, Ghaziabad": {
-                    name: "S.D. PG College, Ghaziabad",
-                    courses: ["MAHistory", "MASociology", "MAHindi", "MAPoliticalScience", "MComCommerce"],
-                    viva: { 
-                        "MAHistory": { center: "S.D. PG College, Ghaziabad", date: "26.04.2025" },
-                        "MASociology": { center: "S.D. PG College, Ghaziabad", date: "26.04.2025" },
-                        "MAHindi": { center: "S.D. PG College, Ghaziabad", date: "26.04.2025" },
-                        "MAPoliticalScience": { center: "S.D. PG College, Ghaziabad", date: "26.04.2025" }
-                    }
-                },
-                "0019-M.M.H. College, Ghaziabad": {
-                    name: "M.M.H. College, Ghaziabad",
-                    courses: ["MComCommerce", "MASociology", "MAHistory", "MAPoliticalScience", "MASanskrit", "MAEnglish", "MAHindi", "MAMathematics", "MAEconomics"],
-                    viva: { 
-                        "MComCommerce": { center: "M.M.H. College, Ghaziabad", date: "07.05.2025 (For College Code 019)" },
-                        "MASociology": { center: "M.M.H. College, Ghaziabad", date: "07.05.2025" },
-                        "MAHistory": { center: "M.M.H. College, Ghaziabad", date: "14 & 15 May 2025" },
-                        "MAPoliticalScience": { center: "M.M.H. College, Ghaziabad", date: "13.05.2025" },
-                        "MASanskrit": { center: "M.M.H. College, Ghaziabad", date: "08.05.2025" },
-                        "MAEnglish": { center: "M.M.H. College, Ghaziabad", date: "16.05.2025" },
-                        "MAHindi": { center: "M.M.H. College, Ghaziabad", date: "15.05.2025" },
-                        "MAMathematics": { center: "M.M.H. College, Ghaziabad", date: "15.05.2025" },
-                        "MAEconomics": { center: "M.M.H. College, Ghaziabad", date: "21.05.2025" }
-                    }
-                },
-                "0029-LR College, Ghaziabad": {
-                    name: "LR College, Ghaziabad",
-                    courses: ["MComCommerce"],
-                    viva: { "MComCommerce": { center: "LR College, Ghaziabad", date: "16.05.2025 (for LR College)" } }
-                },
-                "0035-VMLG College, Ghaziabad": {
-                    name: "VMLG College, Ghaziabad",
-                    courses: ["MAPoliticalScience", "MComCommerce"],
-                    viva: { "MAPoliticalScience": { center: "VMLG College, Ghaziabad", date: "14.05.2025" } }
-                }
-            },
-            "Hapur": {
-                "0028-SSV College, Hapur": {
-                    name: "SSV College, Hapur",
-                    courses: ["MAEconomics", "MAMathematics", "MAPoliticalScience", "MAEnglish", "MComCommerce", "MAHindi", "MAEducation"],
-                    viva: { 
-                        "MAEconomics": { center: "SSV College, Hapur", date: "15.05.2025" },
-                        "MAMathematics": { center: "SSV College, Hapur", date: "14.05.2025" },
-                        "MAPoliticalScience": { center: "SSV College, Hapur", date: "20 & 21 May 2025" },
-                        "MAEnglish": { center: "SSV College, Hapur", date: "23.05.2025" },
-                        "MComCommerce": { center: "SSV College, Hapur", date: "21.05.2025" },
-                        "MAHindi": { center: "SSV College, Hapur", date: "26 & 27 May, 2025" }
-                    }
-                },
-                "0041-Arya Kanya PG College, Hapur": {
-                    name: "Arya Kanya PG College, Hapur",
-                    courses: ["MAEducation"],
-                    viva: { "MAEducation": { center: "Arya Kanya PG College, Hapur", date: "18.05.2025" } }
-                }
-            },
-            "Meerut": {
-                "0055-Meerut College, Meerut": {
-                    name: "Meerut College, Meerut",
-                    courses: Object.keys(SUBJECT_KEY_MAP), // Assume all subjects for "All Subject" notice
-                    viva: { 
-                        "MAHistory": { center: "Meerut College, Meerut", date: "27.04.2025" },
-                        "MComCommerce": { center: "Meerut College, Meerut", date: "27.04.2025" },
-                        "MAEnglish": { center: "Meerut College, Meerut", date: "27.04.2025" },
-                        "MAPoliticalScience": { center: "Meerut College, Meerut", date: "27.04.2025" },
-                        "MAEconomics": { center: "Meerut College, Meerut", date: "27.04.2025" },
-                        "MASociology": { center: "Meerut College, Meerut", date: "27.04.2025" },
-                        "MAHindi": { center: "Meerut College, Meerut", date: "27.04.2025" },
-                        "MAMathematics": { center: "Meerut College, Meerut", date: "27.04.2025" },
-                        "MASanskrit": { center: "Meerut College, Meerut", date: "27.04.2025" },
-                        "MADefence": { center: "Meerut College, Meerut", date: "27.04.2025" },
-                        "MAEducation": { center: "Meerut College, Meerut", date: "27.04.2025" },
-                        "MAPhilosophy": { center: "Meerut College, Meerut", date: "27.04.2025" },
-                        "MAUrdu": { center: "Meerut College, Meerut", date: "27.04.2025" }
-                    }
-                },
-                "0062-Multanimal Modi College, Modinagar": {
-                    name: "Multanimal Modi College, Modinagar",
-                    courses: ["MComCommerce", "MAHistory", "MAPoliticalScience", "MAEnglish", "MAEconomics"],
-                    viva: { 
-                        "MComCommerce": { center: "Multanimal Modi College, Modinagar", date: "28.04.2025" },
-                        "MAHistory": { center: "Multanimal Modi College, Modinagar", date: "20.05.2025 (Revised)" },
-                        "MAPoliticalScience": { center: "Multanimal Modi College, Modinagar", date: "21.05.2025" },
-                        "MAEnglish": { center: "Multanimal Modi College, Modinagar", date: "26.05.2025", time: "10:00 AM" },
-                        "MAEconomics": { center: "Multanimal Modi College, Modinagar", date: "26.05.2025", time: "10:00 AM" }
-                    }
-                },
-                "0058-RG PG College, Meerut": {
-                    name: "RG PG College, Meerut",
-                    courses: ["MAPoliticalScience", "MAEconomics", "MAEnglish", "MASociology", "MAHindi", "MAHistory"],
-                    viva: { 
-                        "MAPoliticalScience": { center: "RG PG College, Meerut", date: "02.05.2025 (For College Code - 058, 060, 070, 085, 098)" },
-                        "MAEconomics": { center: "RG PG College, Meerut", date: "06.05.2025", time: "10:00 AM" },
-                        "MAEnglish": { center: "RG PG College, Meerut", date: "06 & 07 May 2025", time: "10:00 AM" },
-                        "MASociology": { center: "RG PG College, Meerut", date: "07 & 08 May 2025", time: "10:00 AM" },
-                        "MAHindi": { center: "RG PG College, Meerut", date: "05.05.2025", time: "10:00 AM" },
-                        "MAHistory": { center: "RG PG College, Meerut", date: "09.05.2025", time: "10:00 AM" }
-                    }
-                },
-                "0053-IN PG College, Meerut": {
-                    name: "IN PG College, Meerut",
-                    courses: ["MAUrdu"],
-                    viva: { "MAUrdu": { center: "IN PG College, Meerut", date: "09.05.2025", time: "10:00 AM" } }
-                },
-                "0048-DN PG College, Meerut": {
-                    name: "DN PG College, Meerut",
-                    courses: ["MComCommerce"],
-                    viva: { "MComCommerce": { center: "DN PG College, Meerut", date: "30.05.2025", time: "10:00 AM" } }
-                }
-            }
+            // To store the loaded data from all files
+            allData: {},
+            // To store data for the currently selected subject
+            loadedData: []
         };
 
-        // --- DOM Elements ---
-        const courseSelect = document.getElementById('course');
-        const districtSelect = document.getElementById('district');
-        const collegeSelect = document.getElementById('college');
-        const subjectSelect = document.getElementById('subject');
-        const searchBtn = document.getElementById('search-btn');
-        const resultCard = document.getElementById('result-card');
-        const resultContent = document.getElementById('result-content');
-        // New DOM Elements for Utility Bar
-        const themeToggle = document.getElementById('theme-toggle');
-        const themeIcon = document.getElementById('theme-icon');
+        // Get all DOM elements
+        const dom = {
+            initialLoader: document.getElementById('initialLoader'),
+            mainContent: document.getElementById('mainContent'),
+            courseSelect: document.getElementById('courseSelect'),
+            subjectGroup: document.getElementById('subjectGroup'),
+            subjectSelect: document.getElementById('subjectSelect'),
+            districtGroup: document.getElementById('districtGroup'),
+            districtSelect: document.getElementById('districtSelect'),
+            collegeGroup: document.getElementById('collegeGroup'),
+            collegeSelect: document.getElementById('collegeSelect'),
+            resultsCard: document.getElementById('resultsCard'),
+            errorCard: document.getElementById('errorCard'),
+            errorMessage: document.getElementById('errorMessage'),
+            resultCenter: document.getElementById('resultCenter'),
+            resultDate: document.getElementById('resultDate'),
+            resultTime: document.getElementById('resultTime'),
+            headerBranding: document.getElementById('header-branding'),
+            resultBranding: document.getElementById('result-branding'),
+            resultCourse: document.getElementById('resultCourse'),
+            resultCollege: document.getElementById('resultCollege'),
+            footerTime: document.getElementById('live-footer-time') // NEW ELEMENT
+        };
 
-        // --- HELPER FUNCTION: Reset all fields after a change ---
-        function resetFields(level) {
-            resultCard.classList.remove('show');
-            resultCard.classList.add('hidden');
+        /**
+         * A simple CSV parser to handle quotes.
+         * This is a basic parser and assumes a well-formed CSV.
+         */
+        function parseCSV(text) {
+            const lines = text.trim().split('\n');
+            if (lines.length < 2) return [];
 
-            if (level === 'course') {
-                districtSelect.value = "";
-                districtSelect.disabled = true;
-                collegeSelect.innerHTML = '<option value="">-- Select College (Choose District First) --</option>';
-                collegeSelect.disabled = true;
-                subjectSelect.innerHTML = '<option value="">-- Select Subject (Choose College First) --</option>';
-                subjectSelect.disabled = true;
-            } 
-            if (level === 'district') {
-                collegeSelect.innerHTML = '<option value="">-- Select College (Choose District First) --</option>';
-                collegeSelect.disabled = true;
-                subjectSelect.innerHTML = '<option value="">-- Select Subject (Choose College First) --</option>';
-                subjectSelect.disabled = true;
-            } 
-            if (level === 'college') {
-                subjectSelect.innerHTML = '<option value="">-- Select Subject (Choose College First) --</option>';
-                subjectSelect.disabled = true;
+            // Clean headers (remove quotes and BOM)
+            const headers = lines[0].split(',')
+                .map(h => h.trim().replace(/"/g, '').replace(/^\uFEFF/, ''));
+
+            const data = [];
+            for (let i = 1; i < lines.length; i++) {
+                if (!lines[i]) continue;
+                
+                const values = [];
+                let inQuote = false;
+                let cell = '';
+                
+                for (let j = 0; j < lines[i].length; j++) {
+                    const char = lines[i][j];
+                    
+                    if (char === '"') {
+                        if (inQuote && lines[i][j+1] === '"') { // Handle escaped quote ""
+                            cell += '"';
+                            j++;
+                        } else {
+                            inQuote = !inQuote;
+                        }
+                    } else if (char === ',' && !inQuote) {
+                        values.push(cell.trim());
+                        cell = '';
+                    } else {
+                        cell += char;
+                    }
+                }
+                values.push(cell.trim()); // Push the last cell
+
+                if (values.length === headers.length) {
+                    const obj = {};
+                    headers.forEach((header, index) => {
+                        // Remove surrounding quotes from data values
+                        obj[header] = values[index].replace(/^"|"$/g, '');
+                    });
+                    data.push(obj);
+                } else {
+                    console.warn("Skipping malformed CSV line:", lines[i]);
+                }
             }
+            return data;
         }
 
-        // --- FUNCTIONS ---
+        // --- Helper functions for showing/hiding elements ---
+        function show(element) { element.classList.remove('a-tab-hidden'); }
+        function hide(element) { element.classList.add('a-tab-hidden'); }
 
-        // 1. Enable District Selection after Course is chosen
-        function enableDistrictSelection() {
-            const course = courseSelect.value;
-            resetFields('course');
+        function resetSelect(selectElement, defaultText) {
+            selectElement.innerHTML = `<option value="">-- ${defaultText} --</option>`;
+        }
+
+        function hideResults() {
+            hide(dom.resultsCard);
+            hide(dom.errorCard);
+        }
+
+        // --- Event Handlers ---
+
+        /**
+         * 1. Handle Course Change
+         * Populates the Subject dropdown.
+         */
+        function handleCourseChange() {
+            const course = dom.courseSelect.value;
+            hide(dom.subjectGroup);
+            hide(dom.districtGroup);
+            hide(dom.collegeGroup);
+            hideResults();
+            resetSelect(dom.subjectSelect, "Select a Subject");
 
             if (course) {
-                districtSelect.disabled = false;
-                districtSelect.value = ""; // Force reset district to select placeholder
-            }
-        }
-
-        // 2. Update College Dropdown based on Course AND District
-        function updateColleges() {
-            const course = courseSelect.value;
-            const district = districtSelect.value;
-            
-            resetFields('district');
-
-            if (district && course) {
-                const colleges = DATA[district];
-                let collegesFound = false;
-
-                for (const key in colleges) {
-                    const collegeData = colleges[key];
-                    
-                    // Filter colleges: A college must offer *any* subject under the selected Course (M.A. or M.Com)
-                    const relevantSubjects = MASTER_SUBJECTS[course];
-                    const offersCourse = relevantSubjects.some(subj => collegeData.courses.includes(subj.key));
-
-                    if (offersCourse) {
-                        const option = document.createElement('option');
-                        option.value = key; // College Key (Code-Name)
-                        option.textContent = collegeData.name;
-                        collegeSelect.appendChild(option);
-                        collegesFound = true;
-                    }
-                }
-                
-                if (collegesFound) {
-                    collegeSelect.disabled = false;
-                } else {
-                    collegeSelect.innerHTML = '<option value="">-- No Colleges in this District offer this course --</option>';
-                }
-            }
-        }
-
-        // 3. Update Subject Dropdown based on College selection
-        function updateSubjects() {
-            const course = courseSelect.value;
-            const collegeKey = collegeSelect.value;
-            const district = districtSelect.value;
-
-            resetFields('college');
-
-            if (district && collegeKey && course) {
-                const collegeData = DATA[district][collegeKey];
-                const availableSubjectKeys = collegeData.courses;
-                const relevantSubjects = MASTER_SUBJECTS[course];
-                
-                subjectSelect.innerHTML = '<option value="">-- Select Subject --</option>';
-                let subjectsFound = false;
-
-                // Iterate through the master list of subjects for the selected course (M.A. or M.Com)
-                relevantSubjects.forEach(masterSubj => {
-                    // Check if this specific college offers this specific subject key
-                    if (availableSubjectKeys.includes(masterSubj.key)) {
-                        const option = document.createElement('option');
-                        option.value = masterSubj.key; // Subject Key (e.g., MAHistory)
-                        option.textContent = `${masterSubj.name} (${masterSubj.code})`;
-                        subjectSelect.appendChild(option);
-                        subjectsFound = true;
-                    }
+                const subjects = config.subjectMap[course];
+                subjects.forEach(subject => {
+                    const option = new Option(subject.text, subject.value);
+                    dom.subjectSelect.add(option);
                 });
-
-                if (subjectsFound) {
-                    subjectSelect.disabled = false;
-                } else {
-                    subjectSelect.innerHTML = '<option value="">-- No Subjects found for this course at this college --</option>';
-                }
+                show(dom.subjectGroup);
             }
         }
 
-        // 4. Display Viva Result
-        function findVivaCenter() {
-            const course = courseSelect.value;
-            const subjectKey = subjectSelect.value;
-            const district = districtSelect.value;
-            const collegeKey = collegeSelect.value;
+        /**
+         * 2. Handle Subject Change
+         * Loads data from the pre-fetched `config.allData` object.
+         */
+        function handleSubjectChange() {
+            const subjectCode = dom.subjectSelect.value;
+            hide(dom.districtGroup);
+            hide(dom.collegeGroup);
+            hideResults();
+            resetSelect(dom.districtSelect, "Select a District");
 
-            resultCard.classList.remove('show');
-            resultCard.classList.add('hidden');
-            
-            // Validation
-            if (!course || !subjectKey || !district || !collegeKey) {
-                alert("Please make a selection for all four fields.");
+            if (!subjectCode) {
+                config.loadedData = [];
                 return;
             }
 
-            // Get subject details
-            const subjectInfo = SUBJECT_KEY_MAP[subjectKey];
+            // Get data from the pre-loaded object
+            config.loadedData = config.allData[subjectCode] || [];
 
-            // Fetch result data
-            const collegeData = DATA[district][collegeKey];
-            const result = collegeData.viva[subjectKey];
-
-            if (!result) {
-                alert(`Error: Viva date not found for ${subjectInfo.name} at ${collegeData.name}.`);
-                return;
+            if (config.loadedData.length === 0) {
+                 dom.errorMessage.innerHTML = `No data found for subject ${subjectCode}. The data file might be empty or missing.`;
+                 show(dom.errorCard);
+                 return;
             }
-            
-            // Construct Result HTML
-            const timeDisplay = result.time ? `${result.time}` : 'Not Specified';
 
-            resultContent.innerHTML = `
-                <div class="result-item"><i class="fas fa-graduation-cap"></i> <p><b>Course:</b> ${course} (${subjectInfo.name})</p></div>
-                <div class="result-item"><i class="fas fa-tag"></i> <p><b>Subject Code:</b> ${subjectInfo.code}</p></div>
-                <div class="result-item"><i class="fas fa-university"></i> <p><b>College:</b> ${collegeData.name} </p></div>
-                <div class="result-item"><i class="fas fa-map-marker-alt"></i> <p><b>Viva Center:</b> ${result.center}</p></div>
-                <div class="result-item"><i class="fas fa-calendar-day"></i> <p><b>Date:</b> ${result.date} </p></div>
-                <div class="result-item"><i class="fas fa-clock"></i> <p><b>Reporting Time:</b> ${timeDisplay}</p></div>
-                <p class="result-item mt-4 text-sm font-semibold text-yellow-300 hidden">
-                    
-            `;
-
-
-            // Display the Card
-            resultCard.classList.remove('hidden');
-            resultCard.classList.add('show');
+            populateDistricts();
+            show(dom.districtGroup);
         }
 
-        // --- NEW: Theme Toggle Functionality ---
-        function toggleTheme() {
-            const isDark = document.body.classList.toggle('dark-mode');
+        /**
+         * 3. Populate District Dropdown
+         * Called after data is successfully loaded.
+         */
+        function populateDistricts() {
+            const districts = [...new Set(
+                config.loadedData
+                    .map(row => row.District?.trim())
+                    .filter(Boolean) // Remove any empty/undefined districts
+            )].sort();
+
+            districts.forEach(district => {
+                // Correcting potential name mismatches from the user request
+                let districtName = district;
+                if (district.toLowerCase().includes('bulandshahar')) districtName = "Bulandshahar";
+                if (district.toLowerCase().includes('noida')) districtName = "Gautam Buddh Nagar (Noida)";
+
+                const option = new Option(districtName, district); // Use original name for value
+                dom.districtSelect.add(option);
+            });
             
-            if (isDark) {
-                // Apply dark mode styles by changing CSS variables
-                document.documentElement.style.setProperty('--bg-color', '#1f2937'); 
-                document.documentElement.style.setProperty('--text-color', '#f8f9fa'); 
-                document.documentElement.style.setProperty('--footer-bg', '#111827'); 
-                
-                // Update specific elements that need styling adjustment
-                document.querySelector('.container').style.backgroundColor = '#374151'; 
-                document.querySelector('.container').style.boxShadow = '0 10px 30px rgba(255, 255, 255, 0.1)';
-                document.querySelector('h1').style.color = '#bfdbfe'; 
-                document.querySelectorAll('.form-label').forEach(el => el.style.color = '#f8f9fa');
-                document.querySelectorAll('.form-select, .form-input').forEach(el => {
-                    el.style.backgroundColor = '#4b5563';
-                    el.style.borderColor = '#6b7280';
-                    el.style.color = '#f8f9fa';
+            // De-duplicate if names were corrected
+            const uniqueOptions = {};
+            Array.from(dom.districtSelect.options).forEach(opt => {
+                if (opt.value) uniqueOptions[opt.text] = opt.value;
+            });
+            resetSelect(dom.districtSelect, "Select a District");
+            Object.keys(uniqueOptions).sort().forEach(text => {
+                dom.districtSelect.add(new Option(text, uniqueOptions[text]));
+            });
+        }
+
+        /**
+         * 4. Handle District Change
+         * Populates the College dropdown based on selected district and subject.
+         */
+        function handleDistrictChange() {
+            const selectedDistrict = dom.districtSelect.value;
+            const selectedSubjectCode = dom.subjectSelect.value;
+            
+            hide(dom.collegeGroup);
+            hideResults();
+            resetSelect(dom.collegeSelect, "Select Your College");
+
+            if (!selectedDistrict || !selectedSubjectCode) return;
+
+            const colleges = [...new Set(
+                config.loadedData
+                    .filter(row =>
+                        row.District?.trim() === selectedDistrict &&
+                        row['Subject Code']?.trim() === selectedSubjectCode
+                    )
+                    .map(row => row['Attached Colleges']?.trim())
+                    .filter(Boolean) // Remove empty college names
+            )].sort();
+
+            if (colleges.length > 0) {
+                colleges.forEach(college => {
+                    const option = new Option(college, college);
+                    dom.collegeSelect.add(option);
                 });
-
-                // Update icon
-                themeIcon.classList.remove('fa-moon');
-                themeIcon.classList.add('fa-sun');
-
+                show(dom.collegeGroup);
             } else {
-                // Reset to light mode styles
-                document.documentElement.style.setProperty('--bg-color', '#f8f9fa');
-                document.documentElement.style.setProperty('--text-color', '#333');
-                document.documentElement.style.setProperty('--footer-bg', '#2C4B9E'); 
+                dom.errorMessage.innerHTML = "No colleges found for this subject in the selected district.";
+                show(dom.errorCard);
+            }
+        }
 
-                // Reset specific elements
-                document.querySelector('.container').style.backgroundColor = '#ffffff';
-                document.querySelector('.container').style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.1)';
-                document.querySelector('h1').style.color = 'var(--secondary-color)';
-                document.querySelectorAll('.form-label').forEach(el => el.style.color = '#333');
-                document.querySelectorAll('.form-select, .form-input').forEach(el => {
-                    el.style.backgroundColor = '#fff';
-                    el.style.borderColor = '#ddd';
-                    el.style.color = '#333';
+        /**
+         * 5. Handle College Change
+         * Finds and displays the final viva details.
+         */
+        function handleCollegeChange() {
+            const selectedCollege = dom.collegeSelect.value;
+            const selectedSubjectCode = dom.subjectSelect.value;
+            
+            hideResults();
+
+            if (!selectedCollege || !selectedSubjectCode) return;
+
+            const result = config.loadedData.find(row =>
+                row['Attached Colleges']?.trim() === selectedCollege &&
+                row['Subject Code']?.trim() === selectedSubjectCode
+            );
+
+            if (result) {
+                // Get selected text for course and college
+                const selectedCourseText = dom.subjectSelect.options[dom.subjectSelect.selectedIndex].text;
+                const selectedCollegeText = dom.collegeSelect.options[dom.collegeSelect.selectedIndex].text;
+
+                // Populate new confirmation fields
+                dom.resultCourse.textContent = selectedCourseText || 'N/A';
+                dom.resultCollege.textContent = selectedCollegeText || 'N/A';
+                
+                // Populate viva details
+                dom.resultCenter.textContent = result['Name of Center'] || 'N/A';
+                dom.resultDate.textContent = result.Date || 'N/A';
+                dom.resultTime.textContent = result.Time || 'N/A';
+                show(dom.resultsCard);
+            } else {
+                dom.errorMessage.innerHTML = "Could not find viva details for the selected college. Please double-check your selections.";
+                show(dom.errorCard);
+            }
+        }
+
+        /**
+         * 6. Load All Data on Page Start
+         * Fetches all CSV files at once and stores them in config.allData
+         */
+        async function loadAllData() {
+            // Get unique file names
+            const uniqueFiles = [...new Set(Object.values(config.fileMap))];
+            
+            try {
+                // Fetch all unique files in parallel
+                const filePromises = uniqueFiles.map(async (file) => {
+                    const response = await fetch(file);
+                    if (!response.ok) {
+                        throw new Error(`Failed to load: ${file}`);
+                    }
+                    const csvText = await response.text();
+                    const data = parseCSV(csvText);
+                    return { file, data };
                 });
 
-                // Update icon
-                themeIcon.classList.remove('fa-sun');
-                themeIcon.classList.add('fa-moon');
+                const results = await Promise.all(filePromises);
+
+                // Create a map of filename -> data
+                const fileDataMap = {};
+                results.forEach(result => {
+                    fileDataMap[result.file] = result.data;
+                });
+
+                // Map the data back to subject codes
+                for (const subjectCode in config.fileMap) {
+                    const fileName = config.fileMap[subjectCode];
+                    config.allData[subjectCode] = fileDataMap[fileName] || [];
+                }
+                
+                // Show the main content
+                hide(dom.initialLoader);
+                show(dom.mainContent);
+
+            } catch (error) {
+                // Show a permanent error on the page if loading fails
+                dom.initialLoader.innerHTML = `
+                    <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-6 rounded-lg shadow-md max-w-3xl mx-auto">
+                        <h2 class="text-2xl font-bold text-red-800 mb-3">Error: Could Not Load Data Files</h2>
+                        <p class="text-lg mb-4">This webpage is <strong>not working</strong> because it could not load the required <code>.csv</code> data files.</p>
+                        <p class="font-semibold mb-2">This is the most common reason why:</p>
+                        <p class="mb-4">
+                            Files are missing.
+                        </p>
+                        <h3 class="font-bold text-red-800 mb-2">How to Fix This:</h3>
+                        <ol class="list-decimal list-inside space-y-2">
+                            <li>Contact to Administrator</li>
+                            
+                            
+                        </ol>
+                        <p class="text-sm text-gray-600 mt-4"><strong>Technical Error:</strong> ${error.message}</p>
+                    </div>
+                `;
+                // Also show the error in the console for developers
+                console.error("Failed to load all data:", error);
             }
         }
         
-        // --- EVENT LISTENERS ---
-        courseSelect.addEventListener('change', enableDistrictSelection);
-        districtSelect.addEventListener('change', updateColleges);
-        collegeSelect.addEventListener('change', updateSubjects); 
-        
-        subjectSelect.addEventListener('change', () => {
-             resultCard.classList.remove('show');
-             resultCard.classList.add('hidden');
+        /**
+         * 7. Update Live Date & Time
+         * Updates the branding elements with the current date and time.
+         */
+        function updateLiveDateTime() {
+            const now = new Date();
+            // Using en-IN locale for India-specific date/time format
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' };
+            const dateTimeString = now.toLocaleString('en-IN', options);
+
+            const brandingText = `Powered by University Updates | ${dateTimeString}`;
+            
+            if (dom.headerBranding) {
+                dom.headerBranding.textContent = brandingText;
+            }
+            if (dom.resultBranding) {
+                dom.resultBranding.textContent = brandingText;
+            }
+            
+            // --- UPDATED: Update the footer time as well ---
+            if (dom.footerTime) {
+                dom.footerTime.innerHTML = `<i class="far fa-clock text-yellow-400 text-sm"></i> &nbsp; ${dateTimeString}`;
+            }
+        }
+
+
+        // --- Initial Setup ---
+        document.addEventListener('DOMContentLoaded', () => {
+            // Add event listeners
+            dom.courseSelect.addEventListener('change', handleCourseChange);
+            dom.subjectSelect.addEventListener('change', handleSubjectChange);
+            dom.districtSelect.addEventListener('change', handleDistrictChange);
+            dom.collegeSelect.addEventListener('change', handleCollegeChange);
+            
+            // Load all data
+            loadAllData();
+
+            // Set up live date/time
+            updateLiveDateTime();
+            setInterval(updateLiveDateTime, 1000); // Update every 1 sec (1000ms) for better "Live" feel
         });
         
-        searchBtn.addEventListener('click', findVivaCenter);
-
-        // New Event Listener for Theme Toggle
-        themeToggle.addEventListener('click', toggleTheme);
+        
     </script>
 </body>
 </html>
