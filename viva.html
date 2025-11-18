@@ -71,7 +71,47 @@
         .social-icon:hover {
             color: var(--primary-color); 
         }
-        
+
+        #news-title {
+            color: var(--primary-color); 
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 5px;
+        }
+        .news-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .news-list li {
+            padding: 8px 0;
+            border-bottom: 1px dashed #f0f0f0;
+            display: flex;
+            align-items: center;
+            font-size: 0.95rem;
+        }
+        .news-list li:last-child {
+            border-bottom: none;
+        }
+        .news-list i {
+            color: var(--secondary-color);
+            margin-right: 8px;
+            font-size: 0.8rem;
+        }
+        .news-date {
+            font-size: 0.8rem;
+            color: #777;
+            margin-left: auto;
+            flex-shrink: 0;
+        }
+        .news-link {
+            transition: color 0.3s;
+        }
+        .news-link:hover {
+            color: var(--primary-color);
+        }
         
     </style>
 </head>
@@ -214,6 +254,29 @@
                 </p>
             </div>
         </div>
+
+         <div class="container mt-6"> 
+            <div id="news-title" class="flex items-center gap-2">
+                <i class="fas fa-bullhorn"></i> Important Notices
+            </div>
+            <ul class="news-list">
+                <li>
+                    <i class="fas fa-chevron-right"></i>
+                    
+                   <a href="#" class="news-link">Test</a><img src="https://msuniversity.ac.in/assets/images/new.gif" alt="NEW" class="news-gif">  
+                    <span class="news-date">Apr 29</span>
+                </li>
+                <li>
+                    <i class="fas fa-chevron-right"></i>
+                   <img src="https://msuniversity.ac.in/assets/images/new.gif" alt="NEW" class="news-gif">
+                    <a href="#" class="news-link">Test</a>
+                    <span class="news-date">Apr 27</span>
+                </li>
+                
+            </ul>
+        </div>
+
+        
     </main>
     
  <footer class="footer">
