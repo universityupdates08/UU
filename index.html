@@ -976,192 +976,236 @@
       </div>
     </section>
 
-    <!-- Our Journey -->
+      <!-- Our Journey (NEW DESIGN) -->
     <section id="our-journey" class="section-card fade-slide">
-  <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-3 mb-6">
-    <div>
-      <p class="primary-chip mb-2">Journey</p>
-      <h1 class="section-title mb-1">🚀 Our Journey</h1>
-      <p class="section-subtitle">
-        From a small student initiative to a growing digital ecosystem for learners.
-      </p>
-    </div>
-    <div class="text-xs md:text-sm text-slate-500">
-      Step-by-step growth from <span class="font-semibold text-red-600">2022</span> to
-      <span class="font-semibold text-red-600">2025</span>.
-    </div>
-  </div>
-
-  <!-- New Timeline Layout -->
-  <div class="relative mt-4">
-    <!-- Center line for desktop -->
-    <div class="hidden md:block absolute left-1/2 top-0 bottom-0 w-px bg-slate-200"></div>
-
-    <!-- 2022 – Beginning -->
-    <div class="relative md:grid md:grid-cols-2 md:gap-10 items-center mb-10">
-      <!-- Year badge (left side text) -->
-      <div class="md:text-right md:pr-10 mb-3 md:mb-0">
-        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-50 text-red-700 text-xs font-semibold mb-2">
-          <span class="text-lg">📖</span>
-          <span>2022 • Beginning</span>
+      <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-3 mb-4">
+        <div>
+          <p class="primary-chip mb-2">Journey</p>
+          <h1 class="section-title mb-1">🚀 Our Journey</h1>
+          <p class="section-subtitle">
+            From a small student initiative to a growing digital ecosystem for learners.
+          </p>
         </div>
-        <h3 class="font-semibold text-sm md:text-base text-slate-800">
-          The Start of University Channels & Groups
-        </h3>
-        <p class="text-xs md:text-sm text-slate-600 mt-2 leading-relaxed">
-          Our journey started with <b>University Channels &amp; Groups</b>, a small
-          initiative to share information, free notes, and guides with students who
-          needed reliable academic support.
-        </p>
+        <div class="text-xs md:text-sm text-slate-500">
+          Step-by-step growth from <span class="font-semibold text-red-600">2022</span> to
+          <span class="font-semibold text-red-600">2025</span>.
+        </div>
       </div>
 
-      <!-- Card on the right -->
-      <div class="md:pl-10">
-        <!-- Dot in center for desktop -->
-        <div
-          class="hidden md:flex items-center justify-center absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+      <!-- NEW: Year quick-jump badges -->
+      <div class="flex flex-wrap items-center gap-2 mb-6">
+        <button
+          type="button"
+          onclick="document.getElementById('journey-2022').scrollIntoView({ behavior: 'smooth' })"
+          class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-50 text-red-700 text-xs font-semibold border border-red-100 hover:bg-red-100"
         >
-          <div class="h-11 w-11 rounded-full bg-red-500 text-white flex items-center justify-center shadow-lg text-xl">
-            1
+          <i class="fas fa-book-open text-xs"></i> 2022
+        </button>
+        <button
+          type="button"
+          onclick="document.getElementById('journey-2023').scrollIntoView({ behavior: 'smooth' })"
+          class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-blue-700 text-xs font-semibold border border-blue-100 hover:bg-blue-100"
+        >
+          <i class="fas fa-chart-line text-xs"></i> 2023
+        </button>
+        <button
+          type="button"
+          onclick="document.getElementById('journey-2024').scrollIntoView({ behavior: 'smooth' })"
+          class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 text-xs font-semibold border border-emerald-100 hover:bg-emerald-100"
+        >
+          <i class="fas fa-robot text-xs"></i> 2024
+        </button>
+        <button
+          type="button"
+          onclick="document.getElementById('journey-2025').scrollIntoView({ behavior: 'smooth' })"
+          class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-50 text-indigo-700 text-xs font-semibold border border-indigo-100 hover:bg-indigo-100"
+        >
+          <i class="fas fa-rocket text-xs"></i> 2025
+        </button>
+      </div>
+
+      <!-- New Timeline Layout -->
+      <div class="relative mt-2">
+        <!-- Center line for desktop -->
+        <div class="hidden md:block absolute left-1/2 top-0 bottom-0 w-px bg-slate-200"></div>
+
+        <!-- 2022 – Beginning -->
+        <div
+          id="journey-2022"
+          class="relative md:grid md:grid-cols-2 md:gap-10 items-center mb-10"
+        >
+          <!-- Year badge (left side text) -->
+          <div class="md:text-right md:pr-10 mb-3 md:mb-0">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-50 text-red-700 text-xs font-semibold mb-2">
+              <span class="text-lg">📖</span>
+              <span>2022 • Beginning</span>
+            </div>
+            <h3 class="font-semibold text-sm md:text-base text-slate-800">
+              The Start of University Channels & Groups
+            </h3>
+            <p class="text-xs md:text-sm text-slate-600 mt-2 leading-relaxed">
+              Our journey started with <b>University Channels &amp; Groups</b>, a small
+              initiative to share information, free notes, and guides with students who
+              needed reliable academic support.
+            </p>
+          </div>
+
+          <!-- Card on the right -->
+          <div class="md:pl-10">
+            <!-- Dot in center for desktop -->
+            <div
+              class="hidden md:flex items-center justify-center absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+            >
+              <div class="h-11 w-11 rounded-full bg-red-500 text-white flex items-center justify-center shadow-lg text-xl">
+                1
+              </div>
+            </div>
+
+            <div
+              class="bg-white border border-slate-100 rounded-xl p-4 shadow-sm hover:shadow-md transition"
+            >
+              <p class="text-xs md:text-sm text-slate-700 leading-relaxed">
+                What began as <b>simple Telegram and WhatsApp groups</b> slowly turned
+                into a small but committed community of learners who trusted our content
+                and shared it with their friends.
+              </p>
+            </div>
           </div>
         </div>
 
+        <!-- 2023 – Growth -->
         <div
-          class="bg-white border border-slate-100 rounded-xl p-4 shadow-sm hover:shadow-md transition"
+          id="journey-2023"
+          class="relative md:grid md:grid-cols-2 md:gap-10 items-center mb-10"
         >
-          <p class="text-xs md:text-sm text-slate-700 leading-relaxed">
-            What began as <b>simple Telegram and WhatsApp groups</b> slowly turned into
-            a small but committed community of learners who trusted our content and
-            shared it with their friends.
-          </p>
-        </div>
-      </div>
-    </div>
+          <!-- Card on the left (swap) -->
+          <div class="md:pr-10 order-2 md:order-1">
+            <!-- Dot in center -->
+            <div
+              class="hidden md:flex items-center justify-center absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+            >
+              <div class="h-11 w-11 rounded-full bg-blue-600 text-white flex items-center justify-center shadow-lg text-xl">
+                2
+              </div>
+            </div>
 
-    <!-- 2023 – Growth -->
-    <div class="relative md:grid md:grid-cols-2 md:gap-10 items-center mb-10">
-      <!-- Card on the left (swap) -->
-      <div class="md:pr-10 order-2 md:order-1">
-        <!-- Dot in center -->
-        <div
-          class="hidden md:flex items-center justify-center absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
-        >
-          <div class="h-11 w-11 rounded-full bg-blue-600 text-white flex items-center justify-center shadow-lg text-xl">
-            2
+            <div
+              class="bg-white border border-slate-100 rounded-xl p-4 shadow-sm hover:shadow-md transition"
+            >
+              <p class="text-xs md:text-sm text-slate-700 leading-relaxed">
+                We expanded our content and introduced <b>Government Job Hub</b> to help
+                aspirants stay updated with exam notifications, job alerts, and important
+                dates – all in one place.
+              </p>
+            </div>
+          </div>
+
+          <!-- Year badge (right side text) -->
+          <div class="md:pl-10 mb-3 md:mb-0 order-1 md:order-2">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-blue-700 text-xs font-semibold mb-2">
+              <span class="text-lg">🌐</span>
+              <span>2023 • Growth</span>
+            </div>
+            <h3 class="font-semibold text-sm md:text-base text-slate-800">
+              Expanding Resources & Reach
+            </h3>
+            <p class="text-xs md:text-sm text-slate-600 mt-2 leading-relaxed">
+              Through consistent updates and helpful resources, we reached
+              <b>thousands of students</b> across different universities and competitive
+              exam segments.
+            </p>
           </div>
         </div>
 
+        <!-- 2024 – Innovation -->
         <div
-          class="bg-white border border-slate-100 rounded-xl p-4 shadow-sm hover:shadow-md transition"
+          id="journey-2024"
+          class="relative md:grid md:grid-cols-2 md:gap-10 items-center mb-10"
         >
-          <p class="text-xs md:text-sm text-slate-700 leading-relaxed">
-            We expanded our content and introduced <b>Government Job Hub</b> to help
-            aspirants stay updated with exam notifications, job alerts, and important
-            dates – all in one place.
-          </p>
-        </div>
-      </div>
+          <!-- Year badge (left side text) -->
+          <div class="md:text-right md:pr-10 mb-3 md:mb-0">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 text-xs font-semibold mb-2">
+              <span class="text-lg">🤖</span>
+              <span>2024 • Innovation</span>
+            </div>
+            <h3 class="font-semibold text-sm md:text-base text-slate-800">
+              Launch of ExamHelper Bot & myLibrary Base
+            </h3>
+            <p class="text-xs md:text-sm text-slate-600 mt-2 leading-relaxed">
+              We launched <b>ExamHelper Bot</b>, a Telegram-based solution where students
+              can donate notes, sample papers and use them for <b>self-practice</b>. This
+              laid the foundation for what later became <b>myLibrary</b>.
+            </p>
+          </div>
 
-      <!-- Year badge (right side text) -->
-      <div class="md:pl-10 mb-3 md:mb-0 order-1 md:order-2">
-        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-blue-700 text-xs font-semibold mb-2">
-          <span class="text-lg">🌐</span>
-          <span>2023 • Growth</span>
-        </div>
-        <h3 class="font-semibold text-sm md:text-base text-slate-800">
-          Expanding Resources & Reach
-        </h3>
-        <p class="text-xs md:text-sm text-slate-600 mt-2 leading-relaxed">
-          Through consistent updates and helpful resources, we reached
-          <b>thousands of students</b> across different universities and competitive
-          exam segments.
-        </p>
-      </div>
-    </div>
+          <!-- Card on the right -->
+          <div class="md:pl-10">
+            <!-- Dot in center -->
+            <div
+              class="hidden md:flex items-center justify-center absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+            >
+              <div class="h-11 w-11 rounded-full bg-emerald-500 text-white flex items-center justify-center shadow-lg text-xl">
+                3
+              </div>
+            </div>
 
-    <!-- 2024 – Innovation -->
-    <div class="relative md:grid md:grid-cols-2 md:gap-10 items-center mb-10">
-      <!-- Year badge (left side text) -->
-      <div class="md:text-right md:pr-10 mb-3 md:mb-0">
-        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 text-xs font-semibold mb-2">
-          <span class="text-lg">🤖</span>
-          <span>2024 • Innovation</span>
-        </div>
-        <h3 class="font-semibold text-sm md:text-base text-slate-800">
-          Launch of ExamHelper Bot & myLibrary Base
-        </h3>
-        <p class="text-xs md:text-sm text-slate-600 mt-2 leading-relaxed">
-          We launched <b>ExamHelper Bot</b>, a Telegram-based solution where students
-          can donate notes, sample papers and use them for <b>self-practice</b>. This
-          laid the foundation for what later became <b>myLibrary</b>.
-        </p>
-      </div>
-
-      <!-- Card on the right -->
-      <div class="md:pl-10">
-        <!-- Dot in center -->
-        <div
-          class="hidden md:flex items-center justify-center absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
-        >
-          <div class="h-11 w-11 rounded-full bg-emerald-500 text-white flex items-center justify-center shadow-lg text-xl">
-            3
+            <div
+              class="bg-white border border-slate-100 rounded-xl p-4 shadow-sm hover:shadow-md transition"
+            >
+              <p class="text-xs md:text-sm text-slate-700 leading-relaxed">
+                With automation and smart tools, we moved closer to our goal of building a
+                <b>structured digital library</b> that any student can access from anywhere,
+                anytime.
+              </p>
+            </div>
           </div>
         </div>
 
+        <!-- 2025 – New Launch -->
         <div
-          class="bg-white border border-slate-100 rounded-xl p-4 shadow-sm hover:shadow-md transition"
+          id="journey-2025"
+          class="relative md:grid md:grid-cols-2 md:gap-10 items-center mb-2"
         >
-          <p class="text-xs md:text-sm text-slate-700 leading-relaxed">
-            With automation and smart tools, we moved closer to our goal of building a
-            <b>structured digital library</b> that any student can access from anywhere,
-            anytime.
-          </p>
-        </div>
-      </div>
-    </div>
+          <!-- Card on the left (swap) -->
+          <div class="md:pr-10 order-2 md:order-1">
+            <!-- Dot in center -->
+            <div
+              class="hidden md:flex items-center justify-center absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+            >
+              <div class="h-11 w-11 rounded-full bg-indigo-600 text-white flex items-center justify-center shadow-lg text-xl">
+                4
+              </div>
+            </div>
 
-    <!-- 2025 – New Launch -->
-    <div class="relative md:grid md:grid-cols-2 md:gap-10 items-center mb-2">
-      <!-- Card on the left (swap) -->
-      <div class="md:pr-10 order-2 md:order-1">
-        <!-- Dot in center -->
-        <div
-          class="hidden md:flex items-center justify-center absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
-        >
-          <div class="h-11 w-11 rounded-full bg-indigo-600 text-white flex items-center justify-center shadow-lg text-xl">
-            4
+            <div
+              class="bg-white border border-slate-100 rounded-xl p-4 shadow-sm hover:shadow-md transition"
+            >
+              <p class="text-xs md:text-sm text-slate-700 leading-relaxed">
+                In <b>2025</b>, we are focusing on <b>advanced digital tools</b>, improved
+                study platforms, and the <b>University Updates YouTube Channel</b> to
+                deliver visual, easy-to-understand content for students across India.
+              </p>
+            </div>
+          </div>
+
+          <!-- Year badge (right side text) -->
+          <div class="md:pl-10 mb-3 md:mb-0 order-1 md:order-2">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-50 text-indigo-700 text-xs font-semibold mb-2">
+              <span class="text-lg">🚀</span>
+              <span>2025 • New Launch</span>
+            </div>
+            <h3 class="font-semibold text-sm md:text-base text-slate-800">
+              Towards a Complete Student Ecosystem
+            </h3>
+            <p class="text-xs md:text-sm text-slate-600 mt-2 leading-relaxed">
+              Step-by-step, <b>University Updates</b> is evolving into a
+              <b>one-stop ecosystem</b> for notes, tools, notifications, and guidance – all
+              created <b>by students, for students</b>.
+            </p>
           </div>
         </div>
-
-        <div
-          class="bg-white border border-slate-100 rounded-xl p-4 shadow-sm hover:shadow-md transition"
-        >
-          <p class="text-xs md:text-sm text-slate-700 leading-relaxed">
-            In <b>2025</b>, we are focusing on <b>advanced digital tools</b>, improved
-            study platforms, and the <b>University Updates YouTube Channel</b> to
-            deliver visual, easy-to-understand content for students across India.
-          </p>
-        </div>
       </div>
-
-      <!-- Year badge (right side text) -->
-      <div class="md:pl-10 mb-3 md:mb-0 order-1 md:order-2">
-        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-50 text-indigo-700 text-xs font-semibold mb-2">
-          <span class="text-lg">🚀</span>
-          <span>2025 • New Launch</span>
-        </div>
-        <h3 class="font-semibold text-sm md:text-base text-slate-800">
-          Towards a Complete Student Ecosystem
-        </h3>
-        <p class="text-xs md:text-sm text-slate-600 mt-2 leading-relaxed">
-          Step-by-step, <b>University Updates</b> is evolving into a
-          <b>one-stop ecosystem</b> for notes, tools, notifications, and guidance – all
-          created <b>by students, for students</b>.
-        </p>
-      </div>
-    </div>
-  </div>
-</section>
+    </section>
 
 
     <!-- Administrations -->
