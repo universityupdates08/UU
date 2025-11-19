@@ -28,6 +28,11 @@
       --secondary-color: #2c4b9e; /* Deep Blue */
       --card-bg: rgba(255, 255, 255, 0.97);
       --soft-border: #e5e7eb;
+
+      /* From calculator page */
+      --blue: #007BFF;
+      --green: #28a745;
+      --red: #dc3545;
     }
 
     * {
@@ -453,6 +458,55 @@
         padding: 1.25rem;
       }
     }
+
+    /* ====== CALCULATOR STYLES (MERGED) ====== */
+    .calculator {
+      background: #fff;
+      padding: 20px;
+      border-radius: 0.75rem;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+      text-align: center;
+      width: 100%;
+      max-width: 350px;
+      border: 4px solid transparent;
+    }
+
+    .calculator h2 {
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      font-size: 1.1rem;
+    }
+
+    .calculator input {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      border-radius: 8px;
+      border: 1px solid #d1d5db;
+      font-size: 0.95rem;
+      text-align: center;
+      outline: none;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .calculator input:focus {
+      border-color: var(--secondary-color);
+      box-shadow: 0 0 0 1px rgba(37, 99, 235, 0.25);
+    }
+
+    .result {
+      margin-top: 10px;
+      font-weight: 600;
+      font-size: 0.98rem;
+    }
+
+    .blue { color: var(--blue); }
+    .green { color: var(--green); }
+    .error {
+      color: var(--red);
+      font-size: 0.8rem;
+      margin-top: 4px;
+    }
   </style>
 </head>
 
@@ -836,22 +890,51 @@
       </div>
     </section>
 
-    <!-- CGPA Calculator -->
-    <section class="section-card fade-slide">
+    <!-- CGPA & Marks Calculator (MERGED HERE) -->
+    <section class="section-card fade-slide" id="calculator">
+      <p class="primary-chip mb-2">Calculator</p>
       <div class="text-center mb-4">
-        <h1 class="section-title">CGPA ⇆ Percentage Calculator</h1>
+        <h1 class="section-title">Percentage & CGPA Tools</h1>
         <p class="section-subtitle">
-          Quickly Convert Your CGPA to Percentage And Vice Versa.
-        </p>
+          Quickly convert your <b>CGPA ⇆ Percentage</b> and calculate <b>Marks ⇆ Percentage</b> on this page. 
+        </p> <p>CGPA Scale fix to 9.5</p>
       </div>
-      <div class="flex justify-center">
-        <a
-          href="calculator.html"
-          class="cta-card card-calculator max-w-xs w-full justify-center"
-          target="_blank"
-        >
-          Open Calculator
-        </a>
+
+      <div class="flex flex-wrap justify-center gap-6">
+        <!-- CGPA ⇆ Percentage Calculator -->
+        <div class="calculator" id="calculatorBox">
+          <h2>C.G.P.A. ⇆ PERCENTAGE</h2>
+          <input
+            type="number"
+            id="inputValue"
+            placeholder="Enter CGPA (0–10) or Percentage (0–100)"
+            step="any"
+            oninput="convertValue()"
+          />
+          <div class="result" id="result"></div>
+          <div class="error" id="error"></div>
+        </div>
+
+        <!-- Marks ⇆ Percentage Calculator -->
+        <div class="calculator" id="marksCalculatorBox">
+          <h2>MARKS ⇆ PERCENTAGE</h2>
+          <input
+            type="number"
+            id="marksObtained"
+            placeholder="Enter Marks Obtained"
+            step="any"
+            oninput="calculateMarksPercentage()"
+          />
+          <input
+            type="number"
+            id="maxMarks"
+            placeholder="Enter Maximum Marks"
+            step="any"
+            oninput="calculateMarksPercentage()"
+          />
+          <div class="result" id="marksResult"></div>
+          <div class="error" id="marksError"></div>
+        </div>
       </div>
     </section>
 
@@ -976,7 +1059,7 @@
       </div>
     </section>
 
-      <!-- Our Journey (NEW DESIGN) -->
+    <!-- Our Journey (NEW DESIGN) -->
     <section id="our-journey" class="section-card fade-slide">
       <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-3 mb-4">
         <div>
@@ -1581,6 +1664,83 @@
     // Start auto-sliding
     if (totalItems > 1) {
       startAutoSlide();
+    }
+
+    // ====== CALCULATOR LOGIC (MERGED) ======
+    function convertValue() {
+      let value = parseFloat(document.getElementById("inputValue").value);
+      let result = document.getElementById("result");
+      let error = document.getElementById("error");
+      let box = document.getElementById("calculatorBox");
+
+      result.innerText = "";
+      error.innerText = "";
+      result.className = "result";
+      box.style.borderColor = "transparent";
+
+      if (isNaN(value)) return;
+
+      if (value <= 10) {
+        if (value < 0) {
+          error.innerText = "⚠️ CGPA cannot be negative";
+          box.style.borderColor = "var(--red)";
+          return;
+        }
+        let percentage = (value * 9.5).toFixed(2);
+        result.innerHTML = `<b>📘 CGPA = ${value} → Percentage = ${percentage}%</b>`;
+        result.classList.add("blue");
+        box.style.borderColor = "var(--blue)";
+      }
+      else if (value <= 100) {
+        let cgpa = (value / 9.5);
+        if (cgpa > 10) cgpa = 10;
+        cgpa = cgpa.toFixed(2);
+        result.innerHTML = `<b>🎓 Percentage = ${value}% → CGPA = ${cgpa}</b>`;
+        result.classList.add("green");
+        box.style.borderColor = "var(--green)";
+      }
+      else {
+        error.innerText = "⚠️ Enter a valid number (CGPA ≤ 10 or % ≤ 100)";
+        box.style.borderColor = "var(--red)";
+      }
+    }
+
+    function calculateMarksPercentage() {
+      let obtained = parseFloat(document.getElementById("marksObtained").value);
+      let max = parseFloat(document.getElementById("maxMarks").value);
+      let result = document.getElementById("marksResult");
+      let error = document.getElementById("marksError");
+      let box = document.getElementById("marksCalculatorBox");
+
+      result.innerText = "";
+      error.innerText = "";
+      result.className = "result";
+      box.style.borderColor = "transparent";
+
+      if (isNaN(obtained) || isNaN(max)) return;
+
+      if (max <= 0) {
+        error.innerText = "⚠️ Maximum marks must be greater than 0";
+        box.style.borderColor = "var(--red)";
+        return;
+      }
+
+      if (obtained < 0) {
+        error.innerText = "⚠️ Obtained marks cannot be negative";
+        box.style.borderColor = "var(--red)";
+        return;
+      }
+
+      if (obtained > max) {
+        error.innerText = "⚠️ Obtained marks cannot be greater than maximum marks";
+        box.style.borderColor = "var(--red)";
+        return;
+      }
+
+      let percentage = ((obtained / max) * 100).toFixed(2);
+      result.innerHTML = `<b>✅ Marks Obtained = ${obtained} / ${max} → Percentage = ${percentage}%</b>`;
+      result.classList.add("green");
+      box.style.borderColor = "var(--green)";
     }
   </script>
 </body>
