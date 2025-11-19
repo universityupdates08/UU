@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Viva Center Finder - University Updates</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-color: #EF3C3C; /* Crimson Red */
+            --secondary-color: #2C4B9E; /* Deep Blue */
+            --bg-color: #f8f9fa;
+            --text-color: #333;
+            --footer-bg: #2C4B9E; /* Deep Blue for footer */
+            --footer-text: #ffffff;
+        }
+
+        /* Use Inter font */
+        body {
+            font-family: "Inter", sans-serif;
+        }
+
+        /* Hide a-tab elements */
+        .a-tab-hidden {
+            display: none;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0; 
+            padding: 0; 
+            min-height: 100vh; 
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        .main-content {
+            flex-grow: 1; 
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+        }
+
+        /* New Utility Bar & Footer Styles */
+        .utility-bar {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 8px 20px;
+            font-size: 0.9rem;
+            position: relative;
+            z-index: 10;
+        }
+        .utility-link:hover {
+            text-decoration: underline;
+            opacity: 0.8;
+        }
+        .footer {
+            background-color: var(--footer-bg);
+            color: var(--footer-text);
+            padding: 40px 20px 20px 20px;
+            margin-top: 40px; /* Ensures footer is pushed down */
+            position: relative;
+            z-index: 10;
+        }
+        .social-icon {
+            color: white;
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+        .social-icon:hover {
+            color: var(--primary-color); 
+        }
+
+        #news-title {
+            color: var(--primary-color); 
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 5px;
+        }
+        .news-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .news-list li {
+            padding: 8px 0;
+            border-bottom: 1px dashed #f0f0f0;
+            display: flex;
+            align-items: center;
+            font-size: 0.95rem;
+        }
+        .news-list li:last-child {
+            border-bottom: none;
+        }
+        .news-list i {
+            color: var(--secondary-color);
+            margin-right: 8px;
+            font-size: 0.8rem;
+        }
+        .news-date {
+            font-size: 0.8rem;
+            color: #777;
+            margin-left: auto;
+            flex-shrink: 0;
+        }
+        .news-link {
+            transition: color 0.3s;
+        }
+        .news-link:hover {
+            color: var(--primary-color);
+        }
+
+        .news-gif {
+            width: 32px;
+            height: auto;
+            margin-left: 6px;
+        }
+
+        /* --- Background Icons Layer --- */
+        .background-icons {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            opacity: 0.07;
+            z-index: 0;
+        }
+        .background-icons i {
+            position: absolute;
+            font-size: 110px;
+            color: var(--secondary-color);
+        }
+        .background-icons .icon-1 { top: 30%; left: 5%; }
+        .background-icons .icon-2 { top: 30%; right: 10%; }
+        .background-icons .icon-3 { bottom: 25%; left: 12%; }
+        .background-icons .icon-4 { bottom: 10%; right: 5%; }
+
+        /* Make sure main content is above background icons */
+        main, header {
+            position: relative;
+            z-index: 5;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Background decorative icons -->
+    <div class="background-icons">
+        <!-- Location -->
+        <i class="fas fa-map-marker-alt icon-1"></i>
+        <!-- College / University -->
+        <i class="fas fa-university icon-2"></i>
+        <!-- School -->
+        <i class="fas fa-school icon-3"></i>
+        <!-- Exam Papers -->
+        <i class="fas fa-file-alt icon-4"></i>
+    </div>
+
+    <header class="utility-bar">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex space-x-4">
+                <a href="#" class="utility-link"><i class="fas fa-home mr-1"></i> Home</a>
+                <a href="https://t.me/HelpforDMBot" class="utility-link"><i class="fas fa-headset mr-1"></i> Contact Us</a>
+            </div>
+            <div class="flex items-center space-x-4">
+                <a href="https://t.me/CCSUniversityMRT" class="social-icon text-sm hover:text-gray-300 transition"><i class="fab fa-telegram"></i></a>
+                <span class="mx-2">|</span>
+                <a href="https://whatsapp.com/channel/0029Va9jtav4tRrmKPxos138" class="social-icon text-sm hover:text-gray-300 transition"><i class="fab fa-whatsapp"></i></a>
+                <span class="mx-2">|</span>
+                <a href="https://instagram.com/universityupdate_uu" class="social-icon text-sm hover:text-gray-300 transition"><i class="fab fa-instagram"></i></a>
+                <span class="mx-2">|</span>
+                <a href="https://www.youtube.com/@University-Updates-UU" class="social-icon text-sm hover:text-gray-300 transition"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+    </header>
+
+    <div class="max-w-6xl mx-auto flex items-center justify-center p-4 relative z-10">
+        <img src="https://i.ibb.co/nMC0877T/UNIVERSITY-UPDATES-LOGO-removebg-preview.png" alt="Logo" class="w-1/4">
+    </div>
+        
+    <p style="color: white; font-style: italic; font-size: 15px; background-color: crimson; display: flex; align-items: center; height: 25px;">
+        <marquee onmouseover="this.stop();" direction="left" onmouseout="this.start();">
+            <b style="color: white">➤</b> 📢 Welcome to Viva Voce Center Finder - UNIVERSITY UPDATES (Designed by CCSU Private Courses)
+        </marquee>
+    </p>
+
+    <main class="flex-grow w-full flex flex-col justify-center items-center p-4 md:p-8">
+
+        <div id="initialLoader" class="text-center p-8">
+            <svg class="animate-spin h-12 w-12 text-blue-600 mx-auto" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            </svg>
+            <p class="text-gray-600 text-lg mt-4">Loading all viva data...</p>
+        </div>
+
+        <!-- MAIN CARD: LEFT = VIVA FINDER, RIGHT = NEWS & NOTIFICATIONS -->
+        <div id="mainContent" class="a-tab-hidden bg-white shadow-2xl rounded-2xl p-6 md:p-10 w-full max-w-6xl grid md:grid-cols-2 gap-8">
+            
+            <!-- LEFT SIDE: VIVA CENTER FINDER -->
+            <section class="flex flex-col">
+                <div class="text-center mb-8">
+                    <h1 class="text-3xl md:text-4xl font-bold text-gray-800">
+                        <i class="fas fa-search-location text-blue-600 mr-3"></i>Viva Voce Center Finder
+                    </h1>
+                    <p id="header-branding" class="text-sm text-gray-500 italic mt-2">Powered by University Updates</p>
+                </div>
+
+                <div class="space-y-6">
+
+                    <div>
+                        <label for="courseSelect" class="block text-sm font-medium text-gray-700 mb-1">1. Select Course</label>
+                        <select id="courseSelect" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none transition duration-150 ease-in-out">
+                            <option value="">-- Select a Course --</option>
+                            <option value="M.Com.">M.Com.</option>
+                            <option value="M.A.">M.A.</option>
+                        </select>
+                    </div>
+
+                    <div id="subjectGroup" class="a-tab-hidden">
+                        <label for="subjectSelect" class="block text-sm font-medium text-gray-700 mb-1">2. Select Subject</label>
+                        <select id="subjectSelect" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none transition duration-150 ease-in-out">
+                        </select>
+                    </div>
+
+                    <div id="districtGroup" class="a-tab-hidden">
+                        <label for="districtSelect" class="block text-sm font-medium text-gray-700 mb-1">3. Select District</label>
+                        <select id="districtSelect" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none transition duration-150 ease-in-out">
+                        </select>
+                    </div>
+
+                    <div id="collegeGroup" class="a-tab-hidden">
+                        <label for="collegeSelect" class="block text-sm font-medium text-gray-700 mb-1">4. Select Your College</label>
+                        <select id="collegeSelect" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none transition duration-150 ease-in-out">
+                        </select>
+                    </div>
+
+                </div>
+
+                <div id="resultsCard" class="a-tab-hidden mt-8 bg-blue-50 border-l-4 border-blue-500 p-6 rounded-lg shadow-inner">
+                    
+                    <h2 class="text-2xl font-semibold text-blue-800 mb-4 flex items-center">
+                        <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                        Viva Examination Details
+                    </h2>
+                    
+                    <div class="space-y-2 mb-4 border-b border-blue-200 pb-4">
+                        <div>
+                            <h3 class="flex items-center text-sm font-medium text-gray-500 uppercase tracking-wider">
+                                <i class="fas fa-graduation-cap fa-fw mr-2"></i> <span>Course</span>
+                            </h3>
+                            <p id="resultCourse" class="text-lg font-medium text-gray-900 pl-7"></p>
+                        </div>
+                        <div>
+                            <h3 class="flex items-center text-sm font-medium text-gray-500 uppercase tracking-wider">
+                                <i class="fas fa-school fa-fw mr-2"></i> <span>College</span>
+                            </h3>
+                            <p id="resultCollege" class="text-lg font-medium text-gray-900 pl-7"></p>
+                        </div>
+                    </div>
+                    <div class="space-y-3">
+                        <div>
+                            <h3 class="flex items-center text-sm font-medium text-gray-500 uppercase tracking-wider">
+                                <i class="fas fa-university fa-fw mr-2"></i> <span>Viva Center</span>
+                            </h3>
+                            <p id="resultCenter" class="text-lg font-medium text-gray-900 pl-7"></p>
+                        </div>
+                        <div>
+                            <h3 class="flex items-center text-sm font-medium text-gray-500 uppercase tracking-wider">
+                                <i class="fas fa-calendar-alt fa-fw mr-2"></i> <span>Date</span>
+                            </h3>
+                            <p id="resultDate" class="text-lg font-medium text-gray-900 pl-7"></p>
+                        </div>
+                        <div>
+                            <h3 class="flex items-center text-sm font-medium text-gray-500 uppercase tracking-wider">
+                                <i class="fas fa-clock fa-fw mr-2"></i> <span>Time</span>
+                            </h3>
+                            <p id="resultTime" class="text-lg font-medium text-gray-900 pl-7"></p>
+                        </div>
+                    </div>
+
+                    <div class="mt-6 border-t border-blue-200 pt-4">
+                        <p class="text-sm text-blue-700">
+                            <b>Note:</b> Always confirm dates and centers with your respective <b>College / Center</b> administration.
+                        </p>
+                        <p id="result-branding" class="text-xs text-blue-600 italic mt-3">
+                            Powered by University Updates
+                        </p>
+                    </div>
+                </div>
+
+                <div id="errorCard" class="a-tab-hidden mt-8 bg-red-50 border-l-4 border-red-500 p-6 rounded-lg shadow-inner">
+                    <h2 class="text-xl font-semibold text-red-800 mb-2">Error</h2>
+                    <p id="errorMessage" class="text-red-700"></p>
+                </div>
+
+                <div class="text-center mt-8">
+                    <p class="text-xs text-gray-500">
+                        <strong>University Updates</strong>
+                    </p>
+                </div>
+            </section>
+
+            <!-- RIGHT SIDE: NEWS & NOTIFICATIONS -->
+            <aside class="flex flex-col">
+                <div id="news-title" class="flex items-center gap-2">
+                    <i class="fas fa-bullhorn"></i> News & Notifications
+                </div>
+                <ul class="news-list">
+                    <li>
+                        <i class="fas fa-chevron-right"></i>
+                        <a href="#" class="news-link">Test</a>
+                        <img src="https://msuniversity.ac.in/assets/images/new.gif" alt="NEW" class="news-gif">  
+                        <span class="news-date">Apr 29</span>
+                    </li>
+                    <!-- Add more <li> here for more notices -->
+                </ul>
+
+                <!-- You can also add a small notification card if needed -->
+                <div class="mt-6 bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded-lg text-sm">
+                    <p class="font-semibold text-yellow-700 flex items-center">
+                        <i class="fas fa-bell mr-2"></i> Notifications
+                    </p>
+                    <p class="mt-1 text-yellow-700">
+                        Stay tuned for latest viva schedules, exam papers, and important university updates here.
+                    </p>
+                </div>
+            </aside>
+
+        </div> <!-- end mainContent card -->
+
+    </main>
+    
+    <footer class="footer">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-6">
+                
+                <div>
+                    <div class="text-center">
+                        <h3 class="text-xl font-bold mb-3 border-b-2 border-primary-color pb-1 inline-block">Disclaimer</h3>
+                        <div class="text-justify">
+                            <p class="text-sm opacity-90">
+                                The Viva Center and Date information provided here is sourced from the college's & center's recent official notices and is for informational purposes only. Students must <b>always confirm</b> the details from their respective college administration. We are not responsible for any last-minute changes or inaccuracies. Not affiliated with or endorsed by CCSU.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="text-center">
+                        <h3 class="text-xl font-bold mb-3 border-b-2 border-primary-color pb-1 inline-block">Quick Links</h3>
+                        <ul class="space-y-1 text-sm">
+                            <li><i class="fas fa-circle-notch text-xs text-yellow-500 mr-2"></i><a href="#" class="hover:text-primary-color transition"><b>Center List</b></a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="text-center">
+                        <h3 class="text-xl font-bold mb-3 border-b-2 border-primary-color pb-1 inline-block">Connect With Us</h3>
+                        
+                        <div class="flex space-x-4 justify-center">
+                            <a href="https://whatsapp.com/channel/0029Va9jtav4tRrmKPxos138" class="social-icon" title="Whatsapp"><i class="fab fa-whatsapp"></i></a>
+                            <a href="https://t.me/CCSUniversityMRT" class="social-icon" title="Telegram"><i class="fab fa-telegram-plane"></i></a>
+                            <a href="https://instagram.com/universityupdate_uu" class="social-icon" title="Instagram"><i class="fab fa-instagram"></i></a>
+                            <a href="https://www.youtube.com/@University-Updates-UU" class="social-icon" title="YouTube"><i class="fab fa-youtube"></i></a>
+                        </div>
+
+                        <div class="mt-4 text-center">
+                            <p id="live-footer-time" class="text-sm text-gray-200 font-medium tracking-wide flex items-center justify-center gap-2"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center pt-4 border-t border-white border-opacity-30">
+                <p class="text-sm opacity-70">
+                    &copy; 2025 University Updates. All rights reserved.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Store all data in one place
+        const config = {
+            subjectMap: {
+                "M.Com.": [
+                    { text: "M.Com. (I-304)", value: "I-304" }
+                ],
+                "M.A.": [
+                    { text: "Defence Studies (G-895)", value: "G-895" },
+                    { text: "Economics (G-806)", value: "G-806" },
+                    { text: "Education (G-803)", value: "G-803" },
+                    { text: "Education (G-804)", value: "G-804" },
+                    { text: "English (G-812)", value: "G-812" },
+                    { text: "Hindi (G-825)", value: "G-825" },
+                    { text: "History (G-837)", value: "G-837" },
+                    { text: "Mathematics (G-850)", value: "G-850" },
+                    { text: "Philosophy (G-845)", value: "G-845" },
+                    { text: "Political Science (G-870)", value: "G-870" },
+                    { text: "Sanskrit (G-882)", value: "G-882" },
+                    { text: "Sociology (G-887)", value: "G-887" },
+                    { text: "Urdu (G-862)", value: "G-862" }
+                ]
+            },
+            fileMap: {
+                "I-304": "Viva/VIVA CENTER.xlsx - M.Com.csv",
+                "G-895": "Viva/VIVA CENTER.xlsx - G-895.csv",
+                "G-806": "Viva/VIVA CENTER.xlsx - G-806.csv",
+                "G-803": "Viva/VIVA CENTER.xlsx - G-803,G-804.csv",
+                "G-804": "Viva/VIVA CENTER.xlsx - G-803,G-804.csv",
+                "G-812": "Viva/VIVA CENTER.xlsx - G-812.csv",
+                "G-825": "Viva/VIVA CENTER.xlsx - G-825.csv",
+                "G-837": "Viva/VIVA CENTER.xlsx - G-837.csv",
+                "G-850": "Viva/VIVA CENTER.xlsx - G-850.csv",
+                "G-845": "Viva/VIVA CENTER.xlsx - G-845.csv",
+                "G-870": "Viva/VIVA CENTER.xlsx - G-870.csv",
+                "G-882": "Viva/VIVA CENTER.xlsx - G-882.csv",
+                "G-887": "Viva/VIVA CENTER.xlsx - G-887.csv",
+                "G-862": "Viva/VIVA CENTER.xlsx - G-862.csv"
+            },
+            // To store the loaded data from all files
+            allData: {},
+            // To store data for the currently selected subject
+            loadedData: []
+        };
+
+        // Get all DOM elements
+        const dom = {
+            initialLoader: document.getElementById('initialLoader'),
+            mainContent: document.getElementById('mainContent'),
+            courseSelect: document.getElementById('courseSelect'),
+            subjectGroup: document.getElementById('subjectGroup'),
+            subjectSelect: document.getElementById('subjectSelect'),
+            districtGroup: document.getElementById('districtGroup'),
+            districtSelect: document.getElementById('districtSelect'),
+            collegeGroup: document.getElementById('collegeGroup'),
+            collegeSelect: document.getElementById('collegeSelect'),
+            resultsCard: document.getElementById('resultsCard'),
+            errorCard: document.getElementById('errorCard'),
+            errorMessage: document.getElementById('errorMessage'),
+            resultCenter: document.getElementById('resultCenter'),
+            resultDate: document.getElementById('resultDate'),
+            resultTime: document.getElementById('resultTime'),
+            headerBranding: document.getElementById('header-branding'),
+            resultBranding: document.getElementById('result-branding'),
+            resultCourse: document.getElementById('resultCourse'),
+            resultCollege: document.getElementById('resultCollege'),
+            footerTime: document.getElementById('live-footer-time') // NEW ELEMENT
+        };
+
+        /**
+         * A simple CSV parser to handle quotes.
+         * This is a basic parser and assumes a well-formed CSV.
+         */
+        function parseCSV(text) {
+            const lines = text.trim().split('\n');
+            if (lines.length < 2) return [];
+
+            // Clean headers (remove quotes and BOM)
+            const headers = lines[0].split(',')
+                .map(h => h.trim().replace(/"/g, '').replace(/^\uFEFF/, ''));
+
+            const data = [];
+            for (let i = 1; i < lines.length; i++) {
+                if (!lines[i]) continue;
+                
+                const values = [];
+                let inQuote = false;
+                let cell = '';
+                
+                for (let j = 0; j < lines[i].length; j++) {
+                    const char = lines[i][j];
+                    
+                    if (char === '"') {
+                        if (inQuote && lines[i][j+1] === '"') { // Handle escaped quote ""
+                            cell += '"';
+                            j++;
+                        } else {
+                            inQuote = !inQuote;
+                        }
+                    } else if (char === ',' && !inQuote) {
+                        values.push(cell.trim());
+                        cell = '';
+                    } else {
+                        cell += char;
+                    }
+                }
+                values.push(cell.trim()); // Push the last cell
+
+                if (values.length === headers.length) {
+                    const obj = {};
+                    headers.forEach((header, index) => {
+                        // Remove surrounding quotes from data values
+                        obj[header] = values[index].replace(/^"|"$/g, '');
+                    });
+                    data.push(obj);
+                } else {
+                    console.warn("Skipping malformed CSV line:", lines[i]);
+                }
+            }
+            return data;
+        }
+
+        // --- Helper functions for showing/hiding elements ---
+        function show(element) { element.classList.remove('a-tab-hidden'); }
+        function hide(element) { element.classList.add('a-tab-hidden'); }
+
+        function resetSelect(selectElement, defaultText) {
+            selectElement.innerHTML = `<option value="">-- ${defaultText} --</option>`;
+        }
+
+        function hideResults() {
+            hide(dom.resultsCard);
+            hide(dom.errorCard);
+        }
+
+        // --- Event Handlers ---
+
+        /**
+         * 1. Handle Course Change
+         * Populates the Subject dropdown.
+         */
+        function handleCourseChange() {
+            const course = dom.courseSelect.value;
+            hide(dom.subjectGroup);
+            hide(dom.districtGroup);
+            hide(dom.collegeGroup);
+            hideResults();
+            resetSelect(dom.subjectSelect, "Select a Subject");
+
+            if (course) {
+                const subjects = config.subjectMap[course];
+                subjects.forEach(subject => {
+                    const option = new Option(subject.text, subject.value);
+                    dom.subjectSelect.add(option);
+                });
+                show(dom.subjectGroup);
+            }
+        }
+
+        /**
+         * 2. Handle Subject Change
+         * Loads data from the pre-fetched `config.allData` object.
+         */
+        function handleSubjectChange() {
+            const subjectCode = dom.subjectSelect.value;
+            hide(dom.districtGroup);
+            hide(dom.collegeGroup);
+            hideResults();
+            resetSelect(dom.districtSelect, "Select a District");
+
+            if (!subjectCode) {
+                config.loadedData = [];
+                return;
+            }
+
+            // Get data from the pre-loaded object
+            config.loadedData = config.allData[subjectCode] || [];
+
+            if (config.loadedData.length === 0) {
+                 dom.errorMessage.innerHTML = `No data found for subject ${subjectCode}. The data file might be empty or missing.`;
+                 show(dom.errorCard);
+                 return;
+            }
+
+            populateDistricts();
+            show(dom.districtGroup);
+        }
+
+        /**
+         * 3. Populate District Dropdown
+         * Called after data is successfully loaded.
+         */
+        function populateDistricts() {
+            const districts = [...new Set(
+                config.loadedData
+                    .map(row => row.District?.trim())
+                    .filter(Boolean) // Remove any empty/undefined districts
+            )].sort();
+
+            districts.forEach(district => {
+                // Correcting potential name mismatches from the user request
+                let districtName = district;
+                if (district.toLowerCase().includes('bulandshahar')) districtName = "Bulandshahar";
+                if (district.toLowerCase().includes('noida')) districtName = "Gautam Buddh Nagar (Noida)";
+
+                const option = new Option(districtName, district); // Use original name for value
+                dom.districtSelect.add(option);
+            });
+            
+            // De-duplicate if names were corrected
+            const uniqueOptions = {};
+            Array.from(dom.districtSelect.options).forEach(opt => {
+                if (opt.value) uniqueOptions[opt.text] = opt.value;
+            });
+            resetSelect(dom.districtSelect, "Select a District");
+            Object.keys(uniqueOptions).sort().forEach(text => {
+                dom.districtSelect.add(new Option(text, uniqueOptions[text]));
+            });
+        }
+
+        /**
+         * 4. Handle District Change
+         * Populates the College dropdown based on selected district and subject.
+         */
+        function handleDistrictChange() {
+            const selectedDistrict = dom.districtSelect.value;
+            const selectedSubjectCode = dom.subjectSelect.value;
+            
+            hide(dom.collegeGroup);
+            hideResults();
+            resetSelect(dom.collegeSelect, "Select Your College");
+
+            if (!selectedDistrict || !selectedSubjectCode) return;
+
+            const colleges = [...new Set(
+                config.loadedData
+                    .filter(row =>
+                        row.District?.trim() === selectedDistrict &&
+                        row['Subject Code']?.trim() === selectedSubjectCode
+                    )
+                    .map(row => row['Attached Colleges']?.trim())
+                    .filter(Boolean) // Remove empty college names
+            )].sort();
+
+            if (colleges.length > 0) {
+                colleges.forEach(college => {
+                    const option = new Option(college, college);
+                    dom.collegeSelect.add(option);
+                });
+                show(dom.collegeGroup);
+            } else {
+                dom.errorMessage.innerHTML = "No colleges found for this subject in the selected district.";
+                show(dom.errorCard);
+            }
+        }
+
+        /**
+         * 5. Handle College Change
+         * Finds and displays the final viva details.
+         */
+        function handleCollegeChange() {
+            const selectedCollege = dom.collegeSelect.value;
+            const selectedSubjectCode = dom.subjectSelect.value;
+            
+            hideResults();
+
+            if (!selectedCollege || !selectedSubjectCode) return;
+
+            const result = config.loadedData.find(row =>
+                row['Attached Colleges']?.trim() === selectedCollege &&
+                row['Subject Code']?.trim() === selectedSubjectCode
+            );
+
+            if (result) {
+                // Get selected text for course and college
+                const selectedCourseText = dom.subjectSelect.options[dom.subjectSelect.selectedIndex].text;
+                const selectedCollegeText = dom.collegeSelect.options[dom.collegeSelect.selectedIndex].text;
+
+                // Populate new confirmation fields
+                dom.resultCourse.textContent = selectedCourseText || 'N/A';
+                dom.resultCollege.textContent = selectedCollegeText || 'N/A';
+                
+                // Populate viva details
+                dom.resultCenter.textContent = result['Name of Center'] || 'N/A';
+                dom.resultDate.textContent = result.Date || 'N/A';
+                dom.resultTime.textContent = result.Time || 'N/A';
+                show(dom.resultsCard);
+            } else {
+                dom.errorMessage.innerHTML = "Could not find viva details for the selected college. Please double-check your selections.";
+                show(dom.errorCard);
+            }
+        }
+
+        /**
+         * 6. Load All Data on Page Start
+         * Fetches all CSV files at once and stores them in config.allData
+         */
+        async function loadAllData() {
+            // Get unique file names
+            const uniqueFiles = [...new Set(Object.values(config.fileMap))];
+            
+            try {
+                // Fetch all unique files in parallel
+                const filePromises = uniqueFiles.map(async (file) => {
+                    const response = await fetch(file);
+                    if (!response.ok) {
+                        throw new Error(`Failed to load: ${file}`);
+                    }
+                    const csvText = await response.text();
+                    const data = parseCSV(csvText);
+                    return { file, data };
+                });
+
+                const results = await Promise.all(filePromises);
+
+                // Create a map of filename -> data
+                const fileDataMap = {};
+                results.forEach(result => {
+                    fileDataMap[result.file] = result.data;
+                });
+
+                // Map the data back to subject codes
+                for (const subjectCode in config.fileMap) {
+                    const fileName = config.fileMap[subjectCode];
+                    config.allData[subjectCode] = fileDataMap[fileName] || [];
+                }
+                
+                // Show the main content
+                hide(dom.initialLoader);
+                show(dom.mainContent);
+
+            } catch (error) {
+                // Show a permanent error on the page if loading fails
+                dom.initialLoader.innerHTML = `
+                    <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-6 rounded-lg shadow-md max-w-3xl mx-auto">
+                        <h2 class="text-2xl font-bold text-red-800 mb-3">Error 404: Data Not Available</h2>
+                        <h3 class="font-bold text-red-800 mb-2">How to Fix This:</h3>
+                        <ol class="list-decimal list-inside space-y-2">
+                            <li>Contact to Administrator</li>
+                        </ol>
+                    </div>
+                `;
+                console.error("Failed to load all data:", error);
+            }
+        }
+        
+        /**
+         * 7. Update Live Date & Time
+         * Updates the branding elements with the current date and time.
+         */
+        function updateLiveDateTime() {
+            const now = new Date();
+            // Using en-IN locale for India-specific date/time format
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' };
+            const dateTimeString = now.toLocaleString('en-IN', options);
+
+            const brandingText = `Powered by University Updates | ${dateTimeString}`;
+            
+            if (dom.headerBranding) {
+                dom.headerBranding.textContent = brandingText;
+            }
+            if (dom.resultBranding) {
+                dom.resultBranding.textContent = brandingText;
+            }
+            
+            if (dom.footerTime) {
+                dom.footerTime.innerHTML = `<i class="far fa-clock text-yellow-400 text-sm"></i> &nbsp; ${dateTimeString}`;
+            }
+        }
+
+        // --- Initial Setup ---
+        document.addEventListener('DOMContentLoaded', () => {
+            // Add event listeners
+            dom.courseSelect.addEventListener('change', handleCourseChange);
+            dom.subjectSelect.addEventListener('change', handleSubjectChange);
+            dom.districtSelect.addEventListener('change', handleDistrictChange);
+            dom.collegeSelect.addEventListener('change', handleCollegeChange);
+            
+            // Load all data
+            loadAllData();
+
+            // Set up live date/time
+            updateLiveDateTime();
+            setInterval(updateLiveDateTime, 1000); // Update every 1 sec
+        });
+    </script>
+</body>
+</html>
