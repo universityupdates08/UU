@@ -1,0 +1,1702 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="universityupdates.png" type="image/x-icon" />
+  <title>UNIVERSITY UPDATES</title>
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+  />
+
+  <style>
+    :root {
+      --primary-color: #ef3c3c; /* Crimson Red */
+      --primary-color-dark: #c63333;
+      --secondary-color: #2c4b9e; /* Deep Blue */
+      --card-bg: rgba(255, 255, 255, 0.97);
+      --soft-border: #e5e7eb;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Poppins", sans-serif;
+      margin: 0;
+      padding: 0;
+      background: radial-gradient(circle at top, #ffffff 0, #e5edff 45%, #f3f4f6 100%);
+      color: #0f172a;
+    }
+
+    /* Generic section card */
+    .section-card {
+      background: var(--card-bg);
+      border-radius: 1rem;
+      box-shadow: 0 18px 45px rgba(15, 23, 42, 0.08);
+      padding: 1.75rem;
+      margin-bottom: 1.5rem;
+      border: 1px solid rgba(148, 163, 184, 0.15);
+    }
+
+    .section-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+      color: #111827;
+      letter-spacing: 0.02em;
+    }
+
+    .section-subtitle {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: #6b7280;
+    }
+
+    /* Utility bar */
+    .utility-bar {
+      background-color: #0f172a;
+      color: #e5e7eb;
+      font-size: 0.8rem;
+      padding: 0.35rem 0;
+    }
+
+    .utility-bar a {
+      color: #e5e7eb;
+      transition: opacity 0.2s ease, color 0.2s ease;
+    }
+
+    .utility-bar a:hover {
+      opacity: 0.85;
+      color: var(--secondary-color);
+    }
+
+    /* Nav */
+    .main-nav {
+      background-color: #ffffffdd;
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(148, 163, 184, 0.25);
+    }
+
+    .nav-link {
+      font-size: 0.9rem;
+      font-weight: 500;
+      padding: 0.4rem 0.75rem;
+      border-radius: 999px;
+      transition: background-color 0.15s ease, color 0.15s ease;
+    }
+
+    .nav-link:hover {
+      background-color: rgba(239, 60, 60, 0.08);
+      color: var(--primary-color);
+    }
+
+    /* Dropdown */
+    nav {
+      position: relative;
+      z-index: 50;
+    }
+
+    nav .group:hover .nav-dropdown {
+      display: block !important;
+      z-index: 60;
+    }
+
+    .nav-dropdown {
+      border-radius: 0.75rem;
+      overflow: hidden;
+    }
+
+    /* Announcement strip (replaces marquee) */
+    .announcement-bar {
+      background-color: var(--primary-color);
+      color: white;
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      height: 32px;
+    }
+
+    .announcement-inner {
+      white-space: nowrap;
+      display: inline-block;
+      padding-left: 100%;
+      animation: ticker 18s linear infinite;
+    }
+
+    @keyframes ticker {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(-100%);
+      }
+    }
+
+    .greeting-blink {
+      font-weight: 600;
+      font-size: 0.95rem;
+      animation: colorBlink 2.5s infinite;
+    }
+
+    @keyframes colorBlink {
+      0% {
+        color: var(--primary-color);
+      }
+      25% {
+        color: #1d4ed8;
+      }
+      50% {
+        color: #059669;
+      }
+      75% {
+        color: #ea580c;
+      }
+      100% {
+        color: var(--primary-color);
+      }
+    }
+
+    /* Buttons / cards */
+    .primary-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.35rem 0.8rem;
+      border-radius: 999px;
+      background-color: rgba(239, 60, 60, 0.08);
+      color: var(--primary-color);
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .cta-card {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      text-decoration: none;
+      padding: 0.9rem 1rem;
+      border-radius: 0.9rem;
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: #f9fafb;
+      box-shadow: 0 12px 25px rgba(15, 23, 42, 0.35);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+      text-align: center;
+    }
+
+    .cta-card img {
+      height: 32px;
+      width: 32px;
+      object-fit: contain;
+      background: #ffffff;
+      border-radius: 999px;
+      padding: 4px;
+    }
+
+    .cta-card:hover {
+      transform: translateY(-2px) scale(1.015);
+      box-shadow: 0 18px 38px rgba(15, 23, 42, 0.45);
+      filter: brightness(1.05);
+    }
+
+    .card-ccsu {
+      background: linear-gradient(135deg, #2563eb, #4f46e5);
+    }
+
+    .card-msu {
+      background: linear-gradient(135deg, #e11d48, #b91c1c);
+    }
+
+    .card-calculator {
+      background: linear-gradient(135deg, #f97316, #facc15);
+      color: #111827;
+      box-shadow: 0 12px 25px rgba(251, 146, 60, 0.55);
+    }
+
+    .card-co {
+      background: linear-gradient(135deg, #059669, #22c55e);
+    }
+
+    /* News list */
+    .news-link {
+      display: block;
+      padding: 0.55rem 0;
+      border-bottom: 1px dashed #e5e7eb;
+      text-align: left;
+      font-size: 0.86rem;
+      font-weight: 500;
+      color: #374151;
+      transition: color 0.15s ease, padding-left 0.15s ease, background 0.15s ease;
+    }
+
+    .news-link:hover {
+      color: var(--primary-color);
+      padding-left: 0.25rem;
+      background-color: #f9fafb;
+    }
+
+    /* Carousel */
+    .carousel-container {
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+      border-radius: 1rem;
+      height: 100%;
+      min-height: 220px;
+    }
+
+    .carousel-track {
+      display: flex;
+      transition: transform 0.6s ease-in-out;
+      height: 100%;
+    }
+
+    .carousel-item {
+      flex-shrink: 0;
+      width: 100%;
+      position: relative;
+      padding: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: left;
+      background-size: cover;
+      background-position: center;
+      color: #f9fafb;
+    }
+
+    .carousel-item::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        135deg,
+        rgba(15, 23, 42, 0.9),
+        rgba(239, 68, 68, 0.6)
+      );
+      z-index: 1;
+    }
+
+    .carousel-content {
+      position: relative;
+      z-index: 2;
+      max-width: 420px;
+    }
+
+    .carousel-title {
+      font-size: 1.45rem;
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+    }
+
+    .carousel-subtitle {
+      font-size: 0.9rem;
+      opacity: 0.9;
+      margin-bottom: 1rem;
+    }
+
+    .carousel-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      background-color: #f9fafb;
+      color: #111827;
+      padding: 0.55rem 1.1rem;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-decoration: none;
+      box-shadow: 0 8px 18px rgba(15, 23, 42, 0.35);
+      transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+    }
+
+    .carousel-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 12px 26px rgba(15, 23, 42, 0.45);
+      background-color: #e5e7eb;
+    }
+
+    .carousel-nav-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(15, 23, 42, 0.7);
+      color: #e5e7eb;
+      border: none;
+      padding: 0.5rem 0.6rem;
+      border-radius: 999px;
+      cursor: pointer;
+      z-index: 5;
+      opacity: 0.85;
+      transition: opacity 0.15s ease, transform 0.15s ease;
+    }
+
+    .carousel-nav-btn:hover {
+      opacity: 1;
+      transform: translateY(-50%) scale(1.03);
+    }
+
+    #prev-btn {
+      left: 0.75rem;
+    }
+    #next-btn {
+      right: 0.75rem;
+    }
+
+    /* Scroll to top button */
+    #topBtn {
+      display: none;
+      position: fixed;
+      bottom: 20px;
+      right: 24px;
+      z-index: 40;
+      font-size: 16px;
+      border: none;
+      outline: none;
+      background-color: var(--primary-color);
+      color: white;
+      cursor: pointer;
+      padding: 0.6rem 0.8rem;
+      border-radius: 999px;
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.45);
+      transition: transform 0.15s ease, background-color 0.15s ease;
+    }
+
+    #topBtn:hover {
+      background-color: var(--primary-color-dark);
+      transform: translateY(-1px) scale(1.03);
+    }
+
+    /* Reveal on scroll */
+    .fade-slide {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+    }
+
+    .fade-slide.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .finger {
+      display: inline-block;
+      animation: finger 1.1s infinite;
+    }
+
+    @keyframes finger {
+      0% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      50% {
+        opacity: 0.4;
+        transform: translateY(4px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Timeline */
+    .timeline-wrapper {
+      border-left: 3px solid var(--primary-color);
+      margin-left: 0.9rem;
+      position: relative;
+    }
+
+    .timeline-dot {
+      position: absolute;
+      left: -1.35rem;
+      width: 2.1rem;
+      height: 2.1rem;
+      border-radius: 999px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #f9fafb;
+      background-color: var(--primary-color);
+      box-shadow: 0 10px 20px rgba(248, 113, 113, 0.4);
+      font-size: 1.1rem;
+    }
+
+    footer a.footer-social-link {
+      margin: 0 0.75rem;
+      font-size: 1.2rem;
+    }
+
+    footer a.footer-social-link:hover {
+      transform: translateY(-1px);
+    }
+
+    @media (max-width: 768px) {
+      .section-card {
+        padding: 1.25rem;
+      }
+    }
+  </style>
+</head>
+
+<body class="text-slate-900">
+  <!-- Utility Bar -->
+  <div class="utility-bar">
+    <div class="max-w-7xl mx-auto px-4 flex justify-between items-center">
+      <div class="flex items-center gap-4">
+        <a href="https://t.me/HelpforDMBot" target="_blank" class="flex items-center gap-1">
+          <i class="fas fa-envelope text-xs"></i>
+          <span>Contact Us</span>
+        </a>
+      </div>
+      <div class="flex items-center gap-3">
+        <a href="index.html" aria-label="Home">
+          <i class="fas fa-home text-xs"></i>
+        </a>
+        <span class="text-slate-500">|</span>
+        <a
+          href="https://www.youtube.com/@University-Updates-UU"
+          target="_blank"
+          aria-label="YouTube"
+        >
+          <i class="fab fa-youtube"></i>
+        </a>
+        <span class="text-slate-500">|</span>
+        <a
+          href="https://instagram.com/universityupdate_uu"
+          target="_blank"
+          aria-label="Instagram"
+        >
+          <i class="fab fa-instagram"></i>
+        </a>
+        <span class="text-slate-500">|</span>
+        <a
+          href="https://t.me/UniversityUpdates_UU"
+          target="_blank"
+          aria-label="Telegram"
+        >
+          <i class="fab fa-telegram-plane"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="main-nav">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex flex-col md:flex-row items-center justify-between gap-3">
+      <div class="flex items-center gap-3">
+        <img
+          src="https://i.ibb.co/nMC0877T/UNIVERSITY-UPDATES-LOGO-removebg-preview.png"
+          alt="University Updates Logo"
+          class="h-14 md:h-16 drop-shadow-md"
+        />
+        <div class="hidden sm:block">
+          <div class="primary-chip">
+            <i class="fas fa-graduation-cap text-xs"></i>
+            UNIVERSITY UPDATES
+          </div>
+          <p class="text-xs text-slate-500 mt-1">
+            Free Study Resources • Tools • Notifications
+          </p>
+        </div>
+      </div>
+
+      <!-- Desktop Nav -->
+      <nav class="hidden md:flex items-center gap-4 text-sm font-medium">
+        <div class="relative group">
+          <button class="nav-link inline-flex items-center gap-1">
+            About Us
+            <span>▾</span>
+          </button>
+          <div
+            class="nav-dropdown absolute right-0 mt-2 w-56 bg-white shadow-lg border border-slate-100 hidden group-hover:block"
+          >
+            <a href="#about-us" class="block px-4 py-2 text-sm hover:bg-slate-50">
+              About Us
+            </a>
+            <a href="#our-journey" class="block px-4 py-2 text-sm hover:bg-slate-50">
+              Our Journey
+            </a>
+            <a href="#mission-vision" class="block px-4 py-2 text-sm hover:bg-slate-50">
+              Mission &amp; Vision
+            </a>
+          </div>
+        </div>
+
+        <a href="#administrations" class="nav-link">Administrations</a>
+      </nav>
+
+      <!-- Mobile Nav Toggle -->
+      <div class="md:hidden">
+        <button id="menu-btn" class="text-xl focus:outline-none">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div
+      id="mobile-menu"
+      class="hidden md:hidden bg-white border-t border-slate-200 px-4 pb-3 space-y-2"
+    >
+      <div>
+        <button
+          id="btn-about"
+          class="w-full text-left text-sm font-medium py-2 flex items-center justify-between"
+        >
+          <span>About Us</span>
+          <span>▾</span>
+        </button>
+        <div class="pl-3 hidden" id="mobile-about">
+          <a href="#about-us" class="block px-2 py-1 text-sm hover:bg-slate-50 rounded">
+            About Us
+          </a>
+          <a href="#our-journey" class="block px-2 py-1 text-sm hover:bg-slate-50 rounded">
+            Our Journey
+          </a>
+          <a href="#mission-vision" class="block px-2 py-1 text-sm hover:bg-slate-50 rounded">
+            Mission &amp; Vision
+          </a>
+        </div>
+      </div>
+
+      <a
+        href="#administrations"
+        class="block text-sm font-medium py-2 border-t border-slate-100 mt-1"
+      >
+        Administrations
+      </a>
+    </div>
+  </header>
+
+  <!-- Greeting Strip -->
+  <div class="bg-slate-100/80 border-y border-slate-200">
+    <div
+      class="max-w-7xl mx-auto px-4 py-2 flex flex-col md:flex-row items-center justify-center gap-2"
+    >
+      <p class="greeting-blink text-center">
+        सभी विद्यार्थियों को आगामी विषम सेमेस्टर परीक्षायें (दिसम्बर-2025)
+        की अग्रिम बधाई एवं शुभकामनायें...!!!
+      </p>
+    </div>
+  </div>
+
+  <!-- Announcement Ticker -->
+  <div class="announcement-bar">
+    <div class="max-w-7xl mx-auto flex items-center gap-2 px-4 w-full overflow-hidden">
+      <span class="text-lg">📢</span>
+      <div class="flex-1 overflow-hidden">
+        <div class="announcement-inner">
+          ➤ Welcome to UNIVERSITY UPDATES &nbsp;&nbsp;•&nbsp;&nbsp;
+          Free Study Materials, Exam Tools, And Notifications For Students &nbsp;&nbsp;•&nbsp;&nbsp;
+          Stay Connected With CCSU, MSU, AKTU & Many More...
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <main class="max-w-7xl mx-auto px-4 py-6 space-y-6">
+    <!-- Hero: News + Carousel -->
+    <section class="section-card fade-slide">
+      <div class="grid grid-cols-1 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1.8fr)] gap-6">
+        <!-- News -->
+        <div
+          id="news"
+          class="bg-white/80 rounded-xl border border-slate-100 shadow-sm p-4 flex flex-col"
+        >
+          <div class="flex items-center justify-between mb-2">
+            <h2 class="flex items-center gap-2 text-base md:text-lg font-semibold text-red-700">
+              <i class="fas fa-newspaper"></i>
+              <span>News & Notifications</span>
+            </h2>
+          </div>
+
+          <div class="space-y-1 text-left max-h-52 overflow-y-auto pr-1">
+            <a
+              href="https://universityupdates08.github.io/UU/nepacg.html"
+              class="news-link"
+            >
+              <i class="fas fa-circle text-[0.45rem] text-red-500 mr-2"></i>
+              CCSU Exam Date Generator is live for Odd Semester Exams Dec-2025
+              <img
+                src="https://msuniversity.ac.in/assets/images/new.gif"
+                alt="New"
+                class="inline h-4 w-auto ml-1 -mt-1"
+              />
+            </a>
+
+          </div>
+
+          <div class="text-right mt-3">
+            <a
+              href="#news"
+              class="inline-flex items-center gap-1 text-xs font-semibold text-slate-500 hover:text-slate-700"
+            >
+              Read All News
+              <i class="fas fa-arrow-right text-[0.6rem]"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Carousel -->
+        <div
+          id="carousel-wrapper"
+          class="bg-slate-900/95 rounded-xl shadow-sm overflow-hidden relative"
+        >
+          <div class="carousel-container">
+            <div class="carousel-track" id="carousel-track">
+              <!-- Slide 1 -->
+              <div
+                class="carousel-item"
+                style="background-image: url('https://source.unsplash.com/random/800x600/?education,books');"
+              >
+                <div class="carousel-content">
+                  <p class="carousel-title flex items-center gap-2">
+                    <span>📢</span> <span>Viva Voce Center (Private)</span>
+                  </p>
+                  <p class="carousel-subtitle">
+                    Check Viva Voce Center & Date At A Single Place.
+                  </p>
+                  <a href="viva.html" class="carousel-btn">
+                    Click Here <i class="fas fa-arrow-right text-xs"></i>
+                  </a>
+                </div>
+              </div>
+
+              <!-- Slide 2 -->
+              <div
+                class="carousel-item"
+                style="background-image: url('https://source.unsplash.com/random/800x600/?science,lab');"
+              >
+                <div class="carousel-content">
+                  <p class="carousel-title flex items-center gap-2">
+                    <span>📚</span> <span>myLibrary (University Study Materials)</span>
+                  </p>
+                  <p class="carousel-subtitle">
+                    Study Resources (PDFs, Previous Exam Papers, Notes)
+                  </p>
+                  <a href="https://t.me/+vtfL6Iday1EyMTU1" class="carousel-btn">
+                    Explore myLibrary <i class="fas fa-arrow-right text-xs"></i>
+                  </a>
+                </div>
+              </div>
+
+              <!-- Slide 3 -->
+              <div
+                class="carousel-item"
+                style="background-image: url('https://source.unsplash.com/random/800x600/?career,job');"
+              >
+                <div class="carousel-content">
+                  <p class="carousel-title flex items-center gap-2">
+                    <span>💼</span> <span>Government Job Hub Updates</span>
+                  </p>
+                  <p class="carousel-subtitle">
+                    Get the latest notifications for SSC, Banking, and State Exams.
+                  </p>
+                  <a
+                    href="https://t.me/GovJobHub_IN"
+                    target="_blank"
+                    class="carousel-btn"
+                  >
+                    Visit Job Hub <i class="fas fa-arrow-right text-xs"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <button id="prev-btn" class="carousel-nav-btn text-lg">
+              <i class="fas fa-chevron-left"></i>
+            </button>
+            <button id="next-btn" class="carousel-nav-btn text-lg">
+              <i class="fas fa-chevron-right"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Exam Date Generator -->
+    <section class="section-card fade-slide">
+      <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-3">
+        <div>
+          <p class="primary-chip mb-2">Tools</p>
+          <h2 class="section-title">
+            CCSU Examination Date, Time &amp; Shift Generator Tool
+          </h2>
+          <p class="section-subtitle">
+            Chaudhary Charan Singh University, Meerut – Smart Exam Planning Made Easy.
+          </p>
+        </div>
+      </div>
+
+      <div class="flex flex-col md:flex-row justify-center items-center gap-4">
+        <a
+          href="datesheet.html"
+          class="cta-card card-ccsu w-full md:w-1/3"
+          target="_blank"
+        >
+          CCSU Exam Date Generator
+        </a>
+
+        
+
+        <a
+          href="https://youtu.be/QekxFTFbtEk"
+          class="cta-card card-msu w-full md:w-1/3"
+          target="_blank"
+        >
+          <i class="fab fa-youtube text-lg"></i>
+          Watch Tutorial Video
+        </a>
+        <a
+          href="viva.html"
+          class="cta-card card-calculator w-full md:w-1/3"
+          target="_blank"
+        >
+          Viva Voce Center Finder
+        </a>
+
+      </div>
+    </section>
+
+
+   <!-- Exam Date Generator -->
+    <section class="section-card fade-slide">
+      <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-3">
+        <div>
+          <p class="primary-chip mb-2">MCQ Sample Papers</p>
+          <h2 class="section-title">
+            Objective Sample Papers
+          </h2>
+          <p class="section-subtitle">
+            Objective Type Exam Preparation – Smart Exam Preparation Made Easy.
+          </p>
+        </div>
+      </div>
+
+      <div class="flex flex-col md:flex-row justify-center items-center gap-4">
+        <a
+          href="BA.html"
+          class="cta-card card-calculator w-full md:w-1/3"
+          target="_blank"
+        >
+          Bachelor of Arts
+        </a>
+<a
+          href="bsc.html"
+          class="cta-card card-ccsu w-full md:w-1/3"
+          target="_blank"
+        >
+          Bachelor of Science
+        </a>
+        <a
+          href="bcom.html"
+          class="cta-card card-msu w-full md:w-1/3"
+          target="_blank"
+        >
+          Bachelor of Commerce
+        </a>
+        <a
+          href="bcom.html"
+          class="cta-card card-co w-full md:w-1/3"
+          target="_blank"
+        >
+          Co-Curricular
+        </a>
+        
+
+      
+      </div>
+    </section>
+    
+  
+    
+    <!-- CGPA Calculator -->
+    <section class="section-card fade-slide">
+      <div class="text-center mb-4">
+        <h1 class="section-title">CGPA ⇆ Percentage Calculator</h1>
+        <p class="section-subtitle">
+          Quickly Convert Your CGPA to Percentage And Vice Versa.
+        </p>
+      </div>
+      <div class="flex justify-center">
+        <a
+          href="calculator.html"
+          class="cta-card card-calculator max-w-xs w-full justify-center"
+          target="_blank"
+        >
+          Open Calculator
+        </a>
+      </div>
+    </section>
+
+    <!-- Connect With Us (mega social links) -->
+    <section id="mega-social-links" class="section-card fade-slide">
+      <div class="mb-6 flex items-center justify-between flex-wrap gap-3">
+        <div>
+          <h1 class="section-title mb-1">🔗 Connect with Us</h1>
+          <p class="section-subtitle">
+            Stay Updated With Channels, Groups, Bots And More Across Universities.
+          </p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5 text-sm">
+        <!-- CCSU Links -->
+        <div class="bg-white border border-slate-100 rounded-xl p-4 shadow-sm">
+          <h2 class="font-bold text-sm mb-3" style="color: var(--primary-color);">
+            CCSU Links
+          </h2>
+          <div class="space-y-2">
+            <a
+              href="https://whatsapp.com/channel/0029Va9jtav4tRrmKPxos138"
+              target="_blank"
+              class="block text-white py-1.5 rounded-lg font-semibold text-xs text-center"
+              style="background-color: #25d366;"
+            >
+              <i class="fab fa-whatsapp mr-1"></i> WhatsApp Channel
+            </a>
+            <a
+              href="https://t.me/CCSUniversityMRT"
+              target="_blank"
+              class="block text-white py-1.5 rounded-lg font-semibold text-xs text-center"
+              style="background-color: #0088cc;"
+            >
+              <i class="fab fa-telegram-plane mr-1"></i> Telegram Channel
+            </a>
+            <a
+              href="https://t.me/CCSUMeerut1"
+              target="_blank"
+              class="block text-white py-1.5 rounded-lg font-semibold text-xs text-center"
+              style="background-color: #0088cc;"
+            >
+              <i class="fab fa-telegram-plane mr-1"></i> Telegram Group
+            </a>
+            <a
+              href="https://aratt.ai/@ccsumeerut"
+              target="_blank"
+              class="block text-white py-1.5 rounded-lg font-semibold text-xs text-center"
+              style="background-color: #ff9800;"
+            >
+              <i class="fas fa-comment-dots mr-1"></i> Arattai Channel
+            </a>
+            <a
+              href="https://t.me/CCSUPrivate"
+              target="_blank"
+              class="block text-white py-1.5 rounded-lg font-semibold text-xs text-center"
+              style="background-color: #e1306c;"
+            >
+              <i class="fab fa-telegram-plane mr-1"></i> CCSU Private
+            </a>
+            <a
+              href="https://t.me/CCSodl"
+              target="_blank"
+              class="block text-white py-1.5 rounded-lg font-semibold text-xs text-center"
+              style="background-color: #1da1f2;"
+            >
+              <i class="fab fa-telegram-plane mr-1"></i> CCSU ODL
+            </a>
+            <a
+              href="ccsugrace.html"
+              target="_blank"
+              class="block text-white py-1.5 rounded-lg font-semibold text-xs text-center"
+              style="background-color: #d50000;"
+            >
+              <i class="fas fa-calculator mr-1"></i> Grace Calculator
+            </a>
+            <a
+              href="acg.html"
+              target="_blank"
+              class="block text-white py-1.5 rounded-lg font-semibold text-xs text-center"
+              style="background-color: #ff1744;"
+            >
+              <i class="fas fa-table mr-1"></i> Exam Date Generator
+            </a>
+          </div>
+        </div>
+
+        <!-- MSU Links -->
+        <div class="bg-white border border-slate-100 rounded-xl p-4 shadow-sm">
+          <h2 class="font-bold text-sm mb-3" style="color: var(--primary-color);">
+            MSU Links
+          </h2>
+          <div class="space-y-2">
+            <a
+              href="https://whatsapp.com/channel/0029Va4irjP23n3Vh4HMcx00"
+              target="_blank"
+              class="block text-white py-1.5 rounded-lg font-semibold text-xs text-center"
+              style="background-color: #25d366;"
+            >
+              <i class="fab fa-whatsapp mr-1"></i> WhatsApp Channel
+            </a>
+            <a
+              href="https://t.me/myMSUSre"
+              target="_blank"
+              class="block text-white py-1.5 rounded-lg font-semibold text-xs text-center"
+              style="background-color: #0088cc;"
+            >
+              <i class="fab fa-telegram-plane mr-1"></i> Telegram Channel
+            </a>
+            <a
+              href="https://t.me/MSUSre"
+              target="_blank"
+              class="block text-white py-1.5 rounded-lg font-semibold text-xs text-center"
+              style="background-color: #0088cc;"
+            >
+              <i class="fab fa-telegram-plane mr-1"></i> Telegram Group
+            </a>
+            <a
+              href="https://aratt.ai/@mymsu"
+              target="_blank"
+              class="block text-white py-1.5 rounded-lg font-semibold text-xs text-center"
+              style="background-color: #ff9800;"
+            >
+              <i class="fas fa-comment-dots mr-1"></i> Arattai Channel
+            </a>
+            <a
+              href="msugrace.html"
+              target="_blank"
+              class="block text-white py-1.5 rounded-lg font-semibold text-xs text-center"
+              style="background-color: #d50000;"
+            >
+              <i class="fas fa-calculator mr-1"></i> Grace Calculator
+            </a>
+          </div>
+        </div>
+
+        <!-- AKTU Links -->
+        <div class="bg-white border border-slate-100 rounded-xl p-4 shadow-sm">
+          <h2 class="font-bold text-sm mb-3" style="color: var(--primary-color);">
+            AKTU Links
+          </h2>
+          <div class="space-y-2">
+            <a
+              href="https://t.me/myAKTU"
+              target="_blank"
+              class="block text-white py-1.5 rounded-lg font-semibold text-xs text-center"
+              style="background-color: #0088cc;"
+            >
+              <i class="fab fa-telegram-plane mr-1"></i> Telegram Channel
+            </a>
+            <a
+              href="https://t.me/AKTU_Students_Groups"
+              target="_blank"
+              class="block text-white py-1.5 rounded-lg font-semibold text-xs text-center"
+              style="background-color: #0088cc;"
+            >
+              <i class="fab fa-telegram-plane mr-1"></i> Telegram Group
+            </a>
+          </div>
+        </div>
+
+        <!-- Support & Help -->
+        <div class="bg-white border border-slate-100 rounded-xl p-4 shadow-sm">
+          <h2 class="font-bold text-sm mb-3" style="color: var(--primary-color);">
+            Support &amp; Help
+          </h2>
+          <div class="space-y-2">
+            <a
+              href="https://t.me/HelpforDMBot"
+              target="_blank"
+              class="block text-white py-1.5 rounded-lg font-semibold text-xs text-center"
+              style="background-color: #00bcd4;"
+            >
+              <i class="fas fa-headset mr-1"></i> Admin Support
+            </a>
+            <a
+              href="https://t.me/PaperHelpingBot"
+              target="_blank"
+              class="block text-white py-1.5 rounded-lg font-semibold text-xs text-center"
+              style="background-color: #795548;"
+            >
+              <i class="fas fa-robot mr-1"></i> ExamHelper Bot
+            </a>
+            <a
+              href="https://t.me/clgnoticeBot"
+              target="_blank"
+              class="block text-white py-1.5 rounded-lg font-semibold text-xs text-center"
+              style="background-color: #795548;"
+            >
+              <i class="fas fa-robot mr-1"></i> Notice Bot
+            </a>
+          </div>
+        </div>
+
+        <!-- Other Projects -->
+        <div class="bg-white border border-slate-100 rounded-xl p-4 shadow-sm">
+          <h2 class="font-bold text-sm mb-3" style="color: var(--primary-color);">
+            Other Projects
+          </h2>
+          <div class="space-y-2">
+            <a
+              href="https://t.me/GovJobHub_IN"
+              target="_blank"
+              class="block text-white py-1.5 rounded-lg font-semibold text-xs text-center"
+              style="background-color: #3f51b5;"
+            >
+              <i class="fas fa-bullhorn mr-1"></i> Gov Job Hub
+            </a>
+            <a
+              href="https://t.me/GovJobHub_India"
+              target="_blank"
+              class="block text-white py-1.5 rounded-lg font-semibold text-xs text-center"
+              style="background-color: #3f51b5;"
+            >
+              <i class="fas fa-bullhorn mr-1"></i> Gov Job Hub Group
+            </a>
+            <a
+              href="#"
+              target="_blank"
+              class="block text-white py-1.5 rounded-lg font-semibold text-xs text-center"
+              style="background-color: #9c27b0;"
+            >
+              <i class="fas fa-file-alt mr-1"></i> myLibrary
+            </a>
+            <a
+              href="#"
+              target="_blank"
+              class="block text-white py-1.5 rounded-lg font-semibold text-xs text-center"
+              style="background-color: #ff9800;"
+            >
+              <i class="fas fa-calendar-alt mr-1"></i> Admit Cards
+            </a>
+            <a
+              href="#"
+              target="_blank"
+              class="block text-white py-1.5 rounded-lg font-semibold text-xs text-center"
+              style="background-color: #f44336;"
+            >
+              <i class="fas fa-graduation-cap mr-1"></i> Results
+            </a>
+            <a
+              href="https://msuniversity.ac.in/"
+              target="_blank"
+              class="block text-white py-1.5 rounded-lg font-semibold text-xs text-center"
+              style="background-color: #ff1744;"
+            >
+              <i class="fas fa-university mr-1"></i> MSU Official Site
+            </a>
+            <a
+              href="https://ccsuniversity.ac.in/"
+              target="_blank"
+              class="block text-white py-1.5 rounded-lg font-semibold text-xs text-center"
+              style="background-color: #1a237e;"
+            >
+              <i class="fas fa-university mr-1"></i> CCSU Official Site
+            </a>
+            <a
+              href="#"
+              target="_blank"
+              class="block text-white py-1.5 rounded-lg font-semibold text-xs text-center"
+              style="background-color: #304ffe;"
+            >
+              <i class="fas fa-bell mr-1"></i> Notices
+            </a>
+            <a
+              href="https://t.me/UniversityUpdates-UU"
+              target="_blank"
+              class="block text-white py-1.5 rounded-lg font-semibold text-xs text-center"
+              style="background-color: #8c9eff;"
+            >
+              <i class="fas fa-book mr-1"></i> About Us
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Us -->
+    <section id="about-us" class="section-card fade-slide">
+     <p class="primary-chip mb-2">About Us</p>
+      <h1 class="section-title text-center mb-2">About Us</h1>
+
+      <div class="max-w-6xl mb-8 mx-auto text-justify">
+        <p class="text-sm md:text-base text-slate-700 leading-relaxed">
+          We are a student-driven initiative dedicated to
+          <b>providing free study resources</b>,
+          <b>competitive exam support</b>, and
+          <b>digital learning tools</b>.
+          What started as
+          <span class="text-red-800 font-semibold">University Study Materials</span>
+          has now grown into a complete ecosystem of projects like
+          <b>myLibrary</b>, <b>Government Job Hub</b>, and <b>ExamHelper Bot</b>,
+          empowering thousands of learners across India.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 text-center">
+        <div
+          class="bg-white border border-slate-100 shadow-sm rounded-xl p-5 fade-slide hover:shadow-md transition"
+        >
+          <div class="text-3xl mb-2">📚</div>
+          <h2 class="font-semibold text-sm mb-1" style="color: var(--primary-color);">
+            Free Study Materials
+          </h2>
+          <p class="text-xs text-slate-600 mt-1">
+            Access notes, guides, and resources without any cost, anytime.
+          </p>
+        </div>
+
+        <div
+          class="bg-white border border-slate-100 shadow-sm rounded-xl p-5 fade-slide hover:shadow-md transition"
+        >
+          <div class="text-3xl mb-2">📝</div>
+          <h2 class="font-semibold text-sm mb-1" style="color: var(--primary-color);">
+            Govt. Exam Help
+          </h2>
+          <p class="text-xs text-slate-600 mt-1">
+            Stay updated with the latest government job &amp; exam notifications.
+          </p>
+        </div>
+
+        <div
+          class="bg-white border border-slate-100 shadow-sm rounded-xl p-5 fade-slide hover:shadow-md transition"
+        >
+          <div class="text-3xl mb-2">🤖</div>
+          <h2 class="font-semibold text-sm mb-1" style="color: var(--primary-color);">
+            Smart Bot
+          </h2>
+          <p class="text-xs text-slate-600 mt-1">
+            Use our <b>ExamHelper Bot</b> to share and practice study materials easily.
+          </p>
+        </div>
+
+        <div
+          class="bg-white border border-slate-100 shadow-sm rounded-xl p-5 fade-slide hover:shadow-md transition"
+        >
+          <div class="text-3xl mb-2">🌐</div>
+          <h2 class="font-semibold text-sm mb-1" style="color: var(--primary-color);">
+            Community Support
+          </h2>
+          <p class="text-xs text-slate-600 mt-1">
+            Join a large community of learners helping each other succeed.
+          </p>
+        </div>
+        
+      </div>
+        <h1 class="section-title text-center mb-2">Our Mission &amp; Vision</h1>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <div
+          class="bg-white border border-slate-100 rounded-xl p-5 flex flex-col items-center text-center hover:shadow-md transition"
+        >
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
+            alt="Mission Icon"
+            class="h-16 w-16 mb-3"
+          />
+          <h2
+            class="font-semibold text-base mb-2"
+            style="color: var(--primary-color);"
+          >
+            Our Mission
+          </h2>
+          <p class="text-xs md:text-sm text-slate-700 leading-relaxed">
+            Our mission is to <b>provide free study materials</b> and academic support
+            to every student. We aim to create a platform that reduces barriers to
+            quality education by offering easy access to resources, guidance, and
+            updates.
+          </p>
+        </div>
+
+        <div
+          class="bg-white border border-slate-100 rounded-xl p-5 flex flex-col items-center text-center hover:shadow-md transition"
+        >
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/3135/3135789.png"
+            alt="Vision Icon"
+            class="h-16 w-16 mb-3"
+          />
+          <h2
+            class="font-semibold text-base mb-2"
+            style="color: var(--primary-color);"
+          >
+            Our Vision
+          </h2>
+          <p class="text-xs md:text-sm text-slate-700 leading-relaxed">
+            Our vision is to become a <b>trusted companion for students</b> in their
+            educational journey, helping them achieve success in academics and beyond.
+            We believe in the motto:
+            <span class="italic font-semibold text-blue-600">
+              "Education for All, Knowledge without Limits"
+            </span>.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Our Journey -->
+    <section id="our-journey" class="section-card fade-slide">
+      <h1 class="section-title text-center mb-8">🚀 Our Journey</h1>
+
+      <div class="timeline-wrapper relative">
+        <!-- 2022 -->
+        <div class="relative mb-8 ml-4 fade-slide">
+          <div class="timeline-dot">📖</div>
+          <div
+            class="bg-white border border-slate-100 rounded-xl p-5 shadow-sm hover:shadow-md transition"
+          >
+            <h2 class="font-semibold text-sm mb-1" style="color: var(--primary-color);">
+              2022 – Beginning
+            </h2>
+            <p class="text-xs md:text-sm text-slate-700 mt-1">
+              Our vision started with <b>University Channels &amp; Groups</b>, a small
+              initiative to share information, free notes and guides with students.
+            </p>
+          </div>
+        </div>
+
+        <!-- 2023 -->
+        <div class="relative mb-8 ml-4 fade-slide">
+          <div class="timeline-dot">🌐</div>
+          <div
+            class="bg-white border border-slate-100 rounded-xl p-5 shadow-sm hover:shadow-md transition"
+          >
+            <h2 class="font-semibold text-sm mb-1" style="color: var(--primary-color);">
+              2023 – Growth
+            </h2>
+            <p class="text-xs md:text-sm text-slate-700 mt-1">
+              We expanded resources, added <b>Government Job Hub</b> to help aspirants
+              with exam updates, and reached thousands of students through online
+              platforms.
+            </p>
+          </div>
+        </div>
+
+        <!-- 2024 -->
+        <div class="relative mb-8 ml-4 fade-slide">
+          <div class="timeline-dot">🤖</div>
+          <div
+            class="bg-white border border-slate-100 rounded-xl p-5 shadow-sm hover:shadow-md transition"
+          >
+            <h2 class="font-semibold text-sm mb-1" style="color: var(--primary-color);">
+              2024 – Innovation
+            </h2>
+            <p class="text-xs md:text-sm text-slate-700 mt-1">
+              We launched <b>ExamHelper Bot</b>, a Telegram-based tool that allows
+              students to donate materials and self-practice, making study resources
+              more accessible than ever. We also launched University Study Materials,
+              laying the foundation for <b>myLibrary</b>.
+            </p>
+          </div>
+        </div>
+
+        <!-- 2025 -->
+        <div class="relative mb-2 ml-4 fade-slide">
+          <div class="timeline-dot">🚀</div>
+          <div
+            class="bg-white border border-slate-100 rounded-xl p-5 shadow-sm hover:shadow-md transition"
+          >
+            <h2 class="font-semibold text-sm mb-1" style="color: var(--primary-color);">
+              2025 – New Launch
+            </h2>
+            <p class="text-xs md:text-sm text-slate-700 mt-1">
+              Continuing our mission, we are introducing <b>new projects</b> and
+              <b>advanced digital tools</b> to support students and aspirants worldwide,
+              including the University Updates YouTube Channel.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  
+
+    <!-- Administrations -->
+    <section id="administrations" class="section-card fade-slide">
+    <p class="primary-chip mb-2">Admin Panel</p>
+      <h1 class="section-title text-center mb-6">Administrations</h1>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <div
+          class="bg-white border border-slate-100 rounded-xl p-5 flex flex-col items-center hover:shadow-md transition"
+        >
+          <img
+            src="images/user.png"
+            alt="Founder"
+            class="h-20 w-20 mb-2 rounded-full object-cover"
+          />
+          <p class="font-semibold text-sm">Aditya Chaudhary</p>
+          <p class="text-xs text-slate-600">Founder &amp; Owner</p>
+        </div>
+
+        <div
+          class="bg-white border border-slate-100 rounded-xl p-5 flex flex-col items-center hover:shadow-md transition"
+        >
+          <img
+            src="images/user.png"
+            alt="Co-Founder"
+            class="h-20 w-20 mb-2 rounded-full object-cover"
+          />
+          <p class="font-semibold text-sm">Chetan Joshi</p>
+          <p class="text-xs text-slate-600">Co-Founder</p>
+        </div>
+
+        <div
+          class="bg-white border border-slate-100 rounded-xl p-5 flex flex-col items-center hover:shadow-md transition"
+        >
+          <img
+            src="images/user.png"
+            alt="Admins"
+            class="h-20 w-20 mb-2 rounded-full object-cover"
+          />
+          <p class="font-semibold text-sm">Core Administrators</p>
+          <p class="text-xs text-slate-600 leading-relaxed text-center mt-1">
+            DM, Preeti Chauhan, Abhishek Pundir, Arjoo Malik, Gaurav Sachdeva, SS,
+            Sanjeev Kumar, Nitya Chaudhary, VC, Vanshika Jain, Naman Bindal
+          </p>
+        </div>
+      </div>
+
+      <p
+        class="mt-6 text-center text-sm font-semibold italic"
+        style="color: var(--primary-color);"
+      >
+        “Working together to empower students with knowledge &amp; guidance.”
+      </p>
+    </section>
+
+    <!-- Other Projects -->
+    <section id="other-projects" class="section-card fade-slide">
+    <p class="primary-chip mb-2">Projects</p>
+      <h1 class="section-title text-center mb-6">Our Other Projects</h1>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <!-- myLibrary -->
+        <div
+          id="mylibrary"
+          class="bg-white border border-slate-100 rounded-xl p-5 flex flex-col items-center hover:shadow-md transition fade-slide"
+        >
+          <img src="images/library.png" alt="myLibrary Logo" class="h-16 w-16 mb-3" />
+          <h2
+            class="font-semibold text-base mb-2"
+            style="color: var(--primary-color);"
+          >
+            myLibrary
+          </h2>
+          <p class="text-xs md:text-sm text-slate-700 leading-relaxed mb-3 text-center">
+            Formerly known as <b>University Study Materials</b>,
+            <b>myLibrary</b> provides
+            <u>free study resources</u> including notes, sample papers, guides, and
+            reference materials to help students prepare for their exams with ease.
+          </p>
+          <a
+            href="#"
+            target="_blank"
+            class="text-xs font-semibold px-4 py-1.5 rounded-full shadow-sm"
+            style="background-color: var(--primary-color); color: white;"
+          >
+            📚 Click Here to Join
+          </a>
+        </div>
+
+        <!-- Government Job Hub -->
+        <div
+          id="govjobhub"
+          class="bg-white border border-slate-100 rounded-xl p-5 flex flex-col items-center hover:shadow-md transition fade-slide"
+        >
+          <img src="images/job.png" alt="Gov Job Hub Logo" class="h-16 w-16 mb-3" />
+          <h2
+            class="font-semibold text-base mb-2"
+            style="color: var(--primary-color);"
+          >
+            Government Job Hub
+          </h2>
+          <p class="text-xs md:text-sm text-slate-700 leading-relaxed mb-3 text-center">
+            A dedicated hub for <b>competitive exams</b> and <b>job updates</b>. Students
+            and aspirants can get real-time alerts, notifications, and guidance to
+            prepare for government exams and secure their future careers.
+          </p>
+          <a
+            href="https://t.me/GovJobHub_IN"
+            target="_blank"
+            class="text-xs font-semibold px-4 py-1.5 rounded-full shadow-sm"
+            style="background-color: var(--primary-color); color: white;"
+          >
+            📝 Explore Updates
+          </a>
+        </div>
+
+        <!-- ExamHelper -->
+        <div
+          id="examhelper"
+          class="bg-white border border-slate-100 rounded-xl p-5 flex flex-col items-center hover:shadow-md transition fade-slide"
+        >
+          <img src="images/bot.png" alt="ExamHelper Logo" class="h-16 w-16 mb-3" />
+          <h2
+            class="font-semibold text-base mb-2"
+            style="color: var(--primary-color);"
+          >
+            ExamHelper
+          </h2>
+          <p class="text-xs md:text-sm text-slate-700 leading-relaxed mb-3 text-center">
+            A unique <b>Telegram Bot</b> created to
+            <u>donate study materials</u> into <b>myLibrary</b> and help students with
+            <b>self-practice</b> for upcoming exams. It ensures quick access to shared
+            resources anytime, anywhere.
+          </p>
+          <a
+            href="https://t.me/PaperHelpingBot"
+            target="_blank"
+            class="text-xs font-semibold px-4 py-1.5 rounded-full shadow-sm"
+            style="background-color: var(--primary-color); color: white;"
+          >
+            🤖 Try ExamHelper
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Us -->
+    <section id="contact-us" class="section-card fade-slide">
+    <p class="primary-chip mb-2">Contact Us</p>
+      <h1 class="section-title text-center mb-4">Contact Us</h1>
+      <div class="flex justify-center">
+        <a
+          href="https://t.me/HelpforDMBot"
+          target="_blank"
+          class="inline-flex items-center gap-2 text-white text-sm font-semibold px-4 py-2 rounded-full shadow-sm"
+          style="background-color: #00bcd4;"
+        >
+          <i class="fas fa-headset"></i> Admin Support (Telegram)
+        </a>
+      </div>
+    </section>
+
+    <!-- Disclaimer -->
+    <section class="fade-slide">
+      <div
+        class="w-full text-center bg-gradient-to-r from-sky-50 to-indigo-50 shadow-sm border border-sky-100 rounded-xl p-4"
+      >
+        <div class="flex justify-center items-center gap-2 mb-2">
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/595/595067.png"
+            alt="Disclaimer Icon"
+            class="h-7 w-7"
+          />
+          <h2 class="text-sm md:text-base font-bold text-sky-800">Disclaimer</h2>
+        </div>
+        <p class="text-xs md:text-sm text-slate-700 items-center justify-center">
+          This website is developed <b>for educational purposes only</b>.
+          All the study materials, updates, and information provided here are based on
+          respective university guidelines and sources. We do not claim any official
+          affiliation with universities. Students are advised to verify information
+          through the official university notifications.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="text-center py-5 bg-slate-100 border-t border-slate-200 mt-4">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="mb-3 text-slate-600 flex items-center justify-center gap-4">
+        <a
+          href="https://www.youtube.com/@University-Updates-UU"
+          target="_blank"
+          aria-label="YouTube"
+          class="text-slate-500 hover:text-red-600 footer-social-link"
+        >
+          <i class="fab fa-youtube"></i>
+        </a>
+        <a
+          href="https://instagram.com/universityupdate_uu"
+          target="_blank"
+          aria-label="Instagram"
+          class="text-slate-500 hover:text-pink-600 footer-social-link"
+        >
+          <i class="fab fa-instagram"></i>
+        </a>
+        <a
+          href="https://t.me/UniversityUpdates_UU"
+          target="_blank"
+          aria-label="Telegram"
+          class="text-slate-500 hover:text-sky-500 footer-social-link"
+        >
+          <i class="fab fa-telegram-plane"></i>
+        </a>
+      </div>
+
+
+        
+        
+      <div
+        id="datetime"
+        class="text-[var(--secondary-color)] text-xs md:text-sm font-semibold mb-1"
+      >
+        <span id="liveDate"></span> | <span id="liveTime"></span>
+      </div>
+
+      <p class="text-xs md:text-sm text-slate-500">
+        © 2025 | Designed by <b>University Updates</b>
+      </p>
+    </div>
+  </footer>
+
+  <!-- Go To Top Button -->
+  <button id="topBtn" title="Go to top">↑</button>
+
+  <!-- Scripts -->
+  <script>
+    // --- LIVE DATE & TIME ---
+    function updateDateTime() {
+      const now = new Date();
+      const dateOptions = {
+        weekday: "long",
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      };
+      const timeOptions = {
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+        hour12: true,
+      };
+
+      const dateEl = document.getElementById("liveDate");
+      const timeEl = document.getElementById("liveTime");
+
+      if (dateEl && timeEl) {
+        dateEl.textContent = now.toLocaleDateString("en-IN", dateOptions);
+        timeEl.textContent = now.toLocaleTimeString("en-IN", timeOptions);
+      }
+    }
+    updateDateTime();
+    setInterval(updateDateTime, 1000);
+
+    // --- MOBILE MENU TOGGLE ---
+    const menuBtn = document.getElementById("menu-btn");
+    const mobileMenu = document.getElementById("mobile-menu");
+    const btnAbout = document.getElementById("btn-about");
+    const mobileAbout = document.getElementById("mobile-about");
+
+    if (menuBtn && mobileMenu) {
+      menuBtn.addEventListener("click", function () {
+        mobileMenu.classList.toggle("hidden");
+      });
+    }
+
+    if (btnAbout && mobileAbout) {
+      btnAbout.addEventListener("click", function () {
+        mobileAbout.classList.toggle("hidden");
+      });
+    }
+
+    // --- GO TO TOP BUTTON ---
+    const mybutton = document.getElementById("topBtn");
+
+    window.addEventListener("scroll", function () {
+      if (
+        document.body.scrollTop > 120 ||
+        document.documentElement.scrollTop > 120
+      ) {
+        mybutton.style.display = "block";
+      } else {
+        mybutton.style.display = "none";
+      }
+    });
+
+    mybutton.addEventListener("click", function () {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    // --- FADE-IN SCROLL ANIMATION ---
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        threshold: 0.12,
+      }
+    );
+
+    document.querySelectorAll(".fade-slide").forEach((element) => {
+      observer.observe(element);
+    });
+
+    // --- CAROUSEL LOGIC ---
+    const track = document.getElementById("carousel-track");
+    const items = document.querySelectorAll(".carousel-item");
+    const prevBtn = document.getElementById("prev-btn");
+    const nextBtn = document.getElementById("next-btn");
+    const totalItems = items.length;
+    let currentIndex = 0;
+    let autoSlideInterval = null;
+
+    function updateCarousel() {
+      const offset = -currentIndex * 100;
+      if (track) {
+        track.style.transform = `translateX(${offset}%)`;
+      }
+    }
+
+    function nextSlide() {
+      currentIndex = (currentIndex + 1) % totalItems;
+      updateCarousel();
+    }
+
+    function prevSlide() {
+      currentIndex = (currentIndex - 1 + totalItems) % totalItems;
+      updateCarousel();
+    }
+
+    function startAutoSlide() {
+      if (!autoSlideInterval) {
+        autoSlideInterval = setInterval(nextSlide, 5000);
+      }
+    }
+
+    function stopAutoSlide() {
+      if (autoSlideInterval) {
+        clearInterval(autoSlideInterval);
+        autoSlideInterval = null;
+      }
+    }
+
+    if (nextBtn) {
+      nextBtn.addEventListener("click", () => {
+        stopAutoSlide();
+        nextSlide();
+        setTimeout(startAutoSlide, 8000);
+      });
+    }
+
+    if (prevBtn) {
+      prevBtn.addEventListener("click", () => {
+        stopAutoSlide();
+        prevSlide();
+        setTimeout(startAutoSlide, 8000);
+      });
+    }
+
+    // Start auto-sliding
+    if (totalItems > 1) {
+      startAutoSlide();
+    }
+  </script>
+</body>
+</html>
