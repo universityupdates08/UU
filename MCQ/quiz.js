@@ -369,7 +369,7 @@ const savedQuestions = {
   hindi: {}
 };
 
-const API_KEY = "AIzaSyDnKvM2eaIK-rho1PYPOtlZm6ocMrUWwVQ"; // put your real Gemini API key
+const API_KEY = "AIzaSyA16hFaeFHO81P5KB4upSrR2q3WgZYQNw0"; // put your real Gemini API key
 const MODEL_ID = "gemini-2.5-flash-preview-09-2025";
 const NUMBER_OF_QUESTIONS = 25;
 
