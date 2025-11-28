@@ -1,0 +1,283 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="universityupdates.png" type="image/x-icon" />
+  <title>UNIVERSITY UPDATES</title>
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+  />
+
+  <style>
+    :root {
+      --primary-color: #ef3c3c; /* Crimson Red */
+      --primary-color-dark: #c63333;
+      --secondary-color: #2c4b9e; /* Deep Blue */
+      --card-bg: rgba(255, 255, 255, 0.97);
+      --soft-border: #e5e7eb;
+
+      --blue: #007BFF;
+      --green: #28a745;
+      --red: #dc3545;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Poppins", sans-serif;
+      margin: 0;
+      padding: 0;
+      background: radial-gradient(circle at top, #ffffff 0, #e5edff 45%, #f3f4f6 100%);
+      color: #0f172a;
+    }
+
+    .utility-bar {
+      background-color: #0f172a;
+      color: #e5e7eb;
+      font-size: 0.8rem;
+      padding: 0.35rem 0;
+    }
+
+    .utility-bar a {
+      color: #e5e7eb;
+      transition: opacity 0.2s ease, color 0.2s ease;
+    }
+
+    .utility-bar a:hover {
+      opacity: 0.85;
+      color: var(--secondary-color);
+    }
+
+    .main-nav {
+      background-color: #ffffffdd;
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(148, 163, 184, 0.25);
+    }
+
+    .announcement-bar {
+      background-color: var(--primary-color);
+      color: white;
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      height: 32px;
+    }
+
+    .announcement-inner {
+      white-space: nowrap;
+      display: inline-block;
+      padding-left: 100%;
+      animation: ticker 18s linear infinite;
+    }
+
+    @keyframes ticker {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(-100%);
+      }
+    }
+
+    .greeting-blink {
+      font-weight: 600;
+      font-size: 0.95rem;
+      animation: colorBlink 2.5s infinite;
+    }
+
+    @keyframes colorBlink {
+      0% {
+        color: var(--primary-color);
+      }
+      25% {
+        color: #1d4ed8;
+      }
+      50% {
+        color: #059669;
+      }
+      75% {
+        color: #ea580c;
+      }
+      100% {
+        color: var(--primary-color);
+      }
+    }
+
+    .primary-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.35rem 0.8rem;
+      border-radius: 999px;
+      background-color: rgba(239, 60, 60, 0.08);
+      color: var(--primary-color);
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    #topBtn {
+      display: none;
+      position: fixed;
+      bottom: 20px;
+      right: 24px;
+      z-index: 40;
+      font-size: 16px;
+      border: none;
+      outline: none;
+      background-color: var(--primary-color);
+      color: white;
+      cursor: pointer;
+      padding: 0.6rem 0.8rem;
+      border-radius: 999px;
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.45);
+      transition: transform 0.15s ease, background-color 0.15s ease;
+    }
+
+    #topBtn:hover {
+      background-color: var(--primary-color-dark);
+      transform: translateY(-1px) scale(1.03);
+    }
+
+    .scrollable-subjects {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    .scrollable-subjects::-webkit-scrollbar {
+      display: none;
+    }
+    .option-button {
+      transition: all 0.2s ease;
+    }
+    .selected-option {
+      border-color: #10B981 !important;
+      background-color: #ECFDF5 !important;
+    }
+    .correct-answer {
+      background-color: #D1FAE5 !important;
+      border-color: #059669 !important;
+    }
+    .incorrect-answer {
+      background-color: #FEE2E2 !important;
+      border-color: #EF4444 !important;
+    }
+  </style>
+</head>
+
+<body class="text-slate-900">
+  <!-- Utility Bar -->
+  <div class="utility-bar">
+    <div class="max-w-7xl mx-auto px-4 flex justify-between items-center">
+      <div class="flex items-center gap-4">
+        <a href="https://t.me/HelpforDMBot" target="_blank" class="flex items-center gap-1">
+          <i class="fas fa-envelope text-xs"></i>
+          <span>Contact Us</span>
+        </a>
+      </div>
+      <div class="flex items-center gap-3">
+        <a href="index.html" aria-label="Home">
+          <i class="fas fa-home text-xs"></i>
+        </a>
+        <span class="text-slate-500">|</span>
+        <a
+          href="https://www.youtube.com/@University-Updates-UU"
+          target="_blank"
+          aria-label="YouTube"
+        >
+          <i class="fab fa-youtube"></i>
+        </a>
+        <span class="text-slate-500">|</span>
+        <a
+          href="https://instagram.com/universityupdate_uu"
+          target="_blank"
+          aria-label="Instagram"
+        >
+          <i class="fab fa-instagram"></i>
+        </a>
+        <span class="text-slate-500">|</span>
+        <a
+          href="https://t.me/UniversityUpdates_UU"
+          target="_blank"
+          aria-label="Telegram"
+        >
+          <i class="fab fa-telegram-plane"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="main-nav">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex flex-col md:flex-row items-center justify-between gap-3">
+      <div class="flex items-center gap-3">
+        <img
+          src="https://i.ibb.co/nMC0877T/UNIVERSITY-UPDATES-LOGO-removebg-preview.png"
+          alt="University Updates Logo"
+          class="h-14 md:h-16 drop-shadow-md"
+        />
+        <div class="hidden sm:block">
+          <div class="primary-chip">
+            <i class="fas fa-graduation-cap text-xs"></i>
+            UNIVERSITY UPDATES
+          </div>
+          <p class="text-xs text-slate-500 mt-1">
+            Free Study Resources • Tools • Notifications
+          </p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Greeting Strip -->
+  <div class="bg-slate-100/80 border-y border-slate-200">
+    <div
+      class="max-w-7xl mx-auto px-4 py-2 flex flex-col md:flex-row items-center justify-center gap-2"
+    >
+      <p class="greeting-blink text-center">
+        सभी विद्यार्थियों को आगामी सेमेस्टर परीक्षायें
+        की अग्रिम बधाई एवं शुभकामनायें...!!!
+      </p>
+    </div>
+  </div>
+
+  <!-- Announcement Ticker -->
+  <div class="announcement-bar">
+    <div class="max-w-7xl mx-auto flex items-center gap-2 px-4 w-full overflow-hidden">
+      <span class="text-lg">📢</span>
+      <div class="flex-1 overflow-hidden">
+        <div class="announcement-inner">
+          ➤ Welcome to UNIVERSITY UPDATES &nbsp;&nbsp;•&nbsp;&nbsp;
+          Free Study Materials, Exam Tools, And Notifications For Students &nbsp;&nbsp;•&nbsp;&nbsp;
+          Stay Connected With CCSU, MSU, AKTU & Many More...
+        </div>
+      </div>
+    </div>
+  </div>
+
+  ERROR - 404 (We'll Back Soon...)
+
+  <!-- Footer -->
+  <footer class="p-4 text-center text-sm text-gray-500 mt-auto">
+    &copy; 2025 University Updates
+  </footer>
+
+</body>
+</html>
