@@ -369,9 +369,9 @@ const savedQuestions = {
   hindi: {}
 };
 
-const API_KEY = "YOUR_GEMINI_API_KEY_HERE"; // put your real Gemini API key
-const MODEL_ID = "gemini-2.5-flash-preview-09-2025";
-const NUMBER_OF_QUESTIONS = 100;
+const API_KEY = "AIzaSyB76lr7zbzJCuXfiGUCMrRCaFiFWP-Rz_E"; // put your real Gemini API key
+const MODEL_ID = "gemini-3-pro-preview";
+const NUMBER_OF_QUESTIONS = 25;
 
 // DOM ELEMENTS
 const dom = {
