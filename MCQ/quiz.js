@@ -371,7 +371,7 @@ const savedQuestions = {
 
 // --- PERPLEXITY CONFIG ---
 const API_KEY = "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"; // put your Perplexity API key here
-const MODEL_ID = "sonar-pro"; // example Perplexity model name; change if needed
+const MODEL_ID = "gemini-3-pro"; // example Perplexity model name; change if needed
 const NUMBER_OF_QUESTIONS = 100;
 
 // DOM ELEMENTS
