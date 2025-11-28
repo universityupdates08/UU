@@ -369,9 +369,10 @@ const savedQuestions = {
   hindi: {}
 };
 
-const API_KEY = "AIzaSyA16hFaeFHO81P5KB4upSrR2q3WgZYQNw0"; // put your real Gemini API key
-const MODEL_ID = "gemini-2.5-flash-preview-09-2025";
-const NUMBER_OF_QUESTIONS = 25;
+// --- PERPLEXITY CONFIG ---
+const API_KEY = "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"; // put your Perplexity API key here
+const MODEL_ID = "sonar-pro"; // example Perplexity model name; change if needed
+const NUMBER_OF_QUESTIONS = 100;
 
 // DOM ELEMENTS
 const dom = {
@@ -388,7 +389,7 @@ const dom = {
   checkAnswerBtn: document.getElementById("check-answer-btn"),
   explanationBtn: document.getElementById("explanation-btn"),
   nextQuestionBtn: document.getElementById("next-question-btn"),
-  geminiAiBtn: document.getElementById("gemini-ai-btn"),
+  geminiAiBtn: document.getElementById("gemini-ai-btn"), // keep id for backwards compatibility
   geminiBtnText: document.getElementById("gemini-btn-text"),
   feedbackArea: document.getElementById("feedback-area"),
   resultMessage: document.getElementById("result-message"),
@@ -458,17 +459,17 @@ function getFilteredSubjects() {
   return cleaned.filter((subj) => allSubjects.includes(subj));
 }
 
-// QUESTION GENERATION WITH GEMINI
+// QUESTION GENERATION WITH PERPLEXITY
 async function generateQuestions(subject, unit, language) {
   const isEnglish = language === "english";
 
-  if (!API_KEY || API_KEY === "YOUR_GEMINI_API_KEY_HERE") {
+  if (!API_KEY || API_KEY === "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") {
     dom.welcomeMessage.classList.remove("hidden");
     dom.loadingQuestions.classList.add("hidden");
     dom.questionCard.classList.add("hidden");
     dom.welcomeMessage.textContent = isEnglish
-      ? "Please set your Gemini API key in the code (API_KEY constant)."
-      : "कृपया कोड में अपना जेमिनी API कुंजी (API_KEY) सेट करें।";
+      ? "Please set your Perplexity API key in the code (API_KEY constant)."
+      : "कृपया कोड में अपनी Perplexity API कुंजी (API_KEY) सेट करें।";
     return;
   }
 
@@ -482,83 +483,92 @@ async function generateQuestions(subject, unit, language) {
 Your task is to generate exactly ${NUMBER_OF_QUESTIONS} MCQs for the subject "${subject}" under the unit "${unit}".
 Each question must have 4 distinct options and one clear correct answer.
 Provide a detailed, accurate explanation for why the chosen answer is correct.
-The entire response must be a valid JSON array matching the provided schema, and all text (question, options, explanation) must be in ${targetLang}.`;
+The entire response must be a valid JSON array matching this schema:
+[{"q":"...","options":["...","...","...","..."],"ans":<0-3>,"exp":"..."}]
+All text must be in ${targetLang}.`;
 
-  const userQuery = `Generate ${NUMBER_OF_QUESTIONS} fresh, concept-based MCQs for: Subject = ${subject}, Unit = ${unit}. Output only in ${targetLang}.`;
+  const userMessage = `Generate ${NUMBER_OF_QUESTIONS} fresh, concept-based MCQs for: Subject = ${subject}, Unit = ${unit}. Output only the JSON array as specified.`;
 
-  const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL_ID}:generateContent?key=${API_KEY}`;
+  const apiUrl = "https://api.perplexity.ai/chat/completions";
 
   const payload = {
-    contents: [{ parts: [{ text: userQuery }] }],
-    systemInstruction: { parts: [{ text: systemPrompt }] },
-    generationConfig: {
-      responseMimeType: "application/json",
-      responseSchema: {
-        type: "ARRAY",
-        items: {
-          type: "OBJECT",
-          properties: {
-            q: { type: "STRING" },
-            options: {
-              type: "ARRAY",
-              items: { type: "STRING" },
-            },
-            ans: { type: "INTEGER" },
-            exp: { type: "STRING" },
-          },
-          required: ["q", "options", "ans", "exp"],
-        },
-      },
-    },
+    model: MODEL_ID,
+    messages: [
+      { role: "system", content: systemPrompt },
+      { role: "user", content: userMessage }
+    ],
+    max_tokens: 4000,
+    temperature: 0.4,
   };
 
   try {
     const response = await fetchWithRetry(apiUrl, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${API_KEY}`,
+      },
       body: JSON.stringify(payload),
     });
 
-    const result = await response.json();
-    const jsonText = result.candidates?.[0]?.content?.parts?.[0]?.text;
+    const data = await response.json();
 
-    if (jsonText) {
-      const parsedQuestions = JSON.parse(jsonText);
-      if (Array.isArray(parsedQuestions) && parsedQuestions.length > 0) {
-        questionSet = parsedQuestions;
-        currentQuestionIndex = 0;
+    // Perplexity-like responses typically return text at data.choices[0].message.content
+    const jsonText = data?.choices?.[0]?.message?.content;
 
-        if (!savedQuestions[language][subject]) {
-          savedQuestions[language][subject] = {};
-        }
-        savedQuestions[language][subject][unit] = parsedQuestions;
+    if (!jsonText) {
+      throw new Error("Invalid or empty JSON response from Perplexity.");
+    }
 
-        dom.loadingQuestions.classList.add("hidden");
-        dom.questionCard.classList.remove("hidden");
-
-        quizStartTime = new Date();
-        renderQuestion();
-        return;
+    // Try to extract JSON from response (the model may include surrounding text)
+    let parsedQuestions;
+    try {
+      parsedQuestions = JSON.parse(jsonText);
+    } catch (e) {
+      // attempt to locate JSON array inside text
+      const match = jsonText.match(/\[.*\]$/s) || jsonText.match(/\[.*\]/s);
+      if (match) {
+        parsedQuestions = JSON.parse(match[0]);
+      } else {
+        throw e;
       }
     }
-    throw new Error("Invalid or empty JSON response from API.");
+
+    if (Array.isArray(parsedQuestions) && parsedQuestions.length > 0) {
+      questionSet = parsedQuestions;
+      currentQuestionIndex = 0;
+
+      if (!savedQuestions[language][subject]) {
+        savedQuestions[language][subject] = {};
+      }
+      savedQuestions[language][subject][unit] = parsedQuestions;
+
+      dom.loadingQuestions.classList.add("hidden");
+      dom.questionCard.classList.remove("hidden");
+
+      quizStartTime = new Date();
+      renderQuestion();
+      return;
+    }
+    throw new Error("Parsed response does not contain an array of questions.");
   } catch (error) {
-    console.error("Question Generation Error:", error);
+    console.error("Question Generation Error (Perplexity):", error);
     dom.loadingQuestions.classList.add("hidden");
     dom.welcomeMessage.classList.remove("hidden");
     dom.welcomeMessage.textContent = isEnglish
-      ? `Error generating questions for ${unit}. Please check your API key or try again.`
-      : `${unit} के लिए प्रश्न बनाने में त्रुटि। कृपया अपनी API कुंजी जांचें या पुनः प्रयास करें।`;
+      ? `Error generating questions for ${unit}. Please check your Perplexity API key or try again.`
+      : `${unit} के लिए प्रश्न बनाने में त्रुटि। कृपया अपनी Perplexity API कुंजी जांचें या पुनः प्रयास करें।`;
   }
 }
 
-// GEMINI ANALYSIS OF CURRENT QUESTION
+// PERPLEXITY ANALYSIS OF CURRENT QUESTION
 async function analyzeQuestionWithGemini() {
+  // kept function name (gemini) for backwards compatibility
   if (!currentSubject || !currentUnit || !questionSet.length) return;
-  if (!API_KEY || API_KEY === "YOUR_GEMINI_API_KEY_HERE") {
+  if (!API_KEY || API_KEY === "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") {
     dom.geminiAnalysisBlock.classList.remove("hidden");
     dom.geminiAnalysisContent.innerHTML =
-      '<p class="text-red-600 text-sm">Please set your Gemini API key in the code (API_KEY constant).</p>';
+      '<p class="text-red-600 text-sm">Please set your Perplexity API key in the code (API_KEY constant).</p>';
     return;
   }
 
@@ -566,7 +576,7 @@ async function analyzeQuestionWithGemini() {
   const questionText =
     currentQuestion.q +
     " Options: " +
-    currentQuestion.options.join(", ") +
+    currentQuestion.options.join(" | ") +
     ". Correct answer index: " +
     currentQuestion.ans;
 
@@ -588,58 +598,55 @@ Explain:
     currentLanguage === "english" ? "English" : "Hindi"
   }.`;      
 
-  const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL_ID}:generateContent?key=${API_KEY}`;
+  const apiUrl = "https://api.perplexity.ai/chat/completions";
 
   const payload = {
-    contents: [{ parts: [{ text: userQuery }] }],
-    systemInstruction: { parts: [{ text: systemPrompt }] },
+    model: MODEL_ID,
+    messages: [
+      { role: "system", content: systemPrompt },
+      { role: "user", content: userQuery }
+    ],
+    max_tokens: 800,
+    temperature: 0.2,
   };
 
   try {
     const response = await fetchWithRetry(apiUrl, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${API_KEY}`
+      },
       body: JSON.stringify(payload),
     });
 
     const result = await response.json();
-    const candidate = result.candidates?.[0];
+    const candidateText = result?.choices?.[0]?.message?.content;
 
-    if (candidate && candidate.content?.parts?.[0]?.text) {
-      const text = candidate.content.parts[0].text;
-      dom.geminiAnalysisContent.innerHTML = `<p class="text-gray-700 text-sm leading-relaxed">${text}</p>`;
-
-      let sources = [];
-      const groundingMetadata =
-        candidate.groundingMetadata || result.groundingMetadata;
-      if (
-        groundingMetadata &&
-        groundingMetadata.groundingAttributions
-      ) {
-        sources = groundingMetadata.groundingAttributions
-          .map((attribution) => ({
-            uri: attribution.web?.uri,
-            title: attribution.web?.title,
-          }))
-          .filter((source) => source.uri && source.title);
-      }
-
-      if (sources.length > 0) {
-        dom.sourcesList.innerHTML = sources
-          .map(
-            (source) =>
-              `<li><a href="${source.uri}" target="_blank" class="text-blue-500 hover:text-blue-700 underline">${source.title ||
-                "Source Link"}</a></li>`
-          )
-          .join("");
-        dom.geminiSources.classList.remove("hidden");
+    if (candidateText) {
+      dom.geminiAnalysisContent.innerHTML = `<p class="text-gray-700 text-sm leading-relaxed">${candidateText}</p>`;
+      // Perplexity's grounding/attribution structure may differ; attempt to show web attributions if present
+      const attributions = result?.choices?.[0]?.attributions || result?.attributions || [];
+      if (Array.isArray(attributions) && attributions.length > 0) {
+        const sources = attributions
+          .map((a) => (a?.url ? { uri: a.url, title: a.title || a.url } : null))
+          .filter(Boolean);
+        if (sources.length > 0) {
+          dom.sourcesList.innerHTML = sources
+            .map(
+              (source) =>
+                `<li><a href="${source.uri}" target="_blank" class="text-blue-500 hover:text-blue-700 underline">${source.title || "Source"}</a></li>`
+            )
+            .join("");
+          dom.geminiSources.classList.remove("hidden");
+        }
       }
     } else {
       dom.geminiAnalysisContent.innerHTML =
         '<p class="text-red-600 text-sm">AI analysis failed. Please try again later.</p>';
     }
   } catch (error) {
-    console.error("Gemini API Error:", error);
+    console.error("Perplexity API Error:", error);
     dom.geminiAnalysisContent.innerHTML =
       '<p class="text-red-600 text-sm">Failed to connect to the AI service. Check your network or API key.</p>';
   } finally {
@@ -675,8 +682,8 @@ function updateTexts() {
     ? "Next Question"
     : "अगला प्रश्न";
   dom.geminiBtnText.textContent = isEnglish
-    ? "Analyze with Gemini AI"
-    : "जेमिनी एआई से विश्लेषण करें";
+    ? "Analyze with Perplexity AI"
+    : "Perplexity AI से विश्लेषण करें";
   document.getElementById("explanation-heading").textContent = isEnglish
     ? "Explanation:"
     : "स्पष्टीकरण:";
@@ -684,8 +691,8 @@ function updateTexts() {
     dom.geminiAnalysisHeading.querySelector("span:last-child");
   if (headingLabelSpan) {
     headingLabelSpan.textContent = isEnglish
-      ? "Gemini AI Analysis:"
-      : "जेमिनी एआई विश्लेषण:";
+      ? "Perplexity AI Analysis:"
+      : "Perplexity AI विश्लेषण:";
   }
   dom.sourcesHeading.textContent = isEnglish ? "Sources:" : "स्रोत:";
 
@@ -1081,26 +1088,23 @@ dom.courseSelect.addEventListener("change", () => {
     if (dom.semesterWrapper) dom.semesterWrapper.classList.add("hidden");
   } else {
     if (dom.semesterWrapper) dom.semesterWrapper.classList.remove("hidden");
-    currentSemester = dom.semesterSelect.value;
   }
-
   renderSubjects();
 });
 
-// SEMESTER CHANGE (ignored for Co-Curricular)
-dom.semesterSelect.addEventListener("change", () => {
-  if (currentCourse === "Co-Curricular") return;
-  currentSemester = dom.semesterSelect.value;
-  currentSubject = "";
-  currentUnit = "";
-  questionSet = [];
-  quizStartTime = null;
-  questionStartTime = null;
-  renderSubjects();
-});
+// SEMESTER CHANGE
+if (dom.semesterSelect) {
+  dom.semesterSelect.addEventListener("change", () => {
+    currentSemester = dom.semesterSelect.value;
+    currentSubject = "";
+    currentUnit = "";
+    questionSet = [];
+    quizStartTime = null;
+    questionStartTime = null;
+    renderSubjects();
+  });
+}
 
-// INIT
-(function init() {
-  updateTexts();
-  renderSubjects();
-})();
+// Initial UI setup
+updateTexts();
+renderSubjects();
