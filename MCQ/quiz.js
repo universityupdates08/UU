@@ -463,7 +463,7 @@ function getFilteredSubjects() {
 async function generateQuestions(subject, unit, language) {
   const isEnglish = language === "english";
 
-  if (!API_KEY || API_KEY === "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") {
+  if (!API_KEY || API_KEY === "YOUR_PERPLEXITY_API_KEY") {
     dom.welcomeMessage.classList.remove("hidden");
     dom.loadingQuestions.classList.add("hidden");
     dom.questionCard.classList.add("hidden");
@@ -565,7 +565,7 @@ All text must be in ${targetLang}.`;
 async function analyzeQuestionWithGemini() {
   // kept function name (gemini) for backwards compatibility
   if (!currentSubject || !currentUnit || !questionSet.length) return;
-  if (!API_KEY || API_KEY === "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") {
+  if (!API_KEY || API_KEY === "YOUR_PERPLEXITY_API_KEY") {
     dom.geminiAnalysisBlock.classList.remove("hidden");
     dom.geminiAnalysisContent.innerHTML =
       '<p class="text-red-600 text-sm">Please set your Perplexity API key in the code (API_KEY constant).</p>';
