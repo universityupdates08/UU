@@ -1,11 +1,10 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="icon" href="universityupdates.png" type="image/x-icon" />
-  <title>UNIVERSITY UPDATES</title>
+  <title>UNIVERSITY UPDATES — Page Not Found (404)</title>
 
   <!-- Tailwind CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -23,166 +22,158 @@
   />
 
   <style>
-    :root {
-      --primary-color: #ef3c3c; /* Crimson Red */
-      --primary-color-dark: #c63333;
-      --secondary-color: #2c4b9e; /* Deep Blue */
-      --card-bg: rgba(255, 255, 255, 0.97);
-      --soft-border: #e5e7eb;
-
-      --blue: #007BFF;
-      --green: #28a745;
-      --red: #dc3545;
+    :root{
+      --primary-color: #ef3c3c;
+      --primary-dark: #c63333;
+      --muted: #94a3b8;
+      --bg-grad1: #ffffff;
+      --bg-grad2: #e5edff;
     }
 
-    * {
-      box-sizing: border-box;
-    }
-
+    * { box-sizing: border-box; }
     body {
       font-family: "Poppins", sans-serif;
       margin: 0;
-      padding: 0;
-      background: radial-gradient(circle at top, #ffffff 0, #e5edff 45%, #f3f4f6 100%);
+      min-height: 100vh;
+      background: radial-gradient(circle at top, var(--bg-grad1) 0%, var(--bg-grad2) 45%, #f3f4f6 100%);
       color: #0f172a;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
     }
 
-    .utility-bar {
-      background-color: #0f172a;
-      color: #e5e7eb;
-      font-size: 0.8rem;
-      padding: 0.35rem 0;
-    }
+    /* reused base styles from your original file */
+    .utility-bar { background-color: #0f172a; color: #e5e7eb; font-size: 0.8rem; padding: 0.35rem 0; }
+    .utility-bar a { color: #e5e7eb; transition: opacity 0.2s ease, color 0.2s ease; }
+    .utility-bar a:hover { opacity: 0.85; color: #2c4b9e; }
+    .main-nav { background-color: #ffffffdd; backdrop-filter: blur(10px); border-bottom: 1px solid rgba(148,163,184,0.25); }
 
-    .utility-bar a {
-      color: #e5e7eb;
-      transition: opacity 0.2s ease, color 0.2s ease;
-    }
-
-    .utility-bar a:hover {
-      opacity: 0.85;
-      color: var(--secondary-color);
-    }
-
-    .main-nav {
-      background-color: #ffffffdd;
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid rgba(148, 163, 184, 0.25);
-    }
-
-    .announcement-bar {
-      background-color: var(--primary-color);
-      color: white;
-      font-size: 0.85rem;
+    /* 404 hero layout */
+    .hero-404 {
+      min-height: calc(100vh - 160px);
       display: flex;
       align-items: center;
-      overflow: hidden;
-      height: 32px;
+      justify-content: center;
+      padding: 3rem 1rem;
     }
 
-    .announcement-inner {
-      white-space: nowrap;
-      display: inline-block;
-      padding-left: 100%;
-      animation: ticker 18s linear infinite;
-    }
-
-    @keyframes ticker {
-      0% {
-        transform: translateX(0);
-      }
-      100% {
-        transform: translateX(-100%);
-      }
-    }
-
-    .greeting-blink {
-      font-weight: 600;
-      font-size: 0.95rem;
-      animation: colorBlink 2.5s infinite;
-    }
-
-    @keyframes colorBlink {
-      0% {
-        color: var(--primary-color);
-      }
-      25% {
-        color: #1d4ed8;
-      }
-      50% {
-        color: #059669;
-      }
-      75% {
-        color: #ea580c;
-      }
-      100% {
-        color: var(--primary-color);
-      }
-    }
-
-    .primary-chip {
-      display: inline-flex;
+    .card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(255,255,255,0.96));
+      border: 1px solid rgba(15,23,42,0.06);
+      box-shadow: 0 20px 50px rgba(15,23,42,0.08);
+      border-radius: 16px;
+      padding: 2rem;
+      width: 100%;
+      max-width: 1100px;
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      gap: 2rem;
       align-items: center;
-      gap: 0.35rem;
-      padding: 0.35rem 0.8rem;
-      border-radius: 999px;
-      background-color: rgba(239, 60, 60, 0.08);
-      color: var(--primary-color);
-      font-size: 0.75rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
     }
 
-    #topBtn {
-      display: none;
-      position: fixed;
-      bottom: 20px;
-      right: 24px;
-      z-index: 40;
-      font-size: 16px;
-      border: none;
-      outline: none;
-      background-color: var(--primary-color);
+    /* responsive */
+    @media (max-width: 920px) {
+      .card { grid-template-columns: 1fr; max-width: 760px; padding: 1.5rem; }
+      .scene { order: -1; }
+    }
+
+    /* left content */
+    .left h1 {
+      font-size: 3.5rem;
+      line-height: 1;
+      margin: 0;
+      letter-spacing: -0.02em;
+    }
+    .left p {
+      color: var(--muted);
+      margin-top: 0.6rem;
+      font-size: 1rem;
+    }
+    .actions { margin-top: 1.25rem; display:flex; gap:0.75rem; flex-wrap:wrap; }
+    .btn-primary {
+      background: linear-gradient(90deg,var(--primary-color), var(--primary-dark));
       color: white;
-      cursor: pointer;
-      padding: 0.6rem 0.8rem;
+      padding: 0.6rem 1rem;
       border-radius: 999px;
-      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.45);
-      transition: transform 0.15s ease, background-color 0.15s ease;
+      font-weight: 600;
+      box-shadow: 0 8px 20px rgba(239,60,60,0.18);
+      display:inline-flex; gap:0.6rem; align-items:center;
+    }
+    .btn-ghost {
+      border: 1px solid rgba(15,23,42,0.06);
+      padding: 0.6rem 1rem;
+      border-radius: 999px;
+      background: transparent;
+      color: #0f172a;
+      font-weight: 600;
+      display:inline-flex; gap:0.6rem; align-items:center;
     }
 
-    #topBtn:hover {
-      background-color: var(--primary-color-dark);
-      transform: translateY(-1px) scale(1.03);
+    /* simple floating animation for the illustration elements */
+    .float {
+      animation: float 6s ease-in-out infinite;
+      transform-origin: center;
+      will-change: transform;
+    }
+    .float-small { animation-duration: 4.8s; }
+    @keyframes float {
+      0% { transform: translateY(0px) rotate(-1deg); }
+      50% { transform: translateY(-12px) rotate(1deg); }
+      100% { transform: translateY(0px) rotate(-1deg); }
     }
 
-    .scrollable-subjects {
-      -ms-overflow-style: none;
-      scrollbar-width: none;
+    /* "404" digits animation */
+    .digit {
+      display:inline-block;
+      font-weight: 800;
+      font-size: 4.25rem;
+      color: #0f172a;
+      text-shadow: 0 6px 20px rgba(15,23,42,0.07);
+      transform-origin: center;
+      animation: bounceDigit 2.2s infinite;
     }
-    .scrollable-subjects::-webkit-scrollbar {
-      display: none;
+    .digit.delay-1 { animation-delay: 0.15s; }
+    .digit.delay-2 { animation-delay: 0.3s; }
+    @keyframes bounceDigit {
+      0% { transform: translateY(0) scale(1); }
+      20% { transform: translateY(-18px) scale(1.04); }
+      50% { transform: translateY(0) scale(1); }
+      100% { transform: translateY(0) scale(1); }
     }
-    .option-button {
-      transition: all 0.2s ease;
+
+    /* small decorative orbits */
+    .orbit {
+      position: absolute;
+      border-radius: 999px;
+      opacity: 0.12;
+      filter: blur(6px);
+      pointer-events: none;
     }
-    .selected-option {
-      border-color: #10B981 !important;
-      background-color: #ECFDF5 !important;
+
+    /* footer style */
+    footer { padding: 1.25rem; text-align:center; color:#64748b; }
+
+    /* subtle shimmer on the CTA */
+    .btn-primary::after {
+      content: "";
+      position: absolute;
+      left: -40%;
+      top: -10%;
+      width: 30%;
+      height: 120%;
+      transform: skewX(-18deg);
+      background: linear-gradient(90deg, rgba(255,255,255,0.18), rgba(255,255,255,0.02));
+      transition: left 0.9s ease;
+      border-radius: 999px;
     }
-    .correct-answer {
-      background-color: #D1FAE5 !important;
-      border-color: #059669 !important;
-    }
-    .incorrect-answer {
-      background-color: #FEE2E2 !important;
-      border-color: #EF4444 !important;
-    }
+    .btn-primary:hover::after { left: 120%; }
+
+    /* accessibility: focus rings */
+    .btn-primary:focus, .btn-ghost:focus { outline: 3px solid rgba(59,130,246,0.12); outline-offset: 3px; }
   </style>
 </head>
 
 <body class="text-slate-900">
+
   <!-- Utility Bar -->
   <div class="utility-bar">
     <div class="max-w-7xl mx-auto px-4 flex justify-between items-center">
@@ -197,29 +188,11 @@
           <i class="fas fa-home text-xs"></i>
         </a>
         <span class="text-slate-500">|</span>
-        <a
-          href="https://www.youtube.com/@University-Updates-UU"
-          target="_blank"
-          aria-label="YouTube"
-        >
-          <i class="fab fa-youtube"></i>
-        </a>
+        <a href="https://www.youtube.com/@University-Updates-UU" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
         <span class="text-slate-500">|</span>
-        <a
-          href="https://instagram.com/universityupdate_uu"
-          target="_blank"
-          aria-label="Instagram"
-        >
-          <i class="fab fa-instagram"></i>
-        </a>
+        <a href="https://instagram.com/universityupdate_uu" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
         <span class="text-slate-500">|</span>
-        <a
-          href="https://t.me/UniversityUpdates_UU"
-          target="_blank"
-          aria-label="Telegram"
-        >
-          <i class="fab fa-telegram-plane"></i>
-        </a>
+        <a href="https://t.me/UniversityUpdates_UU" target="_blank" aria-label="Telegram"><i class="fab fa-telegram-plane"></i></a>
       </div>
     </div>
   </div>
@@ -234,7 +207,7 @@
           class="h-14 md:h-16 drop-shadow-md"
         />
         <div class="hidden sm:block">
-          <div class="primary-chip">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[rgba(239,60,60,0.08)] text-[0.75rem] font-semibold text-[#ef3c3c] uppercase tracking-wider">
             <i class="fas fa-graduation-cap text-xs"></i>
             UNIVERSITY UPDATES
           </div>
@@ -248,36 +221,142 @@
 
   <!-- Greeting Strip -->
   <div class="bg-slate-100/80 border-y border-slate-200">
-    <div
-      class="max-w-7xl mx-auto px-4 py-2 flex flex-col md:flex-row items-center justify-center gap-2"
-    >
-      <p class="greeting-blink text-center">
-        सभी विद्यार्थियों को आगामी सेमेस्टर परीक्षायें
-        की अग्रिम बधाई एवं शुभकामनायें...!!!
+    <div class="max-w-7xl mx-auto px-4 py-2 flex items-center justify-center">
+      <p class="font-semibold text-sm text-center" style="animation:colorBlink 2.5s infinite;">
+        सभी विद्यार्थियों को आगामी परीक्षाओं की अग्रिम बधाई एवं शुभकामनायें...!!!
       </p>
     </div>
   </div>
 
   <!-- Announcement Ticker -->
-  <div class="announcement-bar">
-    <div class="max-w-7xl mx-auto flex items-center gap-2 px-4 w-full overflow-hidden">
+  <div class="bg-[#ef3c3c] text-white">
+    <div class="max-w-7xl mx-auto px-4 py-2 flex items-center gap-2 overflow-hidden">
       <span class="text-lg">📢</span>
       <div class="flex-1 overflow-hidden">
-        <div class="announcement-inner">
-          ➤ Welcome to UNIVERSITY UPDATES &nbsp;&nbsp;•&nbsp;&nbsp;
-          Free Study Materials, Exam Tools, And Notifications For Students &nbsp;&nbsp;•&nbsp;&nbsp;
-          Stay Connected With CCSU, MSU, AKTU & Many More...
+        <div style="white-space:nowrap; display:inline-block; padding-left:100%; animation:ticker 18s linear infinite;">
+          ➤ Welcome to UNIVERSITY UPDATES • Free Study Materials, Exam Tools, And Notifications For Students • Stay Connected With CCSU, MSU, AKTU & Many More...
         </div>
       </div>
     </div>
   </div>
 
-  ERROR - 404 (We'll Back Soon...)
+  <!-- 404 Hero -->
+  <main class="hero-404">
+    <section class="card" role="main" aria-labelledby="e404-title">
+      <!-- left content -->
+      <div class="left">
+        <div class="flex items-center gap-3">
+          <div aria-hidden class="text-sm px-3 py-1 rounded-full bg-[rgba(44,75,158,0.08)] text-[#2c4b9e] font-semibold">404</div>
+          <div class="text-sm text-slate-500">PAGE NOT FOUND</div>
+        </div>
+
+        <h1 id="e404-title" class="mt-3">Oops — we couldn't find that page. We'll be Back Soon...</h1>
+
+        <p class="mt-3 text-base">
+          The page you tried to reach may have moved, or the URL could be incorrect.
+          Don't worry — we still have plenty of study resources and tools to explore.
+        </p>
+
+        <div class="actions mt-4" role="group" aria-label="404 actions">
+          <a href="index.html" class="relative btn-primary inline-flex items-center" title="Back to Home">
+            <i class="fas fa-house-user"></i>
+            Back to Home
+          </a>
+
+        
+          <a href="https://t.me/UniversityUpdates_UU" target="_blank" class="btn-ghost inline-flex items-center" title="Join our Telegram">
+            <i class="fab fa-telegram-plane"></i>
+            Join Telegram
+          </a>
+        </div>
+
+        <div class="mt-5 text-sm text-slate-500">
+          Tip: Try searching the site or check the <a href="index.html" class="text-[#2c4b9e] underline">homepage</a>.
+        </div>
+      </div>
+
+      <!-- right scene / illustration -->
+      <div class="scene relative w-full h-full flex items-center justify-center">
+        <!-- decorative blurred orbits -->
+        <div class="orbit" style="width:230px;height:230px;background:linear-gradient(90deg,#ef3c3c,#2c4b9e); right: -40px; top: -30px;"></div>
+        <div class="orbit" style="width:120px;height:120px;background:linear-gradient(90deg,#60a5fa,#34d399); left: -30px; bottom: -40px; opacity:0.08;"></div>
+
+        <!-- illustration SVG: simple rocket + 404 digits -->
+        <div class="w-full max-w-md p-3">
+          <div class="bg-[linear-gradient(180deg,rgba(240,248,255,0.9),rgba(255,255,255,0.85))] rounded-xl p-4 relative overflow-visible shadow-md">
+            <div class="flex items-center justify-between">
+              <div>
+                <div class="text-sm text-slate-500">Error</div>
+                <div class="mt-1 flex items-baseline gap-2">
+                  <span class="digit delay-1">4</span>
+                  <span class="digit delay-2">0</span>
+                  <span class="digit">4</span>
+                </div>
+              </div>
+
+              <!-- small badge -->
+              <div class="text-xs px-2 py-1 rounded-full bg-[rgba(44,75,158,0.08)] text-[#2c4b9e] font-semibold">Not Found</div>
+            </div>
+
+            <!-- rocket SVG centered -->
+            <div class="mt-4 flex items-center justify-center">
+              <svg class="float" width="220" height="140" viewBox="0 0 220 140" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+                <!-- ground / shadow -->
+                <ellipse cx="110" cy="128" rx="60" ry="6" fill="rgba(15,23,42,0.06)"/>
+                <!-- body -->
+                <g transform="translate(55,10)">
+                  <path d="M45 0c14 0 26 26 26 26s8 14 8 28c0 18-18 36-34 36S11 72 11 54c0-16 34-54 34-54z" fill="#ef3c3c"/>
+                  <path d="M45 0c14 0 26 26 26 26s8 14 8 28c0 18-18 36-34 36S11 72 11 54c0-16 34-54 34-54z" opacity="0.08"/>
+                  <ellipse cx="45" cy="38" rx="12" ry="12" fill="#fff"/>
+                  <circle cx="45" cy="38" r="6" fill="#2c4b9e"/>
+                  <!-- fins -->
+                  <path d="M18 74c8 6 18-2 18-2l-8-10-14 12z" fill="#c63333" opacity="0.95"/>
+                  <path d="M72 74c-8 6-18-2-18-2l8-10 14 12z" fill="#c63333" opacity="0.95"/>
+                  <!-- flame -->
+                  <g class="float float-small" transform="translate(36,82)">
+                    <path d="M9 0c6 0 11 6 11 12s-5 10-11 16c-6-6-11-9-11-16S3 0 9 0z" fill="#ffb020"/>
+                    <path d="M9 4c3 0 6 4 6 6s-3 4-6 6c-3-2-6-4-6-6s3-6 6-6z" fill="#ff6b6b"/>
+                  </g>
+                </g>
+
+                <!-- tiny floating stars -->
+                <g class="float-small" opacity="0.95">
+                  <circle cx="20" cy="18" r="1.7" fill="#fde68a" />
+                  <circle cx="190" cy="22" r="1.3" fill="#bfdbfe" />
+                  <circle cx="150" cy="6" r="1.1" fill="#bbf7d0" />
+                </g>
+              </svg>
+            </div>
+
+            <!-- small caption -->
+            <div class="mt-3 text-xs text-slate-500 text-center">Our little rocket got lost — let's get you back on track.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
 
   <!-- Footer -->
-  <footer class="p-4 text-center text-sm text-gray-500 mt-auto">
+  <footer>
     &copy; 2025 University Updates
   </footer>
 
+  <!-- small JS for progressive enhancement -->
+  <script>
+    // If the user prefers reduced motion, remove animations for accessibility
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReduced) {
+      document.querySelectorAll('.float, .float-small, .digit').forEach(el => {
+        el.style.animation = 'none';
+      });
+    }
+
+    // Optional: If the user clicks Back to Home, add a small ripple / focus
+    document.querySelectorAll('.btn-primary, .btn-ghost').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        // small pressed visual - handled by CSS hover/active in most browsers
+      });
+    });
+  </script>
 </body>
 </html>
