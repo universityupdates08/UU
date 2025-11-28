@@ -462,7 +462,7 @@ function getFilteredSubjects() {
 async function generateQuestions(subject, unit, language) {
   const isEnglish = language === "english";
 
-  if (!API_KEY || API_KEY === "YOUR_GEMINI_API_KEY_HERE") {
+  if (!API_KEY || API_KEY === "AIzaSyB76lr7zbzJCuXfiGUCMrRCaFiFWP-Rz_E") {
     dom.welcomeMessage.classList.remove("hidden");
     dom.loadingQuestions.classList.add("hidden");
     dom.questionCard.classList.add("hidden");
@@ -555,7 +555,7 @@ The entire response must be a valid JSON array matching the provided schema, and
 // GEMINI ANALYSIS OF CURRENT QUESTION
 async function analyzeQuestionWithGemini() {
   if (!currentSubject || !currentUnit || !questionSet.length) return;
-  if (!API_KEY || API_KEY === "YOUR_GEMINI_API_KEY_HERE") {
+  if (!API_KEY || API_KEY === "AIzaSyB76lr7zbzJCuXfiGUCMrRCaFiFWP-Rz_E") {
     dom.geminiAnalysisBlock.classList.remove("hidden");
     dom.geminiAnalysisContent.innerHTML =
       '<p class="text-red-600 text-sm">Please set your Gemini API key in the code (API_KEY constant).</p>';
