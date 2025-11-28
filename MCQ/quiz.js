@@ -363,14 +363,13 @@ let questionSet = [];
 let quizStartTime = null;
 let questionStartTime = null;
 
-// Cache questions per language/subject/unit
+// Keep savedQuestions structure but we will NOT use caching (always fresh)
 const savedQuestions = {
   english: {},
   hindi: {}
 };
 
-const API_KEY = "AIzaSyB76lr7zbzJCuXfiGUCMrRCaFiFWP-Rz_E"; // put your real Gemini API key
-const MODEL_ID = "gemini-2.5-flash-preview-09-2025";
+// NUMBER_OF_QUESTIONS used for local generation
 const NUMBER_OF_QUESTIONS = 25;
 
 // DOM ELEMENTS
@@ -414,238 +413,200 @@ const dom = {
   timeInfo: document.getElementById("time-info"),
 };
 
-// UTILITY: fetch with retry
-async function fetchWithRetry(url, options, maxRetries = 3) {
-  for (let i = 0; i < maxRetries; i++) {
-    try {
-      const response = await fetch(url, options);
-      if (!response.ok) {
-        if (response.status === 429 && i < maxRetries - 1) {
-          const delay = Math.pow(2, i) * 1000 + Math.random() * 1000;
-          await new Promise((resolve) => setTimeout(resolve, delay));
-          continue;
-        }
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-      return response;
-    } catch (error) {
-      console.error(`Fetch attempt ${i + 1} failed:`, error);
-      if (i === maxRetries - 1) throw error;
-      const delay = Math.pow(2, i) * 1000 + Math.random() * 1000;
-      await new Promise((resolve) => setTimeout(resolve, delay));
-    }
-  }
-}
+// =========================
+// INTERNAL QUESTION GENERATOR (NO API)
+// ALWAYS GENERATES NEW 25 QUESTIONS
+// =========================
 
-// SUBJECT FILTERING BY COURSE + SEMESTER
-function getFilteredSubjects() {
-  const allSubjects = Object.keys(quizData[currentLanguage]);
-
-  if (!currentCourse) return [];
-
-  const courseCfg = courseSemesterSubjects[currentCourse];
-  if (!courseCfg) return [];
-
-  const semesterKey = currentCourse === "Co-Curricular" ? "-" : currentSemester;
-  if (!semesterKey) return [];
-
-  const allowedList = courseCfg[semesterKey]?.[currentLanguage];
-  if (!allowedList) return [];
-
-  const cleaned = allowedList.filter(Boolean);
-  if (!cleaned.length) return [];
-
-  return cleaned.filter((subj) => allSubjects.includes(subj));
-}
-
-// QUESTION GENERATION WITH GEMINI
-async function generateQuestions(subject, unit, language) {
+function generateLocalQuestions(subject, unit, language) {
   const isEnglish = language === "english";
 
-  if (!API_KEY || API_KEY === "AIzaSyB76lr7zbzJCuXfiGUCMrRCaFiFWP-Rz_E") {
-    dom.welcomeMessage.classList.remove("hidden");
-    dom.loadingQuestions.classList.add("hidden");
-    dom.questionCard.classList.add("hidden");
-    dom.welcomeMessage.textContent = isEnglish
-      ? "Please set your Gemini API key in the code (API_KEY constant)."
-      : "कृपया कोड में अपना जेमिनी API कुंजी (API_KEY) सेट करें।";
-    return;
-  }
-
-  dom.welcomeMessage.classList.add("hidden");
-  dom.questionCard.classList.add("hidden");
-  dom.loadingQuestions.classList.remove("hidden");
-
-  const targetLang = isEnglish ? "English" : "Hindi";
-
-  const systemPrompt = `You are a specialist in creating challenging and concept-based Multiple Choice Questions (MCQs) for undergraduate students.
-Your task is to generate exactly ${NUMBER_OF_QUESTIONS} MCQs for the subject "${subject}" under the unit "${unit}".
-Each question must have 4 distinct options and one clear correct answer.
-Provide a detailed, accurate explanation for why the chosen answer is correct.
-The entire response must be a valid JSON array matching the provided schema, and all text (question, options, explanation) must be in ${targetLang}.`;
-
-  const userQuery = `Generate ${NUMBER_OF_QUESTIONS} fresh, concept-based MCQs for: Subject = ${subject}, Unit = ${unit}. Output only in ${targetLang}.`;
-
-  const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL_ID}:generateContent?key=${API_KEY}`;
-
-  const payload = {
-    contents: [{ parts: [{ text: userQuery }] }],
-    systemInstruction: { parts: [{ text: systemPrompt }] },
-    generationConfig: {
-      responseMimeType: "application/json",
-      responseSchema: {
-        type: "ARRAY",
-        items: {
-          type: "OBJECT",
-          properties: {
-            q: { type: "STRING" },
-            options: {
-              type: "ARRAY",
-              items: { type: "STRING" },
-            },
-            ans: { type: "INTEGER" },
-            exp: { type: "STRING" },
-          },
-          required: ["q", "options", "ans", "exp"],
-        },
-      },
+  // Pool of templates (25 good ones included) — you can expand this list later
+  const genericQuestions = [
+    {
+      q: isEnglish ? "Which gas is most abundant in Earth's atmosphere?" : "पृथ्वी के वायुमंडल में सबसे अधिक मात्रा में कौन सी गैस होती है?",
+      options: isEnglish ? ["Oxygen", "Nitrogen", "Carbon dioxide", "Argon"] : ["ऑक्सीजन", "नाइट्रोजन", "कार्बन डाइऑक्साइड", "आर्गन"],
+      ans: 1,
+      exp: isEnglish ? "Nitrogen forms about 78% of Earth's atmosphere." : "नाइट्रोजन पृथ्वी के वायुमंडल का लगभग 78% हिस्सा है।"
     },
-  };
-
-  try {
-    const response = await fetchWithRetry(apiUrl, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
-    });
-
-    const result = await response.json();
-    const jsonText = result.candidates?.[0]?.content?.parts?.[0]?.text;
-
-    if (jsonText) {
-      const parsedQuestions = JSON.parse(jsonText);
-      if (Array.isArray(parsedQuestions) && parsedQuestions.length > 0) {
-        questionSet = parsedQuestions;
-        currentQuestionIndex = 0;
-
-        if (!savedQuestions[language][subject]) {
-          savedQuestions[language][subject] = {};
-        }
-        savedQuestions[language][subject][unit] = parsedQuestions;
-
-        dom.loadingQuestions.classList.add("hidden");
-        dom.questionCard.classList.remove("hidden");
-
-        quizStartTime = new Date();
-        renderQuestion();
-        return;
-      }
+    {
+      q: isEnglish ? "The SI unit of force is:" : "बल की SI इकाई क्या है?",
+      options: isEnglish ? ["Watt", "Pascal", "Newton", "Joule"] : ["वाट", "पास्कल", "न्यूटन", "जूल"],
+      ans: 2,
+      exp: isEnglish ? "Force is measured in Newtons." : "बल की इकाई न्यूटन होती है।"
+    },
+    {
+      q: isEnglish ? "Which organ purifies blood in the human body?" : "मानव शरीर में कौन सा अंग रक्त को शुद्ध करता है?",
+      options: isEnglish ? ["Heart", "Lungs", "Liver", "Kidneys"] : ["हृदय", "फेफड़े", "जिगर", "गुर्दे"],
+      ans: 3,
+      exp: isEnglish ? "Kidneys filter waste from the blood and produce urine." : "गुर्दे रक्त से अपशिष्ट पदार्थों को छानते हैं और मूत्र बनाते हैं।"
+    },
+    {
+      q: isEnglish ? "Who is known as the Father of the Indian Constitution?" : "भारतीय संविधान का जनक किसे कहा जाता है?",
+      options: isEnglish ? ["Jawaharlal Nehru", "B.R. Ambedkar", "Mahatma Gandhi", "Rajendra Prasad"] : ["जवाहरलाल नेहरू", "बी.आर. आंबेडकर", "महात्मा गांधी", "राजेंद्र प्रसाद"],
+      ans: 1,
+      exp: isEnglish ? "B.R. Ambedkar chaired the drafting committee of the Constitution." : "B.R. आंबेडकर संविधान के मसौदा समिति के अध्यक्ष थे।"
+    },
+    {
+      q: isEnglish ? "The process of converting water vapor to liquid is called:" : "जलवाष्प को द्रव में बदलने की प्रक्रिया को क्या कहते हैं?",
+      options: isEnglish ? ["Evaporation", "Sublimation", "Condensation", "Vaporization"] : ["वाष्पीकरण", "उत्क्षेपण", "संघनन", "वाष्पीकरण"],
+      ans: 2,
+      exp: isEnglish ? "Condensation is vapor turning into liquid." : "संघनन वह प्रक्रिया है जिसमें वाष्प द्रव में बदलता है।"
+    },
+    {
+      q: isEnglish ? "Which planet is known as the Red Planet?" : "कौन सा ग्रह 'लाल ग्रह' के नाम से जाना जाता है?",
+      options: isEnglish ? ["Venus", "Mars", "Jupiter", "Saturn"] : ["शुक्र", "मंगल", "बृहस्पति", "शनि"],
+      ans: 1,
+      exp: isEnglish ? "Mars appears red due to iron oxide on its surface." : "मंगल ग्रह की सतह पर लौह ऑक्साइड होने के कारण यह लाल दिखाई देता है।"
+    },
+    {
+      q: isEnglish ? "Who invented the telephone?" : "टेलीफ़ोन का आविष्कार किसने किया?",
+      options: isEnglish ? ["Thomas Edison", "Alexander Graham Bell", "Nikola Tesla", "Albert Einstein"] : ["थॉमस एडिसन", "अलेक्जेंडर ग्राहम बेल", "निकोला टेस्ला", "अल्बर्ट आइंस्टीन"],
+      ans: 1,
+      exp: isEnglish ? "Alexander Graham Bell is credited with the telephone patent." : "अलेक्जेंडर ग्राहम बेल को टेलीफोन का पेटेंट लेने के लिए जाना जाता है।"
+    },
+    {
+      q: isEnglish ? "The chemical formula of water is:" : "पानी का रासायनिक सूत्र क्या है?",
+      options: isEnglish ? ["CO₂", "H₂", "H₂O", "O₂"] : ["CO₂", "H₂", "H₂O", "O₂"],
+      ans: 2,
+      exp: isEnglish ? "Water is H₂O (two hydrogen atoms and one oxygen)." : "पानी H₂O है (दो हाइड्रोजन और एक ऑक्सीजन)।"
+    },
+    {
+      q: isEnglish ? "Which is the largest continent?" : "सबसे बड़ा महाद्वीप कौन सा है?",
+      options: isEnglish ? ["Africa", "Asia", "Europe", "North America"] : ["अफ्रीका", "एशिया", "यूरोप", "उत्तरी अमेरिका"],
+      ans: 1,
+      exp: isEnglish ? "Asia is the largest continent by area." : "क्षेत्रफल के हिसाब से एशिया सबसे बड़ा महाद्वीप है।"
+    },
+    {
+      q: isEnglish ? "Which day is celebrated as World Environment Day?" : "विश्व पर्यावरण दिवस किस तारीख को मनाया जाता है?",
+      options: isEnglish ? ["5 June", "22 April", "10 December", "1 January"] : ["5 जून", "22 अप्रैल", "10 दिसंबर", "1 जनवरी"],
+      ans: 0,
+      exp: isEnglish ? "World Environment Day is observed on 5 June." : "विश्व पर्यावरण दिवस 5 जून को मनाया जाता है।"
+    },
+    {
+      q: isEnglish ? "What is the currency of Japan?" : "जापान की मुद्रा क्या है?",
+      options: isEnglish ? ["Yen", "Dollar", "Won", "Euro"] : ["येन्", "डॉलर", "वोन", "यूरो"],
+      ans: 0,
+      exp: isEnglish ? "Japan's currency is the Yen." : "जापान की मुद्रा येन है।"
+    },
+    {
+      q: isEnglish ? "Which blood group is known as the universal donor?" : "कौन सा रक्त समूह सार्वभौमिक दाता माना जाता है?",
+      options: isEnglish ? ["AB+", "O+", "O−", "AB−"] : ["AB+", "O+", "O−", "AB−"],
+      ans: 2,
+      exp: isEnglish ? "O− can be given to patients of any blood group in emergencies." : "O− आपातकालीन स्थिति में किसी भी रक्त समूह को दिया जा सकता है।"
+    },
+    {
+      q: isEnglish ? "The longest river in the world is:" : "दुनिया की सबसे लंबी नदी कौन सी है?",
+      options: isEnglish ? ["Nile", "Amazon", "Yangtze", "Mississippi"] : ["नील", "अमेज़न", "यांगत्से", "मिसिसिपी"],
+      ans: 0,
+      exp: isEnglish ? "Nile is commonly cited as the longest, though some measure Amazon longer." : "नील को अक्सर सबसे लंबी माना जाता है; कुछ मापदंडों में अमेज़न लंबी बताई जाती है।"
+    },
+    {
+      q: isEnglish ? "Who discovered gravity?" : "गुरुत्वाकर्षण की खोज किसने की?",
+      options: isEnglish ? ["Newton", "Galileo", "Einstein", "Kepler"] : ["न्यूटन", "गैलीलियो", "आइंस्टीन", "केप्लर"],
+      ans: 0,
+      exp: isEnglish ? "Isaac Newton formulated the laws of gravity." : "आइज़ैक न्यूटन ने गुरुत्वाकर्षण के सिद्धांतों को प्रतिपादित किया।"
+    },
+    {
+      q: isEnglish ? "CPU stands for:" : "CPU का पूरा नाम क्या है?",
+      options: isEnglish ? ["Central Power Unit", "Central Processing Unit", "Computer Processing Utility", "Control Program Unit"] : ["सेंट्रल पॉवर यूनिट", "सेंट्रल प्रोसेसिंग यूनिट", "कंप्यूटर प्रोसेसिंग यूटिलिटी", "कंट्रोल प्रोग्राम यूनिट"],
+      ans: 1,
+      exp: isEnglish ? "CPU means Central Processing Unit." : "CPU का मतलब सेंट्रल प्रोसेसिंग यूनिट है।"
+    },
+    {
+      q: isEnglish ? "Photosynthesis occurs in which part of the plant?" : "प्रकाश संश्लेषण पौधे के किस भाग में होता है?",
+      options: isEnglish ? ["Root", "Stem", "Leaves", "Flower"] : ["जड़", "तना", "पत्तियाँ", "फूल"],
+      ans: 2,
+      exp: isEnglish ? "Photosynthesis mainly takes place in leaves where chlorophyll is present." : "प्रकाश संश्लेषण मुख्य रूप से पत्तियों में होता है जहाँ क्लोरोफिल होता है।"
+    },
+    {
+      q: isEnglish ? "The hardest natural substance is:" : "प्राकृतिक रूप से सबसे कठोर पदार्थ कौन सा है?",
+      options: isEnglish ? ["Iron", "Diamond", "Quartz", "Gold"] : ["लोहा", "हीरा", "क्वार्ट्ज", "सोना"],
+      ans: 1,
+      exp: isEnglish ? "Diamond is the hardest naturally occurring material." : "हीरा प्राकृतिक रूप से सबसे कठोर पदार्थ है।"
+    },
+    {
+      q: isEnglish ? "The author of 'Ramayana' is:" : "रामायण के रचयिता कौन हैं?",
+      options: isEnglish ? ["Tulsidas", "Valmiki", "Ved Vyas", "Kalidas"] : ["तुलसीदास", "वाल्मीकि", "वेद व्यास", "कालिदास"],
+      ans: 1,
+      exp: isEnglish ? "Valmiki is traditionally credited as the author of the Ramayana." : "वाल्मीकि को पारंपरिक रूप से रामायण का रचयिता माना जाता है।"
+    },
+    {
+      q: isEnglish ? "Which metal is liquid at room temperature?" : "कौन सा धातु सामान्य तापमान पर द्रव रूप में होता है?",
+      options: isEnglish ? ["Aluminium", "Mercury", "Copper", "Lead"] : ["एल्यूमीनियम", "पारा", "तांबा", "सीसा"],
+      ans: 1,
+      exp: isEnglish ? "Mercury is liquid at room temperature." : "पारा सामान्य तापमान पर द्रव अवस्था में होता है।"
+    },
+    {
+      q: isEnglish ? "The longest bone in the human body is:" : "मानव शरीर की सबसे लंबी हड्डी कौन सी है?",
+      options: isEnglish ? ["Tibia", "Fibula", "Femur", "Humerus"] : ["टिबिया", "फिबुला", "फीमर", "ह्यूमेरस"],
+      ans: 2,
+      exp: isEnglish ? "Femur (thigh bone) is the longest bone." : "फीमर (जांघ की हड्डी) सबसे लंबी हड्डी है।"
+    },
+    {
+      q: isEnglish ? "The national flower of India is:" : "भारत का राष्ट्रीय फूल कौन सा है?",
+      options: isEnglish ? ["Rose", "Lotus", "Lily", "Marigold"] : ["गुलाब", "कमल", "लिली", "गेंदा"],
+      ans: 1,
+      exp: isEnglish ? "Lotus is the national flower of India." : "कमल भारत का राष्ट्रीय फूल है।"
+    },
+    {
+      q: isEnglish ? "Light travels fastest in:" : "प्रकाश किस माध्यम में सबसे तेज़ चलता है?",
+      options: isEnglish ? ["Water", "Glass", "Air", "Vacuum"] : ["पानी", "काँच", "वायु", "रिक्त स्थान (वैक्यूम)"],
+      ans: 3,
+      exp: isEnglish ? "Light speed is maximum in vacuum." : "प्रकाश की गति वैक्यूम में सबसे अधिक होती है।"
+    },
+    {
+      q: isEnglish ? "What does RAM stand for?" : "RAM का पूरा नाम क्या है?",
+      options: isEnglish ? ["Random Access Memory", "Read Access Memory", "Rapid Action Memory", "Remote Access Module"] : ["रैंडम एक्सेस मेमोरी", "रीड एक्सेस मेमोरी", "रैपिड एक्शन मेमोरी", "रिमोट एक्सेस मॉड्यूल"],
+      ans: 0,
+      exp: isEnglish ? "RAM stands for Random Access Memory." : "RAM का पूरा नाम रैंडम एक्सेस मेमोरी है।"
+    },
+    {
+      q: isEnglish ? "The study of earthquakes is called:" : "भूकंपों का अध्ययन किसे कहते हैं?",
+      options: isEnglish ? ["Meteorology", "Seismology", "Geology", "Physiology"] : ["मौसम विज्ञान", "भूकंपीय विज्ञान", "भूविज्ञान", "शारीरिक विज्ञान"],
+      ans: 1,
+      exp: isEnglish ? "Seismology is the study of earthquakes and seismic waves." : "भूकंपीय विज्ञान भूकंपों और भूकंपीय तरंगों का अध्ययन है।"
+    },
+    {
+      q: isEnglish ? "The largest ocean on Earth is:" : "पृथ्वी का सबसे बड़ा महासागर कौन सा है?",
+      options: isEnglish ? ["Atlantic Ocean", "Indian Ocean", "Pacific Ocean", "Arctic Ocean"] : ["अटलांटिक महासागर", "भारतीय महासागर", "प्रशांत महासागर", "आर्कटिक महासागर"],
+      ans: 2,
+      exp: isEnglish ? "The Pacific Ocean is the largest ocean on Earth." : "प्रशांत महासागर पृथ्वी का सबसे बड़ा महासागर है।"
     }
-    throw new Error("Invalid or empty JSON response from API.");
-  } catch (error) {
-    console.error("Question Generation Error:", error);
-    dom.loadingQuestions.classList.add("hidden");
-    dom.welcomeMessage.classList.remove("hidden");
-    dom.welcomeMessage.textContent = isEnglish
-      ? `Error generating questions for ${unit}. Please check your API key or try again.`
-      : `${unit} के लिए प्रश्न बनाने में त्रुटि। कृपया अपनी API कुंजी जांचें या पुनः प्रयास करें।`;
+  ];
+
+  // Build question list by randomly sampling templates.
+  const questionList = [];
+  for (let i = 0; i < NUMBER_OF_QUESTIONS; i++) {
+    const base = genericQuestions[Math.floor(Math.random() * genericQuestions.length)];
+    // deep clone to avoid shared references
+    const copy = JSON.parse(JSON.stringify(base));
+
+    // Optionally, you could shuffle options here and adjust 'ans', but keeping original indices for simplicity.
+    questionList.push(copy);
   }
+
+  // Apply result
+  questionSet = questionList;
+  currentQuestionIndex = 0;
+
+  dom.loadingQuestions.classList.add("hidden");
+  dom.questionCard.classList.remove("hidden");
+
+  quizStartTime = new Date();
+
+  renderQuestion();
 }
 
-// GEMINI ANALYSIS OF CURRENT QUESTION
+// GEMINI ANALYSIS: Disabled in offline mode — show friendly message instead
 async function analyzeQuestionWithGemini() {
-  if (!currentSubject || !currentUnit || !questionSet.length) return;
-  if (!API_KEY || API_KEY === "AIzaSyB76lr7zbzJCuXfiGUCMrRCaFiFWP-Rz_E") {
-    dom.geminiAnalysisBlock.classList.remove("hidden");
-    dom.geminiAnalysisContent.innerHTML =
-      '<p class="text-red-600 text-sm">Please set your Gemini API key in the code (API_KEY constant).</p>';
-    return;
-  }
-
-  const currentQuestion = questionSet[currentQuestionIndex];
-  const questionText =
-    currentQuestion.q +
-    " Options: " +
-    currentQuestion.options.join(", ") +
-    ". Correct answer index: " +
-    currentQuestion.ans;
-
   dom.geminiAnalysisBlock.classList.remove("hidden");
   dom.geminiAnalysisContent.innerHTML =
-    '<div class="flex items-center space-x-2 text-emerald-600"><svg class="animate-spin h-5 w-5 mr-3" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938ल3-2.647z"></path></svg><span>Analyzing...</span></div>';
+    '<p class="text-yellow-700 text-sm">AI analysis is disabled in offline mode (no API). The app generates fresh questions locally. You can enable advanced analysis by configuring an API key and re-enabling the AI integration.</p>';
   dom.geminiAiBtn.disabled = true;
   dom.geminiAiBtn.classList.add("opacity-50", "cursor-not-allowed");
   dom.sourcesList.innerHTML = "";
   dom.geminiSources.classList.add("hidden");
-
-  const systemPrompt = `You are an expert tutor. Provide a concise, single-paragraph analysis of the multiple-choice question.
-Explain:
-1. The core concept being tested.
-2. Why the correct option is correct.
-3. Why the other options are incorrect.`;
-
-  const userQuery = `Analyze this MCQ from "${currentSubject} - ${currentUnit}": ${questionText}. Respond in ${
-    currentLanguage === "english" ? "English" : "Hindi"
-  }.`;      
-
-  const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL_ID}:generateContent?key=${API_KEY}`;
-
-  const payload = {
-    contents: [{ parts: [{ text: userQuery }] }],
-    systemInstruction: { parts: [{ text: systemPrompt }] },
-  };
-
-  try {
-    const response = await fetchWithRetry(apiUrl, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
-    });
-
-    const result = await response.json();
-    const candidate = result.candidates?.[0];
-
-    if (candidate && candidate.content?.parts?.[0]?.text) {
-      const text = candidate.content.parts[0].text;
-      dom.geminiAnalysisContent.innerHTML = `<p class="text-gray-700 text-sm leading-relaxed">${text}</p>`;
-
-      let sources = [];
-      const groundingMetadata =
-        candidate.groundingMetadata || result.groundingMetadata;
-      if (
-        groundingMetadata &&
-        groundingMetadata.groundingAttributions
-      ) {
-        sources = groundingMetadata.groundingAttributions
-          .map((attribution) => ({
-            uri: attribution.web?.uri,
-            title: attribution.web?.title,
-          }))
-          .filter((source) => source.uri && source.title);
-      }
-
-      if (sources.length > 0) {
-        dom.sourcesList.innerHTML = sources
-          .map(
-            (source) =>
-              `<li><a href="${source.uri}" target="_blank" class="text-blue-500 hover:text-blue-700 underline">${source.title ||
-                "Source Link"}</a></li>`
-          )
-          .join("");
-        dom.geminiSources.classList.remove("hidden");
-      }
-    } else {
-      dom.geminiAnalysisContent.innerHTML =
-        '<p class="text-red-600 text-sm">AI analysis failed. Please try again later.</p>';
-    }
-  } catch (error) {
-    console.error("Gemini API Error:", error);
-    dom.geminiAnalysisContent.innerHTML =
-      '<p class="text-red-600 text-sm">Failed to connect to the AI service. Check your network or API key.</p>';
-  } finally {
-    dom.geminiAiBtn.disabled = false;
-    dom.geminiAiBtn.classList.remove("opacity-50", "cursor-not-allowed");
-  }
 }
 
 // TEXTS / UI LANGUAGE
@@ -976,27 +937,15 @@ function selectUnit(unit) {
 
   currentUnit = unit;
 
-  const cached =
-    savedQuestions[currentLanguage]?.[currentSubject]?.[currentUnit];
-
+  // ❗Always generate fresh questions (No caching)
   quizStartTime = null;
   questionStartTime = null;
-
-  if (cached && cached.length) {
-    questionSet = cached;
-    if (currentQuestionIndex >= questionSet.length) {
-      currentQuestionIndex = 0;
-    }
-    dom.welcomeMessage.classList.add("hidden");
-    dom.loadingQuestions.classList.add("hidden");
-    dom.questionCard.classList.remove("hidden");
-    quizStartTime = new Date();
-    renderQuestion();
-  } else {
-    questionSet = [];
-    dom.questionCard.classList.add("hidden");
-    generateQuestions(currentSubject, currentUnit, currentLanguage);
-  }
+  dom.welcomeMessage.classList.add("hidden");
+  dom.loadingQuestions.classList.remove("hidden");
+  // Small timeout so UI shows loading briefly for UX (optional)
+  setTimeout(() => {
+    generateLocalQuestions(currentSubject, currentUnit, currentLanguage);
+  }, 200);
 }
 
 function goToNextQuestion() {
@@ -1041,22 +990,12 @@ function toggleLanguage() {
   }
 
   if (wasQuestionVisible && currentSubject && currentUnit) {
-    const cached =
-      savedQuestions[currentLanguage]?.[currentSubject]?.[currentUnit];
-
-    if (cached && cached.length) {
-      questionSet = cached;
-      if (currentQuestionIndex >= questionSet.length) {
-        currentQuestionIndex = 0;
-      }
-      dom.welcomeMessage.classList.add("hidden");
-      dom.questionCard.classList.remove("hidden");
-      renderQuestion();
-    } else {
-      questionSet = [];
-      dom.questionCard.classList.add("hidden");
-      generateQuestions(currentSubject, currentUnit, currentLanguage);
-    }
+    // Always generate fresh questions in the new language
+    dom.welcomeMessage.classList.add("hidden");
+    dom.loadingQuestions.classList.remove("hidden");
+    setTimeout(() => {
+      generateLocalQuestions(currentSubject, currentUnit, currentLanguage);
+    }, 200);
   }
 }
 
@@ -1098,6 +1037,27 @@ dom.semesterSelect.addEventListener("change", () => {
   questionStartTime = null;
   renderSubjects();
 });
+
+// SUBJECT FILTERING BY COURSE + SEMESTER (kept near end)
+function getFilteredSubjects() {
+  const allSubjects = Object.keys(quizData[currentLanguage]);
+
+  if (!currentCourse) return [];
+
+  const courseCfg = courseSemesterSubjects[currentCourse];
+  if (!courseCfg) return [];
+
+  const semesterKey = currentCourse === "Co-Curricular" ? "-" : currentSemester;
+  if (!semesterKey) return [];
+
+  const allowedList = courseCfg[semesterKey]?.[currentLanguage];
+  if (!allowedList) return [];
+
+  const cleaned = allowedList.filter(Boolean);
+  if (!cleaned.length) return [];
+
+  return cleaned.filter((subj) => allSubjects.includes(subj));
+}
 
 // INIT
 (function init() {
