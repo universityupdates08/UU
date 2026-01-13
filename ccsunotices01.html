@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>CCS University Notices</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f6f8;
+      color: #222;
+    }
+
+    header {
+      background: #0b3c5d;
+      color: #fff;
+      padding: 18px;
+      text-align: center;
+    }
+
+    main {
+      max-width: 1100px;
+      margin: auto;
+      padding: 18px;
+    }
+
+    section {
+      background: #fff;
+      border-radius: 6px;
+      padding: 18px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+
+    .notice {
+      border-bottom: 1px solid #e5e5e5;
+      padding: 12px 0;
+    }
+
+    .notice:last-child {
+      border-bottom: none;
+    }
+
+    .notice a {
+      color: #0b3c5d;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    .notice a:hover {
+      text-decoration: underline;
+    }
+
+    .date {
+      font-size: 13px;
+      color: #555;
+      margin-top: 4px;
+    }
+
+    #error {
+      color: red;
+      text-align: center;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>CCS University – Notices</h1>
+  <p>Automatically refreshed official notifications</p>
+</header>
+
+<main>
+  <section>
+    <h3>Latest Notices</h3>
+    <div id="error"></div>
+    <div id="newsList"></div>
+  </section>
+</main>
+
+<script>
+const API_URL =
+  "https://api.ccsuniversity.ac.in/news/search?title=&id=Notice&month=&year=&page=1";
+
+async function fetchNews() {
+  const newsList = document.getElementById("newsList");
+  const errorDiv = document.getElementById("error");
+
+  try {
+    const res = await fetch(API_URL);
+    if (!res.ok) throw new Error("API Error");
+
+    const data = await res.json();
+    errorDiv.textContent = "";
+    newsList.innerHTML = "";
+
+    if (!data.news || data.news.length === 0) {
+      newsList.innerHTML = "<p>No notices available.</p>";
+      return;
+    }
+
+    data.news.forEach(item => {
+      const div = document.createElement("div");
+      div.className = "notice";
+
+      div.innerHTML = `
+        <a href="${item.url}" target="_blank">${item.title}</a>
+        <div class="date">${new Date(item.created_at).toDateString()}</div>
+      `;
+
+      newsList.appendChild(div);
+    });
+
+  } catch (err) {
+    errorDiv.textContent = "Unable to fetch notices right now.";
+  }
+}
+
+// Initial load
+fetchNews();
+
+// Auto refresh every 60 seconds
+setInterval(fetchNews, 60000);
+</script>
+
+</body>
+</html>
