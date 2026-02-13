@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="hi">
 <head>
@@ -51,10 +50,11 @@ h3{
     width:60%;
 }
 
-.full-line{
+/* दिनांक की छोटी लाइन */
+.date-input{
     border:none;
     border-bottom:1px dotted black;
-    width:100%;
+    width:20%; 
 }
 
 .right-align{ text-align:right; }
@@ -73,8 +73,6 @@ th, td{
     vertical-align:top;
 }
 
-textarea{ width:100%; }
-
 button{
     padding:6px 12px;
     margin-top:5px;
@@ -92,210 +90,139 @@ button{
     margin-top:5px;
 }
 
+/* प्रिंट के समय कैलेंडर आइकन छुपाने के लिए */
+input[type="date"]::-webkit-calendar-picker-indicator {
+    display: none;
+    -webkit-appearance: none;
+}
+
 /* ===== Print Settings ===== */
 @media print{
-
-    .header{ display:none; }
-
-    button{ display:none; }
-
-    .upload-column{ display:none; }
-
-    input[type="file"]{ display:none; }
-
-    body{ background:white; }
-
-    #proofSection{
-        page-break-before: always;
+    .header, button, .upload-column, input[type="file"] { 
+        display:none !important; 
     }
+    body{ background:white; }
+    #proofSection{ page-break-before: always; }
+    input { border:none !important; border-bottom: 1px dotted black !important; }
 }
 </style>
 </head>
 
-<body>
+<body onload="setCurrentDate()">
 
-<!-- Sticky Header -->
 <div class="header">
     Brought to you by University Updates
-    <a href="https://instagram.com/universityupdates_uu" target="_blank">
-        Join us on Instagram
-    </a>
-    
-  
-        <a
-          href="https://youtu.be/QekxFTFbtEk"
-          
-          target="_blank"
-        >
-          Watch Tutorial Video - How to Apply?
-        </a>
-
+    <a href="https://instagram.com/universityupdates_uu" target="_blank">Join us on Instagram</a>
+    <a href="https://youtu.be/QekxFTFbtEk" target="_blank">Watch Tutorial Video</a>
 </div>
 
 <div class="container">
+    <h3>उत्तर कुंजी आपत्ति प्रपत्र</h3>
 
-<h3>उत्तर कुंजी आपत्ति प्रपत्र</h3>
+    <div class="right-align">
+        <p>प्रार्थी / आपत्तिकर्ता का नाम : <input type="text" class="line-input"></p>
+        <p>पाठ्यक्रम का नाम व पेपर कोड : <input type="text" class="line-input"></p>
+        <p>पाठ्यक्रम (वार्षिक / सेमेस्टर) : <input type="text" class="line-input"></p>
+        <p>अनुक्रमांक : <input type="text" class="line-input"></p>
+        <p>उत्तरपुस्तिका क्रमांक : <input type="text" class="line-input"></p>
+        <p>प्रश्न पुस्तिका सीरीज (A/B/C/D) : <input type="text" class="line-input"></p>
+        <p>आपत्ति विवरण : <input type="text" class="line-input"></p>
+    </div>
 
-<div class="right-align">
+    <table id="objectionTable">
+        <tr>
+            <th style="width:60px;">क्र.सं.</th>
+            <th style="width:100px;">प्रश्न संख्या</th>
+            <th>आपत्ति विवरण</th>
+            <th class="upload-column">प्रमाण अपलोड</th>
+        </tr>
+    </table>
 
-<p>प्रार्थी / आपत्तिकर्ता का नाम :
-<input type="text" class="line-input"></p>
+    <button onclick="addRow()">आपत्ति जोड़ें</button>
+    <br><br>
 
-<p>पाठ्यक्रम का नाम व पेपर कोड :
-<input type="text" class="line-input"></p>
+    <div class="left-align">
+        <p>दिनांक : <input type="text" id="dateField" class="date-input" placeholder="DD-MMM-YYYY"></p>
+    </div>
 
-<p>पाठ्यक्रम (वार्षिक / सेमेस्टर) :
-<input type="text" class="line-input"></p>
+    <div class="right-align">
+        <div id="signaturePreview"></div>
+        <p>प्रार्थी / आपत्तिकर्ता के हस्ताक्षर</p>
+        <input type="file" accept="image/*" onchange="previewSignature(event)">
 
-<p>अनुक्रमांक :
-<input type="text" class="line-input"></p>
+        <p>नाम : <input type="text" class="line-input"></p>
+        <p>पता : <input type="text" class="line-input"></p>
+        <p>मोबाइल : <input type="text" class="line-input"></p>
+        <p>ई-मेल आईडी : <input type="text" class="line-input"></p>
+    </div>
 
-<p>उत्तरपुस्तिका क्रमांक :
-<input type="text" class="line-input"></p>
+    <br>
+    <button onclick="window.print()">प्रिंट करें</button>
 
-<p>प्रश्न पुस्तिका सीरीज (A/B/C/D) :
-<input type="text" class="line-input"></p>
-
-<p>आपत्ति विवरण :
-<input type="text" class="line-input"></p>
-
-</div>
-
-<table id="objectionTable">
-<tr>
-<th style="width:60px;">क्र.सं.</th>
-<th style="width:100px;">प्रश्न संख्या</th>
-<th>आपत्ति विवरण</th>
-<th class="upload-column">प्रमाण अपलोड</th>
-</tr>
-</table>
-
-<button onclick="addRow()">आपत्ति जोड़ें</button>
-
-<br><br>
-
-<div class="left-align">
-<p>दिनांक :
-<input type="date" class="line-input"></p>
-</div>
-
-<div class="right-align">
-
-<p>प्रार्थी / आपत्तिकर्ता के हस्ताक्षर :</p>
-<input type="file" accept="image/*" onchange="previewSignature(event)">
-<div id="signaturePreview"></div>
-
-<p>नाम :
-<input type="text" class="line-input"></p>
-
-<p>पता :
-<input type="text" class="line-input"></p>
-
-<p>मोबाइल :
-<input type="text" class="line-input"></p>
-
-<p>ई-मेल आईडी :
-<input type="text" class="line-input"></p>
-
-</div>
-
-<br>
-<button onclick="window.print()">प्रिंट करें</button>
-
-
-
-<!-- Proof Section -->
-<div id="proofSection">
-<h3>संलग्न प्रमाण</h3>
-</div>
-
+    <div id="proofSection">
+        <h3>संलग्न प्रमाण</h3>
+    </div>
 </div>
 
 <script>
-
 let count = 0;
+
+// तारीख को DD-MMM-YYYY फॉर्मेट में सेट करने के लिए
+function setCurrentDate() {
+    const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    const d = new Date();
+    const day = String(d.getDate()).padStart(2, '0');
+    const month = months[d.getMonth()];
+    const year = d.getFullYear();
+    document.getElementById('dateField').value = `${day}-${month}-${year}`;
+}
 
 function addRow(){
     count++;
-
     let table = document.getElementById("objectionTable");
     let row = table.insertRow();
-
     row.innerHTML = `
     <td>${count}</td>
     <td><input type="text" style="width:90%"></td>
     <td>
-        विश्वविद्यालय के अनुसार सही उत्तर:
-        <input type="text" style="width:100%; margin-bottom:5px;"><br>
-
-        प्रमाण के अनुसार सही उत्तर:
-        <input type="text" style="width:100%; margin-bottom:5px;"><br>
-
-        संलग्न प्रमाणों की संख्या:
-        <input type="number" style="width:80px;">
+        विश्वविद्यालय के अनुसार सही उत्तर: <input type="text" style="width:100%; margin-bottom:5px;"><br>
+        प्रमाण के अनुसार सही उत्तर: <input type="text" style="width:100%; margin-bottom:5px;"><br>
+        संलग्न प्रमाणों की संख्या: <input type="number" style="width:80px;">
     </td>
     <td class="upload-column">
-        <input type="file" accept="image/*"
-        onchange="previewProof(event, ${count})">
+        <input type="file" accept="image/*" onchange="previewProof(event, ${count})">
         <br>
         <button class="delete-btn" onclick="deleteRow(this)">हटाएँ</button>
-    </td>
-    `;
+    </td>`;
 }
 
 function deleteRow(button){
-    let row = button.closest("tr");
-    row.remove();
+    button.closest("tr").remove();
 }
 
 function previewProof(event, serial){
-
     let file = event.target.files[0];
     let reader = new FileReader();
-
     reader.onload = function(e){
-
         let section = document.getElementById("proofSection");
-
         let block = document.createElement("div");
         block.style.marginBottom = "20px";
-
-        let title = document.createElement("p");
-        title.innerHTML = "<strong>आपत्ति क्र.सं.: " + serial + "</strong>";
-
-        let img = document.createElement("img");
-        img.src = e.target.result;
-        img.style.width = "300px";
-        img.style.display = "block";
-
-        block.appendChild(title);
-        block.appendChild(img);
-
+        block.innerHTML = `<p><strong>आपत्ति क्र.सं.: ${serial}</strong></p>
+                           <img src="${e.target.result}" style="width:300px; display:block;">`;
         section.appendChild(block);
     };
-
     reader.readAsDataURL(file);
 }
 
 function previewSignature(event){
-
     let file = event.target.files[0];
     let reader = new FileReader();
-
     reader.onload = function(e){
-
-        let img = document.createElement("img");
-        img.src = e.target.result;
-        img.style.width="150px";
-
         let container = document.getElementById("signaturePreview");
-        container.innerHTML="";
-        container.appendChild(img);
+        container.innerHTML = `<img src="${e.target.result}" style="width:150px; margin-bottom:5px;">`;
     };
-
     reader.readAsDataURL(file);
 }
-
 </script>
 
 </body>
