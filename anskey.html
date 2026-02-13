@@ -34,29 +34,31 @@ body{
 }
 
 .container{
-    width:210mm;
+    width: 210mm; /* Standard A4 Width */
+    min-height: 297mm;
     background:white;
-    padding:20px;
+    padding: 15mm; /* Standard margin for printing */
     margin:20px auto;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    box-sizing: border-box; /* Prevents padding from adding to width */
 }
 
 h3{
     text-align:center;
 }
 
-.line-input{
-    border:none;
-    border-bottom:1px dotted black;
-    width:60%;
+/* ===== Input Styling (Screen Mode) ===== */
+input[type="text"], input[type="number"] {
+    font-weight: bold;
+    color: blue;
+    font-size: 16px;
+    border: 1px solid #ccc; 
+    padding: 2px 5px;
+    border-radius: 2px;
 }
 
-/* दिनांक की छोटी लाइन */
-.date-input{
-    border:none;
-    border-bottom:1px dotted black;
-    width:20%; 
-}
-
+.line-input{ width:60%; }
+.date-input{ width:25%; }
 .right-align{ text-align:right; }
 .left-align{ text-align:left; }
 
@@ -64,6 +66,7 @@ table{
     width:100%;
     border-collapse:collapse;
     margin-top:20px;
+    table-layout: fixed; /* Ensures table stays within container */
 }
 
 th, td{
@@ -71,6 +74,7 @@ th, td{
     padding:6px;
     font-size:13px;
     vertical-align:top;
+    word-wrap: break-word;
 }
 
 button{
@@ -79,7 +83,7 @@ button{
     cursor:pointer;
 }
 
-.upload-column{ width:150px; }
+.upload-column{ width:120px; }
 
 .delete-btn{
     background:red;
@@ -90,20 +94,35 @@ button{
     margin-top:5px;
 }
 
-/* प्रिंट के समय कैलेंडर आइकन छुपाने के लिए */
-input[type="date"]::-webkit-calendar-picker-indicator {
-    display: none;
-    -webkit-appearance: none;
-}
-
 /* ===== Print Settings ===== */
-@media print{
-    .header, button, .upload-column, input[type="file"] { 
+@media print {
+    @page {
+        size: A4;
+        margin: 0; /* Let the container padding handle margins */
+    }
+
+    .header, button, .upload-column, input[type="file"], .delete-btn { 
         display:none !important; 
     }
-    body{ background:white; }
-    #proofSection{ page-break-before: always; }
-    input { border:none !important; border-bottom: 1px dotted black !important; }
+    
+    body { background:white; }
+    
+    .container { 
+        box-shadow: none; 
+        margin: 0; 
+        width: 100%; 
+        padding: 10mm; /* Reduced slightly for print safety */
+    }
+    
+    input[type="text"], input[type="number"], .line-input, .date-input {
+        border: none !important;
+        outline: none !important;
+        background: transparent !important;
+        color: blue !important; /* Forces blue color in print */
+        -webkit-print-color-adjust: exact; /* Ensures color renders in PDF/Print */
+    }
+
+    #proofSection { page-break-before: always; }
 }
 </style>
 </head>
@@ -130,12 +149,16 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     </div>
 
     <table id="objectionTable">
-        <tr>
-            <th style="width:60px;">क्र.सं.</th>
-            <th style="width:100px;">प्रश्न संख्या</th>
-            <th>आपत्ति विवरण</th>
-            <th class="upload-column">प्रमाण अपलोड</th>
-        </tr>
+        <thead>
+            <tr>
+                <th style="width:40px;">क्र.सं.</th>
+                <th style="width:80px;">प्रश्न संख्या</th>
+                <th>आपत्ति विवरण</th>
+                <th class="upload-column">प्रमाण अपलोड</th>
+            </tr>
+        </thead>
+        <tbody>
+            </tbody>
     </table>
 
     <button onclick="addRow()">आपत्ति जोड़ें</button>
@@ -157,7 +180,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     </div>
 
     <br>
-    <button onclick="window.print()">प्रिंट करें</button>
+    <button onclick="window.print()" style="background: green; color: white; font-weight: bold; padding: 10px 20px;">प्रिंट करें</button>
 
     <div id="proofSection">
         <h3>संलग्न प्रमाण</h3>
@@ -167,7 +190,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 <script>
 let count = 0;
 
-// तारीख को DD-MMM-YYYY फॉर्मेट में सेट करने के लिए
 function setCurrentDate() {
     const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
     const d = new Date();
@@ -179,15 +201,15 @@ function setCurrentDate() {
 
 function addRow(){
     count++;
-    let table = document.getElementById("objectionTable");
+    let table = document.getElementById("objectionTable").getElementsByTagName('tbody')[0];
     let row = table.insertRow();
     row.innerHTML = `
-    <td>${count}</td>
-    <td><input type="text" style="width:90%"></td>
+    <td style="text-align:center;">${count}</td>
+    <td><input type="text" style="width:90%; border:1px solid #ccc;"></td>
     <td>
-        विश्वविद्यालय के अनुसार सही उत्तर: <input type="text" style="width:100%; margin-bottom:5px;"><br>
-        प्रमाण के अनुसार सही उत्तर: <input type="text" style="width:100%; margin-bottom:5px;"><br>
-        संलग्न प्रमाणों की संख्या: <input type="number" style="width:80px;">
+        विश्वविद्यालय के अनुसार सही उत्तर: <input type="text" style="width:95%; margin-bottom:5px; border:1px solid #ccc;"><br>
+        प्रमाण के अनुसार सही उत्तर: <input type="text" style="width:95%; margin-bottom:5px; border:1px solid #ccc;"><br>
+        संलग्न प्रमाणों की संख्या: <input type="number" style="width:80px; border:1px solid #ccc;">
     </td>
     <td class="upload-column">
         <input type="file" accept="image/*" onchange="previewProof(event, ${count})">
@@ -202,13 +224,15 @@ function deleteRow(button){
 
 function previewProof(event, serial){
     let file = event.target.files[0];
+    if(!file) return;
     let reader = new FileReader();
     reader.onload = function(e){
         let section = document.getElementById("proofSection");
         let block = document.createElement("div");
         block.style.marginBottom = "20px";
+        block.style.textAlign = "center";
         block.innerHTML = `<p><strong>आपत्ति क्र.सं.: ${serial}</strong></p>
-                           <img src="${e.target.result}" style="width:300px; display:block;">`;
+                           <img src="${e.target.result}" style="max-width:100%; height:auto; display:block; margin:auto; border:1px solid #eee;">`;
         section.appendChild(block);
     };
     reader.readAsDataURL(file);
@@ -216,6 +240,7 @@ function previewProof(event, serial){
 
 function previewSignature(event){
     let file = event.target.files[0];
+    if(!file) return;
     let reader = new FileReader();
     reader.onload = function(e){
         let container = document.getElementById("signaturePreview");
