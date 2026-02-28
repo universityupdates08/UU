@@ -1,171 +1,146 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>University Data Portal</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.min.js"></script>
-    <style>
-        .sticky-tabs { position: sticky; top: 0; z-index: 40; background: white; border-bottom: 2px solid #e2e8f0; }
-        .card-shadow { box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); }
-    </style>
+<meta charset="UTF-8">
+<title>Exam Schedule Finder</title>
+
+<script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+
+<style>
+
+body{
+font-family: Arial;
+background:#f5f5f5;
+text-align:center;
+padding:40px;
+}
+
+.container{
+background:white;
+padding:30px;
+border-radius:10px;
+width:80%;
+margin:auto;
+box-shadow:0 0 10px rgba(0,0,0,0.1);
+}
+
+input,button{
+padding:10px;
+margin:10px;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+margin-top:20px;
+}
+
+th,td{
+border:1px solid #ccc;
+padding:10px;
+}
+
+th{
+background:#2c7be5;
+color:white;
+}
+
+</style>
 </head>
-<body class="bg-slate-50 text-slate-800 font-sans">
 
-    <header class="bg-blue-900 text-white p-6 shadow-lg">
-        <div class="container mx-auto">
-            <h1 class="text-2xl font-bold">Academic Resource Portal</h1>
-            <p class="text-blue-200 text-sm">Automated Data Sync from GitHub</p>
-        </div>
-    </header>
+<body>
 
-    <nav class="sticky-tabs p-4">
-        <div class="container mx-auto flex flex-wrap gap-4 items-center justify-between">
-            <div class="flex gap-4 items-center">
-                <input type="text" id="searchInput" placeholder="Search data..." class="border p-2 rounded-md focus:ring-2 focus:ring-blue-500 outline-none">
-                <select id="shiftSort" class="border p-2 rounded-md bg-white">
-                    <option value="asc">Shift: Morning First</option>
-                    <option value="desc">Shift: Evening First</option>
-                </select>
-            </div>
-            <div id="courseFilterContainer">
-                </div>
-        </div>
-    </nav>
+<div class="container">
 
-    <main class="container mx-auto p-6 space-y-12">
+<h2>Exam Date Sheet Search</h2>
 
-        <section>
-            <h2 class="text-xl font-bold mb-4 border-l-4 border-blue-600 pl-3">Schedule by Date</h2>
-            <div id="dateWiseRow" class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <p class="text-gray-500 italic">Loading data...</p>
-            </div>
-        </section>
+<label>Select Date:</label>
+<input type="date" id="searchDate">
 
-        <section>
-            <h2 class="text-xl font-bold mb-4 border-l-4 border-emerald-600 pl-3">Filtered View (Date + Course)</h2>
-            <div id="dateCourseRow" class="bg-white p-4 rounded-lg card-shadow overflow-x-auto">
-                <table class="w-full text-left border-collapse">
-                    <thead>
-                        <tr class="bg-slate-100 text-slate-600 uppercase text-xs">
-                            <th class="p-3">Date</th>
-                            <th class="p-3">Course</th>
-                            <th class="p-3">Shift</th>
-                            <th class="p-3">Details</th>
-                        </tr>
-                    </thead>
-                    <tbody id="filteredTableBody"></tbody>
-                </table>
-            </div>
-        </section>
+<button onclick="searchExam()">Search</button>
 
-        <section>
-            <h2 class="text-xl font-bold mb-4 border-l-4 border-purple-600 pl-3">Course Catalog</h2>
-            <div id="courseWiseRow" class="flex flex-wrap gap-4"></div>
-        </section>
+<table id="resultTable">
+<thead>
+<tr>
+<th>Date</th>
+<th>Day</th>
+<th>Shift</th>
+<th>Class</th>
+<th>Subject</th>
+<th>Course</th>
+<th>Code</th>
+</tr>
+</thead>
+<tbody></tbody>
+</table>
 
-    </main>
+</div>
 
-    <script>
-        // CONFIG: Update this to your GitHub file URL
-        const FILE_URL = 'DatesheetSearch.xlsx'; 
+<script>
 
-        let globalData = [];
+let csvData = [];
 
-        async function fetchData() {
-            try {
-                const response = await fetch(FILE_URL);
-                const arrayBuffer = await response.arrayBuffer();
-                const data = new Uint8Array(arrayBuffer);
-                const workbook = XLSX.read(data, { type: 'array' });
-                
-                // Read first sheet
-                const firstSheet = workbook.SheetNames[0];
-                const jsonData = XLSX.utils.sheet_to_json(workbook.Sheets[firstSheet]);
-                
-                globalData = jsonData;
-                initPortal();
-            } catch (error) {
-                console.error("Error fetching data:", error);
-                document.getElementById('dateWiseRow').innerHTML = "Error loading data. Check console.";
-            }
-        }
+// Load CSV from GitHub repository
+Papa.parse("DatesheetSearch.csv", {
 
-        function initPortal() {
-            populateCourseDropdown();
-            renderDateWise();
-            renderFilteredTable();
-            renderCourseWise();
-            
-            // Event Listeners
-            document.getElementById('searchInput').addEventListener('input', renderFilteredTable);
-            document.getElementById('shiftSort').addEventListener('change', renderFilteredTable);
-        }
+download: true,
+header: true,
+skipEmptyLines: true,
 
-        function populateCourseDropdown() {
-            const courses = [...new Set(globalData.map(item => item.Course))];
-            let html = `<select id="courseSelect" onchange="renderFilteredTable()" class="border p-2 rounded-md bg-white">
-                        <option value="all">All Courses</option>`;
-            courses.forEach(c => html += `<option value="${c}">${c}</option>`);
-            html += `</select>`;
-            document.getElementById('courseFilterContainer').innerHTML = html;
-        }
+complete: function(results){
+csvData = results.data;
+console.log("CSV Loaded", csvData);
+}
 
-        function renderDateWise() {
-            const container = document.getElementById('dateWiseRow');
-            const sortedByDate = [...globalData].sort((a, b) => new Date(a.Date) - new Date(b.Date));
-            
-            container.innerHTML = sortedByDate.map(item => `
-                <div class="bg-white p-4 rounded-lg border-t-4 border-blue-500 card-shadow">
-                    <span class="text-xs font-bold text-blue-600">${item.Date}</span>
-                    <h3 class="font-bold text-lg">${item.Course}</h3>
-                    <p class="text-sm text-gray-600">Shift: ${item.Shift}</p>
-                </div>
-            `).join('');
-        }
+});
 
-        function renderFilteredTable() {
-            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
-            const courseFilter = document.getElementById('courseSelect').value;
-            const shiftSort = document.getElementById('shiftSort').value;
-            const tbody = document.getElementById('filteredTableBody');
+function searchExam(){
 
-            let filtered = globalData.filter(item => {
-                const matchesSearch = Object.values(item).some(val => String(val).toLowerCase().includes(searchTerm));
-                const matchesCourse = courseFilter === 'all' || item.Course === courseFilter;
-                return matchesSearch && matchesCourse;
-            });
+const dateInput = document.getElementById("searchDate").value;
 
-            if(shiftSort === 'asc') filtered.sort((a,b) => a.Shift.localeCompare(b.Shift));
-            else filtered.sort((a,b) => b.Shift.localeCompare(a.Shift));
+if(!dateInput){
+alert("Please select a date");
+return;
+}
 
-            tbody.innerHTML = filtered.map(item => `
-                <tr class="border-b hover:bg-slate-50 transition">
-                    <td class="p-3">${item.Date}</td>
-                    <td class="p-3 font-semibold">${item.Course}</td>
-                    <td class="p-3"><span class="px-2 py-1 rounded-full text-xs bg-gray-200">${item.Shift}</span></td>
-                    <td class="p-3 text-sm text-gray-500">${item.Description || 'N/A'}</td>
-                </tr>
-            `).join('');
-        }
+const selectedDate = new Date(dateInput);
 
-        function renderCourseWise() {
-            const container = document.getElementById('courseWiseRow');
-            const courseCounts = globalData.reduce((acc, curr) => {
-                acc[curr.Course] = (acc[curr.Course] || 0) + 1;
-                return acc;
-            }, {});
+const day = selectedDate.getDate();
+const month = selectedDate.toLocaleString('en-US',{month:'short'});
+const year = selectedDate.getFullYear().toString().slice(-2);
 
-            container.innerHTML = Object.entries(courseCounts).map(([name, count]) => `
-                <div class="bg-purple-100 text-purple-800 px-6 py-4 rounded-xl border border-purple-200">
-                    <div class="text-2xl font-bold">${count}</div>
-                    <div class="text-xs uppercase tracking-wider font-semibold">${name} Sessions</div>
-                </div>
-            `).join('');
-        }
+const formattedDate = `${day}-${month}-${year}`;
 
-        fetchData();
-    </script>
+const results = csvData.filter(row => row.Date === formattedDate);
+
+const tableBody = document.querySelector("#resultTable tbody");
+
+tableBody.innerHTML="";
+
+if(results.length === 0){
+tableBody.innerHTML="<tr><td colspan='7'>No Exam Found</td></tr>";
+return;
+}
+
+results.forEach(r => {
+
+tableBody.innerHTML += `
+<tr>
+<td>${r.Date}</td>
+<td>${r.Day}</td>
+<td>${r.Shift}</td>
+<td>${r.Class}</td>
+<td>${r.Subject}</td>
+<td>${r.Course}</td>
+<td>${r.Code}</td>
+</tr>
+`;
+
+});
+
+}
+
+</script>
+
 </body>
 </html>
