@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exam DateSheet Portal</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
+    <style>
+        :root {
+            --bg-body: #f1f5f9;
+            --primary-grad: linear-gradient(135deg, #0f172a 0%, #334155 100%);
+            --card-grad: linear-gradient(135deg, #4338ca 0%, #6d28d9 100%);
+            --btn-grad: linear-gradient(to right, #2563eb, #7c3aed);
+        }
+        body { font-family: 'Segoe UI', system-ui, sans-serif; background-color: var(--bg-body); margin: 0; padding: 20px; color: #1e293b; }
+        .container { max-width: 1000px; margin: 0 auto; }
+        
+        header { text-align: center; margin-bottom: 30px; }
+        header h1 { font-size: 2.2rem; color: #0f172a; margin-bottom: 5px; }
+        header p { color: #64748b; margin: 0; }
+
+        .search-container { background: white; padding: 25px; border-radius: 16px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); margin-bottom: 30px; }
+        
+        /* Row Styles */
+        .search-row { 
+            display: flex; 
+            flex-wrap: wrap; 
+            gap: 15px; 
+            padding: 20px 0; 
+            border-bottom: 1px solid #e2e8f0; 
+            align-items: flex-end; 
+        }
+        .search-row:last-child { border-bottom: none; }
+        .search-row h3 { width: 100%; margin: 0 0 10px 0; font-size: 0.9rem; color: #64748b; text-transform: uppercase; letter-spacing: 0.05em; }
+
+        .input-group { flex: 1; min-width: 200px; display: flex; flex-direction: column; }
+        .input-group label { font-size: 0.85rem; font-weight: 600; margin-bottom: 6px; color: #475569; }
+        
+        input, select { padding: 10px 12px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 0.95rem; outline: none; background-color: #f8fafc; }
+        input:focus, select:focus { border-color: #3b82f6; box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1); }
+        
+        .btn-search { 
+            background: var(--btn-grad); 
+            color: white; 
+            border: none; 
+            padding: 10px 25px; 
+            border-radius: 8px; 
+            cursor: pointer; 
+            font-weight: 600; 
+            transition: all 0.2s; 
+            height: 42px;
+        }
+        .btn-search:hover { filter: brightness(1.1); transform: translateY(-1px); }
+
+        #status { text-align: center; margin-bottom: 20px; font-size: 0.9rem; font-weight: bold; }
+
+        /* Card Layout */
+        .results-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(310px, 1fr)); gap: 20px; }
+        .card { 
+            background: var(--card-grad); 
+            color: white; 
+            border-radius: 16px; 
+            padding: 20px; 
+            box-shadow: 0 4px 20px rgba(67, 56, 202, 0.25);
+            transition: transform 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .card:hover { transform: translateY(-5px); }
+        .card-header { border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 10px; margin-bottom: 15px; }
+        .card-date { font-size: 1.25rem; font-weight: 800; }
+        .card-day { font-size: 0.9rem; opacity: 0.8; }
+        
+        .card-detail { margin-bottom: 12px; }
+        .detail-label { font-size: 0.7rem; text-transform: uppercase; opacity: 0.7; letter-spacing: 0.05em; display: block; }
+        .detail-value { font-size: 1rem; font-weight: 500; display: block; }
+        
+        .card-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 10px; }
+        .badge { background: rgba(0,0,0,0.2); padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: bold; }
+        
+        .no-results { grid-column: 1 / -1; text-align: center; padding: 40px; background: white; border-radius: 12px; color: #94a3b8; border: 2px dashed #e2e8f0; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>Exam Schedule Portal</h1>
+        <p>Select a search method below to find your datesheet</p>
+    </header>
+
+    <div id="status">Connecting to Database...</div>
+
+    <div class="search-container">
+        <div class="search-row">
+            <h3>Row 1: Search by Date</h3>
+            <div class="input-group">
+                <label>Date</label>
+                <input type="date" id="date1">
+            </div>
+            <button class="btn-search" onclick="search(1)">Search Date</button>
+        </div>
+
+        <div class="search-row">
+            <h3>Row 2: Search by Class & Subject</h3>
+            <div class="input-group">
+                <label>Class</label>
+                <select id="class2"><option value="">-- All Classes --</option></select>
+            </div>
+            <div class="input-group">
+                <label>Subject</label>
+                <select id="subject2"><option value="">-- All Subjects --</option></select>
+            </div>
+            <button class="btn-search" onclick="search(2)">Search Class/Subject</button>
+        </div>
+
+        <div class="search-row">
+            <h3>Row 3: Search by Date & Class</h3>
+            <div class="input-group">
+                <label>Date</label>
+                <input type="date" id="date3">
+            </div>
+            <div class="input-group">
+                <label>Class</label>
+                <select id="class3"><option value="">-- All Classes --</option></select>
+            </div>
+            <button class="btn-search" onclick="search(3)">Search Date/Class</button>
+        </div>
+    </div>
+
+    <div id="resultsGrid" class="results-grid"></div>
+</div>
+
+<script>
+    let examData = [];
+    
+    // CONFIGURATION - Update with your details
+    const GITHUB_USERNAME = "YOUR_USERNAME"; 
+    const REPO_NAME = "YOUR_REPO_NAME";
+    const CSV_FILE = "DatesheetSearch.csv";
+    
+    const csvUrl = `https://raw.githubusercontent.com/${GITHUB_USERNAME}/${REPO_NAME}/main/${CSV_FILE}`;
+
+    window.onload = function() {
+        Papa.parse(csvUrl, {
+            download: true,
+            header: true,
+            skipEmptyLines: true,
+            complete: function(results) {
+                examData = results.data;
+                initDropdowns();
+                document.getElementById('status').innerText = "✅ Database Connected";
+                document.getElementById('status').style.color = "#10b981";
+            },
+            error: function() {
+                document.getElementById('status').innerText = "❌ Error: CSV file not found.";
+                document.getElementById('status').style.color = "#ef4444";
+            }
+        });
+    };
+
+    function initDropdowns() {
+        const classes = [...new Set(examData.map(item => item.Class).filter(Boolean))].sort();
+        const subjects = [...new Set(examData.map(item => item.Subject).filter(Boolean))].sort();
+
+        const cls2 = document.getElementById('class2');
+        const cls3 = document.getElementById('class3');
+        const sbj2 = document.getElementById('subject2');
+
+        classes.forEach(c => {
+            let o1 = new Option(c, c);
+            let o2 = new Option(c, c);
+            cls2.add(o1);
+            cls3.add(o2);
+        });
+
+        subjects.forEach(s => {
+            sbj2.add(new Option(s, s));
+        });
+    }
+
+    function formatToCSVDate(dateStr) {
+        if (!dateStr) return null;
+        const date = new Date(dateStr);
+        const day = String(date.getDate()).padStart(2, '0');
+        const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+        return `${day}-${months[date.getMonth()]}-${String(date.getFullYear()).slice(-2)}`;
+    }
+
+    function search(rowNumber) {
+        let filtered = [];
+
+        if (rowNumber === 1) {
+            const d = formatToCSVDate(document.getElementById('date1').value);
+            if (!d) return alert("Select a date first.");
+            filtered = examData.filter(row => row.Date === d);
+        } 
+        else if (rowNumber === 2) {
+            const c = document.getElementById('class2').value;
+            const s = document.getElementById('subject2').value;
+            filtered = examData.filter(row => {
+                const matchC = c ? row.Class === c : true;
+                const matchS = s ? row.Subject === s : true;
+                return matchC && matchS;
+            });
+        } 
+        else if (rowNumber === 3) {
+            const d = formatToCSVDate(document.getElementById('date3').value);
+            const c = document.getElementById('class3').value;
+            filtered = examData.filter(row => {
+                const matchD = d ? row.Date === d : true;
+                const matchC = c ? row.Class === c : true;
+                return matchD && matchC;
+            });
+        }
+
+        render(filtered);
+    }
+
+    function render(data) {
+        const grid = document.getElementById('resultsGrid');
+        grid.innerHTML = "";
+
+        if (data.length === 0) {
+            grid.innerHTML = `<div class="no-results">No exams found for these criteria.</div>`;
+            return;
+        }
+
+        data.forEach(item => {
+            grid.innerHTML += `
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-date">${item.Date}</div>
+                        <div class="card-day">${item.Day}</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-detail">
+                            <span class="detail-label">Class</span>
+                            <span class="detail-value">${item.Class}</span>
+                        </div>
+                        <div class="card-detail">
+                            <span class="detail-label">Subject / Course</span>
+                            <span class="detail-value">${item.Subject}<br><small>${item.Course}</small></span>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge">${item.Shift}</span>
+                        <span class="badge" style="background:rgba(255,255,255,0.2)">${item.Code || 'N/A'}</span>
+                    </div>
+                </div>
+            `;
+        });
+    }
+</script>
+
+</body>
+</html>
