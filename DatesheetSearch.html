@@ -9,40 +9,64 @@
 <style>
 
 body{
-font-family: Arial;
-background:#f5f5f5;
-text-align:center;
+font-family:Arial;
+background:#eef2f7;
 padding:40px;
+text-align:center;
 }
 
 .container{
 background:white;
 padding:30px;
-border-radius:10px;
-width:80%;
+border-radius:12px;
+width:90%;
 margin:auto;
-box-shadow:0 0 10px rgba(0,0,0,0.1);
+box-shadow:0 8px 20px rgba(0,0,0,0.1);
 }
 
-input,button{
+.row{
+margin:20px 0;
+padding:15px;
+border-bottom:1px solid #ddd;
+}
+
+input,select,button{
 padding:10px;
-margin:10px;
-}
-
-table{
-width:100%;
-border-collapse:collapse;
-margin-top:20px;
-}
-
-th,td{
+margin:8px;
+border-radius:6px;
 border:1px solid #ccc;
-padding:10px;
 }
 
-th{
+button{
 background:#2c7be5;
 color:white;
+border:none;
+cursor:pointer;
+}
+
+.cards{
+margin-top:30px;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:20px;
+}
+
+.card{
+padding:20px;
+border-radius:12px;
+color:white;
+background:linear-gradient(135deg,#6a5cff,#4fb7ff);
+box-shadow:0 6px 15px rgba(0,0,0,0.2);
+text-align:left;
+}
+
+.card h3{
+margin-top:0;
+}
+
+.card span{
+display:block;
+margin-top:5px;
 }
 
 </style>
@@ -52,88 +76,191 @@ color:white;
 
 <div class="container">
 
-<h2>Exam Date Sheet Search</h2>
+<h2>Exam Schedule Finder</h2>
 
-<label>Select Date:</label>
-<input type="date" id="searchDate">
+<!-- ROW 1 DATE -->
+<div class="row">
+<h3>Search By Date</h3>
 
-<button onclick="searchExam()">Search</button>
+<input type="date" id="date1">
+<button onclick="searchByDate()">Search</button>
 
-<table id="resultTable">
-<thead>
-<tr>
-<th>Date</th>
-<th>Day</th>
-<th>Shift</th>
-<th>Class</th>
-<th>Subject</th>
-<th>Course</th>
-<th>Code</th>
-</tr>
-</thead>
-<tbody></tbody>
-</table>
+</div>
+
+
+<!-- ROW 2 CLASS + SUBJECT -->
+<div class="row">
+
+<h3>Search By Class & Subject</h3>
+
+<select id="class2">
+<option value="">Select Class</option>
+</select>
+
+<select id="subject2">
+<option value="">Select Subject</option>
+</select>
+
+<button onclick="searchByClassSubject()">Search</button>
+
+</div>
+
+
+<!-- ROW 3 DATE + CLASS -->
+
+<div class="row">
+
+<h3>Search By Date & Class</h3>
+
+<input type="date" id="date3">
+
+<select id="class3">
+<option value="">Select Class</option>
+</select>
+
+<button onclick="searchByDateClass()">Search</button>
+
+</div>
+
+<div id="resultCards" class="cards"></div>
 
 </div>
 
 <script>
 
-let csvData = [];
+let csvData=[];
 
-// Load CSV from GitHub repository
-Papa.parse("DatesheetSearch.csv", {
+Papa.parse("DatesheetSearch.csv",{
 
-download: true,
-header: true,
-skipEmptyLines: true,
+download:true,
+header:true,
+skipEmptyLines:true,
 
-complete: function(results){
-csvData = results.data;
-console.log("CSV Loaded", csvData);
+complete:function(results){
+
+csvData=results.data;
+
+populateFilters();
+
 }
 
 });
 
-function searchExam(){
 
-const dateInput = document.getElementById("searchDate").value;
+function populateFilters(){
 
-if(!dateInput){
-alert("Please select a date");
-return;
+const classes=new Set();
+const subjects=new Set();
+
+csvData.forEach(r=>{
+
+classes.add(r.Class);
+subjects.add(r.Subject);
+
+});
+
+const class2=document.getElementById("class2");
+const class3=document.getElementById("class3");
+const subject2=document.getElementById("subject2");
+
+classes.forEach(c=>{
+
+class2.innerHTML+=`<option value="${c}">${c}</option>`;
+class3.innerHTML+=`<option value="${c}">${c}</option>`;
+
+});
+
+subjects.forEach(s=>{
+
+subject2.innerHTML+=`<option value="${s}">${s}</option>`;
+
+});
+
 }
 
-const selectedDate = new Date(dateInput);
 
-const day = selectedDate.getDate();
-const month = selectedDate.toLocaleString('en-US',{month:'short'});
-const year = selectedDate.getFullYear().toString().slice(-2);
+function formatDate(dateInput){
 
-const formattedDate = `${day}-${month}-${year}`;
+const d=new Date(dateInput);
 
-const results = csvData.filter(row => row.Date === formattedDate);
+const day=d.getDate();
+const month=d.toLocaleString('en-US',{month:'short'});
+const year=d.getFullYear().toString().slice(-2);
 
-const tableBody = document.querySelector("#resultTable tbody");
+return `${day}-${month}-${year}`;
 
-tableBody.innerHTML="";
-
-if(results.length === 0){
-tableBody.innerHTML="<tr><td colspan='7'>No Exam Found</td></tr>";
-return;
 }
 
-results.forEach(r => {
 
-tableBody.innerHTML += `
-<tr>
-<td>${r.Date}</td>
-<td>${r.Day}</td>
-<td>${r.Shift}</td>
-<td>${r.Class}</td>
-<td>${r.Subject}</td>
-<td>${r.Course}</td>
-<td>${r.Code}</td>
-</tr>
+function searchByDate(){
+
+const date=document.getElementById("date1").value;
+
+const formatted=formatDate(date);
+
+const results=csvData.filter(r=>r.Date===formatted);
+
+displayResults(results);
+
+}
+
+
+function searchByClassSubject(){
+
+const c=document.getElementById("class2").value;
+const s=document.getElementById("subject2").value;
+
+const results=csvData.filter(r=>r.Class===c && r.Subject===s);
+
+displayResults(results);
+
+}
+
+
+function searchByDateClass(){
+
+const date=document.getElementById("date3").value;
+const c=document.getElementById("class3").value;
+
+const formatted=formatDate(date);
+
+const results=csvData.filter(r=>r.Date===formatted && r.Class===c);
+
+displayResults(results);
+
+}
+
+
+function displayResults(data){
+
+const container=document.getElementById("resultCards");
+
+container.innerHTML="";
+
+if(data.length===0){
+
+container.innerHTML="<p>No Exam Found</p>";
+return;
+
+}
+
+data.forEach(r=>{
+
+container.innerHTML+=`
+
+<div class="card">
+
+<h3>${r.Subject}</h3>
+
+<span><b>Date:</b> ${r.Date}</span>
+<span><b>Day:</b> ${r.Day}</span>
+<span><b>Class:</b> ${r.Class}</span>
+<span><b>Course:</b> ${r.Course}</span>
+<span><b>Shift:</b> ${r.Shift}</span>
+<span><b>Code:</b> ${r.Code}</span>
+
+</div>
+
 `;
 
 });
