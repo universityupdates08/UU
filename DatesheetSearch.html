@@ -1,311 +1,171 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Exam Datesheet Portal</title>
-
-<script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
-
-<style>
-
-body{
-font-family:system-ui;
-margin:0;
-background:#f5f7fb;
-}
-
-header{
-background:white;
-padding:15px;
-box-shadow:0 2px 10px rgba(0,0,0,0.05);
-position:sticky;
-top:0;
-z-index:100;
-}
-
-h1{
-margin:0;
-font-size:22px;
-}
-
-.tabs{
-display:flex;
-gap:10px;
-margin-top:10px;
-overflow:auto;
-}
-
-.tab{
-padding:8px 14px;
-background:#e9eef8;
-border-radius:20px;
-cursor:pointer;
-white-space:nowrap;
-}
-
-.tab.active{
-background:#4f6ef7;
-color:white;
-}
-
-.container{
-padding:20px;
-}
-
-.controls{
-display:flex;
-gap:10px;
-flex-wrap:wrap;
-margin-bottom:15px;
-}
-
-input,select{
-padding:8px;
-border-radius:6px;
-border:1px solid #ddd;
-}
-
-.grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-gap:15px;
-}
-
-.card{
-background:white;
-border-radius:10px;
-padding:15px;
-box-shadow:0 3px 12px rgba(0,0,0,0.08);
-}
-
-.card h3{
-margin-top:0;
-color:#4f6ef7;
-}
-
-.exam{
-border-top:1px solid #eee;
-padding:8px 0;
-font-size:14px;
-}
-
-.badge{
-display:inline-block;
-padding:3px 8px;
-border-radius:5px;
-font-size:12px;
-background:#eef2ff;
-}
-
-@media(max-width:600px){
-
-.controls{
-flex-direction:column;
-}
-
-}
-
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>University Data Portal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.min.js"></script>
+    <style>
+        .sticky-tabs { position: sticky; top: 0; z-index: 40; background: white; border-bottom: 2px solid #e2e8f0; }
+        .card-shadow { box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); }
+    </style>
 </head>
-
-<body>
-
-<header>
-
-<h1>Exam Datesheet</h1>
-
-<div id="courseTabs" class="tabs"></div>
-
-</header>
-
-<div class="container">
-
-<div class="controls">
-
-<input id="searchBox" placeholder="Search subject or code">
-
-<select id="shiftSort">
-<option value="">Sort by Shift</option>
-<option value="Morning">Morning</option>
-<option value="Evening">Evening</option>
-</select>
-
-<select id="viewMode">
-<option value="date">Date Wise</option>
-<option value="dateCourse">Date + Course</option>
-<option value="course">Course Wise</option>
-</select>
-
-</div>
-
-<div id="content" class="grid"></div>
-
-</div>
-
-<script>
-
-let data=[]
-let currentCourse="All"
-
-fetch("DatesheetSeach.xlsx")
-.then(r=>r.arrayBuffer())
-.then(buffer=>{
-
-let workbook=XLSX.read(buffer)
-
-let sheet=workbook.Sheets[workbook.SheetNames[0]]
-
-data=XLSX.utils.sheet_to_json(sheet)
-
-createCourseTabs()
-
-render()
-
-})
-
-function createCourseTabs(){
-
-let courses=["All",...new Set(data.map(x=>x.Course))]
-
-let container=document.getElementById("courseTabs")
-
-courses.forEach(course=>{
-
-let tab=document.createElement("div")
-
-tab.className="tab"
-
-tab.innerText=course
-
-if(course==="All") tab.classList.add("active")
-
-tab.onclick=()=>{
-
-document.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"))
-
-tab.classList.add("active")
-
-currentCourse=course
-
-render()
-
-}
-
-container.appendChild(tab)
-
-})
-
-}
-
-function filterData(){
-
-let filtered=[...data]
-
-if(currentCourse!=="All")
-
-filtered=filtered.filter(x=>x.Course===currentCourse)
-
-let search=document.getElementById("searchBox").value.toLowerCase()
-
-if(search)
-
-filtered=filtered.filter(x=>
-
-Object.values(x).join(" ").toLowerCase().includes(search)
-
-)
-
-let shift=document.getElementById("shiftSort").value
-
-if(shift)
-
-filtered=filtered.filter(x=>x.Shift===shift)
-
-return filtered
-
-}
-
-function groupBy(arr,key){
-
-return arr.reduce((a,v)=>{
-
-(a[v[key]]=(a[v[key]]||[])).push(v)
-
-return a
-
-},{})
-
-}
-
-function render(){
-
-let mode=document.getElementById("viewMode").value
-
-let container=document.getElementById("content")
-
-container.innerHTML=""
-
-let filtered=filterData()
-
-let grouped
-
-if(mode==="date")
-
-grouped=groupBy(filtered,"Date")
-
-if(mode==="course")
-
-grouped=groupBy(filtered,"Course")
-
-if(mode==="dateCourse")
-
-grouped=groupBy(filtered,"Date")
-
-Object.keys(grouped).forEach(key=>{
-
-let card=document.createElement("div")
-
-card.className="card"
-
-let html=`<h3>${key}</h3>`
-
-grouped[key].forEach(exam=>{
-
-html+=`
-
-<div class="exam">
-
-<b>${exam.Subject}</b><br>
-
-<span class="badge">${exam.Course}</span>
-
-<span class="badge">${exam.Shift}</span>
-
-<br>
-
-Code: ${exam.Code}
-
-</div>
-
-`
-
-})
-
-card.innerHTML=html
-
-container.appendChild(card)
-
-})
-
-}
-
-document.getElementById("searchBox").oninput=render
-document.getElementById("shiftSort").onchange=render
-document.getElementById("viewMode").onchange=render
-
-</script>
-
+<body class="bg-slate-50 text-slate-800 font-sans">
+
+    <header class="bg-blue-900 text-white p-6 shadow-lg">
+        <div class="container mx-auto">
+            <h1 class="text-2xl font-bold">Academic Resource Portal</h1>
+            <p class="text-blue-200 text-sm">Automated Data Sync from GitHub</p>
+        </div>
+    </header>
+
+    <nav class="sticky-tabs p-4">
+        <div class="container mx-auto flex flex-wrap gap-4 items-center justify-between">
+            <div class="flex gap-4 items-center">
+                <input type="text" id="searchInput" placeholder="Search data..." class="border p-2 rounded-md focus:ring-2 focus:ring-blue-500 outline-none">
+                <select id="shiftSort" class="border p-2 rounded-md bg-white">
+                    <option value="asc">Shift: Morning First</option>
+                    <option value="desc">Shift: Evening First</option>
+                </select>
+            </div>
+            <div id="courseFilterContainer">
+                </div>
+        </div>
+    </nav>
+
+    <main class="container mx-auto p-6 space-y-12">
+
+        <section>
+            <h2 class="text-xl font-bold mb-4 border-l-4 border-blue-600 pl-3">Schedule by Date</h2>
+            <div id="dateWiseRow" class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <p class="text-gray-500 italic">Loading data...</p>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="text-xl font-bold mb-4 border-l-4 border-emerald-600 pl-3">Filtered View (Date + Course)</h2>
+            <div id="dateCourseRow" class="bg-white p-4 rounded-lg card-shadow overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="bg-slate-100 text-slate-600 uppercase text-xs">
+                            <th class="p-3">Date</th>
+                            <th class="p-3">Course</th>
+                            <th class="p-3">Shift</th>
+                            <th class="p-3">Details</th>
+                        </tr>
+                    </thead>
+                    <tbody id="filteredTableBody"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="text-xl font-bold mb-4 border-l-4 border-purple-600 pl-3">Course Catalog</h2>
+            <div id="courseWiseRow" class="flex flex-wrap gap-4"></div>
+        </section>
+
+    </main>
+
+    <script>
+        // CONFIG: Update this to your GitHub file URL
+        const FILE_URL = 'DatesheetSearch.xlsx'; 
+
+        let globalData = [];
+
+        async function fetchData() {
+            try {
+                const response = await fetch(FILE_URL);
+                const arrayBuffer = await response.arrayBuffer();
+                const data = new Uint8Array(arrayBuffer);
+                const workbook = XLSX.read(data, { type: 'array' });
+                
+                // Read first sheet
+                const firstSheet = workbook.SheetNames[0];
+                const jsonData = XLSX.utils.sheet_to_json(workbook.Sheets[firstSheet]);
+                
+                globalData = jsonData;
+                initPortal();
+            } catch (error) {
+                console.error("Error fetching data:", error);
+                document.getElementById('dateWiseRow').innerHTML = "Error loading data. Check console.";
+            }
+        }
+
+        function initPortal() {
+            populateCourseDropdown();
+            renderDateWise();
+            renderFilteredTable();
+            renderCourseWise();
+            
+            // Event Listeners
+            document.getElementById('searchInput').addEventListener('input', renderFilteredTable);
+            document.getElementById('shiftSort').addEventListener('change', renderFilteredTable);
+        }
+
+        function populateCourseDropdown() {
+            const courses = [...new Set(globalData.map(item => item.Course))];
+            let html = `<select id="courseSelect" onchange="renderFilteredTable()" class="border p-2 rounded-md bg-white">
+                        <option value="all">All Courses</option>`;
+            courses.forEach(c => html += `<option value="${c}">${c}</option>`);
+            html += `</select>`;
+            document.getElementById('courseFilterContainer').innerHTML = html;
+        }
+
+        function renderDateWise() {
+            const container = document.getElementById('dateWiseRow');
+            const sortedByDate = [...globalData].sort((a, b) => new Date(a.Date) - new Date(b.Date));
+            
+            container.innerHTML = sortedByDate.map(item => `
+                <div class="bg-white p-4 rounded-lg border-t-4 border-blue-500 card-shadow">
+                    <span class="text-xs font-bold text-blue-600">${item.Date}</span>
+                    <h3 class="font-bold text-lg">${item.Course}</h3>
+                    <p class="text-sm text-gray-600">Shift: ${item.Shift}</p>
+                </div>
+            `).join('');
+        }
+
+        function renderFilteredTable() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const courseFilter = document.getElementById('courseSelect').value;
+            const shiftSort = document.getElementById('shiftSort').value;
+            const tbody = document.getElementById('filteredTableBody');
+
+            let filtered = globalData.filter(item => {
+                const matchesSearch = Object.values(item).some(val => String(val).toLowerCase().includes(searchTerm));
+                const matchesCourse = courseFilter === 'all' || item.Course === courseFilter;
+                return matchesSearch && matchesCourse;
+            });
+
+            if(shiftSort === 'asc') filtered.sort((a,b) => a.Shift.localeCompare(b.Shift));
+            else filtered.sort((a,b) => b.Shift.localeCompare(a.Shift));
+
+            tbody.innerHTML = filtered.map(item => `
+                <tr class="border-b hover:bg-slate-50 transition">
+                    <td class="p-3">${item.Date}</td>
+                    <td class="p-3 font-semibold">${item.Course}</td>
+                    <td class="p-3"><span class="px-2 py-1 rounded-full text-xs bg-gray-200">${item.Shift}</span></td>
+                    <td class="p-3 text-sm text-gray-500">${item.Description || 'N/A'}</td>
+                </tr>
+            `).join('');
+        }
+
+        function renderCourseWise() {
+            const container = document.getElementById('courseWiseRow');
+            const courseCounts = globalData.reduce((acc, curr) => {
+                acc[curr.Course] = (acc[curr.Course] || 0) + 1;
+                return acc;
+            }, {});
+
+            container.innerHTML = Object.entries(courseCounts).map(([name, count]) => `
+                <div class="bg-purple-100 text-purple-800 px-6 py-4 rounded-xl border border-purple-200">
+                    <div class="text-2xl font-bold">${count}</div>
+                    <div class="text-xs uppercase tracking-wider font-semibold">${name} Sessions</div>
+                </div>
+            `).join('');
+        }
+
+        fetchData();
+    </script>
 </body>
 </html>
