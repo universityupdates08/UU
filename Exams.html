@@ -290,7 +290,7 @@ function showLiveAlerts() {
 }
 
 function renderAlertBox(title, dateStr, exams) {
-    const dayName = exams.length > 0 ? exams[0].Day : new Date().toLocaleString('en-us', {weekday:'long'});
+    const dayName = exams.length > 0 ? exams[0].Day : "Schedule";
     let html = `<strong>${title}</strong><br><small>${dateStr} (${dayName})</small><hr>`;
     if (exams.length === 0) return html + `<p class="no-results">No Exams Scheduled</p>`;
     
@@ -309,9 +309,9 @@ function searchByDate() {
     
     if(results.length === 0) { container.innerHTML = `<p class="no-results">No Exams Found</p>`; return; }
     
-    let html = `<table><tr><th>S.No</th><th>Date (Day)</th><th>Class</th><th>Subject</th><th>Course</th><th>Code</th><th>Shift</th></tr>`;
+    let html = `<table><tr><th>S.No</th><th>Date</th><th>Day</th><th>Class</th><th>Subject</th><th>Course</th><th>Code</th><th>Shift</th></tr>`;
     results.forEach((r, i) => {
-        html += `<tr><td>${i+1}</td><td>${r.Date} (${r.Day})</td><td>${r.Class}</td><td>${r.Subject}</td><td>${r.Course}</td><td>${r.Code}</td><td>${r.Shift}</td></tr>`;
+        html += `<tr><td>${i+1}</td><td>${r.Date}</td><td>${r.Day}</td><td>${r.Class}</td><td>${r.Subject}</td><td>${r.Course}</td><td>${r.Code}</td><td>${r.Shift}</td></tr>`;
     });
     container.innerHTML = html + `</table>`;
 }
@@ -325,10 +325,10 @@ function searchByClassSubject() {
     if(results.length === 0) { container.innerHTML = `<div class="no-results">No Records Found</div>`; return; }
 
     container.innerHTML = `
-        <div class="card" style="margin: 20px auto; max-width: 700px;">
+        <div class="card" style="margin: 20px auto; max-width: 800px;">
             <div class="card-header"><div class="card-date">${c}</div><div>${s}</div></div>
-            <table><tr><th>S.No</th><th>Date (Day)</th><th>Course</th><th>Shift</th></tr>
-            ${results.map((r, i) => `<tr><td>${i+1}</td><td>${r.Date} (${r.Day})</td><td>${r.Course}</td><td>${r.Shift}</td></tr>`).join('')}
+            <table><tr><th>S.No</th><th>Date</th><th>Day</th><th>Course</th><th>Shift</th></tr>
+            ${results.map((r, i) => `<tr><td>${i+1}</td><td>${r.Date}</td><td>${r.Day}</td><td>${r.Course}</td><td>${r.Shift}</td></tr>`).join('')}
             </table>
         </div>`;
 }
@@ -340,10 +340,10 @@ function searchByDateClass() {
     const container = document.getElementById("resultRow3");
     container.innerHTML = results.length ? "" : `<div class="no-results">No Exams Found</div>`;
     
-    results.forEach((r, i) => {
+    results.forEach((r) => {
         container.innerHTML += `
             <div class="card">
-                <div class="card-header"><div class="card-date">#${i+1} | ${r.Date}</div><small>(${r.Day})</small></div>
+                <div class="card-header"><div class="card-date">${r.Date}</div><small>(${r.Day})</small></div>
                 <span class="detail-label">Subject</span><span class="detail-value">${r.Subject}</span>
                 <span class="detail-label">Course</span><span class="detail-value">${r.Course}</span>
                 <span class="detail-label">Class</span><span class="detail-value">${r.Class}</span>
