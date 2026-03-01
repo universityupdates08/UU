@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Exam Schedule Portal</title>
+<title>UNIVERSITY UPDATES - Exam Schedule Portal</title>
 
 <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
 
@@ -90,10 +90,9 @@ body{
 
 .controls button:hover{ background: #1a68d1; }
 
-/* ALERT PANEL STYLES */
 .alert-grid{
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     gap: 20px;
 }
 
@@ -108,11 +107,10 @@ body{
 .alert-card.today { border-top-color: var(--alert-today); }
 .alert-card.tomorrow { border-top-color: var(--alert-tomorrow); }
 
-/* GRID AND CARDS */
 .results-grid{
     margin-top: 20px;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 15px;
 }
 
@@ -124,19 +122,6 @@ body{
     text-align: left;
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     transition: transform 0.2s;
-}
-
-.card:hover { transform: translateY(-3px); }
-
-.yellow-card {
-    background: var(--yellow-grad);
-    color: #333;
-    border-radius: 12px;
-    padding: 20px;
-    max-width: 400px;
-    margin: 20px auto;
-    text-align: left;
-    box-shadow: 0 4px 15px rgba(255,180,0,0.3);
 }
 
 .card-header { border-bottom: 1px solid rgba(255,255,255,0.2); margin-bottom: 10px; padding-bottom: 5px; }
@@ -154,21 +139,28 @@ body{
     font-weight: bold;
 }
 
-/* TABLES */
-table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 0.85rem; background: white; color: #333; border-radius: 8px; overflow: hidden; }
-th, td { border: 1px solid #eee; padding: 10px; text-align: center; }
+table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 0.82rem; background: white; color: #333; }
+th, td { border: 1px solid #eee; padding: 8px; text-align: center; }
 th { background: #2c7be5; color: white; }
 tr:nth-child(even) { background: #f9f9f9; }
 
 .no-results { padding: 30px; color: #999; font-style: italic; }
 
+.yellow-card {
+    background: var(--yellow-grad);
+    color: #333;
+    border-radius: 12px;
+    padding: 20px;
+    max-width: 400px;
+    margin: 20px auto;
+    text-align: left;
+}
 </style>
 </head>
 
 <body>
 
 <div class="container">
-
     <h2>Exam Schedule Portal</h2>
     <div class="warning">
         ⚠ Please verify the exam schedule carefully. Always confirm with the official notification before appearing in the exam. The data are available as per University Letter No. (Exam/D.R./10154) Dated - 27.02.2026.
@@ -235,13 +227,11 @@ tr:nth-child(even) { background: #f9f9f9; }
         </div>
         <div id="resultRow5" class="results-grid"></div>
     </div>
-
 </div>
 
 <script>
 let csvData = [];
 
-// Load CSV
 Papa.parse("DatesheetSearch.csv", {
     download: true,
     header: true,
@@ -254,10 +244,7 @@ Papa.parse("DatesheetSearch.csv", {
 });
 
 function populateFilters() {
-    const classes = new Set();
-    const subjects = new Set();
-    const codes = new Set();
-
+    const classes = new Set(), subjects = new Set(), codes = new Set();
     csvData.forEach(r => {
         if(r.Class) classes.add(r.Class);
         if(r.Subject) subjects.add(r.Subject);
@@ -269,9 +256,10 @@ function populateFilters() {
         items.forEach(item => el.innerHTML += `<option value="${item}">${item}</option>`);
     };
 
-    fillSelect("class2", Array.from(classes).sort());
-    fillSelect("class3", Array.from(classes).sort());
-    fillSelect("class5", Array.from(classes).sort());
+    const sortedClasses = Array.from(classes).sort();
+    fillSelect("class2", sortedClasses);
+    fillSelect("class3", sortedClasses);
+    fillSelect("class5", sortedClasses);
     fillSelect("subject2", Array.from(subjects).sort());
     fillSelect("subject5", Array.from(subjects).sort());
     fillSelect("code4", Array.from(codes).sort());
@@ -301,37 +289,46 @@ function showLiveAlerts() {
     document.getElementById("tomorrowCard").innerHTML = renderAlertBox("TOMORROW'S EXAMS", tmStr, tmExams);
 }
 
-function renderAlertBox(title, date, exams) {
-    let html = `<strong>${title}</strong><br><small>${date}</small><hr>`;
+function renderAlertBox(title, dateStr, exams) {
+    const dayName = exams.length > 0 ? exams[0].Day : new Date().toLocaleString('en-us', {weekday:'long'});
+    let html = `<strong>${title}</strong><br><small>${dateStr} (${dayName})</small><hr>`;
     if (exams.length === 0) return html + `<p class="no-results">No Exams Scheduled</p>`;
     
-    html += `<table><tr><th>Class</th><th>Subject</th><th>Shift</th></tr>`;
-    exams.forEach(r => {
-        html += `<tr><td>${r.Class}</td><td>${r.Subject}</td><td>${r.Shift}</td></tr>`;
+    html += `<table><tr><th>S.No</th><th>Class</th><th>Subject</th><th>Shift</th></tr>`;
+    exams.forEach((r, i) => {
+        html += `<tr><td>${i+1}</td><td>${r.Class}</td><td>${r.Subject}</td><td>${r.Shift}</td></tr>`;
     });
     return html + `</table>`;
 }
 
-// Search Functions
 function searchByDate() {
-    const date = formatDate(document.getElementById("date1").value);
+    const val = document.getElementById("date1").value;
+    const date = formatDate(val);
     const results = csvData.filter(r => r.Date === date);
-    renderTable(results, "dateResults");
+    const container = document.getElementById("dateResults");
+    
+    if(results.length === 0) { container.innerHTML = `<p class="no-results">No Exams Found</p>`; return; }
+    
+    let html = `<table><tr><th>S.No</th><th>Date (Day)</th><th>Class</th><th>Subject</th><th>Course</th><th>Code</th><th>Shift</th></tr>`;
+    results.forEach((r, i) => {
+        html += `<tr><td>${i+1}</td><td>${r.Date} (${r.Day})</td><td>${r.Class}</td><td>${r.Subject}</td><td>${r.Course}</td><td>${r.Code}</td><td>${r.Shift}</td></tr>`;
+    });
+    container.innerHTML = html + `</table>`;
 }
 
 function searchByClassSubject() {
     const c = document.getElementById("class2").value;
     const s = document.getElementById("subject2").value;
     const results = csvData.filter(r => r.Class === c && r.Subject === s);
-    
     const container = document.getElementById("resultRow2");
+    
     if(results.length === 0) { container.innerHTML = `<div class="no-results">No Records Found</div>`; return; }
 
     container.innerHTML = `
-        <div class="card" style="margin: 20px auto; max-width: 600px;">
+        <div class="card" style="margin: 20px auto; max-width: 700px;">
             <div class="card-header"><div class="card-date">${c}</div><div>${s}</div></div>
-            <table><tr><th>Date</th><th>Course</th><th>Shift</th></tr>
-            ${results.map(r => `<tr><td>${r.Date}</td><td>${r.Course}</td><td>${r.Shift}</td></tr>`).join('')}
+            <table><tr><th>S.No</th><th>Date (Day)</th><th>Course</th><th>Shift</th></tr>
+            ${results.map((r, i) => `<tr><td>${i+1}</td><td>${r.Date} (${r.Day})</td><td>${r.Course}</td><td>${r.Shift}</td></tr>`).join('')}
             </table>
         </div>`;
 }
@@ -340,7 +337,22 @@ function searchByDateClass() {
     const d = formatDate(document.getElementById("date3").value);
     const c = document.getElementById("class3").value;
     const results = csvData.filter(r => r.Date === d && r.Class === c);
-    renderCards(results, "resultRow3");
+    const container = document.getElementById("resultRow3");
+    container.innerHTML = results.length ? "" : `<div class="no-results">No Exams Found</div>`;
+    
+    results.forEach((r, i) => {
+        container.innerHTML += `
+            <div class="card">
+                <div class="card-header"><div class="card-date">#${i+1} | ${r.Date}</div><small>(${r.Day})</small></div>
+                <span class="detail-label">Subject</span><span class="detail-value">${r.Subject}</span>
+                <span class="detail-label">Course</span><span class="detail-value">${r.Course}</span>
+                <span class="detail-label">Class</span><span class="detail-value">${r.Class}</span>
+                <div style="display:flex; justify-content:space-between; align-items:flex-end;">
+                    <span class="badge">Code: ${r.Code}</span>
+                    <span class="badge">${r.Shift}</span>
+                </div>
+            </div>`;
+    });
 }
 
 function searchByCode() {
@@ -365,29 +377,15 @@ function searchClassYearSubject() {
     const y = document.getElementById("year5").value;
     const s = document.getElementById("subject5").value;
     const results = csvData.filter(r => r.Class === c && r.Subject === s && r.Year === y);
-    renderCards(results, "resultRow5");
-}
-
-// Helpers
-function renderTable(data, id) {
-    const container = document.getElementById(id);
-    if(data.length === 0) { container.innerHTML = `<p class="no-results">No Exams Found</p>`; return; }
-    let html = `<table><tr><th>Date</th><th>Class</th><th>Subject</th><th>Course</th><th>Code</th><th>Shift</th></tr>`;
-    data.forEach(r => {
-        html += `<tr><td>${r.Date}</td><td>${r.Class}</td><td>${r.Subject}</td><td>${r.Course}</td><td>${r.Code}</td><td>${r.Shift}</td></tr>`;
-    });
-    container.innerHTML = html + `</table>`;
-}
-
-function renderCards(data, id) {
-    const container = document.getElementById(id);
-    container.innerHTML = data.length ? "" : `<div class="no-results">No Exams Found</div>`;
-    data.forEach(r => {
+    const container = document.getElementById("resultRow5");
+    container.innerHTML = results.length ? "" : `<div class="no-results">No Exams Found</div>`;
+    
+    results.forEach((r, i) => {
         container.innerHTML += `
             <div class="card">
-                <div class="card-header"><div class="card-date">${r.Date}</div><small>${r.Day}</small></div>
+                <div class="card-header"><div class="card-date">#${i+1} | ${r.Date}</div><small>(${r.Day})</small></div>
                 <span class="detail-label">Subject</span><span class="detail-value">${r.Subject}</span>
-                <span class="detail-label">Class</span><span class="detail-value">${r.Class}</span>
+                <span class="detail-label">Course</span><span class="detail-value">${r.Course}</span>
                 <div style="display:flex; justify-content:space-between; align-items:flex-end;">
                     <span class="badge">Code: ${r.Code}</span>
                     <span class="badge">${r.Shift}</span>
