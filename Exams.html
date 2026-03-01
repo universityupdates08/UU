@@ -218,9 +218,9 @@ tr:nth-child(even) { background: #f9f9f9; }
             <select id="class5"><option value="">Select Class</option></select>
             <select id="year5">
                 <option value="">Select Year</option>
-                <option value="1">1st Year</option>
-                <option value="2">2nd Year</option>
-                <option value="3">3rd Year</option>
+                <option value="1st">1st Year</option>
+                <option value="2nd">2nd Year</option>
+                <option value="3rd">3rd Year</option>
             </select>
             <select id="subject5"><option value="">Select Subject</option></select>
             <button onclick="searchClassYearSubject()">Search</button>
@@ -285,18 +285,20 @@ function showLiveAlerts() {
     const tExams = csvData.filter(r => r.Date === tStr);
     const tmExams = csvData.filter(r => r.Date === tmStr);
 
-    document.getElementById("todayCard").innerHTML = renderAlertBox("TODAY'S EXAMS", tStr, tExams);
-    document.getElementById("tomorrowCard").innerHTML = renderAlertBox("TOMORROW'S EXAMS", tmStr, tmExams);
+    document.getElementById("todayCard").innerHTML = renderAlertBox("TODAY'S EXAMS", today, tExams);
+    document.getElementById("tomorrowCard").innerHTML = renderAlertBox("TOMORROW'S EXAMS", tomorrow, tmExams);
 }
 
-function renderAlertBox(title, dateStr, exams) {
-    const dayName = exams.length > 0 ? exams[0].Day : "Schedule";
+function renderAlertBox(title, dateObj, exams) {
+    const dateStr = formatDate(dateObj);
+    const dayName = dateObj.toLocaleString('en-us', {weekday:'long'});
     let html = `<strong>${title}</strong><br><small>${dateStr} (${dayName})</small><hr>`;
+    
     if (exams.length === 0) return html + `<p class="no-results">No Exams Scheduled</p>`;
     
-    html += `<table><tr><th>S.No</th><th>Class</th><th>Subject</th><th>Shift</th></tr>`;
+    html += `<table><tr><th>S.No</th><th>Class</th><th>Subject</th><th>Code</th><th>Shift</th></tr>`;
     exams.forEach((r, i) => {
-        html += `<tr><td>${i+1}</td><td>${r.Class}</td><td>${r.Subject}</td><td>${r.Shift}</td></tr>`;
+        html += `<tr><td>${i+1}</td><td>${r.Class}</td><td>${r.Subject}</td><td>${r.Code || '-'}</td><td>${r.Shift}</td></tr>`;
     });
     return html + `</table>`;
 }
@@ -334,7 +336,8 @@ function searchByClassSubject() {
 }
 
 function searchByDateClass() {
-    const d = formatDate(document.getElementById("date3").value);
+    const dInput = document.getElementById("date3").value;
+    const d = formatDate(dInput);
     const c = document.getElementById("class3").value;
     const results = csvData.filter(r => r.Date === d && r.Class === c);
     const container = document.getElementById("resultRow3");
@@ -383,7 +386,7 @@ function searchClassYearSubject() {
     results.forEach((r, i) => {
         container.innerHTML += `
             <div class="card">
-                <div class="card-header"><div class="card-date">#${i+1} | ${r.Date}</div><small>(${r.Day})</small></div>
+                <div class="card-header"><div class="card-date">${r.Date}</div><small>(${r.Day})</small></div>
                 <span class="detail-label">Subject</span><span class="detail-value">${r.Subject}</span>
                 <span class="detail-label">Course</span><span class="detail-value">${r.Course}</span>
                 <div style="display:flex; justify-content:space-between; align-items:flex-end;">
