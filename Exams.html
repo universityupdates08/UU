@@ -9,8 +9,7 @@
 <style>
 
 :root{
---morning-grad: linear-gradient(135deg,#4fb7ff,#0066ff);
---evening-grad: linear-gradient(135deg,#9b59ff,#6a00ff);
+--card-grad: linear-gradient(135deg,#6a5cff,#4fb7ff);
 --yellow-grad: linear-gradient(135deg,#ffd84d,#ffb300);
 }
 
@@ -30,25 +29,6 @@ margin:auto;
 box-shadow:0 8px 20px rgba(0,0,0,0.1);
 }
 
-/* TODAY PANEL */
-
-.today-panel{
-background:#e8fff0;
-border:2px solid #00c853;
-padding:20px;
-border-radius:10px;
-margin-bottom:25px;
-}
-
-.today-title{
-font-size:1.3rem;
-font-weight:bold;
-margin-bottom:10px;
-color:#007e33;
-}
-
-/* WARNING */
-
 .warning{
 background:#fff3cd;
 border:1px solid #ffeeba;
@@ -65,15 +45,23 @@ padding:20px;
 border-radius:10px;
 }
 
-.row1{background:#e8f1ff;}
-.row2{background:#e9f9ef;}
-.row3{background:#fff1f1;}
-.row4{background:#fff8e1;}
+.row0{ background:#f0f7ff; }
+.row1{ background:#e8f1ff; }
+.row2{ background:#e9f9ef; }
+.row3{ background:#fff1f1; }
+.row4{ background:#fff8e1; }
+.row5{ background:#f2f2ff; }
+
+.row h3{
+text-align:left;
+margin-bottom:10px;
+}
 
 .controls{
 display:flex;
-gap:10px;
+justify-content:space-between;
 flex-wrap:wrap;
+gap:10px;
 }
 
 .controls input,
@@ -92,8 +80,6 @@ border:none;
 cursor:pointer;
 }
 
-/* CARD GRID */
-
 .results-grid{
 margin-top:20px;
 display:grid;
@@ -101,82 +87,34 @@ grid-template-columns:repeat(auto-fill,minmax(230px,1fr));
 gap:15px;
 }
 
-/* CARDS */
+/* TODAY PANEL */
 
-.card{
+.today-card{
+background:linear-gradient(135deg,#00c6ff,#0072ff);
 color:white;
-border-radius:12px;
-padding:14px;
-box-shadow:0 3px 14px rgba(0,0,0,0.25);
-text-align:left;
-font-size:90%;
-position:relative;
-}
-
-/* SHIFT COLORS */
-
-.morning{
-background:var(--morning-grad);
-}
-
-.evening{
-background:var(--evening-grad);
-}
-
-/* NEXT EXAM */
-
-.next-exam{
-outline:4px solid #00c853;
-box-shadow:0 0 15px #00c853;
-}
-
-/* CODE CARD */
-
-.yellow-card{
-background:var(--yellow-grad);
-color:#333;
-border-radius:12px;
 padding:16px;
-box-shadow:0 4px 15px rgba(255,180,0,0.4);
-max-width:350px;
-margin:auto;
+border-radius:12px;
+margin-bottom:12px;
+text-align:left;
 }
 
-/* HEADER */
-
-.card-header{
-border-bottom:1px solid rgba(255,255,255,0.3);
-padding-bottom:6px;
-margin-bottom:8px;
-}
-
-.card-date{
+.today-title{
 font-size:1.1rem;
 font-weight:bold;
 }
 
-.card-day{
-font-size:0.8rem;
-opacity:0.9;
+.progress-bar{
+width:100%;
+background:#e0e0e0;
+border-radius:10px;
+margin-top:8px;
+overflow:hidden;
 }
 
-.badge{
-background:rgba(0,0,0,0.25);
-padding:3px 8px;
-border-radius:6px;
-font-size:0.75rem;
-margin-right:4px;
-}
-
-/* COUNTDOWN */
-
-.countdown{
-font-size:0.8rem;
-margin-top:6px;
-background:rgba(0,0,0,0.25);
-padding:4px 6px;
-border-radius:6px;
-display:inline-block;
+.progress{
+height:8px;
+background:#00ff95;
+width:100%;
 }
 
 /* CENTER CARD */
@@ -185,6 +123,78 @@ display:inline-block;
 display:flex;
 justify-content:center;
 margin-top:20px;
+}
+
+/* CARDS */
+
+.card{
+background:var(--card-grad);
+color:white;
+border-radius:12px;
+padding:14px;
+box-shadow:0 3px 14px rgba(67,56,202,0.25);
+transition:transform 0.3s ease;
+text-align:left;
+font-size:90%;
+}
+
+.card:hover{
+transform:translateY(-4px);
+}
+
+.card-header{
+border-bottom:1px solid rgba(255,255,255,0.3);
+padding-bottom:8px;
+margin-bottom:10px;
+}
+
+.card-date{
+font-size:1.05rem;
+font-weight:800;
+}
+
+.card-day{
+font-size:0.8rem;
+opacity:0.8;
+}
+
+.card-detail{
+margin-bottom:8px;
+}
+
+.detail-label{
+font-size:0.65rem;
+text-transform:uppercase;
+opacity:0.7;
+}
+
+.detail-value{
+font-size:0.9rem;
+font-weight:500;
+}
+
+.card-footer{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-top:6px;
+}
+
+.badge{
+background:rgba(0,0,0,0.2);
+padding:3px 8px;
+border-radius:6px;
+font-size:0.7rem;
+font-weight:bold;
+}
+
+.no-results{
+text-align:center;
+padding:40px;
+background:white;
+border-radius:12px;
+color:#94a3b8;
+border:2px dashed #e2e8f0;
 }
 
 /* TABLE */
@@ -221,22 +231,20 @@ background:#f2f2f2;
 <div class="container">
 
 <h2>Exam Schedule Portal</h2>
+<h3>Select a search method below to find your datesheet</h3>
+
+<div class="warning">
+⚠ Please verify the exam schedule carefully. Always confirm with the official notification before appearing in the exam.
+</div>
 
 <!-- TODAY PANEL -->
 
-<div class="today-panel">
-
-<div class="today-title">📅 Today's Exams</div>
-
-<div id="todayExams" class="results-grid"></div>
-
+<div class="row row0">
+<h3>📅 TODAY'S EXAMS</h3>
+<div id="todayPanel"></div>
 </div>
 
-<div class="warning">
-⚠ Verify exam schedule with official notification.
-</div>
-
-<!-- SEARCH BY DATE -->
+<!-- SEARCH DATE -->
 
 <div class="row row1">
 
@@ -258,9 +266,12 @@ background:#f2f2f2;
 <h3>SEARCH BY CLASS & SUBJECT</h3>
 
 <div class="controls">
-<select id="class2"><option>Select Class</option></select>
-<select id="subject2"><option>Select Subject</option></select>
+
+<select id="class2"><option value="">Select Class</option></select>
+<select id="subject2"><option value="">Select Subject</option></select>
+
 <button onclick="searchByClassSubject()">Search</button>
+
 </div>
 
 <div id="resultRow2" class="center-card"></div>
@@ -274,27 +285,60 @@ background:#f2f2f2;
 <h3>SEARCH BY DATE & CLASS</h3>
 
 <div class="controls">
+
 <input type="date" id="date3">
-<select id="class3"><option>Select Class</option></select>
+<select id="class3"><option value="">Select Class</option></select>
+
 <button onclick="searchByDateClass()">Search</button>
+
 </div>
 
 <div id="resultRow3" class="results-grid"></div>
 
 </div>
 
-<!-- CODE -->
+<!-- PAPER CODE -->
 
 <div class="row row4">
 
-<h3>SEARCH BY CODE</h3>
+<h3>SEARCH BY PAPER CODE</h3>
 
 <div class="controls">
-<select id="code4"><option>Select Code</option></select>
+
+<select id="code4"><option value="">Select Code</option></select>
 <button onclick="searchByCode()">Search</button>
+
 </div>
 
-<div id="resultRow4"></div>
+<div id="resultRow4" class="results-grid"></div>
+
+</div>
+
+<!-- CLASS YEAR SUBJECT -->
+
+<div class="row row5">
+
+<h3>SEARCH BY CLASS, YEAR & SUBJECT</h3>
+
+<div class="controls">
+
+<select id="class5"><option value="">Select Class</option></select>
+
+<select id="year5">
+<option value="">Select Year</option>
+<option value="1">1st Year</option>
+<option value="2">2nd Year</option>
+<option value="3">3rd Year</option>
+<option value="4">4th Year</option>
+</select>
+
+<select id="subject5"><option value="">Select Subject</option></select>
+
+<button onclick="searchClassYearSubject()">Search</button>
+
+</div>
+
+<div id="resultRow5" class="results-grid"></div>
 
 </div>
 
@@ -305,28 +349,49 @@ background:#f2f2f2;
 let csvData=[];
 
 Papa.parse("DatesheetSearch.csv",{
+
 download:true,
 header:true,
 skipEmptyLines:true,
 
 complete:function(results){
+
 csvData=results.data;
 populateFilters();
 showTodayExams();
+
 }
 
 });
 
-/* DATE PARSER */
+/* POPULATE DROPDOWNS */
 
-function parseExamDate(dateStr){
+function populateFilters(){
 
-const parts=dateStr.split("-");
-const day=parts[0];
-const month=parts[1];
-const year="20"+parts[2];
+const classes=new Set();
+const subjects=new Set();
+const codes=new Set();
 
-return new Date(`${month} ${day}, ${year}`);
+csvData.forEach(r=>{
+classes.add(r.Class);
+subjects.add(r.Subject);
+codes.add(r.Code);
+});
+
+classes.forEach(c=>{
+class2.innerHTML+=`<option>${c}</option>`;
+class3.innerHTML+=`<option>${c}</option>`;
+class5.innerHTML+=`<option>${c}</option>`;
+});
+
+subjects.forEach(s=>{
+subject2.innerHTML+=`<option>${s}</option>`;
+subject5.innerHTML+=`<option>${s}</option>`;
+});
+
+codes.forEach(c=>{
+code4.innerHTML+=`<option>${c}</option>`;
+});
 
 }
 
@@ -334,43 +399,41 @@ return new Date(`${month} ${day}, ${year}`);
 
 function showTodayExams(){
 
+const container=document.getElementById("todayPanel");
+
 const today=new Date();
+const day=today.getDate();
+const month=today.toLocaleString('en-US',{month:'short'});
+const year=today.getFullYear().toString().slice(-2);
 
-const todayStr=today.getDate()+"-"+today.toLocaleString('en-US',{month:'short'})+"-"+today.getFullYear().toString().slice(-2);
+const formatted=`${day}-${month}-${year}`;
 
-const todayData=csvData.filter(r=>r.Date===todayStr);
+const exams=csvData.filter(r=>r.Date===formatted);
 
-const container=document.getElementById("todayExams");
+container.innerHTML="";
 
-if(todayData.length===0){
-
-container.innerHTML="<p>No Exam Today</p>";
+if(exams.length===0){
+container.innerHTML=`<div class="no-results">No Exam Today</div>`;
 return;
-
 }
 
-todayData.forEach(r=>{
-
-const shift=r.Shift.toLowerCase().includes("morning")?"morning":"evening";
+exams.forEach(r=>{
 
 container.innerHTML+=`
 
-<div class="card ${shift} next-exam">
+<div class="today-card">
 
-<div class="card-header">
-<div class="card-date">${r.Date}</div>
-<div class="card-day">${r.Day}</div>
+<div class="today-title">${r.Subject}</div>
+
+<p>${r.Class} | ${r.Course}</p>
+<p>${r.Date} (${r.Day})</p>
+<p><b>${r.Shift}</b> | Code: ${r.Code}</p>
+
+<p style="color:#ffd84d;font-weight:bold;">Exam Today</p>
+
+<div class="progress-bar">
+<div class="progress"></div>
 </div>
-
-<b>${r.Subject}</b>
-
-<div>${r.Class}</div>
-<div>${r.Course}</div>
-
-<div class="badge">Code ${r.Code}</div>
-<div class="badge">${r.Shift}</div>
-
-<div class="countdown">Exam Today</div>
 
 </div>
 
@@ -380,9 +443,218 @@ container.innerHTML+=`
 
 }
 
-/* OTHER FUNCTIONS REMAIN SAME (SEARCH + DISPLAY) */
+/* DATE FORMAT */
 
-/* For brevity they are identical to the previous version */
+function formatDate(dateInput){
+
+const d=new Date(dateInput);
+const day=d.getDate();
+const month=d.toLocaleString('en-US',{month:'short'});
+const year=d.getFullYear().toString().slice(-2);
+
+return `${day}-${month}-${year}`;
+
+}
+
+/* SEARCH DATE */
+
+function searchByDate(){
+
+const date=formatDate(date1.value);
+const results=csvData.filter(r=>r.Date===date);
+displayDateResults(results);
+
+}
+
+/* SEARCH CLASS SUBJECT */
+
+function searchByClassSubject(){
+
+const c=class2.value;
+const s=subject2.value;
+
+const results=csvData.filter(r=>r.Class===c && r.Subject===s);
+displayClassSubject(results);
+
+}
+
+/* SEARCH DATE CLASS */
+
+function searchByDateClass(){
+
+const date=formatDate(date3.value);
+const c=class3.value;
+
+const results=csvData.filter(r=>r.Date===date && r.Class===c);
+displayCards(results,"resultRow3");
+
+}
+
+/* SEARCH CODE */
+
+function searchByCode(){
+
+const code=code4.value;
+const results=csvData.filter(r=>r.Code===code);
+displayCards(results,"resultRow4");
+
+}
+
+/* SEARCH CLASS YEAR SUBJECT */
+
+function searchClassYearSubject(){
+
+const c=class5.value;
+const y=year5.value;
+const s=subject5.value;
+
+const results=csvData.filter(r=>r.Class===c && r.Subject===s && r.Year===y);
+displayCards(results,"resultRow5");
+
+}
+
+/* DATE TABLE */
+
+function displayDateResults(data){
+
+if(data.length===0){
+dateResults.innerHTML="<p>No Exam Found</p>";
+return;
+}
+
+let table=`<table>
+<tr>
+<th>S.No</th>
+<th>Date</th>
+<th>Day</th>
+<th>Class</th>
+<th>Course</th>
+<th>Subject</th>
+<th>Code</th>
+<th>Shift</th>
+</tr>`;
+
+data.forEach((r,i)=>{
+
+table+=`<tr>
+<td>${i+1}</td>
+<td>${r.Date}</td>
+<td>${r.Day}</td>
+<td>${r.Class}</td>
+<td>${r.Course}</td>
+<td>${r.Subject}</td>
+<td>${r.Code}</td>
+<td>${r.Shift}</td>
+</tr>`;
+
+});
+
+table+=`</table>`;
+
+dateResults.innerHTML=table;
+
+}
+
+/* CLASS SUBJECT CARD */
+
+function displayClassSubject(data){
+
+resultRow2.innerHTML="";
+
+if(data.length===0){
+resultRow2.innerHTML=`<div class="no-results">No Exam Found</div>`;
+return;
+}
+
+const cls=data[0].Class;
+const sub=data[0].Subject;
+
+let html=`<div class="card">
+
+<div class="card-header">
+<div class="card-date">${cls}</div>
+<div class="card-day">${sub}</div>
+</div>
+
+<table>
+
+<tr>
+<th>S.No</th>
+<th>Date</th>
+<th>Day</th>
+<th>Course</th>
+<th>Shift</th>
+</tr>
+`;
+
+data.forEach((r,i)=>{
+
+html+=`<tr>
+<td>${i+1}</td>
+<td>${r.Date}</td>
+<td>${r.Day}</td>
+<td>${r.Course}</td>
+<td>${r.Shift}</td>
+</tr>`;
+
+});
+
+html+=`</table></div>`;
+
+resultRow2.innerHTML=html;
+
+}
+
+/* NORMAL CARDS */
+
+function displayCards(data,id){
+
+const container=document.getElementById(id);
+container.innerHTML="";
+
+if(data.length===0){
+container.innerHTML=`<div class="no-results">No Exam Found</div>`;
+return;
+}
+
+data.forEach(r=>{
+
+container.innerHTML+=`
+
+<div class="card">
+
+<div class="card-header">
+<div class="card-date">${r.Date}</div>
+<div class="card-day">${r.Day}</div>
+</div>
+
+<div class="card-detail">
+<span class="detail-label">Subject</span>
+<span class="detail-value">${r.Subject}</span>
+</div>
+
+<div class="card-detail">
+<span class="detail-label">Class</span>
+<span class="detail-value">${r.Class}</span>
+</div>
+
+<div class="card-detail">
+<span class="detail-label">Course</span>
+<span class="detail-value">${r.Course}</span>
+</div>
+
+<div class="card-footer">
+<span class="badge">Code: ${r.Code}</span>
+<span class="badge">${r.Shift}</span>
+</div>
+
+</div>
+
+`;
+
+});
+
+}
 
 </script>
 
