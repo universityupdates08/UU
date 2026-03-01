@@ -69,6 +69,14 @@ display:block;
 margin-top:5px;
 }
 
+/* Date row result style */
+
+.date-result{
+padding:10px;
+border-bottom:1px solid #ddd;
+text-align:left;
+}
+
 </style>
 </head>
 
@@ -80,10 +88,13 @@ margin-top:5px;
 
 <!-- ROW 1 DATE -->
 <div class="row">
+
 <h3>Search By Date</h3>
 
 <input type="date" id="date1">
 <button onclick="searchByDate()">Search</button>
+
+<div id="dateResults"></div>
 
 </div>
 
@@ -139,7 +150,6 @@ skipEmptyLines:true,
 complete:function(results){
 
 csvData=results.data;
-
 populateFilters();
 
 }
@@ -196,11 +206,18 @@ function searchByDate(){
 
 const date=document.getElementById("date1").value;
 
+if(!date){
+alert("Please select date");
+return;
+}
+
 const formatted=formatDate(date);
 
 const results=csvData.filter(r=>r.Date===formatted);
 
-displayResults(results);
+displayDateResults(results);
+
+document.getElementById("resultCards").innerHTML="";
 
 }
 
@@ -213,6 +230,8 @@ const s=document.getElementById("subject2").value;
 const results=csvData.filter(r=>r.Class===c && r.Subject===s);
 
 displayResults(results);
+
+document.getElementById("dateResults").innerHTML="";
 
 }
 
@@ -227,6 +246,44 @@ const formatted=formatDate(date);
 const results=csvData.filter(r=>r.Date===formatted && r.Class===c);
 
 displayResults(results);
+
+document.getElementById("dateResults").innerHTML="";
+
+}
+
+
+function displayDateResults(data){
+
+const container=document.getElementById("dateResults");
+
+container.innerHTML="";
+
+if(data.length===0){
+
+container.innerHTML="<p>No Exam Found</p>";
+return;
+
+}
+
+data.forEach(r=>{
+
+container.innerHTML+=`
+
+<div class="date-result">
+
+<b>${r.Subject}</b> |
+Date: ${r.Date} |
+Day: ${r.Day} |
+Class: ${r.Class} |
+Course: ${r.Course} |
+Shift: ${r.Shift} |
+Code: ${r.Code}
+
+</div>
+
+`;
+
+});
 
 }
 
