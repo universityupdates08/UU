@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Exam Schedule Portal</title>
+
+<script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+
+<style>
+
+:root{
+--morning-grad: linear-gradient(135deg,#4fb7ff,#0066ff);
+--evening-grad: linear-gradient(135deg,#9b59ff,#6a00ff);
+--yellow-grad: linear-gradient(135deg,#ffd84d,#ffb300);
+}
+
+body{
+font-family:Arial;
+background:#eef2f7;
+padding:40px;
+text-align:center;
+}
+
+.container{
+background:white;
+padding:30px;
+border-radius:12px;
+width:90%;
+margin:auto;
+box-shadow:0 8px 20px rgba(0,0,0,0.1);
+}
+
+.warning{
+background:#fff3cd;
+border:1px solid #ffeeba;
+padding:15px;
+margin-bottom:20px;
+border-radius:8px;
+color:#856404;
+text-align:left;
+}
+
+.row{
+margin:20px 0;
+padding:20px;
+border-radius:10px;
+}
+
+.row1{background:#e8f1ff;}
+.row2{background:#e9f9ef;}
+.row3{background:#fff1f1;}
+.row4{background:#fff8e1;}
+
+.controls{
+display:flex;
+gap:10px;
+flex-wrap:wrap;
+}
+
+.controls input,
+.controls select,
+.controls button{
+flex:1;
+padding:10px;
+border-radius:6px;
+border:1px solid #ccc;
+}
+
+.controls button{
+background:#2c7be5;
+color:white;
+border:none;
+cursor:pointer;
+}
+
+/* CARD GRID */
+
+.results-grid{
+margin-top:20px;
+display:grid;
+grid-template-columns:repeat(auto-fill,minmax(230px,1fr));
+gap:15px;
+}
+
+/* CARDS */
+
+.card{
+color:white;
+border-radius:12px;
+padding:14px;
+box-shadow:0 3px 14px rgba(0,0,0,0.25);
+text-align:left;
+font-size:90%;
+position:relative;
+}
+
+/* SHIFT COLORS */
+
+.morning{
+background:var(--morning-grad);
+}
+
+.evening{
+background:var(--evening-grad);
+}
+
+/* NEXT EXAM */
+
+.next-exam{
+outline:4px solid #00c853;
+box-shadow:0 0 15px #00c853;
+}
+
+/* CODE CARD */
+
+.yellow-card{
+background:var(--yellow-grad);
+color:#333;
+border-radius:12px;
+padding:16px;
+box-shadow:0 4px 15px rgba(255,180,0,0.4);
+max-width:350px;
+margin:auto;
+}
+
+/* HEADER */
+
+.card-header{
+border-bottom:1px solid rgba(255,255,255,0.3);
+padding-bottom:6px;
+margin-bottom:8px;
+}
+
+.card-date{
+font-size:1.1rem;
+font-weight:bold;
+}
+
+.card-day{
+font-size:0.8rem;
+opacity:0.9;
+}
+
+/* DETAILS */
+
+.card-detail{
+margin-bottom:6px;
+}
+
+.badge{
+background:rgba(0,0,0,0.25);
+padding:3px 8px;
+border-radius:6px;
+font-size:0.75rem;
+margin-right:4px;
+}
+
+/* COUNTDOWN */
+
+.countdown{
+font-size:0.8rem;
+margin-top:6px;
+background:rgba(0,0,0,0.25);
+padding:4px 6px;
+border-radius:6px;
+display:inline-block;
+}
+
+/* CENTER CARD */
+
+.center-card{
+display:flex;
+justify-content:center;
+margin-top:20px;
+}
+
+/* TABLE */
+
+table{
+width:100%;
+border-collapse:collapse;
+margin-top:10px;
+font-size:75%;
+background:white;
+color:black;
+}
+
+th,td{
+border:1px solid #ddd;
+padding:6px;
+text-align:center;
+}
+
+th{
+background:#2c7be5;
+color:white;
+}
+
+tr:nth-child(even){
+background:#f2f2f2;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>Exam Schedule Portal</h2>
+
+<div class="warning">
+⚠ Verify exam schedule with official notification.
+</div>
+
+<!-- SEARCH BY DATE -->
+
+<div class="row row1">
+
+<h3>SEARCH BY DATE</h3>
+
+<div class="controls">
+<input type="date" id="date1">
+<button onclick="searchByDate()">Search</button>
+</div>
+
+<div id="dateResults"></div>
+
+</div>
+
+<!-- CLASS SUBJECT -->
+
+<div class="row row2">
+
+<h3>SEARCH BY CLASS & SUBJECT</h3>
+
+<div class="controls">
+<select id="class2"><option>Select Class</option></select>
+<select id="subject2"><option>Select Subject</option></select>
+<button onclick="searchByClassSubject()">Search</button>
+</div>
+
+<div id="resultRow2" class="center-card"></div>
+
+</div>
+
+<!-- DATE CLASS -->
+
+<div class="row row3">
+
+<h3>SEARCH BY DATE & CLASS</h3>
+
+<div class="controls">
+<input type="date" id="date3">
+<select id="class3"><option>Select Class</option></select>
+<button onclick="searchByDateClass()">Search</button>
+</div>
+
+<div id="resultRow3" class="results-grid"></div>
+
+</div>
+
+<!-- CODE -->
+
+<div class="row row4">
+
+<h3>SEARCH BY CODE</h3>
+
+<div class="controls">
+<select id="code4"><option>Select Code</option></select>
+<button onclick="searchByCode()">Search</button>
+</div>
+
+<div id="resultRow4"></div>
+
+</div>
+
+</div>
+
+<script>
+
+let csvData=[];
+
+Papa.parse("DatesheetSearch.csv",{
+download:true,
+header:true,
+skipEmptyLines:true,
+
+complete:function(results){
+csvData=results.data;
+populateFilters();
+}
+
+});
+
+/* POPULATE DROPDOWNS */
+
+function populateFilters(){
+
+const classes=new Set();
+const subjects=new Set();
+const codes=new Set();
+
+csvData.forEach(r=>{
+classes.add(r.Class);
+subjects.add(r.Subject);
+codes.add(r.Code);
+});
+
+classes.forEach(c=>{
+class2.innerHTML+=`<option value="${c}">${c}</option>`;
+class3.innerHTML+=`<option value="${c}">${c}</option>`;
+});
+
+subjects.forEach(s=>{
+subject2.innerHTML+=`<option value="${s}">${s}</option>`;
+});
+
+codes.forEach(c=>{
+code4.innerHTML+=`<option value="${c}">${c}</option>`;
+});
+
+}
+
+/* DATE PARSER */
+
+function parseExamDate(dateStr){
+
+const parts=dateStr.split("-");
+const day=parts[0];
+const month=parts[1];
+const year="20"+parts[2];
+
+return new Date(`${month} ${day}, ${year}`);
+
+}
+
+/* SORT */
+
+function sortByDate(data){
+
+return data.sort((a,b)=>{
+return parseExamDate(a.Date)-parseExamDate(b.Date);
+});
+
+}
+
+/* COUNTDOWN */
+
+function getCountdown(dateStr){
+
+const exam=parseExamDate(dateStr);
+const today=new Date();
+
+const diff=Math.ceil((exam-today)/(1000*60*60*24));
+
+if(diff>0) return diff+" days left";
+if(diff===0) return "Exam Today";
+return "Exam Passed";
+
+}
+
+/* NEXT EXAM */
+
+function getNextExam(data){
+
+const today=new Date();
+
+return data.find(r=>parseExamDate(r.Date)>=today);
+
+}
+
+/* SEARCH FUNCTIONS */
+
+function searchByDate(){
+
+const date=date1.value;
+const formatted=formatDate(date);
+
+const results=sortByDate(csvData.filter(r=>r.Date===formatted));
+
+displayDateResults(results);
+
+}
+
+function searchByClassSubject(){
+
+const c=class2.value;
+const s=subject2.value;
+
+const results=sortByDate(csvData.filter(r=>r.Class===c && r.Subject===s));
+
+displayClassSubject(results);
+
+}
+
+function searchByDateClass(){
+
+const date=date3.value;
+const c=class3.value;
+
+const formatted=formatDate(date);
+
+const results=sortByDate(csvData.filter(r=>r.Date===formatted && r.Class===c));
+
+displayCards(results,"resultRow3");
+
+}
+
+function searchByCode(){
+
+const code=code4.value;
+
+const results=sortByDate(csvData.filter(r=>r.Code===code));
+
+displayCodeCard(results);
+
+}
+
+/* FORMAT DATE */
+
+function formatDate(dateInput){
+
+const d=new Date(dateInput);
+
+const day=d.getDate();
+const month=d.toLocaleString('en-US',{month:'short'});
+const year=d.getFullYear().toString().slice(-2);
+
+return `${day}-${month}-${year}`;
+
+}
+
+/* CARDS */
+
+function displayCards(data,containerID){
+
+const container=document.getElementById(containerID);
+container.innerHTML="";
+
+const next=getNextExam(data);
+
+data.forEach(r=>{
+
+const shiftClass=r.Shift.toLowerCase().includes("morning")?"morning":"evening";
+
+const highlight=(next && r.Code===next.Code)?"next-exam":"";
+
+container.innerHTML+=`
+
+<div class="card ${shiftClass} ${highlight}">
+
+<div class="card-header">
+<div class="card-date">${r.Date}</div>
+<div class="card-day">${r.Day}</div>
+</div>
+
+<div class="card-detail"><b>${r.Subject}</b></div>
+<div class="card-detail">${r.Class}</div>
+<div class="card-detail">${r.Course}</div>
+
+<div class="badge">Code ${r.Code}</div>
+<div class="badge">${r.Shift}</div>
+
+<div class="countdown">${getCountdown(r.Date)}</div>
+
+</div>
+
+`;
+
+});
+
+}
+
+/* CLASS SUBJECT */
+
+function displayClassSubject(data){
+
+if(data.length===0){
+resultRow2.innerHTML="No Exam Found";
+return;
+}
+
+const cls=data[0].Class;
+const sub=data[0].Subject;
+
+let html=`
+<div class="card">
+
+<div class="card-header">
+<div class="card-date">${cls}</div>
+<div class="card-day">${sub}</div>
+</div>
+
+<table>
+<tr>
+<th>S.No</th>
+<th>Date</th>
+<th>Course</th>
+<th>Shift</th>
+</tr>
+`;
+
+data.forEach((r,i)=>{
+html+=`
+<tr>
+<td>${i+1}</td>
+<td>${r.Date}</td>
+<td>${r.Course}</td>
+<td>${r.Shift}</td>
+</tr>
+`;
+});
+
+html+=`</table></div>`;
+
+resultRow2.innerHTML=html;
+
+}
+
+/* DATE TABLE */
+
+function displayDateResults(data){
+
+let table=`
+<table>
+<tr>
+<th>S.No</th>
+<th>Date</th>
+<th>Day</th>
+<th>Class</th>
+<th>Course</th>
+<th>Subject</th>
+<th>Code</th>
+<th>Shift</th>
+</tr>
+`;
+
+data.forEach((r,i)=>{
+table+=`
+<tr>
+<td>${i+1}</td>
+<td>${r.Date}</td>
+<td>${r.Day}</td>
+<td>${r.Class}</td>
+<td>${r.Course}</td>
+<td>${r.Subject}</td>
+<td>${r.Code}</td>
+<td>${r.Shift}</td>
+</tr>
+`;
+});
+
+table+="</table>";
+
+dateResults.innerHTML=table;
+
+}
+
+/* CODE CARD */
+
+function displayCodeCard(data){
+
+if(data.length===0){
+resultRow4.innerHTML="No Exam Found";
+return;
+}
+
+const r=data[0];
+
+resultRow4.innerHTML=`
+
+<div class="yellow-card">
+
+<h3>${r.Subject}</h3>
+
+<p><b>Code:</b> ${r.Code}</p>
+<p><b>Date:</b> ${r.Date}</p>
+<p><b>Day:</b> ${r.Day}</p>
+<p><b>Class:</b> ${r.Class}</p>
+<p><b>Course:</b> ${r.Course}</p>
+<p><b>Shift:</b> ${r.Shift}</p>
+
+<div class="countdown">${getCountdown(r.Date)}</div>
+
+</div>
+
+`;
+
+}
+
+</script>
+
+</body>
+</html>
