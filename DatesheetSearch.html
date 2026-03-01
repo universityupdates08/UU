@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Exam Schedule Finder</title>
+<title>Exam Schedule Portal</title>
 
 <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
 
@@ -24,60 +24,96 @@ margin:auto;
 box-shadow:0 8px 20px rgba(0,0,0,0.1);
 }
 
-.row{
-margin:20px 0;
+/* Warning */
+
+.warning{
+background:#fff3cd;
+border:1px solid #ffeeba;
 padding:15px;
-border-bottom:1px solid #ddd;
+margin-bottom:20px;
+border-radius:8px;
+color:#856404;
+text-align:left;
 }
 
-input,select,button{
+/* ROW STYLES */
+
+.row{
+margin:20px 0;
+padding:20px;
+border-radius:10px;
+}
+
+.row1{ background:#e8f1ff; }
+.row2{ background:#e9f9ef; }
+.row3{ background:#fff1f1; }
+
+.row h3{
+text-align:left;
+margin-bottom:10px;
+}
+
+/* Controls */
+
+.controls{
+display:flex;
+justify-content:space-between;
+flex-wrap:wrap;
+gap:10px;
+}
+
+.controls input,
+.controls select,
+.controls button{
+flex:1;
 padding:10px;
-margin:8px;
 border-radius:6px;
 border:1px solid #ccc;
 }
 
-button{
+.controls button{
 background:#2c7be5;
 color:white;
 border:none;
 cursor:pointer;
 }
 
-/* Card Results */
+/* CARD RESULTS */
 
 .cards{
-margin-top:30px;
+margin-top:20px;
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-gap:20px;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:15px;
+font-size:75%;
 }
 
 .card{
-padding:20px;
-border-radius:12px;
+padding:15px;
+border-radius:10px;
 color:white;
 background:linear-gradient(135deg,#6a5cff,#4fb7ff);
-box-shadow:0 6px 15px rgba(0,0,0,0.2);
+box-shadow:0 4px 10px rgba(0,0,0,0.2);
 text-align:left;
 }
 
 .card span{
 display:block;
-margin-top:5px;
+margin-top:4px;
 }
 
-/* Table Style */
+/* TABLE RESULT */
 
 table{
 width:100%;
 border-collapse:collapse;
-margin-top:20px;
+margin-top:15px;
+font-size:75%;
 }
 
 th,td{
 border:1px solid #ddd;
-padding:8px;
+padding:6px;
 text-align:center;
 }
 
@@ -97,26 +133,35 @@ background:#f2f2f2;
 
 <div class="container">
 
-<h2>Exam Schedule Finder</h2>
+<h2>Exam Schedule Portal</h2>
+<h3>Select a search method below to find your datesheet</h3>
 
-<!-- ROW 1 DATE -->
-<div class="row">
 
-<h3>Search By Date</h3>
+<div class="warning">
+⚠ Please verify the exam schedule carefully. Always confirm with the official notification before appearing in the exam. The data are available as per University Letter No. (Exam/D.R./10154) Dated - 27.02.2026.
+</div>
 
+<!-- ROW 1 -->
+<div class="row row1">
+
+<h3>SEARCH BY DATE</h3>
+
+<div class="controls">
 <input type="date" id="date1">
 <button onclick="searchByDate()">Search</button>
+</div>
 
 <div id="dateResults"></div>
 
 </div>
 
 
-<!-- ROW 2 CLASS + SUBJECT -->
-<div class="row">
+<!-- ROW 2 -->
+<div class="row row2">
 
-<h3>Search By Class & Subject</h3>
+<h3>SEARCH BY CLASS & SUBJECT</h3>
 
+<div class="controls">
 <select id="class2">
 <option value="">Select Class</option>
 </select>
@@ -126,15 +171,19 @@ background:#f2f2f2;
 </select>
 
 <button onclick="searchByClassSubject()">Search</button>
+</div>
+
+<div id="resultRow2" class="cards"></div>
 
 </div>
 
 
-<!-- ROW 3 DATE + CLASS -->
-<div class="row">
+<!-- ROW 3 -->
+<div class="row row3">
 
-<h3>Search By Date & Class</h3>
+<h3>SEARCH BY DATE & CLASS</h3>
 
+<div class="controls">
 <input type="date" id="date3">
 
 <select id="class3">
@@ -142,10 +191,11 @@ background:#f2f2f2;
 </select>
 
 <button onclick="searchByDateClass()">Search</button>
-
 </div>
 
-<div id="resultCards" class="cards"></div>
+<div id="resultRow3" class="cards"></div>
+
+</div>
 
 </div>
 
@@ -175,10 +225,8 @@ const classes=new Set();
 const subjects=new Set();
 
 csvData.forEach(r=>{
-
 classes.add(r.Class);
 subjects.add(r.Subject);
-
 });
 
 const class2=document.getElementById("class2");
@@ -210,14 +258,11 @@ return `${day}-${month}-${year}`;
 }
 
 
+/* SEARCH 1 */
+
 function searchByDate(){
 
 const date=document.getElementById("date1").value;
-
-if(!date){
-alert("Please select date");
-return;
-}
 
 const formatted=formatDate(date);
 
@@ -225,10 +270,10 @@ const results=csvData.filter(r=>r.Date===formatted);
 
 displayDateResults(results);
 
-document.getElementById("resultCards").innerHTML="";
-
 }
 
+
+/* SEARCH 2 */
 
 function searchByClassSubject(){
 
@@ -237,12 +282,12 @@ const s=document.getElementById("subject2").value;
 
 const results=csvData.filter(r=>r.Class===c && r.Subject===s);
 
-displayResults(results);
-
-document.getElementById("dateResults").innerHTML="";
+displayCards(results,"resultRow2");
 
 }
 
+
+/* SEARCH 3 */
 
 function searchByDateClass(){
 
@@ -253,12 +298,12 @@ const formatted=formatDate(date);
 
 const results=csvData.filter(r=>r.Date===formatted && r.Class===c);
 
-displayResults(results);
-
-document.getElementById("dateResults").innerHTML="";
+displayCards(results,"resultRow3");
 
 }
 
+
+/* DATE TABLE RESULT */
 
 function displayDateResults(data){
 
@@ -267,15 +312,12 @@ const container=document.getElementById("dateResults");
 container.innerHTML="";
 
 if(data.length===0){
-
 container.innerHTML="<p>No Exam Found</p>";
 return;
-
 }
 
 let table=`
 <table>
-<thead>
 <tr>
 <th>S.No</th>
 <th>Date</th>
@@ -286,15 +328,13 @@ let table=`
 <th>Code</th>
 <th>Shift</th>
 </tr>
-</thead>
-<tbody>
 `;
 
-data.forEach((r,index)=>{
+data.forEach((r,i)=>{
 
 table+=`
 <tr>
-<td>${index+1}</td>
+<td>${i+1}</td>
 <td>${r.Date}</td>
 <td>${r.Day}</td>
 <td>${r.Class}</td>
@@ -307,24 +347,24 @@ table+=`
 
 });
 
-table+=`</tbody></table>`;
+table+=`</table>`;
 
 container.innerHTML=table;
 
 }
 
 
-function displayResults(data){
+/* CARD RESULT */
 
-const container=document.getElementById("resultCards");
+function displayCards(data,containerID){
+
+const container=document.getElementById(containerID);
 
 container.innerHTML="";
 
 if(data.length===0){
-
 container.innerHTML="<p>No Exam Found</p>";
 return;
-
 }
 
 data.forEach(r=>{
@@ -333,14 +373,14 @@ container.innerHTML+=`
 
 <div class="card">
 
-<h3>${r.Subject}</h3>
+<b>${r.Subject}</b>
 
-<span><b>Date:</b> ${r.Date}</span>
-<span><b>Day:</b> ${r.Day}</span>
-<span><b>Class:</b> ${r.Class}</span>
-<span><b>Course:</b> ${r.Course}</span>
-<span><b>Shift:</b> ${r.Shift}</span>
-<span><b>Code:</b> ${r.Code}</span>
+<span>Date: ${r.Date}</span>
+<span>Day: ${r.Day}</span>
+<span>Class: ${r.Class}</span>
+<span>Course: ${r.Course}</span>
+<span>Code: ${r.Code}</span>
+<span>Shift: ${r.Shift}</span>
 
 </div>
 
