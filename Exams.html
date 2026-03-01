@@ -144,8 +144,9 @@ font-size:85%;
 
 th,td{
 border:1px solid #ddd;
-padding:8px;
+padding:10px;
 text-align:center;
+vertical-align:middle;
 }
 
 th{
@@ -504,7 +505,7 @@ const s=subject2.value;
 
 const results=csvData.filter(r=>r.Class===c && r.Subject===s);
 
-displayCards(results,"resultRow2");
+displayTable(results,"resultRow2");
 
 }
 
@@ -583,6 +584,58 @@ container.innerHTML+=`
 `;
 
 });
+
+}
+
+  function displayTable(data,id){
+
+const container=document.getElementById(id);
+container.innerHTML="";
+
+if(data.length===0){
+container.innerHTML=`<div class="no-results">No Exam Found</div>`;
+return;
+}
+
+let html=`
+
+<table>
+
+<tr>
+<th>Sr No.</th>
+<th>Date</th>
+<th>Day</th>
+<th>Class</th>
+<th>Subject</th>
+<th>Course</th>
+<th>Code</th>
+<th>Shift</th>
+</tr>
+
+`;
+
+data.forEach((r,i)=>{
+
+html+=`
+
+<tr>
+<td>${i+1}</td>
+<td>${r.Date}</td>
+<td>${r.Day}</td>
+<td>${r.Class}</td>
+<td>${r.Subject}</td>
+<td>${r.Course}</td>
+<td>${r.Code}</td>
+<td>${r.Shift}</td>
+</tr>
+
+`;
+
+});
+
+html+=`</table>`;
+
+container.innerHTML=html;
 
 }
 
