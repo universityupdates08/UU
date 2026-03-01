@@ -44,6 +44,8 @@ border:none;
 cursor:pointer;
 }
 
+/* Card Results */
+
 .cards{
 margin-top:30px;
 display:grid;
@@ -60,21 +62,32 @@ box-shadow:0 6px 15px rgba(0,0,0,0.2);
 text-align:left;
 }
 
-.card h3{
-margin-top:0;
-}
-
 .card span{
 display:block;
 margin-top:5px;
 }
 
-/* Date row result style */
+/* Table Style */
 
-.date-result{
-padding:10px;
-border-bottom:1px solid #ddd;
-text-align:left;
+table{
+width:100%;
+border-collapse:collapse;
+margin-top:20px;
+}
+
+th,td{
+border:1px solid #ddd;
+padding:8px;
+text-align:center;
+}
+
+th{
+background:#2c7be5;
+color:white;
+}
+
+tr:nth-child(even){
+background:#f2f2f2;
 }
 
 </style>
@@ -118,7 +131,6 @@ text-align:left;
 
 
 <!-- ROW 3 DATE + CLASS -->
-
 <div class="row">
 
 <h3>Search By Date & Class</h3>
@@ -174,16 +186,12 @@ const class3=document.getElementById("class3");
 const subject2=document.getElementById("subject2");
 
 classes.forEach(c=>{
-
 class2.innerHTML+=`<option value="${c}">${c}</option>`;
 class3.innerHTML+=`<option value="${c}">${c}</option>`;
-
 });
 
 subjects.forEach(s=>{
-
 subject2.innerHTML+=`<option value="${s}">${s}</option>`;
-
 });
 
 }
@@ -265,25 +273,43 @@ return;
 
 }
 
-data.forEach(r=>{
+let table=`
+<table>
+<thead>
+<tr>
+<th>S.No</th>
+<th>Date</th>
+<th>Day</th>
+<th>Class</th>
+<th>Course</th>
+<th>Subject</th>
+<th>Code</th>
+<th>Shift</th>
+</tr>
+</thead>
+<tbody>
+`;
 
-container.innerHTML+=`
+data.forEach((r,index)=>{
 
-<div class="date-result">
-
-<b>${r.Subject}</b> |
-Date: ${r.Date} |
-Day: ${r.Day} |
-Class: ${r.Class} |
-Course: ${r.Course} |
-Shift: ${r.Shift} |
-Code: ${r.Code}
-
-</div>
-
+table+=`
+<tr>
+<td>${index+1}</td>
+<td>${r.Date}</td>
+<td>${r.Day}</td>
+<td>${r.Class}</td>
+<td>${r.Course}</td>
+<td>${r.Subject}</td>
+<td>${r.Code}</td>
+<td>${r.Shift}</td>
+</tr>
 `;
 
 });
+
+table+=`</tbody></table>`;
+
+container.innerHTML=table;
 
 }
 
