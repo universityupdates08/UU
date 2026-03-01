@@ -83,46 +83,8 @@ cursor:pointer;
 .results-grid{
 margin-top:20px;
 display:grid;
-grid-template-columns:repeat(auto-fill,minmax(230px,1fr));
-gap:15px;
-}
-
-/* TODAY PANEL */
-
-.today-card{
-background:linear-gradient(135deg,#00c6ff,#0072ff);
-color:white;
-padding:16px;
-border-radius:12px;
-margin-bottom:12px;
-text-align:left;
-}
-
-.today-title{
-font-size:1.1rem;
-font-weight:bold;
-}
-
-.progress-bar{
-width:100%;
-background:#e0e0e0;
-border-radius:10px;
-margin-top:8px;
-overflow:hidden;
-}
-
-.progress{
-height:8px;
-background:#00ff95;
-width:100%;
-}
-
-/* CENTER CARD */
-
-.center-card{
-display:flex;
-justify-content:center;
-margin-top:20px;
+grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+gap:20px;
 }
 
 /* CARDS */
@@ -131,15 +93,9 @@ margin-top:20px;
 background:var(--card-grad);
 color:white;
 border-radius:12px;
-padding:14px;
+padding:18px;
 box-shadow:0 3px 14px rgba(67,56,202,0.25);
-transition:transform 0.3s ease;
 text-align:left;
-font-size:90%;
-}
-
-.card:hover{
-transform:translateY(-4px);
 }
 
 .card-header{
@@ -149,52 +105,32 @@ margin-bottom:10px;
 }
 
 .card-date{
-font-size:1.05rem;
+font-size:1.2rem;
 font-weight:800;
 }
 
 .card-day{
-font-size:0.8rem;
-opacity:0.8;
-}
-
-.card-detail{
-margin-bottom:8px;
-}
-
-.detail-label{
-font-size:0.65rem;
-text-transform:uppercase;
-opacity:0.7;
-}
-
-.detail-value{
 font-size:0.9rem;
-font-weight:500;
+opacity:0.9;
 }
 
-.card-footer{
+/* BIGGER CARDS ROW 3 & 4 */
+
+.row3 .card,
+.row4 .card{
+padding:24px;
+font-size:105%;
+}
+
+.row3 table,
+.row4 table{
+font-size:90%;
+}
+
+.center-card{
 display:flex;
-justify-content:space-between;
-align-items:center;
-margin-top:6px;
-}
-
-.badge{
-background:rgba(0,0,0,0.2);
-padding:3px 8px;
-border-radius:6px;
-font-size:0.7rem;
-font-weight:bold;
-}
-
-.no-results{
-text-align:center;
-padding:40px;
-background:white;
-border-radius:12px;
-color:#94a3b8;
-border:2px dashed #e2e8f0;
+justify-content:center;
+margin-top:20px;
 }
 
 /* TABLE */
@@ -203,7 +139,7 @@ table{
 width:100%;
 border-collapse:collapse;
 margin-top:10px;
-font-size:75%;
+font-size:80%;
 background:white;
 color:black;
 }
@@ -223,6 +159,14 @@ tr:nth-child(even){
 background:#f2f2f2;
 }
 
+.no-results{
+text-align:center;
+padding:20px;
+background:white;
+border-radius:12px;
+color:#555;
+}
+
 </style>
 </head>
 
@@ -234,14 +178,22 @@ background:#f2f2f2;
 <h3>Select a search method below to find your datesheet</h3>
 
 <div class="warning">
-⚠ Please verify the exam schedule carefully. Always confirm with the official notification before appearing in the exam.
+⚠ Please verify the exam schedule carefully. Always confirm with the official notification before appearing in the exam. The data are available as per University Letter No. (Exam/D.R./10154) Dated - 27.02.2026.
 </div>
 
-<!-- TODAY PANEL -->
+<!-- TODAY & TOMORROW PANEL -->
 
 <div class="row row0">
-<h3>📅 TODAY'S EXAMS</h3>
-<div id="todayPanel"></div>
+
+<h3>📅 EXAM ALERT</h3>
+
+<div class="results-grid">
+
+<div class="card" id="todayCard"></div>
+<div class="card" id="tomorrowCard"></div>
+
+</div>
+
 </div>
 
 <!-- SEARCH DATE -->
@@ -349,22 +301,19 @@ background:#f2f2f2;
 let csvData=[];
 
 Papa.parse("DatesheetSearch.csv",{
-
 download:true,
 header:true,
 skipEmptyLines:true,
 
 complete:function(results){
-
 csvData=results.data;
 populateFilters();
-showTodayExams();
-
+showExamAlert();
 }
 
 });
 
-/* POPULATE DROPDOWNS */
+/* POPULATE FILTERS */
 
 function populateFilters(){
 
@@ -395,55 +344,101 @@ code4.innerHTML+=`<option>${c}</option>`;
 
 }
 
-/* TODAY PANEL */
+/* FORMAT DATE */
 
-function showTodayExams(){
+function formatDisplayDate(date){
 
-const container=document.getElementById("todayPanel");
+const d=new Date(date);
 
-const today=new Date();
-const day=today.getDate();
-const month=today.toLocaleString('en-US',{month:'short'});
-const year=today.getFullYear().toString().slice(-2);
+const day=d.getDate();
+const month=d.toLocaleString('en-US',{month:'short'});
+const year=d.getFullYear().toString().slice(-2);
+const weekday=d.toLocaleString('en-US',{weekday:'long'});
 
-const formatted=`${day}-${month}-${year}`;
+return {
+date:`${day}-${month}-${year}`,
+day:weekday
+};
 
-const exams=csvData.filter(r=>r.Date===formatted);
-
-container.innerHTML="";
-
-if(exams.length===0){
-container.innerHTML=`<div class="no-results">No Exam Today</div>`;
-return;
 }
 
-exams.forEach(r=>{
+/* TODAY + TOMORROW PANEL */
 
-container.innerHTML+=`
+function showExamAlert(){
 
-<div class="today-card">
+const todayBox=document.getElementById("todayCard");
+const tomorrowBox=document.getElementById("tomorrowCard");
 
-<div class="today-title">${r.Subject}</div>
+const today=new Date();
+const tomorrow=new Date();
+tomorrow.setDate(today.getDate()+1);
 
-<p>${r.Class} | ${r.Course}</p>
-<p>${r.Date} (${r.Day})</p>
-<p><b>${r.Shift}</b> | Code: ${r.Code}</p>
+const todayFormat=formatDisplayDate(today);
+const tomorrowFormat=formatDisplayDate(tomorrow);
 
-<p style="color:#ffd84d;font-weight:bold;">Exam Today</p>
+const todayExams=csvData.filter(r=>r.Date===todayFormat.date);
+const tomorrowExams=csvData.filter(r=>r.Date===tomorrowFormat.date);
 
-<div class="progress-bar">
-<div class="progress"></div>
+function buildCard(title,date,day,data){
+
+let html=`
+<div class="card-header">
+<div class="card-date">${title}</div>
+<div class="card-day">${date} (${day})</div>
 </div>
+`;
 
-</div>
+if(data.length===0){
+html+=`<div class="no-results">No Exams</div>`;
+return html;
+}
 
+html+=`
+<table>
+<tr>
+<th>S.No</th>
+<th>Class</th>
+<th>Subject</th>
+<th>Shift</th>
+</tr>
+`;
+
+data.forEach((r,i)=>{
+
+html+=`
+<tr>
+<td>${i+1}</td>
+<td>${r.Class}</td>
+<td>${r.Subject}</td>
+<td>${r.Shift}</td>
+</tr>
 `;
 
 });
 
+html+=`</table>`;
+
+return html;
+
 }
 
-/* DATE FORMAT */
+todayBox.innerHTML=buildCard(
+"TODAY'S EXAMS",
+todayFormat.date,
+todayFormat.day,
+todayExams
+);
+
+tomorrowBox.innerHTML=buildCard(
+"TOMORROW EXAMS",
+tomorrowFormat.date,
+tomorrowFormat.day,
+tomorrowExams
+);
+
+}
+
+/* FORMAT INPUT DATE */
 
 function formatDate(dateInput){
 
@@ -456,68 +451,14 @@ return `${day}-${month}-${year}`;
 
 }
 
-/* SEARCH DATE */
+/* SEARCH BY DATE */
 
 function searchByDate(){
 
 const date=formatDate(date1.value);
 const results=csvData.filter(r=>r.Date===date);
-displayDateResults(results);
 
-}
-
-/* SEARCH CLASS SUBJECT */
-
-function searchByClassSubject(){
-
-const c=class2.value;
-const s=subject2.value;
-
-const results=csvData.filter(r=>r.Class===c && r.Subject===s);
-displayClassSubject(results);
-
-}
-
-/* SEARCH DATE CLASS */
-
-function searchByDateClass(){
-
-const date=formatDate(date3.value);
-const c=class3.value;
-
-const results=csvData.filter(r=>r.Date===date && r.Class===c);
-displayCards(results,"resultRow3");
-
-}
-
-/* SEARCH CODE */
-
-function searchByCode(){
-
-const code=code4.value;
-const results=csvData.filter(r=>r.Code===code);
-displayCards(results,"resultRow4");
-
-}
-
-/* SEARCH CLASS YEAR SUBJECT */
-
-function searchClassYearSubject(){
-
-const c=class5.value;
-const y=year5.value;
-const s=subject5.value;
-
-const results=csvData.filter(r=>r.Class===c && r.Subject===s && r.Year===y);
-displayCards(results,"resultRow5");
-
-}
-
-/* DATE TABLE */
-
-function displayDateResults(data){
-
-if(data.length===0){
+if(results.length===0){
 dateResults.innerHTML="<p>No Exam Found</p>";
 return;
 }
@@ -534,7 +475,7 @@ let table=`<table>
 <th>Shift</th>
 </tr>`;
 
-data.forEach((r,i)=>{
+results.forEach((r,i)=>{
 
 table+=`<tr>
 <td>${i+1}</td>
@@ -555,57 +496,59 @@ dateResults.innerHTML=table;
 
 }
 
-/* CLASS SUBJECT CARD */
+/* CLASS SUBJECT */
 
-function displayClassSubject(data){
+function searchByClassSubject(){
 
-resultRow2.innerHTML="";
+const c=class2.value;
+const s=subject2.value;
 
-if(data.length===0){
-resultRow2.innerHTML=`<div class="no-results">No Exam Found</div>`;
-return;
-}
+const results=csvData.filter(r=>r.Class===c && r.Subject===s);
 
-const cls=data[0].Class;
-const sub=data[0].Subject;
-
-let html=`<div class="card">
-
-<div class="card-header">
-<div class="card-date">${cls}</div>
-<div class="card-day">${sub}</div>
-</div>
-
-<table>
-
-<tr>
-<th>S.No</th>
-<th>Date</th>
-<th>Day</th>
-<th>Course</th>
-<th>Shift</th>
-</tr>
-`;
-
-data.forEach((r,i)=>{
-
-html+=`<tr>
-<td>${i+1}</td>
-<td>${r.Date}</td>
-<td>${r.Day}</td>
-<td>${r.Course}</td>
-<td>${r.Shift}</td>
-</tr>`;
-
-});
-
-html+=`</table></div>`;
-
-resultRow2.innerHTML=html;
+displayCards(results,"resultRow2");
 
 }
 
-/* NORMAL CARDS */
+/* DATE CLASS */
+
+function searchByDateClass(){
+
+const date=formatDate(date3.value);
+const c=class3.value;
+
+const results=csvData.filter(r=>r.Date===date && r.Class===c);
+
+displayCards(results,"resultRow3");
+
+}
+
+/* CODE */
+
+function searchByCode(){
+
+const code=code4.value;
+
+const results=csvData.filter(r=>r.Code===code);
+
+displayCards(results,"resultRow4");
+
+}
+
+/* CLASS YEAR SUBJECT */
+
+function searchClassYearSubject(){
+
+const c=class5.value;
+const y=year5.value;
+const s=subject5.value;
+
+const results=csvData.filter(r=>r.Class===c && r.Subject===s && r.Year===y);
+
+displayCards(results,"resultRow5");
+
+}
+
+/* CARD DISPLAY */
 
 function displayCards(data,id){
 
@@ -617,7 +560,7 @@ container.innerHTML=`<div class="no-results">No Exam Found</div>`;
 return;
 }
 
-data.forEach(r=>{
+data.forEach((r,i)=>{
 
 container.innerHTML+=`
 
@@ -628,25 +571,23 @@ container.innerHTML+=`
 <div class="card-day">${r.Day}</div>
 </div>
 
-<div class="card-detail">
-<span class="detail-label">Subject</span>
-<span class="detail-value">${r.Subject}</span>
-</div>
+<table>
 
-<div class="card-detail">
-<span class="detail-label">Class</span>
-<span class="detail-value">${r.Class}</span>
-</div>
+<tr>
+<th>S.No</th>
+<th>Class</th>
+<th>Subject</th>
+<th>Shift</th>
+</tr>
 
-<div class="card-detail">
-<span class="detail-label">Course</span>
-<span class="detail-value">${r.Course}</span>
-</div>
+<tr>
+<td>${i+1}</td>
+<td>${r.Class}</td>
+<td>${r.Subject}</td>
+<td>${r.Shift}</td>
+</tr>
 
-<div class="card-footer">
-<span class="badge">Code: ${r.Code}</span>
-<span class="badge">${r.Shift}</span>
-</div>
+</table>
 
 </div>
 
