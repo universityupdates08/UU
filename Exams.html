@@ -1,3 +1,6 @@
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -86,13 +89,7 @@ grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
 gap:20px;
 }
 
-.center-card{
-display:flex;
-justify-content:center;
-margin-top:20px;
-}
-
-/* ALERT PANEL */
+/* PROFESSIONAL ALERT PANEL */
 
 .alert-grid{
 display:grid;
@@ -143,7 +140,6 @@ table{
 width:100%;
 border-collapse:collapse;
 font-size:85%;
-margin-top:10px;
 }
 
 th,td{
@@ -161,7 +157,7 @@ tr:nth-child(even){
 background:#f7f9fc;
 }
 
-/* CARDS */
+/* NORMAL CARDS */
 
 .card{
 background:var(--card-grad);
@@ -170,8 +166,6 @@ border-radius:12px;
 padding:16px;
 box-shadow:0 3px 14px rgba(67,56,202,0.25);
 text-align:left;
-max-width:500px;
-width:100%;
 }
 
 .card-header{
@@ -190,6 +184,14 @@ font-size:0.85rem;
 opacity:0.85;
 }
 
+/* BIGGER CARDS */
+
+.row3 .card,
+.row4 .card{
+padding:25px;
+font-size:105%;
+}
+
 .no-results{
 padding:20px;
 text-align:center;
@@ -205,6 +207,8 @@ color:#777;
 <h3>Select a search method below to find your datesheet</h3>
 
 <div class="container">
+
+
 
 <div class="warning">
 ⚠ Please verify the exam schedule carefully. Always confirm with the official notification before appearing in the exam. The data are available as per University Letter No. (Exam/D.R./10154) Dated - 27.02.2026.
@@ -245,7 +249,7 @@ color:#777;
 
 </div>
 
-<!-- SEARCH BY CLASS SUBJECT -->
+<!-- SEARCH BY CLASS & SUBJECT -->
 
 <div class="row row2">
 
@@ -257,11 +261,11 @@ color:#777;
 <button onclick="searchByClassSubject()">Search</button>
 </div>
 
-<div id="resultRow2" class="center-card"></div>
+<div id="resultRow2" class="results-grid"></div>
 
 </div>
 
-<!-- SEARCH DATE CLASS -->
+<!-- SEARCH BY DATE & CLASS -->
 
 <div class="row row3">
 
@@ -277,7 +281,7 @@ color:#777;
 
 </div>
 
-<!-- SEARCH CODE -->
+<!-- SEARCH BY PAPER CODE -->
 
 <div class="row row4">
 
@@ -330,16 +334,15 @@ Papa.parse("DatesheetSearch.csv",{
 download:true,
 header:true,
 skipEmptyLines:true,
-
 complete:function(results){
 
 csvData=results.data;
+
 populateFilters();
 showTodayExams();
 scheduleMidnightRefresh();
 
 }
-
 });
 
 function populateFilters(){
@@ -371,7 +374,108 @@ code4.innerHTML+=`<option>${c}</option>`;
 
 }
 
-/* DATE FORMAT */
+function formatDisplayDate(date){
+
+const d=new Date(date);
+const day=d.getDate();
+const month=d.toLocaleString('en-US',{month:'short'});
+const year=d.getFullYear().toString().slice(-2);
+const weekday=d.toLocaleString('en-US',{weekday:'long'});
+
+return{
+date:`${day}-${month}-${year}`,
+day:weekday
+};
+
+}
+
+function showTodayExams(){
+
+const todayBox=document.getElementById("todayCard");
+const tomorrowBox=document.getElementById("tomorrowCard");
+
+const today=new Date();
+const tomorrow=new Date();
+tomorrow.setDate(today.getDate()+1);
+
+const todayFormat=formatDisplayDate(today);
+const tomorrowFormat=formatDisplayDate(tomorrow);
+
+const todayExams=csvData.filter(r=>r.Date===todayFormat.date);
+const tomorrowExams=csvData.filter(r=>r.Date===tomorrowFormat.date);
+
+function buildCard(title,date,day,data){
+
+let html=`
+<div class="alert-title">${title}</div>
+<div class="alert-date">${date} (${day})</div>
+`;
+
+if(data.length===0){
+html+=`<div class="alert-empty">No Exams Scheduled</div>`;
+return html;
+}
+
+html+=`
+<table>
+<tr>
+<th>S.No</th>
+<th>Class</th>
+<th>Subject</th>
+<th>Shift</th>
+</tr>
+`;
+
+data.forEach((r,i)=>{
+html+=`
+<tr>
+<td>${i+1}</td>
+<td>${r.Class}</td>
+<td>${r.Subject}</td>
+<td>${r.Shift}</td>
+</tr>
+`;
+});
+
+html+=`</table>`;
+
+return html;
+
+}
+
+todayBox.innerHTML=buildCard(
+"TODAY'S EXAMS",
+todayFormat.date,
+todayFormat.day,
+todayExams
+);
+
+tomorrowBox.innerHTML=buildCard(
+"TOMORROW EXAMS",
+tomorrowFormat.date,
+tomorrowFormat.day,
+tomorrowExams
+);
+
+}
+
+function scheduleMidnightRefresh(){
+
+const now=new Date();
+const midnight=new Date();
+
+midnight.setHours(24,0,0,0);
+
+const timeout=midnight-now;
+
+setTimeout(function(){
+
+showTodayExams();
+scheduleMidnightRefresh();
+
+},timeout);
+
+}
 
 function formatDate(dateInput){
 
@@ -384,64 +488,14 @@ return `${day}-${month}-${year}`;
 
 }
 
-/* SEARCH BY DATE */
-
 function searchByDate(){
 
 const date=formatDate(date1.value);
 const results=csvData.filter(r=>r.Date===date);
 
-displayDateTable(results);
+displayCards(results,"dateResults");
 
 }
-
-function displayDateTable(data){
-
-const container=document.getElementById("dateResults");
-container.innerHTML="";
-
-if(data.length===0){
-container.innerHTML=`<div class="no-results">No Exam Found</div>`;
-return;
-}
-
-let table=`
-<table>
-<tr>
-<th>S.No</th>
-<th>Date</th>
-<th>Day</th>
-<th>Class</th>
-<th>Course</th>
-<th>Subject</th>
-<th>Code</th>
-<th>Shift</th>
-</tr>
-`;
-
-data.forEach((r,i)=>{
-
-table+=`
-<tr>
-<td>${i+1}</td>
-<td>${r.Date}</td>
-<td>${r.Day}</td>
-<td>${r.Class}</td>
-<td>${r.Course}</td>
-<td>${r.Subject}</td>
-<td>${r.Code}</td>
-<td>${r.Shift}</td>
-</tr>
-`;
-
-});
-
-table+=`</table>`;
-container.innerHTML=table;
-
-}
-
-/* SEARCH CLASS SUBJECT */
 
 function searchByClassSubject(){
 
@@ -450,57 +504,9 @@ const s=subject2.value;
 
 const results=csvData.filter(r=>r.Class===c && r.Subject===s);
 
-displayClassSubject(results);
+displayCards(results,"resultRow2");
 
 }
-
-function displayClassSubject(data){
-
-const container=document.getElementById("resultRow2");
-container.innerHTML="";
-
-if(data.length===0){
-container.innerHTML=`<div class="no-results">No Exam Found</div>`;
-return;
-}
-
-const cls=data[0].Class;
-const sub=data[0].Subject;
-
-let html=`
-<div class="card">
-
-<div class="card-header">
-<div class="card-date">${cls}</div>
-<div class="card-day">${sub}</div>
-</div>
-
-<table>
-<tr>
-<th>S.No</th>
-<th>Date</th>
-<th>Course</th>
-<th>Shift</th>
-</tr>
-`;
-
-data.forEach((r,i)=>{
-html+=`
-<tr>
-<td>${i+1}</td>
-<td>${r.Date}</td>
-<td>${r.Course}</td>
-<td>${r.Shift}</td>
-</tr>
-`;
-});
-
-html+=`</table></div>`;
-container.innerHTML=html;
-
-}
-
-/* OTHER SEARCHES */
 
 function searchByDateClass(){
 
@@ -516,6 +522,7 @@ displayCards(results,"resultRow3");
 function searchByCode(){
 
 const code=code4.value;
+
 const results=csvData.filter(r=>r.Code===code);
 
 displayCards(results,"resultRow4");
