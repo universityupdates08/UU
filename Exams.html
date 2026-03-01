@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,7 +12,6 @@
 
 :root{
 --card-grad: linear-gradient(135deg,#6a5cff,#4fb7ff);
---yellow-grad: linear-gradient(135deg,#ffd84d,#ffb300);
 }
 
 body{
@@ -87,13 +88,81 @@ grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
 gap:20px;
 }
 
-/* CARDS */
+/* PROFESSIONAL ALERT PANEL */
+
+.alert-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:20px;
+margin-top:10px;
+}
+
+.alert-card{
+background:white;
+border-radius:14px;
+padding:20px;
+box-shadow:0 6px 18px rgba(0,0,0,0.08);
+border-top:5px solid #2c7be5;
+}
+
+.alert-card.today{
+border-top:5px solid #00b894;
+}
+
+.alert-card.tomorrow{
+border-top:5px solid #f39c12;
+}
+
+.alert-title{
+font-size:1.4rem;
+font-weight:700;
+text-align:center;
+margin-bottom:4px;
+}
+
+.alert-date{
+text-align:center;
+font-size:0.95rem;
+color:#555;
+margin-bottom:10px;
+}
+
+.alert-empty{
+text-align:center;
+padding:20px;
+color:#777;
+}
+
+/* TABLE */
+
+table{
+width:100%;
+border-collapse:collapse;
+font-size:85%;
+}
+
+th,td{
+border:1px solid #ddd;
+padding:8px;
+text-align:center;
+}
+
+th{
+background:#2c7be5;
+color:white;
+}
+
+tr:nth-child(even){
+background:#f7f9fc;
+}
+
+/* NORMAL CARDS */
 
 .card{
 background:var(--card-grad);
 color:white;
 border-radius:12px;
-padding:18px;
+padding:16px;
 box-shadow:0 3px 14px rgba(67,56,202,0.25);
 text-align:left;
 }
@@ -106,65 +175,26 @@ margin-bottom:10px;
 
 .card-date{
 font-size:1.2rem;
-font-weight:800;
+font-weight:700;
 }
 
 .card-day{
-font-size:0.9rem;
-opacity:0.9;
+font-size:0.85rem;
+opacity:0.85;
 }
 
-/* BIGGER CARDS ROW 3 & 4 */
+/* BIGGER CARDS */
 
 .row3 .card,
 .row4 .card{
-padding:24px;
+padding:25px;
 font-size:105%;
 }
 
-.row3 table,
-.row4 table{
-font-size:90%;
-}
-
-.center-card{
-display:flex;
-justify-content:center;
-margin-top:20px;
-}
-
-/* TABLE */
-
-table{
-width:100%;
-border-collapse:collapse;
-margin-top:10px;
-font-size:80%;
-background:white;
-color:black;
-}
-
-th,td{
-border:1px solid #ddd;
-padding:6px;
-text-align:center;
-}
-
-th{
-background:#2c7be5;
-color:white;
-}
-
-tr:nth-child(even){
-background:#f2f2f2;
-}
-
 .no-results{
-text-align:center;
 padding:20px;
-background:white;
-border-radius:12px;
-color:#555;
+text-align:center;
+color:#777;
 }
 
 </style>
@@ -172,31 +202,38 @@ color:#555;
 
 <body>
 
-<div class="container">
-
 <h2>Exam Schedule Portal</h2>
 <h3>Select a search method below to find your datesheet</h3>
+
+<div class="container">
+
+
 
 <div class="warning">
 ⚠ Please verify the exam schedule carefully. Always confirm with the official notification before appearing in the exam. The data are available as per University Letter No. (Exam/D.R./10154) Dated - 27.02.2026.
 </div>
 
-<!-- TODAY & TOMORROW PANEL -->
+<!-- EXAM ALERT PANEL -->
 
 <div class="row row0">
 
-<h3>📅 EXAM ALERT</h3>
+<h3>📢 Exam Alert Panel</h3>
 
-<div class="results-grid">
+<div class="alert-grid">
 
-<div class="card" id="todayCard"></div>
-<div class="card" id="tomorrowCard"></div>
+<div class="alert-card today">
+<div id="todayCard"></div>
+</div>
 
+<div class="alert-card tomorrow">
+<div id="tomorrowCard"></div>
 </div>
 
 </div>
 
-<!-- SEARCH DATE -->
+</div>
+
+<!-- SEARCH BY DATE -->
 
 <div class="row row1">
 
@@ -211,62 +248,54 @@ color:#555;
 
 </div>
 
-<!-- CLASS SUBJECT -->
+<!-- SEARCH BY CLASS & SUBJECT -->
 
 <div class="row row2">
 
 <h3>SEARCH BY CLASS & SUBJECT</h3>
 
 <div class="controls">
-
 <select id="class2"><option value="">Select Class</option></select>
 <select id="subject2"><option value="">Select Subject</option></select>
-
 <button onclick="searchByClassSubject()">Search</button>
+</div>
+
+<div id="resultRow2" class="results-grid"></div>
 
 </div>
 
-<div id="resultRow2" class="center-card"></div>
-
-</div>
-
-<!-- DATE CLASS -->
+<!-- SEARCH BY DATE & CLASS -->
 
 <div class="row row3">
 
 <h3>SEARCH BY DATE & CLASS</h3>
 
 <div class="controls">
-
 <input type="date" id="date3">
 <select id="class3"><option value="">Select Class</option></select>
-
 <button onclick="searchByDateClass()">Search</button>
-
 </div>
 
 <div id="resultRow3" class="results-grid"></div>
 
 </div>
 
-<!-- PAPER CODE -->
+<!-- SEARCH BY PAPER CODE -->
 
 <div class="row row4">
 
 <h3>SEARCH BY PAPER CODE</h3>
 
 <div class="controls">
-
 <select id="code4"><option value="">Select Code</option></select>
 <button onclick="searchByCode()">Search</button>
-
 </div>
 
 <div id="resultRow4" class="results-grid"></div>
 
 </div>
 
-<!-- CLASS YEAR SUBJECT -->
+<!-- SEARCH CLASS YEAR SUBJECT -->
 
 <div class="row row5">
 
@@ -304,16 +333,16 @@ Papa.parse("DatesheetSearch.csv",{
 download:true,
 header:true,
 skipEmptyLines:true,
-
 complete:function(results){
+
 csvData=results.data;
+
 populateFilters();
-showExamAlert();
+showTodayExams();
+scheduleMidnightRefresh();
+
 }
-
 });
-
-/* POPULATE FILTERS */
 
 function populateFilters(){
 
@@ -344,27 +373,22 @@ code4.innerHTML+=`<option>${c}</option>`;
 
 }
 
-/* FORMAT DATE */
-
 function formatDisplayDate(date){
 
 const d=new Date(date);
-
 const day=d.getDate();
 const month=d.toLocaleString('en-US',{month:'short'});
 const year=d.getFullYear().toString().slice(-2);
 const weekday=d.toLocaleString('en-US',{weekday:'long'});
 
-return {
+return{
 date:`${day}-${month}-${year}`,
 day:weekday
 };
 
 }
 
-/* TODAY + TOMORROW PANEL */
-
-function showExamAlert(){
+function showTodayExams(){
 
 const todayBox=document.getElementById("todayCard");
 const tomorrowBox=document.getElementById("tomorrowCard");
@@ -382,14 +406,12 @@ const tomorrowExams=csvData.filter(r=>r.Date===tomorrowFormat.date);
 function buildCard(title,date,day,data){
 
 let html=`
-<div class="card-header">
-<div class="card-date">${title}</div>
-<div class="card-day">${date} (${day})</div>
-</div>
+<div class="alert-title">${title}</div>
+<div class="alert-date">${date} (${day})</div>
 `;
 
 if(data.length===0){
-html+=`<div class="no-results">No Exams</div>`;
+html+=`<div class="alert-empty">No Exams Scheduled</div>`;
 return html;
 }
 
@@ -404,7 +426,6 @@ html+=`
 `;
 
 data.forEach((r,i)=>{
-
 html+=`
 <tr>
 <td>${i+1}</td>
@@ -413,7 +434,6 @@ html+=`
 <td>${r.Shift}</td>
 </tr>
 `;
-
 });
 
 html+=`</table>`;
@@ -438,7 +458,23 @@ tomorrowExams
 
 }
 
-/* FORMAT INPUT DATE */
+function scheduleMidnightRefresh(){
+
+const now=new Date();
+const midnight=new Date();
+
+midnight.setHours(24,0,0,0);
+
+const timeout=midnight-now;
+
+setTimeout(function(){
+
+showTodayExams();
+scheduleMidnightRefresh();
+
+},timeout);
+
+}
 
 function formatDate(dateInput){
 
@@ -451,52 +487,14 @@ return `${day}-${month}-${year}`;
 
 }
 
-/* SEARCH BY DATE */
-
 function searchByDate(){
 
 const date=formatDate(date1.value);
 const results=csvData.filter(r=>r.Date===date);
 
-if(results.length===0){
-dateResults.innerHTML="<p>No Exam Found</p>";
-return;
-}
-
-let table=`<table>
-<tr>
-<th>S.No</th>
-<th>Date</th>
-<th>Day</th>
-<th>Class</th>
-<th>Course</th>
-<th>Subject</th>
-<th>Code</th>
-<th>Shift</th>
-</tr>`;
-
-results.forEach((r,i)=>{
-
-table+=`<tr>
-<td>${i+1}</td>
-<td>${r.Date}</td>
-<td>${r.Day}</td>
-<td>${r.Class}</td>
-<td>${r.Course}</td>
-<td>${r.Subject}</td>
-<td>${r.Code}</td>
-<td>${r.Shift}</td>
-</tr>`;
-
-});
-
-table+=`</table>`;
-
-dateResults.innerHTML=table;
+displayCards(results,"dateResults");
 
 }
-
-/* CLASS SUBJECT */
 
 function searchByClassSubject(){
 
@@ -509,8 +507,6 @@ displayCards(results,"resultRow2");
 
 }
 
-/* DATE CLASS */
-
 function searchByDateClass(){
 
 const date=formatDate(date3.value);
@@ -522,8 +518,6 @@ displayCards(results,"resultRow3");
 
 }
 
-/* CODE */
-
 function searchByCode(){
 
 const code=code4.value;
@@ -533,8 +527,6 @@ const results=csvData.filter(r=>r.Code===code);
 displayCards(results,"resultRow4");
 
 }
-
-/* CLASS YEAR SUBJECT */
 
 function searchClassYearSubject(){
 
@@ -548,8 +540,6 @@ displayCards(results,"resultRow5");
 
 }
 
-/* CARD DISPLAY */
-
 function displayCards(data,id){
 
 const container=document.getElementById(id);
@@ -560,7 +550,7 @@ container.innerHTML=`<div class="no-results">No Exam Found</div>`;
 return;
 }
 
-data.forEach((r,i)=>{
+data.forEach(r=>{
 
 container.innerHTML+=`
 
@@ -574,14 +564,12 @@ container.innerHTML+=`
 <table>
 
 <tr>
-<th>S.No</th>
 <th>Class</th>
 <th>Subject</th>
 <th>Shift</th>
 </tr>
 
 <tr>
-<td>${i+1}</td>
 <td>${r.Class}</td>
 <td>${r.Subject}</td>
 <td>${r.Shift}</td>
