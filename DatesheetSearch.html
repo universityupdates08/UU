@@ -10,6 +10,7 @@
 
 :root{
 --card-grad: linear-gradient(135deg,#6a5cff,#4fb7ff);
+--yellow-grad: linear-gradient(135deg,#ffd84d,#ffb300);
 }
 
 body{
@@ -28,8 +29,6 @@ margin:auto;
 box-shadow:0 8px 20px rgba(0,0,0,0.1);
 }
 
-/* Warning */
-
 .warning{
 background:#fff3cd;
 border:1px solid #ffeeba;
@@ -40,8 +39,6 @@ color:#856404;
 text-align:left;
 }
 
-/* ROW STYLES */
-
 .row{
 margin:20px 0;
 padding:20px;
@@ -51,13 +48,12 @@ border-radius:10px;
 .row1{ background:#e8f1ff; }
 .row2{ background:#e9f9ef; }
 .row3{ background:#fff1f1; }
+.row4{ background:#fff8e1; }
 
 .row h3{
 text-align:left;
 margin-bottom:10px;
 }
-
-/* Controls */
 
 .controls{
 display:flex;
@@ -82,8 +78,6 @@ border:none;
 cursor:pointer;
 }
 
-/* CARD GRID */
-
 .results-grid{
 margin-top:20px;
 display:grid;
@@ -91,7 +85,14 @@ grid-template-columns:repeat(auto-fill,minmax(230px,1fr));
 gap:15px;
 }
 
-/* CARD */
+/* CENTER CARD FOR CLASS SUBJECT */
+.center-card{
+display:flex;
+justify-content:center;
+margin-top:20px;
+}
+
+/* CARDS */
 
 .card{
 background:var(--card-grad);
@@ -100,21 +101,28 @@ border-radius:12px;
 padding:14px;
 box-shadow:0 3px 14px rgba(67,56,202,0.25);
 transition:transform 0.3s ease;
-display:flex;
-flex-direction:column;
-justify-content:space-between;
 text-align:left;
 font-size:90%;
+max-width:500px;
+width:100%;
 }
 
 .card:hover{
 transform:translateY(-4px);
 }
 
-/* HEADER */
+.yellow-card{
+background:var(--yellow-grad);
+color:#333;
+border-radius:12px;
+padding:16px;
+box-shadow:0 4px 15px rgba(255,180,0,0.4);
+max-width:350px;
+margin:auto;
+}
 
 .card-header{
-border-bottom:1px solid rgba(255,255,255,0.2);
+border-bottom:1px solid rgba(255,255,255,0.3);
 padding-bottom:8px;
 margin-bottom:10px;
 }
@@ -128,8 +136,6 @@ font-weight:800;
 font-size:0.8rem;
 opacity:0.8;
 }
-
-/* DETAILS */
 
 .card-detail{
 margin-bottom:8px;
@@ -149,8 +155,6 @@ font-weight:500;
 display:block;
 }
 
-/* FOOTER */
-
 .card-footer{
 display:flex;
 justify-content:space-between;
@@ -166,10 +170,7 @@ font-size:0.7rem;
 font-weight:bold;
 }
 
-/* NO RESULTS */
-
 .no-results{
-grid-column:1/-1;
 text-align:center;
 padding:40px;
 background:white;
@@ -187,8 +188,6 @@ margin-top:10px;
 font-size:75%;
 background:white;
 color:black;
-border-radius:6px;
-overflow:hidden;
 }
 
 th,td{
@@ -220,7 +219,7 @@ background:#f2f2f2;
 ⚠ Please verify the exam schedule carefully. Always confirm with the official notification before appearing in the exam. The data are available as per University Letter No. (Exam/D.R./10154) Dated - 27.02.2026.
 </div>
 
-<!-- ROW 1 -->
+<!-- SEARCH BY DATE -->
 
 <div class="row row1">
 
@@ -235,7 +234,7 @@ background:#f2f2f2;
 
 </div>
 
-<!-- ROW 2 -->
+<!-- SEARCH BY CLASS SUBJECT -->
 
 <div class="row row2">
 
@@ -255,11 +254,11 @@ background:#f2f2f2;
 
 </div>
 
-<div id="resultRow2" class="results-grid"></div>
+<div id="resultRow2" class="center-card"></div>
 
 </div>
 
-<!-- ROW 3 -->
+<!-- SEARCH BY DATE CLASS -->
 
 <div class="row row3">
 
@@ -278,6 +277,26 @@ background:#f2f2f2;
 </div>
 
 <div id="resultRow3" class="results-grid"></div>
+
+</div>
+
+<!-- SEARCH BY CODE -->
+
+<div class="row row4">
+
+<h3>SEARCH BY PAPER CODE</h3>
+
+<div class="controls">
+
+<select id="code4">
+<option value="">Select Code</option>
+</select>
+
+<button onclick="searchByCode()">Search</button>
+
+</div>
+
+<div id="resultRow4"></div>
 
 </div>
 
@@ -308,15 +327,18 @@ function populateFilters(){
 
 const classes=new Set();
 const subjects=new Set();
+const codes=new Set();
 
 csvData.forEach(r=>{
 classes.add(r.Class);
 subjects.add(r.Subject);
+codes.add(r.Code);
 });
 
 const class2=document.getElementById("class2");
 const class3=document.getElementById("class3");
 const subject2=document.getElementById("subject2");
+const code4=document.getElementById("code4");
 
 classes.forEach(c=>{
 class2.innerHTML+=`<option value="${c}">${c}</option>`;
@@ -325,6 +347,10 @@ class3.innerHTML+=`<option value="${c}">${c}</option>`;
 
 subjects.forEach(s=>{
 subject2.innerHTML+=`<option value="${s}">${s}</option>`;
+});
+
+codes.forEach(c=>{
+code4.innerHTML+=`<option value="${c}">${c}</option>`;
 });
 
 }
@@ -384,7 +410,19 @@ displayCards(results,"resultRow3");
 
 }
 
-/* TABLE RESULT (SEARCH BY DATE) */
+/* SEARCH BY CODE */
+
+function searchByCode(){
+
+const code=document.getElementById("code4").value;
+
+const results=csvData.filter(r=>r.Code===code);
+
+displayCodeCard(results);
+
+}
+
+/* DATE TABLE */
 
 function displayDateResults(data){
 
@@ -434,7 +472,7 @@ container.innerHTML=table;
 
 }
 
-/* SINGLE CARD TABLE (CLASS & SUBJECT) */
+/* CLASS SUBJECT CARD */
 
 function displayClassSubject(data){
 
@@ -449,7 +487,7 @@ return;
 const cls=data[0].Class;
 const sub=data[0].Subject;
 
-let table=`
+let html=`
 <div class="card">
 
 <div class="card-header">
@@ -467,8 +505,7 @@ let table=`
 `;
 
 data.forEach((r,i)=>{
-
-table+=`
+html+=`
 <tr>
 <td>${i+1}</td>
 <td>${r.Date}</td>
@@ -476,19 +513,15 @@ table+=`
 <td>${r.Shift}</td>
 </tr>
 `;
-
 });
 
-table+=`
-</table>
-</div>
-`;
+html+=`</table></div>`;
 
-container.innerHTML=table;
+container.innerHTML=html;
 
 }
 
-/* CARD RESULT */
+/* NORMAL CARDS */
 
 function displayCards(data,containerID){
 
@@ -536,6 +569,39 @@ container.innerHTML+=`
 `;
 
 });
+
+}
+
+/* CODE CARD */
+
+function displayCodeCard(data){
+
+const container=document.getElementById("resultRow4");
+container.innerHTML="";
+
+if(data.length===0){
+container.innerHTML=`<div class="no-results">No Exam Found</div>`;
+return;
+}
+
+const r=data[0];
+
+container.innerHTML=`
+
+<div class="yellow-card">
+
+<h3>${r.Subject}</h3>
+
+<p><b>Code:</b> ${r.Code}</p>
+<p><b>Date:</b> ${r.Date}</p>
+<p><b>Day:</b> ${r.Day}</p>
+<p><b>Class:</b> ${r.Class}</p>
+<p><b>Course:</b> ${r.Course}</p>
+<p><b>Shift:</b> ${r.Shift}</p>
+
+</div>
+
+`;
 
 }
 
