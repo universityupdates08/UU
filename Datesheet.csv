@@ -1,0 +1,500 @@
+Date,Day,Shift,Class,Subject,Paper Name,Paper Code,Year
+18-Mar-26,Wednesday,Shift-I (10:00 A.M. - 01:00 P.M.),B.A.,Urdu,Fiction,A-136,1st
+18-Mar-26,Wednesday,Shift-II (02:00 P.M. - 05:00 P.M.),B.A.,Urdu,Prose,A-236,2nd
+18-Mar-26,Wednesday,Shift-I (10:00 A.M. - 01:00 P.M.),B.A.,Urdu,History of Urdu Literature & Criticism,A-336,3rd
+18-Mar-26,Wednesday,Shift-I (10:00 A.M. - 01:00 P.M.),"B.Sc. (PE, HE & Sports)","B.Sc. (PE, HE & Sports)",Foundation of Physical Education,S-101,1st
+18-Mar-26,Wednesday,Shift-II (02:00 P.M. - 05:00 P.M.),"B.Sc. (PE, HE & Sports)","B.Sc. (PE, HE & Sports)","Health Education, Safely Education, First Aid and Rehabilitation",A-201,2nd
+18-Mar-26,Wednesday,Shift-I (10:00 A.M. - 01:00 P.M.),"B.Sc. (PE, HE & Sports)","B.Sc. (PE, HE & Sports)",Psychology & Sociology Physical Education & Sports,S-301,3rd
+18-Mar-26,Wednesday,Shift-II (02:00 P.M. - 05:00 P.M.),M.Com.,Commerce,Operation Research,I-301,2nd
+18-Mar-26,Wednesday,Shift-I (10:00 A.M. - 01:00 P.M.),B.A.,Philosophy,Indian Philosophy,A-124,1st
+18-Mar-26,Wednesday,Shift-II (02:00 P.M. - 05:00 P.M.),B.A.,Philosophy,Ethics (Indian & Western),A-224,2nd
+18-Mar-26,Wednesday,Shift-I (10:00 A.M. - 01:00 P.M.),B.A.,Philosophy,VI Philosophy of Religion,A-424,3rd
+19-Mar-26,Thursday,Shift-I (10:00 A.M. - 01:00 P.M.),B.A.,Hindi,Prachin Evam Madhyakaleen Kavya,A-113,1st
+19-Mar-26,Thursday,Shift-II (02:00 P.M. - 05:00 P.M.),B.A.,Hindi,Adhunik Hindi Kavya,A-213,2nd
+19-Mar-26,Thursday,Shift-I (10:00 A.M. - 01:00 P.M.),B.A.,Hindi,Adhyatan Hindi Evam Kaurvi Lok Kavya,A-313,1st
+19-Mar-26,Thursday,Shift-I (10:00 A.M. - 01:00 P.M.),"B.Sc. (PE, HE & Sports)","B.Sc. (PE, HE & Sports)",Anatomy and Physiology,S-102,1st
+19-Mar-26,Thursday,Shift-II (02:00 P.M. - 05:00 P.M.),"B.Sc. (PE, HE & Sports)","B.Sc. (PE, HE & Sports)",Physiology of Exercise,S-202,2nd
+19-Mar-26,Thursday,Shift-I (10:00 A.M. - 01:00 P.M.),"B.Sc. (PE, HE & Sports)","B.Sc. (PE, HE & Sports)",Fundamentals of Sports Training,S-302,3rd
+20-Mar-26,Friday,Shift-I (10:00 A.M. - 01:00 P.M.),B.A.,Maths,Algebra & Trigonometry,A-126,1st
+20-Mar-26,Friday,Shift-I (10:00 A.M. - 01:00 P.M.),B.Sc.,Maths,Algebra & Trigonometry,B-126,1st
+20-Mar-26,Friday,Shift-II (02:00 P.M. - 05:00 P.M.),B.A.,Maths,Linear Algebra and Matrices,A-226,2nd
+20-Mar-26,Friday,Shift-II (02:00 P.M. - 05:00 P.M.),B.Sc.,Maths,Linear Algebra and Matrices,B-226,2nd
+20-Mar-26,Friday,Shift-I (10:00 A.M. - 01:00 P.M.),B.A.,Maths,Analysis,A-326,3rd
+20-Mar-26,Friday,Shift-I (10:00 A.M. - 01:00 P.M.),B.Sc.,Maths,Analysis,B-326,3rd
+20-Mar-26,Friday,Shift-I (10:00 A.M. - 01:00 P.M.),"B.Sc. (PE, HE & Sports)","B.Sc. (PE, HE & Sports)",Theory of Games & Sports (Track & Field),S-103,1st
+20-Mar-26,Friday,Shift-II (02:00 P.M. - 05:00 P.M.),"B.Sc. (PE, HE & Sports)","B.Sc. (PE, HE & Sports)",Theory of Games & Sports (Track & Field Events),S-203,2nd
+20-Mar-26,Friday,Shift-I (10:00 A.M. - 01:00 P.M.),"B.Sc. (PE, HE & Sports)","B.Sc. (PE, HE & Sports)",Kinesiology & Bio-Mechanics,S-303,3rd
+20-Mar-26,Friday,Shift-II (02:00 P.M. - 05:00 P.M.),M.Com.,Commerce,Research Methodology,I-302,2nd
+23-Mar-26,Monday,Shift-I (10:00 A.M. - 01:00 P.M.),B.A.,Economics,Micro Economics,A-145,1st
+23-Mar-26,Monday,Shift-I (10:00 A.M. - 01:00 P.M.),B.Sc.,Economics,Micro Economics,B-145,1st
+23-Mar-26,Monday,Shift-II (02:00 P.M. - 05:00 P.M.),B.A.,Economics,Elementary Quantitative Methods,A-245,2nd
+23-Mar-26,Monday,Shift-II (02:00 P.M. - 05:00 P.M.),B.Sc.,Economics,Elementary Quantitative Methods,B-245,2nd
+23-Mar-26,Monday,Shift-I (10:00 A.M. - 01:00 P.M.),B.A.,Economics,Indian Economy,A-336,3rd
+23-Mar-26,Monday,Shift-I (10:00 A.M. - 01:00 P.M.),B.Sc.,Economics,Indian Economy,B-336,3rd
+23-Mar-26,Monday,Shift-I (10:00 A.M. - 01:00 P.M.),"B.Sc. (PE, HE & Sports)","B.Sc. (PE, HE & Sports)",Theory of Games & Sports (Gymnastics),S-104,1st
+23-Mar-26,Monday,Shift-II (02:00 P.M. - 05:00 P.M.),"B.Sc. (PE, HE & Sports)","B.Sc. (PE, HE & Sports)",Theory of Games & Sports (Gymnastics),S-204,2nd
+23-Mar-26,Monday,Shift-I (10:00 A.M. - 01:00 P.M.),"B.Sc. (PE, HE & Sports)","B.Sc. (PE, HE & Sports)",Theory of Games & Sports (Track & Field),S-304,3rd
+23-Mar-26,Monday,Shift-II (02:00 P.M. - 05:00 P.M.),M.Com.,Commerce,Strategic Management,I-303,2nd
+24-Mar-26,Tuesday,Shift-I (10:00 A.M. - 01:00 P.M.),B.A.,English,Short Stories,A-109,1st
+24-Mar-26,Tuesday,Shift-II (02:00 P.M. - 05:00 P.M.),B.A.,English,British Poetry,A-209,2nd
+24-Mar-26,Tuesday,Shift-I (10:00 A.M. - 01:00 P.M.),B.A.,English,Indian Writing in English Drama & Fiction,A-309,3rd
+24-Mar-26,Tuesday,Shift-II (02:00 P.M. - 05:00 P.M.),M.Com.,Commerce,Managerial Economics,I-305,2nd
+24-Mar-26,Tuesday,Shift-I (10:00 A.M. - 01:00 P.M.),B.A.,Philosophy,Modern Western Philosophy,A-125,1st
+24-Mar-26,Tuesday,Shift-II (02:00 P.M. - 05:00 P.M.),B.A.,Philosophy,Logic (Indian & Western),A-225,2nd
+24-Mar-26,Tuesday,Shift-I (10:00 A.M. - 01:00 P.M.),B.A.,Philosophy,Social & Political Philosophy,A-425,3rd
+24-Mar-26,Tuesday,Shift-I (10:00 A.M. - 01:00 P.M.),B.A.,Philosophy,Applied Philosophy,A-426,3rd
+25-Mar-26,Wednesday,Shift-I (10:00 A.M. - 01:00 P.M.),B.A.,Computer Application,Visual Programming,A-392,3rd
+25-Mar-26,Wednesday,Shift-I (10:00 A.M. - 01:00 P.M.),B.A.,Library & Info Science,Computer Applications in Libraries,A-321,3rd
+25-Mar-26,Wednesday,Shift-II (02:00 P.M. - 05:00 P.M.),B.A.,Library & Info Science,Knowledge Organisation in Libraries,A-221,2nd
+25-Mar-26,Wednesday,Shift-I (10:00 A.M. - 01:00 P.M.),B.A.,Psychology,Basic Psychological Process,A-140,1st
+25-Mar-26,Wednesday,Shift-II (02:00 P.M. - 05:00 P.M.),B.A.,Psychology,Psychopathology,A-240,2nd
+25-Mar-26,Wednesday,Shift-I (10:00 A.M. - 01:00 P.M.),B.A.,Psychology,Psychological Measurement & Testing,A-439,3rd
+25-Mar-26,Wednesday,Shift-I (10:00 A.M. - 01:00 P.M.),B.A.,Defence Studies,Evolution of Strategic Thought,A-304,3rd
+25-Mar-26,Wednesday,Shift-I (10:00 A.M. - 01:00 P.M.),B.Sc.,Defence Studies,Evolution of Strategic Thought,B-304,3rd
+25-Mar-26,Wednesday,Shift-II (02:00 P.M. - 05:00 P.M.),B.A.,Defence Studies,Art of War in India (After 1947),A-204,2nd
+25-Mar-26,Wednesday,Shift-II (02:00 P.M. - 05:00 P.M.),B.Sc.,Defence Studies,Art of War in India (After 1947),B-204,2nd
+25-Mar-26,Wednesday,Shift-I (10:00 A.M. - 01:00 P.M.),B.A.,Home Science,Fundamentals of Food & Nutrition,A-317,3rd
+25-Mar-26,Wednesday,Shift-II (02:00 P.M. - 05:00 P.M.),B.A.,Home Science,Introduction to Textiles,A-217,2nd
+25-Mar-26,Wednesday,Shift-I (10:00 A.M. - 01:00 P.M.),B.A.,Geography,Environmental Studies,A-311,3rd
+25-Mar-26,Wednesday,Shift-I (10:00 A.M. - 01:00 P.M.),B.Sc.,Geography,Environmental Studies,B-311,3rd
+25-Mar-26,Wednesday,Shift-II (02:00 P.M. - 05:00 P.M.),B.A.,Geography,Economic Geography,A-211,2nd
+25-Mar-26,Wednesday,Shift-II (02:00 P.M. - 05:00 P.M.),B.Sc.,Geography,Economic Geography,B-211,2nd
+25-Mar-26,Wednesday,Shift-I (10:00 A.M. - 01:00 P.M.),B.A.,Physical Education,Foundation of Physical Education,A-185,1st
+25-Mar-26,Wednesday,Shift-II (02:00 P.M. - 05:00 P.M.),B.A.,Physical Education,Health Education ,A-285,2nd
+25-Mar-26,Wednesday,Shift-I (10:00 A.M. - 01:00 P.M.),B.A.,Physical Education,Management in Physical Education,A-385,3rd
+25-Mar-26,Wednesday,Shift-I (10:00 A.M. - 01:00 P.M.),B.A.,Music,Vocal (Theory Paper),A-165,1st
+25-Mar-26,Wednesday,Shift-I (10:00 A.M. - 01:00 P.M.),B.A.,Music,Vocal (Theory Paper),A-365,3rd
+25-Mar-26,Wednesday,Shift-I (10:00 A.M. - 01:00 P.M.),B.A.,Music,Tabla (Theory Paper),A-369,3rd
+25-Mar-26,Wednesday,Shift-I (10:00 A.M. - 01:00 P.M.),B.A.,Drawing & Painting (Visual Art),Philosophy of Art and Modern Indian Painting (18th Century A.D. upto present age),A-303,3rd
+25-Mar-26,Wednesday,Shift-II (02:00 P.M. - 05:00 P.M.),B.A.,Drawing & Painting (Visual Art),History of Indian Painting (Primitive Art and 1st Century to 17th Century A.D.),A-203,2nd
+25-Mar-26,Wednesday,Shift-I (10:00 A.M. - 01:00 P.M.),B.Sc.,Botany,"Plant Resource Utilization, Palynology, Plant Pathology and Biostatistics",B-301,3rd
+25-Mar-26,Wednesday,Shift-II (02:00 P.M. - 05:00 P.M.),B.Sc.,Botany,Diversity of Angiosperms: Systematics Development & Reproduction,B-201,2nd
+25-Mar-26,Wednesday,Shift-II (02:00 P.M. - 05:00 P.M.),B.Sc.,Chemistry,Organic Chemistry,B-206,2nd
+25-Mar-26,Wednesday,Shift-I (10:00 A.M. - 01:00 P.M.),B.Sc.,Chemistry,Inorganic Chemistry,B-306,3rd
+25-Mar-26,Wednesday,Shift-II (02:00 P.M. - 05:00 P.M.),B.Sc.,Physics,Physical Optics and Lasers,B-216,2nd
+25-Mar-26,Wednesday,Shift-I (10:00 A.M. - 01:00 P.M.),B.Sc.,Physics,Relativity & Statistical Physics,B-316,3rd
+25-Mar-26,Wednesday,Shift-II (02:00 P.M. - 05:00 P.M.),B.Sc.,Zoology,Chordata,B-220,2nd
+25-Mar-26,Wednesday,Shift-I (10:00 A.M. - 01:00 P.M.),B.Sc.,Zoology,Applied & Economic Zoology,B-320,3rd
+25-Mar-26,Wednesday,Shift-I (10:00 A.M. - 01:00 P.M.),B.Sc.,Computer Science,Visual Basic and Introduction to Web-Desigining,B-397,3rd
+25-Mar-26,Wednesday,Shift-I (10:00 A.M. - 01:00 P.M.),B.Sc.,Industrial Chemistry,Industrial Chemical Analysis,B-353,3rd
+25-Mar-26,Wednesday,Shift-II (02:00 P.M. - 05:00 P.M.),B.Sc.,Statistics,Statistical Inference,B-294,2nd
+25-Mar-26,Wednesday,Shift-I (10:00 A.M. - 01:00 P.M.),B.Sc.,Statistics,Non Parametric Methods and Numerical Analysis,B-394,3rd
+27-Mar-26,Friday,Shift-I (10:00 A.M. - 01:00 P.M.),B.A.,Computer Application,Advanced Topics in Computer,A-393,3rd
+27-Mar-26,Friday,Shift-I (10:00 A.M. - 01:00 P.M.),B.Sc.,Computer Application,Advanced Topics in Computer,B-393,3rd
+27-Mar-26,Friday,Shift-I (10:00 A.M. - 01:00 P.M.),B.Com,Computer Application,Advanced Topics in Computer,C-393,3rd
+27-Mar-26,Friday,Shift-II (02:00 P.M. - 05:00 P.M.),B.A.,Library & Info Science,Information Storage and Retrieval System,A-222,2nd
+27-Mar-26,Friday,Shift-I (10:00 A.M. - 01:00 P.M.),B.A.,Library & Info Science,Library Management,A-322,3rd
+27-Mar-26,Friday,Shift-II (02:00 P.M. - 05:00 P.M.),B.A.,Psychology,Social Psychology,A-241,2nd
+27-Mar-26,Friday,Shift-I (10:00 A.M. - 01:00 P.M.),B.A.,Psychology,Experimental Methodology & Statistics,A-141,1st
+27-Mar-26,Friday,Shift-I (10:00 A.M. - 01:00 P.M.),B.A.,Psychology,Counseling and Guidance,A-440,3rd
+27-Mar-26,Friday,Shift-I (10:00 A.M. - 01:00 P.M.),B.A.,Psychology,Organizational Behaviour,A-441,3rd
+27-Mar-26,Friday,Shift-I (10:00 A.M. - 01:00 P.M.),B.A.,Psychology,Health Psychology,A-442,3rd
+27-Mar-26,Friday,Shift-I (10:00 A.M. - 01:00 P.M.),B.A.,Psychology,Environmental Psychology,A-443,3rd
+27-Mar-26,Friday,Shift-II (02:00 P.M. - 05:00 P.M.),B.A.,Defence Studies,National Security,A-205,2nd
+27-Mar-26,Friday,Shift-II (02:00 P.M. - 05:00 P.M.),B.Sc.,Defence Studies,National Security,B-205,2nd
+27-Mar-26,Friday,Shift-I (10:00 A.M. - 01:00 P.M.),B.A.,Defence Studies,Study of War & Peace,A-305,3rd
+27-Mar-26,Friday,Shift-I (10:00 A.M. - 01:00 P.M.),B.Sc.,Defence Studies,Study of War & Peace,B-305,3rd
+27-Mar-26,Friday,Shift-II (02:00 P.M. - 05:00 P.M.),B.A.,Geography,Geography of India,A-212,2nd
+27-Mar-26,Friday,Shift-II (02:00 P.M. - 05:00 P.M.),B.Sc.,Geography,Geography of India,B-212,2nd
+27-Mar-26,Friday,Shift-I (10:00 A.M. - 01:00 P.M.),B.A.,Geography,South West Asia,A-512,3rd
+27-Mar-26,Friday,Shift-I (10:00 A.M. - 01:00 P.M.),B.Sc.,Geography,South West Asia,B-512,3rd
+27-Mar-26,Friday,Shift-I (10:00 A.M. - 01:00 P.M.),B.A.,Geography,South East Asia,A-513,3rd
+27-Mar-26,Friday,Shift-I (10:00 A.M. - 01:00 P.M.),B.Sc.,Geography,South East Asia,B-513,3rd
+27-Mar-26,Friday,Shift-I (10:00 A.M. - 01:00 P.M.),B.A.,Geography,South Asia,A-515,3rd
+27-Mar-26,Friday,Shift-I (10:00 A.M. - 01:00 P.M.),B.Sc.,Geography,South Asia,B-515,3rd
+27-Mar-26,Friday,Shift-II (02:00 P.M. - 05:00 P.M.),B.A.,Home Science,Child Development,A-218,2nd
+27-Mar-26,Friday,Shift-I (10:00 A.M. - 01:00 P.M.),B.A.,Home Science,Dietetics and Therapeutic Nutrition,A-318,3rd
+27-Mar-26,Friday,Shift-I (10:00 A.M. - 01:00 P.M.),B.A.,Physical Education,History of Physical Education,A-186,1st
+27-Mar-26,Friday,Shift-II (02:00 P.M. - 05:00 P.M.),B.A.,Physical Education,Psychological Foundation of Physica; Education,A-286,2nd
+27-Mar-26,Friday,Shift-I (10:00 A.M. - 01:00 P.M.),B.A.,Physical Education,Kinesiology & Bio-Mechanics in Physical Education,A-386,3rd
+27-Mar-26,Friday,Shift-II (02:00 P.M. - 05:00 P.M.),B.Sc.,Botany,"Cytology, Genetics, Evolution & Ecology",A-202,2nd
+27-Mar-26,Friday,Shift-I (10:00 A.M. - 01:00 P.M.),B.Sc.,Botany,Molecular Biology & Biotechnology,B-302,3rd
+27-Mar-26,Friday,Shift-II (02:00 P.M. - 05:00 P.M.),B.Sc.,Chemistry,Organic Chemistry,B-207,2nd
+27-Mar-26,Friday,Shift-I (10:00 A.M. - 01:00 P.M.),B.Sc.,Chemistry,Organic Chemistry,B-307,3rd
+27-Mar-26,Friday,Shift-II (02:00 P.M. - 05:00 P.M.),B.Sc.,Physics,Electromagnetics,B-217,2nd
+27-Mar-26,Friday,Shift-I (10:00 A.M. - 01:00 P.M.),B.Sc.,Physics,Solid State & Nuclear Physics,B-317,3rd
+27-Mar-26,Friday,Shift-II (02:00 P.M. - 05:00 P.M.),B.Sc.,Zoology,"Animal Distribution, Evolution and Developmental Biology",B-221,2nd
+27-Mar-26,Friday,Shift-I (10:00 A.M. - 01:00 P.M.),B.Sc.,Zoology,"Biotechnology, Immunology, Biological Tools and Techniques and Biostatistics",B-321,3rd
+27-Mar-26,Friday,Shift-I (10:00 A.M. - 01:00 P.M.),B.Sc.,Computer Science,Computer Architecture & Data Communication,B-398,3rd
+27-Mar-26,Friday,Shift-I (10:00 A.M. - 01:00 P.M.),B.Sc.,Industrial Chemistry,Chemical Process Economics and Industrial Organization,B-354,3rd
+27-Mar-26,Friday,Shift-II (02:00 P.M. - 05:00 P.M.),B.Sc.,Statistics,Survey Sampling,B-295,2nd
+27-Mar-26,Friday,Shift-I (10:00 A.M. - 01:00 P.M.),B.Sc.,Statistics,Applied Statistics,B-395,3rd
+28-Mar-26,Saturday,Shift-I (10:00 A.M. - 01:00 P.M.),B.A.,Computer Application,"Project Report - Java, Visual Basic, Web Technology and Oracle",A-690,3rd
+28-Mar-26,Saturday,Shift-I (10:00 A.M. - 01:00 P.M.),B.A.,Physical Education,Introduction to Statistics & Computer Application in Physical Education,A-387,3rd
+28-Mar-26,Saturday,Shift-II (02:00 P.M. - 05:00 P.M.),B.A.,Physical Education,Athletic Injuries & Rehabilitation,A-287,2nd
+28-Mar-26,Saturday,Shift-I (10:00 A.M. - 01:00 P.M.),B.A.,Physical Education,Anatomy & Physiology in Physical Education,A-187,1st
+1-Apr-26,Wednesday,Shift-I (10:00 A.M. - 01:00 P.M.),B.A.,Qualifying Course,Sports & Physical Education,A-001,1st
+1-Apr-26,Wednesday,Shift-I (10:00 A.M. - 01:00 P.M.),B.Sc.,Qualifying Course,Sports & Physical Education,B-001,1st
+1-Apr-26,Wednesday,Shift-I (10:00 A.M. - 01:00 P.M.),B.Com,Qualifying Course,Sports & Physical Education,C-001,1st
+1-Apr-26,Wednesday,Shift-II (02:00 P.M. - 05:00 P.M.),B.A.,Qualifying Course,Sports & Physical Education,A-002,2nd
+1-Apr-26,Wednesday,Shift-II (02:00 P.M. - 05:00 P.M.),B.Sc.,Qualifying Course,Sports & Physical Education,B-002,2nd
+1-Apr-26,Wednesday,Shift-II (02:00 P.M. - 05:00 P.M.),B.Com,Qualifying Course,Sports & Physical Education,C-002,2nd
+1-Apr-26,Wednesday,Shift-I (10:00 A.M. - 01:00 P.M.),B.A.,Qualifying Course,Sports & Physical Education,A-003,3rd
+1-Apr-26,Wednesday,Shift-I (10:00 A.M. - 01:00 P.M.),B.Sc.,Qualifying Course,Sports & Physical Education,B-003,3rd
+1-Apr-26,Wednesday,Shift-I (10:00 A.M. - 01:00 P.M.),B.Com,Qualifying Course,Sports & Physical Education,C-003,3rd
+2-Apr-26,Thursday,Shift-II (02:00 P.M. - 05:00 P.M.),B.Sc.,Botany,Plant Physiology and Biochemistry,B-203,2nd
+2-Apr-26,Thursday,Shift-I (10:00 A.M. - 01:00 P.M.),B.Sc.,Botany,Environmental Botany,B-303,3rd
+2-Apr-26,Thursday,Shift-II (02:00 P.M. - 05:00 P.M.),B.Sc.,Chemistry,Physical Chemistry,B-208,2nd
+2-Apr-26,Thursday,Shift-I (10:00 A.M. - 01:00 P.M.),B.Sc.,Chemistry,Physical Chemistry,B-308,3rd
+2-Apr-26,Thursday,Shift-II (02:00 P.M. - 05:00 P.M.),B.Sc.,Maths,Mechanics,B-228,2nd
+2-Apr-26,Thursday,Shift-I (10:00 A.M. - 01:00 P.M.),B.Sc.,Maths,Numerical Methods and Fundamentals of Computer,B-328,3rd
+2-Apr-26,Thursday,Shift-II (02:00 P.M. - 05:00 P.M.),B.Sc.,Physics,"Elements of Quantum Mechanics, Atomic and Moleculars Spectra",B-218,2nd
+2-Apr-26,Thursday,Shift-I (10:00 A.M. - 01:00 P.M.),B.Sc.,Physics,Solid State Electronics,B-318,3rd
+2-Apr-26,Thursday,Shift-II (02:00 P.M. - 05:00 P.M.),B.Sc.,Zoology,Physiology and Bio-Chemistry,B-222,2nd
+2-Apr-26,Thursday,Shift-I (10:00 A.M. - 01:00 P.M.),B.Sc.,Zoology,"Ecology, Microbiology Animal Behaviour and Pollution and Toxicology",B-322,3rd
+2-Apr-26,Thursday,Shift-I (10:00 A.M. - 01:00 P.M.),B.Sc.,Computer Science,Introduction to DBNS_SQL & Software Engineering Concept,B-399,3rd
+2-Apr-26,Thursday,Shift-I (10:00 A.M. - 01:00 P.M.),B.Sc.,Industrial Chemistry,Polymers,B-455,3rd
+2-Apr-26,Thursday,Shift-I (10:00 A.M. - 01:00 P.M.),B.Sc.,Industrial Chemistry,Heavy and Fine Chemicals,B-459,3rd
+2-Apr-26,Thursday,Shift-II (02:00 P.M. - 05:00 P.M.),B.Sc.,Statistics,Analysis of Variance and Design of Experiment,B-296,2nd
+2-Apr-26,Thursday,Shift-I (10:00 A.M. - 01:00 P.M.),B.Sc.,Statistics,Linear Programming & Computational Techniques,B-396,3rd
+4-Apr-26,Saturday,Shift-II (02:00 P.M. - 05:00 P.M.),B.A.,Foundation Course,Bhartiya Sanskriti Evam Rashtra Gaurav,A-009,1st
+4-Apr-26,Saturday,Shift-II (02:00 P.M. - 05:00 P.M.),B.Sc.,Foundation Course,Bhartiya Sanskriti Evam Rashtra Gaurav,B-009,1st
+4-Apr-26,Saturday,Shift-II (02:00 P.M. - 05:00 P.M.),B.Com,Foundation Course,Bhartiya Sanskriti Evam Rashtra Gaurav,C-009,1st
+4-Apr-26,Saturday,Shift-II (02:00 P.M. - 05:00 P.M.),"B.Sc. (PE, HE & Sports)",Foundation Course,Bhartiya Sanskriti Evam Rashtra Gaurav,S-009,1st
+4-Apr-26,Saturday,Shift-I (10:00 A.M. - 01:00 P.M.),M.A.,Political Science,Traditions of Political Thinking,G-170,1st
+4-Apr-26,Saturday,Shift-II (02:00 P.M. - 05:00 P.M.),M.A.,Political Science,Research Methodology,G-370,2nd
+4-Apr-26,Saturday,Shift-II (02:00 P.M. - 05:00 P.M.),M.A.,Sanskrit,Roopak & Champu Kavy,G-582,2nd
+4-Apr-26,Saturday,Shift-II (02:00 P.M. - 05:00 P.M.),M.A.,Urdu,Folk Tradition In Urdu,G-362,2nd
+6-Apr-26,Monday,Shift-I (10:00 A.M. - 01:00 P.M.),B.A.,Political Science,Political Theory,A-138,1st
+6-Apr-26,Monday,Shift-II (02:00 P.M. - 05:00 P.M.),B.A.,Political Science,An Outline History of Western Political Thought,A-238,2nd
+6-Apr-26,Monday,Shift-I (10:00 A.M. - 01:00 P.M.),B.A.,Political Science,Principles of Public Administration,A-338,3rd
+6-Apr-26,Monday,Shift-II (02:00 P.M. - 05:00 P.M.),M.Com.,Commerce,Security Analysis & Portfolio Management,I-401,2nd
+6-Apr-26,Monday,Shift-II (02:00 P.M. - 05:00 P.M.),M.Com.,Commerce,Marketing Management,I-403,2nd
+6-Apr-26,Monday,Shift-II (02:00 P.M. - 05:00 P.M.),M.Com.,Commerce,Human Resource Management,I-405,2nd
+6-Apr-26,Monday,Shift-II (02:00 P.M. - 05:00 P.M.),M.A.,English,American Literature,G-312,2nd
+6-Apr-26,Monday,Shift-II (02:00 P.M. - 05:00 P.M.),M.A.,Hindi,Adhunik Kavya (Chayavad Prayant),G-325,2nd
+6-Apr-26,Monday,Shift-II (02:00 P.M. - 05:00 P.M.),M.A.,Maths,Integration Theory and Functional Analysis,G-349,2nd
+6-Apr-26,Monday,Shift-II (02:00 P.M. - 05:00 P.M.),M.A.,Philosophy,Contemporaru Western Philosophy,G-545,2nd
+6-Apr-26,Monday,Shift-I (10:00 A.M. - 01:00 P.M.),M.A.,Sociology,Classical Thinkers,G-187,1st
+6-Apr-26,Monday,Shift-I (10:00 A.M. - 01:00 P.M.),M.A.,Defence Studies,Theory and Development of war Since 1789 AD to 1945 AD,G-195,1st
+6-Apr-26,Monday,Shift-I (10:00 A.M. - 01:00 P.M.),M.A.,Economics,Micro Economics I,G-106,1st
+6-Apr-26,Monday,Shift-I (10:00 A.M. - 01:00 P.M.),M.A.,Education,Psychological Foundation of Education,G-102,1st
+6-Apr-26,Monday,Shift-I (10:00 A.M. - 01:00 P.M.),M.A.,History,"Historiography: Concepts, Methods, Approaches and Tools",G-137,1st
+6-Apr-26,Monday,Shift-I (10:00 A.M. - 01:00 P.M.),M.A.,Sanskrit,"Ved, Upnishad, Shiksha & History of Vedic Literature",G-182,1st
+6-Apr-26,Monday,Shift-I (10:00 A.M. - 01:00 P.M.),M.A.,Urdu,Origin & Develop of Urdu Language,G-162,1st
+7-Apr-26,Tuesday,Shift-I (10:00 A.M. - 01:00 P.M.),B.A.,Hindi,Hindi Natak & Rangmanch,A-114,1st
+7-Apr-26,Tuesday,Shift-II (02:00 P.M. - 05:00 P.M.),B.A.,Hindi,Hindi Katha Sahitya,A-214,2nd
+7-Apr-26,Tuesday,Shift-I (10:00 A.M. - 01:00 P.M.),B.A.,Hindi,Hindi Nibandh and Anaya Gadh Vidyaye,A-314,3rd
+7-Apr-26,Tuesday,Shift-I (10:00 A.M. - 01:00 P.M.),B.Com,Commerce,Business Communication,C-101,1st
+7-Apr-26,Tuesday,Shift-II (02:00 P.M. - 05:00 P.M.),B.Com,Commerce,Company Law,C-201,2nd
+7-Apr-26,Tuesday,Shift-I (10:00 A.M. - 01:00 P.M.),B.Com,Commerce,Corporate Accounting,C-301,3rd
+7-Apr-26,Tuesday,Shift-II (02:00 P.M. - 05:00 P.M.),M.A.,Defence Studies,International Law,G-395,2nd
+7-Apr-26,Tuesday,Shift-II (02:00 P.M. - 05:00 P.M.),M.A.,Economics,Econometrics,G-410,2nd
+7-Apr-26,Tuesday,Shift-II (02:00 P.M. - 05:00 P.M.),M.A.,Economics,Gender Economics,G-309,2nd
+7-Apr-26,Tuesday,Shift-II (02:00 P.M. - 05:00 P.M.),M.A.,Economics,Industrial Economics and Entrepreneurship,G-406,2nd
+7-Apr-26,Tuesday,Shift-II (02:00 P.M. - 05:00 P.M.),M.A.,Economics,Economics of Insurance,G-411,2nd
+7-Apr-26,Tuesday,Shift-II (02:00 P.M. - 05:00 P.M.),M.A.,Economics,Computer Application of Economics,G-412,2nd
+7-Apr-26,Tuesday,Shift-II (02:00 P.M. - 05:00 P.M.),M.A.,Education,Comparative Education,G-302,2nd
+7-Apr-26,Tuesday,Shift-II (02:00 P.M. - 05:00 P.M.),M.A.,History,Tourism in India,G-437,2nd
+7-Apr-26,Tuesday,Shift-II (02:00 P.M. - 05:00 P.M.),M.A.,Political Science,Western Political Thought,G-371,2nd
+7-Apr-26,Tuesday,Shift-I (10:00 A.M. - 01:00 P.M.),M.A.,Political Science,Indian Political System,G-171,1st
+7-Apr-26,Tuesday,Shift-I (10:00 A.M. - 01:00 P.M.),M.A.,English,Chaucher to Milton,G-112,1st
+7-Apr-26,Tuesday,Shift-I (10:00 A.M. - 01:00 P.M.),M.A.,Hindi,Hindi Sahitya Ka Itihas,G-125,1st
+7-Apr-26,Tuesday,Shift-I (10:00 A.M. - 01:00 P.M.),M.A.,Maths,Topology,G-149,1st
+7-Apr-26,Tuesday,Shift-I (10:00 A.M. - 01:00 P.M.),M.A.,Philosophy,Ethics,G-145,1st
+8-Apr-26,Wednesday,Shift-I (10:00 A.M. - 01:00 P.M.),B.A.,Maths,Calculus,A-127,1st
+8-Apr-26,Wednesday,Shift-I (10:00 A.M. - 01:00 P.M.),B.Sc.,Maths,Calculus,B-127,1st
+8-Apr-26,Wednesday,Shift-II (02:00 P.M. - 05:00 P.M.),B.A.,Maths,Differential Equations and Integral Transforms,A-227,2nd
+8-Apr-26,Wednesday,Shift-II (02:00 P.M. - 05:00 P.M.),B.Sc.,Maths,Differential Equations and Integral Transforms,B-227,2nd
+8-Apr-26,Wednesday,Shift-I (10:00 A.M. - 01:00 P.M.),B.A.,Maths,Linear Programming,A-327,3rd
+8-Apr-26,Wednesday,Shift-I (10:00 A.M. - 01:00 P.M.),B.Sc.,Maths,Linear Programming,B-327,3rd
+8-Apr-26,Wednesday,Shift-I (10:00 A.M. - 01:00 P.M.),"B.Sc. (PE, HE & Sports)","B.Sc. (PE, HE & Sports)",Theory of Games Sport (Yoga),S-105,1st
+8-Apr-26,Wednesday,Shift-I (10:00 A.M. - 01:00 P.M.),"B.Sc. (PE, HE & Sports)","B.Sc. (PE, HE & Sports)",Badminton,S-305,3rd
+8-Apr-26,Wednesday,Shift-I (10:00 A.M. - 01:00 P.M.),"B.Sc. (PE, HE & Sports)","B.Sc. (PE, HE & Sports)",Kabbaddi,S-306,3rd
+8-Apr-26,Wednesday,Shift-I (10:00 A.M. - 01:00 P.M.),"B.Sc. (PE, HE & Sports)","B.Sc. (PE, HE & Sports)",Weight Lifting,S-307,3rd
+8-Apr-26,Wednesday,Shift-II (02:00 P.M. - 05:00 P.M.),"B.Sc. (PE, HE & Sports)","B.Sc. (PE, HE & Sports)",Basket Ball,S-205,2nd
+8-Apr-26,Wednesday,Shift-II (02:00 P.M. - 05:00 P.M.),"B.Sc. (PE, HE & Sports)","B.Sc. (PE, HE & Sports)",Hockey,S-206,2nd
+8-Apr-26,Wednesday,Shift-II (02:00 P.M. - 05:00 P.M.),"B.Sc. (PE, HE & Sports)","B.Sc. (PE, HE & Sports)",Foot Ball,S-207,2nd
+8-Apr-26,Wednesday,Shift-II (02:00 P.M. - 05:00 P.M.),M.Com.,Commerce,Securities Laws & Capital Mark,I-402,2nd
+8-Apr-26,Wednesday,Shift-II (02:00 P.M. - 05:00 P.M.),M.Com.,Commerce,Internaltional Marketing,I-404,2nd
+8-Apr-26,Wednesday,Shift-II (02:00 P.M. - 05:00 P.M.),M.Com.,Commerce,Industrial Relations & Labour Laws,I-406,2nd
+8-Apr-26,Wednesday,Shift-I (10:00 A.M. - 01:00 P.M.),M.A.,Defence Studies,War and International Relation Since 1945,G-196,1st
+8-Apr-26,Wednesday,Shift-I (10:00 A.M. - 01:00 P.M.),M.A.,Economics,Macro Economics I,G-107,1st
+8-Apr-26,Wednesday,Shift-I (10:00 A.M. - 01:00 P.M.),M.A.,Education,Philosophical Foundation of Education,G-103,1st
+8-Apr-26,Wednesday,Shift-I (10:00 A.M. - 01:00 P.M.),M.A.,History,History of Ancient India (From Earliest Times to Post Harappan Settlement),G-138,1st
+8-Apr-26,Wednesday,Shift-I (10:00 A.M. - 01:00 P.M.),M.A.,Sanskrit,"Indian Philosophy (Nyay-Vaisheshik, Sankhy & History)",G-183,1st
+8-Apr-26,Wednesday,Shift-I (10:00 A.M. - 01:00 P.M.),M.A.,Urdu,Literary Tradition of Urdu,G-163,1st
+10-Apr-26,Friday,Shift-II (02:00 P.M. - 05:00 P.M.),B.A.,Qualifying Course,Environmental Studies,A-008,1st
+10-Apr-26,Friday,Shift-II (02:00 P.M. - 05:00 P.M.),B.Com,Qualifying Course,Environmental Studies,C-008,1st
+10-Apr-26,Friday,Shift-II (02:00 P.M. - 05:00 P.M.),"B.Sc. (PE, HE & Sports)",Qualifying Course,Environmental Studies,S-008,1st
+11-Apr-26,Saturday,Shift-I (10:00 A.M. - 01:00 P.M.),B.A.,Political Science,National Movement & Constitution of India,A-139,1st
+11-Apr-26,Saturday,Shift-II (02:00 P.M. - 05:00 P.M.),B.A.,Political Science,Comparative Government,A-239,2nd
+11-Apr-26,Saturday,Shift-I (10:00 A.M. - 01:00 P.M.),B.A.,Political Science,Indian Political Thought International Politics,A-339,3rd
+11-Apr-26,Saturday,Shift-I (10:00 A.M. - 01:00 P.M.),B.A.,Political Science,Indian Political Thought International Politics,A-540,3rd
+11-Apr-26,Saturday,Shift-I (10:00 A.M. - 01:00 P.M.),B.Com,Commerce,Business Statistics,C-102,1st
+11-Apr-26,Saturday,Shift-II (02:00 P.M. - 05:00 P.M.),B.Com,Commerce,Cost Accounting,C-202,2nd
+11-Apr-26,Saturday,Shift-I (10:00 A.M. - 01:00 P.M.),B.Com,Commerce,Auditing,C-302,3rd
+11-Apr-26,Saturday,Shift-II (02:00 P.M. - 05:00 P.M.),M.A.,Sanskrit,"Sanhita, Nirukt",G-583,2nd
+11-Apr-26,Saturday,Shift-II (02:00 P.M. - 05:00 P.M.),M.A.,Urdu,Urdu Nazm,G-363,2nd
+11-Apr-26,Saturday,Shift-I (10:00 A.M. - 01:00 P.M.),M.A.,English,Literary Theory and Cultural Studies,G-113,1st
+11-Apr-26,Saturday,Shift-I (10:00 A.M. - 01:00 P.M.),M.A.,Hindi,Pracheen Evm Purv Madhyakaleen Kavya,G-126,1st
+11-Apr-26,Saturday,Shift-I (10:00 A.M. - 01:00 P.M.),M.A.,Maths,Real Analysis,G-150,1st
+11-Apr-26,Saturday,Shift-I (10:00 A.M. - 01:00 P.M.),M.A.,Philosophy,Indian Philosophy,G-146,1st
+11-Apr-26,Saturday,Shift-I (10:00 A.M. - 01:00 P.M.),M.A.,Political Science,International Relations,G-271,1st
+11-Apr-26,Saturday,Shift-II (02:00 P.M. - 05:00 P.M.),M.A.,Political Science,Indian Administration,G-470,2nd
+13-Apr-26,Monday,Shift-I (10:00 A.M. - 01:00 P.M.),B.A.,Sociology,Introduction to Sociology,A-132,1st
+13-Apr-26,Monday,Shift-II (02:00 P.M. - 05:00 P.M.),B.A.,Sociology,Social Change and Social Control,A-232,2nd
+13-Apr-26,Monday,Shift-I (10:00 A.M. - 01:00 P.M.),B.A.,Sociology,Functions of Sociological Thought,A-332,3rd
+13-Apr-26,Monday,Shift-II (02:00 P.M. - 05:00 P.M.),M.A.,English,English Phonetics and Linguistics,G-313,2nd
+13-Apr-26,Monday,Shift-II (02:00 P.M. - 05:00 P.M.),M.A.,Hindi,Bhasha Vigyan Evm Hindi Bhasha,G-326,2nd
+13-Apr-26,Monday,Shift-II (02:00 P.M. - 05:00 P.M.),M.A.,Maths,Fluid Dynamics,G-350,2nd
+13-Apr-26,Monday,Shift-II (02:00 P.M. - 05:00 P.M.),M.A.,Philosophy,Philosophy of Religion,G-546,2nd
+13-Apr-26,Monday,Shift-I (10:00 A.M. - 01:00 P.M.),M.A.,Defence Studies,Economics Aspects of Defence ,G-294,1st
+13-Apr-26,Monday,Shift-I (10:00 A.M. - 01:00 P.M.),M.A.,Economics,Economics of Growth and Development ,G-108,1st
+13-Apr-26,Monday,Shift-I (10:00 A.M. - 01:00 P.M.),M.A.,Education,Methodology of Education Research and Educational Statistics,G-202,1st
+13-Apr-26,Monday,Shift-I (10:00 A.M. - 01:00 P.M.),M.A.,History,History of Ancient India (Vedic Age to Mauryan Kingdom),G-139,1st
+13-Apr-26,Monday,Shift-I (10:00 A.M. - 01:00 P.M.),M.A.,Sanskrit,Natika & Dramaturgy,G-184,1st
+13-Apr-26,Monday,Shift-I (10:00 A.M. - 01:00 P.M.),M.A.,Urdu,Literary Criticism,G-164,1st
+15-Apr-26,Wednesday,Shift-II (02:00 P.M. - 05:00 P.M.),B.A.,Foundation Course,Hindi,A-011,2nd
+15-Apr-26,Wednesday,Shift-II (02:00 P.M. - 05:00 P.M.),B.A.,Foundation Course,English,A-012,2nd
+15-Apr-26,Wednesday,Shift-II (02:00 P.M. - 05:00 P.M.),B.A.,Foundation Course,Sanskrit,A-013,2nd
+15-Apr-26,Wednesday,Shift-II (02:00 P.M. - 05:00 P.M.),B.Com,Foundation Course,Hindi,C-011,2nd
+15-Apr-26,Wednesday,Shift-II (02:00 P.M. - 05:00 P.M.),B.Com,Foundation Course,English,C-012,2nd
+15-Apr-26,Wednesday,Shift-II (02:00 P.M. - 05:00 P.M.),B.Com,Foundation Course,Sanskrit,C-013,2nd
+15-Apr-26,Wednesday,Shift-II (02:00 P.M. - 05:00 P.M.),"B.Sc. (PE, HE & Sports)",Foundation Course,Hindi,S-011,2nd
+15-Apr-26,Wednesday,Shift-II (02:00 P.M. - 05:00 P.M.),"B.Sc. (PE, HE & Sports)",Foundation Course,English,S-012,2nd
+15-Apr-26,Wednesday,Shift-II (02:00 P.M. - 05:00 P.M.),"B.Sc. (PE, HE & Sports)",Foundation Course,Sanskrit,S-013,2nd
+15-Apr-26,Wednesday,Shift-II (02:00 P.M. - 05:00 P.M.),M.A.,Defence Studies,National Security of India,G-396,2nd
+15-Apr-26,Wednesday,Shift-II (02:00 P.M. - 05:00 P.M.),M.A.,Economics,Public Economics,G-307,2nd
+15-Apr-26,Wednesday,Shift-II (02:00 P.M. - 05:00 P.M.),M.A.,Education,Teacher Education,G-303,2nd
+15-Apr-26,Wednesday,Shift-II (02:00 P.M. - 05:00 P.M.),M.A.,History,History of Medieval India (Till 1526 A.D.),G-441,2nd
+15-Apr-26,Wednesday,Shift-I (10:00 A.M. - 01:00 P.M.),M.A.,English,Shakespeare,G-114,1st
+15-Apr-26,Wednesday,Shift-I (10:00 A.M. - 01:00 P.M.),M.A.,Hindi,Naatak Aur Rangmanch,G-127,1st
+15-Apr-26,Wednesday,Shift-I (10:00 A.M. - 01:00 P.M.),M.A.,Maths,Discrete Mathematics,G-151,1st
+15-Apr-26,Wednesday,Shift-I (10:00 A.M. - 01:00 P.M.),M.A.,Philosophy,Western Philosophy,G-147,1st
+15-Apr-26,Wednesday,Shift-I (10:00 A.M. - 01:00 P.M.),M.A.,Sociology,Methodology of Social Research,G-188,1st
+15-Apr-26,Wednesday,Shift-II (02:00 P.M. - 05:00 P.M.),M.A.,Sociology,Society In India,G-387,2nd
+16-Apr-26,Thursday,Shift-II (02:00 P.M. - 05:00 P.M.),M.Com.,Commerce,Management Concept and Organizational Behaviour,I-101,1st
+16-Apr-26,Thursday,Shift-I (10:00 A.M. - 01:00 P.M.),M.A.,Political Science,Administrative Theory,G-272,1st
+16-Apr-26,Thursday,Shift-II (02:00 P.M. - 05:00 P.M.),M.A.,Political Science,State Politics In India,G-471,2nd
+16-Apr-26,Thursday,Shift-II (02:00 P.M. - 05:00 P.M.),M.A.,Sanskrit,Linguistics & Sanskrit Grammer,G-585,2nd
+16-Apr-26,Thursday,Shift-II (02:00 P.M. - 05:00 P.M.),M.A.,Urdu,Mass Media,G-364,2nd
+16-Apr-26,Thursday,Shift-II (02:00 P.M. - 05:00 P.M.),M.A.,Urdu,Sir Syed Ahmad Khan,G-366,2nd
+16-Apr-26,Thursday,Shift-II (02:00 P.M. - 05:00 P.M.),M.A.,Urdu,Premchand,G-368,2nd
+16-Apr-26,Thursday,Shift-II (02:00 P.M. - 05:00 P.M.),M.A.,Urdu,Maulana Abul Kalam Azad,G-462,2nd
+16-Apr-26,Thursday,Shift-I (10:00 A.M. - 01:00 P.M.),M.A.,Defence Studies,Operation Research,G-295,1st
+16-Apr-26,Thursday,Shift-I (10:00 A.M. - 01:00 P.M.),M.A.,Economics,Quantitative Methods,G-109,1st
+16-Apr-26,Thursday,Shift-I (10:00 A.M. - 01:00 P.M.),M.A.,Education,Sociological Foundation of Education,G-203,1st
+16-Apr-26,Thursday,Shift-I (10:00 A.M. - 01:00 P.M.),M.A.,History,Ancient India (Shunga Dynasty to Rajput Era),G-240,1st
+16-Apr-26,Thursday,Shift-I (10:00 A.M. - 01:00 P.M.),M.A.,Sanskrit,Geetikavay and Gadyakavya,G-185,1st
+16-Apr-26,Thursday,Shift-I (10:00 A.M. - 01:00 P.M.),M.A.,Urdu,Information Technology,G-165,1st
+16-Apr-26,Thursday,Shift-I (10:00 A.M. - 01:00 P.M.),M.A.,Urdu,Urdu Drama,G-262,1st
+17-Apr-26,Friday,Shift-I (10:00 A.M. - 01:00 P.M.),B.A.,Education,Principles of Education,A-160,1st
+17-Apr-26,Friday,Shift-II (02:00 P.M. - 05:00 P.M.),B.A.,Education,Educational Psychology,A-260,2nd
+17-Apr-26,Friday,Shift-I (10:00 A.M. - 01:00 P.M.),B.A.,Education,New Trends and Innovations in Education,A-360,3rd
+17-Apr-26,Friday,Shift-I (10:00 A.M. - 01:00 P.M.),B.Com,Commerce,Financial Accounting,C-103,1st
+17-Apr-26,Friday,Shift-II (02:00 P.M. - 05:00 P.M.),B.Com,Commerce,Principles of Business Management,C-203,2nd
+17-Apr-26,Friday,Shift-I (10:00 A.M. - 01:00 P.M.),B.Com,Commerce,Principles of Marketing,C-303,3rd
+17-Apr-26,Friday,Shift-II (02:00 P.M. - 05:00 P.M.),M.A.,English,20th Century British Poetry,G-314,2nd
+17-Apr-26,Friday,Shift-II (02:00 P.M. - 05:00 P.M.),M.A.,Hindi,Kavya Shastra (Bhartiya Evm Paashchatya),G-330,2nd
+17-Apr-26,Friday,Shift-II (02:00 P.M. - 05:00 P.M.),M.A.,Maths,Operation Research,G-351,2nd
+17-Apr-26,Friday,Shift-II (02:00 P.M. - 05:00 P.M.),M.A.,Philosophy,Advanced Ethics,G-550,2nd
+17-Apr-26,Friday,Shift-I (10:00 A.M. - 01:00 P.M.),M.A.,English,Research Methods and Materials in English,G-115,1st
+17-Apr-26,Friday,Shift-I (10:00 A.M. - 01:00 P.M.),M.A.,Hindi,Prayojanmulak Hindi,G-128,1st
+17-Apr-26,Friday,Shift-I (10:00 A.M. - 01:00 P.M.),M.A.,Maths,Complex Analysis,G-152,1st
+17-Apr-26,Friday,Shift-I (10:00 A.M. - 01:00 P.M.),M.A.,Philosophy,Social and Political Philosophy,G-248,1st
+17-Apr-26,Friday,Shift-I (10:00 A.M. - 01:00 P.M.),M.A.,Sociology,Rural Sociology,G-190,1st
+17-Apr-26,Friday,Shift-II (02:00 P.M. - 05:00 P.M.),M.A.,Sociology,Social Change in India,G-388,2nd
+18-Apr-26,Saturday,Shift-II (02:00 P.M. - 05:00 P.M.),M.Com.,Commerce,Direct Tax-Law and Practice,I-102,1st
+18-Apr-26,Saturday,Shift-II (02:00 P.M. - 05:00 P.M.),M.A.,Defence Studies,"Disarmament, Arms Control and Peace",G-495,2nd
+18-Apr-26,Saturday,Shift-II (02:00 P.M. - 05:00 P.M.),M.A.,Economics,Indian Econommy,G-308,2nd
+18-Apr-26,Saturday,Shift-II (02:00 P.M. - 05:00 P.M.),M.A.,Education,"Intelligence, Creativity and Education",G-304,2nd
+18-Apr-26,Saturday,Shift-II (02:00 P.M. - 05:00 P.M.),M.A.,History,History of Medieval India (1526-1707 A.D.),G-442,2nd
+18-Apr-26,Saturday,Shift-I (10:00 A.M. - 01:00 P.M.),M.A.,Defence Studies,Ballistics,G-296,1st
+18-Apr-26,Saturday,Shift-I (10:00 A.M. - 01:00 P.M.),M.A.,Economics,Economics of Education and Health,G-206,1st
+18-Apr-26,Saturday,Shift-I (10:00 A.M. - 01:00 P.M.),M.A.,Economics,Agricultural Economics,G-208,1st
+18-Apr-26,Saturday,Shift-I (10:00 A.M. - 01:00 P.M.),M.A.,Economics,Labour Economics,G-209,1st
+18-Apr-26,Saturday,Shift-I (10:00 A.M. - 01:00 P.M.),M.A.,Economics,Economics of Infrastructure,G-207,1st
+18-Apr-26,Saturday,Shift-I (10:00 A.M. - 01:00 P.M.),M.A.,Economics,Research Methodology,G-210,1st
+18-Apr-26,Saturday,Shift-I (10:00 A.M. - 01:00 P.M.),M.A.,Education,Essay on Any Paper I to IV,G-204,1st
+18-Apr-26,Saturday,Shift-I (10:00 A.M. - 01:00 P.M.),M.A.,History,Socio-Economic and Cultural History of Ancient India (Till 1200 A.D.),G-241,1st
+18-Apr-26,Saturday,Shift-I (10:00 A.M. - 01:00 P.M.),M.A.,Sanskrit,Sanskrit Epic,G-186,1st
+18-Apr-26,Saturday,Shift-I (10:00 A.M. - 01:00 P.M.),M.A.,Urdu,Urdu Ghazal,G-263,1st
+20-Apr-26,Monday,Shift-I (10:00 A.M. - 01:00 P.M.),B.A.,Education,History and Development of Indian Education,A-161,1st
+20-Apr-26,Monday,Shift-II (02:00 P.M. - 05:00 P.M.),B.A.,Education,Thoughts and Practices in Education,A-261,2nd
+20-Apr-26,Monday,Shift-I (10:00 A.M. - 01:00 P.M.),B.A.,Education,Measurement and Ealuation in Education,A-361,3rd
+20-Apr-26,Monday,Shift-I (10:00 A.M. - 01:00 P.M.),B.Com,Commerce,Business Regulatory Framework,C-104,1st
+20-Apr-26,Monday,Shift-II (02:00 P.M. - 05:00 P.M.),B.Com,Commerce,Income Tax,C-204,2nd
+20-Apr-26,Monday,Shift-I (10:00 A.M. - 01:00 P.M.),B.Com,Commerce,Economic Laws,C-304,3rd
+20-Apr-26,Monday,Shift-I (10:00 A.M. - 01:00 P.M.),"B.Sc. (PE, HE & Sports)","B.Sc. (PE, HE & Sports)",Sports & Games of Speciality,S-106,1st
+20-Apr-26,Monday,Shift-II (02:00 P.M. - 05:00 P.M.),"B.Sc. (PE, HE & Sports)","B.Sc. (PE, HE & Sports)",Cricket,S-208,2nd
+20-Apr-26,Monday,Shift-II (02:00 P.M. - 05:00 P.M.),"B.Sc. (PE, HE & Sports)","B.Sc. (PE, HE & Sports)",Hand Ball,S-209,2nd
+20-Apr-26,Monday,Shift-II (02:00 P.M. - 05:00 P.M.),"B.Sc. (PE, HE & Sports)","B.Sc. (PE, HE & Sports)",Volley Ball,S-210,2nd
+20-Apr-26,Monday,Shift-II (02:00 P.M. - 05:00 P.M.),"B.Sc. (PE, HE & Sports)","B.Sc. (PE, HE & Sports)",Vocational Oriented Courses,S-211,2nd
+20-Apr-26,Monday,Shift-I (10:00 A.M. - 01:00 P.M.),"B.Sc. (PE, HE & Sports)","B.Sc. (PE, HE & Sports)",Theory of Games & Sports (Sports Specialization),S-308,3rd
+20-Apr-26,Monday,Shift-I (10:00 A.M. - 01:00 P.M.),M.A.,Political Science,Comparative Politics,G-270,1st
+20-Apr-26,Monday,Shift-II (02:00 P.M. - 05:00 P.M.),M.A.,Political Science,Modern Indian Political thought,G-472,2nd
+20-Apr-26,Monday,Shift-II (02:00 P.M. - 05:00 P.M.),M.A.,Sanskrit,Dharma Shastr & Artha Shastr,G-587,2nd
+20-Apr-26,Monday,Shift-II (02:00 P.M. - 05:00 P.M.),M.A.,Urdu,Meer Taqi Meer,G-463,2nd
+20-Apr-26,Monday,Shift-II (02:00 P.M. - 05:00 P.M.),M.A.,Urdu,Ghalib,G-464,2nd
+20-Apr-26,Monday,Shift-II (02:00 P.M. - 05:00 P.M.),M.A.,Urdu,Iqbal,G-365,2nd
+20-Apr-26,Monday,Shift-I (10:00 A.M. - 01:00 P.M.),M.A.,English,Restoration to 1798,G-116,1st
+20-Apr-26,Monday,Shift-I (10:00 A.M. - 01:00 P.M.),M.A.,Hindi,Uttar Madhyakaleen Kavya,G-129,1st
+20-Apr-26,Monday,Shift-I (10:00 A.M. - 01:00 P.M.),M.A.,Maths,Differential Equations,G-153,1st
+20-Apr-26,Monday,Shift-I (10:00 A.M. - 01:00 P.M.),M.A.,Maths,Differential Geometry,G-154,1st
+20-Apr-26,Monday,Shift-I (10:00 A.M. - 01:00 P.M.),M.A.,Maths,Mechanics,G-155,1st
+20-Apr-26,Monday,Shift-I (10:00 A.M. - 01:00 P.M.),M.A.,Philosophy,Modern Indian Thought,G-249,1st
+21-Apr-26,Tuesday,Shift-I (10:00 A.M. - 01:00 P.M.),B.A.,Sanskrit,Sanskritkavyam Kavyashastranchna,A-130,1st
+21-Apr-26,Tuesday,Shift-II (02:00 P.M. - 05:00 P.M.),B.A.,Sanskrit,"Natakam, Natya-shaityetihasashcha",A-230,2nd
+21-Apr-26,Tuesday,Shift-I (10:00 A.M. - 01:00 P.M.),B.A.,Sanskrit,Veda-Upnishad-Arshkavyam-Alankarashcha,A-330,3rd
+21-Apr-26,Tuesday,Shift-II (02:00 P.M. - 05:00 P.M.),M.Com.,Commerce,Statistical Analysis,I-103,1st
+21-Apr-26,Tuesday,Shift-II (02:00 P.M. - 05:00 P.M.),M.A.,English,English Language Teaching and English in India,G-315,2nd
+21-Apr-26,Tuesday,Shift-II (02:00 P.M. - 05:00 P.M.),M.A.,Hindi,Patrakarita-Prashikshan,G-329,2nd
+21-Apr-26,Tuesday,Shift-II (02:00 P.M. - 05:00 P.M.),M.A.,Maths,Difference Equations,G-449,2nd
+21-Apr-26,Tuesday,Shift-II (02:00 P.M. - 05:00 P.M.),M.A.,Maths,Integral Equations and Boundary Value Problems,G-450,2nd
+21-Apr-26,Tuesday,Shift-II (02:00 P.M. - 05:00 P.M.),M.A.,Maths,Wavelets,G-451,2nd
+21-Apr-26,Tuesday,Shift-II (02:00 P.M. - 05:00 P.M.),M.A.,Maths,Information Theory and Reliability Theory,G-452,2nd
+21-Apr-26,Tuesday,Shift-II (02:00 P.M. - 05:00 P.M.),M.A.,Philosophy,Philosophy of Sankara,G-555,2nd
+21-Apr-26,Tuesday,Shift-I (10:00 A.M. - 01:00 P.M.),M.A.,Economics,Micro Economics II,G-110,1st
+21-Apr-26,Tuesday,Shift-I (10:00 A.M. - 01:00 P.M.),M.A.,History,History of Modern Europe (1789-1919),G-242,1st
+21-Apr-26,Tuesday,Shift-I (10:00 A.M. - 01:00 P.M.),M.A.,Urdu,Urdu Fiction,G-264,1st
+21-Apr-26,Tuesday,Shift-I (10:00 A.M. - 01:00 P.M.),M.A.,Sanskrit,Sanskrit Poetics,G-282,1st
+21-Apr-26,Tuesday,Shift-I (10:00 A.M. - 01:00 P.M.),M.A.,Defence Studies,Psychology of War,G-297,1st
+24-Apr-26,Friday,Shift-I (10:00 A.M. - 01:00 P.M.),B.A.,Sociology,Society in India-Structure and Change,A-133,1st
+24-Apr-26,Friday,Shift-I (10:00 A.M. - 01:00 P.M.),B.A.,Sociology,Social Research Methods,A-333,3rd
+24-Apr-26,Friday,Shift-II (02:00 P.M. - 05:00 P.M.),B.A.,Sociology,Indian Society-Issues and Problems,A-233,2nd
+24-Apr-26,Friday,Shift-I (10:00 A.M. - 01:00 P.M.),B.Com,Commerce,Business Ecconomics,C-105,1st
+24-Apr-26,Friday,Shift-II (02:00 P.M. - 05:00 P.M.),B.Com,Commerce,Fundaments of Entreprenurship,C-205,2nd
+24-Apr-26,Friday,Shift-I (10:00 A.M. - 01:00 P.M.),B.Com,Commerce,E-Commerce,C-305,3rd
+24-Apr-26,Friday,Shift-II (02:00 P.M. - 05:00 P.M.),M.A.,Defence Studies,Man Power Studies,G-496,2nd
+24-Apr-26,Friday,Shift-II (02:00 P.M. - 05:00 P.M.),M.A.,Economics,International Ecnomics,G-306,2nd
+24-Apr-26,Friday,Shift-II (02:00 P.M. - 05:00 P.M.),M.A.,Education,Special Education,G-305,2nd
+24-Apr-26,Friday,Shift-II (02:00 P.M. - 05:00 P.M.),M.A.,History,History of modern India (1707-1885 A.D.),G-443,2nd
+24-Apr-26,Friday,Shift-II (02:00 P.M. - 05:00 P.M.),M.A.,Urdu,Modern Literature,G-465,2nd
+24-Apr-26,Friday,Shift-I (10:00 A.M. - 01:00 P.M.),M.A.,English,Romantic Literature,G-117,1st
+24-Apr-26,Friday,Shift-I (10:00 A.M. - 01:00 P.M.),M.A.,Hindi,Katha-Sahitya,G-130,1st
+24-Apr-26,Friday,Shift-I (10:00 A.M. - 01:00 P.M.),M.A.,Sociology,Sociological Concepts,G-287,1st
+24-Apr-26,Friday,Shift-II (02:00 P.M. - 05:00 P.M.),M.A.,Sociology,Modern Sociological Theories,G-389,2nd
+24-Apr-26,Friday,Shift-I (10:00 A.M. - 01:00 P.M.),M.A.,Maths,Advanced Abstract Algebra,G-156,1st
+24-Apr-26,Friday,Shift-I (10:00 A.M. - 01:00 P.M.),M.A.,Maths,Theory of Numbers,G-157,1st
+24-Apr-26,Friday,Shift-I (10:00 A.M. - 01:00 P.M.),M.A.,Maths,Mathematical Statistics,G-158,1st
+25-Apr-26,Saturday,Shift-I (10:00 A.M. - 01:00 P.M.),B.A.,Sanskrit,"Vyakaranam, Anuvadeh, Sanskritsahityetihasshcha",A-131,1st
+25-Apr-26,Saturday,Shift-II (02:00 P.M. - 05:00 P.M.),B.A.,Sanskrit,"Gadhyakavyam, -Vyakaranam, Nibandhah, Gadhya,-Shaityetihas",A-231,2nd
+25-Apr-26,Saturday,Shift-I (10:00 A.M. - 01:00 P.M.),B.A.,Sanskrit,Gadyakavyam-Neetikavyam- Vayakaranam-Chandashcha,A-331,3rd
+25-Apr-26,Saturday,Shift-I (10:00 A.M. - 01:00 P.M.),"B.Sc. (PE, HE & Sports)","B.Sc. (PE, HE & Sports)",Kho Kho,S-309,3rd
+25-Apr-26,Saturday,Shift-I (10:00 A.M. - 01:00 P.M.),"B.Sc. (PE, HE & Sports)","B.Sc. (PE, HE & Sports)",Table Tennis,S-310,3rd
+25-Apr-26,Saturday,Shift-I (10:00 A.M. - 01:00 P.M.),"B.Sc. (PE, HE & Sports)","B.Sc. (PE, HE & Sports)",Wrestling,S-311,3rd
+25-Apr-26,Saturday,Shift-I (10:00 A.M. - 01:00 P.M.),"B.Sc. (PE, HE & Sports)","B.Sc. (PE, HE & Sports)",Theory of Vocational Oriented Courses,S-312,3rd
+25-Apr-26,Saturday,Shift-II (02:00 P.M. - 05:00 P.M.),M.Com.,Commerce,Financial Management,I-104,1st
+25-Apr-26,Saturday,Shift-I (10:00 A.M. - 01:00 P.M.),M.A.,Political Science,Ancient Indian Political Thought,G-273,1st
+25-Apr-26,Saturday,Shift-II (02:00 P.M. - 05:00 P.M.),M.A.,Political Science,India and the World,G-473,2nd
+25-Apr-26,Saturday,Shift-II (02:00 P.M. - 05:00 P.M.),M.A.,Sanskrit,"Dhwani, Vyanjana Sthapan & Kavyashastriy Shat Prasthan",G-584,2nd
+25-Apr-26,Saturday,Shift-II (02:00 P.M. - 05:00 P.M.),M.A.,Hindi,Chayavadottar Kavya,G-332,2nd
+25-Apr-26,Saturday,Shift-I (10:00 A.M. - 01:00 P.M.),M.A.,Economics,Macro Economics II,G-111,1st
+25-Apr-26,Saturday,Shift-I (10:00 A.M. - 01:00 P.M.),M.A.,Defence Studies,Area Study (himalayan States-Nepal & Bhutan) & Pakistan,G-298,1st
+25-Apr-26,Saturday,Shift-I (10:00 A.M. - 01:00 P.M.),M.A.,History,History of Modern World (1920-1960),G-243,1st
+25-Apr-26,Saturday,Shift-I (10:00 A.M. - 01:00 P.M.),M.A.,History,Archaeology of Ancient Indian History,G-244,1st
+25-Apr-26,Saturday,Shift-I (10:00 A.M. - 01:00 P.M.),M.A.,History,History of South India (From Sangam Age to Vigay Nagar Empire),G-245,1st
+25-Apr-26,Saturday,Shift-I (10:00 A.M. - 01:00 P.M.),M.A.,Urdu,Non-Fictional Prose,G-265,1st
+25-Apr-26,Saturday,Shift-I (10:00 A.M. - 01:00 P.M.),M.A.,Sanskrit,"Sanskrit Grammer, Essay & Anuwad",G-283,1st
+27-Apr-26,Monday,Shift-I (10:00 A.M. - 01:00 P.M.),B.A.,History,Political History of Ancient India (B.C. 600 - A.D. 606),A-115,1st
+27-Apr-26,Monday,Shift-II (02:00 P.M. - 05:00 P.M.),B.A.,History,Political History of Medieval India (1206 - 1526 A.D.),A-215,2nd
+27-Apr-26,Monday,Shift-I (10:00 A.M. - 01:00 P.M.),B.A.,History,Political History of India (1740-1947),A-415,3rd
+27-Apr-26,Monday,Shift-I (10:00 A.M. - 01:00 P.M.),B.Com,Commerce,Business Environment,C-106,1st
+27-Apr-26,Monday,Shift-II (02:00 P.M. - 05:00 P.M.),B.Com,Commerce,Public Finance,C-206,2nd
+27-Apr-26,Monday,Shift-I (10:00 A.M. - 01:00 P.M.),B.Com,Commerce,Management Accounting,C-306,3rd
+27-Apr-26,Monday,Shift-II (02:00 P.M. - 05:00 P.M.),M.A.,English,"20th Century British Fiction, Drama and Prose",G-316,2nd
+27-Apr-26,Monday,Shift-II (02:00 P.M. - 05:00 P.M.),M.A.,Maths,Computer Programming & Data Structure,G-453,2nd
+27-Apr-26,Monday,Shift-II (02:00 P.M. - 05:00 P.M.),M.A.,Maths,Non Linear Programming,G-454,2nd
+27-Apr-26,Monday,Shift-II (02:00 P.M. - 05:00 P.M.),M.A.,Maths,Spherical Astronomy & Space Dynamics,G-455,2nd
+27-Apr-26,Monday,Shift-II (02:00 P.M. - 05:00 P.M.),M.A.,Maths,"Fuzzy Set Theory, Fuzzy Logics & Their Applications",G-456,2nd
+27-Apr-26,Monday,Shift-II (02:00 P.M. - 05:00 P.M.),M.A.,History,History of Modern India (1885-1950 A.D.),G-444,2nd
+27-Apr-26,Monday,Shift-II (02:00 P.M. - 05:00 P.M.),M.A.,Urdu,Script Writing & Translation,G-466,2nd
+27-Apr-26,Monday,Shift-II (02:00 P.M. - 05:00 P.M.),M.A.,Urdu,Essay Writing & Translation,G-467,2nd
+27-Apr-26,Monday,Shift-II (02:00 P.M. - 05:00 P.M.),M.A.,Economics,Financial Institutions and Markets,G-408,2nd
+27-Apr-26,Monday,Shift-I (10:00 A.M. - 01:00 P.M.),M.A.,English,Victorian Literature,G-118,1st
+28-Apr-26,Tuesday,Shift-I (10:00 A.M. - 01:00 P.M.),M.A.,Hindi,Katheitar Gadh Sahitya,G-131,1st
+28-Apr-26,Tuesday,Shift-I (10:00 A.M. - 01:00 P.M.),M.A.,Hindi,Vishisth Rachnakar (Soordas),G-225,1st
+28-Apr-26,Tuesday,Shift-I (10:00 A.M. - 01:00 P.M.),M.A.,Hindi,Vishisth Rachnakar (Goswami Tulsidas),G-226,1st
+28-Apr-26,Tuesday,Shift-I (10:00 A.M. - 01:00 P.M.),M.A.,Hindi,Vishisth Rachnakar (Jayshankar Prashad),G-227,1st
+28-Apr-26,Tuesday,Shift-I (10:00 A.M. - 01:00 P.M.),M.A.,Hindi,Vishisth Rachnakar (Premchand),G-228,1st
+28-Apr-26,Tuesday,Shift-I (10:00 A.M. - 01:00 P.M.),M.A.,Hindi,Vishisth Rachnakar (Agyey),G-229,1st
+28-Apr-26,Tuesday,Shift-I (10:00 A.M. - 01:00 P.M.),M.A.,Hindi,Vishisth Rachnakar (Kabir Das),G-230,1st
+29-Apr-26,Wednesday,Shift-I (10:00 A.M. - 01:00 P.M.),B.A.,Economics,Macro Economics,A-146,1st
+29-Apr-26,Wednesday,Shift-I (10:00 A.M. - 01:00 P.M.),B.Sc.,Economics,Macro Economics,B-146,1st
+29-Apr-26,Wednesday,Shift-II (02:00 P.M. - 05:00 P.M.),B.A.,Economics,Public Finance,A-246,2nd
+29-Apr-26,Wednesday,Shift-II (02:00 P.M. - 05:00 P.M.),B.Sc.,Economics,Public Finance,B-246,2nd
+29-Apr-26,Wednesday,Shift-I (10:00 A.M. - 01:00 P.M.),B.A.,Economics,Economic Growth & International Trade,A-346,3rd
+29-Apr-26,Wednesday,Shift-I (10:00 A.M. - 01:00 P.M.),B.Sc.,Economics,Economic Growth & International Trade,B-346,3rd
+29-Apr-26,Wednesday,Shift-II (02:00 P.M. - 05:00 P.M.),M.Com.,Commerce,Indirect Taxes-GST and Custom Law,I-105,1st
+29-Apr-26,Wednesday,Shift-II (02:00 P.M. - 05:00 P.M.),M.A.,Defence Studies,Science and Technology in War,G-497,2nd
+29-Apr-26,Wednesday,Shift-II (02:00 P.M. - 05:00 P.M.),M.A.,Education,Distance Education,G-402,2nd
+29-Apr-26,Wednesday,Shift-II (02:00 P.M. - 05:00 P.M.),M.A.,Hindi,Hindi Aqlochana,G-333,2nd
+29-Apr-26,Wednesday,Shift-I (10:00 A.M. - 01:00 P.M.),M.A.,Sociology,Basic Statistics & Computer Application in Social Research,G-288,1st
+29-Apr-26,Wednesday,Shift-II (02:00 P.M. - 05:00 P.M.),M.A.,Sociology,Tribes in India,G-487,2nd
+29-Apr-26,Wednesday,Shift-II (02:00 P.M. - 05:00 P.M.),M.A.,Sociology,Sociology of Environment,G-491,2nd
+29-Apr-26,Wednesday,Shift-II (02:00 P.M. - 05:00 P.M.),M.A.,Sociology,Sociology of Social Movements,G-489,2nd
+29-Apr-26,Wednesday,Shift-II (02:00 P.M. - 05:00 P.M.),M.A.,Sociology,Political Sociology,G-494,2nd
+30-Apr-26,Thursday,Shift-II (02:00 P.M. - 05:00 P.M.),B.A.,Qualifying Course,General Awareness,A-010,2nd
+30-Apr-26,Thursday,Shift-II (02:00 P.M. - 05:00 P.M.),B.Com,Qualifying Course,General Awareness,C-010,2nd
+30-Apr-26,Thursday,Shift-II (02:00 P.M. - 05:00 P.M.),"B.Sc. (PE, HE & Sports)",Qualifying Course,General Awareness,S-010,2nd
+30-Apr-26,Thursday,Shift-I (10:00 A.M. - 01:00 P.M.),M.A.,Political Science,Contemporary Political Theory,G-274,1st
+30-Apr-26,Thursday,Shift-II (02:00 P.M. - 05:00 P.M.),M.A.,Political Science,Local Governance in India,G-474,2nd
+30-Apr-26,Thursday,Shift-II (02:00 P.M. - 05:00 P.M.),M.A.,Sanskrit,Indian Philosophy,G-586,2nd
+30-Apr-26,Thursday,Shift-II (02:00 P.M. - 05:00 P.M.),M.A.,History,Research Methodology,G-438,2nd
+30-Apr-26,Thursday,Shift-II (02:00 P.M. - 05:00 P.M.),M.A.,Urdu,Classical Literature,G-468,2nd
+30-Apr-26,Thursday,Shift-II (02:00 P.M. - 05:00 P.M.),M.A.,Economics,Demography,G-409,2nd
+30-Apr-26,Thursday,Shift-I (10:00 A.M. - 01:00 P.M.),M.A.,Defence Studies,Insurgency & Counter Insurgence,G-299,1st
+2-May-26,Saturday,Shift-I (10:00 A.M. - 01:00 P.M.),B.A.,Maths,Geometry and Vector Calculus,A-128,1st
+2-May-26,Saturday,Shift-I (10:00 A.M. - 01:00 P.M.),B.Sc.,Maths,Geometry and Vector Calculus,B-128,1st
+2-May-26,Saturday,Shift-II (02:00 P.M. - 05:00 P.M.),B.A.,Maths,Mechanics,A-228,2nd
+2-May-26,Saturday,Shift-II (02:00 P.M. - 05:00 P.M.),B.Sc.,Maths,Mechanics,B-228,2nd
+2-May-26,Saturday,Shift-I (10:00 A.M. - 01:00 P.M.),B.A.,Maths,Numerical Methods and Fundamentals of Computer,A-328,3rd
+2-May-26,Saturday,Shift-I (10:00 A.M. - 01:00 P.M.),B.Sc.,Maths,Numerical Methods and Fundamentals of Computer,B-328,3rd
+2-May-26,Saturday,Shift-I (10:00 A.M. - 01:00 P.M.),M.A.,Sociology,Neo-Classical Theories,G-289,1st
+2-May-26,Saturday,Shift-II (02:00 P.M. - 05:00 P.M.),M.A.,Sociology,Social Problems In India,G-290,1st
+2-May-26,Saturday,Shift-II (02:00 P.M. - 05:00 P.M.),M.A.,English,Indian Literature in English,G-317,2nd
+2-May-26,Saturday,Shift-II (02:00 P.M. - 05:00 P.M.),M.A.,Maths,Mathematical Modeling,G-457,2nd
+2-May-26,Saturday,Shift-II (02:00 P.M. - 05:00 P.M.),M.A.,Maths,Partial Differential Equations,G-458,2nd
+2-May-26,Saturday,Shift-II (02:00 P.M. - 05:00 P.M.),M.A.,Maths,Bio-Mathematics,G-459,2nd
+2-May-26,Saturday,Shift-II (02:00 P.M. - 05:00 P.M.),M.A.,Maths,Mathematics of Finance & Insurance,G-460,2nd
+2-May-26,Saturday,Shift-II (02:00 P.M. - 05:00 P.M.),M.A.,Hindi,Vishisth Sahityadhara (Bhartiya Sahitya),G-327,2nd
+2-May-26,Saturday,Shift-II (02:00 P.M. - 05:00 P.M.),M.A.,Hindi,Vishisth Sahityadhara (Kauravi Lok Sahitya),G-328,2nd
+2-May-26,Saturday,Shift-II (02:00 P.M. - 05:00 P.M.),M.A.,Hindi,Vishisth Sahityadhara (Pravashi Hindi Sahitya),G-334,2nd
+2-May-26,Saturday,Shift-II (02:00 P.M. - 05:00 P.M.),M.A.,Hindi,Vishisth Sahityadhara (Sanskrit),G-336,2nd
+2-May-26,Saturday,Shift-II (02:00 P.M. - 05:00 P.M.),M.A.,Hindi,Vishisth Sahityadhara (Prakrut - Apbransh),G-337,2nd
+4-May-26,Monday,Shift-I (10:00 A.M. - 01:00 P.M.),B.A.,Urdu,Nazam,A-137,1st
+4-May-26,Monday,Shift-II (02:00 P.M. - 05:00 P.M.),B.A.,Urdu,Ghazal,A-237,2nd
+4-May-26,Monday,Shift-I (10:00 A.M. - 01:00 P.M.),B.A.,Urdu,Classical Poetry,A-437,3rd
+4-May-26,Monday,Shift-I (10:00 A.M. - 01:00 P.M.),B.A.,Urdu,Essay Translation & Grammer,A-438,3rd
+4-May-26,Monday,Shift-II (02:00 P.M. - 05:00 P.M.),M.Com.,Commerce,Corporate Financial Accounting,I-106,1st
+4-May-26,Monday,Shift-II (02:00 P.M. - 05:00 P.M.),M.A.,Defence Studies,Cicil & Military Relations,G-498,2nd
+4-May-26,Monday,Shift-II (02:00 P.M. - 05:00 P.M.),M.A.,Education,Educational Technology,G-403,2nd
+4-May-26,Monday,Shift-II (02:00 P.M. - 05:00 P.M.),M.A.,Economics,Environmental Economics,G-413,2nd
+5-May-26,Tuesday,Shift-I (10:00 A.M. - 01:00 P.M.),B.A.,English,English Grammer and Phonetics,A-110,1st
+5-May-26,Tuesday,Shift-II (02:00 P.M. - 05:00 P.M.),B.A.,English,Indian Writings in English Prose and Poetry,A-210,2nd
+5-May-26,Tuesday,Shift-I (10:00 A.M. - 01:00 P.M.),B.A.,English,Shakespeare,A-310,3rd
+5-May-26,Tuesday,Shift-II (02:00 P.M. - 05:00 P.M.),M.A.,English,Translation Studies,G-318,2nd
+5-May-26,Tuesday,Shift-II (02:00 P.M. - 05:00 P.M.),M.A.,Sanskrit,Brahman Pratishakhy & Nirukt,G-588,2nd
+5-May-26,Tuesday,Shift-I (10:00 A.M. - 01:00 P.M.),M.A.,Sociology,Social Change: Concept and Theories,G-290,2nd
+5-May-26,Tuesday,Shift-II (02:00 P.M. - 05:00 P.M.),M.A.,Sociology,Classification in Sociology,G-391,2nd
+6-May-26,Wednesday,Shift-I (10:00 A.M. - 01:00 P.M.),B.A.,History,Political History of India (From A.D. 606 upto A.D. 1206),A-116,1st
+6-May-26,Wednesday,Shift-II (02:00 P.M. - 05:00 P.M.),B.A.,History,Political History of Medieval India (1526-1740 A.D.),A-216,2nd
+6-May-26,Wednesday,Shift-I (10:00 A.M. - 01:00 P.M.),B.A.,History,History of Indian Culture,A-416,3rd
+6-May-26,Wednesday,Shift-I (10:00 A.M. - 01:00 P.M.),B.A.,History,History of Modern World (1920-1960),A-417,3rd
+6-May-26,Wednesday,Shift-II (02:00 P.M. - 05:00 P.M.),M.A.,Sociology,Perspectives on Indian Society,G-392,2nd
+6-May-26,Wednesday,Shift-II (02:00 P.M. - 05:00 P.M.),M.A.,History,Socio-Cultural History of Modern India (1757-1947 A.D.),G-445,2nd
+6-May-26,Wednesday,Shift-II (02:00 P.M. - 05:00 P.M.),M.A.,History,Economic History of British India (1757-1950),G-446,2nd
+6-May-26,Wednesday,Shift-II (02:00 P.M. - 05:00 P.M.),M.A.,History,Women Through Ages,G-447,2nd
+6-May-26,Wednesday,Shift-II (02:00 P.M. - 05:00 P.M.),M.Com.,Commerce,Corporate Laws and Governance,I-107,1st
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
