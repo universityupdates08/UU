@@ -1572,5 +1572,29 @@
         }
     
     </script>
+
+
+    
+  <div class="flex items-center justify-center gap-2 mt-4 text-slate-500 text-xs">
+  <i class="fas fa-users text-blue-500"></i>
+  <span>Total Visitors:</span>
+  <span id="new-count" class="font-bold text-slate-800 bg-slate-200 px-2 py-0.5 rounded">0</span>
+</div>
+
+<script>
+  // This uses counterapi.dev which is active in 2026
+  async function getHits() {
+    try {
+      // replace 'university_updates_uu' with any unique name for your site
+      const response = await fetch('https://api.counterapi.dev/v1/university_updates_uu/main/up');
+      const data = await response.json();
+      document.getElementById('new-count').innerText = data.count;
+    } catch (err) {
+      console.log("Counter Error:", err);
+    }
+  }
+  getHits();
+</script>
+    
 </body>
 </html>
