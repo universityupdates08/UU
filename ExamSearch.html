@@ -2,257 +2,396 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Exam DateSheet Portal</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Exam Schedule Portal - UNIVERSITY UPDATES</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+
     <style>
         :root {
-            --bg-body: #f1f5f9;
-            --primary-grad: linear-gradient(135deg, #0f172a 0%, #334155 100%);
-            --card-grad: linear-gradient(135deg, #4338ca 0%, #6d28d9 100%);
-            --btn-grad: linear-gradient(to right, #2563eb, #7c3aed);
+            --primary-color: #ef3c3c;
+            --primary-color-dark: #c63333;
+            --secondary-color: #2c4b9e;
+            --card-bg: rgba(255, 255, 255, 0.97);
+            /* Exam Portal Theme */
+            --card-grad: linear-gradient(135deg, #6a5cff, #4fb7ff);
+            --yellow-grad: linear-gradient(135deg, #ffd84d, #ffb300);
+            --alert-today: #00b894;
+            --alert-tomorrow: #f39c12;
         }
-        body { font-family: 'Segoe UI', system-ui, sans-serif; background-color: var(--bg-body); margin: 0; padding: 20px; color: #1e293b; }
-        .container { max-width: 1000px; margin: 0 auto; }
-        
-        header { text-align: center; margin-bottom: 30px; }
-        header h1 { font-size: 2.2rem; color: #0f172a; margin-bottom: 5px; }
-        header p { color: #64748b; margin: 0; }
 
-        .search-container { background: white; padding: 25px; border-radius: 16px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); margin-bottom: 30px; }
-        
-        /* Row Styles */
-        .search-row { 
-            display: flex; 
-            flex-wrap: wrap; 
-            gap: 15px; 
-            padding: 20px 0; 
-            border-bottom: 1px solid #e2e8f0; 
-            align-items: flex-end; 
+        * { box-sizing: border-box; }
+
+        body {
+            font-family: "Poppins", sans-serif;
+            margin: 0;
+            padding: 0;
+            background: radial-gradient(circle at top, #ffffff 0, #e5edff 45%, #f3f4f6 100%);
+            color: #0f172a;
         }
-        .search-row:last-child { border-bottom: none; }
-        .search-row h3 { width: 100%; margin: 0 0 10px 0; font-size: 0.9rem; color: #64748b; text-transform: uppercase; letter-spacing: 0.05em; }
 
-        .input-group { flex: 1; min-width: 200px; display: flex; flex-direction: column; }
-        .input-group label { font-size: 0.85rem; font-weight: 600; margin-bottom: 6px; color: #475569; }
-        
-        input, select { padding: 10px 12px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 0.95rem; outline: none; background-color: #f8fafc; }
-        input:focus, select:focus { border-color: #3b82f6; box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1); }
-        
-        .btn-search { 
-            background: var(--btn-grad); 
-            color: white; 
-            border: none; 
-            padding: 10px 25px; 
-            border-radius: 8px; 
-            cursor: pointer; 
-            font-weight: 600; 
-            transition: all 0.2s; 
-            height: 42px;
+        /* Utility & Nav Styles */
+        .utility-bar { background-color: #0f172a; color: #e5e7eb; font-size: 0.8rem; padding: 0.35rem 0; }
+        .utility-bar a { color: #e5e7eb; transition: opacity 0.2s ease; }
+        .utility-bar a:hover { opacity: 0.85; color: var(--secondary-color); }
+
+        .main-nav { background-color: #ffffffdd; backdrop-filter: blur(10px); border-bottom: 1px solid rgba(148, 163, 184, 0.25); position: sticky; top: 0; z-index: 100; }
+        .nav-link { font-size: 0.9rem; font-weight: 500; padding: 0.4rem 0.75rem; border-radius: 999px; transition: 0.15s ease; }
+        .nav-link:hover { background-color: rgba(239, 60, 60, 0.08); color: var(--primary-color); }
+
+        .announcement-bar { background-color: var(--primary-color); color: white; font-size: 0.85rem; display: flex; align-items: center; overflow: hidden; height: 32px; }
+        .announcement-inner { white-space: nowrap; display: inline-block; padding-left: 100%; animation: ticker 18s linear infinite; }
+        @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-100%); } }
+
+        .primary-chip { display: inline-flex; align-items: center; gap: 0.35rem; padding: 0.35rem 0.8rem; border-radius: 999px; background-color: rgba(239, 60, 60, 0.08); color: var(--primary-color); font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; }
+
+        /* Exam Portal Containers */
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            width: 95%;
+            max-width: 1200px;
+            margin: 2rem auto;
+            box-shadow: 0 18px 45px rgba(15, 23, 42, 0.08);
         }
-        .btn-search:hover { filter: brightness(1.1); transform: translateY(-1px); }
 
-        #status { text-align: center; margin-bottom: 20px; font-size: 0.9rem; font-weight: bold; }
+        .row { margin: 20px 0; padding: 20px; border-radius: 10px; }
+        .row0 { background: #f8f9fa; border: 1px solid #eee; }
+        .row1 { background: #e8f1ff; }
+        .row2 { background: #e9f9ef; }
+        .row3 { background: #fff1f1; }
+        .row4 { background: #fff8e1; }
+        .row5 { background: #f2f2ff; }
+        
+        .row h3 { text-align: left; margin-bottom: 15px; color: #333; font-size: 1.1rem; border-left: 4px solid #2c7be5; padding-left: 10px; font-weight: 700; }
 
-        /* Card Layout */
-        .results-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(310px, 1fr)); gap: 20px; }
-        .card { 
-            background: var(--card-grad); 
-            color: white; 
-            border-radius: 16px; 
-            padding: 20px; 
-            box-shadow: 0 4px 20px rgba(67, 56, 202, 0.25);
-            transition: transform 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-        .card:hover { transform: translateY(-5px); }
-        .card-header { border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 10px; margin-bottom: 15px; }
-        .card-date { font-size: 1.25rem; font-weight: 800; }
-        .card-day { font-size: 0.9rem; opacity: 0.8; }
+        .warning { background: #fff3cd; border: 1px solid #ffeeba; padding: 15px; margin-bottom: 20px; border-radius: 8px; color: #856404; text-align: left; font-size: 0.9rem; }
+
+        /* Controls & Tables */
+        .controls { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+        .controls input, .controls select, .controls button { flex: 1; min-width: 150px; padding: 12px; border-radius: 6px; border: 1px solid #ccc; font-size: 0.9rem; font-family: inherit; }
+        .controls button { background: #2c7be5; color: white; border: none; cursor: pointer; font-weight: bold; }
         
-        .card-detail { margin-bottom: 12px; }
-        .detail-label { font-size: 0.7rem; text-transform: uppercase; opacity: 0.7; letter-spacing: 0.05em; display: block; }
-        .detail-value { font-size: 1rem; font-weight: 500; display: block; }
-        
-        .card-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 10px; }
-        .badge { background: rgba(0,0,0,0.2); padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: bold; }
-        
-        .no-results { grid-column: 1 / -1; text-align: center; padding: 40px; background: white; border-radius: 12px; color: #94a3b8; border: 2px dashed #e2e8f0; }
+        .alert-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 20px; }
+        .alert-card { background: white; border-radius: 14px; padding: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); border-top: 5px solid #2c7be5; }
+        .alert-card.today { border-top-color: var(--alert-today); }
+        .alert-card.tomorrow { border-top-color: var(--alert-tomorrow); }
+
+        .results-grid { margin-top: 20px; display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 15px; }
+        .card { background: var(--card-grad); color: white; border-radius: 12px; padding: 16px; text-align: left; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .card-date { font-weight: 800; font-size: 1.1rem; }
+        .badge { display: inline-block; background: rgba(0,0,0,0.15); padding: 4px 8px; border-radius: 4px; font-size: 0.75rem; margin-top: 10px; font-weight: bold; }
+
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 0.82rem; background: white; color: #333; }
+        th, td { border: 1px solid #eee; padding: 8px; text-align: center; }
+        th { background: #2c7be5; color: white; }
+
+        /* Go To Top */
+        #topBtn { display: none; position: fixed; bottom: 20px; right: 24px; z-index: 40; background-color: var(--primary-color); color: white; padding: 0.6rem 0.8rem; border-radius: 999px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); cursor: pointer; border:none; }
+
+        footer a.footer-social-link { margin: 0 0.75rem; font-size: 1.2rem; transition: 0.2s; }
     </style>
 </head>
 <body>
-
-<div class="container">
-    <header>
-        <h1>Exam Schedule Portal</h1>
-        <p>Select a search method below to find your datesheet</p>
-    </header>
-
-    <div id="status">Connecting to Database...</div>
-
-    <div class="search-container">
-        <div class="search-row">
-            <h3>Row 1: Search by Date</h3>
-            <div class="input-group">
-                <label>Date</label>
-                <input type="date" id="date1">
+    <div class="utility-bar">
+        <div class="max-w-7xl mx-auto px-4 flex justify-between items-center">
+            <div class="flex items-center gap-4">
+                <a href="https://t.me/HelpforDMBot" target="_blank" class="flex items-center gap-1">
+                    <i class="fas fa-envelope text-xs"></i>
+                    <span>Contact Us</span>
+                </a>
             </div>
-            <button class="btn-search" onclick="search(1)">Search Date</button>
-        </div>
-
-        <div class="search-row">
-            <h3>Row 2: Search by Class & Subject</h3>
-            <div class="input-group">
-                <label>Class</label>
-                <select id="class2"><option value="">-- All Classes --</option></select>
+            <div class="flex items-center gap-3">
+                <a href="index.html" aria-label="Home"><i class="fas fa-home text-xs"></i></a>
+                <span class="text-slate-500">|</span>
+                <a href="https://www.youtube.com/@University-Updates-UU" target="_blank"><i class="fab fa-youtube"></i></a>
+                <span class="text-slate-500">|</span>
+                <a href="https://instagram.com/universityupdates_uu" target="_blank"><i class="fab fa-instagram"></i></a>
+                <span class="text-slate-500">|</span>
+                <a href="https://x.com/uniupdates08" target="_blank"><i class="fab fa-x"></i></a>
+                <span class="text-slate-500">|</span>
+                <a href="https://t.me/UniversityUpdates_UU" target="_blank"><i class="fab fa-telegram-plane"></i></a>
             </div>
-            <div class="input-group">
-                <label>Subject</label>
-                <select id="subject2"><option value="">-- All Subjects --</option></select>
-            </div>
-            <button class="btn-search" onclick="search(2)">Search Class/Subject</button>
-        </div>
-
-        <div class="search-row">
-            <h3>Row 3: Search by Date & Class</h3>
-            <div class="input-group">
-                <label>Date</label>
-                <input type="date" id="date3">
-            </div>
-            <div class="input-group">
-                <label>Class</label>
-                <select id="class3"><option value="">-- All Classes --</option></select>
-            </div>
-            <button class="btn-search" onclick="search(3)">Search Date/Class</button>
         </div>
     </div>
 
-    <div id="resultsGrid" class="results-grid"></div>
-</div>
+    <header class="main-nav">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex flex-col md:flex-row items-center justify-between gap-3">
+            <div class="flex items-center gap-3">
+                <img src="images/uuug.png" alt="Logo" class="h-14 md:h-16 drop-shadow-md" />
+                <div class="hidden sm:block text-left">
+                    <div class="primary-chip"><i class="fas fa-graduation-cap text-xs"></i> UNIVERSITY UPDATES & UNIVERSITY GYAAN</div>
+                    <p class="text-xs text-slate-500 mt-1">Free Study Resources • Tools • Notifications</p>
+                </div>
+            </div>
+            <nav class="hidden md:flex items-center gap-4 text-sm font-medium">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="vivanew.html" class="nav-link">Viva-Voce (Private)</a>
+                <a href="datesheet.html" class="nav-link">Datesheet Generator</a>
+            </nav>
+            <div class="md:hidden">
+                <button id="menu-btn" class="text-xl focus:outline-none"><i class="fas fa-bars"></i></button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-slate-200 px-4 pb-3 space-y-2">
+            <a href="index.html" class="block text-sm font-medium py-2">Home</a>
+            <a href="vivanew.html" class="block text-sm font-medium py-2 border-t">Viva-Voce (Private)</a>
+            <a href="datesheet.html" class="block text-sm font-medium py-2 border-t">Datesheet Generator</a>
+        </div>
+    </header>
 
-<script>
-    let examData = [];
-    
-    // CONFIGURATION - Update with your details
-    const GITHUB_USERNAME = "universityupdates08"; 
-    const REPO_NAME = "UU";
-    const CSV_FILE = "DatesheetSearch.csv";
-    
-    const csvUrl = `https://raw.githubusercontent.com/${GITHUB_USERNAME}/${REPO_NAME}/main/${CSV_FILE}`;
+    <div class="announcement-bar">
+        <div class="max-w-7xl mx-auto flex items-center gap-2 px-4 w-full overflow-hidden">
+            <span class="text-lg">📢</span>
+            <div class="flex-1 overflow-hidden">
+                <div class="announcement-inner">
+                    ➤ Welcome to UNIVERSITY UPDATES & UNIVERSITY GYAAN &nbsp;&nbsp;•&nbsp;&nbsp; Free Study Materials, Exam Tools, And Notifications For Students &nbsp;&nbsp;•&nbsp;&nbsp; Stay Connected With CCSU, MSU, AKTU & Many More...
+                </div>
+            </div>
+        </div>
+    </div>
 
-    window.onload = function() {
-        Papa.parse(csvUrl, {
+    <main class="container">
+        <h2 class="text-2xl font-bold mb-4">Exam Schedule Portal</h2>
+        <div class="warning">
+            ⚠ Please verify the exam schedule carefully. Always confirm with the official notification before appearing in the exam. The data are available as per University Letter No. (Exam/D.R./10154) Dated - 27.02.2026.
+        </div>
+
+        <div class="row row0">
+            <h3>📢 Live Exam Alerts</h3>
+            <div class="alert-grid">
+                <div class="alert-card today" id="todayCard"></div>
+                <div class="alert-card tomorrow" id="tomorrowCard"></div>
+            </div>
+        </div>
+
+        <div class="row row1">
+            <h3>SEARCH BY DATE</h3>
+            <div class="controls">
+                <input type="date" id="date1">
+                <button onclick="searchByDate()">Search</button>
+            </div>
+            <div id="dateResults"></div>
+        </div>
+
+        <div class="row row2">
+            <h3>SEARCH BY CLASS & SUBJECT</h3>
+            <div class="controls">
+                <select id="class2"><option value="">Select Class</option></select>
+                <select id="subject2"><option value="">Select Subject</option></select>
+                <button onclick="searchByClassSubject()">Search</button>
+            </div>
+            <div id="resultRow2"></div>
+        </div>
+
+        <div class="row row3">
+            <h3>SEARCH BY DATE & CLASS</h3>
+            <div class="controls">
+                <input type="date" id="date3">
+                <select id="class3"><option value="">Select Class</option></select>
+                <button onclick="searchByDateClass()">Search</button>
+            </div>
+            <div id="resultRow3" class="results-grid"></div>
+        </div>
+
+        <div class="row row4">
+            <h3>SEARCH BY PAPER CODE</h3>
+            <div class="controls">
+                <select id="code4"><option value="">Select Paper Code</option></select>
+                <button onclick="searchByCode()">Search</button>
+            </div>
+            <div id="resultRow4"></div>
+        </div>
+
+        <div class="row row5">
+            <h3>SEARCH BY CLASS, YEAR & SUBJECT</h3>
+            <div class="controls">
+                <select id="class5"><option value="">Select Class</option></select>
+                <select id="year5">
+                    <option value="">Select Year</option>
+                    <option value="1st">1st Year</option>
+                    <option value="2nd">2nd Year</option>
+                    <option value="3rd">3rd Year</option>
+                </select>
+                <select id="subject5"><option value="">Select Subject</option></select>
+                <button onclick="searchClassYearSubject()">Search</button>
+            </div>
+            <div id="resultRow5"></div>
+        </div>
+    </main>
+
+    <footer class="text-center py-8 bg-slate-100 border-t border-slate-200 mt-12">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="mb-4 text-slate-600 flex items-center justify-center gap-4">
+                <a href="https://www.youtube.com/@University-Updates-UU" target="_blank" class="text-slate-500 hover:text-red-600 footer-social-link"><i class="fab fa-youtube"></i></a>
+                <a href="https://instagram.com/universityupdate_uu" target="_blank" class="text-slate-500 hover:text-pink-600 footer-social-link"><i class="fab fa-instagram"></i></a>
+                <a href="https://x.com/uniupdates08" target="_blank" class="text-slate-500 hover:text-pink-600 footer-social-link"><i class="fab fa-x"></i></a>
+                <a href="https://t.me/UniversityUpdates_UU" target="_blank" class="text-slate-500 hover:text-sky-500 footer-social-link"><i class="fab fa-telegram-plane"></i></a>
+            </div>
+
+            <div id="datetime" class="text-[#2c4b9e] text-sm font-semibold mb-2">
+                <span id="liveDate"></span> | <span id="liveTime"></span>
+            </div>
+
+            <p class="text-xs md:text-sm text-slate-500">
+                © 2026 | Designed by <b>University Updates</b>
+            </p>
+        </div>
+    </footer>
+
+    <button id="topBtn" title="Go to top">↑</button>
+
+    <script>
+        let csvData = [];
+        Papa.parse("Datesheet.csv", {
             download: true,
             header: true,
             skipEmptyLines: true,
             complete: function(results) {
-                examData = results.data;
-                initDropdowns();
-                document.getElementById('status').innerText = "✅ Database Connected";
-                document.getElementById('status').style.color = "#10b981";
-            },
-            error: function() {
-                document.getElementById('status').innerText = "❌ Error: CSV file not found.";
-                document.getElementById('status').style.color = "#ef4444";
+                csvData = results.data;
+                populateFilters();
+                showLiveAlerts();
             }
         });
-    };
 
-    function initDropdowns() {
-        const classes = [...new Set(examData.map(item => item.Class).filter(Boolean))].sort();
-        const subjects = [...new Set(examData.map(item => item.Subject).filter(Boolean))].sort();
+        // --- Live Date & Time ---
+        function updateDateTime() {
+            const now = new Date();
+            const dateEl = document.getElementById("liveDate");
+            const timeEl = document.getElementById("liveTime");
+            if (dateEl && timeEl) {
+                dateEl.textContent = now.toLocaleDateString("en-IN", { weekday: "long", year: "numeric", month: "long", day: "numeric" });
+                timeEl.textContent = now.toLocaleTimeString("en-IN", { hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: true });
+            }
+        }
+        setInterval(updateDateTime, 1000);
+        updateDateTime();
 
-        const cls2 = document.getElementById('class2');
-        const cls3 = document.getElementById('class3');
-        const sbj2 = document.getElementById('subject2');
-
-        classes.forEach(c => {
-            let o1 = new Option(c, c);
-            let o2 = new Option(c, c);
-            cls2.add(o1);
-            cls3.add(o2);
+        // --- Mobile Menu ---
+        document.getElementById("menu-btn").addEventListener("click", () => {
+            document.getElementById("mobile-menu").classList.toggle("hidden");
         });
 
-        subjects.forEach(s => {
-            sbj2.add(new Option(s, s));
-        });
-    }
+        // --- Scroll Top ---
+        const topBtn = document.getElementById("topBtn");
+        window.onscroll = () => {
+            topBtn.style.display = (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) ? "block" : "none";
+        };
+        topBtn.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
 
-    function formatToCSVDate(dateStr) {
-        if (!dateStr) return null;
-        const date = new Date(dateStr);
-        const day = String(date.getDate()).padStart(2, '0');
-        const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-        return `${day}-${months[date.getMonth()]}-${String(date.getFullYear()).slice(-2)}`;
-    }
-
-    function search(rowNumber) {
-        let filtered = [];
-
-        if (rowNumber === 1) {
-            const d = formatToCSVDate(document.getElementById('date1').value);
-            if (!d) return alert("Select a date first.");
-            filtered = examData.filter(row => row.Date === d);
-        } 
-        else if (rowNumber === 2) {
-            const c = document.getElementById('class2').value;
-            const s = document.getElementById('subject2').value;
-            filtered = examData.filter(row => {
-                const matchC = c ? row.Class === c : true;
-                const matchS = s ? row.Subject === s : true;
-                return matchC && matchS;
+        // --- Original Search Logic ---
+        function populateFilters() {
+            const classes = new Set(), subjects = new Set(), codes = new Set();
+            csvData.forEach(r => {
+                if(r.Class) classes.add(r.Class);
+                if(r.Subject) subjects.add(r.Subject);
+                if(r['Paper Code']) codes.add(r['Paper Code']);
             });
-        } 
-        else if (rowNumber === 3) {
-            const d = formatToCSVDate(document.getElementById('date3').value);
-            const c = document.getElementById('class3').value;
-            filtered = examData.filter(row => {
-                const matchD = d ? row.Date === d : true;
-                const matchC = c ? row.Class === c : true;
-                return matchD && matchC;
+
+            const fillSelect = (id, items) => {
+                const el = document.getElementById(id);
+                items.forEach(item => el.innerHTML += `<option value="${item}">${item}</option>`);
+            };
+
+            const sortedClasses = Array.from(classes).sort();
+            fillSelect("class2", sortedClasses);
+            fillSelect("class3", sortedClasses);
+            fillSelect("class5", sortedClasses);
+            fillSelect("subject2", Array.from(subjects).sort());
+            fillSelect("subject5", Array.from(subjects).sort());
+            fillSelect("code4", Array.from(codes).sort());
+        }
+
+        function formatDate(dateInput) {
+            if(!dateInput) return "";
+            const d = new Date(dateInput);
+            const day = String(d.getDate()).padStart(1, '0');
+            const month = d.toLocaleString('en-US', { month: 'short' });
+            const year = d.getFullYear().toString().slice(-2);
+            return `${day}-${month}-${year}`;
+        }
+
+        function showLiveAlerts() {
+            const today = new Date();
+            const tomorrow = new Date();
+            tomorrow.setDate(today.getDate() + 1);
+            const tStr = formatDate(today);
+            const tmStr = formatDate(tomorrow);
+            const tExams = csvData.filter(r => r.Date === tStr);
+            const tmExams = csvData.filter(r => r.Date === tmStr);
+
+            document.getElementById("todayCard").innerHTML = renderAlertBox("TODAY'S EXAMS", today, tExams);
+            document.getElementById("tomorrowCard").innerHTML = renderAlertBox("TOMORROW'S EXAMS", tomorrow, tmExams);
+        }
+
+        function renderAlertBox(title, dateObj, exams) {
+            const dateStr = formatDate(dateObj);
+            const dayName = dateObj.toLocaleString('en-us', {weekday:'long'});
+            let html = `<strong>${title}</strong><br><small>${dateStr} (${dayName})</small><hr>`;
+            if (exams.length === 0) return html + `<p class="py-4 text-slate-400 italic">No Exams Scheduled</p>`;
+            html += `<table><tr><th>S.No</th><th>Class</th><th>Subject</th><th>Paper Code</th><th>Shift</th></tr>`;
+            exams.forEach((r, i) => {
+                html += `<tr><td>${i+1}</td><td>${r.Class}</td><td>${r.Subject}</td><td>${r['Paper Code'] || '-'}</td><td>${r.Shift}</td></tr>`;
+            });
+            return html + `</table>`;
+        }
+
+        function searchByDate() {
+            const val = document.getElementById("date1").value;
+            const date = formatDate(val);
+            const results = csvData.filter(r => r.Date === date);
+            const container = document.getElementById("dateResults");
+            if(results.length === 0) { container.innerHTML = `<p class="py-4 text-slate-400 italic">No Exams Found</p>`; return; }
+            let html = `<table><tr><th>S.No</th><th>Date</th><th>Day</th><th>Class</th><th>Subject</th><th>Paper Name</th><th>Paper Code</th><th>Shift</th></tr>`;
+            results.forEach((r, i) => {
+                html += `<tr><td>${i+1}</td><td>${r.Date}</td><td>${r.Day}</td><td>${r.Class}</td><td>${r.Subject}</td><td>${r['Paper Name']}</td><td>${r['Paper Code']}</td><td>${r.Shift}</td></tr>`;
+            });
+            container.innerHTML = html + `</table>`;
+        }
+
+        function searchByClassSubject() {
+            const c = document.getElementById("class2").value;
+            const s = document.getElementById("subject2").value;
+            const results = csvData.filter(r => r.Class === c && r.Subject === s);
+            const container = document.getElementById("resultRow2");
+            if(results.length === 0) { container.innerHTML = `<div class="py-4 text-slate-400 italic">No Records Found</div>`; return; }
+            container.innerHTML = `<div class="card mx-auto max-w-4xl mt-4"><div class="card-header font-bold">${c} - ${s}</div><table><tr><th>S.No</th><th>Date</th><th>Day</th><th>Paper Name</th><th>Shift</th></tr>${results.map((r, i) => `<tr><td>${i+1}</td><td>${r.Date}</td><td>${r.Day}</td><td>${r['Paper Name']}</td><td>${r.Shift}</td></tr>`).join('')}</table></div>`;
+        }
+
+        function searchByDateClass() {
+            const d = formatDate(document.getElementById("date3").value);
+            const c = document.getElementById("class3").value;
+            const results = csvData.filter(r => r.Date === d && r.Class === c);
+            const container = document.getElementById("resultRow3");
+            container.innerHTML = results.length ? "" : `<div class="py-4 text-slate-400 italic col-span-full text-center">No Exams Found</div>`;
+            results.forEach((r) => {
+                container.innerHTML += `<div class="card"><div class="card-header"><div class="card-date">${r.Date}</div><small>(${r.Day})</small></div><div class="text-xs opacity-70 mt-2 uppercase">Subject</div><div class="font-bold">${r.Subject}</div><div class="text-xs opacity-70 mt-2 uppercase">Paper</div><div>${r['Paper Name']}</div><div class="flex justify-between mt-4"><span class="badge">Code: ${r['Paper Code']}</span><span class="badge">${r.Shift}</span></div></div>`;
             });
         }
 
-        render(filtered);
-    }
-
-    function render(data) {
-        const grid = document.getElementById('resultsGrid');
-        grid.innerHTML = "";
-
-        if (data.length === 0) {
-            grid.innerHTML = `<div class="no-results">No exams found for these criteria.</div>`;
-            return;
+        function searchByCode() {
+            const code = document.getElementById("code4").value;
+            const results = csvData.filter(r => r['Paper Code'] === code);
+            const container = document.getElementById("resultRow4");
+            if(results.length === 0) { container.innerHTML = `<div class="py-4 text-slate-400 italic">No Records Found</div>`; return; }
+            const r = results[0];
+            container.innerHTML = `<div class="p-6 bg-[#ffd84d] text-slate-800 rounded-xl max-w-md mx-auto mt-4 text-left"><h3 class="font-bold border-none p-0 mb-2">${r.Subject}</h3><div>Code: <b>${r['Paper Code']}</b></div><div>Date: <b>${r.Date} (${r.Day})</b></div><div>Class: <b>${r.Class}</b></div><div class="mt-4 bg-black/10 inline-block px-3 py-1 rounded font-bold">Shift: ${r.Shift}</div></div>`;
         }
 
-        data.forEach(item => {
-            grid.innerHTML += `
-                <div class="card">
-                    <div class="card-header">
-                        <div class="card-date">${item.Date}</div>
-                        <div class="card-day">${item.Day}</div>
-                    </div>
-                    <div class="card-body">
-                        <div class="card-detail">
-                            <span class="detail-label">Class</span>
-                            <span class="detail-value">${item.Class}</span>
-                        </div>
-                        <div class="card-detail">
-                            <span class="detail-label">Subject / Course</span>
-                            <span class="detail-value">${item.Subject}<br><small>${item.Course}</small></span>
-                        </div>
-                    </div>
-                    <div class="card-footer">
-                        <span class="badge">${item.Shift}</span>
-                        <span class="badge" style="background:rgba(255,255,255,0.2)">${item.Code || 'N/A'}</span>
-                    </div>
-                </div>
-            `;
-        });
-    }
-</script>
-
+        function searchClassYearSubject() {
+            const c = document.getElementById("class5").value;
+            const y = document.getElementById("year5").value;
+            const s = document.getElementById("subject5").value;
+            const results = csvData.filter(r => r.Class === c && r.Subject === s && r.Year === y);
+            const container = document.getElementById("resultRow5");
+            if(results.length === 0) { container.innerHTML = `<div class="py-4 text-slate-400 italic">No Records Found</div>`; return; }
+            container.innerHTML = `<div class="card mx-auto max-w-4xl mt-4"><div class="card-header font-bold">${c} (${y} Year) - ${s}</div><table><tr><th>S.No</th><th>Date</th><th>Day</th><th>Paper Name</th><th>Paper Code</th><th>Shift</th></tr>${results.map((r, i) => `<tr><td>${i+1}</td><td>${r.Date}</td><td>${r.Day}</td><td>${r['Paper Name']}</td><td>${r['Paper Code']}</td><td>${r.Shift}</td></tr>`).join('')}</table></div>`;
+        }
+    </script>
 </body>
 </html>
