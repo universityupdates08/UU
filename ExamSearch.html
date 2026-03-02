@@ -393,5 +393,28 @@
             container.innerHTML = `<div class="card mx-auto max-w-4xl mt-4"><div class="card-header font-bold">${c} (${y} Year) - ${s}</div><table><tr><th>S.No</th><th>Date</th><th>Day</th><th>Paper Name</th><th>Paper Code</th><th>Shift</th></tr>${results.map((r, i) => `<tr><td>${i+1}</td><td>${r.Date}</td><td>${r.Day}</td><td>${r['Paper Name']}</td><td>${r['Paper Code']}</td><td>${r.Shift}</td></tr>`).join('')}</table></div>`;
         }
     </script>
+
+    
+  <div class="flex items-center justify-center gap-2 mt-4 text-slate-500 text-xs">
+  <i class="fas fa-users text-blue-500"></i>
+  <span>Total Visitors:</span>
+  <span id="new-count" class="font-bold text-slate-800 bg-slate-200 px-2 py-0.5 rounded">0</span>
+</div>
+
+<script>
+  // This uses counterapi.dev which is active in 2026
+  async function getHits() {
+    try {
+      // replace 'university_updates_uu' with any unique name for your site
+      const response = await fetch('https://api.counterapi.dev/v1/university_updates_uu/main/up');
+      const data = await response.json();
+      document.getElementById('new-count').innerText = data.count;
+    } catch (err) {
+      console.log("Counter Error:", err);
+    }
+  }
+  getHits();
+</script>
+    
 </body>
 </html>
