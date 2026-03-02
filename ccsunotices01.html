@@ -2,128 +2,1885 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>CCS University Notices</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="universityupdates.png" type="image/x-icon" />
+  <title>UNIVERSITY UPDATES</title>
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+  />
 
   <style>
+    :root {
+      --primary-color: #ef3c3c; /* Crimson Red */
+      --primary-color-dark: #c63333;
+      --secondary-color: #2c4b9e; /* Deep Blue */
+      --card-bg: rgba(255, 255, 255, 0.97);
+      --soft-border: #e5e7eb;
+
+      /* From calculator page */
+      --blue: #007BFF;
+      --green: #28a745;
+      --red: #dc3545;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
     body {
+      font-family: "Poppins", sans-serif;
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f4f6f8;
-      color: #222;
+      padding: 0;
+      background: radial-gradient(circle at top, #ffffff 0, #e5edff 45%, #f3f4f6 100%);
+      color: #0f172a;
     }
 
-    header {
-      background: #0b3c5d;
-      color: #fff;
-      padding: 18px;
-      text-align: center;
+    /* Generic section card */
+    .section-card {
+      background: var(--card-bg);
+      border-radius: 1rem;
+      box-shadow: 0 18px 45px rgba(15, 23, 42, 0.08);
+      padding: 1.75rem;
+      margin-bottom: 1.5rem;
+      border: 1px solid rgba(148, 163, 184, 0.15);
     }
 
-    main {
-      max-width: 1100px;
-      margin: auto;
-      padding: 18px;
+    .section-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+      color: #111827;
+      letter-spacing: 0.02em;
     }
 
-    section {
-      background: #fff;
-      border-radius: 6px;
-      padding: 18px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    .section-subtitle {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: #6b7280;
     }
 
-    .notice {
-      border-bottom: 1px solid #e5e5e5;
-      padding: 12px 0;
+    /* Utility bar */
+    .utility-bar {
+      background-color: #0f172a;
+      color: #e5e7eb;
+      font-size: 0.8rem;
+      padding: 0.35rem 0;
     }
 
-    .notice:last-child {
-      border-bottom: none;
+    .utility-bar a {
+      color: #e5e7eb;
+      transition: opacity 0.2s ease, color 0.2s ease;
     }
 
-    .notice a {
-      color: #0b3c5d;
-      font-weight: bold;
+    .utility-bar a:hover {
+      opacity: 0.85;
+      color: var(--secondary-color);
+    }
+
+    /* Nav */
+    .main-nav {
+      background-color: #ffffffdd;
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(148, 163, 184, 0.25);
+    }
+
+    .nav-link {
+      font-size: 0.9rem;
+      font-weight: 500;
+      padding: 0.4rem 0.75rem;
+      border-radius: 999px;
+      transition: background-color 0.15s ease, color 0.15s ease;
+    }
+
+    .nav-link:hover {
+      background-color: rgba(239, 60, 60, 0.08);
+      color: var(--primary-color);
+    }
+
+    /* Dropdown */
+    nav {
+      position: relative;
+      z-index: 50;
+    }
+
+    nav .group:hover .nav-dropdown {
+      display: block !important;
+      z-index: 60;
+    }
+
+    .nav-dropdown {
+      border-radius: 0.75rem;
+      overflow: hidden;
+    }
+
+    /* Announcement strip (replaces marquee) */
+    .announcement-bar {
+      background-color: var(--primary-color);
+      color: white;
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      height: 32px;
+    }
+
+    .announcement-inner {
+      white-space: nowrap;
+      display: inline-block;
+      padding-left: 100%;
+      animation: ticker 18s linear infinite;
+    }
+
+    @keyframes ticker {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(-100%);
+      }
+    }
+
+    .greeting-blink {
+      font-weight: 600;
+      font-size: 0.95rem;
+      animation: colorBlink 2.5s infinite;
+    }
+
+    @keyframes colorBlink {
+      0% {
+        color: var(--primary-color);
+      }
+      25% {
+        color: #1d4ed8;
+      }
+      50% {
+        color: #059669;
+      }
+      75% {
+        color: #ea580c;
+      }
+      100% {
+        color: var(--primary-color);
+      }
+    }
+
+    /* Buttons / cards */
+    .primary-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.35rem 0.8rem;
+      border-radius: 999px;
+      background-color: rgba(239, 60, 60, 0.08);
+      color: var(--primary-color);
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .cta-card {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
       text-decoration: none;
-    }
-
-    .notice a:hover {
-      text-decoration: underline;
-    }
-
-    .date {
-      font-size: 13px;
-      color: #555;
-      margin-top: 4px;
-    }
-
-    #error {
-      color: red;
+      padding: 0.9rem 1rem;
+      border-radius: 0.9rem;
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: #f9fafb;
+      box-shadow: 0 12px 25px rgba(15, 23, 42, 0.35);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
       text-align: center;
+    }
+
+    .cta-card img {
+      height: 32px;
+      width: 32px;
+      object-fit: contain;
+      background: #ffffff;
+      border-radius: 999px;
+      padding: 4px;
+    }
+
+    .cta-card:hover {
+      transform: translateY(-2px) scale(1.015);
+      box-shadow: 0 18px 38px rgba(15, 23, 42, 0.45);
+      filter: brightness(1.05);
+    }
+
+    .card-ccsu {
+      background: linear-gradient(135deg, #2563eb, #4f46e5);
+    }
+
+    .card-msu {
+      background: linear-gradient(135deg, #e11d48, #b91c1c);
+    }
+
+    .card-calculator {
+      background: linear-gradient(135deg, #f97316, #facc15);
+      color: #111827;
+      box-shadow: 0 12px 25px rgba(251, 146, 60, 0.55);
+    }
+
+    .card-co {
+      background: linear-gradient(135deg, #059669, #22c55e);
+    }
+
+    /* News list */
+    .news-link {
+      display: block;
+      padding: 0.55rem 0;
+      border-bottom: 1px dashed #e5e7eb;
+      text-align: left;
+      font-size: 0.86rem;
+      font-weight: 500;
+      color: #374151;
+      transition: color 0.15s ease, padding-left 0.15s ease, background 0.15s ease;
+    }
+
+    .news-link:hover {
+      color: var(--primary-color);
+      padding-left: 0.25rem;
+      background-color: #f9fafb;
+    }
+
+    /* Carousel */
+    .carousel-container {
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+      border-radius: 1rem;
+      height: 100%;
+      min-height: 220px;
+    }
+
+    .carousel-track {
+      display: flex;
+      transition: transform 0.6s ease-in-out;
+      height: 100%;
+    }
+
+    .carousel-item {
+      flex-shrink: 0;
+      width: 100%;
+      position: relative;
+      padding: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: left;
+      background-size: cover;
+      background-position: center;
+      color: #f9fafb;
+    }
+
+    .carousel-item::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        135deg,
+        rgba(15, 23, 42, 0.9),
+        rgba(239, 68, 68, 0.6)
+      );
+      z-index: 1;
+    }
+
+    .carousel-content {
+      position: relative;
+      z-index: 2;
+      max-width: 420px;
+    }
+
+    .carousel-title {
+      font-size: 1.45rem;
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+    }
+
+    .carousel-subtitle {
+      font-size: 0.9rem;
+      opacity: 0.9;
+      margin-bottom: 1rem;
+    }
+
+    .carousel-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      background-color: #f9fafb;
+      color: #111827;
+      padding: 0.55rem 1.1rem;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-decoration: none;
+      box-shadow: 0 8px 18px rgba(15, 23, 42, 0.35);
+      transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+    }
+
+    .carousel-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 12px 26px rgba(15, 23, 42, 0.45);
+      background-color: #e5e7eb;
+    }
+
+    .carousel-nav-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(15, 23, 42, 0.7);
+      color: #e5e7eb;
+      border: none;
+      padding: 0.5rem 0.6rem;
+      border-radius: 999px;
+      cursor: pointer;
+      z-index: 5;
+      opacity: 0.85;
+      transition: opacity 0.15s ease, transform 0.15s ease;
+    }
+
+    .carousel-nav-btn:hover {
+      opacity: 1;
+      transform: translateY(-50%) scale(1.03);
+    }
+
+    #prev-btn {
+      left: 0.75rem;
+    }
+    #next-btn {
+      right: 0.75rem;
+    }
+
+    /* Scroll to top button */
+    #topBtn {
+      display: none;
+      position: fixed;
+      bottom: 20px;
+      right: 24px;
+      z-index: 40;
+      font-size: 16px;
+      border: none;
+      outline: none;
+      background-color: var(--primary-color);
+      color: white;
+      cursor: pointer;
+      padding: 0.6rem 0.8rem;
+      border-radius: 999px;
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.45);
+      transition: transform 0.15s ease, background-color 0.15s ease;
+    }
+
+    #topBtn:hover {
+      background-color: var(--primary-color-dark);
+      transform: translateY(-1px) scale(1.03);
+    }
+
+    /* Reveal on scroll */
+    .fade-slide {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+    }
+
+    .fade-slide.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .finger {
+      display: inline-block;
+      animation: finger 1.1s infinite;
+    }
+
+    @keyframes finger {
+      0% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      50% {
+        opacity: 0.4;
+        transform: translateY(4px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Timeline */
+    .timeline-wrapper {
+      border-left: 3px solid var(--primary-color);
+      margin-left: 0.9rem;
+      position: relative;
+    }
+
+    .timeline-dot {
+      position: absolute;
+      left: -1.35rem;
+      width: 2.1rem;
+      height: 2.1rem;
+      border-radius: 999px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #f9fafb;
+      background-color: var(--primary-color);
+      box-shadow: 0 10px 20px rgba(248, 113, 113, 0.4);
+      font-size: 1.1rem;
+    }
+
+    footer a.footer-social-link {
+      margin: 0 0.75rem;
+      font-size: 1.2rem;
+    }
+
+    footer a.footer-social-link:hover {
+      transform: translateY(-1px);
+    }
+
+    @media (max-width: 768px) {
+      .section-card {
+        padding: 1.25rem;
+      }
+    }
+
+    /* ====== CALCULATOR STYLES (MERGED) ====== */
+    .calculator {
+      background: #fff;
+      padding: 20px;
+      border-radius: 0.75rem;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+      text-align: center;
+      width: 100%;
+      max-width: 350px;
+      border: 4px solid transparent;
+    }
+
+    .calculator h2 {
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      font-size: 1.1rem;
+    }
+
+    .calculator input {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      border-radius: 8px;
+      border: 1px solid #d1d5db;
+      font-size: 0.95rem;
+      text-align: center;
+      outline: none;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .calculator input:focus {
+      border-color: var(--secondary-color);
+      box-shadow: 0 0 0 1px rgba(37, 99, 235, 0.25);
+    }
+
+    .result {
       margin-top: 10px;
+      font-weight: 600;
+      font-size: 0.98rem;
+    }
+
+    .blue { color: var(--blue); }
+    .green { color: var(--green); }
+    .error {
+      color: var(--red);
+      font-size: 0.8rem;
+      margin-top: 4px;
     }
   </style>
 </head>
-<body>
 
-<header>
-  <h1>CCS University – Notices</h1>
-  <p>Automatically refreshed official notifications</p>
-</header>
+<body class="text-slate-900">
+  <!-- Utility Bar -->
+  <div class="utility-bar">
+    <div class="max-w-7xl mx-auto px-4 flex justify-between items-center">
+      <div class="flex items-center gap-4">
+        <a href="https://t.me/HelpforDMBot" target="_blank" class="flex items-center gap-1">
+          <i class="fas fa-envelope text-xs"></i>
+          <span>Contact Us</span>
+        </a>
+      </div>
+      <div class="flex items-center gap-3">
+        <a href="index.html" aria-label="Home">
+          <i class="fas fa-home text-xs"></i>
+        </a>
+        <span class="text-slate-500">|</span>
+        <a
+          href="https://www.youtube.com/@University-Updates-UU"
+          target="_blank"
+          aria-label="YouTube"
+        >
+          <i class="fab fa-youtube"></i>
+        </a>
+        <span class="text-slate-500">|</span>
+        <a
+          href="https://instagram.com/universityupdates_uu"
+          target="_blank"
+          aria-label="Instagram"
+        >
+          <i class="fab fa-instagram"></i>
+        </a>
+         <span class="text-slate-500">|</span>
+        <a
+          href="https://x.com/uni_updates08"
+          target="_blank"
+          aria-label="X"
+        >
+          <i class="fab fa-x"></i>
+        </a>
+        <span class="text-slate-500">|</span>
+        <a
+          href="https://t.me/UniversityUpdates_UU"
+          target="_blank"
+          aria-label="Telegram"
+        >
+          <i class="fab fa-telegram-plane"></i>
+        </a>
+      </div>
+    </div>
+  </div>
 
-<main>
-  <section>
-    <h3>Latest Notices</h3>
-    <div id="error"></div>
-    <div id="newsList"></div>
-  </section>
-</main>
+  <!-- Header -->
+  <header class="main-nav">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex flex-col md:flex-row items-center justify-between gap-3">
+      <div class="flex items-center gap-3">
+        <img
+          src="https://i.ibb.co/nMC0877T/UNIVERSITY-UPDATES-LOGO-removebg-preview.png"
+          alt="University Updates Logo"
+          class="h-14 md:h-16 drop-shadow-md"
+        />
+        <div class="hidden sm:block">
+          <div class="primary-chip">
+            <i class="fas fa-graduation-cap text-xs"></i>
+            UNIVERSITY UPDATES
+          </div>
+          <p class="text-xs text-slate-500 mt-1">
+            Free Study Resources • Tools • Notifications
+          </p>
+        </div>
+      </div>
 
-<script>
-const API_URL =
-  "https://api.ccsuniversity.ac.in/news/search?title=&id=Notice&month=&year=&page=1";
+      <!-- Desktop Nav -->
+      <nav class="hidden md:flex items-center gap-4 text-sm font-medium">
+        <div class="relative group">
+          <button class="nav-link inline-flex items-center gap-1">
+            About Us
+            <span>▾</span>
+          </button>
+          <div
+            class="nav-dropdown absolute right-0 mt-2 w-56 bg-white shadow-lg border border-slate-100 hidden group-hover:block"
+          >
+            <a href="#about-us" class="block px-4 py-2 text-sm hover:bg-slate-50">
+              About Us
+            </a>
+            <a href="#our-journey" class="block px-4 py-2 text-sm hover:bg-slate-50">
+              Our Journey
+            </a>
+            <a href="#mission-vision" class="block px-4 py-2 text-sm hover:bg-slate-50">
+              Mission &amp; Vision
+            </a>
+          </div>
+        </div>
 
-async function fetchNews() {
-  const newsList = document.getElementById("newsList");
-  const errorDiv = document.getElementById("error");
+        <a href="#administrations" class="nav-link">Administrations</a>
+      </nav>
 
-  try {
-    const res = await fetch(API_URL);
-    if (!res.ok) throw new Error("API Error");
+      <!-- Mobile Nav Toggle -->
+      <div class="md:hidden">
+        <button id="menu-btn" class="text-xl focus:outline-none">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </div>
 
-    const data = await res.json();
-    errorDiv.textContent = "";
-    newsList.innerHTML = "";
+    <!-- Mobile Menu -->
+    <div
+      id="mobile-menu"
+      class="hidden md:hidden bg-white border-t border-slate-200 px-4 pb-3 space-y-2"
+    >
+      <div>
+        <button
+          id="btn-about"
+          class="w-full text-left text-sm font-medium py-2 flex items-center justify-between"
+        >
+          <span>About Us</span>
+          <span>▾</span>
+        </button>
+        <div class="pl-3 hidden" id="mobile-about">
+          <a href="#about-us" class="block px-2 py-1 text-sm hover:bg-slate-50 rounded">
+            About Us
+          </a>
+          <a href="#our-journey" class="block px-2 py-1 text-sm hover:bg-slate-50 rounded">
+            Our Journey
+          </a>
+          <a href="#mission-vision" class="block px-2 py-1 text-sm hover:bg-slate-50 rounded">
+            Mission &amp; Vision
+          </a>
+        </div>
+      </div>
 
-    if (!data.news || data.news.length === 0) {
-      newsList.innerHTML = "<p>No notices available.</p>";
-      return;
+      <a
+        href="#administrations"
+        class="block text-sm font-medium py-2 border-t border-slate-100 mt-1"
+      >
+        Administrations
+      </a>
+    </div>
+  </header>
+
+  <!-- Greeting Strip -->
+  <div class="bg-slate-100/80 border-y border-slate-200">
+    <div
+      class="max-w-7xl mx-auto px-4 py-2 flex flex-col md:flex-row items-center justify-center gap-2"
+    >
+      <p class="greeting-blink text-center">
+        University Updates Welcomes You...!!!
+      </p>
+    </div>
+  </div>
+
+  <!-- Announcement Ticker -->
+  <div class="announcement-bar">
+    <div class="max-w-7xl mx-auto flex items-center gap-2 px-4 w-full overflow-hidden">
+      <span class="text-lg">📢</span>
+      <div class="flex-1 overflow-hidden">
+        <div class="announcement-inner">
+          ➤ Welcome to UNIVERSITY UPDATES &nbsp;&nbsp;•&nbsp;&nbsp;
+          Free Study Materials, Exam Tools, And Notifications For Students &nbsp;&nbsp;•&nbsp;&nbsp;
+          Stay Connected With CCSU, MSU, AKTU & Many More...
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <main class="max-w-7xl mx-auto px-4 py-6 space-y-6">
+    <!-- Hero: News + Carousel -->
+    <section class="section-card fade-slide">
+      <div class="grid grid-cols-1 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1.8fr)] gap-6">
+        <!-- News -->
+        <div
+          id="news"
+          class="bg-white/80 rounded-xl border border-slate-100 shadow-sm p-4 flex flex-col"
+        >
+          <div class="flex items-center justify-between mb-2">
+            <h2 class="flex items-center gap-2 text-base md:text-lg font-semibold text-red-700">
+              <i class="fas fa-newspaper"></i>
+              <span>News & Notifications</span>
+            </h2>
+          </div>
+
+          <div class="space-y-1 text-left max-h-52 overflow-y-auto pr-1">
+            <a
+              href="https://universityupdates08.github.io/UU/datesheet.html"
+              class="news-link"
+            >
+              <i class="fas fa-circle text-[0.45rem] text-red-500 mr-2"></i>
+              CCSU Exam Date Generator is live for Odd Semester Exams Dec-2025
+              <img
+                src="https://msuniversity.ac.in/assets/images/new.gif"
+                alt="New"
+                class="inline h-4 w-auto ml-1 -mt-1"
+              />
+            </a>
+
+            <a
+              href="https://t.me/+qj6dmkFSXW80MGJl"
+              class="news-link"
+            >
+              <i class="fas fa-circle text-[0.45rem] text-red-500 mr-2"></i>
+              myLibrary (University Study Materials)
+              <img
+                src="https://msuniversity.ac.in/assets/images/new.gif"
+                alt="New"
+                class="inline h-4 w-auto ml-1 -mt-1"
+              />
+            </a>
+          </div>
+
+          <div class="text-right mt-3">
+            <a
+              href="#news"
+              class="inline-flex items-center gap-1 text-xs font-semibold text-slate-500 hover:text-slate-700"
+            >
+              Read All News
+              <i class="fas fa-arrow-right text-[0.6rem]"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Carousel -->
+        <div
+          id="carousel-wrapper"
+          class="bg-slate-900/95 rounded-xl shadow-sm overflow-hidden relative"
+        >
+          <div class="carousel-container">
+            <div class="carousel-track" id="carousel-track">
+              <!-- Slide 1 -->
+              <div
+                class="carousel-item"
+                style="background-image: url('https://source.unsplash.com/random/800x600/?education,books');"
+              >
+                <div class="carousel-content">
+                  <p class="carousel-title flex items-center gap-2">
+                    <span>📢</span> <span>Viva Voce Center (Private)</span>
+                  </p>
+                  <p class="carousel-subtitle">
+                    Check Viva Voce Center & Date At A Single Place.
+                  </p>
+                  <a href="vivanew.html" class="carousel-btn">
+                    Click Here <i class="fas fa-arrow-right text-xs"></i>
+                  </a>
+                </div>
+              </div>
+
+              <!-- Slide 2 -->
+              <div
+                class="carousel-item"
+                style="background-image: url('https://source.unsplash.com/random/800x600/?science,lab');"
+              >
+                <div class="carousel-content">
+                  <p class="carousel-title flex items-center gap-2">
+                    <span>📚</span> <span>myLibrary (University Study Materials)</span>
+                  </p>
+                  <p class="carousel-subtitle">
+                    Study Resources (PDFs, Previous Exam Papers, Notes)
+                  </p>
+                  <a href="https://t.me/+qj6dmkFSXW80MGJl" class="carousel-btn">
+                    Explore myLibrary <i class="fas fa-arrow-right text-xs"></i>
+                  </a>
+                </div>
+              </div>
+
+              <!-- Slide 3 -->
+              <div
+                class="carousel-item"
+                style="background-image: url('https://source.unsplash.com/random/800x600/?career,job');"
+              >
+                <div class="carousel-content">
+                  <p class="carousel-title flex items-center gap-2">
+                    <span>💼</span> <span>Government Job Hub Updates</span>
+                  </p>
+                  <p class="carousel-subtitle">
+                    Get the latest notifications for SSC, Banking, and State Exams.
+                  </p>
+                  <a
+                    href="https://t.me/GovJobHub_IN"
+                    target="_blank"
+                    class="carousel-btn"
+                  >
+                    Visit Job Hub <i class="fas fa-arrow-right text-xs"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <button id="prev-btn" class="carousel-nav-btn text-lg">
+              <i class="fas fa-chevron-left"></i>
+            </button>
+            <button id="next-btn" class="carousel-nav-btn text-lg">
+              <i class="fas fa-chevron-right"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Exam Date Generator -->
+    <section class="section-card fade-slide">
+      <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-3">
+        <div>
+          <p class="primary-chip mb-2">Tools</p>
+          <h2 class="section-title">
+            CCSU Examination Date, Time &amp; Shift Generator Tool
+          </h2>
+          <p class="section-subtitle">
+            Chaudhary Charan Singh University, Meerut – Smart Exam Planning Made Easy.
+          </p>
+        </div>
+      </div>
+
+      <div class="flex flex-col md:flex-row justify-center items-center gap-4">
+        <!-- UPDATED: Added calendar icon -->
+        <a
+          href="datesheet.html"
+          class="cta-card card-ccsu w-full md:w-1/3"
+          target="_blank"
+        >
+          <i class="fas fa-calendar-alt text-lg"></i>
+          CCSU Exam Date Generator
+        </a>
+
+<a
+          href="ExamSearch.html"
+          class="cta-card card-ccsu w-full md:w-1/3"
+          target="_blank"
+        >
+          <i class="fas fa-calendar-alt text-lg"></i>
+          Digital Exam Schedule Portal <img
+                src="https://msuniversity.ac.in/assets/images/new.gif"
+                alt="New"
+                class="inline h-4 w-auto ml-1 -mt-1"
+              />
+        </a>
+        
+        <a
+          href="https://youtu.be/QekxFTFbtEk"
+          class="cta-card card-msu w-full md:w-1/3"
+          target="_blank"
+        >
+          <i class="fab fa-youtube text-lg"></i>
+          Watch Tutorial Video
+        </a>
+
+        <!-- UPDATED: Added location-search icon -->
+        <a
+          href="vivanew.html"
+          class="cta-card card-calculator w-full md:w-1/3"
+          target="_blank"
+        >
+          <i class="fas fa-search-location text-lg"></i>
+          Viva Voce Center Finder
+        </a>
+      </div>
+    </section>
+
+    <!-- MSU OBJECTIONS -->
+    <section class="section-card fade-slide">
+      <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-3">
+        <div>
+          <p class="primary-chip mb-2">Tools</p>
+          <h2 class="section-title">
+            MSU, Saharanpur MCQ Objection Helper
+          </h2>
+          <p class="section-subtitle">
+            Maa Shakumbhari University, Saharanpur – Make Objection File Digitally.
+          </p>
+        </div>
+      </div>
+
+      <div class="flex flex-col md:flex-row justify-center items-center gap-4">
+        <!-- UPDATED: Added calendar icon -->
+        <a
+          href="anskey.html"
+          class="cta-card card-ccsu w-full md:w-1/3"
+          target="_blank"
+        >
+          <i class="fas fa-calendar-alt text-lg"></i>
+          Generate Objection PDF
+        </a>
+
+        <a
+          href="#"
+          class="cta-card card-msu w-full md:w-1/3"
+          target="_blank"
+        >
+          <i class="fab fa-youtube text-lg"></i>
+          Watch Tutorial Video
+        </a>
+
+      </div>
+    </section>
+    
+    <!-- MCQ Sample Papers -->
+    <section class="section-card fade-slide">
+      <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-3">
+        <div>
+          <p class="primary-chip mb-2">MCQ Sample Papers</p>
+          <h2 class="section-title">
+            Objective Sample Papers
+          </h2>
+          <p class="section-subtitle">
+            Objective Type Exam Preparation – Smart Exam Preparation Made Easy.
+          </p>
+        </div>
+      </div>
+
+      <div class="flex flex-col md:flex-row justify-center items-center gap-4">
+        <!-- UPDATED: Added book-open icon -->
+        <a
+          href="mcq.html"
+          class="cta-card card-calculator w-full md:w-1/3"
+          target="_blank"
+        >
+          <i class="fas fa-book-open text-lg"></i>
+         MCQ Live Quiz (AI)
+        </a>
+
+        
+      </div>
+    </section>
+
+    <!-- CGPA & Marks Calculator (MERGED HERE) -->
+    <section class="section-card fade-slide" id="calculator">
+      <p class="primary-chip mb-2">Calculator</p>
+      <div class="text-center mb-4">
+        <h1 class="section-title">Percentage & CGPA Tools</h1>
+        <p class="section-subtitle">
+          Quickly convert your <b>CGPA ⇆ Percentage</b> and calculate <b>Marks ⇆ Percentage</b> on this page. 
+        </p> <p>CGPA Scale fix to 9.5</p>
+      </div>
+
+      <div class="flex flex-wrap justify-center gap-6">
+        <!-- CGPA ⇆ Percentage Calculator -->
+        <div class="calculator" id="calculatorBox">
+          <h2>C.G.P.A. ⇆ PERCENTAGE</h2>
+          <input
+            type="number"
+            id="inputValue"
+            placeholder="Enter CGPA (0–10) or Percentage (0–100)"
+            step="any"
+            oninput="convertValue()"
+          />
+          <div class="result" id="result"></div>
+          <div class="error" id="error"></div>
+        </div>
+
+        <!-- Marks ⇆ Percentage Calculator -->
+        <div class="calculator" id="marksCalculatorBox">
+          <h2>MARKS ⇆ PERCENTAGE</h2>
+          <input
+            type="number"
+            id="marksObtained"
+            placeholder="Enter Marks Obtained"
+            step="any"
+            oninput="calculateMarksPercentage()"
+          />
+          <input
+            type="number"
+            id="maxMarks"
+            placeholder="Enter Maximum Marks"
+            step="any"
+            oninput="calculateMarksPercentage()"
+          />
+          <div class="result" id="marksResult"></div>
+          <div class="error" id="marksError"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Us -->
+    <section id="about-us" class="section-card fade-slide">
+      <p class="primary-chip mb-2">About Us</p>
+      <h1 class="section-title text-center mb-2">About Us</h1>
+
+      <div class="max-w-6xl mb-8 mx-auto text-justify">
+        <p class="text-sm md:text-base text-slate-700 leading-relaxed">
+          We are a student-driven initiative dedicated to
+          <b>providing free study resources</b>,
+          <b>competitive exam support</b>, and
+          <b>digital learning tools</b>.
+          What started as
+          <span class="text-red-800 font-semibold">University Study Materials</span>
+          has now grown into a complete ecosystem of projects like
+          <b>myLibrary</b>, <b>Government Job Hub</b>, and <b>ExamHelper Bot</b>,
+          empowering thousands of learners across India.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 text-center">
+        <div
+          class="bg-white border border-slate-100 shadow-sm rounded-xl p-5 fade-slide hover:shadow-md transition"
+        >
+          <div class="text-3xl mb-2">📚</div>
+          <h2 class="font-semibold text-sm mb-1" style="color: var(--primary-color);">
+            Free Study Materials
+          </h2>
+          <p class="text-xs text-slate-600 mt-1">
+            Access notes, guides, and resources without any cost, anytime.
+          </p>
+        </div>
+
+        <div
+          class="bg-white border border-slate-100 shadow-sm rounded-xl p-5 fade-slide hover:shadow-md transition"
+        >
+          <div class="text-3xl mb-2">📝</div>
+          <h2 class="font-semibold text-sm mb-1" style="color: var(--primary-color);">
+            Govt. Exam Help
+          </h2>
+          <p class="text-xs text-slate-600 mt-1">
+            Stay updated with the latest government job &amp; exam notifications.
+          </p>
+        </div>
+
+        <div
+          class="bg-white border border-slate-100 shadow-sm rounded-xl p-5 fade-slide hover:shadow-md transition"
+        >
+          <div class="text-3xl mb-2">🤖</div>
+          <h2 class="font-semibold text-sm mb-1" style="color: var(--primary-color);">
+            Smart Bot
+          </h2>
+          <p class="text-xs text-slate-600 mt-1">
+            Use our <b>ExamHelper Bot</b> to share and practice study materials easily.
+          </p>
+        </div>
+
+        <div
+          class="bg-white border border-slate-100 shadow-sm rounded-xl p-5 fade-slide hover:shadow-md transition"
+        >
+          <div class="text-3xl mb-2">🌐</div>
+          <h2 class="font-semibold text-sm mb-1" style="color: var(--primary-color);">
+            Community Support
+          </h2>
+          <p class="text-xs text-slate-600 mt-1">
+            Join a large community of learners helping each other succeed.
+          </p>
+        </div>
+      </div>
+
+      <!-- UPDATED: Added extra gap before Our Mission & Vision -->
+      <h1 id="mission-vision" class="section-title text-center mt-4 mb-2">Our Mission &amp; Vision</h1>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <div
+          class="bg-white border border-slate-100 rounded-xl p-5 flex flex-col items-center text-center hover:shadow-md transition"
+        >
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
+            alt="Mission Icon"
+            class="h-16 w-16 mb-3"
+          />
+          <h2
+            class="font-semibold text-base mb-2"
+            style="color: var(--primary-color);"
+          >
+            Our Mission
+          </h2>
+          <p class="text-xs md:text-sm text-slate-700 leading-relaxed">
+            Our mission is to <b>provide free study materials</b> and academic support
+            to every student. We aim to create a platform that reduces barriers to
+            quality education by offering easy access to resources, guidance, and
+            updates.
+          </p>
+        </div>
+
+        <div
+          class="bg-white border border-slate-100 rounded-xl p-5 flex flex-col items-center text-center hover:shadow-md transition"
+        >
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/3135/3135789.png"
+            alt="Vision Icon"
+            class="h-16 w-16 mb-3"
+          />
+          <h2
+            class="font-semibold text-base mb-2"
+            style="color: var(--primary-color);"
+          >
+            Our Vision
+          </h2>
+          <p class="text-xs md:text-sm text-slate-700 leading-relaxed">
+            Our vision is to become a <b>trusted companion for students</b> in their
+            educational journey, helping them achieve success in academics and beyond.
+            We believe in the motto:
+            <span class="italic font-semibold text-blue-600">
+              "Education for All, Knowledge without Limits"
+            </span>.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Our Journey (NEW DESIGN) -->
+    <section id="our-journey" class="section-card fade-slide">
+      <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-3 mb-4">
+        <div>
+          <p class="primary-chip mb-2">Journey</p>
+          <h1 class="section-title mb-1">🚀 Our Journey</h1>
+          <p class="section-subtitle">
+            From a small student initiative to a growing digital ecosystem for learners.
+          </p>
+        </div>
+        <div class="text-xs md:text-sm text-slate-500">
+          Step-by-step growth from <span class="font-semibold text-red-600">2022</span> to
+          <span class="font-semibold text-red-600">2025</span>.
+        </div>
+      </div>
+
+      <!-- NEW: Year quick-jump badges -->
+      <div class="flex flex-wrap items-center gap-2 mb-6">
+        <button
+          type="button"
+          onclick="document.getElementById('journey-2022').scrollIntoView({ behavior: 'smooth' })"
+          class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-50 text-red-700 text-xs font-semibold border border-red-100 hover:bg-red-100"
+        >
+          <i class="fas fa-book-open text-xs"></i> 2022
+        </button>
+        <button
+          type="button"
+          onclick="document.getElementById('journey-2023').scrollIntoView({ behavior: 'smooth' })"
+          class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-blue-700 text-xs font-semibold border border-blue-100 hover:bg-blue-100"
+        >
+          <i class="fas fa-chart-line text-xs"></i> 2023
+        </button>
+        <button
+          type="button"
+          onclick="document.getElementById('journey-2024').scrollIntoView({ behavior: 'smooth' })"
+          class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 text-xs font-semibold border border-emerald-100 hover:bg-emerald-100"
+        >
+          <i class="fas fa-robot text-xs"></i> 2024
+        </button>
+        <button
+          type="button"
+          onclick="document.getElementById('journey-2025').scrollIntoView({ behavior: 'smooth' })"
+          class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-50 text-indigo-700 text-xs font-semibold border border-indigo-100 hover:bg-indigo-100"
+        >
+          <i class="fas fa-rocket text-xs"></i> 2025
+        </button>
+      </div>
+
+      <!-- New Timeline Layout -->
+      <div class="relative mt-2">
+        <!-- Center line for desktop -->
+        <div class="hidden md:block absolute left-1/2 top-0 bottom-0 w-px bg-slate-200"></div>
+
+        <!-- 2022 – Beginning -->
+        <div
+          id="journey-2022"
+          class="relative md:grid md:grid-cols-2 md:gap-10 items-center mb-10"
+        >
+          <!-- Year badge (left side text) -->
+          <div class="md:text-right md:pr-10 mb-3 md:mb-0">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-50 text-red-700 text-xs font-semibold mb-2">
+              <span class="text-lg">📖</span>
+              <span>2022 • Beginning</span>
+            </div>
+            <h3 class="font-semibold text-sm md:text-base text-slate-800">
+              The Start of University Channels & Groups
+            </h3>
+            <p class="text-xs md:text-sm text-slate-600 mt-2 leading-relaxed">
+              Our journey started with <b>University Channels &amp; Groups</b>, a small
+              initiative to share information, free notes, and guides with students who
+              needed reliable academic support.
+            </p>
+          </div>
+
+          <!-- Card on the right -->
+          <div class="md:pl-10">
+            <!-- Dot in center for desktop -->
+            <div
+              class="hidden md:flex items-center justify-center absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+            >
+              <div class="h-11 w-11 rounded-full bg-red-500 text-white flex items-center justify-center shadow-lg text-xl">
+                1
+              </div>
+            </div>
+
+            <div
+              class="bg-white border border-slate-100 rounded-xl p-4 shadow-sm hover:shadow-md transition"
+            >
+              <p class="text-xs md:text-sm text-slate-700 leading-relaxed">
+                What began as <b>simple Telegram and WhatsApp groups</b> slowly turned
+                into a small but committed community of learners who trusted our content
+                and shared it with their friends.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2023 – Growth -->
+        <div
+          id="journey-2023"
+          class="relative md:grid md:grid-cols-2 md:gap-10 items-center mb-10"
+        >
+          <!-- Card on the left (swap) -->
+          <div class="md:pr-10 order-2 md:order-1">
+            <!-- Dot in center -->
+            <div
+              class="hidden md:flex items-center justify-center absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+            >
+              <div class="h-11 w-11 rounded-full bg-blue-600 text-white flex items-center justify-center shadow-lg text-xl">
+                2
+              </div>
+            </div>
+
+            <div
+              class="bg-white border border-slate-100 rounded-xl p-4 shadow-sm hover:shadow-md transition"
+            >
+              <p class="text-xs md:text-sm text-slate-700 leading-relaxed">
+                We expanded our content and introduced <b>Government Job Hub</b> to help
+                aspirants stay updated with exam notifications, job alerts, and important
+                dates – all in one place.
+              </p>
+            </div>
+          </div>
+
+          <!-- Year badge (right side text) -->
+          <div class="md:pl-10 mb-3 md:mb-0 order-1 md:order-2">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-blue-700 text-xs font-semibold mb-2">
+              <span class="text-lg">🌐</span>
+              <span>2023 • Growth</span>
+            </div>
+            <h3 class="font-semibold text-sm md:text-base text-slate-800">
+              Expanding Resources & Reach
+            </h3>
+            <p class="text-xs md:text-sm text-slate-600 mt-2 leading-relaxed">
+              Through consistent updates and helpful resources, we reached
+              <b>thousands of students</b> across different universities and competitive
+              exam segments.
+            </p>
+          </div>
+        </div>
+
+        <!-- 2024 – Innovation -->
+        <div
+          id="journey-2024"
+          class="relative md:grid md:grid-cols-2 md:gap-10 items-center mb-10"
+        >
+          <!-- Year badge (left side text) -->
+          <div class="md:text-right md:pr-10 mb-3 md:mb-0">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 text-xs font-semibold mb-2">
+              <span class="text-lg">🤖</span>
+              <span>2024 • Innovation</span>
+            </div>
+            <h3 class="font-semibold text-sm md:text-base text-slate-800">
+              Launch of ExamHelper Bot & myLibrary Base
+            </h3>
+            <p class="text-xs md:text-sm text-slate-600 mt-2 leading-relaxed">
+              We launched <b>ExamHelper Bot</b>, a Telegram-based solution where students
+              can donate notes, sample papers and use them for <b>self-practice</b>. This
+              laid the foundation for what later became <b>myLibrary</b>.
+            </p>
+          </div>
+
+          <!-- Card on the right -->
+          <div class="md:pl-10">
+            <!-- Dot in center -->
+            <div
+              class="hidden md:flex items-center justify-center absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+            >
+              <div class="h-11 w-11 rounded-full bg-emerald-500 text-white flex items-center justify-center shadow-lg text-xl">
+                3
+              </div>
+            </div>
+
+            <div
+              class="bg-white border border-slate-100 rounded-xl p-4 shadow-sm hover:shadow-md transition"
+            >
+              <p class="text-xs md:text-sm text-slate-700 leading-relaxed">
+                With automation and smart tools, we moved closer to our goal of building a
+                <b>structured digital library</b> that any student can access from anywhere,
+                anytime.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2025 – New Launch -->
+        <div
+          id="journey-2025"
+          class="relative md:grid md:grid-cols-2 md:gap-10 items-center mb-2"
+        >
+          <!-- Card on the left (swap) -->
+          <div class="md:pr-10 order-2 md:order-1">
+            <!-- Dot in center -->
+            <div
+              class="hidden md:flex items-center justify-center absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+            >
+              <div class="h-11 w-11 rounded-full bg-indigo-600 text-white flex items-center justify-center shadow-lg text-xl">
+                4
+              </div>
+            </div>
+
+            <div
+              class="bg-white border border-slate-100 rounded-xl p-4 shadow-sm hover:shadow-md transition"
+            >
+              <p class="text-xs md:text-sm text-slate-700 leading-relaxed">
+                In <b>2025</b>, we are focusing on <b>advanced digital tools</b>, improved
+                study platforms, and the <b>University Updates YouTube Channel</b> to
+                deliver visual, easy-to-understand content for students across India.
+              </p>
+            </div>
+          </div>
+
+          <!-- Year badge (right side text) -->
+          <div class="md:pl-10 mb-3 md:mb-0 order-1 md:order-2">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-50 text-indigo-700 text-xs font-semibold mb-2">
+              <span class="text-lg">🚀</span>
+              <span>2025 • New Launch</span>
+            </div>
+            <h3 class="font-semibold text-sm md:text-base text-slate-800">
+              Towards a Complete Student Ecosystem
+            </h3>
+            <p class="text-xs md:text-sm text-slate-600 mt-2 leading-relaxed">
+              Step-by-step, <b>University Updates</b> is evolving into a
+              <b>one-stop ecosystem</b> for notes, tools, notifications, and guidance – all
+              created <b>by students, for students</b>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- Administrations -->
+    <section id="administrations" class="section-card fade-slide">
+      <p class="primary-chip mb-2">Admin Panel</p>
+      <h1 class="section-title text-center mb-6">Administrations</h1>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <div
+          class="bg-white border border-slate-100 rounded-xl p-5 flex flex-col items-center hover:shadow-md transition"
+        >
+          <img
+            src="images/user.png"
+            alt="Founder"
+            class="h-20 w-20 mb-2 rounded-full object-cover"
+          />
+          <p class="font-semibold text-sm">Aditya Chaudhary</p>
+          <p class="text-xs text-slate-600">Founder &amp; Owner</p>
+        </div>
+
+        <div
+          class="bg-white border border-slate-100 rounded-xl p-5 flex flex-col items-center hover:shadow-md transition"
+        >
+          <img
+            src="images/user.png"
+            alt="Co-Founder"
+            class="h-20 w-20 mb-2 rounded-full object-cover"
+          />
+          <p class="font-semibold text-sm">Chetan Joshi</p>
+          <p class="text-xs text-slate-600">Co-Founder</p>
+        </div>
+
+        <div
+          class="bg-white border border-slate-100 rounded-xl p-5 flex flex-col items-center hover:shadow-md transition"
+        >
+          <img
+            src="images/user.png"
+            alt="Admins"
+            class="h-20 w-20 mb-2 rounded-full object-cover"
+          />
+          <p class="font-semibold text-sm">Core Administrators</p>
+          <p class="text-xs text-slate-600 leading-relaxed text-center mt-1">
+            DM, Preeti Chauhan, Abhishek Pundir, Arjoo Malik, Gaurav Sachdeva, SS,
+            Sanjeev Kumar, Nitya Chaudhary, VC, Vanshika Jain, Naman Bindal
+          </p>
+        </div>
+      </div>
+
+      <p
+        class="mt-6 text-center text-sm font-semibold italic"
+        style="color: var(--primary-color);"
+      >
+        “Working together to empower students with knowledge &amp; guidance.”
+      </p>
+    </section>
+
+    <!-- Other Projects -->
+    <section id="other-projects" class="section-card fade-slide">
+      <p class="primary-chip mb-2">Projects</p>
+      <h1 class="section-title text-center mb-6">Our Other Projects</h1>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <!-- myLibrary -->
+        <div
+          id="mylibrary"
+          class="bg-white border border-slate-100 rounded-xl p-5 flex flex-col items-center hover:shadow-md transition fade-slide"
+        >
+          <img src="images/library.png" alt="myLibrary Logo" class="h-16 w-16 mb-3" />
+          <h2
+            class="font-semibold text-base mb-2"
+            style="color: var(--primary-color);"
+          >
+            myLibrary
+          </h2>
+          <p class="text-xs md:text-sm text-slate-700 leading-relaxed mb-3 text-center">
+            Formerly known as <b>University Study Materials</b>,
+            <b>myLibrary</b> provides
+            <u>free study resources</u> including notes, sample papers, guides, and
+            reference materials to help students prepare for their exams with ease.
+          </p>
+          <a
+            href="https://t.me/+qj6dmkFSXW80MGJl"
+            target="_blank"
+            class="text-xs font-semibold px-4 py-1.5 rounded-full shadow-sm"
+            style="background-color: var(--primary-color); color: white;"
+          >
+            📚 Click Here to Join
+          </a>
+        </div>
+
+        <!-- Government Job Hub -->
+        <div
+          id="govjobhub"
+          class="bg-white border border-slate-100 rounded-xl p-5 flex flex-col items-center hover:shadow-md transition fade-slide"
+        >
+          <img src="images/job.png" alt="Gov Job Hub Logo" class="h-16 w-16 mb-3" />
+          <h2
+            class="font-semibold text-base mb-2"
+            style="color: var(--primary-color);"
+          >
+            Government Job Hub
+          </h2>
+          <p class="text-xs md:text-sm text-slate-700 leading-relaxed mb-3 text-center">
+            A dedicated hub for <b>competitive exams</b> and <b>job updates</b>. Students
+            and aspirants can get real-time alerts, notifications, and guidance to
+            prepare for government exams and secure their future careers.
+          </p>
+          <a
+            href="https://t.me/GovJobHub_IN"
+            target="_blank"
+            class="text-xs font-semibold px-4 py-1.5 rounded-full shadow-sm"
+            style="background-color: var(--primary-color); color: white;"
+          >
+            📝 Explore Updates
+          </a>
+        </div>
+
+        <!-- ExamHelper -->
+        <div
+          id="examhelper"
+          class="bg-white border border-slate-100 rounded-xl p-5 flex flex-col items-center hover:shadow-md transition fade-slide"
+        >
+          <img src="images/bot.png" alt="ExamHelper Logo" class="h-16 w-16 mb-3" />
+          <h2
+            class="font-semibold text-base mb-2"
+            style="color: var(--primary-color);"
+          >
+            ExamHelper
+          </h2>
+          <p class="text-xs md:text-sm text-slate-700 leading-relaxed mb-3 text-center">
+            A unique <b>Telegram Bot</b> created to
+            <u>donate study materials</u> into <b>myLibrary</b> and help students with
+            <b>self-practice</b> for upcoming exams. It ensures quick access to shared
+            resources anytime, anywhere.
+          </p>
+          <a
+            href="https://t.me/PaperHelpingBot"
+            target="_blank"
+            class="text-xs font-semibold px-4 py-1.5 rounded-full shadow-sm"
+            style="background-color: var(--primary-color); color: white;"
+          >
+            🤖 Try ExamHelper
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Us -->
+    <section id="contact-us" class="section-card fade-slide">
+      <p class="primary-chip mb-2">Contact Us</p>
+      <h1 class="section-title text-center mb-4">Contact Us</h1>
+      <div class="flex justify-center">
+        <a
+          href="https://t.me/HelpforDMBot"
+          target="_blank"
+          class="inline-flex items-center gap-2 text-white text-sm font-semibold px-4 py-2 rounded-full shadow-sm"
+          style="background-color: #00bcd4;"
+        >
+          <i class="fas fa-headset"></i> Admin Support (Telegram)
+        </a>
+      </div>
+    </section>
+
+    <!-- Disclaimer -->
+    <section class="fade-slide">
+      <div
+        class="w-full text-center bg-gradient-to-r from-sky-50 to-indigo-50 shadow-sm border border-sky-100 rounded-xl p-4"
+      >
+        <div class="flex justify-center items-center gap-2 mb-2">
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/595/595067.png"
+            alt="Disclaimer Icon"
+            class="h-7 w-7"
+          />
+          <h2 class="text-sm md:text-base font-bold text-sky-800">Disclaimer</h2>
+        </div>
+        <p class="text-xs md:text-sm text-slate-700 items-center justify-center">
+          This website is developed <b>for educational purposes only</b>.
+          All the study materials, updates, and information provided here are based on
+          respective university guidelines and sources. We do not claim any official
+          affiliation with universities. Students are advised to verify information
+          through the official university notifications.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="text-center py-5 bg-slate-100 border-t border-slate-200 mt-4">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="mb-3 text-slate-600 flex items-center justify-center gap-4">
+        <a
+          href="https://www.youtube.com/@University-Updates-UU"
+          target="_blank"
+          aria-label="YouTube"
+          class="text-slate-500 hover:text-red-600 footer-social-link"
+        >
+          <i class="fab fa-youtube"></i>
+        </a>
+        <a
+          href="https://instagram.com/universityupdate_uu"
+          target="_blank"
+          aria-label="Instagram"
+          class="text-slate-500 hover:text-pink-600 footer-social-link"
+        >
+          <i class="fab fa-instagram"></i>
+        </a>
+        <a
+          href="https://t.me/UniversityUpdates_UU"
+          target="_blank"
+          aria-label="Telegram"
+          class="text-slate-500 hover:text-sky-500 footer-social-link"
+        >
+          <i class="fab fa-telegram-plane"></i>
+        </a>
+      </div>
+
+      <div
+        id="datetime"
+        class="text-[var(--secondary-color)] text-xs md:text-sm font-semibold mb-1"
+      >
+        <span id="liveDate"></span> | <span id="liveTime"></span>
+      </div>
+
+      <p class="text-xs md:text-sm text-slate-500">
+        © 2025 | Designed by <b>University Updates</b>
+      </p>
+    </div>
+  </footer>
+
+  <!-- Go To Top Button -->
+  <button id="topBtn" title="Go to top">↑</button>
+  
+  <!-- Pop Up -->
+  <div id="portalPopup" class="fixed inset-0 z-[100] flex items-center justify-center bg-slate-900/60 backdrop-blur-sm hidden">
+  <div class="relative w-full max-w-md mx-4 bg-white rounded-2xl shadow-2xl border border-slate-200 overflow-hidden transform transition-all">
+    
+    <button id="closePopup" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 transition-colors">
+      <i class="fas fa-times text-xl"></i>
+    </button>
+
+    <div class="bg-gradient-to-r from-red-600 to-red-500 p-6 text-center">
+      <div class="inline-flex items-center justify-center w-16 h-16 bg-white/20 rounded-full mb-3">
+        <i class="fas fa-external-link-alt text-white text-2xl"></i>
+      </div>
+      <h3 class="text-white font-bold text-xl uppercase tracking-wide">New Portals</h3>
+    </div>
+
+    <div class="p-6 space-y-4">
+      <p class="text-slate-600 text-sm text-center mb-4">
+        Select a portal below to access the latest university resources and services.
+      </p>
+
+      <a href="https://universityupdates08.github.io/UU/ExamSearch.html" target="_blank" class="flex items-center gap-4 p-4 rounded-xl border border-slate-100 bg-slate-50 hover:bg-red-50 hover:border-red-200 transition-all group">
+        <div class="bg-red-100 text-red-600 p-3 rounded-lg group-hover:bg-red-600 group-hover:text-white transition-colors">
+          <i class="fas fa-university"></i>
+        </div>
+        <div>
+          <span class="block font-bold text-slate-800">Digital Exam Schedule Portal</span>
+          <span class="text-xs text-slate-500 text-left">Access Digital Exam Schedule At A Single Place</span>
+        </div>
+        <i class="fas fa-chevron-right ml-auto text-slate-300"></i>
+      </a>
+
+      <a href="https://universityupdates08.github.io/UU/vivanew.html" target="_blank" class="flex items-center gap-4 p-4 rounded-xl border border-slate-100 bg-slate-50 hover:bg-blue-50 hover:border-blue-200 transition-all group">
+        <div class="bg-blue-100 text-blue-600 p-3 rounded-lg group-hover:bg-blue-600 group-hover:text-white transition-colors">
+          <i class="fas fa-user-graduate"></i>
+        </div>
+        <div>
+          <span class="block font-bold text-slate-800">(Private) Viva-Voce</span>
+          <span class="text-xs text-slate-500 text-left">View Date & Center</span>
+        </div>
+        <i class="fas fa-chevron-right ml-auto text-slate-300"></i>
+      </a>
+    </div>
+
+    <div class="px-6 py-4 bg-slate-50 border-t border-slate-100 text-center">
+      <p class="text-[10px] text-slate-400 uppercase tracking-widest font-semibold">Powered by University Updates</p>
+    </div>
+  </div>
+</div>
+
+<!-- Visitors -->
+
+<div class="flex items-center justify-center gap-2 mt-4 text-slate-500 text-xs">
+  <i class="fas fa-users text-red-500"></i>
+  <span>Total Visitors:</span>
+  <span id="count" class="font-bold text-slate-800 bg-slate-200 px-2 py-0.5 rounded">Loading...</span>
+</div>
+
+
+
+
+  <!-- Scripts -->
+  <script>
+    // --- LIVE DATE & TIME ---
+    function updateDateTime() {
+      const now = new Date();
+      const dateOptions = {
+        weekday: "long",
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      };
+      const timeOptions = {
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+        hour12: true,
+      };
+
+      const dateEl = document.getElementById("liveDate");
+      const timeEl = document.getElementById("liveTime");
+
+      if (dateEl && timeEl) {
+        dateEl.textContent = now.toLocaleDateString("en-IN", dateOptions);
+        timeEl.textContent = now.toLocaleTimeString("en-IN", timeOptions);
+      }
+    }
+    updateDateTime();
+    setInterval(updateDateTime, 1000);
+
+    // --- MOBILE MENU TOGGLE ---
+    const menuBtn = document.getElementById("menu-btn");
+    const mobileMenu = document.getElementById("mobile-menu");
+    const btnAbout = document.getElementById("btn-about");
+    const mobileAbout = document.getElementById("mobile-about");
+
+    if (menuBtn && mobileMenu) {
+      menuBtn.addEventListener("click", function () {
+        mobileMenu.classList.toggle("hidden");
+      });
     }
 
-    data.news.forEach(item => {
-      const div = document.createElement("div");
-      div.className = "notice";
+    if (btnAbout && mobileAbout) {
+      btnAbout.addEventListener("click", function () {
+        mobileAbout.classList.toggle("hidden");
+      });
+    }
 
-      div.innerHTML = `
-        <a href="${item.url}" target="_blank">${item.title}</a>
-        <div class="date">${new Date(item.created_at).toDateString()}</div>
-      `;
+    // --- GO TO TOP BUTTON ---
+    const mybutton = document.getElementById("topBtn");
 
-      newsList.appendChild(div);
+    window.addEventListener("scroll", function () {
+      if (
+        document.body.scrollTop > 120 ||
+        document.documentElement.scrollTop > 120
+      ) {
+        mybutton.style.display = "block";
+      } else {
+        mybutton.style.display = "none";
+      }
     });
 
-  } catch (err) {
-    errorDiv.textContent = "Unable to fetch notices right now.";
+    mybutton.addEventListener("click", function () {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    // --- FADE-IN SCROLL ANIMATION ---
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        threshold: 0.12,
+      }
+    );
+
+    document.querySelectorAll(".fade-slide").forEach((element) => {
+      observer.observe(element);
+    });
+
+    // --- CAROUSEL LOGIC ---
+    const track = document.getElementById("carousel-track");
+    const items = document.querySelectorAll(".carousel-item");
+    const prevBtn = document.getElementById("prev-btn");
+    const nextBtn = document.getElementById("next-btn");
+    const totalItems = items.length;
+    let currentIndex = 0;
+    let autoSlideInterval = null;
+
+    function updateCarousel() {
+      const offset = -currentIndex * 100;
+      if (track) {
+        track.style.transform = `translateX(${offset}%)`;
+      }
+    }
+
+    function nextSlide() {
+      currentIndex = (currentIndex + 1) % totalItems;
+      updateCarousel();
+    }
+
+    function prevSlide() {
+      currentIndex = (currentIndex - 1 + totalItems) % totalItems;
+      updateCarousel();
+    }
+
+    function startAutoSlide() {
+      if (!autoSlideInterval) {
+        autoSlideInterval = setInterval(nextSlide, 5000);
+      }
+    }
+
+    function stopAutoSlide() {
+      if (autoSlideInterval) {
+        clearInterval(autoSlideInterval);
+        autoSlideInterval = null;
+      }
+    }
+
+    if (nextBtn) {
+      nextBtn.addEventListener("click", () => {
+        stopAutoSlide();
+        nextSlide();
+        setTimeout(startAutoSlide, 8000);
+      });
+    }
+
+    if (prevBtn) {
+      prevBtn.addEventListener("click", () => {
+        stopAutoSlide();
+        prevSlide();
+        setTimeout(startAutoSlide, 8000);
+      });
+    }
+
+    // Start auto-sliding
+    if (totalItems > 1) {
+      startAutoSlide();
+    }
+
+    // ====== CALCULATOR LOGIC (MERGED) ======
+    function convertValue() {
+      let value = parseFloat(document.getElementById("inputValue").value);
+      let result = document.getElementById("result");
+      let error = document.getElementById("error");
+      let box = document.getElementById("calculatorBox");
+
+      result.innerText = "";
+      error.innerText = "";
+      result.className = "result";
+      box.style.borderColor = "transparent";
+
+      if (isNaN(value)) return;
+
+      if (value <= 10) {
+        if (value < 0) {
+          error.innerText = "⚠️ CGPA cannot be negative";
+          box.style.borderColor = "var(--red)";
+          return;
+        }
+        let percentage = (value * 9.5).toFixed(2);
+        result.innerHTML = `<b>📘 CGPA = ${value} → Percentage = ${percentage}%</b>`;
+        result.classList.add("blue");
+        box.style.borderColor = "var(--blue)";
+      }
+      else if (value <= 100) {
+        let cgpa = (value / 9.5);
+        if (cgpa > 10) cgpa = 10;
+        cgpa = cgpa.toFixed(2);
+        result.innerHTML = `<b>🎓 Percentage = ${value}% → CGPA = ${cgpa}</b>`;
+        result.classList.add("green");
+        box.style.borderColor = "var(--green)";
+      }
+      else {
+        error.innerText = "⚠️ Enter a valid number (CGPA ≤ 10 or % ≤ 100)";
+        box.style.borderColor = "var(--red)";
+      }
+    }
+
+    function calculateMarksPercentage() {
+      let obtained = parseFloat(document.getElementById("marksObtained").value);
+      let max = parseFloat(document.getElementById("maxMarks").value);
+      let result = document.getElementById("marksResult");
+      let error = document.getElementById("marksError");
+      let box = document.getElementById("marksCalculatorBox");
+
+      result.innerText = "";
+      error.innerText = "";
+      result.className = "result";
+      box.style.borderColor = "transparent";
+
+      if (isNaN(obtained) || isNaN(max)) return;
+
+      if (max <= 0) {
+        error.innerText = "⚠️ Maximum marks must be greater than 0";
+        box.style.borderColor = "var(--red)";
+        return;
+      }
+
+      if (obtained < 0) {
+        error.innerText = "⚠️ Obtained marks cannot be negative";
+        box.style.borderColor = "var(--red)";
+        return;
+      }
+
+      if (obtained > max) {
+        error.innerText = "⚠️ Obtained marks cannot be greater than maximum marks";
+        box.style.borderColor = "var(--red)";
+        return;
+      }
+
+      let percentage = ((obtained / max) * 100).toFixed(2);
+      result.innerHTML = `<b>✅ Marks Obtained = ${obtained} / ${max} → Percentage = ${percentage}%</b>`;
+      result.classList.add("green");
+      box.style.borderColor = "var(--green)";
+    }
+    
+    //== popup ===
+    document.addEventListener("DOMContentLoaded", function() {
+  const popup = document.getElementById('portalPopup');
+  const closeBtn = document.getElementById('closePopup');
+
+  // Show the popup 1.5 seconds after page load
+  setTimeout(() => {
+    popup.classList.remove('hidden');
+    // Add animation classes if using Tailwind or CSS
+    popup.querySelector('div').classList.add('scale-100', 'opacity-100');
+  }, 1500);
+
+  // Function to close popup
+  function hidePopup() {
+    popup.classList.add('hidden');
   }
+
+  // Close on button click
+  closeBtn.addEventListener('click', hidePopup);
+
+  // Close on clicking outside the white box
+  popup.addEventListener('click', (e) => {
+    if (e.target === popup) hidePopup();
+  });
+});
+
+// visitor
+function cb(response) {
+    document.getElementById('count').innerText = response.value;
 }
 
-// Initial load
-fetchNews();
+// Replace 'universityupdates08.github.io' with your actual domain name to keep the count unique
+const script = document.createElement('script');
+script.src = 'https://api.countapi.xyz/hit/universityupdates08.github.io/UU/visits?callback=cb';
+document.head.appendChild(script);
 
-// Auto refresh every 60 seconds
-setInterval(fetchNews, 60000);
-</script>
 
+  </script>
 </body>
 </html>
