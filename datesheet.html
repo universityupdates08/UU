@@ -910,7 +910,7 @@
             hide(dataError);
             
             try {
-                const response = await fetch('datesheet.csv');
+                const response = await fetch('Datesheet.csv');
                 if (!response.ok) {
                     throw new Error(`Failed to load datesheet.csv (Status: ${response.status})`);
                 }
