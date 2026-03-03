@@ -32,6 +32,7 @@
             padding: 0;
             background: radial-gradient(circle at top, #ffffff 0, #e5edff 45%, #f3f4f6 100%);
             color: #0f172a;
+            overflow-x: hidden; /* Prevent side-scrolling the whole page */
         }
 
         /* Utility & Nav Styles */
@@ -72,10 +73,22 @@
 
         .warning { background: #fff3cd; border: 1px solid #ffeeba; padding: 15px; margin-bottom: 20px; border-radius: 8px; color: #856404; text-align: left; font-size: 0.9rem; }
 
-        /* Controls & Tables */
-        .controls { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
-        .controls input, .controls select, .controls button { flex: 1; min-width: 150px; padding: 12px; border-radius: 6px; border: 1px solid #ccc; font-size: 0.9rem; font-family: inherit; }
-        .controls button { background: #2c7be5; color: white; border: none; cursor: pointer; font-weight: bold; }
+        /* Fix for Controls on Mobile */
+    .controls { 
+        display: flex; 
+        justify-content: space-between; 
+        flex-wrap: wrap; 
+        gap: 10px; 
+    }
+    .controls input, .controls select, .controls button { 
+        flex: 1; 
+        min-width: 200px; /* Force stacking on small screens */
+        padding: 12px; 
+        border-radius: 6px; 
+        border: 1px solid #ccc; 
+        font-size: 0.95rem; 
+    }
+    .controls button { background: #2c7be5; color: white; border: none; cursor: pointer; font-weight: bold; width: 100%; }
         
         .alert-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 20px; }
         .alert-card { background: white; border-radius: 14px; padding: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); border-top: 5px solid #2c7be5; }
@@ -87,9 +100,32 @@
         .card-date { font-weight: 800; font-size: 1.1rem; }
         .badge { display: inline-block; background: rgba(0,0,0,0.15); padding: 4px 8px; border-radius: 4px; font-size: 0.75rem; margin-top: 10px; font-weight: bold; }
 
-        table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 0.82rem; background: white; color: #333; }
-        th, td { border: 1px solid #eee; padding: 8px; text-align: center; }
-        th { background: #2c7be5; color: white; }
+        /* --- THE TABLE FIX --- */
+    /* This makes every table inside a container scrollable on mobile */
+    .row, .alert-card, .card, #dateResults, #resultRow2, #resultRow4, #resultRow5 {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    table { 
+        width: 100%; 
+        min-width: 500px; /* Ensures table doesn't squish too much */
+        border-collapse: collapse; 
+        margin-top: 10px; 
+        font-size: 0.8rem; 
+        background: white; 
+        color: #333; 
+    }
+    th, td { border: 1px solid #eee; padding: 10px 6px; text-align: center; }
+    th { background: #2c7be5; color: white; white-space: nowrap; }
+
+        /* Adjustments for very small phones */
+    @media (max-width: 480px) {
+        .container { padding: 15px; width: 98%; }
+        .controls input, .controls select { min-width: 100%; }
+        .text-2xl { font-size: 1.25rem; }
+        .row h3 { font-size: 1rem; }
+    }
 
         /* Go To Top */
         #topBtn { display: none; position: fixed; bottom: 20px; right: 24px; z-index: 40; background-color: var(--primary-color); color: white; padding: 0.6rem 0.8rem; border-radius: 999px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); cursor: pointer; border:none; }
