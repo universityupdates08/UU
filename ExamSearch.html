@@ -106,6 +106,20 @@
         overflow-x: auto;
         -webkit-overflow-scrolling: touch;
     }
+    
+    /* Enhanced Paper Code Result Card */
+#resultRow4 .bg-\[\#ffd84d\] {
+    background: var(--yellow-grad) !important;
+    color: #1e293b !important;
+    border: 1px solid rgba(0,0,0,0.1);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+    line-height: 1.6;
+}
+
+#resultRow4 b {
+    color: #000;
+    font-weight: 700;
+}
 
     table { 
         width: 100%; 
@@ -261,7 +275,12 @@
         </div>
     </main>
 
-    <footer class="text-center py-8 bg-slate-100 border-t border-slate-200 mt-12">
+    <footer class="text-center py-2 bg-slate-100 border-t border-slate-200 mt-12">
+     <div class="flex items-center justify-center py-4 gap-1 mt-2 text-slate-500 text-xs">
+  <i class="fas fa-users text-blue-500"></i>
+  <span>Total Visitors:</span>
+  <span id="new-count" class="font-bold text-slate-800 bg-slate-200 px-2 py-0.5 rounded">0</span>
+</div>
         <div class="max-w-7xl mx-auto px-4">
             <div class="mb-4 text-slate-600 flex items-center justify-center gap-4">
                 <a href="https://www.youtube.com/@University-Updates-UU" target="_blank" class="text-slate-500 hover:text-red-600 footer-social-link"><i class="fab fa-youtube"></i></a>
@@ -411,13 +430,26 @@
         }
 
         function searchByCode() {
-            const code = document.getElementById("code4").value;
-            const results = csvData.filter(r => r['Paper Code'] === code);
-            const container = document.getElementById("resultRow4");
-            if(results.length === 0) { container.innerHTML = `<div class="py-4 text-slate-400 italic">No Records Found</div>`; return; }
-            const r = results[0];
-            container.innerHTML = `<div class="p-6 bg-[#ffd84d] text-slate-800 rounded-xl max-w-md mx-auto mt-4 text-left"><h3 class="font-bold border-none p-0 mb-2">${r.Subject}</h3><div>Code: <b>${r['Paper Code']}</b></div><div>Date: <b>${r.Date} (${r.Day})</b></div><div>Class: <b>${r.Class}</b></div><div class="mt-4 bg-black/10 inline-block px-3 py-1 rounded font-bold">Shift: ${r.Shift}</div></div>`;
-        }
+    const code = document.getElementById("code4").value;
+    const results = csvData.filter(r => r['Paper Code'] === code);
+    const container = document.getElementById("resultRow4");
+    
+    if(results.length === 0) { 
+        container.innerHTML = `<div class="py-4 text-slate-400 italic">No Records Found</div>`; 
+        return; 
+    }
+    
+    const r = results[0];
+    container.innerHTML = `
+        <div class="p-6 bg-[#ffd84d] text-slate-800 rounded-xl max-w-md mx-auto mt-4 text-left">
+            <h3 class="font-bold border-none p-0 mb-2">${r.Subject}</h3>
+            <div class="mb-2 text-sm">Paper: <b>${r['Paper Name']}</b></div> 
+            <div>Code: <b>${r['Paper Code']}</b></div>
+            <div>Date: <b>${r.Date} (${r.Day})</b></div>
+            <div>Class: <b>${r.Class}</b></div>
+            <div class="mt-4 bg-black/10 inline-block px-3 py-1 rounded font-bold">Shift: ${r.Shift}</div>
+        </div>`;
+}
 
         function searchClassYearSubject() {
             const c = document.getElementById("class5").value;
@@ -431,11 +463,6 @@
     </script>
 
     
-  <div class="flex items-center justify-center gap-2 mt-4 text-slate-500 text-xs">
-  <i class="fas fa-users text-blue-500"></i>
-  <span>Total Visitors:</span>
-  <span id="new-count" class="font-bold text-slate-800 bg-slate-200 px-2 py-0.5 rounded">0</span>
-</div>
 
 <script>
   // This uses counterapi.dev which is active in 2026
