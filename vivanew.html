@@ -185,7 +185,7 @@
                 <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                 <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
             </svg>
-            <p class="text-gray-600 text-lg mt-4">Initializing Finder...</p>
+            <p class="text-gray-600 text-lg mt-4">Initializing...</p>
         </div>
 
         <div id="mainContent" class="a-tab-hidden bg-white shadow-2xl rounded-2xl p-6 md:p-10 w-full max-w-6xl grid md:grid-cols-2 gap-8">
@@ -205,6 +205,7 @@
                             <option value="">-- Select a Course --</option>
                             <option value="M.Com.">M.Com.</option>
                             <option value="M.A.">M.A.</option>
+                            <option value="LOP">Left Out Viva</option>
                         </select>
                     </div>
 
@@ -293,27 +294,16 @@
                         <img src="https://msuniversity.ac.in/assets/images/new.gif" alt="NEW" class="news-gif">  
                         <span class="news-date">Comming Soon</span>
                     </li>
+                    <li>
+                        <i class="fas fa-chevron-right"></i>
+                        <a href="Viva/LOP.jpg" class="news-link">Left Out Viva (DN College, Meerut) - 2026</a>
+                        <img src="https://msuniversity.ac.in/assets/images/new.gif" alt="NEW" class="news-gif">  
+                        <span class="news-date">Mar 06, 2026</span>
+                    </li>
                 </ul>
 
-                <div class="mt-6 bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded-lg text-sm">
-                    <p class="font-semibold text-yellow-700 flex items-center">
-                        <i class="fas fa-bell mr-2"></i> Notifications
-                    </p>
-                    <p class="mt-1 text-yellow-700">Stay tuned for latest viva schedules.</p>
-                </div>
-
-                <div class="mt-6 bg-slate-50 border-l-4 border-slate-400 p-4 rounded-lg text-sm shadow-sm">
-                    <p class="font-semibold text-slate-700 flex items-center mb-2">
-                        <i class="fas fa-file-alt mr-2"></i> Latest Exam Papers
-                    </p>
-                    <ul class="news-list">
-                        <li><i class="fas fa-chevron-right"></i> <a href="#" class="news-link">News 1</a> <span class="news-date">Test</span></li>
-                        <li><i class="fas fa-chevron-right"></i> <a href="#" class="news-link">News 2</a> <span class="news-date">Test</span></li>
-                    </ul>
-                    <p class="mt-2 text-xs text-slate-500 italic">
-            * Click on the titles to view or download (to be updated by admin).
-        </p>
-                </div>
+               
+                
             </aside>
         </div>
     </main>
@@ -388,7 +378,8 @@
                     { text: "Sanskrit (G-882)", value: "G-882" },
                     { text: "Sociology (G-887)", value: "G-887" },
                     { text: "Urdu (G-862)", value: "G-862" }
-                ]
+                ],
+                "LOP": [{ text: "Left Out Viva", value: "LOP" }]
             },
             fileMap: {
                 "I-304": "Viva/VIVA CENTER.xlsx - M.Com.csv",
@@ -404,7 +395,8 @@
                 "G-870": "Viva/VIVA CENTER.xlsx - G-870.csv",
                 "G-882": "Viva/VIVA CENTER.xlsx - G-882.csv",
                 "G-887": "Viva/VIVA CENTER.xlsx - G-887.csv",
-                "G-862": "Viva/VIVA CENTER.xlsx - G-862.csv"
+                "G-862": "Viva/VIVA CENTER.xlsx - G-862.csv",
+                "LOP": "Viva/Test.csv"
             },
             allData: {},
             loadedData: []
