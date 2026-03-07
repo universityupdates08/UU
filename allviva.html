@@ -587,7 +587,7 @@
         function handleLOCourseChange() {
             const course = dom.loCourseSelect.value;
             hide(dom.loCenterGroup); hide(dom.loSubjectGroup); hideResults();
-            resetSelect(dom.loCenterSelect, "Selection of Center");
+            resetSelect(dom.loCenterSelect, "Select Center");
             if (course) {
                 const centers = [...new Set(config.leftoverData.filter(r => r.Course === course).map(r => r['Name of Center']))].sort();
                 centers.forEach(c => dom.loCenterSelect.add(new Option(c, c)));
