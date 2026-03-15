@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>UNIVERSITY UPDATES - ADMIT CARD GENERATOR</title>
+    <title>UNIVERSITY UPDATES - EXAM DATE GENERATOR</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -481,7 +481,7 @@
   
      <p style="color: white; font-style: italic; font-size: 15px; background-color: crimson; display: flex; align-items: center; height: 25px;">
     <marquee onmouseover="this.stop();" direction="left" onmouseout="this.start();">
-        <b style="color: white">➤</b> 📢 यह प्रवेश पत्र केवल आपकी सुविधा एवं जानकारी हेतु है, परीक्षाओ के लिए यह वैध नहीं है। यह सीसीएसयू से संबद्ध या समर्थित नहीं है। वैध प्रवेश पत्र के लिए ccsuniversity.ac.in पर विजिट करें।
+        <b style="color: white">➤</b> 📢 यह केवल आपकी सुविधा एवं जानकारी हेतु है, परीक्षाओ के लिए यह वैध नहीं है। यह सीसीएसयू से संबद्ध या समर्थित नहीं है। वैध प्रवेश पत्र के लिए ccsuniversity.ac.in पर विजिट करें।
     </marquee>
 </p>
 
@@ -512,7 +512,7 @@
             <ol>
                     <li><i class="fas fa-circle-notch text-xs text-blue-500 mr-2"></i><b>Step 1:</b> Select the <b>"Manual Entry"</b> option.</li>
                     <li><i class="fas fa-circle-notch text-xs text-blue-500 mr-2"></i><b>Step 2:</b> Fill in all the Student and Paper details manually according to your Exam Form.</li>
-                    <li><i class="fas fa-circle-notch text-xs text-blue-500 mr-2"></i><b>Step 3:</b> Click on <b>"Generate Admit Card"</b>.</li>
+                    <li><i class="fas fa-circle-notch text-xs text-blue-500 mr-2"></i><b>Step 3:</b> Click on <b>"Generate Exam Date Card"</b>.</li>
                 </ol>
           </div>
         </div>
@@ -527,7 +527,7 @@
                     <li><i class="fas fa-circle-notch text-xs text-green-500 mr-2"></i><b>Step 1:</b> Select the <b>"Auto-fill from Upload"</b> option.</li>
                     <li><i class="fas fa-circle-notch text-xs text-green-500 mr-2"></i><b>Step 2:</b> Upload your <b>Exam Form/Admit Card</b> (PDF Recommended).</li>
                     <li><i class="fas fa-circle-notch text-xs text-green-500 mr-2"></i><b>Step 3:</b> Review and correct any auto-filled details.</li>
-                    <li><i class="fas fa-circle-notch text-xs text-green-500 mr-2"></i><b>Step 4:</b> Click on <b>"Generate Admit Card"</b>.</li>
+                    <li><i class="fas fa-circle-notch text-xs text-green-500 mr-2"></i><b>Step 4:</b> Click on <b>"Generate Exam Date Card"</b>.</li>
                 </ol>
           </div>
           
@@ -567,7 +567,7 @@
 
         <div id="auto-fill-section" style="display:none;" class="border-2 border-dashed border-blue-300 bg-blue-50 p-6 rounded-lg text-center mb-8">
             <label for="admitCardUpload" class="block text-lg font-semibold text-blue-700 mb-3">
-                Upload Admit Card/Exam Form (PDF/Image) to Auto-Fill Details (PDF Recommended)
+                Upload Admit Card/Exam Form (PDF) to Auto-Fill Details.
             </label>
             <input type="file" id="admitCardUpload" accept=".pdf,.png,.jpg,.jpeg" class="p-2 border border-gray-300 rounded-md w-full max-w-md mx-auto block">
             <p id="upload-status" class="mt-3 text-blue-600 font-semibold"></p>
@@ -665,7 +665,7 @@
     
 
   <div class="action-buttons flex flex-wrap justify-center gap-4 mt-6 mb-10 w-full max-w-5xl px-4 content-hidden">
-        <button type="button" id="generateBtn" class="gradient-button">Generate Admit Card</button>
+        <button type="button" id="generateBtn" class="gradient-button">Generate Exam Date Card</button>
         <button type="button" id="resetBtn" class="gradient-button">Reset Form</button>
         <button type="button" id="printBtn" class="gradient-button" style="display:none;">Print Admit Card</button>
         <button type="button" id="downloadBtn" class="gradient-button" style="display:none;">Download as PDF</button>
@@ -683,12 +683,12 @@
 
     <div class="sub-header" style="text-align:center; margin-bottom:10px;">
       <h4 style="font-weight:bold; font-size:16px;">
-        औपबंधिक प्रवेश-पत्र / PROVISIONAL ADMIT CARD
+        परीक्षा तिथि-पत्र / EXAM DATE CARD
       </h4>
     </div>
     <div class="sub-header" style="text-align:justify; margin-bottom:10px;">
       <h4 style="font-weight:bold; color:#d32f2f; font-size:16px;">
-        यह प्रवेश पत्र केवल आपकी सुविधा एवं जानकारी हेतु है, परीक्षाओ के लिए यह वैध नहीं है। यह सीसीएसयू से संबद्ध या समर्थित नहीं है। वैध प्रवेश पत्र के लिए ccsuniversity.ac.in पर विजिट करें. 
+        यह केवल आपकी सुविधा एवं जानकारी हेतु है, परीक्षाओ के लिए यह वैध नहीं है। यह सीसीएसयू से संबद्ध या समर्थित नहीं है। वैध प्रवेश पत्र के लिए ccsuniversity.ac.in पर विजिट करें. 
       </h4>
     </div>
 
@@ -743,7 +743,7 @@
     </table>
 
     <div class="mt-8 text-xs text-gray-600 leading-relaxed border-t pt-4">
-      <p class="text-justify"><strong>नोट:</strong> यह औपबंधिक प्रवेश पत्र आधिकारिक तौर पर स्वीकृत नहीं है। इसको बनाने का मात्र उद्देश्य सम्बन्धित छात्रों को परीक्षा तिथि और समय की जानकारी उपलब्ध कराना है। अधिक जानकारी के लिए विश्वविद्यालय की अधिकृत वेबसाइट www.ccsuniversity.ac.in का अवलोकन करें।</p>
+      <p class="text-justify"><strong>नोट:</strong> यह परीक्षा तिथि पत्र आधिकारिक तौर पर स्वीकृत नहीं है। इसको बनाने का मात्र उद्देश्य सम्बन्धित छात्रों को परीक्षा तिथि और समय की जानकारी उपलब्ध कराना है। अधिक जानकारी के लिए विश्वविद्यालय की अधिकृत वेबसाइट www.ccsuniversity.ac.in का अवलोकन करें।</p>
 
 
       <div class="text-right mt-2">
@@ -761,7 +761,7 @@
         </h2>
 
         <p class="text-gray-700 mb-2 text-[10px] sm:text-xs leading-tight text-justify">
-            This <b>ADMIT CARD GENERATOR</b> is a non-official tool designed for educational and informational purposes only. The provisional admit card generated here is based on user input and pre-defined exam datesheet data.
+            This <b>EXAM DATE CARD GENERATOR</b> is a non-official tool designed for educational and informational purposes only. The exam date card generated here is based on user input and pre-defined exam datesheet data.
         </p>
 
         <ul class="list-disc list-inside text-gray-700 mb-2 text-[10px] sm:text-xs leading-tight space-y-1 text-justify">
@@ -791,15 +791,15 @@
                     <h3 class="text-xl font-bold mb-3 border-b-2 border-primary-color pb-1 inline-block">Disclaimer</h3>
                     <div class="text-justify">
                     <p class="text-sm opacity-90">
-                        The Admit Card generated is for informational purposes only. It is <b>not</b> an official document. Students must <b>always confirm</b> the details from their respective college/ university administration. We are not responsible for any last-minute changes or inaccuracies. Not affiliated with or endorsed by CCSU.
+                        The Exam Date Card generated is for informational purposes only. It is <b>not</b> an official document. Students must <b>always confirm</b> the details from their respective college/ university administration. We are not responsible for any last-minute changes or inaccuracies. Not affiliated with or endorsed by CCSU.
                     </p>
                 </div></div></div>
 
                 <div>
                 <div class="text-center">
-                    <h3 class="text-xl font-bold mb-3 border-b-2 border-primary-color pb-1 inline-block">Exam Schedule</h3>
+                    <h3 class="text-xl font-bold mb-3 border-b-2 border-primary-color pb-1 inline-block">Exam Schedules</h3>
                     <ul class="space-y-1 text-sm">
-                        <li><i class="fas fa-circle-notch text-xs text-yellow-500 mr-2"></i><a href="https://t.me/CCSUniversityMRT/19751" class="hover:text-primary-color transition"><b>Download</b> (Telegram) </a></li>
+                        <li><i class="fas fa-circle-notch text-xs text-yellow-500 mr-2"></i><a href="https://t.me/CCSUniversityMRT/19751" class="hover:text-primary-color transition"><b>Download from Telegram</b> </a></li>
                         </ul>
                 </div></div>
 
