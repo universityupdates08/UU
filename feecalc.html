@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>University Fee Portal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .step-hidden { display: none; }
+        .disabled-card { opacity: 0.5; pointer-events: none; }
+    </style>
+</head>
+<body class="bg-gray-100 p-5 md:p-10 text-gray-800">
+
+    <div class="max-w-2xl mx-auto space-y-10">
+        
+        <div class="bg-white p-8 rounded-xl shadow-lg border-t-4 border-blue-600">
+            <h2 class="text-2xl font-bold mb-6 text-blue-800 text-center">Regular Exam Fee</h2>
+            <div class="space-y-4">
+                <div>
+                    <label class="block font-semibold mb-1">1. Select Level:</label>
+                    <select id="level" class="w-full border p-2 rounded" onchange="updateUI()">
+                        <option value="">-- Select Level --</option>
+                        <option value="ug">Bachelors (UG)</option>
+                        <option value="pg">Masters (PG)</option>
+                    </select>
+                </div>
+                <div id="step-system" class="step-hidden">
+                    <label class="block font-semibold mb-1">2. Select System:</label>
+                    <select id="system" class="w-full border p-2 rounded" onchange="updateUI()">
+                        <option value="">-- Select System --</option>
+                        <option value="annual">Annual System</option>
+                        <option value="semester">Semester System</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-white p-8 rounded-xl shadow-lg border-t-4 border-red-600">
+            <h2 class="text-2xl font-bold mb-6 text-red-800 text-center">Back Paper Fee</h2>
+            
+            <div class="space-y-6">
+                <div>
+                    <label class="block font-semibold mb-2">1. Select Level:</label>
+                    <div class="flex gap-4">
+                        <label class="flex-1 text-center p-2 border rounded cursor-pointer hover:bg-gray-50">
+                            <input type="radio" name="backLevel" value="ug" checked onchange="calculateBackFee()"> UG (Bachelors)
+                        </label>
+                        <label class="flex-1 text-center p-2 border rounded cursor-pointer hover:bg-gray-50">
+                            <input type="radio" name="backLevel" value="pg" onchange="calculateBackFee()"> PG (Masters)
+                        </label>
+                    </div>
+                </div>
+
+                <div class="space-y-3">
+                    <label class="block font-semibold border-b pb-1">2. Select Components:</label>
+                    
+                    <div id="theoryRow" class="flex items-center justify-between p-3 bg-gray-50 rounded border">
+                        <label class="flex items-center cursor-pointer font-medium">
+                            <input type="checkbox" id="backTheory" class="w-5 h-5 mr-3" onchange="calculateBackFee()" checked>
+                            Theory Exam
+                        </label>
+                    </div>
+
+                    <div id="projectRow" class="flex items-center justify-between p-3 bg-gray-50 rounded border">
+                        <label class="flex items-center cursor-pointer font-medium">
+                            <input type="checkbox" id="backProjectAlso" class="w-5 h-5 mr-3" onchange="calculateBackFee()">
+                            Project?
+                        </label>
+                    </div>
+
+                    <div id="practicalRow" class="p-3 bg-gray-50 rounded border">
+                        <div class="flex items-center justify-between">
+                            <label class="flex items-center cursor-pointer font-medium">
+                                <input type="checkbox" id="backPracticalCheck" class="w-5 h-5 mr-3" onchange="calculateBackFee()">
+                                Practical Subjects
+                            </label>
+                            <div id="backPractInputArea" class="hidden">
+                                <input type="number" id="backPractCount" min="1" value="1" 
+                                       class="w-20 border p-1 rounded text-center" oninput="calculateBackFee()">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between p-3 bg-red-50 rounded border border-red-200">
+                        <label class="flex items-center cursor-pointer font-bold text-red-700">
+                            <input type="checkbox" id="backProjectOnly" class="w-5 h-5 mr-3" onchange="handleProjectOnlySelection()">
+                            Project Only 
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-8 bg-red-50 p-6 rounded-lg border-l-4 border-red-500">
+                <h3 class="font-bold text-red-800 mb-2 border-b border-red-200 pb-1">Fee Breakdown</h3>
+                <div id="backBreakdown" class="grid grid-cols-2 gap-y-1 text-sm text-gray-700"></div>
+                <div class="mt-4 pt-4 border-t border-red-200 text-2xl font-bold text-red-900 text-center">
+                    Total: ₹<span id="backTotal">0</span>
+                </div>
+                <button onclick="copyBackSummary()" class="w-full mt-4 bg-red-600 text-white py-2 rounded font-bold hover:bg-red-700 transition">
+                    Copy Fee Breakdown
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function handleProjectOnlySelection() {
+            const isProjectOnly = document.getElementById('backProjectOnly').checked;
+            const theory = document.getElementById('backTheory');
+            const project = document.getElementById('backProjectAlso');
+            const practical = document.getElementById('backPracticalCheck');
+
+            if (isProjectOnly) {
+                theory.checked = false; project.checked = false; practical.checked = false;
+                document.getElementById('theoryRow').classList.add('disabled-card');
+                document.getElementById('projectRow').classList.add('disabled-card');
+                document.getElementById('practicalRow').classList.add('disabled-card');
+            } else {
+                document.getElementById('theoryRow').classList.remove('disabled-card');
+                document.getElementById('projectRow').classList.remove('disabled-card');
+                document.getElementById('practicalRow').classList.remove('disabled-card');
+                // Auto-check theory if practical/project is clicked (handled in calculate)
+            }
+            calculateBackFee();
+        }
+
+        function calculateBackFee() {
+            const level = document.querySelector('input[name="backLevel"]:checked').value;
+            const theory = document.getElementById('backTheory');
+            const project = document.getElementById('backProjectAlso');
+            const practical = document.getElementById('backPracticalCheck');
+            const projectOnly = document.getElementById('backProjectOnly').checked;
+            
+            const base = (level === 'pg') ? 980 : 780;
+            const permission = 160;
+            const practArea = document.getElementById('backPractInputArea');
+
+            let total = 0;
+            let html = "";
+
+            // Auto-force theory selection if practical or project is checked
+            if (!projectOnly && (project.checked || practical.checked)) {
+                theory.checked = true;
+            }
+
+            practical.checked ? practArea.classList.remove('hidden') : practArea.classList.add('hidden');
+
+            if (projectOnly) {
+                total = base;
+                html += `<span>Project (Only):</span><b>₹${base}</b>`;
+                html += `<span class="text-xs text-red-500 italic"></span>`;
+            } else if (theory.checked || project.checked || practical.checked) {
+                // Base Fee & Permission added once for the group
+                total += base + permission;
+                html += `<span>Theory Fee:</span><b>₹${base}</b>`;
+                html += `<span>Permission Fee:</span><b>₹${permission}</b>`;
+
+                if (project.checked) {
+                    // If project is an additional component, we add another base fee
+                    total += base;
+                    html += `<span>Project Fee:</span><b>₹${base}</b>`;
+                }
+
+                if (practical.checked) {
+                    const count = parseInt(document.getElementById('backPractCount').value) || 0;
+                    const pTotal = count * 170;
+                    total += pTotal;
+                    html += `<span>Practical (${count} Sub):</span><b>₹${pTotal}</b>`;
+                }
+            }
+
+            document.getElementById('backBreakdown').innerHTML = html;
+            document.getElementById('backTotal').innerText = total;
+        }
+
+        function copyBackSummary() {
+            const level = document.querySelector('input[name="backLevel"]:checked').value.toUpperCase();
+            const total = document.getElementById('backTotal').innerText;
+            const breakdown = document.getElementById('backBreakdown').innerText.replace(/\n/g, ' | ');
+            const text = `*BACK EXAM FEE BREAKDOWN*\n-------------------\nLevel: ${level}\nTotal: ₹${total}\nBreakdown: ${breakdown}\n-------------------`;
+            navigator.clipboard.writeText(text);
+            alert("Copied!");
+        }
+
+        function toggle(id, cond) { 
+            const el = document.getElementById(id);
+            if(el) el.style.display = cond ? 'block' : 'none'; 
+        }
+
+        function updateUI() {
+            const level = document.getElementById('level').value;
+            const sys = document.getElementById('system').value;
+            toggle('step-system', level);
+            toggle('step-duration', sys);
+        }
+
+        window.onload = calculateBackFee;
+    </script>
+</body>
+</html>
