@@ -415,7 +415,7 @@
             const results = csvData.filter(r => r.Class === c && r.Subject === s);
             const container = document.getElementById("resultRow2");
             if(results.length === 0) { container.innerHTML = `<div class="py-4 text-slate-400 italic">No Records Found</div>`; return; }
-            container.innerHTML = `<div class="card mx-auto max-w-4xl mt-4"><div class="card-header font-bold">${c} - ${s}</div><table><tr><th>S.No</th><th>Date</th><th>Day</th><th>Paper Name</th><th>Paper Code</th><th>Shift</th></tr>${results.map((r, i) => `<tr><td>${i+1}</td><td>${r.Date}</td><td>${r.Day}</td><td>${r['Paper Name']}</td><td>${r.Shift}</td></tr>`).join('')}</table></div>`;
+            container.innerHTML = `<div class="card mx-auto max-w-4xl mt-4"><div class="card-header font-bold">${c} - ${s}</div><table><tr><th>S.No</th><th>Date</th><th>Day</th><th>Paper Name</th><th>Paper Code</th><th>Shift</th></tr>${results.map((r, i) => `<tr><td>${i+1}</td><td>${r.Date}</td><td>${r.Day}</td><td>${r['Paper Name']}</td><td>${r['Paper Code']}</td><td>${r.Shift}</td></tr>`).join('')}</table></div>`;
         }
 
         function searchByDateClass() {
