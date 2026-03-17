@@ -22,6 +22,10 @@
 <body class="bg-gray-100 p-5 md:p-10 text-gray-800">
     <div class="max-w-2xl mx-auto">
         
+        <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-6 rounded shadow-sm text-sm text-yellow-800">
+            <p><strong>Disclaimer:</strong> This is a Fee Calculator to calculate your Exam form fees for Maa Shakumbhari University and Chaudhary Charan Singh University Students. It has a limited number of courses due to being Limited information. Just click on drop down arrows and select the option that applies to you.</p>
+        </div>
+
         <div class="flex bg-white rounded-t-xl shadow-md overflow-hidden mb-0">
             <button onclick="switchTab('reg')" id="btn-reg" class="tab-btn active-reg flex-1 py-4 font-bold text-center uppercase tracking-wider">
                 Regular / Private Fee
@@ -202,11 +206,11 @@
             regular: {
                 ug: {
                     annual: ["B.Ed."],
-                    semester: ["B.A. (NEP)", "B.Com. (NEP)", "B.Sc. (NEP)"]
+                    semester: ["B.A. (NEP)", "B.Com. (NEP)", "B.Sc. (NEP)", "BBA", "BCA", "B.A.LL.B.", "B.COM.LL.B.", "LL.B.", "B.Sc. (Computer Science)", "B.Sc. (Ag.)"]
                 },
                 pg: {
                     annual: [],
-                    semester: ["M.A. (NEP)", "M.Com. (NEP)", "M.Sc. (NEP)"]
+                    semester: ["M.A. (NEP)", "M.Com. (NEP)", "M.Sc. (NEP)", "M.Ed.", "M.Sc. (Computer Science)", "M.Sc. (Ag.)"]
                 }
             },
             private: {
@@ -278,17 +282,19 @@
                     pSelect.innerHTML = opts;
                 } else {
                     label.innerText = "Select Semester:";
+                    let maxSem = 6;
+                    if(cSelect.value === "B.A.LL.B." || cSelect.value === "B.COM.LL.B.") maxSem = 10;
+                    if(cSelect.value === "B.Sc. (Ag.)") maxSem = 8;
+                    if(level === "pg") maxSem = 4;
+
                     let opts = '';
-                    for(let i=1; i<=6; i++) opts += `<option value="${i}">${i} Sem</option>`;
+                    for(let i=1; i<=maxSem; i++) opts += `<option value="${i}">${i} Sem</option>`;
                     pSelect.innerHTML = opts;
                 }
                 if(prevPeriod) pSelect.value = prevPeriod;
 
-                // Rule: Hide Practicals for B.Ed.
                 const isBEd = cSelect.value === "B.Ed.";
                 toggle('div-practical-container', !isBEd && !isPrivate);
-                
-                // Set correct tag label for project
                 document.querySelector('.reg-project-tag').innerText = (level === 'ug') ? '+₹800' : '+₹1000';
             }
             calculateRegularFee();
@@ -322,7 +328,7 @@
                 let examBase = (level === 'ug') ? 2410 : 3000;
                 if (period === 2) examBase -= 160;
                 if (period === 3) examBase += 90;
-                if (college === 'self-finance') examBase += 535;
+                if (college === 'self-finance') examBase += 635;
 
                 total += examBase;
                 html += `<div class="flex justify-between item-row"><span>Exam Fee</span><b>₹${examBase}</b></div>`;
@@ -336,26 +342,44 @@
                 total += theory;
                 html += `<div class="flex justify-between item-row"><span>Theory Fee</span><b>₹${theory}</b></div>`;
 
+                // Logic for Special Fees (Development & Infra) - First Sem Self-Finance Only
+                const specialFeesCourses = ["M.Ed.", "B.A.LL.B.", "B.COM.LL.B.", "LL.B.", "B.Sc. (Computer Science)", "BBA", "BCA"];
+                if (specialFeesCourses.includes(course) && period === 1 && college === 'self-finance') {
+                    total += 470 + 1540;
+                    html += `<div class="flex justify-between item-row"><span>Development Fee</span><b>₹470</b></div>`;
+                    html += `<div class="flex justify-between item-row"><span>Infrastructure Fee</span><b>₹1540</b></div>`;
+                }
+
+                // Odd Semester Common Fees
                 if (period % 2 !== 0) {
-                    let sports = (college === 'govt./aided') ? 50 : 70;
-                    let rr = 10;
-                    let cult = 7;
-                    total += sports + rr + cult;
-                    html += `<div class="flex justify-between item-row"><span>Sports Fee</span><b>₹${sports}</b></div>`;
-                    html += `<div class="flex justify-between item-row"><span>Rovers Ranger Fee</span><b>₹${rr}</b></div>`;
-                    html += `<div class="flex justify-between item-row"><span>Cultural Activity Fee</span><b>₹${cult}</b></div>`;
+                    // Sports Fee logic (Exempt for Agriculture)
+                    if (course !== "B.Sc. (Ag.)" && course !== "M.Sc. (Ag.)") {
+                        let sports = (college === 'govt./aided') ? 50 : 70;
+                        total += sports;
+                        html += `<div class="flex justify-between item-row"><span>Sports Fee</span><b>₹${sports}</b></div>`;
+                    }
+                    total += 10 + 7;
+                    html += `<div class="flex justify-between item-row"><span>Rovers Ranger Fee</span><b>₹10</b></div>`;
+                    html += `<div class="flex justify-between item-row"><span>Cultural Activity Fee</span><b>₹7</b></div>`;
                 }
 
                 if (course === "B.Ed.") {
                     total += 340;
-                    html += `<div class="flex justify-between item-row"><span>Practical Fee</span><b>₹${340}</b></div>`;
+                    html += `<div class="flex justify-between item-row"><span>Practical Fee</span><b>₹340</b></div>`;
                     if (college === 'self-finance' && period === 1) {
                         total += 2010;
                         html += `<div class="flex justify-between item-row"><span>Infra & Dev Fee</span><b>₹2010</b></div>`;
                     }
                 }
 
-                if ((system === 'semester' && (period === 2 || period === 6)) || (system === 'annual' && period === 2)) {
+                // Degree Fee Logic
+                let degreeApplicable = false;
+                if (level === 'pg' && period === 4) degreeApplicable = true;
+                if (["LL.B.", "B.Sc. (Computer Science)", "BBA", "BCA"].includes(course) && period === 6) degreeApplicable = true;
+                if (["B.A.LL.B.", "B.COM.LL.B."].includes(course) && period === 10) degreeApplicable = true;
+                if (course === "B.Sc. (Ag.)" && period === 8) degreeApplicable = true;
+
+                if (degreeApplicable) {
                     total += 250;
                     html += `<div class="flex justify-between item-row"><span>Degree Fee</span><b>₹250</b></div>`;
                 }
