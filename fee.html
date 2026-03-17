@@ -17,13 +17,14 @@
         .tab-btn { transition: all 0.3s ease; border-bottom: 3px solid transparent; }
         .tab-btn.active-reg { color: #2563eb; border-color: #2563eb; background-color: #eff6ff; }
         .tab-btn.active-back { color: #dc2626; border-color: #dc2626; background-color: #fef2f2; }
+        .item-row { margin-bottom: 4px; padding-bottom: 2px; border-bottom: 1px dashed #e5e7eb; }
     </style>
 </head>
 <body class="bg-gray-100 p-5 md:p-10 text-gray-800">
     <div class="max-w-2xl mx-auto">
         
         <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-6 rounded shadow-sm text-sm text-yellow-800">
-            <p><strong>Disclaimer:</strong> This is a Fee Calculator to calculate your Exam form fees for Maa Shakumbhari University and Chaudhary Charan Singh University Students. It has a limited number of courses due to being Limited information. Just click on drop down arrows and select the option that applies to you.</p>
+            <p><strong>Disclaimer:</strong> This is a Fee Calculator to calculate your Exam form fees for Maa Shakumbhari University and CCSU Students it has a limited number of courses due to being Limited information just click on drop down arrows and select the option that applies to you.</p>
         </div>
 
         <div class="flex bg-white rounded-t-xl shadow-md overflow-hidden mb-0">
@@ -274,7 +275,7 @@
                 const label = document.getElementById('periodLabel');
                 const prevPeriod = pSelect.value;
 
-                if(system === 'annual') {
+                if(system === 'annual' || isPrivate) {
                     label.innerText = "Select Year:";
                     let yrs = (level === 'ug' && cSelect.value !== "B.Ed.") ? 3 : 2; 
                     let opts = '';
@@ -307,8 +308,6 @@
             
             const isPrivate = typeEl.value === 'private';
             const level = levelEl.value;
-            const sysEl = document.querySelector('input[name="regSystem"]:checked');
-            const system = sysEl ? sysEl.value : 'semester';
             const period = parseInt(document.getElementById('regPeriod').value) || 1;
             const college = document.querySelector('input[name="collegeType"]:checked').value;
             const enrolled = document.querySelector('input[name="enrolled"]:checked').value;
@@ -320,88 +319,104 @@
             } else {
                 toggle('div-college', period % 2 !== 0);
             }
-            toggle('div-project-container', !isPrivate && system === 'semester');
+            const isBEd = course === "B.Ed.";
+            toggle('div-project-container', !isPrivate && !isBEd);
+            
 
             let total = 0, html = '';
 
             if (isPrivate) {
-                let examBase = (level === 'ug') ? 2410 : 3000;
-                if (period === 2) examBase -= 160;
-                if (period === 3) examBase += 90;
-                if (college === 'self-finance') examBase += 635;
-
-                total += examBase;
-                html += `<div class="flex justify-between item-row"><span>Exam Fee</span><b>₹${examBase}</b></div>`;
+                let privateBase = 0;
+                if (level === 'ug') {
+                    if (period === 1) privateBase = (college === 'self-finance') ? 3045 : 2410;
+                    else if (period === 2) privateBase = (college === 'self-finance') ? 2885 : 2250;
+                    else if (period === 3) privateBase = (college === 'self-finance') ? 3135 : 2500;
+                } else {
+                    if (period === 1) privateBase = (college === 'self-finance') ? 3415 : 2780;
+                    else if (period === 2) privateBase = (college === 'self-finance') ? 3835 : 3200;
+                }
+                total += privateBase;
+                html += `<div class="flex justify-between item-row"><span>Private Exam Fee</span><b>₹${privateBase}</b></div>`;
                 
                 if (college === 'govt./aided') {
                     total += 635;
                     html += `<div class="flex justify-between item-row"><span>Verification Fee</span><b>₹635</b></div>`;
                 }
             } else {
-                let theory = 800;
+                // Regular Theory Fees
+                let theory = 800; // Default (NEP, BBA, BCA, B.Ed)
+                if (["B.A.LL.B.", "B.COM.LL.B.", "B.Sc. (Computer Science)"].includes(course)) theory = 1850;
+                else if (["LL.B.", "B.Sc. (Ag.)"].includes(course)) theory = 1000;
+                else if (["M.A. (NEP)", "M.Com. (NEP)", "M.Sc. (NEP)", "M.Sc. (Ag.)"].includes(course)) theory = 580;
+                else if (["M.Sc. (Computer Science)", "M.Ed."].includes(course)) theory = 2310;
+
                 total += theory;
                 html += `<div class="flex justify-between item-row"><span>Theory Fee</span><b>₹${theory}</b></div>`;
 
-                // Logic for Special Fees (Development & Infra) - First Sem Self-Finance Only
-                const specialFeesCourses = ["M.Ed.", "B.A.LL.B.", "B.COM.LL.B.", "LL.B.", "B.Sc. (Computer Science)", "BBA", "BCA"];
-                if (specialFeesCourses.includes(course) && period === 1 && college === 'self-finance') {
+                // Self Finance Special Fees
+                const sfCourses = ["M.Ed.", "B.A.LL.B.", "B.COM.LL.B.", "LL.B.", "B.Sc. (Computer Science)", "BBA", "BCA"];
+                if (sfCourses.includes(course) && period === 1 && college === 'self-finance') {
                     total += 470 + 1540;
                     html += `<div class="flex justify-between item-row"><span>Development Fee</span><b>₹470</b></div>`;
                     html += `<div class="flex justify-between item-row"><span>Infrastructure Fee</span><b>₹1540</b></div>`;
                 }
 
-                // Odd Semester Common Fees
+                // B.Ed. 1st Year Self Finance Fee
+                if (course === "B.Ed." && period === 1 && college === 'self-finance') {
+                    total += (470 + 1540);
+                    html += `<div class="flex justify-between item-row"><span>Development Fee</span><b>₹470</b></div>`;
+                    html += `<div class="flex justify-between item-row"><span>Infrastructure Fee</span><b>₹1540</b></div>`;
+                }
+
+                // Common Extras (Odd Semester)
                 if (period % 2 !== 0) {
-                    // Sports Fee logic (Exempt for Agriculture)
                     if (course !== "B.Sc. (Ag.)" && course !== "M.Sc. (Ag.)") {
-                        let sports = (college === 'govt./aided') ? 50 : 70;
+                        let sports = (college === 'self-finance') ? 70 : 50;
                         total += sports;
                         html += `<div class="flex justify-between item-row"><span>Sports Fee</span><b>₹${sports}</b></div>`;
                     }
-                    total += 10 + 7;
-                    html += `<div class="flex justify-between item-row"><span>Rovers Ranger Fee</span><b>₹10</b></div>`;
-                    html += `<div class="flex justify-between item-row"><span>Cultural Activity Fee</span><b>₹7</b></div>`;
+                    total += 7 + 10;
+                    html += `<div class="flex justify-between item-row"><span>Cultural Activities</span><b>₹7</b></div>`;
+                    html += `<div class="flex justify-between item-row"><span>Rovers Ranger</span><b>₹10</b></div>`;
                 }
 
+                // Marksheet
+                total += 80;
+                html += `<div class="flex justify-between item-row"><span>Marksheet Fee</span><b>₹80</b></div>`;
+
+                // B.Ed. Practical
                 if (course === "B.Ed.") {
                     total += 340;
                     html += `<div class="flex justify-between item-row"><span>Practical Fee</span><b>₹340</b></div>`;
-                    if (college === 'self-finance' && period === 1) {
-                        total += 2010;
-                        html += `<div class="flex justify-between item-row"><span>Infra & Dev Fee</span><b>₹2010</b></div>`;
-                    }
                 }
 
-                // Degree Fee Logic
-                let degreeApplicable = false;
-                if (level === 'pg' && period === 4) degreeApplicable = true;
-                if (["LL.B.", "B.Sc. (Computer Science)", "BBA", "BCA"].includes(course) && period === 6) degreeApplicable = true;
-                if (["B.A.LL.B.", "B.COM.LL.B."].includes(course) && period === 10) degreeApplicable = true;
-                if (course === "B.Sc. (Ag.)" && period === 8) degreeApplicable = true;
+                // Degree Fees Logic
+                let degreeApp = false;
+                if (level === 'pg' && period === 4) degreeApp = true;
+                if (course === "B.Ed." && period === 2) degreeApp = true;
+                if (["LL.B.", "BBA", "BCA", "B.A. (NEP)", "B.Com. (NEP)", "B.Sc. (NEP)", "B.Sc. (Computer Science)", "BBA", "BCA"].includes(course) && period === 6) degreeApp = true;
+                if (["B.A.LL.B.", "B.COM.LL.B."].includes(course) && period === 10) degreeApp = true;
+                if (course === "B.Sc. (Ag.)" && period === 8) degreeApp = true;
 
-                if (degreeApplicable) {
+                if (degreeApp) {
                     total += 250;
                     html += `<div class="flex justify-between item-row"><span>Degree Fee</span><b>₹250</b></div>`;
                 }
 
-                if (system === 'semester' && document.getElementById('regCheckProject').checked) {
-                    let projectFee = (level === 'ug') ? 800 : 1000;
-                    total += projectFee;
-                    html += `<div class="flex justify-between item-row"><span>Project Fee</span><b>₹${projectFee}</b></div>`;
+                // Project and Practicals
+                if (document.getElementById('regCheckProject').checked) {
+                    let pFee = (level === 'ug') ? 800 : 1000;
+                    total += pFee;
+                    html += `<div class="flex justify-between item-row"><span>Project Fee</span><b>₹${pFee}</b></div>`;
                 }
-
-                if (course !== "B.Ed.") {
-                    const practs = parseInt(document.getElementById('regPractCount').value) || 0;
-                    if (practs > 0) {
-                        total += (practs * 170);
-                        html += `<div class="flex justify-between item-row"><span>Add. Practicals</span><b>₹${practs*170}</b></div>`;
-                    }
+                const pCount = parseInt(document.getElementById('regPractCount').value) || 0;
+                if (pCount > 0 && course !== "B.Ed.") {
+                    total += (pCount * 170);
+                    html += `<div class="flex justify-between item-row"><span>Practicals (${pCount})</span><b>₹${pCount*170}</b></div>`;
                 }
-                
-                total += 80;
-                html += `<div class="flex justify-between item-row"><span>Marksheet Fee</span><b>₹80</b></div>`;
             }
 
+            // Enrollment (General Rule)
             if (period === 1 && enrolled === 'no') {
                 total += 160;
                 html += `<div class="flex justify-between item-row"><span>Enrollment Fee</span><b>₹160</b></div>`;
@@ -428,25 +443,24 @@
             const project = document.getElementById('backProjectAlso');
             const practical = document.getElementById('backPracticalCheck');
             const only = document.getElementById('backProjectOnly').checked;
+            
             const base = (level === 'pg') ? 930 : 780;
-            const projectFee = (level === 'pg') ? 1000 : 800;
+            const pFee = (level === 'pg') ? 1000 : 800;
             const permission = 160;
             const practInp = document.getElementById('backPractCount');
+            
             let total = 0, html = "";
             
             if (!only && (project.checked || practical.checked)) theory.checked = true;
             practical.checked ? practInp.classList.remove('hidden') : practInp.classList.add('hidden');
             
             if (only) {
-                total = projectFee; html += `<div class="flex justify-between item-row"><span>Project Only</span><b>₹${projectFee}</b></div>`;
+                total = pFee; html += `<div class="flex justify-between item-row"><span>Project Only</span><b>₹${pFee}</b></div>`;
             } else if (theory.checked || project.checked || practical.checked) {
                 total += base + permission;
                 html += `<div class="flex justify-between item-row"><span>Theory Fee</span><b>₹${base}</b></div>`;
                 html += `<div class="flex justify-between item-row"><span>Permission Fee</span><b>₹${permission}</b></div>`;
-                if (project.checked) { 
-                    total += projectFee; 
-                    html += `<div class="flex justify-between item-row"><span>Project Fee</span><b>₹${projectFee}</b></div>`; 
-                }
+                if (project.checked) { total += pFee; html += `<div class="flex justify-between item-row"><span>Project Fee</span><b>₹${pFee}</b></div>`; }
                 if (practical.checked) {
                     const cnt = parseInt(practInp.value) || 0;
                     total += cnt * 170; html += `<div class="flex justify-between item-row"><span>Practical (${cnt})</span><b>₹${cnt*170}</b></div>`;
@@ -460,15 +474,30 @@
             const isReg = type === 'regular';
             const total = document.getElementById(isReg ? 'regTotalDisplay' : 'backTotal').innerText;
             const rows = document.getElementById(isReg ? 'regBreakdown' : 'backBreakdown').querySelectorAll('.item-row');
+            
+            // MODIFICATION: Get Course and Period details
+            let courseName = "N/A";
+            let periodVal = "N/A";
+            
+            if (isReg) {
+                courseName = document.getElementById('regCourse').value;
+                const pSelect = document.getElementById('regPeriod');
+                periodVal = pSelect.options[pSelect.selectedIndex].text;
+            } else {
+                const level = document.querySelector('input[name="backLevel"]:checked').value;
+                courseName = level === 'ug' ? 'UG (Bachelors)' : 'PG (Masters)';
+                periodVal = "Back Paper";
+            }
+
             let details = '';
             rows.forEach(r => details += `▫️ ${r.innerText.replace('\n', ': ')}\n`);
-            const text = `*UNIVERSITY ${type.toUpperCase()} FEE*\n------------------\n${details}------------------\n💰 *TOTAL: ₹${total}*`;
+            const text = `*UNIVERSITY ${type.toUpperCase()} FEE*\n------------------\n🎓 *COURSE:* ${courseName}\n📅 *PERIOD:* ${periodVal}\n------------------\n${details}------------------\n💰 *TOTAL: ₹${total}*`;
             navigator.clipboard.writeText(text);
             alert("Copied!");
         }
 
         function toggle(id, cond) { const el = document.getElementById(id); if(el) el.style.display = cond ? 'block' : 'none'; }
-        window.onload = () => { calculateBackFee(); };
+        window.onload = () => { updateUI(); };
     </script>
 </body>
 </html>
