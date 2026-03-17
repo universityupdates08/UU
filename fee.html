@@ -8,210 +8,249 @@
     <style>
         .step-hidden { display: none; }
         .disabled-card { opacity: 0.5; pointer-events: none; transition: opacity 0.3s ease; }
-        
-        /* Premium Card Style */
-        .radio-card input:checked + div {
-            border-color: #2563eb;
-            background-color: #eff6ff;
-            color: #1e40af;
-            box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.1);
-        }
-
-        /* Back Card Specific Style */
-        .back-card input:checked + div {
-            border-color: #dc2626;
-            background-color: #fef2f2;
-            color: #991b1b;
-        }
-
-        /* Premium Checkbox Style */
+        .radio-card input:checked + div { border-color: #2563eb; background-color: #eff6ff; color: #1e40af; box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.1); }
+        .back-card input:checked + div { border-color: #dc2626; background-color: #fef2f2; color: #991b1b; }
         .premium-check { transition: all 0.2s ease; border: 2px solid #e5e7eb; }
-        .check-hidden:checked + .premium-check {
-            border-color: #2563eb;
-            background-color: #eff6ff;
-            color: #1e40af;
-        }
+        .check-hidden:checked + .premium-check { border-color: #2563eb; background-color: #eff6ff; color: #1e40af; }
+        .back-check-hidden:checked + .back-check { border-color: #dc2626; background-color: #fef2f2; color: #991b1b; }
         
-        /* Back Checkbox Style */
-        .back-check-hidden:checked + .back-check {
-            border-color: #dc2626;
-            background-color: #fef2f2;
-            color: #991b1b;
-        }
+        .tab-btn { transition: all 0.3s ease; border-bottom: 3px solid transparent; }
+        .tab-btn.active-reg { color: #2563eb; border-color: #2563eb; background-color: #eff6ff; }
+        .tab-btn.active-back { color: #dc2626; border-color: #dc2626; background-color: #fef2f2; }
     </style>
 </head>
 <body class="bg-gray-100 p-5 md:p-10 text-gray-800">
-
-    <div class="max-w-2xl mx-auto space-y-10">
+    <div class="max-w-2xl mx-auto">
         
-        <div class="bg-white p-8 rounded-xl shadow-lg border-t-4 border-blue-600">
-            <h2 class="text-2xl font-bold mb-6 text-blue-800 text-center">Regular Exam Fee</h2>
-            <div class="space-y-6">
-                <div>
-                    <label class="block font-semibold mb-2">Select Course Level:</label>
-                    <div class="flex gap-4">
-                        <label class="flex-1 radio-card cursor-pointer">
-                            <input type="radio" name="regLevel" value="ug" class="hidden" onchange="updateUI()">
-                            <div class="text-center p-3 border-2 rounded-lg font-medium transition hover:bg-gray-50">Under-Graduate</div>
-                        </label>
-                        <label class="flex-1 radio-card cursor-pointer">
-                            <input type="radio" name="regLevel" value="pg" class="hidden" onchange="updateUI()">
-                            <div class="text-center p-3 border-2 rounded-lg font-medium transition hover:bg-gray-50">Post-Graduate</div>
-                        </label>
-                    </div>
-                </div>
-
-                <div id="div-system" class="step-hidden">
-                    <label class="block font-semibold mb-2">Select Course System:</label>
-                    <div class="flex gap-4">
-                        <label class="flex-1 radio-card cursor-pointer">
-                            <input type="radio" name="regSystem" value="annual" class="hidden" onchange="updateUI()">
-                            <div class="text-center p-3 border-2 rounded-lg font-medium transition hover:bg-gray-50">Annual</div>
-                        </label>
-                        <label class="flex-1 radio-card cursor-pointer">
-                            <input type="radio" name="regSystem" value="semester" class="hidden" onchange="updateUI()">
-                            <div class="text-center p-3 border-2 rounded-lg font-medium transition hover:bg-gray-50">Semester</div>
-                        </label>
-                    </div>
-                </div>
-
-                <div id="div-course" class="step-hidden">
-                    <label class="block font-semibold mb-1">Select Course:</label>
-                    <select id="regCourse" class="w-full border-2 p-2 rounded-lg bg-white" onchange="updateUI()"></select>
-                </div>
-
-                <div id="div-period" class="step-hidden">
-                    <label id="periodLabel" class="block font-semibold mb-1">Select Year/Sem:</label>
-                    <select id="regPeriod" class="w-full border-2 p-2 rounded-lg bg-white" onchange="calculateRegularFee()"></select>
-                </div>
-
-                <div id="div-extras-reg" class="step-hidden space-y-4">
-                    <div class="grid grid-cols-2 gap-4">
-                        <div id="div-college">
-                            <p class="text-xs font-bold text-gray-500 mb-1">COLLEGE TYPE</p>
-                            <div class="flex gap-2">
-                                <label class="flex-1 radio-card cursor-pointer">
-                                    <input type="radio" name="collegeType" value="aided" class="hidden" checked onchange="calculateRegularFee()">
-                                    <div class="text-center py-2 border-2 rounded-lg text-sm transition">Govt./Aided</div>
-                                </label>
-                                <label class="flex-1 radio-card cursor-pointer">
-                                    <input type="radio" name="collegeType" value="self" class="hidden" onchange="calculateRegularFee()">
-                                    <div class="text-center py-2 border-2 rounded-lg text-sm transition">Self-Finance</div>
-                                </label>
-                            </div>
-                        </div>
-                        <div id="div-enroll">
-                            <p class="text-xs font-bold text-gray-500 mb-1">ALREADY ENROLLED?</p>
-                            <div class="flex gap-2">
-                                <label class="flex-1 radio-card cursor-pointer">
-                                    <input type="radio" name="enrolled" value="yes" class="hidden" checked onchange="calculateRegularFee()">
-                                    <div class="text-center py-2 border-2 rounded-lg text-sm transition">Yes</div>
-                                </label>
-                                <label class="flex-1 radio-card cursor-pointer">
-                                    <input type="radio" name="enrolled" value="no" class="hidden" onchange="calculateRegularFee()">
-                                    <div class="text-center py-2 border-2 rounded-lg text-sm transition">No</div>
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <label class="flex items-center cursor-pointer">
-                        <input type="checkbox" id="regCheckProject" class="hidden check-hidden" onchange="calculateRegularFee()">
-                        <div class="premium-check w-full p-3 rounded-lg flex justify-between items-center">
-                            <span class="font-bold">Have Project?</span>
-                            <span class="text-xs font-bold text-blue-600 reg-project-tag"></span>
-                        </div>
-                    </label>
-
-                    <div class="p-3 border-2 border-dashed rounded-lg bg-gray-50 flex items-center justify-between">
-                        <span class="font-bold">Practicals</span>
-                        <input type="number" id="regPractCount" min="0" value="0" class="w-20 p-1 border-2 rounded text-center font-bold" oninput="calculateRegularFee()">
-                    </div>
-                </div>
-            </div>
-
-            <div id="regSummary" class="mt-8 bg-blue-50 p-6 rounded-xl border-2 border-blue-100 step-hidden">
-                <div id="regBreakdown" class="space-y-1 text-sm text-gray-700 mb-4"></div>
-                <div class="flex justify-between items-center pt-3 border-t-2 border-blue-200">
-                    <span class="font-bold text-blue-800">Total Fee</span>
-                    <span class="text-2xl font-black text-blue-900">₹<span id="regTotalDisplay">0</span></span>
-                </div>
-                <button onclick="copyFee('regular')" class="w-full mt-4 bg-blue-600 text-white py-2 rounded-lg font-bold">Copy Fee Breakdown</button>
-            </div>
+        <div class="flex bg-white rounded-t-xl shadow-md overflow-hidden mb-0">
+            <button onclick="switchTab('reg')" id="btn-reg" class="tab-btn active-reg flex-1 py-4 font-bold text-center uppercase tracking-wider">
+                Regular / Private Fee
+            </button>
+            <button onclick="switchTab('back')" id="btn-back" class="tab-btn flex-1 py-4 font-bold text-center text-gray-400 uppercase tracking-wider">
+                Back Paper Fee
+            </button>
         </div>
 
-        <div class="bg-white p-8 rounded-xl shadow-lg border-t-4 border-red-600">
-            <h2 class="text-2xl font-bold mb-6 text-red-800 text-center">Back Paper Fee</h2>
-            <div class="space-y-6">
-                <div>
-                    <label class="block font-semibold mb-2">Select Course Level:</label>
-                    <div class="flex gap-4">
-                        <label class="flex-1 radio-card back-card cursor-pointer">
-                            <input type="radio" name="backLevel" value="ug" class="hidden" checked onchange="calculateBackFee()">
-                            <div class="text-center p-3 border-2 rounded-lg font-medium transition hover:bg-gray-50">UG (Bachelors)</div>
-                        </label>
-                        <label class="flex-1 radio-card back-card cursor-pointer">
-                            <input type="radio" name="backLevel" value="pg" class="hidden" onchange="calculateBackFee()">
-                            <div class="text-center p-3 border-2 rounded-lg font-medium transition hover:bg-gray-50">PG (Masters)</div>
-                        </label>
+        <div class="bg-white p-8 rounded-b-xl shadow-lg border-t-0">
+            
+            <div id="section-reg">
+                <h2 class="text-2xl font-bold mb-6 text-blue-800 text-center">Main Exam Fee</h2>
+                <div class="space-y-6">
+                    <div>
+                        <label class="block font-semibold mb-2">Select Course Category:</label>
+                        <div class="flex gap-4">
+                            <label class="flex-1 radio-card cursor-pointer">
+                                <input type="radio" name="courseType" value="regular" class="hidden" checked onchange="updateUI()">
+                                <div class="text-center p-3 border-2 rounded-lg font-medium transition hover:bg-gray-50">Regular</div>
+                            </label>
+                            <label class="flex-1 radio-card cursor-pointer">
+                                <input type="radio" name="courseType" value="private" class="hidden" onchange="updateUI()">
+                                <div class="text-center p-3 border-2 rounded-lg font-medium transition hover:bg-gray-50">Private</div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block font-semibold mb-2">Select Course Level:</label>
+                        <div class="flex gap-4">
+                            <label class="flex-1 radio-card cursor-pointer">
+                                <input type="radio" name="regLevel" value="ug" class="hidden" onchange="updateUI()">
+                                <div class="text-center p-3 border-2 rounded-lg font-medium transition hover:bg-gray-50">Under-Graduate</div>
+                            </label>
+                            <label class="flex-1 radio-card cursor-pointer">
+                                <input type="radio" name="regLevel" value="pg" class="hidden" onchange="updateUI()">
+                                <div class="text-center p-3 border-2 rounded-lg font-medium transition hover:bg-gray-50">Post-Graduate</div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div id="div-system" class="step-hidden">
+                        <label class="block font-semibold mb-2">Select Course System:</label>
+                        <div class="flex gap-4">
+                            <label class="flex-1 radio-card cursor-pointer">
+                                <input type="radio" name="regSystem" value="annual" class="hidden" onchange="updateUI()">
+                                <div class="text-center p-3 border-2 rounded-lg font-medium transition hover:bg-gray-50">Annual</div>
+                            </label>
+                            <label id="label-semester" class="flex-1 radio-card cursor-pointer">
+                                <input type="radio" name="regSystem" value="semester" class="hidden" onchange="updateUI()">
+                                <div class="text-center p-3 border-2 rounded-lg font-medium transition hover:bg-gray-50">Semester</div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div id="div-course" class="step-hidden">
+                        <label class="block font-semibold mb-1">Select Course:</label>
+                        <select id="regCourse" class="w-full border-2 p-2 rounded-lg bg-white" onchange="updateUI()"></select>
+                    </div>
+
+                    <div id="div-period" class="step-hidden">
+                        <label id="periodLabel" class="block font-semibold mb-1">Select Year/Sem:</label>
+                        <select id="regPeriod" class="w-full border-2 p-2 rounded-lg bg-white" onchange="updateUI()"></select>
+                    </div>
+
+                    <div id="div-extras-reg" class="step-hidden space-y-4">
+                        <div class="grid grid-cols-2 gap-4">
+                            <div id="div-college">
+                                <p class="text-xs font-bold text-gray-500 mb-1">COLLEGE TYPE</p>
+                                <div class="flex gap-2">
+                                    <label class="flex-1 radio-card cursor-pointer">
+                                        <input type="radio" name="collegeType" value="govt./aided" class="hidden" checked onchange="calculateRegularFee()">
+                                        <div class="text-center py-2 border-2 rounded-lg text-sm transition">Govt./Aided</div>
+                                    </label>
+                                    <label class="flex-1 radio-card cursor-pointer">
+                                        <input type="radio" name="collegeType" value="self-finance" class="hidden" onchange="calculateRegularFee()">
+                                        <div class="text-center py-2 border-2 rounded-lg text-sm transition">Self-Finance</div>
+                                    </label>
+                                </div>
+                            </div>
+                            <div id="div-enroll">
+                                <p class="text-xs font-bold text-gray-500 mb-1">ALREADY ENROLLED?</p>
+                                <div class="flex gap-2">
+                                    <label class="flex-1 radio-card cursor-pointer">
+                                        <input type="radio" name="enrolled" value="yes" class="hidden" checked onchange="calculateRegularFee()">
+                                        <div class="text-center py-2 border-2 rounded-lg text-sm transition">Yes</div>
+                                    </label>
+                                    <label class="flex-1 radio-card cursor-pointer">
+                                        <input type="radio" name="enrolled" value="no" class="hidden" onchange="calculateRegularFee()">
+                                        <div class="text-center py-2 border-2 rounded-lg text-sm transition">No</div>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="div-project-container">
+                            <label class="flex items-center cursor-pointer">
+                                <input type="checkbox" id="regCheckProject" class="hidden check-hidden" onchange="calculateRegularFee()">
+                                <div class="premium-check w-full p-3 rounded-lg flex justify-between items-center">
+                                    <span class="font-bold">Include Project Fee?</span>
+                                    <span class="text-xs font-bold text-blue-600 reg-project-tag"></span>
+                                </div>
+                            </label>
+                        </div>
+
+                        <div id="div-practical-container" class="p-3 border-2 border-dashed rounded-lg bg-gray-50 flex items-center justify-between">
+                            <span class="font-bold">Add Practicals (if any)</span>
+                            <input type="number" id="regPractCount" min="0" value="0" class="w-20 p-1 border-2 rounded text-center font-bold" oninput="calculateRegularFee()">
+                        </div>
                     </div>
                 </div>
 
-                <div class="space-y-3">
-                    <label class="block font-semibold border-b pb-1">Select Components:</label>
-                    
-                    <label id="theoryRow" class="flex items-center cursor-pointer group">
-                        <input type="checkbox" id="backTheory" class="hidden back-check-hidden" checked onchange="calculateBackFee()">
-                        <div class="premium-check back-check w-full p-3 rounded-lg font-medium">Theory Exam</div>
-                    </label>
-
-                    <label id="projectRow" class="flex items-center cursor-pointer group">
-                        <input type="checkbox" id="backProjectAlso" class="hidden back-check-hidden" onchange="calculateBackFee()">
-                        <div class="premium-check back-check w-full p-3 rounded-lg font-medium">Have Project Back?</div>
-                    </label>
-
-                    <div id="practicalRow" class="p-3 bg-gray-50 rounded border flex items-center justify-between">
-                        <label class="flex items-center cursor-pointer font-medium">
-                            <input type="checkbox" id="backPracticalCheck" class="w-5 h-5 mr-3" onchange="calculateBackFee()">
-                            Have Practical Subjects Back?
-                        </label>
-                        <input type="number" id="backPractCount" min="1" value="1" class="hidden w-16 border p-1 rounded text-center" oninput="calculateBackFee()">
+                <div id="regSummary" class="mt-8 bg-blue-50 p-6 rounded-xl border-2 border-blue-100 step-hidden">
+                    <div id="regBreakdown" class="space-y-1 text-sm text-gray-700 mb-4"></div>
+                    <div class="flex justify-between items-center pt-3 border-t-2 border-blue-200">
+                        <span class="font-bold text-blue-800">Total Fee</span>
+                        <span class="text-2xl font-black text-blue-900">₹<span id="regTotalDisplay">0</span></span>
                     </div>
-
-                    <label class="flex items-center cursor-pointer group">
-                        <input type="checkbox" id="backProjectOnly" class="hidden back-check-hidden" onchange="handleProjectOnlySelection()">
-                        <div class="premium-check back-check w-full p-3 rounded-lg font-bold">Project Back Only</div>
-                    </label>
+                    <button onclick="copyFee('regular')" class="w-full mt-4 bg-blue-600 text-white py-2 rounded-lg font-bold">Copy Fee Breakdown</button>
                 </div>
             </div>
 
-            <div id="backSummary" class="mt-8 bg-red-50 p-6 rounded-xl border-2 border-red-100">
-                <div id="backBreakdown" class="space-y-1 text-sm text-gray-700 mb-4"></div>
-                <div class="flex justify-between items-center pt-3 border-t-2 border-red-200">
-                    <span class="font-bold text-red-800">Total Fee</span>
-                    <span class="text-2xl font-black text-red-900">₹<span id="backTotal">0</span></span>
+            <div id="section-back" class="hidden">
+                <h2 class="text-2xl font-bold mb-6 text-red-800 text-center">Back Paper Fee</h2>
+                <div class="space-y-6">
+                    <div>
+                        <label class="block font-semibold mb-2">Select Course Level:</label>
+                        <div class="flex gap-4">
+                            <label class="flex-1 radio-card back-card cursor-pointer">
+                                <input type="radio" name="backLevel" value="ug" class="hidden" checked onchange="calculateBackFee()">
+                                <div class="text-center p-3 border-2 rounded-lg font-medium transition hover:bg-gray-50">UG (Bachelors)</div>
+                            </label>
+                            <label class="flex-1 radio-card back-card cursor-pointer">
+                                <input type="radio" name="backLevel" value="pg" class="hidden" onchange="calculateBackFee()">
+                                <div class="text-center p-3 border-2 rounded-lg font-medium transition hover:bg-gray-50">PG (Masters)</div>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="space-y-3">
+                        <label class="block font-semibold border-b pb-1">Select Components:</label>
+                        <label class="flex items-center cursor-pointer group">
+                            <input type="checkbox" id="backTheory" class="hidden back-check-hidden" checked onchange="calculateBackFee()">
+                            <div class="premium-check back-check w-full p-3 rounded-lg font-medium">Theory Exam</div>
+                        </label>
+                        <label class="flex items-center cursor-pointer group">
+                            <input type="checkbox" id="backProjectAlso" class="hidden back-check-hidden" onchange="calculateBackFee()">
+                            <div class="premium-check back-check w-full p-3 rounded-lg font-medium">Have Project Back?</div>
+                        </label>
+                        <div id="practicalRow" class="p-3 bg-gray-50 rounded border flex items-center justify-between">
+                            <label class="flex items-center cursor-pointer font-medium">
+                                <input type="checkbox" id="backPracticalCheck" class="w-5 h-5 mr-3" onchange="calculateBackFee()">
+                                Have Practical Subjects Back?
+                            </label>
+                            <input type="number" id="backPractCount" min="1" value="1" class="hidden w-16 border p-1 rounded text-center" oninput="calculateBackFee()">
+                        </div>
+                        <label class="flex items-center cursor-pointer group">
+                            <input type="checkbox" id="backProjectOnly" class="hidden back-check-hidden" onchange="handleProjectOnlySelection()">
+                            <div class="premium-check back-check w-full p-3 rounded-lg font-bold">Project Back Only</div>
+                        </label>
+                    </div>
                 </div>
-                <button onclick="copyFee('back')" class="w-full mt-4 bg-red-600 text-white py-2 rounded-lg font-bold">Copy Fee Breakdown</button>
+                <div id="backSummary" class="mt-8 bg-red-50 p-6 rounded-xl border-2 border-red-100">
+                    <div id="backBreakdown" class="space-y-1 text-sm text-gray-700 mb-4"></div>
+                    <div class="flex justify-between items-center pt-3 border-t-2 border-red-200">
+                        <span class="font-bold text-red-800">Total Fee</span>
+                        <span class="text-2xl font-black text-red-900">₹<span id="backTotal">0</span></span>
+                    </div>
+                    <button onclick="copyFee('back')" class="w-full mt-4 bg-red-600 text-white py-2 rounded-lg font-bold">Copy Fee Breakdown</button>
+                </div>
             </div>
+
         </div>
     </div>
 
     <script>
-        const courseData = {
-            ug: {
-                annual: ["B.ED."],
-                semester: ["B.A. (NEP)", "B.Sc. (NEP)", "B.Com. (NEP)", "B.A.LL.B.", "B.Com.LL.B.", "LL.B.", "B.Sc. Ag.", "B.B.A", "B.C.A"]
+        const feeDatabase = {
+            regular: {
+                ug: {
+                    annual: ["B.Ed."],
+                    semester: ["B.A. (NEP)", "B.Com. (NEP)", "B.Sc. (NEP)"]
+                },
+                pg: {
+                    annual: [],
+                    semester: ["M.A. (NEP)", "M.Com. (NEP)", "M.Sc. (NEP)"]
+                }
             },
-            pg: {
-                semester: ["M.A.", "M.Sc.", "M.Com.", "M.Sc. Ag.", "M.Ed."]
+            private: {
+                ug: ["B.A. (Private)", "B.Com. (Private)"],
+                pg: ["M.A. (Private)", "M.Com. (Private)"]
             }
         };
 
+        function switchTab(tab) {
+            const regSect = document.getElementById('section-reg');
+            const backSect = document.getElementById('section-back');
+            const regBtn = document.getElementById('btn-reg');
+            const backBtn = document.getElementById('btn-back');
+
+            if(tab === 'reg') {
+                regSect.classList.remove('hidden');
+                backSect.classList.add('hidden');
+                regBtn.className = "tab-btn active-reg flex-1 py-4 font-bold text-center uppercase tracking-wider";
+                backBtn.className = "tab-btn flex-1 py-4 font-bold text-center text-gray-400 uppercase tracking-wider hover:text-red-400";
+            } else {
+                regSect.classList.add('hidden');
+                backSect.classList.remove('hidden');
+                regBtn.className = "tab-btn flex-1 py-4 font-bold text-center text-gray-400 uppercase tracking-wider hover:text-blue-400";
+                backBtn.className = "tab-btn active-back flex-1 py-4 font-bold text-center uppercase tracking-wider";
+                calculateBackFee();
+            }
+        }
+
         function updateUI() {
             const levelEl = document.querySelector('input[name="regLevel"]:checked');
-            if(!levelEl) return;
-            const level = levelEl.value;
+            const typeEl = document.querySelector('input[name="courseType"]:checked');
+            if(!levelEl || !typeEl) return;
             
+            const level = levelEl.value;
+            const isPrivate = typeEl.value === 'private';
+            
+            const semLabel = document.getElementById('label-semester');
+            if (isPrivate) {
+                semLabel.classList.add('hidden');
+                document.querySelector('input[name="regSystem"][value="annual"]').checked = true;
+            } else {
+                semLabel.classList.remove('hidden');
+            }
+
             toggle('div-system', true);
             const sysEl = document.querySelector('input[name="regSystem"]:checked');
             const system = sysEl ? sysEl.value : null;
@@ -222,59 +261,126 @@
                 toggle('div-extras-reg', true);
                 toggle('regSummary', true);
 
-                document.querySelector('.reg-project-tag').innerText = (level === 'ug') ? '+₹800' : '+₹1000';
-
                 const cSelect = document.getElementById('regCourse');
-                const list = courseData[level][system] || [];
-                const current = cSelect.value;
-                cSelect.innerHTML = list.map(c => `<option value="${c}" ${c===current?'selected':''}>${c}</option>`).join('');
+                const list = isPrivate ? feeDatabase.private[level] : feeDatabase.regular[level][system];
+                const prevCourse = cSelect.value;
+                cSelect.innerHTML = list.map(c => `<option value="${c}" ${c===prevCourse?'selected':''}>${c}</option>`).join('');
 
                 const pSelect = document.getElementById('regPeriod');
                 const label = document.getElementById('periodLabel');
+                const prevPeriod = pSelect.value;
+
                 if(system === 'annual') {
-                    label.innerText = "4. Select Year:";
-                    pSelect.innerHTML = '<option value="1">1st Year</option><option value="2">2nd Year</option><option value="3">3rd Year</option><option value="4">4th Year</option>';
-                } else {
-                    label.innerText = "4. Select Semester:";
+                    label.innerText = "Select Year:";
+                    let yrs = (level === 'ug' && cSelect.value !== "B.Ed.") ? 3 : 2; 
                     let opts = '';
-                    for(let i=1; i<=10; i++) opts += `<option value="${i}">${i} Sem</option>`;
+                    for(let i=1; i<=yrs; i++) opts += `<option value="${i}">${i}${i==1?'st':i==2?'nd':'rd'} Year</option>`;
+                    pSelect.innerHTML = opts;
+                } else {
+                    label.innerText = "Select Semester:";
+                    let opts = '';
+                    for(let i=1; i<=6; i++) opts += `<option value="${i}">${i} Sem</option>`;
                     pSelect.innerHTML = opts;
                 }
+                if(prevPeriod) pSelect.value = prevPeriod;
+
+                // Rule: Hide Practicals for B.Ed.
+                const isBEd = cSelect.value === "B.Ed.";
+                toggle('div-practical-container', !isBEd && !isPrivate);
+                
+                // Set correct tag label for project
+                document.querySelector('.reg-project-tag').innerText = (level === 'ug') ? '+₹800' : '+₹1000';
             }
             calculateRegularFee();
         }
 
         function calculateRegularFee() {
             const levelEl = document.querySelector('input[name="regLevel"]:checked');
-            if(!levelEl) return;
+            const typeEl = document.querySelector('input[name="courseType"]:checked');
+            if(!levelEl || !typeEl) return;
+            
+            const isPrivate = typeEl.value === 'private';
             const level = levelEl.value;
-            const course = document.getElementById('regCourse').value;
-            const period = parseInt(document.getElementById('regPeriod').value);
+            const sysEl = document.querySelector('input[name="regSystem"]:checked');
+            const system = sysEl ? sysEl.value : 'semester';
+            const period = parseInt(document.getElementById('regPeriod').value) || 1;
             const college = document.querySelector('input[name="collegeType"]:checked').value;
             const enrolled = document.querySelector('input[name="enrolled"]:checked').value;
+            const course = document.getElementById('regCourse').value;
+
+            toggle('div-enroll', period === 1);
+            if (isPrivate) {
+                toggle('div-college', true);
+            } else {
+                toggle('div-college', period % 2 !== 0);
+            }
+            toggle('div-project-container', !isPrivate && system === 'semester');
 
             let total = 0, html = '';
 
-            let theory = (course.includes("NEP") || course === "B.ED.") ? 800 : 1000;
-            total += theory; html += `<div class="flex justify-between item-row"><span>Theory Fee</span><b>₹${theory}</b></div>`;
+            if (isPrivate) {
+                let examBase = (level === 'ug') ? 2410 : 3000;
+                if (period === 2) examBase -= 160;
+                if (period === 3) examBase += 90;
+                if (college === 'self-finance') examBase += 535;
 
-            total += 80; html += `<div class="flex justify-between item-row"><span>Marksheet Fee</span><b>₹80</b></div>`;
-            if(enrolled === 'no' && period === 1) { total += 160; html += `<div class="flex justify-between item-row"><span>Enrollment Fee</span><b>₹160</b></div>`; }
+                total += examBase;
+                html += `<div class="flex justify-between item-row"><span>Exam Fee</span><b>₹${examBase}</b></div>`;
+                
+                if (college === 'govt./aided') {
+                    total += 635;
+                    html += `<div class="flex justify-between item-row"><span>Verification Fee</span><b>₹635</b></div>`;
+                }
+            } else {
+                let theory = 800;
+                total += theory;
+                html += `<div class="flex justify-between item-row"><span>Theory Fee</span><b>₹${theory}</b></div>`;
 
-            if(period % 2 !== 0) {
-                total += 17; html += `<div class="flex justify-between item-row"><span>Misc (Cultural/RR)</span><b>₹17</b></div>`;
-                let sport = (college === 'aided') ? 50 : 70;
-                total += sport; html += `<div class="flex justify-between item-row"><span>Sports Fee</span><b>₹${sport}</b></div>`;
+                if (period % 2 !== 0) {
+                    let sports = (college === 'govt./aided') ? 50 : 70;
+                    let rr = 10;
+                    let cult = 7;
+                    total += sports + rr + cult;
+                    html += `<div class="flex justify-between item-row"><span>Sports Fee</span><b>₹${sports}</b></div>`;
+                    html += `<div class="flex justify-between item-row"><span>Rovers Ranger Fee</span><b>₹${rr}</b></div>`;
+                    html += `<div class="flex justify-between item-row"><span>Cultural Activity Fee</span><b>₹${cult}</b></div>`;
+                }
+
+                if (course === "B.Ed.") {
+                    total += 340;
+                    html += `<div class="flex justify-between item-row"><span>Practical Fee</span><b>₹${340}</b></div>`;
+                    if (college === 'self-finance' && period === 1) {
+                        total += 2010;
+                        html += `<div class="flex justify-between item-row"><span>Infra & Dev Fee</span><b>₹2010</b></div>`;
+                    }
+                }
+
+                if ((system === 'semester' && (period === 2 || period === 6)) || (system === 'annual' && period === 2)) {
+                    total += 250;
+                    html += `<div class="flex justify-between item-row"><span>Degree Fee</span><b>₹250</b></div>`;
+                }
+
+                if (system === 'semester' && document.getElementById('regCheckProject').checked) {
+                    let projectFee = (level === 'ug') ? 800 : 1000;
+                    total += projectFee;
+                    html += `<div class="flex justify-between item-row"><span>Project Fee</span><b>₹${projectFee}</b></div>`;
+                }
+
+                if (course !== "B.Ed.") {
+                    const practs = parseInt(document.getElementById('regPractCount').value) || 0;
+                    if (practs > 0) {
+                        total += (practs * 170);
+                        html += `<div class="flex justify-between item-row"><span>Add. Practicals</span><b>₹${practs*170}</b></div>`;
+                    }
+                }
+                
+                total += 80;
+                html += `<div class="flex justify-between item-row"><span>Marksheet Fee</span><b>₹80</b></div>`;
             }
 
-            if(document.getElementById('regCheckProject').checked) {
-                let p = (level === 'ug') ? 800 : 1000;
-                total += p; html += `<div class="flex justify-between item-row"><span>Project Fee</span><b>₹${p}</b></div>`;
-            }
-
-            const practs = parseInt(document.getElementById('regPractCount').value) || 0;
-            if(practs > 0) {
-                total += (practs * 170); html += `<div class="flex justify-between item-row"><span>Practical (${practs})</span><b>₹${practs*170}</b></div>`;
+            if (period === 1 && enrolled === 'no') {
+                total += 160;
+                html += `<div class="flex justify-between item-row"><span>Enrollment Fee</span><b>₹160</b></div>`;
             }
 
             document.getElementById('regBreakdown').innerHTML = html;
@@ -291,28 +397,32 @@
         }
 
         function calculateBackFee() {
-            const level = document.querySelector('input[name="backLevel"]:checked').value;
+            const levelEl = document.querySelector('input[name="backLevel"]:checked');
+            if(!levelEl) return;
+            const level = levelEl.value;
             const theory = document.getElementById('backTheory');
             const project = document.getElementById('backProjectAlso');
             const practical = document.getElementById('backPracticalCheck');
             const only = document.getElementById('backProjectOnly').checked;
-            
-            const base = (level === 'pg') ? 980 : 780;
+            const base = (level === 'pg') ? 930 : 780;
+            const projectFee = (level === 'pg') ? 1000 : 800;
             const permission = 160;
             const practInp = document.getElementById('backPractCount');
-
             let total = 0, html = "";
+            
             if (!only && (project.checked || practical.checked)) theory.checked = true;
-
             practical.checked ? practInp.classList.remove('hidden') : practInp.classList.add('hidden');
-
+            
             if (only) {
-                total = base; html += `<div class="flex justify-between item-row"><span>Project Only</span><b>₹${base}</b></div>`;
+                total = projectFee; html += `<div class="flex justify-between item-row"><span>Project Only</span><b>₹${projectFee}</b></div>`;
             } else if (theory.checked || project.checked || practical.checked) {
                 total += base + permission;
                 html += `<div class="flex justify-between item-row"><span>Theory Fee</span><b>₹${base}</b></div>`;
                 html += `<div class="flex justify-between item-row"><span>Permission Fee</span><b>₹${permission}</b></div>`;
-                if (project.checked) { total += base; html += `<div class="flex justify-between item-row"><span>Project Fee</span><b>₹${base}</b></div>`; }
+                if (project.checked) { 
+                    total += projectFee; 
+                    html += `<div class="flex justify-between item-row"><span>Project Fee</span><b>₹${projectFee}</b></div>`; 
+                }
                 if (practical.checked) {
                     const cnt = parseInt(practInp.value) || 0;
                     total += cnt * 170; html += `<div class="flex justify-between item-row"><span>Practical (${cnt})</span><b>₹${cnt*170}</b></div>`;
@@ -328,7 +438,6 @@
             const rows = document.getElementById(isReg ? 'regBreakdown' : 'backBreakdown').querySelectorAll('.item-row');
             let details = '';
             rows.forEach(r => details += `▫️ ${r.innerText.replace('\n', ': ')}\n`);
-            
             const text = `*UNIVERSITY ${type.toUpperCase()} FEE*\n------------------\n${details}------------------\n💰 *TOTAL: ₹${total}*`;
             navigator.clipboard.writeText(text);
             alert("Copied!");
