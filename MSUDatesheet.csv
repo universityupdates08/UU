@@ -1,0 +1,238 @@
+Date,Day,Shift,Class,Year,Subject,Paper Code,Paper Name
+27-Mar-26,Friday,Shift-I (11:00 AM - 02:00 PM),B.Sc.,I,Bio-Technology,0128701,Bio-chemistry
+27-Mar-26,Friday,Shift-I (11:00 AM - 02:00 PM),B.Sc.,I,Microbiology,0128801,Fundamentals of Microbiology
+27-Mar-26,Friday,Shift-I (11:00 AM - 02:00 PM),B.Sc.,I,"Physical Education, Health Education & Sports",0159001,Foundation of Physical Education
+27-Mar-26,Friday,Shift-I (11:00 AM - 02:00 PM),B.Ed.,I,Education,0158001,Contemporary India and Education
+27-Mar-26,Friday,Shift-I (11:00 AM - 02:00 PM),B.A. B.Ed.,I,Education,0158601,a) Hindi (Ancient & Medieval Poetry)
+27-Mar-26,Friday,Shift-I (11:00 AM - 02:00 PM),B.A. B.Ed.,I,Education,0158603,b) English (Poetry)
+27-Mar-26,Friday,Shift-I (11:00 AM - 02:00 PM),B.Sc. B.Ed.,I,Education,0158701,a) Mechanics
+27-Mar-26,Friday,Shift-I (11:00 AM - 02:00 PM),B.Sc. B.Ed.,I,Education,0158705,"b) Algae, Lichens and Bryophytes "
+27-Mar-26,Friday,Shift-I (11:00 AM - 02:00 PM),B.El.Ed.,I,Education,0158901,Child Development
+27-Mar-26,Friday,Shift-I (11:00 AM - 02:00 PM),B.P.Ed.,I,Education,0158201,"History, Principles and Foundation of Physical Education "
+27-Mar-26,Friday,Shift-I (11:00 AM - 02:00 PM),B.F.A.,I,Art,0118604,Environmental Studies
+27-Mar-26,Friday,Shift-II (03:00 PM - 06:00 PM),B.Sc.,II,Bio-Technology,0228701,Fundamentals of Computers & Bio-informatics
+27-Mar-26,Friday,Shift-II (03:00 PM - 06:00 PM),B.Sc.,II,Microbiology,0228801,Cell Biology
+27-Mar-26,Friday,Shift-II (03:00 PM - 06:00 PM),B.Sc.,II,"Physical Education, Health Education & Sports",0259001,Language Comm. & Writing Skill-Sanskrit
+27-Mar-26,Friday,Shift-II (03:00 PM - 06:00 PM),B.Ed.,II,Education,0258001,Creating an Inclusive School
+27-Mar-26,Friday,Shift-II (03:00 PM - 06:00 PM),B.A. B.Ed.,II,Education,0258601,a) Hindi (Modern Hindi Poetry)
+27-Mar-26,Friday,Shift-II (03:00 PM - 06:00 PM),B.A. B.Ed.,II,Education,0258611,b) Economics (National Income Analysis Money & Banking)
+27-Mar-26,Friday,Shift-II (03:00 PM - 06:00 PM),B.Sc. B.Ed.,II,Education,0258701,a) Electromagnetics
+27-Mar-26,Friday,Shift-II (03:00 PM - 06:00 PM),B.Sc. B.Ed.,II,Education,0258705,"b) Palaeobotany, Pteridophytes and Gymnosperms "
+27-Mar-26,Friday,Shift-II (03:00 PM - 06:00 PM),B.El.Ed.,II,Education,0258901,Learning Among Elementary Children
+27-Mar-26,Friday,Shift-II (03:00 PM - 06:00 PM),B.P.Ed.,II,Education,0258201,Sports Training
+27-Mar-26,Friday,Shift-II (03:00 PM - 06:00 PM),B.El.Ed.,IV,Education,0458901,Curriculum Studies
+27-Mar-26,Friday,Shift-II (03:00 PM - 06:00 PM),B.F.A.,IV,Art,0418601,History of Modern Indian Art
+27-Mar-26,Friday,Shift-II (03:00 PM - 06:00 PM),B.A. B.Ed.,IV,Education,0458601,Teaching of Social Science
+27-Mar-26,Friday,Shift-II (03:00 PM - 06:00 PM),B.Sc. B.Ed.,IV,Education,0458701,1-Statistical Mechanics & Thermal Physics
+27-Mar-26,Friday,Shift-II (03:00 PM - 06:00 PM),B.Sc. B.Ed.,IV,Education,0458704, 2-Inorganic Chemistry
+27-Mar-26,Friday,Shift-II (03:00 PM - 06:00 PM),B.Sc. B.Ed.,IV,Education,0458707,3-Plant Systematics
+27-Mar-26,Friday,Shift-II (03:00 PM - 06:00 PM),B.Sc. B.Ed.,IV,Education,0458710,4-Ecology and Behavior
+27-Mar-26,Friday,Shift-II (03:00 PM - 06:00 PM),B.Sc. B.Ed.,IV,Education,0458713,5-Real & Complex Analysis
+28-03-2026 Saturday,,03:00 PM - 06:00 PM,B.Sc.,III,Bio-Technology,328701,Plant Bio-technology
+,,,B.Sc.,III,Microbiology,328801,Immunology
+30-03-2026 Monday,,11:00 AM - 01:00 PM,B.Sc.,I,Bio-Technology,128702,Bio-physics
+,,,B.Sc.,I,Microbiology,128802,Bacteriology
+,,,B.Sc.,I,Physical Education,159002,Anatomy And Physiology
+,,,B.Ed.,I,Education,158002,Philosophical & Sociological Perspectives of Education
+,,,B.A. B.Ed.,I,Education,0158602/04,Hindi (Hindi Drama and Stage) / English (Prose)
+,,,B.Sc. B.Ed.,I,Education,0158702/06,a) Optics b) Mycology Microbiology and Phytopathology
+,,,B.El.Ed.,I,Education,158902,Nature of Language
+,,,B.P.Ed.,I,Education,158202,Anatomy and Physiology
+,,03:00 PM - 06:00 PM,B.Sc.,III,Physical Education,359001,Psychology & Sociology Physical Education & Sports
+,,,B.A. B.Ed.,III,Education,0358601/03,a) Hindi b) English (History of English Literature)
+,,,B.Sc. B.Ed.,III,Education,0358701/05,"a) Electronics b) Cell Biology and Genetics, Plant Breeding and Evolution "
+,,,B.El.Ed.,III,Education,358901,Basic Concepts of Education
+,,,B.F.A.,III,Art,318601,History of Far Eastern Art
+,,,B.Sc.,II,Bio-Technology,228702,Bio-energetics and Bio-membranes
+,,,B.Sc.,II,Microbiology,228802,Cell Reproduction and Differentiation
+,,,B.Sc.,II,Physical Education,259002,"Health Education, Safety Education First Aid & Rehabilitation "
+,,,B.Ed.,II,Education,258002,"Gender, School and Society "
+,,,B.A. B.Ed.,II,Education,258602,Hindi (Hindi Narrative Literature)
+,,,B.Sc. B.Ed.,II,Education,0258702/06,a) Quantum Mechanics and Spectroscopy b) Taxonomy of Angiosperms and Developmental Botany
+,,,B.El.Ed.,II,Education,258902,Language Acquisition Among Elementary Children
+,,,B.P.Ed.,II,Education,258202,Computer Applications in Physical Education
+,,,B.El.Ed.,IV,Education,458902,Gender and Schooling
+,,,B.F.A.,IV,Art,418602,History of Modern Western Art
+,,,B.A. B.Ed.,IV,Education,458602,Teaching of Hindi
+,,,B.Sc. B.Ed.,IV,Education,0458702-14,1-Solid State Physics 2-Organic Chemistry 3-Plant Physiology 4-Applied Zoology 5-Numerical Analysis
+02-04-2026 Wednesday,,11:00 AM - 01:00 PM,B.Sc.,I,Bio-Technology,128703,Cell Biology
+,,,B.Sc.,I,Microbiology,128803,Virology
+,,,B.Sc.,I,Physical Education,159003,Theory of Games & Sports (Track & Field)
+,,,B.Ed.,I,Education,158003,Growing up as a Learner
+,,,B.A. B.Ed.,I,Education,0158605/07,a) Sanskrit b) History (Political History of Ancient India)
+,,,B.Sc. B.Ed.,I,Education,158703,Inorganic Chemistry
+,,,B.El.Ed.,I,Education,158903,Elementary Level Mathematics
+,,,B.P.Ed.,I,Education,158203,Health Education and Environmental Studies
+,,03:00 PM - 06:00 PM,B.Sc.,III,Bio-Technology,328702,Animal Bio-technology
+,,,B.Sc.,III,Microbiology,328802,Medical Microbiology
+,,,B.Sc.,III,Physical Education,359002,Fundamentals of Sports Training
+,,,B.El.Ed.,III,Education,358902,School Planning and Management
+,,,B.F.A.,III,Art,318602,Indian Aesthetic
+,,,B.A. B.Ed.,III,Education,0358602/04,a) Hindi b) English (Indian Writing in English Prose)
+,,,B.Sc. B.Ed.,III,Education,0358702/06,a) Relativity and Electrodynamics b) Ecology and Environment Biology
+,,,B.El.Ed.,IV,Education,0458903/04,a) Pedagogy of Language b) Pedagogy of Mathematics
+04-04-2026 Saturday,,11:00 AM - 01:00 PM,B.Sc.,I,Bio-Technology,128704,Microbiology
+,,,B.Sc.,I,Microbiology,128804,"Mycology, Phycology and Protozoology "
+,,,B.Sc.,I,Physical Education,159004,Theory of Games & Sports (Gymnastics)
+,,,B.Ed.,I,Education,158004,"Teacher, Teaching and Technology "
+,,,B.A. B.Ed.,I,Education,0158606/08,a) Sanskrit b) History (AD 606 to AD 1206)
+,,,B.Sc. B.Ed.,I,Education,158704,Organic Chemistry
+,,,B.El.Ed.,I,Education,158904,Elementary Level Natural Science
+,,,B.P.Ed.,I,Education,158204,Yoga Education
+,,03:00 PM - 06:00 PM,B.Sc.,II,Bio-Technology,228703,Molecular Biology
+,,,B.Sc.,II,Microbiology,228803,Microbial Physiology
+,,,B.Sc.,II,Physical Education,259003,Physiology of Exercise
+,,,B.Ed.,II,Education,258003,"Knowledge, Language & Curriculum "
+,,,B.A. B.Ed.,II,Education,0258603/05,a) English (Drama) b) Sanskrit
+,,,B.El.Ed.,II,Education,258903,Techniques for Developing Warm Relationship with Children
+,,,B.P.Ed.,II,Education,258203,Sports Psychology and Sociology
+,,,B.El.Ed.,IV,Education,0458905/06,c) Pedagogy of Natural Science d) Pedagogy of Social Science
+,,,B.F.A.,IV,Art,418603,Advertising Theory
+,,,B.A. B.Ed.,IV,Education,458603,Teaching of English
+,,,B.Sc. B.Ed.,IV,Education,0458703-15,1-Nuclear Physics 2-Physical Chemistry 3-Plant Bio-tech 4-Biostatistics 5-Metric Space
+06-04-2026 Thursday,,11:00 AM - 01:00 PM,B.Sc.,I,Bio-Technology,128705,Genetics
+,,,B.Sc.,I,Microbiology,128805,Bio-Chemistry
+,,,B.Sc.,I,Physical Education,159005,Theory of Games & Sports (Yoga)
+,,,B.Ed.,I,Education,158005,Pedagogy of Hindi
+,,,B.A. B.Ed.,I,Education,158609,Political Science (Political Theory)
+,,,B.Sc. B.Ed.,I,Education,0158707/09,a) Animal Diversity and Evolution b) Algebra and Coordinate Geometry
+,,,B.El.Ed.,I,Education,158905,Elementary Level Social Science
+,,,B.P.Ed.,I,Education,158205,Educational Technology and Methods
+,,03:00 PM - 06:00 PM,B.Sc.,III,Bio-Technology,328703,Molecular Virology
+,,,B.Sc.,III,Microbiology,328803,Food and Dairy Microbiology
+,,,B.Sc.,III,Physical Education,359003,Kinesiology & Bio-Mechanics
+,,,B.El.Ed.,III,Education,358903,Logic of Mathematics Education
+,,,B.F.A.,III,Art,318603,Advertising Theory
+,,,B.A. B.Ed.,III,Education,0358605/09,a) Sanskrit b) History of Modern World
+,,,B.Sc. B.Ed.,III,Education,358703,Inorganic Chemistry
+,,,B.Sc. B.Ed.,II,Education,258703,Organic Chemistry
+07-04-2026 Saturday,,03:00 PM - 06:00 PM,B.Sc.,II,Bio-Technology,228704,Molecular Genetics and Cytogenetics
+,,,B.Sc.,II,Microbiology,228804,Microbial Metabolism
+,,,B.Sc.,II,Physical Education,259004,Theory of Games & Sports (Track & Field)
+,,,B.Ed.,II,Education,258004,"Work Education, Gandhiji’s Nai Talim "
+,,,B.A. B.Ed.,II,Education,0258604/06,a) English (Fiction) b) Sanskrit
+,,,B.Sc. B.Ed.,II,Education,258704,Physical Chemistry
+,,,B.El.Ed.,II,Education,258904,"Identifying Gifted, Creative and Problem Children "
+,,,B.P.Ed.,II,Education,258204,Measurement and Evaluation in Phys. Education
+,,,B.El.Ed.,IV,Education,0458907/08,a) Computer Education b) Special Education
+,,,B.F.A.,IV,Art,418605,Fashion Theory
+,,,B.A. B.Ed.,IV,Education,458604,Teaching of Sanskrit
+,,,B.Sc. B.Ed.,IV,Education,458716,Knowledge & Curriculum
+08-04-2026 Tuesday,,11:00 AM - 01:00 PM,B.Sc.,I,Bio-Technology,128706,Instrumentation & Bio-analytical Techniques
+,,,B.Sc.,I,Microbiology,128806,Bio-Physics
+,,,B.Sc.,I,Physical Education,159006,Sports & Games of Spec.
+,,,B.Ed.,I,Education,0158006/07/15,Pedagogy of English/Sanskrit/Urdu
+,,,B.A. B.Ed.,I,Education,158610,Political Science (National Movement & Constitution)
+,,,B.Sc. B.Ed.,I,Education,0158708/10,a) Biology of Non chordates b) Calculus
+,,,B.P.Ed.,I,Education,158206,Organization and Administration
+,,03:00 PM - 06:00 PM,B.Sc.,III,Bio-Technology,328704,Nano-Biotechnology
+,,,B.Sc.,III,Microbiology,328804,Agricultural Microbiology
+,,,B.Sc.,II,Physical Education,359004,Theory of Games & Sports (Track & Field)
+,,,B.El.Ed.,III,Education,358904,Pedagogy of Environmental Studies
+,,,B.A. B.Ed.,III,Education,358606,Sanskrit
+,,,B.Sc. B.Ed.,III,Education,358704,Physical Chemistry
+09-04-2026 Friday,,03:00 PM - 06:00 PM,B.Sc.,II,Bio-Technology,228705,Immunology and Immuno-technology
+,,,B.Sc.,II,Microbiology,228805,Molecular Biology
+,,,B.Sc.,II,Physical Education,259005,Theory of Games & Sports (Gymnastics)
+,,,B.Ed.,II,Education,258005,Assessment for Learning
+,,,B.A. B.Ed.,II,Education,258607,History (Medieval India 1206-1526 AD)
+,,,B.Sc. B.Ed.,II,Education,0258707/09,a) Chordate Structure b) 3D Geometry
+,,,B.P.Ed.,II,Education,258205,Kinesiology and Biomechanics
+,,,B.F.A.,IV,Art,418606,Apparel Fabric Studies
+,,,B.A. B.Ed.,IV,Education,458605,Teaching of Home Science
+,,,B.Sc. B.Ed.,IV,Education,458717,Understanding Inclusive Education
+10-04-2026 Sunday,,11:00 AM - 01:00 PM,B.Sc.,I,Bio-Technology,128707,Bio-mathematics & Bio-statistics
+,,,B.Sc.,I,Microbiology,128807,Instrumentation and Culture Techniques
+,,,B.Ed.,I,Education,0158008/11,a) Pedagogy of Social Science b) Biological Science
+,,,B.A. B.Ed.,I,Education,158611,Economics (Principles of Economic Analysis)
+,,,B.Sc. B.Ed.,I,Education,158711,Childhood and growing up
+,,,B.P.Ed.,I,Education,158207,Officiating and Coaching
+,,03:00 PM - 06:00 PM,B.Sc.,III,Bio-Technology,328705,Environmental Bio-Technology
+,,,B.Sc.,III,Microbiology,328805,Recombinant DNA Technology
+,,,B.Sc.,III,Physical Education,359005,Kabbaddi
+,,,B.A. B.Ed.,III,Education,358607,History (1740-1947)
+,,,B.Sc. B.Ed.,III,Education,358707,Cell Biology and Genetics
+11-04-2026 Wednesday,,03:00 PM - 06:00 PM,B.Sc.,II,Bio-Technology,228706,Recombinant DNA Technology
+,,,B.Sc.,II,Microbiology,228806,Microbial Genetics
+,,,B.Sc.,II,Physical Education,259006,Theory of Games & Sports (Basket Ball)
+,,,B.Ed.,II,Education,0258006-11,a) Administration b) Guidance c) Env. d) Computer e) Yoga
+,,,B.A. B.Ed.,II,Education,258608,History (1526-1740 AD)
+,,,B.Sc. B.Ed.,II,Education,0258708/10,a) Developmental Biology b) Differential Equations
+,,,B.P.Ed.,II,Education,258206,Research and Statistics in Physical Education
+,,,B.Sc. B.Ed.,IV,Education,458718,Pedagogy of Mathematics
+13-04-2026 Monday,,11:00 AM - 01:00 PM,B.Sc.,I,Bio-Technology,128708,Chemistry
+,,,B.Sc.,I,Microbiology,128808,Analytical Techniques
+,,,B.Sc.,I,Physical Education,188008,Environmental Studies (Qualifying)
+,,,B.Ed.,I,Education,0158009/13,a) Pedagogy of Mathematics b) Home Science
+,,,B.A. B.Ed.,I,Education,188008,Environmental Studies (Compulsory Qualifying)
+,,,B.Sc. B.Ed.,I,Education,158712,Basics in Education & Communication
+,,03:00 PM - 06:00 PM,B.Sc.,III,Bio-Technology,328706,Industrial Bio-Technology
+,,,B.Sc.,III,Microbiology,328806,Industrial Microbiology
+,,,B.Sc.,III,Physical Education,359006,Theory of Games (Sports Specialization)
+,,,B.A. B.Ed.,III,Education,358608,History (History of Indian Culture)
+,,,B.Sc. B.Ed.,II,Education,358708,Animal Physiology and Biochemistry
+15-04-2026 Wednesday,,11:00 AM - 01:00 PM,B.P.Ed.,I,Education,158208,Sports Nutrition and Weight Management
+,,,B.Sc.,I,Microbiology,128809,Biology - I
+,,,B.Sc.,I,Bio-Technology,128709,Bio-Diversity
+,,,B.Sc.,I,Physical Education,188009,Bhartiya Sanskriti Evam Rashtra Gaurav
+,,,B.Ed.,I,Education,158010,Pedagogy of Physical Science
+,,,B.A. B.Ed.,I,Education,158612,Economics (Indian Economic Problems)
+,,,B.Sc. B.Ed.,I,Education,158713,Language Across the Curriculum
+,,03:00 PM - 06:00 PM,B.Sc.,II,Bio-Technology,228707,Animal Physiology
+,,,B.Sc.,II,Microbiology,228807,Bio-Mathematics
+,,,B.Sc.,II,Physical Education,259007,Theory of Games (Volley Ball)
+,,,B.A. B.Ed.,II,Education,258609,Political Science (Western Political Thought)
+,,,B.Sc. B.Ed.,II,Education,258711,Fundamentals of Contemporary Indian Ed.
+,,,B.P.Ed.,II,Education,258207,Sports Medicine and Rehabilitation
+,,,B.Sc. B.Ed.,IV,Education,458719,Pedagogy of Physical Science
+16-04-2026 Thursday,,03:00 PM - 06:00 PM,B.Sc.,III,Bio-Technology,328707,Genomics and Proteomics
+,,,B.Sc.,III,Microbiology,328807,Microbial Microbiology
+,,,B.Sc.,III,Physical Education,359007,Kho Kho
+17-04-2026 Friday,,11:00 AM - 01:00 PM,B.Sc.,I,Microbiology,128810,Biology - II
+,,,B.Ed.,I,Education,158012,Pedagogy of Computer Science
+,,,B.A. B.Ed.,I,Education,158613,Home Science (Management and Housing)
+,,,B.Sc. B.Ed.,I,Education,158714,Conservation & Environmental Regeneration
+,,,B.Sc.,I,Physical Education,188010,General Awareness (Qualifying)
+,,03:00 PM - 06:00 PM,B.A. B.Ed.,III,Education,358610,Political Science (Public Administration)
+,,,B.Sc. B.Ed.,III,Education,358709,Mechanics (Statics and Dynamics)
+,,,B.Sc.,II,Bio-Technology,228708,Plant Physiology
+,,,B.Sc.,II,Microbiology,228808,Fundamentals of Computer & Bio-stats
+,,,B.A. B.Ed.,II,Education,258610,Political Science (Comparative Gov.)
+,,,B.Sc. B.Ed.,II,Education,258712,Learning Enrichment through ICT
+20-04-2026 Monday,,11:00 AM - 01:00 PM,B.Ed.,I,Education,158014,Pedagogy of Commerce
+,,,B.A. B.Ed.,I,Education,158614,Home Science (Extension Education)
+,,,B.Sc. B.Ed.,I,Education,158715,General English
+,,03:00 PM - 06:00 PM,B.P.Ed.,II,Education,258208,Sports Management
+,,,B.Sc. B.Ed.,IV,Education,458720,Pedagogy of Chemistry
+,,,B.Sc.,III,Bio-Technology,328708,"Bio-safety, IPR and Entrepreneurship "
+,,,B.Sc.,III,Microbiology,328808,Microbes in Environmental Bio-Tech
+,,,B.A. B.Ed.,III,Education,358611,Political Science (Indian Political Thought)
+,,,B.Sc. B.Ed.,III,Education,358710,Abstract Algebra
+21-04-2026 Tuesday,,11:00 AM - 01:00 PM,B.A. B.Ed.,I,Education,158615,Development of Learner
+,,03:00 PM - 06:00 PM,B.Sc.,II,Microbiology,228809,Biology-III
+,,,B.Sc.,II,Bio-Technology,228709,Enzymes and Enzyme Technology
+,,,B.A. B.Ed.,II,Education,258612,Economics (Public Finance)
+,,,B.Sc. B.Ed.,II,Education,258713,"Schooling, Socialization and Identity "
+,,,B.Sc. B.Ed.,IV,Education,458721,Pedagogy of Biological Science
+24-04-2026 Friday,,11:00 AM - 01:00 PM,B.A. B.Ed.,I,Education,158616,Essentials of Ed. Technology & Management
+,,03:00 PM - 06:00 PM,B.Sc.,III,Bio-Technology,328709,Recent Trends in Bio-technology
+,,,B.Sc.,III,Microbiology,328809,Fundamentals of Information Technology
+,,,B.A. B.Ed.,III,Education,358612,Economics (Growth and Development)
+,,,B.Sc. B.Ed.,III,Education,358711,"Teaching, Learning & Assessment "
+25-04-2026 Saturday,,03:00 PM - 06:00 PM,B.Sc.,II,Microbiology,228810,Biology - IV
+,,,B.A. B.Ed.,II,Education,258613,Home Science (Introduction to Textile)
+,,,B.Sc. B.Ed.,II,Education,258714,Health & Physical Education
+,,,B.Sc. B.Ed.,IV,Education,458722,Pedagogy of General Science
+27-04-2026 Monday,,03:00 PM - 06:00 PM,B.Sc.,III,Microbiology,328810,"Genomics, Proteomics and Bio-informatics "
+,,,B.A. B.Ed.,III,Education,358613,Economics (Quantitative Methods)
+28-04-2026 Tuesday,,03:00 PM - 06:00 PM,B.Sc. B.Ed.,III,Education,358712,Gender Issues in Education
+,,,B.A. B.Ed.,II,Education,258614,Home Science (Child Development)
+,,,B.A. B.Ed.,III,Education,358614,Home Science (Foods and Nutrition)
+30-04-2026 Thursday,,03:00 PM - 06:00 PM,B.Sc. B.Ed.,III,Education,358713,Pedagogy of Mathematics
+,,,B.A. B.Ed.,II,Education,258615,Teacher in Emerging Indian Society
+02-05-2026 Thursday,,03:00 PM - 06:00 PM,B.A. B.Ed.,III,Education,358615,Home Science (Dietetics)
+,,,B.Sc. B.Ed.,III,Education,358714,Pedagogy of Physical Science
+04-05-2026 Sunday,,03:00 PM - 06:00 PM,B.A. B.Ed.,II,Education,258616,Development of Education System in India
+05-05-2026 Tuesday,,03:00 PM - 06:00 PM,B.A. B.Ed.,III,Education,0358680/81,Career Guidance / Educational Administration
+06-05-2026 Friday,,03:00 PM - 06:00 PM,B.Sc. B.Ed.,III,Education,358716,Pedagogy of Biological Science
+,,,B.A. B.Ed.,II,Education,188002,Games/Sports and Physical Education (Compulsory)
