@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Exam Schedule Portal - UNIVERSITY UPDATES</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+
+    <style>
+        :root {
+            --primary-color: #ef3c3c;
+            --primary-color-dark: #c63333;
+            --secondary-color: #2c4b9e;
+            --card-bg: rgba(255, 255, 255, 0.97);
+            --card-grad: linear-gradient(135deg, #6a5cff, #4fb7ff);
+            --yellow-grad: linear-gradient(135deg, #ffd84d, #ffb300);
+            --alert-today: #00b894;
+            --alert-tomorrow: #f39c12;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            font-family: "Poppins", sans-serif;
+            margin: 0;
+            padding: 0;
+            background: radial-gradient(circle at top, #ffffff 0, #e5edff 45%, #f3f4f6 100%);
+            color: #0f172a;
+            overflow-x: hidden;
+        }
+
+        .utility-bar { background-color: #0f172a; color: #e5e7eb; font-size: 0.8rem; padding: 0.35rem 0; }
+        .utility-bar a { color: #e5e7eb; transition: opacity 0.2s ease; }
+        .utility-bar a:hover { opacity: 0.85; color: var(--secondary-color); }
+
+        .main-nav { background-color: #ffffffdd; backdrop-filter: blur(10px); border-bottom: 1px solid rgba(148, 163, 184, 0.25); position: sticky; top: 0; z-index: 100; }
+        .nav-link { font-size: 0.9rem; font-weight: 500; padding: 0.4rem 0.75rem; border-radius: 999px; transition: 0.15s ease; }
+        .nav-link:hover { background-color: rgba(239, 60, 60, 0.08); color: var(--primary-color); }
+
+        .announcement-bar { background-color: var(--primary-color); color: white; font-size: 0.85rem; display: flex; align-items: center; overflow: hidden; height: 32px; }
+        .announcement-inner { white-space: nowrap; display: inline-block; padding-left: 100%; animation: ticker 18s linear infinite; }
+        @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-100%); } }
+
+        .primary-chip { display: inline-flex; align-items: center; gap: 0.35rem; padding: 0.35rem 0.8rem; border-radius: 999px; background-color: rgba(239, 60, 60, 0.08); color: var(--primary-color); font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; }
+
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            width: 95%;
+            max-width: 1200px;
+            margin: 2rem auto;
+            box-shadow: 0 18px 45px rgba(15, 23, 42, 0.08);
+        }
+
+        .row { margin: 20px 0; padding: 20px; border-radius: 10px; }
+        .row0 { background: #f8f9fa; border: 1px solid #eee; }
+        .row1 { background: #e8f1ff; }
+        .row2 { background: #e9f9ef; }
+        .row3 { background: #fff1f1; }
+        .row4 { background: #fff8e1; }
+        .row5 { background: #f2f2ff; }
+        
+        .row h3 { text-align: left; margin-bottom: 15px; color: #333; font-size: 1.1rem; border-left: 4px solid #2c7be5; padding-left: 10px; font-weight: 700; }
+
+        .warning { background: #fff3cd; border: 1px solid #ffeeba; padding: 15px; margin-bottom: 20px; border-radius: 8px; color: #856404; text-align: left; font-size: 0.9rem; }
+
+        .controls { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+        .controls input, .controls select, .controls button { flex: 1; min-width: 200px; padding: 12px; border-radius: 6px; border: 1px solid #ccc; font-size: 0.95rem; }
+        .controls button { background: #2c7be5; color: white; border: none; cursor: pointer; font-weight: bold; width: 100%; }
+        
+        .alert-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 20px; }
+        .alert-card { background: white; border-radius: 14px; padding: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); border-top: 5px solid #2c7be5; }
+        .alert-card.today { border-top-color: var(--alert-today); }
+        .alert-card.tomorrow { border-top-color: var(--alert-tomorrow); }
+
+        .results-grid { margin-top: 20px; display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 15px; }
+        .card { background: var(--card-grad); color: white; border-radius: 12px; padding: 16px; text-align: left; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .card-date { font-weight: 800; font-size: 1.1rem; }
+        .badge { display: inline-block; background: rgba(0,0,0,0.15); padding: 4px 8px; border-radius: 4px; font-size: 0.75rem; margin-top: 10px; font-weight: bold; }
+
+        .row, .alert-card, .card, #dateResults, #resultRow2, #resultRow4, #resultRow5 {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+    
+        #resultRow4 .bg-\[\#ffd84d\] { background: var(--yellow-grad) !important; color: #1e293b !important; border: 1px solid rgba(0,0,0,0.1); box-shadow: 0 10px 20px rgba(0,0,0,0.05); line-height: 1.6; }
+        #resultRow4 b { color: #000; font-weight: 700; }
+
+        table { width: 100%; min-width: 500px; border-collapse: collapse; margin-top: 10px; font-size: 0.8rem; background: white; color: #333; }
+        th, td { border: 1px solid #eee; padding: 10px 6px; text-align: center; }
+        th { background: #2c7be5; color: white; white-space: nowrap; }
+
+        @media (max-width: 480px) {
+            .container { padding: 15px; width: 98%; }
+            .controls input, .controls select { min-width: 100%; }
+            .text-2xl { font-size: 1.25rem; }
+            .row h3 { font-size: 1rem; }
+        }
+
+        #topBtn { display: none; position: fixed; bottom: 20px; right: 24px; z-index: 40; background-color: var(--primary-color); color: white; padding: 0.6rem 0.8rem; border-radius: 999px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); cursor: pointer; border:none; }
+        footer a.footer-social-link { margin: 0 0.75rem; font-size: 1.2rem; transition: 0.2s; }
+    </style>
+</head>
+<body>
+    <div class="utility-bar">
+        <div class="max-w-7xl mx-auto px-4 flex justify-between items-center">
+            <div class="flex items-center gap-4">
+                <a href="https://t.me/HelpforDMBot" target="_blank" class="flex items-center gap-1">
+                    <i class="fas fa-envelope text-xs"></i>
+                    <span>Contact Us</span>
+                </a>
+            </div>
+            <div class="flex items-center gap-3">
+                <a href="index.html" aria-label="Home"><i class="fas fa-home text-xs"></i></a>
+                <span class="text-slate-500">|</span>
+                <a href="https://www.youtube.com/@University-Updates-UU" target="_blank"><i class="fab fa-youtube"></i></a>
+                <span class="text-slate-500">|</span>
+                <a href="https://instagram.com/universityupdates_uu" target="_blank"><i class="fab fa-instagram"></i></a>
+                <span class="text-slate-500">|</span>
+                <a href="https://x.com/uniupdates08" target="_blank"><i class="fab fa-x"></i></a>
+                <span class="text-slate-500">|</span>
+                <a href="https://t.me/UniversityUpdates_UU" target="_blank"><i class="fab fa-telegram-plane"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <header class="main-nav">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex flex-col md:flex-row items-center justify-between gap-3">
+            <div class="flex items-center gap-3">
+                <img src="images/uuug.png" alt="Logo" class="h-14 md:h-16 drop-shadow-md" />
+                <div class="hidden sm:block text-left">
+                    <div class="primary-chip"><i class="fas fa-graduation-cap text-xs"></i> UNIVERSITY UPDATES & UNIVERSITY GYAAN</div>
+                    <p class="text-xs text-slate-500 mt-1">Free Study Resources • Tools • Notifications</p>
+                </div>
+            </div>
+            <nav class="hidden md:flex items-center gap-4 text-sm font-medium">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="vivanew.html" class="nav-link">Viva-Voce (Private)</a>
+                <a href="datesheet.html" class="nav-link">Exam Date Card Generator</a>
+            </nav>
+            <div class="md:hidden">
+                <button id="menu-btn" class="text-xl focus:outline-none"><i class="fas fa-bars"></i></button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-slate-200 px-4 pb-3 space-y-2">
+            <a href="index.html" class="block text-sm font-medium py-2">Home</a>
+            <a href="vivanew.html" class="block text-sm font-medium py-2 border-t">Viva-Voce (Private)</a>
+            <a href="datesheet.html" class="block text-sm font-medium py-2 border-t">Exam Date Card Generator</a>
+        </div>
+    </header>
+
+    <div class="announcement-bar">
+        <div class="max-w-7xl mx-auto flex items-center gap-2 px-4 w-full overflow-hidden">
+            <span class="text-lg">📢</span>
+            <div class="flex-1 overflow-hidden">
+                <div class="announcement-inner">
+                    ➤ Welcome to UNIVERSITY UPDATES & UNIVERSITY GYAAN &nbsp;&nbsp;•&nbsp;&nbsp; Free Study Materials, Exam Tools, And Notifications For Students &nbsp;&nbsp;•&nbsp;&nbsp; Stay Connected With CCSU, MSU, AKTU & Many More...
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <main class="container">
+        <h2 class="text-2xl font-bold mb-4">CCSU Digital Exam Schedule Portal</h2>
+        <div class="warning">
+            ⚠ Please verify the exam schedule carefully. Always confirm with the official notification before appearing in the exam. The data are available as per University Letter No. (Exam/D.R./10184) Dated - 16.03.2026 & (Exam/D.R./10191) Dated - 20.03.2026. We are not responsible for any error.
+        </div>
+
+        <div class="row row0">
+            <h3>📢 CCSU Live Exam Alerts</h3>
+            <div class="alert-grid">
+                <div class="alert-card today" id="todayCard"></div>
+                <div class="alert-card tomorrow" id="tomorrowCard"></div>
+            </div>
+        </div>
+
+        <div class="row row1">
+            <h3>SEARCH BY DATE</h3>
+            <div class="controls">
+                <input type="date" id="date1">
+                <button onclick="searchByDate()">Search</button>
+            </div>
+            <div id="dateResults"></div>
+        </div>
+
+        <div class="row row2">
+            <h3>SEARCH BY CLASS & SUBJECT</h3>
+            <div class="controls">
+                <select id="class2"><option value="">Select Class</option></select>
+                <select id="subject2"><option value="">Select Subject</option></select>
+                <button onclick="searchByClassSubject()">Search</button>
+            </div>
+            <div id="resultRow2"></div>
+        </div>
+
+        <div class="row row3">
+            <h3>SEARCH BY DATE & CLASS</h3>
+            <div class="controls">
+                <input type="date" id="date3">
+                <select id="class3"><option value="">Select Class</option></select>
+                <button onclick="searchByDateClass()">Search</button>
+            </div>
+            <div id="resultRow3" class="results-grid"></div>
+        </div>
+
+        <div class="row row4">
+            <h3>SEARCH BY PAPER CODE</h3>
+            <div class="controls">
+                <select id="code4"><option value="">Select Paper Code</option></select>
+                <button onclick="searchByCode()">Search</button>
+            </div>
+            <div id="resultRow4"></div>
+        </div>
+
+        <div class="row row5">
+            <h3>SEARCH BY CLASS, YEAR/SEM & SUBJECT</h3>
+            <div class="controls">
+                <select id="class5"><option value="">Select Class</option></select>
+                <select id="year5">
+                    <option value="">Select Year/Sem</option>
+                    <option value="1st">1st Year/Sem</option>
+                    <option value="2nd">2nd Year/Sem</option>
+                    <option value="3rd">3rd Year/Sem</option>
+                    <option value="4th">4th Year/Sem</option>
+                    <option value="5th">5th Sem</option>
+                    <option value="6th">6th Sem</option>
+                    <option value="7th">7th Sem</option>
+                    <option value="8th">8th Sem</option>
+                    <option value="9th">9th Sem</option>
+                    <option value="10th">10th Sem</option>
+                </select>
+                <select id="subject5"><option value="">Select Subject</option></select>
+                <button onclick="searchClassYearSubject()">Search</button>
+            </div>
+            <div id="resultRow5"></div>
+        </div>
+    </main>
+
+    <footer class="text-center py-2 bg-slate-100 border-t border-slate-200 mt-12">
+        <div class="flex items-center justify-center py-4 gap-1 mt-2 text-slate-500 text-xs">
+            <i class="fas fa-users text-blue-500"></i>
+            <span>Total Visitors:</span>
+            <span id="new-count" class="font-bold text-slate-800 bg-slate-200 px-2 py-0.5 rounded">0</span>
+        </div>
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="mb-4 text-slate-600 flex items-center justify-center gap-4">
+                <a href="https://www.youtube.com/@University-Updates-UU" target="_blank" class="text-slate-500 hover:text-red-600 footer-social-link"><i class="fab fa-youtube"></i></a>
+                <a href="https://instagram.com/universityupdate_uu" target="_blank" class="text-slate-500 hover:text-pink-600 footer-social-link"><i class="fab fa-instagram"></i></a>
+                <a href="https://x.com/uniupdates08" target="_blank" class="text-slate-500 hover:text-pink-600 footer-social-link"><i class="fab fa-x"></i></a>
+                <a href="https://t.me/UniversityUpdates_UU" target="_blank" class="text-slate-500 hover:text-sky-500 footer-social-link"><i class="fab fa-telegram-plane"></i></a>
+            </div>
+            <div id="datetime" class="text-[#2c4b9e] text-sm font-semibold mb-2">
+                <span id="liveDate"></span> | <span id="liveTime"></span>
+            </div>
+            <p class="text-xs md:text-sm text-slate-500">
+                © 2026 | Designed by <b>University Updates</b>
+            </p>
+        </div>
+    </footer>
+
+    <button id="topBtn" title="Go to top">↑</button>
+
+<script>
+    let csvData = [];
+    Papa.parse("Datesheet.csv", {
+        download: true,
+        header: true,
+        skipEmptyLines: true,
+        complete: function(results) {
+            csvData = results.data;
+            populateFilters();
+            showLiveAlerts();
+        }
+    });
+
+    function updateDateTime() {
+        const now = new Date();
+        const dateEl = document.getElementById("liveDate");
+        const timeEl = document.getElementById("liveTime");
+        if (dateEl && timeEl) {
+            dateEl.textContent = now.toLocaleDateString("en-IN", { weekday: "long", year: "numeric", month: "long", day: "numeric" });
+            timeEl.textContent = now.toLocaleTimeString("en-IN", { hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: true });
+        }
+    }
+    setInterval(updateDateTime, 1000);
+    updateDateTime();
+
+    document.getElementById("menu-btn").addEventListener("click", () => {
+        document.getElementById("mobile-menu").classList.toggle("hidden");
+    });
+
+    const topBtn = document.getElementById("topBtn");
+    window.onscroll = () => {
+        topBtn.style.display = (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) ? "block" : "none";
+    };
+    topBtn.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    // --- Updated Filter Logic ---
+    function populateFilters() {
+        const classes = new Set(), codes = new Set();
+        csvData.forEach(r => {
+            if(r.Class) classes.add(r.Class);
+            if(r['Paper Code']) codes.add(r['Paper Code']);
+        });
+
+        const fillSelect = (id, items) => {
+            const el = document.getElementById(id);
+            el.innerHTML = el.options[0].outerHTML; // Keep "Select..." option
+            items.forEach(item => el.innerHTML += `<option value="${item}">${item}</option>`);
+        };
+
+        const sortedClasses = Array.from(classes).sort();
+        fillSelect("class2", sortedClasses);
+        fillSelect("class3", sortedClasses);
+        fillSelect("class5", sortedClasses);
+        fillSelect("code4", Array.from(codes).sort());
+
+        // Event Listeners for dynamic subject display based on class
+        document.getElementById("class2").addEventListener("change", function() {
+            updateSubjectDropdown(this.value, "subject2");
+        });
+
+        document.getElementById("class5").addEventListener("change", function() {
+            updateSubjectDropdown(this.value, "subject5");
+        });
+    }
+
+    function updateSubjectDropdown(selectedClass, subjectElementId) {
+        const subjectSelect = document.getElementById(subjectElementId);
+        subjectSelect.innerHTML = `<option value="">Select Subject</option>`;
+        
+        if (!selectedClass) return;
+
+        const filteredSubjects = new Set();
+        csvData.forEach(r => {
+            if (r.Class === selectedClass && r.Subject) {
+                filteredSubjects.add(r.Subject);
+            }
+        });
+
+        Array.from(filteredSubjects).sort().forEach(sub => {
+            const opt = document.createElement("option");
+            opt.value = sub;
+            opt.textContent = sub;
+            subjectSelect.appendChild(opt);
+        });
+    }
+
+    function formatDate(dateInput) {
+        if(!dateInput) return "";
+        const d = new Date(dateInput);
+        const day = String(d.getDate()).padStart(1, '0');
+        const month = d.toLocaleString('en-US', { month: 'short' });
+        const year = d.getFullYear().toString().slice(-2);
+        return `${day}-${month}-${year}`;
+    }
+
+    function showLiveAlerts() {
+        const today = new Date();
+        const tomorrow = new Date();
+        tomorrow.setDate(today.getDate() + 1);
+        const tStr = formatDate(today);
+        const tmStr = formatDate(tomorrow);
+        const tExams = csvData.filter(r => r.Date === tStr);
+        const tmExams = csvData.filter(r => r.Date === tmStr);
+
+        document.getElementById("todayCard").innerHTML = renderAlertBox("TODAY'S EXAMS", today, tExams);
+        document.getElementById("tomorrowCard").innerHTML = renderAlertBox("TOMORROW'S EXAMS", tomorrow, tmExams);
+    }
+
+    function renderAlertBox(title, dateObj, exams) {
+        const dateStr = formatDate(dateObj);
+        const dayName = dateObj.toLocaleString('en-us', {weekday:'long'});
+        let html = `<strong>${title}</strong><br><small>${dateStr} (${dayName})</small><hr>`;
+        if (exams.length === 0) return html + `<p class="py-4 text-slate-400 italic">No Exams Scheduled</p>`;
+        html += `<table><tr><th>S.No</th><th>Class</th><th>Subject</th><th>Paper Code</th><th>Shift</th></tr>`;
+        exams.forEach((r, i) => {
+            html += `<tr><td>${i+1}</td><td>${r.Class}</td><td>${r.Subject}</td><td>${r['Paper Code'] || '-'}</td><td>${r.Shift}</td></tr>`;
+        });
+        return html + `</table>`;
+    }
+
+    function searchByDate() {
+        const val = document.getElementById("date1").value;
+        const date = formatDate(val);
+        const results = csvData.filter(r => r.Date === date);
+        const container = document.getElementById("dateResults");
+        if(results.length === 0) { container.innerHTML = `<p class="py-4 text-slate-400 italic">No Exams Found</p>`; return; }
+        let html = `<table><tr><th>S.No</th><th>Date</th><th>Day</th><th>Class</th><th>Subject</th><th>Paper Name</th><th>Paper Code</th><th>Shift</th></tr>`;
+        results.forEach((r, i) => {
+            html += `<tr><td>${i+1}</td><td>${r.Date}</td><td>${r.Day}</td><td>${r.Class}</td><td>${r.Subject}</td><td>${r['Paper Name']}</td><td>${r['Paper Code']}</td><td>${r.Shift}</td></tr>`;
+        });
+        container.innerHTML = html + `</table>`;
+    }
+
+    function searchByClassSubject() {
+        const c = document.getElementById("class2").value;
+        const s = document.getElementById("subject2").value;
+        const results = csvData.filter(r => r.Class === c && r.Subject === s);
+        const container = document.getElementById("resultRow2");
+        if(results.length === 0) { container.innerHTML = `<div class="py-4 text-slate-400 italic">No Records Found</div>`; return; }
+        container.innerHTML = `<div class="card mx-auto max-w-4xl mt-4"><div class="card-header font-bold">${c} - ${s}</div><table><tr><th>S.No</th><th>Date</th><th>Day</th><th>Paper Name</th><th>Paper Code</th><th>Shift</th></tr>${results.map((r, i) => `<tr><td>${i+1}</td><td>${r.Date}</td><td>${r.Day}</td><td>${r['Paper Name']}</td><td>${r['Paper Code']}</td><td>${r.Shift}</td></tr>`).join('')}</table></div>`;
+    }
+
+    function searchByDateClass() {
+        const d = formatDate(document.getElementById("date3").value);
+        const c = document.getElementById("class3").value;
+        const results = csvData.filter(r => r.Date === d && r.Class === c);
+        const container = document.getElementById("resultRow3");
+        container.innerHTML = results.length ? "" : `<div class="py-4 text-slate-400 italic col-span-full text-center">No Exams Found</div>`;
+        results.forEach((r) => {
+            container.innerHTML += `<div class="card"><div class="card-header"><div class="card-date">${r.Date}</div><small>(${r.Day})</small></div><div class="text-xs opacity-70 mt-2 uppercase">Subject</div><div class="font-bold">${r.Subject}</div><div class="text-xs opacity-70 mt-2 uppercase">Paper</div><div>${r['Paper Name']}</div><div class="flex justify-between mt-4"><span class="badge">Code: ${r['Paper Code']}</span><span class="badge">${r.Shift}</span></div></div>`;
+        });
+    }
+
+    function searchByCode() {
+        const code = document.getElementById("code4").value;
+        const results = csvData.filter(r => r['Paper Code'] === code);
+        const container = document.getElementById("resultRow4");
+        if(results.length === 0) { container.innerHTML = `<div class="py-4 text-slate-400 italic">No Records Found</div>`; return; }
+        const r = results[0];
+        container.innerHTML = `
+            <div class="p-6 bg-[#ffd84d] text-slate-800 rounded-xl max-w-md mx-auto mt-4 text-left">
+                <h3 class="font-bold border-none p-0 mb-2">${r.Subject}</h3>
+                <div class="mb-2 text-sm">Paper: <b>${r['Paper Name']}</b></div> 
+                <div>Code: <b>${r['Paper Code']}</b></div>
+                <div>Date: <b>${r.Date} (${r.Day})</b></div>
+                <div>Class: <b>${r.Class}</b></div>
+                <div class="mt-4 bg-black/10 inline-block px-3 py-1 rounded font-bold">Shift: ${r.Shift}</div>
+            </div>`;
+    }
+
+    function searchClassYearSubject() {
+        const c = document.getElementById("class5").value;
+        const y = document.getElementById("year5").value;
+        const s = document.getElementById("subject5").value;
+        const results = csvData.filter(r => r.Class === c && r.Subject === s && r.Year === y);
+        const container = document.getElementById("resultRow5");
+        if(results.length === 0) { container.innerHTML = `<div class="py-4 text-slate-400 italic">No Records Found</div>`; return; }
+        container.innerHTML = `<div class="card mx-auto max-w-4xl mt-4"><div class="card-header font-bold">${c} (${y} Year/Sem) - ${s}</div><table><tr><th>S.No</th><th>Date</th><th>Day</th><th>Paper Name</th><th>Paper Code</th><th>Shift</th></tr>${results.map((r, i) => `<tr><td>${i+1}</td><td>${r.Date}</td><td>${r.Day}</td><td>${r['Paper Name']}</td><td>${r['Paper Code']}</td><td>${r.Shift}</td></tr>`).join('')}</table></div>`;
+    }
+
+    async function getHits() {
+        try {
+            const response = await fetch('https://api.counterapi.dev/v1/university_updates_uu/main/up');
+            const data = await response.json();
+            document.getElementById('new-count').innerText = data.count;
+        } catch (err) { console.log("Counter Error:", err); }
+    }
+    getHits();
+</script>
+</body>
+</html>
