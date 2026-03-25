@@ -82,7 +82,9 @@
         .row4 { background: #fff8e1; }
         .row5 { background: #f2f2ff; }
         .row h3 { text-align: left; margin-bottom: 15px; color: #333; font-size: 1.1rem; border-left: 4px solid #2c7be5; padding-left: 10px; font-weight: 700; }
+        
         .warning { background: #fff3cd; border: 1px solid #ffeeba; padding: 15px; margin-bottom: 20px; border-radius: 8px; color: #856404; text-align: left; font-size: 0.9rem; }
+        
         .controls { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
         .controls input, .controls select, .controls button { flex: 1; min-width: 200px; padding: 12px; border-radius: 6px; border: 1px solid #ccc; font-size: 0.95rem; }
         .controls button { background: #2c7be5; color: white; border: none; cursor: pointer; font-weight: bold; width: 100%; }
@@ -177,12 +179,12 @@
             </div>
         </div>
 
-        <div class="warning">
-            ⚠ Please verify the exam schedule carefully. Always confirm with the official notification before appearing in the exam. The data are available as per University Letter No. (862/Exam/MSU/2025-26) Dated - 17.03.2026, (867/Exam/MSU/2025-26) Dated - 23.03.2026, (870/Exam/MSU/2025-26) Dated - 25.03.2026. University Updates is not responsible for any discripencies.
+        <div id="dynamic-warning" class="warning">
+            ⚠ Please verify the exam schedule carefully. Always confirm with the official notification before appearing in the exam. The data are available as per University Letter No. (Exam/D.R./10184) Dated - 16.03.2026, (Exam/D.R./10191) Dated - 20.03.2026, (Committ. Cell/(Prof.Exam.)/7553), (Committ. Cell/(M.B.B.S.)/7554) Dated - 23.03.2026 & (Committ. Cell/(Prof.Exam.)/7556) Dated - 24.03.2026. We are not responsible for any error.
         </div>
 
         <div class="row row0">
-            <h3>📢 Live Exam Alerts</h3>
+            <h3 id="alerts-title">📢 CCSU Live Exam Alerts</h3>
             <div class="alert-grid">
                 <div class="alert-card today" id="todayCard"></div>
                 <div class="alert-card tomorrow" id="tomorrowCard"></div>
@@ -273,6 +275,7 @@
         </div>
     </footer>
     <button id="topBtn" title="Go to top">↑</button>
+
 
 <script src="Scripts/Exams.js"></script>
     
