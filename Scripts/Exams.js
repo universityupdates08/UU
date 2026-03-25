@@ -1,4 +1,4 @@
-    let csvData = [];
+ let csvData = [];
     
     // Configuration Object for University Content
     const uniConfig = {
@@ -211,5 +211,3 @@
         } catch (err) { console.log("Counter Error:", err); }
     }
     getHits();
-
-</html>
