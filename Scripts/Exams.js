@@ -1,12 +1,32 @@
     let csvData = [];
     
+    // Configuration Object for University Content
+    const uniConfig = {
+        CCSU: {
+            file: "CCSUDatesheet.csv",
+            title: "CCSU Digital Exam Schedule Portal",
+            alertHeader: "📢 CCSU Live Exam Alerts",
+            warning: "⚠ Please verify the exam schedule carefully. Always confirm with the official notification before appearing in the exam. The data are available as per University Letter No. (Exam/D.R./10184) Dated - 16.03.2026, (Exam/D.R./10191) Dated - 20.03.2026, (Committ. Cell/(Prof.Exam.)/7553), (Committ. Cell/(M.B.B.S.)/7554) Dated - 23.03.2026 & (Committ. Cell/(Prof.Exam.)/7556) Dated - 24.03.2026. We are not responsible for any error."
+        },
+        MSU: {
+            file: "MSUDatesheet.csv",
+            title: "MSU Digital Exam Schedule Portal",
+            alertHeader: "📢 MSU Live Exam Alerts",
+            warning: "⚠ Please verify the exam schedule carefully. Always confirm with the official notification before appearing in the exam. The data are available as per University Letter No. (862/Exam/MSU/2025-26) Dated - 17.03.2026, (867/Exam/MSU/2025-26) Dated - 23.03.2026, (870/Exam/MSU/2025-26) Dated - 25.03.2026. University Updates is not responsible for any discripencies."
+        }
+    };
+
     function handleUniChange() {
-        const selectedUni = document.querySelector('input[name="uni-choice"]:checked').value;
-        const fileName = selectedUni === "CCSU" ? "CCSUDatesheet.csv" : "MSUDatesheet.csv";
-        const titleText = selectedUni === "CCSU" ? "CCSU Digital Exam Schedule Portal" : "MSU Digital Exam Schedule Portal";
+        const selectedKey = document.querySelector('input[name="uni-choice"]:checked').value;
+        const config = uniConfig[selectedKey];
         
-        document.getElementById('portal-title').innerText = titleText;
-        loadCSV(fileName);
+        // Update Text Content
+        document.getElementById('portal-title').innerText = config.title;
+        document.getElementById('alerts-title').innerText = config.alertHeader;
+        document.getElementById('dynamic-warning').innerText = config.warning;
+        
+        // Load Data
+        loadCSV(config.file);
     }
 
     function loadCSV(file) {
@@ -18,7 +38,7 @@
                 csvData = results.data;
                 populateFilters();
                 showLiveAlerts();
-                // Clear existing search results when switching
+                // Clear existing search results
                 document.getElementById("dateResults").innerHTML = "";
                 document.getElementById("resultRow2").innerHTML = "";
                 document.getElementById("resultRow3").innerHTML = "";
@@ -28,8 +48,8 @@
         });
     }
 
-    // Initial load
-    loadCSV("CCSUDatesheet.csv");
+    // Initial load for CCSU
+    handleUniChange();
 
     function updateDateTime() {
         const now = new Date();
@@ -191,3 +211,5 @@
         } catch (err) { console.log("Counter Error:", err); }
     }
     getHits();
+
+</html>
