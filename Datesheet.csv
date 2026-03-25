@@ -851,7 +851,7 @@ Date,Day,Shift,Class,Subject,Paper Name,Paper Code,Year
 10-Apr-26,Friday,Shift-I (10:00 AM - 01:00 PM),B.P.Ed.,Education,Anatomy and Physiology,CC-102,1st
 16-Apr-26,Thursday,Shift-I (10:00 AM - 01:00 PM),B.P.Ed.,Education,Health Education and Environmental Studies,CC-103,1st
 18-Apr-26,Saturday,Shift-I (10:00 AM - 01:00 PM),B.P.Ed.,Education,Yoga Education,CC-104,1st
-21-Apr-26,Tuesday,Shift-I (10:00 AM - 01:00 PM),B.P.Ed.,Education,Educational Technology and Methods in ….......,CC-105,1st
+21-Apr-26,Tuesday,Shift-I (10:00 AM - 01:00 PM),B.P.Ed.,Education,Educational Technology and Methods in Â….......,CC-105,1st
 23-Apr-26,Thursday,Shift-I (10:00 AM - 01:00 PM),B.P.Ed.,Education,Organization and Administration,CC-106,1st
 25-Apr-26,Saturday,Shift-I (10:00 AM - 01:00 PM),B.P.Ed.,Education,Officiating and Coaching,CC-107,1st
 28-Apr-26,Tuesday,Shift-I (10:00 AM - 01:00 PM),B.P.Ed.,Education,Sports Nutrition and Weight Management,CC-108,1st
@@ -863,3 +863,12 @@ Date,Day,Shift,Class,Subject,Paper Name,Paper Code,Year
 22-Apr-26,Wednesday,Shift-II (02:00 PM - 05:00 PM),B.P.Ed.,Education,Research and Statistics in Physical Education,CC-206,2nd
 24-Apr-26,Friday,Shift-II (02:00 PM - 05:00 PM),B.P.Ed.,Education,"Sports Medicine, Physiotherapy and Rehabilitation",CC-207,2nd
 27-Apr-26,Monday,Shift-II (02:00 PM - 05:00 PM),B.P.Ed.,Education,Sports Management,CC-208,2nd
+28-Mar-26,Saturday,Shift-I (10:00 AM - 01:00 PM),M.B.B.S.-3rd Prof. Part-II,MBBS,Opthalmology,302,3rd
+30-Mar-26,Monday,Shift-I (10:00 AM - 01:00 PM),M.B.B.S.-3rd Prof. Part-II,MBBS,E.N.T.,301,3rd
+01-Apr-26,Wednesday,Shift-I (10:00 AM - 01:00 PM),M.B.B.S.-3rd Prof. Part-II,MBBS,Medicine-I,401,3rd
+02-Apr-26,Thurday,Shift-I (10:00 AM - 01:00 PM),M.B.B.S.-3rd Prof. Part-II,MBBS,Medicine-II,402,3rd
+04-Apr-26,Saturday,Shift-I (10:00 AM - 01:00 PM),M.B.B.S.-3rd Prof. Part-II,MBBS,Paediatrics,406,3rd
+06-Apr-26,Monday,Shift-I (10:00 AM - 01:00 PM),M.B.B.S.-3rd Prof. Part-II,MBBS,Surgery-I,403,3rd
+07-Apr-26,Tuesday,Shift-I (10:00 AM - 01:00 PM),M.B.B.S.-3rd Prof. Part-II,MBBS,Surgery-II,404,3rd
+09-Apr-26,Thursday,Shift-I (10:00 AM - 01:00 PM),M.B.B.S.-3rd Prof. Part-II,MBBS,OBS & Gynae-I,405,3rd
+10-Apr-26,Friday,Shift-I (10:00 AM - 01:00 PM),M.B.B.S.-3rd Prof. Part-II,MBBS,OBS & Gynae-II,407,3rd
