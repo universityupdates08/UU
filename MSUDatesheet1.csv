@@ -2,7 +2,7 @@ Date,Day,Shift,Class,Year,Subject,Paper Code,Paper Name
 27-Mar-26,Friday,Shift-I (11:00 AM - 02:00 PM),B.Sc.,1st,Bio-Technology,0128701,Bio-chemistry
 27-Mar-26,Friday,Shift-I (11:00 AM - 02:00 PM),B.Sc.,1st,Microbiology,0128801,Fundamentals of Microbiology
 27-Mar-26,Friday,Shift-I (11:00 AM - 02:00 PM),B.Sc.,1st,"Physical Education, Health Education & Sports",0159001,Foundation of Physical Education
-27-Mar-26,Friday,Shift-I (11:00 AM - 02:00 PM),B.Ed.,1st,Education,0158001,Contemporary India and Education
+24-Apr-26,Friday,Shift-I (11:00 AM - 02:00 PM),B.Ed.,1st,Education,0158001,Contemporary India and Education
 27-Mar-26,Friday,Shift-I (11:00 AM - 02:00 PM),B.A. B.Ed.,1st,Education,0158601,a) ????? (??????? ??? ????????? ?????)
 27-Mar-26,Friday,Shift-I (11:00 AM - 02:00 PM),B.A. B.Ed.,1st,Education,0158603,b) English (Poetry)
 27-Mar-26,Friday,Shift-I (11:00 AM - 02:00 PM),B.Sc. B.Ed.,1st,Education,0158701,a) Mechanics
@@ -13,7 +13,7 @@ Date,Day,Shift,Class,Year,Subject,Paper Code,Paper Name
 27-Mar-26,Friday,Shift-II (03:00 PM - 06:00 PM),B.Sc.,2nd,Bio-Technology,0228701,Fundamentals of Computers & Bio-informatics
 27-Mar-26,Friday,Shift-II (03:00 PM - 06:00 PM),B.Sc.,2nd,Microbiology,0228801,Cell Biology
 27-Mar-26,Friday,Shift-II (03:00 PM - 06:00 PM),B.Sc.,2nd,"Physical Education, Health Education & Sports",0259001,Language Comm. & Writing Skill-Sanskrit
-27-Mar-26,Friday,Shift-II (03:00 PM - 06:00 PM),B.Ed.,2nd,Education,0258001,Creating an Inclusive School
+13-Apr-26,Monday,Shift-II (03:00 PM - 06:00 PM),B.Ed.,2nd,Education,0258001,Creating an Inclusive School
 27-Mar-26,Friday,Shift-II (03:00 PM - 06:00 PM),B.A. B.Ed.,2nd,Education,0258601,a) Hindi ????? (?????? ????? ?????)
 27-Mar-26,Friday,Shift-II (03:00 PM - 06:00 PM),B.A. B.Ed.,2nd,Education,0258611,b) Economics (National Income Analysis Money & Banking)
 27-Mar-26,Friday,Shift-II (03:00 PM - 06:00 PM),B.Sc. B.Ed.,2nd,Education,0258701,a) Electromagnetics
@@ -55,7 +55,7 @@ Date,Day,Shift,Class,Year,Subject,Paper Code,Paper Name
 30-Mar-26,Monday,Shift-II (03:00 PM - 06:00 PM),B.Sc. B.Ed.,2nd,Education,0258702,a) Quantum Mechanics and Spectroscopy
 30-Mar-26,Monday,Shift-II (03:00 PM - 06:00 PM),B.Sc. B.Ed.,2nd,Education,0258706,b) Taxonomy of Angiosperms and Developmental Botany
 30-Mar-26,Monday,Shift-II (03:00 PM - 06:00 PM),B.El.Ed.,2nd,Education,0258902,Language Acquisition Among Elementary Children
-30-Mar-26,Monday,Shift-II (03:00 PM - 06:00 PM),B.P.Ed.,2nd,Education,0258202,Computer Applications in Physical Education
+13-Apr-26,Monday,Shift-II (03:00 PM - 06:00 PM),B.P.Ed.,2nd,Education,0258202,Computer Applications in Physical Education
 30-Mar-26,Monday,Shift-II (03:00 PM - 06:00 PM),B.El.Ed.,4th,Education,0458902,Gender and Schooling
 30-Mar-26,Monday,Shift-II (03:00 PM - 06:00 PM),B.F.A.,4th,Art,0418602,History of Modern Western Art
 30-Mar-26,Monday,Shift-II (03:00 PM - 06:00 PM),B.A. B.Ed.,4th,Education,0458602,Teaching of Hindi
@@ -98,7 +98,7 @@ Date,Day,Shift,Class,Year,Subject,Paper Code,Paper Name
 04-Apr-26,Saturday,Shift-II (03:00 PM - 06:00 PM),B.A. B.Ed.,2nd,Education,0258603,a) English (Drama)
 04-Apr-26,Saturday,Shift-II (03:00 PM - 06:00 PM),B.A. B.Ed.,2nd,Education,0258605,b) Sanskrit
 04-Apr-26,Saturday,Shift-II (03:00 PM - 06:00 PM),B.El.Ed.,2nd,Education,0258903,Techniques for Developing Warm Relationship with Children
-04-Apr-26,Saturday,Shift-II (03:00 PM - 06:00 PM),B.P.Ed.,2nd,Education,0258203,Sports Psychology and Sociology
+20-Apr-26,Monday,Shift-II (03:00 PM - 06:00 PM),B.P.Ed.,2nd,Education,0258203,Sports Psychology and Sociology
 04-Apr-26,Saturday,Shift-II (03:00 PM - 06:00 PM),B.El.Ed.,4th,Education,0458903,a) Pedagogy of Language 
 04-Apr-26,Saturday,Shift-II (03:00 PM - 06:00 PM),B.El.Ed.,4th,Education,0458904,b) Pedagogy of Mathematics
 04-Apr-26,Saturday,Shift-II (03:00 PM - 06:00 PM),B.El.Ed.,4th,Education,0458905,c) Pedagogy of Natural Science
@@ -131,7 +131,7 @@ Date,Day,Shift,Class,Year,Subject,Paper Code,Paper Name
 07-Apr-26,Tuesday,Shift-II (03:00 PM - 06:00 PM),B.Sc.,2nd,Bio-Technology,0228704,Molecular Genetics and Cytogenetics
 07-Apr-26,Tuesday,Shift-II (03:00 PM - 06:00 PM),B.Sc.,2nd,Microbiology,0228804,Microbial Metabolism
 07-Apr-26,Tuesday,Shift-II (03:00 PM - 06:00 PM),B.Sc.,2nd,"Physical Education, Health Education & Sports",0259004,Theory of Games & Sports (Track & Field)
-07-Apr-26,Tuesday,Shift-II (03:00 PM - 06:00 PM),B.Ed.,2nd,Education,0258004,"Work Education, Gandhiji’s Nai Talim and Community Engagement"
+07-Apr-26,Tuesday,Shift-II (03:00 PM - 06:00 PM),B.Ed.,2nd,Education,0258004,"Work Education, GandhijiÂ’s Nai Talim and Community Engagement"
 07-Apr-26,Tuesday,Shift-II (03:00 PM - 06:00 PM),B.A. B.Ed.,2nd,Education,0258604,a) English (Fiction) 
 07-Apr-26,Tuesday,Shift-II (03:00 PM - 06:00 PM),B.A. B.Ed.,2nd,Education,0258606,b) Sanskrit
 07-Apr-26,Tuesday,Shift-II (03:00 PM - 06:00 PM),B.Sc. B.Ed.,2nd,Education,0258704,Physical Chemistry
