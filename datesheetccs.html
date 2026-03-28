@@ -838,7 +838,7 @@
         // --- DATA (Datesheet for fetching Date, Day, Shift, and Name) ---
         // REMOVED: The hardcoded 'examDatesheet' object is gone.
         
-        // NEW: This object will be populated from 'datesheet.csv'
+        // NEW: This object will be populated from 'CCSUDatesheet.csv'
         let loadedDatesheetData = {};
 
         const paperEntriesContainer = document.getElementById('paper-entries');
@@ -915,7 +915,7 @@
             hide(dataError);
             
             try {
-                const response = await fetch('Datesheet.csv');
+                const response = await fetch('CCSUDatesheet.csv');
                 if (!response.ok) {
                     throw new Error(`Failed to load datesheet.csv (Status: ${response.status})`);
                 }
