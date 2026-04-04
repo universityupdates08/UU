@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>BUY BOOK ONLINE - UNIVERSITY UPDATES</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        :root {
+            --primary-color: #ef3c3c;
+            --secondary-color: #2c4b9e;
+            --bg-gradient: radial-gradient(circle at top, #ffffff 0, #e5edff 45%, #f3f4f6 100%);
+        }
+        body { 
+            font-family: "Poppins", sans-serif; 
+            background: var(--bg-gradient); 
+            color: #0f172a; 
+            margin: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        /* Mobile-First Container */
+        .container { 
+            background: white; 
+            padding: 20px; 
+            border-radius: 12px; 
+            width: 92%; 
+            max-width: 1200px; 
+            margin: 1.5rem auto; 
+            box-shadow: 0 10px 30px rgba(15,23,42,0.05); 
+        }
+
+        @media (min-width: 768px) {
+            .container { padding: 40px; border-radius: 16px; }
+        }
+
+        /* Ticker Animation */
+        .announcement-bar { background-color: var(--primary-color); color: white; font-size: 0.75rem; height: 35px; display: flex; align-items: center; overflow: hidden; }
+        .announcement-inner { white-space: nowrap; animation: ticker 25s linear infinite; display: inline-block; padding-left: 100%; }
+        @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-100%); } }
+        
+        /* Book Card Responsive Tweaks */
+        .book-card { 
+            border: 1px solid #f1f5f9; 
+            border-radius: 12px; 
+            transition: all 0.3s ease; 
+            background: white; 
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        .book-image-container { position: relative; height: 200px; background: #f8fafc; border-bottom: 1px solid #f1f5f9; }
+        .book-card img { width: 100%; height: 100%; object-fit: contain; padding: 15px; }
+
+        /* Modal Overlay */
+        #previewModal { 
+            display: none; 
+            position: fixed; 
+            inset: 0; 
+            background: rgba(15, 23, 42, 0.9); 
+            backdrop-filter: blur(8px);
+            z-index: 1000; 
+            align-items: center; 
+            justify-content: center; 
+            padding: 15px; 
+        }
+        
+        /* Hide scrollbar for Chrome, Safari and Opera */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+    </style>
+</head>
+<body>
+
+    <div class="utility-bar bg-[#0f172a] text-[#e5e7eb] text-[10px] sm:text-xs py-2">
+        <div class="max-w-7xl mx-auto px-4 flex justify-between items-center">
+            <div class="flex gap-3">
+                <span><i class="fas fa-headset mr-1"></i> Support</span>
+                <span class="hidden sm:inline">|</span>
+                <span class="hidden sm:inline">HelpforDMBot</span>
+            </div>
+            <div class="flex gap-4">
+                <i class="fab fa-youtube"></i>
+                <i class="fab fa-instagram"></i>
+                <i class="fab fa-telegram-plane"></i>
+            </div>
+        </div>
+    </div>
+
+    <header class="main-nav sticky top-0 bg-white/80 backdrop-blur-md border-b z-50">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center">
+                <div class="font-bold text-lg sm:text-xl tracking-tighter text-slate-900">
+                    UNIVERSITY<span class="text-red-600">UPDATES</span>
+                </div>
+            </div>
+            
+            <nav class="hidden md:flex gap-6 text-sm font-semibold text-slate-600">
+                <a href="#" class="text-red-600">Store</a>
+                <a href="#" class="hover:text-red-600">Contact</a>
+            </nav>
+
+            <div class="flex items-center gap-3">
+                <button class="p-2 md:hidden text-slate-600"><i class="fas fa-search"></i></button>
+                <button class="bg-slate-900 text-white px-4 py-1.5 rounded-full text-xs font-medium hover:bg-slate-800 transition">
+                    Login
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="announcement-bar">
+        <div class="announcement-inner">
+            🔥 SALE: 20% discount on all Digital PDF Guides • New arrivals for 2026 Semester now available • 
+        </div>
+    </div>
+
+    <main class="container">
+        <div class="mb-6 md:mb-10">
+            <h2 class="text-xl md:text-3xl font-bold text-slate-900">Book Store</h2>
+            <p class="text-xs md:text-sm text-slate-500 mt-1">Access your study material anywhere, anytime.</p>
+        </div>
+
+        <div class="flex overflow-x-auto no-scrollbar gap-2 mb-8 pb-2">
+            <button class="whitespace-nowrap px-4 py-2 bg-slate-900 text-white rounded-full text-xs">All Categories</button>
+            <button class="whitespace-nowrap px-4 py-2 bg-white border border-slate-200 rounded-full text-xs text-slate-600">UG-NEP</button>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8">
+            
+            <div class="book-card">
+                <div class="book-image-container">
+                    <img src="images/HVS.png" alt="Hindi Vyakaran Aur Sampreshan">
+                    <span class="absolute top-2 right-2 bg-green-500 text-white text-[9px] font-bold px-2 py-0.5 rounded shadow-sm">PDF</span>
+                </div>
+                <div class="p-4 flex flex-col flex-grow">
+                    <h4 class="font-bold text-slate-800 text-sm md:text-base leading-tight">हिंदी व्याकरण और संप्रेषण</h4>
+                    <p class="text-[10px] text-slate-400 mt-1 mb-4">By University Updates</p>
+                    
+                    <div class="mt-auto">
+                        <div class="flex items-baseline gap-2 mb-4">
+                            <span class="text-lg font-bold text-slate-900">₹35</span>
+                            <span class="text-xs line-through text-slate-400">₹45</span>
+                        </div>
+                        <div class="grid grid-cols-2 gap-2">
+                            <button onclick="openPreview('हिंदी व्याकरण और संप्रेषण')" class="py-2 text-[11px] font-semibold bg-slate-100 text-slate-600 rounded-lg active:scale-95 transition">Preview</button>
+                            <button class="py-2 text-[11px] font-bold bg-blue-600 text-white rounded-lg active:scale-95 transition shadow-md shadow-blue-100">Buy PDF</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="book-card">
+                <div class="book-image-container">
+                    <img src="https://via.placeholder.com/200x280?text=Physics+Book" alt="Social Responsibility and Community Engagement">
+                </div>
+                <div class="p-4 flex flex-col flex-grow">
+                    <h4 class="font-bold text-slate-800 text-sm leading-tight">Social Responsibility and Community Engagement</h4>
+                    <p class="text-[10px] text-slate-400 mt-1 mb-4">Sem-IV Special Edition</p>
+                    <div class="mt-auto">
+                        <div class="flex items-baseline gap-2 mb-4">
+                            <span class="text-lg font-bold text-slate-900">₹35</span>
+                        </div>
+                        <div class="grid grid-cols-2 gap-2">
+                            <button onclick="openPreview('Social Responsibility and Community Engagement')" class="py-2 text-[11px] font-semibold bg-slate-100 text-slate-600 rounded-lg">Preview</button>
+                            <button class="py-2 text-[11px] font-bold bg-blue-600 text-white rounded-lg">Buy PDF</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <div id="previewModal">
+        <div class="bg-white rounded-xl w-full max-w-lg overflow-hidden flex flex-col shadow-2xl animate-in zoom-in duration-300">
+            <div class="p-4 border-b flex justify-between items-center bg-slate-50">
+                <h3 id="modalTitle" class="font-bold text-xs sm:text-sm text-slate-800 truncate pr-4">Preview</h3>
+                <button onclick="closePreview()" class="text-slate-400 hover:text-red-600 text-2xl transition leading-none">&times;</button>
+            </div>
+            
+            <div class="flex-grow overflow-y-auto p-4 bg-slate-100 h-[60vh]">
+                <div class="bg-white w-full shadow-sm p-6 min-h-screen">
+                    <div class="space-y-3">
+                        <div class="h-3 bg-slate-100 rounded w-1/3"></div>
+                        <div class="h-3 bg-slate-100 rounded w-full"></div>
+                        <div class="h-3 bg-slate-100 rounded w-5/6"></div>
+                        <div class="h-40 bg-slate-50 rounded-lg flex items-center justify-center my-6">
+                            <i class="fas fa-file-pdf text-3xl text-slate-200"></i>
+                        </div>
+                        <div class="h-3 bg-slate-100 rounded w-full"></div>
+                        <div class="h-3 bg-slate-100 rounded w-4/6"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-4 border-t bg-white flex flex-col sm:flex-row gap-2">
+                <button onclick="closePreview()" class="order-2 sm:order-1 flex-1 py-2 text-xs font-medium text-slate-500">Close</button>
+                <button class="order-1 sm:order-2 flex-[2] py-2 text-xs bg-red-600 text-white rounded-lg font-bold">Purchase Full Access</button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="py-8 bg-white border-t mt-10">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <p class="text-[10px] text-slate-400 uppercase tracking-widest font-bold">University Updates</p>
+            <p class="text-[10px] text-slate-300 mt-2">© 2026. All Rights Reseverd</p>
+        </div>
+    </footer>
+
+    <script>
+        function openPreview(title) {
+            document.getElementById('modalTitle').innerText = title + " - Sample";
+            document.getElementById('previewModal').style.display = 'flex';
+            document.body.style.overflow = 'hidden'; 
+        }
+        function closePreview() {
+            document.getElementById('previewModal').style.display = 'none';
+            document.body.style.overflow = 'auto'; 
+        }
+        // Handle background click
+        window.onclick = function(e) {
+            if (e.target == document.getElementById('previewModal')) closePreview();
+        }
+    </script>
+</body>
+</html>
