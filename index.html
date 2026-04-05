@@ -507,6 +507,20 @@
       font-size: 0.8rem;
       margin-top: 4px;
     }
+
+    /* ====== NEW: LIBRARY WIDGET STYLES ====== */
+    .library-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.25rem; }
+    .book-card {
+      background: white; border: 1px solid var(--soft-border); border-radius: 1rem;
+      padding: 1.5rem; text-align: center; transition: all 0.3s ease; display: flex; flex-direction: column;
+    }
+    .book-card:hover { transform: translateY(-6px); border-color: var(--primary-color); box-shadow: 0 15px 30px rgba(0,0,0,0.06); }
+    .book-icon-wrapper {
+      width: 60px; height: 60px; background: #fef2f2; border-radius: 0.75rem;
+      display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; transition: transform 0.3s ease;
+    }
+    .book-card:hover .book-icon-wrapper { transform: scale(1.1) rotate(-5deg); background: #fee2e2; }
+    
   </style>
 </head>
 
@@ -865,6 +879,46 @@
       </div>
     </section>
 
+        <section id="digital-library" class="section-card fade-slide">
+      <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
+        <div>
+          <p class="primary-chip mb-2">myLibrary</p>
+          <h2 class="section-title">Digital Resource Center</h2>
+          <p class="section-subtitle">Categorized study materials for easy access.</p>
+        </div>
+        <a href="https://t.me/+qj6dmkFSXW80MGJl" target="_blank" class="text-sm font-bold text-red-600 hover:underline">
+          View All on Telegram <i class="fas fa-external-link-alt text-xs ml-1"></i>
+        </a>
+      </div>
+
+      <div class="library-grid">
+        <div class="book-card">
+          <div class="book-icon-wrapper"><i class="fas fa-file-invoice text-2xl text-red-600"></i></div>
+          <h3 class="font-bold text-slate-800 mb-1">Previous Papers</h3>
+          <p class="text-xs text-slate-500 mb-4">CCSU & MSU Last 10 Year Papers.</p>
+          <a href="https://t.me/+qj6dmkFSXW80MGJl" class="mt-auto py-2 bg-slate-100 text-slate-700 text-xs font-bold rounded-lg hover:bg-red-600 hover:text-white transition">Browse Files</a>
+        </div>
+        <div class="book-card">
+          <div class="book-icon-wrapper"><i class="fas fa-book-open text-2xl text-red-600"></i></div>
+          <h3 class="font-bold text-slate-800 mb-1">Handwritten Notes</h3>
+          <p class="text-xs text-slate-500 mb-4">Topper-verified notes for all subjects.</p>
+          <a href="https://t.me/+qj6dmkFSXW80MGJl" class="mt-auto py-2 bg-slate-100 text-slate-700 text-xs font-bold rounded-lg hover:bg-red-600 hover:text-white transition">Download PDF</a>
+        </div>
+        <div class="book-card">
+          <div class="book-icon-wrapper"><i class="fas fa-tasks text-2xl text-red-600"></i></div>
+          <h3 class="font-bold text-slate-800 mb-1">MCQ Bank</h3>
+          <p class="text-xs text-slate-500 mb-4">Practice for OMR based examinations.</p>
+          <a href="mcq.html" class="mt-auto py-2 bg-slate-100 text-slate-700 text-xs font-bold rounded-lg hover:bg-red-600 hover:text-white transition">Start Quiz</a>
+        </div>
+        <div class="book-card">
+          <div class="book-icon-wrapper"><i class="fas fa-scroll text-2xl text-red-600"></i></div>
+          <h3 class="font-bold text-slate-800 mb-1">Latest Syllabus</h3>
+          <p class="text-xs text-slate-500 mb-4">New NEP & Private Exam Syllabus.</p>
+          <a href="https://t.me/+qj6dmkFSXW80MGJl" class="mt-auto py-2 bg-slate-100 text-slate-700 text-xs font-bold rounded-lg hover:bg-red-600 hover:text-white transition">Check Now</a>
+        </div>
+      </div>
+    </section>
+    
     <!-- MSU OBJECTIONS -->
     <section class="section-card fade-slide">
       <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-3">
