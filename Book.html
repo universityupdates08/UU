@@ -22,7 +22,7 @@
         .tab-content { display: none; }
         .tab-content.active { display: block; }
         
-        /* FIX: Added missing class to stop continuous loading */
+        /* FIX: Ensure hidden class works globally */
         .hidden { display: none !important; }
         
         #previewModal { display: none; position: fixed; inset: 0; background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(4px); z-index: 1000; align-items: center; justify-content: center; padding: 20px; }
@@ -64,9 +64,9 @@
                     <a href="#tab-section" onclick="showTab('about')" class="bg-white border border-slate-200 px-8 py-4 rounded-xl font-bold hover:bg-slate-50 transition text-slate-700">Learn More</a>
                 </div>
             </div>
-            <div class="hidden md:block relative">
+            <div class="hidden md:block relative text-center">
                 <div class="absolute -inset-4 bg-blue-100 rounded-full blur-3xl opacity-30"></div>
-                <img src="images/sitebook.png" class="relative z-10 rounded-2xl" alt="Hero" onerror="this.src='https://via.placeholder.com/500x400?text=University+Updates'">
+                <img src="https://i.ibb.co/nMC0877T/UNIVERSITY-UPDATES-LOGO-removebg-preview.png" class="relative z-10 rounded-2xl mx-auto max-h-80" alt="Hero" onerror="this.src='https://via.placeholder.com/500x400?text=University+Updates'">
             </div>
         </div>
     </header>
@@ -153,26 +153,8 @@
                 </div>
             </div>
 
-            <div class="book-card bg-white rounded-2xl overflow-hidden flex flex-col" data-category="ug-nep">
-                <div class="h-64 bg-slate-100 p-8 relative">
-                    <img src="images/Sanskrit.png" alt="Sanskrit" class="w-full h-full object-contain drop-shadow-xl" onerror="this.src='https://via.placeholder.com/200x280?text=Sanskrit'">
-                    <span class="absolute top-4 right-4 bg-green-500 text-white text-[10px] font-black px-2.5 py-1 rounded-full uppercase">PDF</span>
-                </div>
-                <div class="p-6 flex-grow flex flex-col">
-                    <h3 class="font-bold text-slate-800 leading-snug">संस्कृत - भाषा एवं संभाषणम्</h3>
-                    <p class="text-xs text-slate-400 mt-1 uppercase tracking-tighter">BY UNIVERSITY UPDATES</p>
-                    <div class="mt-6 flex items-center justify-between">
-                        <div class="flex flex-col">
-                            <span class="text-2xl font-bold text-slate-900">₹35</span>
-                            <span class="text-xs line-through text-slate-400">₹45</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="p-5 pt-0 grid grid-cols-2 gap-2">
-                    <button onclick="openPreviewModal('संस्कृत - भाषा एवं संभाषणम्', 'previews/sanskrit-sample.pdf', '100% Quality', 'Hindi/Sanskrit', 'PDF', '#')" class="text-xs font-bold py-2.5 bg-slate-100 text-slate-700 rounded-lg hover:bg-slate-200">View Info</button>
-                    <button onclick="redirectBuy('#')" class="text-xs font-bold py-2.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 shadow-lg shadow-blue-100">Buy Now</button>
-                </div>
-            </div>
+           
+              
         </div>
     </main>
 
@@ -233,7 +215,7 @@
         <div class="bg-white rounded-2xl w-full max-w-2xl overflow-hidden flex flex-col md:flex-row shadow-2xl relative">
             <button onclick="closeModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-900 text-xl z-10">&times;</button>
             <div class="md:w-1/2 bg-slate-100 p-4 flex items-center justify-center min-h-[300px]">
-                <div id="modalLoader" class="loader"></div>
+                <div id="modalLoader" class="loader hidden"></div>
                 <iframe id="pdfPreview" src="" class="w-full h-full border-0 hidden rounded shadow-md" title="PDF Preview"></iframe>
             </div>
             <div class="md:w-1/2 p-8">
@@ -257,8 +239,7 @@
             <h3 id="modalHeading" class="heading-font text-2xl font-bold text-slate-900 mb-6 flex items-center">
                 <i class="fas fa-download mr-3 text-blue-600"></i>How to Download?
             </h3>
-            <div id="modalContent" class="space-y-6">
-                </div>
+            <div id="modalContent" class="space-y-6"></div>
             <button id="proceedBuyBtn" class="w-full mt-8 bg-slate-900 text-white py-3 rounded-xl font-bold hover:bg-slate-800 transition">Proceed to Payment</button>
         </div>
     </div>
@@ -316,7 +297,7 @@
                 <div class="space-y-4">
                     <p class="text-sm text-slate-600">1. Choose the book and click on <strong>"Buy Now"</strong> to go to the secure Razorpay gateway.</p>
                     <p class="text-sm text-slate-600">2. Enter your basic details: <strong>Name, Email and Mobile Number.</strong></p>
-                    <p class="text-sm text-slate-600">3. CComplete payment via <strong>UPI, Card or Netbanking.</strong></p>
+                    <p class="text-sm text-slate-600">3. Complete payment via <strong>UPI, Card or Netbanking.</strong></p>
                     <p class="text-sm text-slate-600">4. After payment, <strong>Wait 10 seconds</strong>. The PDF will download automatically. Do not refresh!</p>
                     <p class="text-sm text-slate-600">5. <strong>You must wait for redirection in 10 seconds to download the PDF after the payment completion.</strong></p>
                 </div>
@@ -357,19 +338,23 @@
             const modal = document.getElementById('previewModal');
             const loader = document.getElementById('modalLoader');
             const iframe = document.getElementById('pdfPreview');
+            
             document.getElementById('modalTitle').innerText = title;
             document.getElementById('modalQuality').innerText = quality;
             document.getElementById('modalLang').innerText = lang;
             document.getElementById('modalFormat').innerText = format;
             document.getElementById('modalBuyBtn').onclick = () => redirectBuy(buyUrl);
             
+            // RESET BEFORE SHOWING
             loader.classList.remove('hidden');
             iframe.classList.add('hidden');
             iframe.src = pdfSrc;
+            
             iframe.onload = function() {
                 loader.classList.add('hidden');
                 iframe.classList.remove('hidden');
             };
+            
             modal.style.display = 'flex';
             document.body.style.overflow = 'hidden';
         }
@@ -377,6 +362,7 @@
         function closeModal() {
             document.getElementById('previewModal').style.display = 'none';
             document.getElementById('pdfPreview').src = "";
+            document.getElementById('modalLoader').classList.add('hidden');
             document.body.style.overflow = 'auto';
         }
 
