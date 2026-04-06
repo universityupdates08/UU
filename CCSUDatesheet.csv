@@ -547,9 +547,15 @@ Date,Day,Shift,Class,Subject,Paper Name,Paper Code,Year
 24-Apr-26,Friday,Shift-II (02:00 PM - 05:00 PM),B.A. (NEP),Urdu,Sir Syed,A030604T,6th
 24-Apr-26,Friday,Shift-II (02:00 PM - 05:00 PM),B.A. (NEP),Urdu,Iqbal,A030605T,6th
 24-Apr-26,Friday,Shift-II (02:00 PM - 05:00 PM),B.A. (NEP),Urdu,Premchand,A030606T,6th
-25-Apr-26,Saturday,Shift-I (10:00 AM - 01:00 PM),Co-Curricular,Co-Curricular,First Aid and Health,Z020201,2nd
-25-Apr-26,Saturday,Shift-II (02:00 PM - 05:00 PM),Co-Curricular,Co-Curricular,Communication Skills and Personality Development,Z060601,6th
-27-Apr-26,Monday,Shift-I (10:00 AM - 01:00 PM),Co-Curricular,Co-Curricular,Physical Education and Yoga,Z040401,4th
+25-Apr-26,Saturday,Shift-I (10:00 AM - 01:00 PM),B.A. (NEP),Co-Curricular,First Aid and Health,Z020201,2nd
+25-Apr-26,Saturday,Shift-I (10:00 AM - 01:00 PM),B.Sc. (NEP),Co-Curricular,First Aid and Health,Z020201,2nd
+25-Apr-26,Saturday,Shift-I (10:00 AM - 01:00 PM),B.Com. (NEP),Co-Curricular,First Aid and Health,Z020201,2nd
+25-Apr-26,Saturday,Shift-II (02:00 PM - 05:00 PM),B.A. (NEP),Co-Curricular,Communication Skills and Personality Development,Z060601,6th
+25-Apr-26,Saturday,Shift-II (02:00 PM - 05:00 PM),B.Sc. (NEP),Co-Curricular,Communication Skills and Personality Development,Z060601,6th
+25-Apr-26,Saturday,Shift-II (02:00 PM - 05:00 PM),B.Com. (NEP),Co-Curricular,Communication Skills and Personality Development,Z060601,6th
+27-Apr-26,Monday,Shift-I (10:00 AM - 01:00 PM),B.A. (NEP),Co-Curricular,Physical Education and Yoga,Z040401,4th
+27-Apr-26,Monday,Shift-I (10:00 AM - 01:00 PM),B.Sc. (NEP),Co-Curricular,Physical Education and Yoga,Z040401,4th
+27-Apr-26,Monday,Shift-I (10:00 AM - 01:00 PM),B.Com. (NEP),Co-Curricular,Physical Education and Yoga,Z040401,4th
 28-Apr-26,Tuesday,Shift-I (10:00 AM - 01:00 PM),Minor,Education,Population and Environmental Education,Q10002,2nd
 28-Apr-26,Tuesday,Shift-I (10:00 AM - 01:00 PM),Minor,Statistics,Basic Statistics,Q10009,2nd
 28-Apr-26,Tuesday,Shift-I (10:00 AM - 01:00 PM),Minor,Sanskrit,Bhartiya Sanskriti Evam Sanskrit,Q10011,2nd
