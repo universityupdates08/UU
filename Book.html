@@ -50,7 +50,9 @@
     <nav class="glass-nav sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
             <img src="https://i.ibb.co/nMC0877T/UNIVERSITY-UPDATES-LOGO-removebg-preview.png" alt="Logo" class="h-10 md:h-12" />
-            <a href="#tab-section" onclick="showTab('instructions')" class="bg-blue-600 text-white px-5 py-2 rounded-lg text-sm font-bold shadow-lg shadow-blue-200 hover:bg-blue-700 transition">How to Download?</a>
+            <button onclick="openInstructionsModal()" class="bg-blue-600 text-white px-5 py-2 rounded-lg text-sm font-bold shadow-lg shadow-blue-200 hover:bg-blue-700 transition">
+    How to Download?
+</button>
         </div>
     </nav>
 
@@ -67,7 +69,7 @@
             </div>
             <div class="hidden md:block relative">
                 <div class="absolute -inset-4 bg-blue-100 rounded-full blur-3xl opacity-30"></div>
-                <img src="https://via.placeholder.com/500x400?text=Digital+Learning+Mockup" class="relative z-10 rounded-2xl" alt="Hero">
+                <img src="images/sitebook.png" class="relative z-10 rounded-2xl" alt="Hero">
             </div>
         </div>
     </header>
@@ -257,6 +259,42 @@
             </div>
         </div>
     </div>
+
+    <div id="instructionsModal" style="display: none; position: fixed; inset: 0; background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(4px); z-index: 1001; align-items: center; justify-content: center; padding: 20px;">
+    <div class="bg-white rounded-2xl w-full max-w-lg overflow-hidden shadow-2xl relative p-8">
+        <button onclick="closeInstructions()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-900 text-2xl">&times;</button>
+        
+        <h3 class="heading-font text-2xl font-bold text-slate-900 mb-6 flex items-center">
+            <i class="fas fa-download mr-3 text-blue-600"></i>How to Download?
+        </h3>
+        
+        <div class="space-y-6">
+            <div class="flex gap-4">
+                <span class="bg-blue-600 text-white w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 font-bold text-xs">1</span>
+                <p class="text-sm text-slate-600">Choose your book and click <strong>"Buy Now"</strong> to go to the secure Razorpay gateway.</p>
+            </div>
+            <div class="flex gap-4">
+                <span class="bg-blue-600 text-white w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 font-bold text-xs">2</span>
+                <p class="text-sm text-slate-600">Enter your basic details: <strong>Name, Email, and Mobile Number</strong>.</p>
+            </div>
+            <div class="flex gap-4">
+                <span class="bg-blue-600 text-white w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 font-bold text-xs">3</span>
+                <p class="text-sm text-slate-600">Complete payment via <strong>UPI, Card, or Netbanking</strong>.</p>
+            </div>
+            <div class="flex gap-4 border-l-4 border-blue-100 pl-4 py-1">
+                <span class="bg-blue-600 text-white w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 font-bold text-xs">4</span>
+                <p class="text-sm text-slate-600 font-medium">After payment, <strong>Wait 10 seconds</strong>. The PDF will download automatically. Do not refresh!</p>
+            </div>
+            <div class="flex gap-4">
+                <span class="bg-blue-600 text-white w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 font-bold text-xs">5</span>
+                <p class="text-sm text-slate-600"><strong>You must be wait for redirection to Downloading of PDF ☑ after the payment completion.</strong></p>
+            </div>
+        </div>
+
+        <button onclick="closeInstructions()" class="w-full mt-8 bg-slate-900 text-white py-3 rounded-xl font-bold hover:bg-slate-800 transition">Got it, thanks!</button>
+    </div>
+</div>
+
     
 <footer class="bg-white py-12 border-t">
         <div class="max-w-7xl mx-auto px-6 text-center">
@@ -339,6 +377,29 @@
         window.onclick = function(event) {
             if (event.target == document.getElementById('previewModal')) closeModal();
         }
+
+
+        
+        function openInstructionsModal() {
+    const modal = document.getElementById('instructionsModal');
+    modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden'; // Prevent background scroll
+}
+
+function closeInstructions() {
+    const modal = document.getElementById('instructionsModal');
+    modal.style.display = 'none';
+    document.body.style.overflow = 'auto'; // Re-enable scroll
+}
+
+// Update your existing window.onclick to handle clicking outside this new modal too
+window.onclick = function(event) {
+    const previewModal = document.getElementById('previewModal');
+    const instructionsModal = document.getElementById('instructionsModal');
+    
+    if (event.target == previewModal) closeModal();
+    if (event.target == instructionsModal) closeInstructions();
+}
     </script>
 </body>
 </html>
