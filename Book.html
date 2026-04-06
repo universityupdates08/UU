@@ -31,7 +31,6 @@
     </style>
 </head>
 <body>
-
     <div class="bg-slate-900 text-slate-300 py-2 text-[11px] font-medium">
         <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
             <div class="flex gap-4">
@@ -50,9 +49,7 @@
     <nav class="glass-nav sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
             <img src="https://i.ibb.co/nMC0877T/UNIVERSITY-UPDATES-LOGO-removebg-preview.png" alt="Logo" class="h-10 md:h-12" />
-            <button onclick="openInstructionsModal()" class="bg-blue-600 text-white px-5 py-2 rounded-lg text-sm font-bold shadow-lg shadow-blue-200 hover:bg-blue-700 transition">
-    How to Download?
-</button>
+            <button onclick="openInstructionsOnly()" class="bg-blue-600 text-white px-5 py-2 rounded-lg text-sm font-bold shadow-lg shadow-blue-200 hover:bg-blue-700 transition">How to Download?</button>
         </div>
     </nav>
 
@@ -69,7 +66,7 @@
             </div>
             <div class="hidden md:block relative">
                 <div class="absolute -inset-4 bg-blue-100 rounded-full blur-3xl opacity-30"></div>
-                <img src="images/sitebook.png" class="relative z-10 rounded-2xl" alt="Hero">
+                <img src="images/sitebook.png" class="relative z-10 rounded-2xl" alt="Hero" onerror="this.src='https://via.placeholder.com/500x400?text=University+Updates'">
             </div>
         </div>
     </header>
@@ -214,19 +211,19 @@
                     </div>
                 </div>
             </div>
-            
+
             <div id="terms" class="tab-content space-y-4">
                 <h3 class="text-2xl font-bold heading-font">Refunds & Usage</h3>
                 <div class="text-slate-400 text-sm space-y-3">
-                    <p>• <strong>Non-exclusive use:</strong>Content is for personal use only. Sharing, reselling, or commercial distribution is strictly prohibited.</p>
-                    <p>• <strong>Non-transferable:</strong>You can't transfer the E-Book to others.</p>
+                    <p>• <strong>Non-exclusive use:</strong> Content is for personal use only. Sharing, reselling, or commercial distribution is strictly prohibited.</p>
+                    <p>• <strong>Non-transferable:</strong> You can't transfer the E-Book to others.</p>
                     <p>• Due to the nature of digital goods, we do not offer refunds once the download link is accessed.</p>
-                    <p>• <strong>No Editing:</strong>You can't edit, copy, annotate, or highlight the E-Book.</p>
-                    <p>• <strong>No Reproduction:</strong>You can't reproduce the E-Book in any form, including photocopying, recording, file sharing, or by any information storage or retrieval system, without prior written permission from the publisher.</p>
+                    <p>• <strong>No Editing:</strong> You can't edit, copy, annotate, or highlight the E-Book.</p>
+                    <p>• <strong>No Reproduction:</strong> You can't reproduce the E-Book in any form, including photocopying, recording, file sharing, or by any information storage or retrieval system, without prior written permission from the publisher.</p>
                     <p>• If you face any payment issues, contact support via Telegram within 24 hours with your transaction ID.</p>
                 </div>
             </div>
-            
+
             <div id="pp" class="tab-content space-y-4">
                 <h3 class="text-2xl font-bold heading-font">Privacy Policy</h3>
                 <div class="text-slate-400 text-sm space-y-3">
@@ -236,15 +233,13 @@
         </div>
     </section>
 
-<div id="previewModal">
+    <div id="previewModal">
         <div class="bg-white rounded-2xl w-full max-w-2xl overflow-hidden flex flex-col md:flex-row shadow-2xl relative">
             <button onclick="closeModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-900 text-xl z-10">&times;</button>
-            
-            <div class="md:w-1/2 bg-slate-100 p-8 flex items-center justify-center">
-                <div id="modalLoader" class="loader hidden"></div>
-                <img id="modalImg" src="" class="max-h-64 md:max-h-full rounded shadow-md" alt="Preview">
+            <div class="md:w-1/2 bg-slate-100 p-4 flex items-center justify-center min-h-[300px]">
+                <div id="modalLoader" class="loader"></div>
+                <iframe id="pdfPreview" src="" class="w-full h-full border-0 hidden rounded shadow-md" title="PDF Preview"></iframe>
             </div>
-
             <div class="md:w-1/2 p-8">
                 <h3 id="modalTitle" class="heading-font text-xl font-bold text-slate-900 mb-4">Book Details</h3>
                 <div class="space-y-3 mb-8">
@@ -261,49 +256,44 @@
     </div>
 
     <div id="instructionsModal" style="display: none; position: fixed; inset: 0; background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(4px); z-index: 1001; align-items: center; justify-content: center; padding: 20px;">
-    <div class="bg-white rounded-2xl w-full max-w-lg overflow-hidden shadow-2xl relative p-8">
-        <button onclick="closeInstructions()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-900 text-2xl">&times;</button>
-        
-        <h3 class="heading-font text-2xl font-bold text-slate-900 mb-6 flex items-center">
-            <i class="fas fa-download mr-3 text-blue-600"></i>How to Download?
-        </h3>
-        
-        <div class="space-y-6">
-            <div class="flex gap-4">
-                <span class="bg-blue-600 text-white w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 font-bold text-xs">1</span>
-                <p class="text-sm text-slate-600">Choose your book and click <strong>"Buy Now"</strong> to go to the secure Razorpay gateway.</p>
+        <div class="bg-white rounded-2xl w-full max-w-lg overflow-hidden shadow-2xl relative p-8">
+            <button onclick="closeInstructions()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-900 text-2xl">&times;</button>
+            <h3 class="heading-font text-2xl font-bold text-slate-900 mb-6 flex items-center">
+                <i class="fas fa-download mr-3 text-blue-600"></i>How to Download?
+            </h3>
+            <div class="space-y-6">
+                <div class="flex gap-4">
+                    <span class="bg-blue-600 text-white w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 font-bold text-xs">1</span>
+                    <p class="text-sm text-slate-600">Click on <strong>"Proceed to Payment"</strong> to go to the secure Razorpay gateway.</p>
+                </div>
+                <div class="flex gap-4">
+                    <span class="bg-blue-600 text-white w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 font-bold text-xs">2</span>
+                    <p class="text-sm text-slate-600">Enter your basic details: <strong>Name, Email, and Mobile Number</strong>.</p>
+                </div>
+                <div class="flex gap-4">
+                    <span class="bg-blue-600 text-white w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 font-bold text-xs">3</span>
+                    <p class="text-sm text-slate-600">Complete payment via <strong>UPI, Card, or Netbanking</strong>.</p>
+                </div>
+                <div class="flex gap-4 border-l-4 border-blue-100 pl-4 py-1">
+                    <span class="bg-blue-600 text-white w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 font-bold text-xs">4</span>
+                    <p class="text-sm text-slate-600 font-medium">After payment, <strong>Wait 10 seconds</strong>. The PDF will download automatically. Do not refresh!</p>
+                </div>
+                <div class="flex gap-4">
+                    <span class="bg-blue-600 text-white w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 font-bold text-xs">5</span>
+                    <p class="text-sm text-slate-600"><strong>You must wait for redirection to download the PDF after the payment completion.</strong></p>
+                </div>
             </div>
-            <div class="flex gap-4">
-                <span class="bg-blue-600 text-white w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 font-bold text-xs">2</span>
-                <p class="text-sm text-slate-600">Enter your basic details: <strong>Name, Email, and Mobile Number</strong>.</p>
-            </div>
-            <div class="flex gap-4">
-                <span class="bg-blue-600 text-white w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 font-bold text-xs">3</span>
-                <p class="text-sm text-slate-600">Complete payment via <strong>UPI, Card, or Netbanking</strong>.</p>
-            </div>
-            <div class="flex gap-4 border-l-4 border-blue-100 pl-4 py-1">
-                <span class="bg-blue-600 text-white w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 font-bold text-xs">4</span>
-                <p class="text-sm text-slate-600 font-medium">After payment, <strong>Wait 10 seconds</strong>. The PDF will download automatically. Do not refresh!</p>
-            </div>
-            <div class="flex gap-4">
-                <span class="bg-blue-600 text-white w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 font-bold text-xs">5</span>
-                <p class="text-sm text-slate-600"><strong>You must be wait for redirection to Downloading of PDF ☑ after the payment completion.</strong></p>
-            </div>
+            <button id="proceedBuyBtn" class="w-full mt-8 bg-slate-900 text-white py-3 rounded-xl font-bold hover:bg-slate-800 transition">Proceed to Payment</button>
         </div>
-
-        <button onclick="closeInstructions()" class="w-full mt-8 bg-slate-900 text-white py-3 rounded-xl font-bold hover:bg-slate-800 transition">Got it, thanks!</button>
     </div>
-</div>
 
-    
-<footer class="bg-white py-12 border-t">
+    <footer class="bg-white py-12 border-t">
         <div class="max-w-7xl mx-auto px-6 text-center">
             <img src="https://i.ibb.co/nMC0877T/UNIVERSITY-UPDATES-LOGO-removebg-preview.png" class="h-12 mx-auto grayscale opacity-50 mb-6" alt="Footer Logo">
             <p class="text-slate-500 text-sm max-w-md mx-auto">Helping students bridge the gap between learning and excellence. Trusted by thousands of university students.</p>
             <div class="mt-8 pt-8 border-t border-slate-100 flex flex-col md:flex-row justify-between items-center gap-4">
                 <p class="text-xs text-slate-400">© 2026 | University Updates. All academic content is copyrighted.</p>
                 <div class="flex gap-6 text-xs font-semibold text-slate-600 uppercase tracking-widest">
-                    
                     <a href="https://t.me/HelpforDMBot">Help Desk</a>
                 </div>
             </div>
@@ -311,6 +301,8 @@
     </footer>
 
     <script>
+        let currentBuyUrl = "";
+
         function filterCategory(category, btn) {
             document.querySelectorAll('.category-btn').forEach(b => {
                 b.classList.remove('bg-slate-900', 'text-white');
@@ -326,80 +318,97 @@
         }
 
         function showTab(tabId) {
-            // Hide all tab content
             document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
-            
-            // Deactivate all buttons
             document.querySelectorAll('.tab-btn').forEach(btn => {
                 btn.classList.remove('border-blue-500', 'text-white');
                 btn.classList.add('border-transparent', 'text-slate-400');
             });
-            
-            // Show the selected content
             document.getElementById(tabId).classList.add('active');
-            
-            // Find the button associated with this tabId and activate it
             const targetBtn = Array.from(document.querySelectorAll('.tab-btn')).find(btn => 
-                btn.getAttribute('onclick').includes(`'${tabId}'`)
+                 btn.getAttribute('onclick').includes(`'${tabId}'`)
             );
-            
             if(targetBtn) {
                 targetBtn.classList.add('border-blue-500', 'text-white');
                 targetBtn.classList.remove('border-transparent', 'text-slate-400');
             }
         }
 
+        // Updated redirect logic to show instructions first
         function redirectBuy(url) {
             if(url && url !== '#') {
-                window.location.href = url;
+                currentBuyUrl = url;
+                openInstructionsModal();
             } else {
                 alert("Will be available shortly!");
             }
         }
-        
-        function openPreviewModal(title, imgSrc, quality, lang, format, buyUrl) {
+
+        // For the nav button which just shows info
+        function openInstructionsOnly() {
+            document.getElementById('proceedBuyBtn').innerText = "Got it, thanks!";
+            document.getElementById('proceedBuyBtn').onclick = closeInstructions;
+            openInstructionsModal();
+        }
+
+        function openPreviewModal(title, pdfSrc, quality, lang, format, buyUrl) {
             const modal = document.getElementById('previewModal');
+            const loader = document.getElementById('modalLoader');
+            const iframe = document.getElementById('pdfPreview');
+            
             document.getElementById('modalTitle').innerText = title;
-            document.getElementById('modalImg').src = imgSrc;
             document.getElementById('modalQuality').innerText = quality;
             document.getElementById('modalLang').innerText = lang;
             document.getElementById('modalFormat').innerText = format;
             document.getElementById('modalBuyBtn').onclick = () => redirectBuy(buyUrl);
+            
+            // Fix: Load PDF into Iframe
+            loader.classList.remove('hidden');
+            iframe.classList.add('hidden');
+            iframe.src = pdfSrc;
+            
+            iframe.onload = function() {
+                loader.classList.add('hidden');
+                iframe.classList.remove('hidden');
+            };
+
             modal.style.display = 'flex';
             document.body.style.overflow = 'hidden';
         }
 
         function closeModal() {
             document.getElementById('previewModal').style.display = 'none';
+            document.getElementById('pdfPreview').src = ""; // Stop loading PDF
             document.body.style.overflow = 'auto';
         }
 
-        window.onclick = function(event) {
-            if (event.target == document.getElementById('previewModal')) closeModal();
+        function openInstructionsModal() {
+            const modal = document.getElementById('instructionsModal');
+            const proceedBtn = document.getElementById('proceedBuyBtn');
+            
+            // Reset button if it was changed by nav link
+            if(currentBuyUrl !== "") {
+                proceedBtn.innerText = "Proceed to Payment";
+                proceedBtn.onclick = function() {
+                    window.location.href = currentBuyUrl;
+                };
+            }
+
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
         }
 
+        function closeInstructions() {
+            document.getElementById('instructionsModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+            currentBuyUrl = ""; // Reset
+        }
 
-        
-        function openInstructionsModal() {
-    const modal = document.getElementById('instructionsModal');
-    modal.style.display = 'flex';
-    document.body.style.overflow = 'hidden'; // Prevent background scroll
-}
-
-function closeInstructions() {
-    const modal = document.getElementById('instructionsModal');
-    modal.style.display = 'none';
-    document.body.style.overflow = 'auto'; // Re-enable scroll
-}
-
-// Update your existing window.onclick to handle clicking outside this new modal too
-window.onclick = function(event) {
-    const previewModal = document.getElementById('previewModal');
-    const instructionsModal = document.getElementById('instructionsModal');
-    
-    if (event.target == previewModal) closeModal();
-    if (event.target == instructionsModal) closeInstructions();
-}
+        window.onclick = function(event) {
+            const previewModal = document.getElementById('previewModal');
+            const instructionsModal = document.getElementById('instructionsModal');
+            if (event.target == previewModal) closeModal();
+            if (event.target == instructionsModal) closeInstructions();
+        }
     </script>
 </body>
 </html>
