@@ -3,304 +3,341 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>BUY BOOK ONLINE - UNIVERSITY UPDATES</title>
+    <title>BUY BOOKS ONLINE - UNIVERSITY UPDATES</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <style>
         :root {
-            --primary-color: #ef3c3c;
-            --secondary-color: #2c4b9e;
-            --bg-gradient: radial-gradient(circle at top, #ffffff 0, #e5edff 45%, #f3f4f6 100%);
+            --primary: #2563eb;
+            --accent: #ef4444;
+            --slate-bg: #f8fafc;
         }
-        body { 
-             font-family: "Poppins", sans-serif; 
-             background: var(--bg-gradient); 
-             color: #0f172a; 
-             margin: 0;
-            -webkit-tap-highlight-color: transparent;
-        }
-        .container { 
-             background: white; 
-             padding: 20px; 
-             border-radius: 12px; 
-             width: 92%; 
-             max-width: 1200px; 
-             margin: 1.5rem auto; 
-             box-shadow: 0 10px 30px rgba(15,23,42,0.05); 
-         }
-        @media (min-width: 768px) { .container { padding: 40px; border-radius: 16px; } }
-
-        .announcement-bar { background-color: var(--primary-color); color: white; font-size: 0.75rem; height: 35px; display: flex; align-items: center; overflow: hidden; }
-        .announcement-inner { white-space: nowrap; animation: ticker 25s linear infinite; display: inline-block; padding-left: 100%; }
-        @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-100%); } }
-
-        .book-card { border: 1px solid #f1f5f9; border-radius: 12px; transition: all 0.3s ease; background: white; display: flex; flex-direction: column; height: 100%; }
-        .book-image-container { position: relative; height: 200px; background: #f8fafc; border-bottom: 1px solid #f1f5f9; }
-        .book-card img { width: 100%; height: 100%; object-fit: contain; padding: 15px; }
-
-        /* Modal Styles */
-        #previewModal { 
-            display: none; 
-            position: fixed; 
-            inset: 0; 
-            background: rgba(15, 23, 42, 0.9); 
-            backdrop-filter: blur(8px);
-            z-index: 1000; 
-            align-items: center; 
-            justify-content: center; 
-            padding: 15px; 
-        }
-        .no-scrollbar::-webkit-scrollbar { display: none; }
-        
-        /* Loading Spinner */
-        .loader {
-            border: 3px solid #f3f3f3;
-            border-top: 3px solid #3498db;
-            border-radius: 50%;
-            width: 30px;
-            height: 30px;
-            animation: spin 1s linear infinite;
-        }
+        body { font-family: "Inter", sans-serif; background-color: var(--slate-bg); color: #1e293b; scroll-behavior: smooth; }
+        .heading-font { font-family: "Poppins", sans-serif; }
+        .glass-nav { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(226, 232, 240, 0.8); }
+        .book-card { transition: transform 0.2s ease, box-shadow 0.2s ease; border: 1px solid #e2e8f0; }
+        .book-card:hover { transform: translateY(-4px); box-shadow: 0 12px 24px -10px rgba(0,0,0,0.1); }
+        .announcement-bar { background: linear-gradient(90deg, #1e293b 0%, #334155 100%); color: white; font-size: 0.75rem; height: 35px; display: flex; align-items: center; overflow: hidden; }
+        .announcement-inner { white-space: nowrap; animation: ticker 30s linear infinite; display: inline-block; }
+        @keyframes ticker { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        #previewModal { display: none; position: fixed; inset: 0; background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(4px); z-index: 1000; align-items: center; justify-content: center; padding: 20px; }
+        .loader { border: 3px solid #f3f3f3; border-top: 3px solid var(--primary); border-radius: 50%; width: 30px; height: 30px; animation: spin 1s linear infinite; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
     </style>
 </head>
 <body>
-    <div class="utility-bar bg-[#0f172a] text-[#e5e7eb] text-[10px] sm:text-xs py-2">
-        <div class="max-w-7xl mx-auto px-4 flex justify-between items-center">
-            <div class="flex gap-3">
-            <a href="https://t.me/HelpforDMBot" target="_blank" class="flex items-center gap-1">
-                <span><i class="fas fa-headset mr-1"></i> Support</span></a>
-            </div>
-            <div class="flex gap-4">
-                <div class="flex items-center gap-3">
-        <a href="index.html" aria-label="Home">
-          <i class="fas fa-home text-xs"></i>
-        </a>
-        <span class="text-slate-500">|</span>
-        <a href="https://www.youtube.com/@University-Updates-UU" target="_blank" aria-label="YouTube">
-          <i class="fab fa-youtube"></i>
-        </a>
-        <span class="text-slate-500">|</span>
-        <a href="https://instagram.com/universityupdates_uu" target="_blank" aria-label="Instagram">
-          <i class="fab fa-instagram"></i>
-        </a>
-         <span class="text-slate-500">|</span>
-        <a href="https://x.com/uni_updates08" target="_blank" aria-label="X">
-          <i class="fab fa-x"></i>
-        </a>
-        <span class="text-slate-500">|</span>
-        <a href="https://t.me/UniversityUpdates_UU" target="_blank" aria-label="Telegram">
-          <i class="fab fa-telegram-plane"></i>
-        </a>
-      </div>
-    </div>
-  </div>
-</div>
 
-    <header class="main-nav sticky top-0 bg-white/80 backdrop-blur-md border-b z-50">
-        <div class="max-w-7xl mx-auto px-4 py-3 flex flex-col md:flex-row items-center justify-between gap-3">
-            <div class="flex items-center gap-3">
-                 <img src="https://i.ibb.co/nMC0877T/UNIVERSITY-UPDATES-LOGO-removebg-preview.png" alt="University Updates Logo" class="h-14 md:h-16 drop-shadow-md" />
+    <div class="bg-slate-900 text-slate-300 py-2 text-[11px] font-medium">
+        <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
+            <div class="flex gap-4">
+                <a href="https://t.me/HelpforDMBot" class="hover:text-white transition"><i class="fas fa-headset mr-1"></i>Support</a>
             </div>
-            <button class="bg-slate-900 text-white px-4 py-1.5 rounded-full text-xs font-medium">Help?</button>
+            <div class="flex gap-4 items-center">
+                <a href="#"><i class="fas fa-home hover:text-white-500"></i></a>
+                <a href="https://www.youtube.com/@University-Updates-UU"><i class="fab fa-youtube hover:text-red-500"></i></a>
+                <a href="https://instagram.com/universityupdates_uu"><i class="fab fa-instagram hover:text-pink-500"></i></a>
+                <a href="https://t.me/UniversityUpdates_UU"><i class="fab fa-telegram hover:text-blue-400"></i></a>
+                <a href="https://x.com/uni_updates08"><i class="fab fa-x hover:text-black-400"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <nav class="glass-nav sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <img src="https://i.ibb.co/nMC0877T/UNIVERSITY-UPDATES-LOGO-removebg-preview.png" alt="Logo" class="h-10 md:h-12" />
+            <a href="#tab-section" onclick="showTab('instructions')" class="bg-blue-600 text-white px-5 py-2 rounded-lg text-sm font-bold shadow-lg shadow-blue-200 hover:bg-blue-700 transition">How to Download?</a>
+        </div>
+    </nav>
+
+    <header class="bg-white border-b overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 py-16 md:py-4 grid md:grid-cols-2 items-center gap-12">
+            <div>
+                <span class="text-blue-600 font-bold text-sm tracking-widest uppercase">Academic Excellence</span>
+                <h1 class="heading-font text-4xl md:text-6xl font-bold text-slate-900 mt-4 leading-tight">Master Your Exams with <span class="text-blue-600">Expert Guides.</span></h1>
+                <p class="text-slate-500 mt-6 text-lg">Comprehensive study materials designed by University Updates to help you excel in the NEP-2020 curriculum.</p>
+                <div class="mt-10 flex gap-4">
+                    <a href="#store" class="bg-slate-900 text-white px-8 py-4 rounded-xl font-bold hover:bg-slate-800 transition">Browse Books</a>
+                    <a href="#tab-section" onclick="showTab('about')" class="bg-white border border-slate-200 px-8 py-4 rounded-xl font-bold hover:bg-slate-50 transition text-slate-700">Learn More</a>
+                </div>
+            </div>
+            <div class="hidden md:block relative">
+                <div class="absolute -inset-4 bg-blue-100 rounded-full blur-3xl opacity-30"></div>
+                <img src="https://via.placeholder.com/500x400?text=Digital+Learning+Mockup" class="relative z-10 rounded-2xl" alt="Hero">
+            </div>
         </div>
     </header>
 
     <div class="announcement-bar">
         <div class="announcement-inner">
-            🔥 SALE: 20% discount on all Digital PDF Guides • New arrivals for 2026 Semester now available • 
+            ✨ LAUNCH OFFER: 20% off • New 2026 Semester Guides are now LIVE • Get instant PDF delivery after payment • Verified Academic Content 
         </div>
     </div>
 
-    <main class="container">
-        <div class="mb-6 md:mb-10">
-            <h2 class="text-xl md:text-3xl font-bold text-slate-900">Book Store</h2>
-            <p class="text-xs md:text-sm text-slate-500 mt-1">Access your study material anywhere, anytime.</p>
+    <main id="store" class="max-w-7xl mx-auto px-6 py-20">
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+            <div>
+                <h2 class="heading-font text-3xl font-bold text-slate-900">Digital Resource Library</h2>
+                <p class="text-slate-500 mt-2">Instant access to high-quality PDF study guides.</p>
+            </div>
+            <div class="flex bg-white p-1.5 rounded-xl border border-slate-200 shadow-sm">
+                <button onclick="filterCategory('all', this)" class="category-btn px-6 py-2 rounded-lg text-sm font-semibold bg-slate-900 text-white transition">All Books</button>
+                <button onclick="filterCategory('ug-nep', this)" class="category-btn px-6 py-2 rounded-lg text-sm font-semibold text-slate-600 hover:bg-slate-50 transition">UG-NEP</button>
+            </div>
         </div>
 
-        <div class="flex overflow-x-auto no-scrollbar gap-2 mb-8 pb-2">
-            <button onclick="filterCategory('all', this)" class="category-btn active whitespace-nowrap px-4 py-2 bg-slate-900 text-white rounded-full text-xs transition">All Categories</button>
-            <button onclick="filterCategory('ug-nep', this)" class="category-btn whitespace-nowrap px-4 py-2 bg-white border border-slate-200 rounded-full text-xs text-slate-600 transition">UG-NEP</button>
-        </div>
-
-        <div id="book-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8">
-            
-            <div class="book-card" data-category="ug-nep">
-                <div class="book-image-container">
-                    <img src="images/HVS.png" alt="Hindi Vyakaran" onerror="this.src='https://via.placeholder.com/200x280?text=Hindi+Book'">
-                    <span class="absolute top-2 right-2 bg-green-500 text-white text-[9px] font-bold px-2 py-0.5 rounded shadow-sm">PDF</span>
+        <div id="book-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div class="book-card bg-white rounded-2xl overflow-hidden flex flex-col" data-category="ug-nep">
+                <div class="h-64 bg-slate-100 p-8 relative">
+                    <img src="images/HVS.png" alt="Hindi" class="w-full h-full object-contain drop-shadow-xl" onerror="this.src='https://via.placeholder.com/200x280?text=Hindi+Vyakaran'">
+                    <span class="absolute top-4 right-4 bg-green-500 text-white text-[10px] font-black px-2.5 py-1 rounded-full uppercase">PDF</span>
                 </div>
-                <div class="p-4 flex flex-col flex-grow">
-                    <h4 class="font-bold text-slate-800 text-sm md:text-base leading-tight">हिंदी व्याकरण और संप्रेषण</h4>
-                    <p class="text-[10px] text-slate-400 mt-1 mb-4">By University Updates</p>
-                    <div class="mt-auto">
-                        <div class="flex items-baseline gap-2 mb-4">
-                            <span class="text-lg font-bold text-slate-900">₹35</span>
+                <div class="p-6 flex-grow flex flex-col">
+                    <h3 class="font-bold text-slate-800 leading-snug">हिंदी व्याकरण और संप्रेषण</h3>
+                    <p class="text-xs text-slate-400 mt-1 uppercase tracking-tighter">BY UNIVERSITY UPDATES</p>
+                    <div class="mt-6 flex items-center justify-between">
+                        <div class="flex flex-col">
+                            <span class="text-2xl font-bold text-slate-900">₹35</span>
                             <span class="text-xs line-through text-slate-400">₹45</span>
                         </div>
-                        <div class="grid grid-cols-2 gap-2">
-                            <button onclick="openPreview('हिंदी व्याकरण और संप्रेषण', 'previews/hvs-sample.pdf', 'https://pages.razorpay.com/BookHVS')" class="py-2 text-[11px] font-semibold bg-slate-100 text-slate-600 rounded-lg active:scale-95">Preview</button>
-                            <button onclick="redirectBuy('https://pages.razorpay.com/BookHVS')" class="py-2 text-[11px] font-bold bg-blue-600 text-white rounded-lg active:scale-95 shadow-md">Buy PDF</button>
-                        </div>
                     </div>
+                </div>
+                <div class="p-5 pt-0 grid grid-cols-2 gap-2">
+                    <button onclick="openPreviewModal('हिंदी व्याकरण और संप्रेषण', 'previews/hvs-sample.pdf', '100% Quality', 'Hindi', 'PDF', 'https://pages.razorpay.com/BookHVS')" class="text-xs font-bold py-2.5 bg-slate-100 text-slate-700 rounded-lg hover:bg-slate-200">View Info</button>
+                    <button onclick="redirectBuy('https://pages.razorpay.com/BookHVS')" class="text-xs font-bold py-2.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 shadow-lg shadow-blue-100">Buy Now</button>
                 </div>
             </div>
 
-            <div class="book-card" data-category="ug-nep">
-                <div class="book-image-container">
-                    <img src="https://via.placeholder.com/200x280?text=Social+Responsibility" alt="Social Responsibility and Community Engagement">
-                    <span class="absolute top-2 right-2 bg-green-500 text-white text-[9px] font-bold px-2 py-0.5 rounded shadow-sm">PDF</span>
+            <div class="book-card bg-white rounded-2xl overflow-hidden flex flex-col" data-category="ug-nep">
+                <div class="h-64 bg-slate-100 p-8 relative">
+                    <img src="images/SRCE.png" alt="Social Responsibility" class="w-full h-full object-contain drop-shadow-xl" onerror="this.src='https://via.placeholder.com/200x280?text=Social+Responsibility'">
+                    <span class="absolute top-4 right-4 bg-green-500 text-white text-[10px] font-black px-2.5 py-1 rounded-full uppercase">PDF</span>
                 </div>
-                <div class="p-4 flex flex-col flex-grow">
-                    <h4 class="font-bold text-slate-800 text-sm leading-tight">Social Responsibility and Community Engagement (English)</h4>
-                    <p class="text-[10px] text-slate-400 mt-1 mb-4">By University Updates</p>
-                    <div class="mt-auto">
-                        <div class="flex items-baseline gap-2 mb-4">
-                            <span class="text-lg font-bold text-slate-900">₹35</span>
-                        </div>
-                        <div class="grid grid-cols-2 gap-2">
-                             <button onclick="openPreview('Social Responsibility', '#', '#')" class="py-2 text-[11px] font-semibold bg-slate-100 text-slate-600 rounded-lg active:scale-95">Preview</button>
-                            <button onclick="redirectBuy('#')" class="py-2 text-[11px] font-bold bg-blue-600 text-white rounded-lg active:scale-95 shadow-md">Buy PDF</button>
+                <div class="p-6 flex-grow flex flex-col">
+                    <h3 class="font-bold text-slate-800 leading-snug">Social Responsibility and Community Engagement (English)</h3>
+                    <p class="text-xs text-slate-400 mt-1 uppercase tracking-tighter">BY UNIVERSITY UPDATES</p>
+                    <div class="mt-6 flex items-center justify-between">
+                        <div class="flex flex-col">
+                            <span class="text-2xl font-bold text-slate-900">₹35</span>
+                            <span class="text-xs line-through text-slate-400">₹45</span>
                         </div>
                     </div>
+                </div>
+                <div class="p-5 pt-0 grid grid-cols-2 gap-2">
+                    <button onclick="openPreviewModal('Social Responsibility and Community Engagement', 'previews/srce-sample.pdf', '100% Quality', 'English', 'PDF', '#')" class="text-xs font-bold py-2.5 bg-slate-100 text-slate-700 rounded-lg hover:bg-slate-200">View Info</button>
+                    <button onclick="redirectBuy('#')" class="text-xs font-bold py-2.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 shadow-lg shadow-blue-100">Buy Now</button>
                 </div>
             </div>
 
-            <div class="book-card" data-category="ug-nep">
-                <div class="book-image-container">
-                    <img src="https://via.placeholder.com/200x280?text=Social+Responsibility+Hindi" alt="सामाजिक उत्तरदायित्व और सामुदायिक सहभागिता">
-                    <span class="absolute top-2 right-2 bg-green-500 text-white text-[9px] font-bold px-2 py-0.5 rounded shadow-sm">PDF</span>
+            <div class="book-card bg-white rounded-2xl overflow-hidden flex flex-col" data-category="ug-nep">
+                <div class="h-64 bg-slate-100 p-8 relative">
+                    <img src="images/SRCEH.png" alt="Social Responsibility Hindi" class="w-full h-full object-contain drop-shadow-xl" onerror="this.src='https://via.placeholder.com/200x280?text=Social+Responsibility+Hindi'">
+                    <span class="absolute top-4 right-4 bg-green-500 text-white text-[10px] font-black px-2.5 py-1 rounded-full uppercase">PDF</span>
                 </div>
-                <div class="p-4 flex flex-col flex-grow">
-                    <h4 class="font-bold text-slate-800 text-sm leading-tight">सामाजिक उत्तरदायित्व और सामुदायिक सहभागिता (Hindi)</h4>
-                    <p class="text-[10px] text-slate-400 mt-1 mb-4">By University Updates</p>
-                    <div class="mt-auto">
-                        <div class="flex items-baseline gap-2 mb-4">
-                            <span class="text-lg font-bold text-slate-900">₹35</span>
-                        </div>
-                        <div class="grid grid-cols-2 gap-2">
-                             <button onclick="openPreview('Social Responsibility Hindi', '#', '#')" class="py-2 text-[11px] font-semibold bg-slate-100 text-slate-600 rounded-lg active:scale-95">Preview</button>
-                            <button onclick="redirectBuy('#')" class="py-2 text-[11px] font-bold bg-blue-600 text-white rounded-lg active:scale-95 shadow-md">Buy PDF</button>
+                <div class="p-6 flex-grow flex flex-col">
+                    <h3 class="font-bold text-slate-800 leading-snug">सामाजिक उत्तरदायित्व और सामुदायिक सहभागिता</h3>
+                    <p class="text-xs text-slate-400 mt-1 uppercase tracking-tighter">BY UNIVERSITY UPDATES</p>
+                    <div class="mt-6 flex items-center justify-between">
+                        <div class="flex flex-col">
+                            <span class="text-2xl font-bold text-slate-900">₹35</span>
+                            <span class="text-xs line-through text-slate-400">₹45</span>
                         </div>
                     </div>
+                </div>
+                <div class="p-5 pt-0 grid grid-cols-2 gap-2">
+                    <button onclick="openPreviewModal('सामाजिक उत्तरदायित्व और सामुदायिक सहभागिता', 'previews/srceh-sample.pdf', '100% Quality', 'Hindi', 'PDF', '#')" class="text-xs font-bold py-2.5 bg-slate-100 text-slate-700 rounded-lg hover:bg-slate-200">View Info</button>
+                    <button onclick="redirectBuy('#')" class="text-xs font-bold py-2.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 shadow-lg shadow-blue-100">Buy Now</button>
                 </div>
             </div>
 
-
-             <div class="book-card" data-category="ug-nep">
-                <div class="book-image-container">
-                    <img src="https://via.placeholder.com/200x280?text=Social+Responsibility+Hindi" alt="ससंस्कृत - भाषा एवं संभाषणम्">
-                    <span class="absolute top-2 right-2 bg-green-500 text-white text-[9px] font-bold px-2 py-0.5 rounded shadow-sm">PDF</span>
+            <div class="book-card bg-white rounded-2xl overflow-hidden flex flex-col" data-category="ug-nep">
+                <div class="h-64 bg-slate-100 p-8 relative">
+                    <img src="images/Sanskrit.png" alt="Sanskrit" class="w-full h-full object-contain drop-shadow-xl" onerror="this.src='https://via.placeholder.com/200x280?text=Sanskrit'">
+                    <span class="absolute top-4 right-4 bg-green-500 text-white text-[10px] font-black px-2.5 py-1 rounded-full uppercase">PDF</span>
                 </div>
-                <div class="p-4 flex flex-col flex-grow">
-                    <h4 class="font-bold text-slate-800 text-sm leading-tight">ससंस्कृत - भाषा एवं संभाषणम्</h4>
-                    <p class="text-[10px] text-slate-400 mt-1 mb-4">By University Updates</p>
-                    <div class="mt-auto">
-                        <div class="flex items-baseline gap-2 mb-4">
-                            <span class="text-lg font-bold text-slate-900">₹35</span>
-                        </div>
-                        <div class="grid grid-cols-2 gap-2">
-                             <button onclick="openPreview('Sanskrit', '#', '#')" class="py-2 text-[11px] font-semibold bg-slate-100 text-slate-600 rounded-lg active:scale-95">Preview</button>
-                            <button onclick="redirectBuy('#')" class="py-2 text-[11px] font-bold bg-blue-600 text-white rounded-lg active:scale-95 shadow-md">Buy PDF</button>
+                <div class="p-6 flex-grow flex flex-col">
+                    <h3 class="font-bold text-slate-800 leading-snug">संस्कृत - भाषा एवं संभाषणम्</h3>
+                    <p class="text-xs text-slate-400 mt-1 uppercase tracking-tighter">BY UNIVERSITY UPDATES</p>
+                    <div class="mt-6 flex items-center justify-between">
+                        <div class="flex flex-col">
+                            <span class="text-2xl font-bold text-slate-900">₹35</span>
+                            <span class="text-xs line-through text-slate-400">₹45</span>
                         </div>
                     </div>
+                </div>
+                <div class="p-5 pt-0 grid grid-cols-2 gap-2">
+                    <button onclick="openPreviewModal('संस्कृत - भाषा एवं संभाषणम्', 'previews/sanskrit-sample.pdf', '100% Quality', 'Hindi/Sanskrit', 'PDF', '#')" class="text-xs font-bold py-2.5 bg-slate-100 text-slate-700 rounded-lg hover:bg-slate-200">View Info</button>
+                    <button onclick="redirectBuy('#')" class="text-xs font-bold py-2.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 shadow-lg shadow-blue-100">Buy Now</button>
                 </div>
             </div>
         </div>
     </main>
 
-    <div id="previewModal">
-        <div class="bg-white rounded-xl w-full max-w-lg overflow-hidden flex flex-col shadow-2xl">
-            <div class="p-4 border-b flex justify-between items-center bg-slate-50">
-                <h3 id="modalTitle" class="font-bold text-xs sm:text-sm text-slate-800 truncate">Preview</h3>
-                <button onclick="closePreview()" class="text-slate-400 hover:text-red-600 text-2xl leading-none">&times;</button>
-            </div>
-            
-            <div id="modalBody" class="flex-grow overflow-y-auto bg-slate-100 h-[65vh] flex items-center justify-center relative">
-                <div class="loader"></div>
+    <section id="tab-section" class="bg-slate-900 text-white py-20">
+        <div class="max-w-4xl mx-auto px-6">
+            <div class="flex flex-wrap justify-center gap-4 mb-12">
+                <button onclick="showTab('instructions')" class="tab-btn border-b-2 border-blue-500 px-4 py-2 text-sm font-bold text-white">How to Buy</button>
+                <button onclick="showTab('about')" class="tab-btn border-b-2 border-transparent px-4 py-2 text-sm font-bold text-slate-400">About Books</button>
+                <button onclick="showTab('pp')" class="tab-btn border-b-2 border-transparent px-4 py-2 text-sm font-bold text-slate-400">Privacy Policy</button>
+                <button onclick="showTab('terms')" class="tab-btn border-b-2 border-transparent px-4 py-2 text-sm font-bold text-slate-400">Terms & Conditions</button>
             </div>
 
-            <div class="p-4 border-t bg-white flex flex-col sm:flex-row gap-2">
-                <button onclick="closePreview()" class="order-2 sm:order-1 flex-1 py-2 text-xs font-medium text-slate-500">Close</button>
-                <button id="modalBuyBtn" onclick="" class="order-1 sm:order-2 flex-[2] py-2 text-xs bg-red-600 text-white rounded-lg font-bold">Purchase Full Access</button>
+            <div id="instructions" class="tab-content active space-y-4">
+                <h3 class="text-2xl font-bold heading-font">4-Step Simple Process</h3>
+                <ol class="space-y-4 text-slate-400">
+                    <li class="flex gap-4 items-start"><span class="bg-blue-600 text-white w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 font-bold text-xs">1</span> Choose your book and click "Buy Now" which redirects to our secure Razorpay gateway.</li>
+                    <li class="flex gap-4 items-start"><span class="bg-blue-600 text-white w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 font-bold text-xs">2</span> Fill the Basic Information (Name, E-Mail & Mobile Number).</li>
+                    <li class="flex gap-4 items-start"><span class="bg-blue-600 text-white w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 font-bold text-xs">3</span> Complete the payment using UPI, Card, or Netbanking.</li>
+                    <li class="flex gap-4 items-start"><span class="bg-blue-600 text-white w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 font-bold text-xs">4</span> Once paid, the PDF will be available to download in 10 seconds. Please don't refresh the page.</li>
+                </ol>
+            </div>
+
+            <div id="about" class="tab-content space-y-6">
+                <h3 class="text-2xl font-bold heading-font">Expertly Crafted Study Material</h3>
+                <p class="text-slate-400 leading-relaxed">Our books are specifically designed for university students following the <span class="text-white">New Education Policy (NEP)</span>. We focus on simplified explanations and exam-oriented summaries.</p>
+                <div class="grid grid-cols-2 gap-6 mt-8">
+                    <div class="bg-slate-800 p-4 rounded-xl">
+                        <i class="fas fa-check-circle text-blue-400 mb-2"></i>
+                        <h4 class="font-bold">Syllabus Aligned</h4>
+                        <p class="text-xs text-slate-400">Directly mapped to 2026 university guidelines.</p>
+                    </div>
+                    <div class="bg-slate-800 p-4 rounded-xl">
+                        <i class="fas fa-mobile-alt text-blue-400 mb-2"></i>
+                        <h4 class="font-bold">Mobile Friendly</h4>
+                        <p class="text-xs text-slate-400">Optimized for reading on phones and tablets.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="terms" class="tab-content space-y-4">
+                <h3 class="text-2xl font-bold heading-font">Refunds & Usage</h3>
+                <div class="text-slate-400 text-sm space-y-3">
+                    <p>• <strong>Non-exclusive use:</strong>Content is for personal use only. Sharing, reselling, or commercial distribution is strictly prohibited.</p>
+                    <p>• <strong>Non-transferable:</strong>You can't transfer the E-Book to others.</p>
+                    <p>• Due to the nature of digital goods, we do not offer refunds once the download link is accessed.</p>
+                    <p>• <strong>No Editing:</strong>You can't edit, copy, annotate, or highlight the E-Book.</p>
+                    <p>• <strong>No Reproduction:</strong>You can't reproduce the E-Book in any form, including photocopying, recording, file sharing, or by any information storage or retrieval system, without prior written permission from the publisher.</p>
+                    <p>• If you face any payment issues, contact support via Telegram within 24 hours with your transaction ID.</p>
+                </div>
+            </div>
+            
+            <div id="pp" class="tab-content space-y-4">
+                <h3 class="text-2xl font-bold heading-font">Privacy Policy</h3>
+                <div class="text-slate-400 text-sm space-y-3">
+                    <p>• You agree to share information entered on this payment page with UNIVERSITY UPDATES and Razorpay.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<div id="previewModal">
+        <div class="bg-white rounded-2xl w-full max-w-2xl overflow-hidden flex flex-col md:flex-row shadow-2xl relative">
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-900 text-xl z-10">&times;</button>
+            
+            <div class="md:w-1/2 bg-slate-100 p-8 flex items-center justify-center">
+                <div id="modalLoader" class="loader hidden"></div>
+                <img id="modalImg" src="" class="max-h-64 md:max-h-full rounded shadow-md" alt="Preview">
+            </div>
+
+            <div class="md:w-1/2 p-8">
+                <h3 id="modalTitle" class="heading-font text-xl font-bold text-slate-900 mb-4">Book Details</h3>
+                <div class="space-y-3 mb-8">
+                    <div class="flex justify-between text-xs border-b pb-2"><span class="text-slate-400">Quality</span><span id="modalQuality" class="font-bold"></span></div>
+                    <div class="flex justify-between text-xs border-b pb-2"><span class="text-slate-400">Language</span><span id="modalLang" class="font-bold"></span></div>
+                    <div class="flex justify-between text-xs border-b pb-2"><span class="text-slate-400">Format</span><span id="modalFormat" class="font-bold text-blue-600"></span></div>
+                </div>
+                <div class="bg-blue-50 p-4 rounded-xl mb-6">
+                    <p class="text-[11px] text-blue-700 leading-relaxed font-medium"><i class="fas fa-info-circle mr-1"></i> Preview shows selected pages only. Full content is delivered immediately after purchase.</p>
+                </div>
+                <button id="modalBuyBtn" class="w-full bg-blue-600 text-white py-3 rounded-xl font-bold hover:bg-blue-700 transition">Get Full Access Now</button>
             </div>
         </div>
     </div>
     
-     <footer class="py-8 bg-white border-t mt-10">
-        <div class="max-w-7xl mx-auto px-4 text-center">
-            <p class="text-[10px] text-slate-400 uppercase tracking-widest font-bold">University Updates</p>
-            <p class="text-[10px] text-slate-300 mt-2">© 2026 | All Rights Reserved</p>
+<footer class="bg-white py-12 border-t">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <img src="https://i.ibb.co/nMC0877T/UNIVERSITY-UPDATES-LOGO-removebg-preview.png" class="h-12 mx-auto grayscale opacity-50 mb-6" alt="Footer Logo">
+            <p class="text-slate-500 text-sm max-w-md mx-auto">Helping students bridge the gap between learning and excellence. Trusted by thousands of university students.</p>
+            <div class="mt-8 pt-8 border-t border-slate-100 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-xs text-slate-400">© 2026 | University Updates. All academic content is copyrighted.</p>
+                <div class="flex gap-6 text-xs font-semibold text-slate-600 uppercase tracking-widest">
+                    
+                    <a href="https://t.me/HelpforDMBot">Help Desk</a>
+                </div>
+            </div>
         </div>
     </footer>
 
     <script>
         function filterCategory(category, btn) {
             document.querySelectorAll('.category-btn').forEach(b => {
-                b.classList.remove('active', 'bg-slate-900', 'text-white');
-                b.classList.add('bg-white', 'text-slate-600');
+                b.classList.remove('bg-slate-900', 'text-white');
+                b.classList.add('text-slate-600');
             });
-            btn.classList.add('active', 'bg-slate-900', 'text-white');
-            btn.classList.remove('bg-white', 'text-slate-600');
-
+            btn.classList.add('bg-slate-900', 'text-white');
+            
             const books = document.querySelectorAll('.book-card');
             books.forEach(book => {
-                const categories = book.getAttribute('data-category');
-                if (category === 'all' || categories.includes(category)) {
-                    book.style.display = 'flex';
-                } else {
-                    book.style.display = 'none';
-                }
+                const cat = book.getAttribute('data-category');
+                book.style.display = (category === 'all' || cat === category) ? 'flex' : 'none';
             });
         }
 
-        // Updated Preview Function
-        function openPreview(title, previewUrl, buyUrl) {
-            const modal = document.getElementById('previewModal');
-            const modalTitle = document.getElementById('modalTitle');
-            const modalBody = document.getElementById('modalBody');
-            const modalBuyBtn = document.getElementById('modalBuyBtn');
-
-            // Set Title & Buy Button Link
-            modalTitle.innerText = title + " (Sample)";
-            modalBuyBtn.setAttribute('onclick', `redirectBuy('${buyUrl}')`);
-
-            // Clear previous content and show loader
-            modalBody.innerHTML = '<div class="flex flex-col items-center gap-3"><div class="loader"></div><p class="text-xs text-slate-400">Loading Preview...</p></div>';
+        function showTab(tabId) {
+            // Hide all tab content
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
             
-            modal.style.display = 'flex';
-            document.body.style.overflow = 'hidden';
-
-            // Simulate small delay then load content
-            setTimeout(() => {
-                // If the link is a PDF, use iframe. If image, use <img>.
-                if (previewUrl.toLowerCase().endsWith('.pdf')) {
-                    modalBody.innerHTML = `<iframe src="${previewUrl}#toolbar=0" class="w-full h-full" frameborder="0"></iframe>`;
-                } else {
-                    modalBody.innerHTML = `<img src="${previewUrl}" class="max-w-full h-auto p-4 shadow-sm" alt="Preview Image">`;
-                }
-            }, 500);
-        }
-
-        function closePreview() {
-            document.getElementById('previewModal').style.display = 'none';
-            document.body.style.overflow = 'auto';
+            // Deactivate all buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('border-blue-500', 'text-white');
+                btn.classList.add('border-transparent', 'text-slate-400');
+            });
+            
+            // Show the selected content
+            document.getElementById(tabId).classList.add('active');
+            
+            // Find the button associated with this tabId and activate it
+            const targetBtn = Array.from(document.querySelectorAll('.tab-btn')).find(btn => 
+                btn.getAttribute('onclick').includes(`'${tabId}'`)
+            );
+            
+            if(targetBtn) {
+                targetBtn.classList.add('border-blue-500', 'text-white');
+                targetBtn.classList.remove('border-transparent', 'text-slate-400');
+            }
         }
 
         function redirectBuy(url) {
             if(url && url !== '#') {
                 window.location.href = url;
             } else {
-                alert("Book will available soon!");
+                alert("Will be available shortly!");
             }
         }
-
-        window.onclick = function(e) {
+        
+        function openPreviewModal(title, imgSrc, quality, lang, format, buyUrl) {
             const modal = document.getElementById('previewModal');
-            if (e.target == modal) closePreview();
+            document.getElementById('modalTitle').innerText = title;
+            document.getElementById('modalImg').src = imgSrc;
+            document.getElementById('modalQuality').innerText = quality;
+            document.getElementById('modalLang').innerText = lang;
+            document.getElementById('modalFormat').innerText = format;
+            document.getElementById('modalBuyBtn').onclick = () => redirectBuy(buyUrl);
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('previewModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        window.onclick = function(event) {
+            if (event.target == document.getElementById('previewModal')) closeModal();
         }
     </script>
 </body>
