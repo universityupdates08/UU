@@ -10,11 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <style>
-        :root {
-            --primary: #2563eb;
-            --accent: #ef4444;
-            --slate-bg: #f8fafc;
-        }
+        :root { --primary: #2563eb; --accent: #ef4444; --slate-bg: #f8fafc; }
         body { font-family: "Inter", sans-serif; background-color: var(--slate-bg); color: #1e293b; scroll-behavior: smooth; }
         .heading-font { font-family: "Poppins", sans-serif; }
         .glass-nav { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(226, 232, 240, 0.8); }
@@ -25,6 +21,10 @@
         @keyframes ticker { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
         .tab-content { display: none; }
         .tab-content.active { display: block; }
+        
+        /* FIX: Added missing class to stop continuous loading */
+        .hidden { display: none !important; }
+        
         #previewModal { display: none; position: fixed; inset: 0; background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(4px); z-index: 1000; align-items: center; justify-content: center; padding: 20px; }
         .loader { border: 3px solid #f3f3f3; border-top: 3px solid var(--primary); border-radius: 50%; width: 30px; height: 30px; animation: spin 1s linear infinite; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
@@ -184,7 +184,6 @@
                 <button onclick="showTab('pp')" class="tab-btn border-b-2 border-transparent px-4 py-2 text-sm font-bold text-slate-400">Privacy Policy</button>
                 <button onclick="showTab('terms')" class="tab-btn border-b-2 border-transparent px-4 py-2 text-sm font-bold text-slate-400">Terms & Conditions</button>
             </div>
-
             <div id="instructions" class="tab-content active space-y-4">
                 <h3 class="text-2xl font-bold heading-font">4-Step Simple Process</h3>
                 <ol class="space-y-4 text-slate-400">
@@ -194,7 +193,6 @@
                     <li class="flex gap-4 items-start"><span class="bg-blue-600 text-white w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 font-bold text-xs">4</span> Once paid, the PDF will be available to download in 10 seconds. Please don't refresh the page.</li>
                 </ol>
             </div>
-
             <div id="about" class="tab-content space-y-6">
                 <h3 class="text-2xl font-bold heading-font">Expertly Crafted Study Material</h3>
                 <p class="text-slate-400 leading-relaxed">Our books are specifically designed for university students following the <span class="text-white">New Education Policy (NEP)</span>. We focus on simplified explanations and exam-oriented summaries.</p>
@@ -211,7 +209,6 @@
                     </div>
                 </div>
             </div>
-
             <div id="terms" class="tab-content space-y-4">
                 <h3 class="text-2xl font-bold heading-font">Refunds & Usage</h3>
                 <div class="text-slate-400 text-sm space-y-3">
@@ -223,7 +220,6 @@
                     <p>• If you face any payment issues, contact support via Telegram within 24 hours with your transaction ID.</p>
                 </div>
             </div>
-
             <div id="pp" class="tab-content space-y-4">
                 <h3 class="text-2xl font-bold heading-font">Privacy Policy</h3>
                 <div class="text-slate-400 text-sm space-y-3">
@@ -258,31 +254,11 @@
     <div id="instructionsModal" style="display: none; position: fixed; inset: 0; background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(4px); z-index: 1001; align-items: center; justify-content: center; padding: 20px;">
         <div class="bg-white rounded-2xl w-full max-w-lg overflow-hidden shadow-2xl relative p-8">
             <button onclick="closeInstructions()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-900 text-2xl">&times;</button>
-            <h3 class="heading-font text-2xl font-bold text-slate-900 mb-6 flex items-center">
+            <h3 id="modalHeading" class="heading-font text-2xl font-bold text-slate-900 mb-6 flex items-center">
                 <i class="fas fa-download mr-3 text-blue-600"></i>How to Download?
             </h3>
-            <div class="space-y-6">
-                <div class="flex gap-4">
-                    <span class="bg-blue-600 text-white w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 font-bold text-xs">1</span>
-                    <p class="text-sm text-slate-600">Click on <strong>"Proceed to Payment"</strong> to go to the secure Razorpay gateway.</p>
+            <div id="modalContent" class="space-y-6">
                 </div>
-                <div class="flex gap-4">
-                    <span class="bg-blue-600 text-white w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 font-bold text-xs">2</span>
-                    <p class="text-sm text-slate-600">Enter your basic details: <strong>Name, Email, and Mobile Number</strong>.</p>
-                </div>
-                <div class="flex gap-4">
-                    <span class="bg-blue-600 text-white w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 font-bold text-xs">3</span>
-                    <p class="text-sm text-slate-600">Complete payment via <strong>UPI, Card, or Netbanking</strong>.</p>
-                </div>
-                <div class="flex gap-4 border-l-4 border-blue-100 pl-4 py-1">
-                    <span class="bg-blue-600 text-white w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 font-bold text-xs">4</span>
-                    <p class="text-sm text-slate-600 font-medium">After payment, <strong>Wait 10 seconds</strong>. The PDF will download automatically. Do not refresh!</p>
-                </div>
-                <div class="flex gap-4">
-                    <span class="bg-blue-600 text-white w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 font-bold text-xs">5</span>
-                    <p class="text-sm text-slate-600"><strong>You must wait for redirection to download the PDF after the payment completion.</strong></p>
-                </div>
-            </div>
             <button id="proceedBuyBtn" class="w-full mt-8 bg-slate-900 text-white py-3 rounded-xl font-bold hover:bg-slate-800 transition">Proceed to Payment</button>
         </div>
     </div>
@@ -309,7 +285,6 @@
                 b.classList.add('text-slate-600');
             });
             btn.classList.add('bg-slate-900', 'text-white');
-            
             const books = document.querySelectorAll('.book-card');
             books.forEach(book => {
                 const cat = book.getAttribute('data-category');
@@ -325,7 +300,7 @@
             });
             document.getElementById(tabId).classList.add('active');
             const targetBtn = Array.from(document.querySelectorAll('.tab-btn')).find(btn => 
-                 btn.getAttribute('onclick').includes(`'${tabId}'`)
+                btn.getAttribute('onclick').includes(`'${tabId}'`)
             );
             if(targetBtn) {
                 targetBtn.classList.add('border-blue-500', 'text-white');
@@ -333,81 +308,86 @@
             }
         }
 
-        // Updated redirect logic to show instructions first
+        function openInstructionsOnly() {
+            currentBuyUrl = "";
+            const modal = document.getElementById('instructionsModal');
+            document.getElementById('modalHeading').innerHTML = '<i class="fas fa-download mr-3 text-blue-600"></i>How to Download?';
+            document.getElementById('modalContent').innerHTML = `
+                <div class="space-y-4">
+                    <p class="text-sm text-slate-600">1. Choose the book and click on <strong>"Buy Now"</strong> to go to the secure Razorpay gateway.</p>
+                    <p class="text-sm text-slate-600">2. Enter your basic details: <strong>Name, Email and Mobile Number.</strong></p>
+                    <p class="text-sm text-slate-600">3. CComplete payment via <strong>UPI, Card or Netbanking.</strong></p>
+                    <p class="text-sm text-slate-600">4. After payment, <strong>Wait 10 seconds</strong>. The PDF will download automatically. Do not refresh!</p>
+                    <p class="text-sm text-slate-600">5. <strong>You must wait for redirection in 10 seconds to download the PDF after the payment completion.</strong></p>
+                </div>
+            `;
+            const btn = document.getElementById('proceedBuyBtn');
+            btn.innerText = "Got it, Thanks!";
+            btn.onclick = closeInstructions;
+            modal.style.display = 'flex';
+        }
+
         function redirectBuy(url) {
             if(url && url !== '#') {
                 currentBuyUrl = url;
-                openInstructionsModal();
+                const modal = document.getElementById('instructionsModal');
+                document.getElementById('modalHeading').innerHTML = '<i class="fas fa-shopping-cart mr-3 text-blue-600"></i>Confirm Purchase';
+                document.getElementById('modalContent').innerHTML = `
+                    <div class="bg-blue-50 p-4 rounded-xl border border-blue-100">
+                        <p class="text-sm text-blue-800 font-medium mb-2">Important Instructions:</p>
+                        <ul class="text-xs text-blue-700 space-y-2">
+                            <li>• Click on <strong>"Proceed to Payment"</strong> to go to the secure Razorpay gateway.</li>
+                            <li>• Enter your basic details: <strong>Name, Email and Mobile Number.</strong></li>
+                            <li>• Complete payment via <strong>UPI, Card, or Netbanking.</strong></li>
+                            <li>• <b>DO NOT</b> close or refresh the browser after payment.</li>
+                            <li>• After successful payment, the PDF will start downloading automatically within 10-15 seconds.</li>
+                        </ul>
+                    </div>
+                `;
+                const btn = document.getElementById('proceedBuyBtn');
+                btn.innerText = "Proceed to Payment";
+                btn.onclick = function() { window.location.href = currentBuyUrl; };
+                modal.style.display = 'flex';
             } else {
                 alert("Will be available shortly!");
             }
-        }
-
-        // For the nav button which just shows info
-        function openInstructionsOnly() {
-            document.getElementById('proceedBuyBtn').innerText = "Got it, thanks!";
-            document.getElementById('proceedBuyBtn').onclick = closeInstructions;
-            openInstructionsModal();
         }
 
         function openPreviewModal(title, pdfSrc, quality, lang, format, buyUrl) {
             const modal = document.getElementById('previewModal');
             const loader = document.getElementById('modalLoader');
             const iframe = document.getElementById('pdfPreview');
-            
             document.getElementById('modalTitle').innerText = title;
             document.getElementById('modalQuality').innerText = quality;
             document.getElementById('modalLang').innerText = lang;
             document.getElementById('modalFormat').innerText = format;
             document.getElementById('modalBuyBtn').onclick = () => redirectBuy(buyUrl);
             
-            // Fix: Load PDF into Iframe
             loader.classList.remove('hidden');
             iframe.classList.add('hidden');
             iframe.src = pdfSrc;
-            
             iframe.onload = function() {
                 loader.classList.add('hidden');
                 iframe.classList.remove('hidden');
             };
-
             modal.style.display = 'flex';
             document.body.style.overflow = 'hidden';
         }
 
         function closeModal() {
             document.getElementById('previewModal').style.display = 'none';
-            document.getElementById('pdfPreview').src = ""; // Stop loading PDF
+            document.getElementById('pdfPreview').src = "";
             document.body.style.overflow = 'auto';
-        }
-
-        function openInstructionsModal() {
-            const modal = document.getElementById('instructionsModal');
-            const proceedBtn = document.getElementById('proceedBuyBtn');
-            
-            // Reset button if it was changed by nav link
-            if(currentBuyUrl !== "") {
-                proceedBtn.innerText = "Proceed to Payment";
-                proceedBtn.onclick = function() {
-                    window.location.href = currentBuyUrl;
-                };
-            }
-
-            modal.style.display = 'flex';
-            document.body.style.overflow = 'hidden';
         }
 
         function closeInstructions() {
             document.getElementById('instructionsModal').style.display = 'none';
             document.body.style.overflow = 'auto';
-            currentBuyUrl = ""; // Reset
         }
 
         window.onclick = function(event) {
-            const previewModal = document.getElementById('previewModal');
-            const instructionsModal = document.getElementById('instructionsModal');
-            if (event.target == previewModal) closeModal();
-            if (event.target == instructionsModal) closeInstructions();
+            if (event.target == document.getElementById('previewModal')) closeModal();
+            if (event.target == document.getElementById('instructionsModal')) closeInstructions();
         }
     </script>
 </body>
