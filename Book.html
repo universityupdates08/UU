@@ -21,6 +21,9 @@
         @keyframes ticker { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
         .tab-content { display: none; }
         .tab-content.active { display: block; }
+
+         /* WARNING UI COMPONENT */
+        .warning-banner { background: #fffbeb; border-left: 4px solid #f59e0b; padding: 1rem; border-radius: 0.75rem; margin-bottom: 2rem; }
         
         /* FIX: Ensure hidden class works globally */
         .hidden { display: none !important; }
@@ -79,6 +82,17 @@
     </div>
 
     <main id="store" class="max-w-7xl mx-auto px-6 py-5">
+        <div class="warning-banner shadow-sm flex items-start gap-4">
+            <i class="fas fa-exclamation-triangle text-amber-500 text-xl mt-1"></i>
+            <div>
+                <h4 class="font-bold text-amber-900 text-sm">Critical Payment Instructions</h4>
+                <p class="text-amber-800 text-xs mt-1 leading-relaxed">
+                    After completing your payment, <strong>DO NOT close this window or click back</strong>. 
+                    The system takes 10-15 seconds to verify your transaction and trigger the automatic PDF download. 
+                    If you close early, the download link may not appear.
+                </p>
+            </div>
+        </div>
         <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
             <div>
                 <h2 class="heading-font text-3xl font-bold text-slate-900">Digital Resource Library</h2>
