@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>BUY BOOKS ONLINE - UNIVERSITY UPDATES</title>
+    <title>UNIVERSITY UPDATES - STUDY PORTAL</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -14,33 +14,27 @@
         body { font-family: "Inter", sans-serif; background-color: var(--slate-bg); color: #1e293b; scroll-behavior: smooth; }
         .heading-font { font-family: "Poppins", sans-serif; }
         .glass-nav { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(226, 232, 240, 0.8); }
-        .book-card { transition: transform 0.2s ease, box-shadow 0.2s ease; border: 1px solid #e2e8f0; }
-        .book-card:hover { transform: translateY(-4px); box-shadow: 0 12px 24px -10px rgba(0,0,0,0.1); }
+        
+        /* IFRAME STYLING */
+        .portal-wrapper { background: white; border: 1px solid #e2e8f0; border-radius: 1.5rem; overflow: hidden; box-shadow: 0 10px 30px -15px rgba(0,0,0,0.1); }
+        .external-web-container { width: 100%; height: 700px; border: none; }
+        
         .announcement-bar { background: linear-gradient(90deg, #1e293b 0%, #334155 100%); color: white; font-size: 0.75rem; height: 35px; display: flex; align-items: center; overflow: hidden; }
         .announcement-inner { white-space: nowrap; animation: ticker 30s linear infinite; display: inline-block; }
         @keyframes ticker { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
-        .tab-content { display: none; }
-        .tab-content.active { display: block; }
-        
-        .hidden { display: none !important; }
-        
-        #previewModal { display: none; position: fixed; inset: 0; background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(4px); z-index: 1000; align-items: center; justify-content: center; padding: 20px; }
-        .loader { border: 3px solid #f3f3f3; border-top: 3px solid var(--primary); border-radius: 50%; width: 30px; height: 30px; animation: spin 1s linear infinite; }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
     </style>
 </head>
 <body>
+
     <div class="bg-slate-900 text-slate-300 py-2 text-[11px] font-medium">
         <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
             <div class="flex gap-4">
                 <a href="https://t.me/HelpforDMBot" class="hover:text-white transition"><i class="fas fa-headset mr-1"></i>Support</a>
             </div>
             <div class="flex gap-4 items-center">
-                <a href="#"><i class="fas fa-home hover:text-white-500"></i></a>
-                <a href="https://www.youtube.com/@University-Updates-UU"><i class="fab fa-youtube hover:text-red-500"></i></a>
-                <a href="https://instagram.com/universityupdates_uu"><i class="fab fa-instagram hover:text-pink-500"></i></a>
-                <a href="https://t.me/UniversityUpdates_UU"><i class="fab fa-telegram hover:text-blue-400"></i></a>
-                <a href="https://x.com/uni_updates08"><i class="fab fa-x hover:text-black-400"></i></a>
+                <a href="https://www.youtube.com/@University-Updates-UU"><i class="fab fa-youtube"></i></a>
+                <a href="https://instagram.com/universityupdates_uu"><i class="fab fa-instagram"></i></a>
+                <a href="https://t.me/UniversityUpdates_UU"><i class="fab fa-telegram"></i></a>
             </div>
         </div>
     </div>
@@ -48,324 +42,51 @@
     <nav class="glass-nav sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
             <img src="https://i.ibb.co/nMC0877T/UNIVERSITY-UPDATES-LOGO-removebg-preview.png" alt="Logo" class="h-10 md:h-12" />
-            <button onclick="openInstructionsOnly()" class="bg-blue-600 text-white px-5 py-2 rounded-lg text-sm font-bold shadow-lg shadow-blue-200 hover:bg-blue-700 transition">How to Download?</button>
+            <button onclick="window.scrollTo({top: document.getElementById('portal-section').offsetTop - 100, behavior: 'smooth'})" class="bg-blue-600 text-white px-5 py-2 rounded-lg text-sm font-bold shadow-lg hover:bg-blue-700 transition">Go to Portal</button>
         </div>
     </nav>
 
-    <header class="bg-white border-b overflow-hidden">
-        <div class="max-w-7xl mx-auto px-6 py-16 md:py-4 grid md:grid-cols-2 items-center gap-12">
-            <div>
-                <span class="text-blue-600 font-bold text-sm tracking-widest uppercase">Academic Excellence</span>
-                <h1 class="heading-font text-4xl md:text-6xl font-bold text-slate-900 mt-4 leading-tight">Master Your Exams with <span class="text-blue-600">Expert Guides.</span></h1>
-                <p class="text-slate-500 mt-6 text-lg">Comprehensive study materials designed by University Updates to help you excel in the NEP-2020 curriculum.</p>
-                <div class="mt-10 flex gap-4">
-                    <a href="#store" class="bg-slate-900 text-white px-8 py-4 rounded-xl font-bold hover:bg-slate-800 transition">Browse Books</a>
-                    <a href="#tab-section" onclick="showTab('about')" class="bg-white border border-slate-200 px-8 py-4 rounded-xl font-bold hover:bg-slate-50 transition text-slate-700">Learn More</a>
-                </div>
-            </div>
-             <div class="md:block relative"> 
-                 <div class="absolute -inset-4 bg-blue-100 rounded-full blur-3xl opacity-30">
-                 </div> 
-                 <img src="images/sitebook.png" class="relative z-10 rounded-2xl" alt="Hero" onerror="this.style.display='none'"> 
-             </div> 
+    <header class="bg-white border-b">
+        <div class="max-w-7xl mx-auto px-6 py-12 text-center">
+            <h1 class="heading-font text-4xl md:text-5xl font-bold text-slate-900">University Resources & Updates</h1>
+            <p class="text-slate-500 mt-4 text-lg">Access your university portal and study materials all in one place.</p>
         </div>
     </header>
 
     <div class="announcement-bar">
         <div class="announcement-inner">
-            ✨ LAUNCH OFFER: 20% off • New 2026 Semester Guides are now LIVE • Get instant PDF delivery after payment • Verified Academic Content 
+            ✨ LIVE UPDATES: Check your exam schedule below • New PDF guides added to the store section • Scroll down for the student portal.
         </div>
     </div>
 
-    <main id="store" class="max-w-7xl mx-auto px-6 py-5">
-        <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
-            <div>
-                <h2 class="heading-font text-3xl font-bold text-slate-900">Digital Resource Library</h2>
-                <p class="text-slate-500 mt-2">Instant access to high-quality PDF study guides.</p>
-            </div>
-            <div class="flex bg-white p-1.5 rounded-xl border border-slate-200 shadow-sm">
-                <button onclick="filterCategory('all', this)" class="category-btn px-6 py-2 rounded-lg text-sm font-semibold bg-slate-900 text-white transition">All Books</button>
-                <button onclick="filterCategory('ug-nep', this)" class="category-btn px-6 py-2 rounded-lg text-sm font-semibold text-slate-600 hover:bg-slate-50 transition">UG-NEP</button>
-            </div>
+    <section id="portal-section" class="max-w-7xl mx-auto px-6 py-10">
+        <div class="mb-6">
+            <h2 class="heading-font text-2xl font-bold text-slate-900 flex items-center">
+                <i class="fas fa-globe text-blue-600 mr-3"></i>Student Examination Portal
+            </h2>
+            <p class="text-sm text-slate-500">Access the official university links directly below.</p>
         </div>
 
-        <div id="book-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            <div class="book-card bg-white rounded-2xl overflow-hidden flex flex-col" data-category="ug-nep">
-                <div class="h-64 bg-slate-100 p-8 relative">
-                    <img src="images/HVS.png" alt="Hindi" class="w-full h-full object-contain drop-shadow-xl" onerror="this.src='https://via.placeholder.com/200x280?text=Hindi+Vyakaran'">
-                    <span class="absolute top-4 right-4 bg-green-500 text-white text-[10px] font-black px-2.5 py-1 rounded-full uppercase">PDF</span>
-                </div>
-                <div class="p-6 flex-grow flex flex-col">
-                    <h3 class="font-bold text-slate-800 leading-snug">हिंदी व्याकरण और संप्रेषण</h3>
-                    <p class="text-xs text-slate-400 mt-1 uppercase tracking-tighter">BY UNIVERSITY UPDATES</p>
-                    <div class="mt-6 flex items-center justify-between">
-                        <div class="flex flex-col">
-                            <span class="text-2xl font-bold text-slate-900">₹35</span>
-                            <span class="text-xs line-through text-slate-400">₹45</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="p-5 pt-0 grid grid-cols-2 gap-2">
-                    <button onclick="openPreviewModal('हिंदी व्याकरण और संप्रेषण', 'previews/hvs-sample.pdf', '100% Quality', 'Hindi', 'PDF', 'https://pages.razorpay.com/BookHVS')" class="text-xs font-bold py-2.5 bg-slate-100 text-slate-700 rounded-lg hover:bg-slate-200">View Info</button>
-                    <button onclick="redirectBuy('https://pages.razorpay.com/BookHVS')" class="text-xs font-bold py-2.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 shadow-lg shadow-blue-100">Buy Now</button>
-                </div>
-            </div>
-
-            <div class="book-card bg-white rounded-2xl overflow-hidden flex flex-col" data-category="ug-nep">
-                <div class="h-64 bg-slate-100 p-8 relative">
-                    <img src="images/SRCE.png" alt="Social Responsibility" class="w-full h-full object-contain drop-shadow-xl" onerror="this.src='https://via.placeholder.com/200x280?text=Social+Responsibility'">
-                    <span class="absolute top-4 right-4 bg-green-500 text-white text-[10px] font-black px-2.5 py-1 rounded-full uppercase">PDF</span>
-                </div>
-                <div class="p-6 flex-grow flex flex-col">
-                    <h3 class="font-bold text-slate-800 leading-snug">Social Responsibility and Community Engagement (English)</h3>
-                    <p class="text-xs text-slate-400 mt-1 uppercase tracking-tighter">BY UNIVERSITY UPDATES</p>
-                    <div class="mt-6 flex items-center justify-between">
-                        <div class="flex flex-col">
-                            <span class="text-2xl font-bold text-slate-900">₹35</span>
-                            <span class="text-xs line-through text-slate-400">₹45</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="p-5 pt-0 grid grid-cols-2 gap-2">
-                    <button onclick="openPreviewModal('Social Responsibility and Community Engagement', 'previews/srce-sample.pdf', '100% Quality', 'English', 'PDF', '#')" class="text-xs font-bold py-2.5 bg-slate-100 text-slate-700 rounded-lg hover:bg-slate-200">View Info</button>
-                    <button onclick="redirectBuy('#')" class="text-xs font-bold py-2.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 shadow-lg shadow-blue-100">Buy Now</button>
-                </div>
-            </div>
-
-            <div class="book-card bg-white rounded-2xl overflow-hidden flex flex-col" data-category="ug-nep">
-                <div class="h-64 bg-slate-100 p-8 relative">
-                    <img src="images/SRCEH.png" alt="Social Responsibility Hindi" class="w-full h-full object-contain drop-shadow-xl" onerror="this.src='https://via.placeholder.com/200x280?text=Social+Responsibility+Hindi'">
-                    <span class="absolute top-4 right-4 bg-green-500 text-white text-[10px] font-black px-2.5 py-1 rounded-full uppercase">PDF</span>
-                </div>
-                <div class="p-6 flex-grow flex flex-col">
-                    <h3 class="font-bold text-slate-800 leading-snug">सामाजिक उत्तरदायित्व और सामुदायिक सहभागिता</h3>
-                    <p class="text-xs text-slate-400 mt-1 uppercase tracking-tighter">BY UNIVERSITY UPDATES</p>
-                    <div class="mt-6 flex items-center justify-between">
-                        <div class="flex flex-col">
-                            <span class="text-2xl font-bold text-slate-900">₹35</span>
-                            <span class="text-xs line-through text-slate-400">₹45</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="p-5 pt-0 grid grid-cols-2 gap-2">
-                    <button onclick="openPreviewModal('सामाजिक उत्तरदायित्व और सामुदायिक सहभागिता', 'previews/srceh-sample.pdf', '100% Quality', 'Hindi', 'PDF', '#')" class="text-xs font-bold py-2.5 bg-slate-100 text-slate-700 rounded-lg hover:bg-slate-200">View Info</button>
-                    <button onclick="redirectBuy('#')" class="text-xs font-bold py-2.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 shadow-lg shadow-blue-100">Buy Now</button>
-                </div>
-            </div>
+        <div class="portal-wrapper">
+            <iframe 
+                src="https://ezezeez2.pythonanywhere.com/" 
+                class="external-web-container" 
+                loading="lazy"
+                title="University Content">
+            </iframe>
         </div>
-    </main>
-
-    <section id="tab-section" class="bg-slate-900 text-white py-10">
-        <div class="max-w-4xl mx-auto px-6">
-            <div class="flex flex-wrap justify-center gap-4 mb-12">
-                <button onclick="showTab('instructions')" class="tab-btn border-b-2 border-blue-500 px-4 py-2 text-sm font-bold text-white">How to Buy</button>
-                <button onclick="showTab('about')" class="tab-btn border-b-2 border-transparent px-4 py-2 text-sm font-bold text-slate-400">About Books</button>
-                <button onclick="showTab('pp')" class="tab-btn border-b-2 border-transparent px-4 py-2 text-sm font-bold text-slate-400">Privacy Policy</button>
-                <button onclick="showTab('terms')" class="tab-btn border-b-2 border-transparent px-4 py-2 text-sm font-bold text-slate-400">Terms & Conditions</button>
-            </div>
-            <div id="instructions" class="tab-content active space-y-4">
-                <h3 class="text-2xl font-bold heading-font">4-Step Simple Process</h3>
-                <ol class="space-y-4 text-slate-400">
-                    <li class="flex gap-4 items-start"><span class="bg-blue-600 text-white w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 font-bold text-xs">1</span> Choose your book and click "Buy Now" which redirects to our secure Razorpay gateway.</li>
-                    <li class="flex gap-4 items-start"><span class="bg-blue-600 text-white w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 font-bold text-xs">2</span> Fill the Basic Information (Name, E-Mail & Mobile Number).</li>
-                    <li class="flex gap-4 items-start"><span class="bg-blue-600 text-white w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 font-bold text-xs">3</span> Complete the payment using UPI, Card, or Netbanking.</li>
-                    <li class="flex gap-4 items-start"><span class="bg-blue-600 text-white w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 font-bold text-xs">4</span> Once paid, the PDF will be available to download in 10 seconds. Please don't refresh the page.</li>
-                </ol>
-            </div>
-            <div id="about" class="tab-content space-y-6">
-                <h3 class="text-2xl font-bold heading-font">Expertly Crafted Study Material</h3>
-                <p class="text-slate-400 leading-relaxed">Our books are specifically designed for university students following the <span class="text-white">New Education Policy (NEP)</span>. We focus on simplified explanations and exam-oriented summaries.</p>
-                <div class="grid grid-cols-2 gap-6 mt-8">
-                    <div class="bg-slate-800 p-4 rounded-xl">
-                        <i class="fas fa-check-circle text-blue-400 mb-2"></i>
-                        <h4 class="font-bold">Syllabus Aligned</h4>
-                        <p class="text-xs text-slate-400">Directly mapped to 2026 university guidelines.</p>
-                    </div>
-                    <div class="bg-slate-800 p-4 rounded-xl">
-                        <i class="fas fa-mobile-alt text-blue-400 mb-2"></i>
-                        <h4 class="font-bold">Mobile Friendly</h4>
-                        <p class="text-xs text-slate-400">Optimized for reading on phones and tablets.</p>
-                    </div>
-                </div>
-            </div>
-            <div id="terms" class="tab-content space-y-4">
-                <h3 class="text-2xl font-bold heading-font">Refunds & Usage</h3>
-                <div class="text-slate-400 text-sm space-y-3">
-                    <p>• <strong>Non-exclusive use:</strong> Content is for personal use only. Sharing, reselling, or commercial distribution is strictly prohibited.</p>
-                    <p>• <strong>Non-transferable:</strong> You can't transfer the E-Book to others.</p>
-                    <p>• Due to the nature of digital goods, we do not offer refunds once the download link is accessed.</p>
-                </div>
-            </div>
-            <div id="pp" class="tab-content space-y-4">
-                <h3 class="text-2xl font-bold heading-font">Privacy Policy</h3>
-                <div class="text-slate-400 text-sm space-y-3">
-                    <p>• You agree to share information entered on this payment page with UNIVERSITY UPDATES and Razorpay.</p>
-                </div>
-            </div>
+        
+        <div class="mt-4 p-4 bg-amber-50 rounded-xl border border-amber-100 flex items-center gap-3">
+            <i class="fas fa-info-circle text-amber-600"></i>
+            <p class="text-xs text-amber-800">Can't see the portal? Some browsers block third-party content. <a href="https://www.wikipedia.org" target="_blank" class="underline font-bold">Click here to open in a new tab.</a></p>
         </div>
     </section>
 
-    <div id="previewModal">
-        <div class="bg-white rounded-2xl w-full max-w-2xl overflow-hidden flex flex-col md:flex-row shadow-2xl relative">
-            <button onclick="closeModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-900 text-xl z-10">&times;</button>
-            <div class="md:w-1/2 bg-slate-100 p-4 flex items-center justify-center min-h-[300px] relative">
-                <div id="modalLoader" class="loader"></div>
-                <iframe id="pdfPreview" src="" class="w-full h-full border-0 hidden rounded shadow-md" title="PDF Preview"></iframe>
-            </div>
-            <div class="md:w-1/2 p-8">
-                <h3 id="modalTitle" class="heading-font text-xl font-bold text-slate-900 mb-4">Book Details</h3>
-                <div class="space-y-3 mb-8">
-                    <div class="flex justify-between text-xs border-b pb-2"><span class="text-slate-400">Quality</span><span id="modalQuality" class="font-bold"></span></div>
-                    <div class="flex justify-between text-xs border-b pb-2"><span class="text-slate-400">Language</span><span id="modalLang" class="font-bold"></span></div>
-                    <div class="flex justify-between text-xs border-b pb-2"><span class="text-slate-400">Format</span><span id="modalFormat" class="font-bold text-blue-600"></span></div>
-                </div>
-                <div class="bg-blue-50 p-4 rounded-xl mb-6">
-                    <p class="text-[11px] text-blue-700 leading-relaxed font-medium"><i class="fas fa-info-circle mr-1"></i> Preview shows selected pages only. Full content is delivered after purchase.</p>
-                </div>
-                <button id="modalBuyBtn" class="w-full bg-blue-600 text-white py-3 rounded-xl font-bold hover:bg-blue-700 transition">Get Full Access Now</button>
-            </div>
-        </div>
-    </div>
-
-    <div id="instructionsModal" style="display: none; position: fixed; inset: 0; background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(4px); z-index: 1001; align-items: center; justify-content: center; padding: 20px;">
-        <div class="bg-white rounded-2xl w-full max-w-lg overflow-hidden shadow-2xl relative p-8">
-            <button onclick="closeInstructions()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-900 text-2xl">&times;</button>
-            <h3 id="modalHeading" class="heading-font text-2xl font-bold text-slate-900 mb-6 flex items-center">
-                <i class="fas fa-download mr-3 text-blue-600"></i>How to Download?
-            </h3>
-            <div id="modalContent" class="space-y-6"></div>
-            <button id="proceedBuyBtn" class="w-full mt-8 bg-slate-900 text-white py-3 rounded-xl font-bold hover:bg-slate-800 transition">Proceed</button>
-        </div>
-    </div>
-
-    <footer class="bg-white py-7 border-t">
+    <footer class="bg-slate-900 text-white py-10 mt-12">
         <div class="max-w-7xl mx-auto px-6 text-center">
-            <img src="images/Universityupdates.png" class="h-12 mx-auto grayscale opacity-50 mb-6" alt="Footer Logo" onerror="this.style.display='none'">
-            <p class="text-slate-500 text-sm max-w-md mx-auto">Helping students bridge the gap between learning and excellence.</p>
-            <p class="text-xs text-slate-400 mt-4">© 2026 | University Updates.</p>
+            <p class="text-slate-400 text-xs">© 2026 | University Updates. Designed for Students.</p>
         </div>
     </footer>
 
-    <script>
-        let currentBuyUrl = "";
-
-        function filterCategory(category, btn) {
-            document.querySelectorAll('.category-btn').forEach(b => {
-                b.classList.remove('bg-slate-900', 'text-white');
-                b.classList.add('text-slate-600');
-            });
-            btn.classList.add('bg-slate-900', 'text-white');
-            const books = document.querySelectorAll('.book-card');
-            books.forEach(book => {
-                const cat = book.getAttribute('data-category');
-                book.style.display = (category === 'all' || cat === category) ? 'flex' : 'none';
-            });
-        }
-
-        function showTab(tabId) {
-            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
-            document.querySelectorAll('.tab-btn').forEach(btn => {
-                btn.classList.remove('border-blue-500', 'text-white');
-                btn.classList.add('border-transparent', 'text-slate-400');
-            });
-            document.getElementById(tabId).classList.add('active');
-            const targetBtn = Array.from(document.querySelectorAll('.tab-btn')).find(btn => 
-                btn.getAttribute('onclick').includes(`'${tabId}'`)
-            );
-            if(targetBtn) {
-                targetBtn.classList.add('border-blue-500', 'text-white');
-                targetBtn.classList.remove('border-transparent', 'text-slate-400');
-            }
-        }
-
-        function openInstructionsOnly() {
-            currentBuyUrl = "";
-            const modal = document.getElementById('instructionsModal');
-            document.getElementById('modalHeading').innerHTML = '<i class="fas fa-download mr-3 text-blue-600"></i>How to Download?';
-            document.getElementById('modalContent').innerHTML = `
-                <div class="space-y-4">
-                    <p class="text-sm text-slate-600">1. Click <strong>"Buy Now"</strong>.</p>
-                    <p class="text-sm text-slate-600">2. Enter Name, Email and Mobile.</p>
-                    <p class="text-sm text-slate-600">3. Pay via UPI or Card.</p>
-                    <p class="text-sm text-slate-600">4. <strong>Wait 10 seconds</strong> after payment for the automatic download.</p>
-                </div>
-            `;
-            const btn = document.getElementById('proceedBuyBtn');
-            btn.innerText = "Got it!";
-            btn.onclick = closeInstructions;
-            modal.style.display = 'flex';
-        }
-
-        function redirectBuy(url) {
-            if(url && url !== '#') {
-                currentBuyUrl = url;
-                const modal = document.getElementById('instructionsModal');
-                document.getElementById('modalHeading').innerHTML = '<i class="fas fa-shopping-cart mr-3 text-blue-600"></i>Confirm Purchase';
-                document.getElementById('modalContent').innerHTML = `
-                    <div class="bg-blue-50 p-4 rounded-xl border border-blue-100">
-                        <p class="text-sm text-blue-800 font-medium mb-2">Important:</p>
-                        <ul class="text-xs text-blue-700 space-y-2">
-                            <li>• DO NOT refresh after payment.</li>
-                            <li>• PDF will download automatically within 10-15 seconds.</li>
-                        </ul>
-                    </div>
-                `;
-                const btn = document.getElementById('proceedBuyBtn');
-                btn.innerText = "Proceed to Payment";
-                btn.onclick = function() { window.location.href = currentBuyUrl; };
-                modal.style.display = 'flex';
-            } else {
-                alert("Will be available shortly!");
-            }
-        }
-
-        function openPreviewModal(title, pdfSrc, quality, lang, format, buyUrl) {
-            const modal = document.getElementById('previewModal');
-            const loader = document.getElementById('modalLoader');
-            const iframe = document.getElementById('pdfPreview');
-            
-            document.getElementById('modalTitle').innerText = title;
-            document.getElementById('modalQuality').innerText = quality;
-            document.getElementById('modalLang').innerText = lang;
-            document.getElementById('modalFormat').innerText = format;
-            document.getElementById('modalBuyBtn').onclick = () => redirectBuy(buyUrl);
-            
-            // Start Loading State
-            loader.classList.remove('hidden');
-            iframe.classList.add('hidden');
-            iframe.src = pdfSrc;
-            
-            // FAIL-SAFE: Stop loading after 5 seconds if file not found
-            const timer = setTimeout(() => {
-                loader.classList.add('hidden');
-                console.log("Loading timed out - check file path");
-            }, 5000);
-
-            iframe.onload = function() {
-                clearTimeout(timer);
-                loader.classList.add('hidden');
-                iframe.classList.remove('hidden');
-            };
-            
-            modal.style.display = 'flex';
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeModal() {
-            document.getElementById('previewModal').style.display = 'none';
-            document.getElementById('pdfPreview').src = "";
-            document.body.style.overflow = 'auto';
-        }
-
-        function closeInstructions() {
-            document.getElementById('instructionsModal').style.display = 'none';
-            document.body.style.overflow = 'auto';
-        }
-
-        window.onclick = function(event) {
-            if (event.target == document.getElementById('previewModal')) closeModal();
-            if (event.target == document.getElementById('instructionsModal')) closeInstructions();
-        }
-    </script>
 </body>
 </html>
