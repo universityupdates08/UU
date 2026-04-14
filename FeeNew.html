@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>University Multi-Fee Portal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .radio-card input:checked + div { border-color: #2563eb; background-color: #eff6ff; color: #1e40af; }
+        .tab-btn { transition: all 0.2s; border-bottom: 3px solid transparent; }
+        .tab-active { border-color: #2563eb; color: #2563eb; background: #f8fafc; }
+        .item-row { display: flex; justify-content: space-between; padding: 4px 0; border-bottom: 1px dashed #e2e8f0; font-size: 0.875rem; }
+    </style>
+</head>
+<body class="bg-slate-50 p-4 md:p-8 text-slate-800">
+    <div class="max-w-3xl mx-auto bg-white shadow-2xl rounded-2xl overflow-hidden">
+        <div class="bg-blue-700 p-6 text-white">
+            <h1 class="text-2xl font-bold">University Fee Calculator</h1>
+            <p class="text-blue-100 text-sm mt-1">CCSU Meerut & Maa Shakumbhari University Saharanpur</p>
+        </div>
+
+        <div class="flex border-b">
+            <button onclick="switchTab('reg')" id="tab-reg" class="tab-btn tab-active flex-1 py-4 font-bold uppercase text-xs tracking-wider">Regular/Private</button>
+            <button onclick="switchTab('ex')" id="tab-ex" class="tab-btn flex-1 py-4 font-bold uppercase text-xs tracking-wider text-slate-400">Ex-Student</button>
+            <button onclick="switchTab('back')" id="tab-back" class="tab-btn flex-1 py-4 font-bold uppercase text-xs tracking-wider text-slate-400">Back Paper</button>
+        </div>
+
+        <div class="p-6 space-y-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-xs font-bold text-slate-500 mb-1 uppercase">University</label>
+                    <select id="uni" class="w-full border-2 p-2.5 rounded-lg bg-white font-semibold" onchange="updateCourseList()">
+                        <option value="ccsu">CCSU, Meerut</option>
+                        <option value="msu">Maa Shakumbhari, Saharanpur</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-500 mb-1 uppercase">Student Category</label>
+                    <select id="category" class="w-full border-2 p-2.5 rounded-lg bg-white font-semibold" onchange="updateCourseList()">
+                        <option value="college">College Student</option>
+                        <option value="campus">Campus Student</option>
+                        <option value="private">Private (Annual)</option>
+                    </select>
+                </div>
+            </div>
+
+            <div id="main-form" class="space-y-4">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 mb-1 uppercase">Course Level</label>
+                        <div class="flex gap-2">
+                            <label class="flex-1 radio-card cursor-pointer">
+                                <input type="radio" name="level" value="ug" class="hidden" checked onchange="updateCourseList()">
+                                <div class="text-center py-2 border-2 rounded-lg font-bold text-sm">UG</div>
+                            </label>
+                            <label class="flex-1 radio-card cursor-pointer">
+                                <input type="radio" name="level" value="pg" class="hidden" onchange="updateCourseList()">
+                                <div class="text-center py-2 border-2 rounded-lg font-bold text-sm">PG</div>
+                            </label>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 mb-1 uppercase">Select Course</label>
+                        <select id="course" class="w-full border-2 p-2.5 rounded-lg bg-white" onchange="calculate()"></select>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 border-t pt-4">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 mb-1 uppercase">Year/Semester</label>
+                        <select id="period" class="w-full border-2 p-2 rounded-lg" onchange="calculate()">
+                            <option value="1">1st (Year/Sem)</option>
+                            <option value="2">2nd (Year/Sem)</option>
+                            <option value="3">3rd (Year/Sem)</option>
+                            <option value="4">4th (Year/Sem)</option>
+                            <option value="5">5th (Year/Sem)</option>
+                            <option value="6">6th (Year/Sem)</option>
+                        </select>
+                    </div>
+                    <div id="sf-type-box">
+                        <label class="block text-xs font-bold text-slate-500 mb-1 uppercase">College Type</label>
+                        <select id="sf_type" class="w-full border-2 p-2 rounded-lg" onchange="calculate()">
+                            <option value="aided">Govt / Aided</option>
+                            <option value="sf">Self-Finance</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 mb-1 uppercase">Enrollment</label>
+                        <select id="enrolled" class="w-full border-2 p-2 rounded-lg" onchange="calculate()">
+                            <option value="yes">Already Enrolled</option>
+                            <option value="no">New Admission</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                    <h3 class="font-bold text-sm mb-3 text-slate-600 uppercase tracking-tight">Additional Components</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <label class="flex items-center space-x-3 cursor-pointer p-2 bg-white rounded border">
+                            <input type="checkbox" id="project" onchange="calculate()" class="w-4 h-4 text-blue-600">
+                            <span class="text-sm font-medium">Project / Dissertation</span>
+                        </label>
+                        <div class="flex items-center space-x-3 p-2 bg-white rounded border">
+                            <span class="text-sm font-medium">Practicals:</span>
+                            <input type="number" id="viva_count" value="0" min="0" oninput="calculate()" class="w-16 border rounded text-center font-bold">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-blue-50 border-2 border-blue-100 rounded-2xl p-6">
+                <div id="breakdown" class="mb-4"></div>
+                <div class="flex justify-between items-center border-t-2 border-blue-200 pt-4">
+                    <span class="text-blue-900 font-black text-xl">TOTAL FEE</span>
+                    <span class="text-3xl font-black text-blue-700">₹<span id="total_display">0</span></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentTab = 'reg';
+        
+        const feeData = {
+            ccsu: {
+                college: {
+                    ug: ["B.A.", "B.A. (Honours)", "B.Sc.", "B.Sc. (Honours)", "B.Com.", "B.Com. (Honours)", "B.Ed.", "B.Com.LL.B.", "LL.B.", "B.Sc. Ag.", "B.Sc. Ag. (Honours)", "B.Sc. Home Science", "B.R.D.I.T.", "B.A.B.Ed.", "B.El.Ed.", "B.P.E.S.", "B.B.A.", "B.C.A.", "B.F.A.", "B.J.M.C.", "B.Voc.", "B.Lib.", "B.Sc. Bio-Technology", "B.D.S.", "B.Sc. Nursing", "B.A.M.S.", "B.U.M.S.", "M.B.B.S."],
+                    pg: ["M.A.", "M.Sc.", "M.Sc. Ag.", "M.Sc. Home Science", "LL.M.", "M.Ed.", "M.Sc. Nursing", "M.O.T.", "M.Lib.", "M.P.E.", "M.P.Ed.", "M.P.T.", "MJMC", "MBA", "M.Sc. Computer Science", "M.Sc. Microbiology", "M.D.", "M.S.", "D.M.", "Pre Ph.D."]
+                },
+                campus: {
+                    ug: ["U.G. General", "B.Tech."],
+                    pg: ["P.G. General", "M.Ed.", "LL.M.", "PG Diploma"]
+                },
+                private: {
+                    ug: ["B.A. (Private)", "B.Com. (Private)"],
+                    pg: ["M.A. (Private)", "M.Com. (Private)"]
+                }
+            },
+            msu: {
+                college: {
+                    ug: ["B.A.", "B.Sc.", "B.Com.", "B.Ed.", "LL.B.", "B.Sc. Ag.", "B.B.A.", "B.C.A.", "B.Lib."],
+                    pg: ["M.A.", "M.Sc.", "LL.M.", "M.Ed.", "M.Lib.", "M.P.Ed."]
+                },
+                campus: {
+                    ug: ["B.B.A", "B.COM. (Honours)"],
+                    pg: ["P.G. Courses"]
+                },
+                private: {
+                    ug: ["B.A. (Private)", "B.Com. (Private)"],
+                    pg: ["M.A. (Private)", "M.Com. (Private)"]
+                }
+            }
+        };
+
+        function switchTab(t) {
+            currentTab = t;
+            ['reg', 'ex', 'back'].forEach(id => {
+                const btn = document.getElementById('tab-' + id);
+                btn.className = (id === t) ? "tab-btn tab-active flex-1 py-4 font-bold uppercase text-xs tracking-wider" : "tab-btn flex-1 py-4 font-bold uppercase text-xs tracking-wider text-slate-400";
+            });
+            calculate();
+        }
+
+        function updateCourseList() {
+            const uni = document.getElementById('uni').value;
+            const cat = document.getElementById('category').value;
+            const level = document.querySelector('input[name="level"]:checked').value;
+            const list = feeData[uni][cat][level];
+            const select = document.getElementById('course');
+            select.innerHTML = list.map(c => `<option value="${c}">${c}</option>`).join('');
+            calculate();
+        }
+
+        function calculate() {
+            const uni = document.getElementById('uni').value;
+            const cat = document.getElementById('category').value;
+            const level = document.querySelector('input[name="level"]:checked').value;
+            const course = document.getElementById('course').value;
+            const period = parseInt(document.getElementById('period').value);
+            const isSF = document.getElementById('sf_type').value === 'sf';
+            const isNew = document.getElementById('enrolled').value === 'no';
+            const hasProj = document.getElementById('project').checked;
+            const practicals = parseInt(document.getElementById('viva_count').value) || 0;
+
+            let total = 0;
+            let html = "";
+
+            function addFee(label, amt) {
+                total += amt;
+                html += `<div class="item-row"><span>${label}</span><b>₹${amt}</b></div>`;
+            }
+
+            if (currentTab === 'back') {
+                const base = (level === 'pg') ? 930 : 780;
+                addFee("Back Registration", 160);
+                addFee("Back Exam & Marksheet", base);
+                if(cat === 'private') addFee("Private Verification", 235);
+            } else if (cat === 'private') {
+                const baseMap = {"B.A. (Private)": 1930, "B.Com. (Private)": 1930, "M.A. (Private)": 2460, "M.Com. (Private)": 2460};
+                addFee("Exam & Marksheet", baseMap[course] || 2000);
+                addFee("Registration Fee", 160);
+                addFee("Permission Fee", 160);
+                addFee("College Verification", 635);
+                if(period === 3 || (level === 'pg' && period === 2)) addFee("Degree Fee", 250);
+            } else {
+                // Main / Ex-Student Logic
+                let examBase = (level === 'pg') ? 580 : 800;
+                if(course.includes("Ag.") || course.includes("LL.B.") || course === "B.Tech.") examBase = 1000;
+                if(course === "LL.M.") examBase = 1540;
+                if(course === "M.B.B.S." || course.includes("Nursing")) examBase = (period === 1) ? 3690 : 1850;
+                
+                addFee("Examination Fee", examBase);
+                addFee("Marksheet Fee", 80);
+                
+                if (currentTab === 'ex') {
+                    addFee("Ex-Student Registration", 160);
+                    addFee("Ex-Student Permission", 160);
+                }
+
+                if(isSF && period === 1) {
+                    addFee("Development Fee", 470);
+                    addFee("Infrastructure Fee", 1540);
+                }
+
+                if(period % 2 !== 0) { // Odd Semesters / Annual
+                    addFee("Sports Fee", isSF ? 70 : 50);
+                    addFee("Cultural/Rovers", 17);
+                }
+            }
+
+            if(isNew) addFee("Enrollment Fee", 160);
+            if(hasProj) addFee("Project/Dissertation", (level === 'pg' ? 1000 : 800));
+            if(practicals > 0) addFee(`Practical Fee (${practicals})`, practicals * 160);
+
+            document.getElementById('breakdown').innerHTML = html;
+            document.getElementById('total_display').innerText = total;
+        }
+
+        window.onload = updateCourseList;
+    </script>
+</body>
+</html>
