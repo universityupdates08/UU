@@ -3,150 +3,142 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>University Fee Calculator | Professional Portal</title>
+    <title>University Fee Calculator</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --primary: #2563eb;
-            --primary-hover: #1d4ed8;
-            --secondary: #64748b;
-            --success: #10b981;
-            --bg: #f8fafc;
-            --card: #ffffff;
-            --text-main: #0f172a;
-            --border: #e2e8f0;
-        }
-
+        :root { --primary: #2563eb; --success: #10b981; --bg: #f8fafc; --text: #0f172a; --border: #e2e8f0; }
         * { box-sizing: border-box; transition: all 0.2s ease; }
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); color: var(--text-main); margin: 0; display: flex; justify-content: center; padding: 20px; }
-
-        .app-container { background: var(--card); width: 100%; max-width: 650px; border-radius: 24px; box-shadow: 0 20px 50px rgba(0,0,0,0.05); border: 1px solid var(--border); overflow: hidden; }
-        
-        .header { background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); padding: 32px; color: white; text-align: center; }
-        .header h1 { margin: 0; font-size: 1.5rem; font-weight: 800; }
-        .header p { margin: 8px 0 0; font-size: 0.9rem; opacity: 0.8; }
-
-        .content { padding: 32px; }
-
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); color: var(--text); display: flex; justify-content: center; padding: 20px; }
+        .app-container { background: #fff; width: 100%; max-width: 800px; border-radius: 24px; box-shadow: 0 20px 50px rgba(0,0,0,0.05); border: 1px solid var(--border); overflow: hidden; }
+        .header { background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); padding: 30px; color: white; text-align: center; }
+        .content { padding: 30px; }
         .step-label { display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 0.75rem; color: var(--primary); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
-        .step-label span { background: rgba(37, 99, 235, 0.1); width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; border-radius: 50%; font-size: 10px; }
-
-        .group { margin-bottom: 24px; }
-        
-        select {
-            width: 100%; padding: 14px 16px; border: 2px solid var(--border); border-radius: 12px; font-size: 1rem;
-            background: #fff; cursor: pointer; color: var(--text-main); font-weight: 500; appearance: none;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2364748b'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
-            background-repeat: no-repeat; background-position: right 16px center; background-size: 18px;
-        }
-        select:focus { border-color: var(--primary); outline: none; box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1); }
-        select:disabled { background: #f1f5f9; cursor: not-allowed; opacity: 0.6; }
-
-        .tabs { display: flex; gap: 8px; background: #f1f5f9; padding: 6px; border-radius: 14px; margin-bottom: 24px; }
-        .tab-btn { flex: 1; padding: 12px; border: none; background: transparent; cursor: pointer; border-radius: 10px; font-weight: 700; color: var(--secondary); font-size: 0.85rem; }
-        .tab-btn.active { background: white; color: var(--primary); box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
-
-        #result-area { margin-top: 32px; display: none; animation: slideUp 0.4s ease-out; }
-        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-
-        .receipt-card { background: #f8fafc; border-radius: 20px; border: 2px dashed var(--border); padding: 24px; }
-        .total-amount { font-size: 3rem; font-weight: 800; color: var(--text-main); display: block; text-align: center; margin: 10px 0; }
-        .line-item { display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 0.95rem; color: var(--secondary); }
-        .line-item.bold { font-weight: 700; color: var(--text-main); border-top: 1px solid var(--border); padding-top: 12px; margin-top: 12px; }
-
-        .copy-btn {
-            width: 100%; background: var(--primary); color: white; border: none; padding: 16px; border-radius: 14px;
-            font-size: 1rem; font-weight: 700; cursor: pointer; margin-top: 20px; display: flex; align-items: center; justify-content: center; gap: 10px;
-        }
-        .copy-btn:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 8px 20px rgba(37, 99, 235, 0.25); }
-        
-        .flex-row { display: flex; gap: 16px; }
-        @media (max-width: 500px) { .flex-row { flex-direction: column; } }
+        .group { margin-bottom: 20px; }
+        select { width: 100%; padding: 12px 16px; border: 2px solid var(--border); border-radius: 12px; font-size: 1rem; background: #fff; cursor: pointer; font-weight: 500; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2364748b'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 16px center; background-size: 18px; }
+        .tabs { display: flex; gap: 8px; background: #f1f5f9; padding: 5px; border-radius: 12px; margin-bottom: 20px; }
+        .tab-btn { flex: 1; padding: 10px; border: none; background: transparent; cursor: pointer; border-radius: 8px; font-weight: 700; color: #64748b; font-size: 0.8rem; }
+        .tab-btn.active { background: white; color: var(--primary); box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        #result-area { margin-top: 30px; display: none; }
+        .receipt { background: #f8fafc; border: 2px dashed var(--border); border-radius: 20px; padding: 25px; }
+        .total-amount { font-size: 3.5rem; font-weight: 800; display: block; text-align: center; margin-bottom: 10px; color: var(--text); }
+        .line-item { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 0.95rem; color: #64748b; }
+        .line-item.bold { font-weight: 700; color: var(--text); border-top: 1px solid var(--border); padding-top: 12px; margin-top: 12px; }
+        .copy-btn { width: 100%; background: var(--primary); color: white; border: none; padding: 16px; border-radius: 14px; font-weight: 700; cursor: pointer; margin-top: 15px; display: flex; align-items: center; justify-content: center; gap: 8px; }
+        .flex-row { display: flex; gap: 15px; }
+        @media (max-width: 600px) { .flex-row { flex-direction: column; gap: 0; } }
     </style>
 </head>
 <body>
 
 <div class="app-container">
     <div class="header">
-        <h1>University Fee Calculator</h1>
-        <p>Dynamic Academic Fee Estimation</p>
+        <h1>Fee Calculator</h1>
     </div>
 
     <div class="content">
         <div class="flex-row">
             <div class="group" style="flex:1">
-                <div class="step-label"><span>1</span> Student Type</div>
-                <select id="location" onchange="handleLocation()">
-                    <option value="College">College Student</option>
-                    <option value="Campus">University Campus Student</option>
+                <div class="step-label">University</div>
+                <select id="uni" onchange="initSetup()">
+                    <option value="">-- Choose --</option>
+                    <option value="CCSU">Chaudhary Charan Singh University, Meerut</option>
+                    <option value="MSU">Maa Shakumbhari University, Saharanpur</option>
                 </select>
             </div>
             <div class="group" style="flex:1">
-                <div class="step-label"><span>2</span> University</div>
-                <select id="uni" onchange="calculate()">
-                    <option value="">Choose University</option>
-                    <option value="CCSU">CCSU, Meerut</option>
-                    <option value="MSU">MSU, Saharanpur</option>
+                <div class="step-label">Student Type</div>
+                <select id="studentLoc" onchange="initSetup()">
+                    <option value="College">College</option>
+                    <option value="Campus">University Campus</option>
                 </select>
             </div>
         </div>
 
-        <div class="step-label"><span>3</span> Examination Category</div>
+        <div class="step-label">Exam Category</div>
         <div class="tabs">
-            <button class="tab-btn active" id="btn-main" onclick="setTab('main')">Main Exam</button>
+            <button class="tab-btn active" id="btn-main" onclick="setTab('main')">Main/Regular</button>
+            <button class="tab-btn" id="btn-private" onclick="setTab('private')">Private</button>
             <button class="tab-btn" id="btn-ex" onclick="setTab('ex')">Ex-Student</button>
             <button class="tab-btn" id="btn-back" onclick="setTab('back')">Back Paper</button>
         </div>
 
         <div class="flex-row">
-            <div class="group" style="flex:1">
-                <div class="step-label"><span>4</span> College Type</div>
+            <div class="group" id="collTypeBox" style="flex:1">
+                <div class="step-label">College Type</div>
                 <select id="collType" onchange="calculate()">
                     <option value="Aided">Govt. / Aided</option>
-                    <option value="SFS">Self-Finance (SFS)</option>
+                    <option value="SFS">Self-Finance</option>
                 </select>
             </div>
             <div class="group" style="flex:1">
-                <div class="step-label"><span>5</span> Enrolled?</div>
+                <div class="step-label">Already Enrolled?</div>
                 <select id="enrolled" onchange="calculate()">
-                    <option value="Yes">Yes (Enrolled)</option>
-                    <option value="No">No (New Student)</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
                 </select>
             </div>
         </div>
 
-        <div class="group">
-            <div class="step-label"><span>6</span> Course Details</div>
-            <div class="flex-row" style="margin-bottom:12px;">
-                <select id="cat" onchange="handleCategory()" style="flex:1">
-                    <option value="Regular">Regular</option>
-                    <option value="Private">Private</option>
+        <div class="flex-row" id="otherStateRow" style="display:none">
+            <div class="group" style="flex:1">
+                <div class="step-label">Resident of UP?</div>
+                <select id="isUP" onchange="calculate()">
+                    <option value="Yes">Yes</option>
+                    <option value="No">No (+6330 Fee)</option>
                 </select>
-                <select id="lvl" onchange="handleLevel()" style="flex:1">
+            </div>
+        </div>
+
+        <div class="flex-row">
+            <div class="group" style="flex:1">
+                <div class="step-label">Course Level</div>
+                <select id="lvl" onchange="handleCourseChange()">
                     <option value="UG">Undergraduate (UG)</option>
                     <option value="PG">Postgraduate (PG)</option>
                 </select>
             </div>
-            <div class="flex-row">
-                <select id="sys" onchange="handleSystem()" style="flex:1">
-                    <option value="Semester">Semester System</option>
-                    <option value="Annual">Annual System</option>
+            <div class="group" style="flex:1">
+                <div class="step-label" id="sysLabel">System</div>
+                <select id="sys" onchange="handleSystem()">
+                    <option value="Semester">Semester</option>
+                    <option value="Annual">Annual</option>
                 </select>
-                <select id="time" onchange="calculate()" style="flex:1">
-                    </select>
             </div>
         </div>
 
         <div class="group">
-            <div class="step-label"><span>7</span> Specific Course</div>
-            <select id="course" onchange="calculate()">
+            <div class="step-label">Course</div>
+            <select id="course" onchange="handleSystem()">
                 </select>
         </div>
 
+        <div class="group">
+            <div class="step-label">Semester / Year</div>
+            <select id="time" onchange="calculate()">
+                </select>
+        </div>
+
+        <div class="flex-row">
+            <div class="group" style="flex:1">
+                <div class="step-label">Practical/Viva?</div>
+                <select id="viva" onchange="calculate()">
+                    <option value="0">No</option>
+                    <option value="170">Yes (+170)</option>
+                </select>
+            </div>
+            <div class="group" style="flex:1">
+                <div class="step-label">Project?</div>
+                <select id="project" onchange="calculate()">
+                    <option value="0">No</option>
+                    <option value="Apply">Yes (Applied as per UG/PG)</option>
+                </select>
+            </div>
+        </div>
+
         <div id="result-area">
-            <div class="receipt-card">
-                <div class="total-amount" id="fee-val">₹0</div>
-                <div id="breakdown-items"></div>
+            <div class="receipt">
+                <span class="total-amount" id="fee-val">₹0</span>
+                <div id="breakdown"></div>
             </div>
             <button class="copy-btn" onclick="copyResult()">📋 Copy Full Breakdown</button>
         </div>
@@ -154,117 +146,175 @@
 </div>
 
 <script>
-    const theoryFees = {
-        "B.A.": 800, "B.A. (Honours)": 800, "B.Sc.": 800, "B.Sc. (Honours)": 800,
-        "B.Com.": 800, "B.Com. (Honours)": 800, "B.Ed.": 800, "LL.B.": 1000, 
-        "B.Sc. Ag.": 1000, "M.A.": 580, "M.Sc.": 580, "LL.M.": 1540, "M.Ed.": 630
+    // Comprehensive Theory Fee Data [cite: 5, 131, 159, 150]
+    const baseFees = {
+        "B.A.": 800, "B.A. (Honours)": 800, "B.Sc.": 800, "B.Sc. (Honours)": 800, "B.Com.": 800, "B.Com. (Honours)": 800,
+        "B.Ed.": 800, "B.Com.LL.B.": 800, "LL.B.": 1000, "B.Sc. Ag.": 1000, "B.Sc. Home Science": 580,
+        "M.A.": 580, "M.Sc.": 580, "M.Sc. Ag.": 580, "LL.M.": 1540, "M.Ed.": 630, "B.Tech.": 1000, "B.B.A": 800,
+        "B.R.D.I.T.": 1850, "B.A.LL.B.": 1850, "MBBS/BDS/Nursing": 1500, "M.Lib/M.P.Ed/M.P.T": 2310
     };
 
     let activeTab = 'main';
-
-    function handleLocation() {
-        const loc = document.getElementById('location').value;
-        const collType = document.getElementById('collType');
-        if(loc === "Campus") {
-            collType.value = "Aided"; // Usually Campus follows Govt rate logic
-            collType.disabled = true;
-        } else {
-            collType.disabled = false;
-        }
-        calculate();
-    }
 
     function setTab(t) {
         activeTab = t;
         document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
         document.getElementById('btn-' + t).classList.add('active');
-        calculate();
+        
+        // Logical constraints
+        if(t === 'private') {
+            document.getElementById('sys').value = "Annual";
+            document.getElementById('sys').disabled = true;
+        } else {
+            document.getElementById('sys').disabled = false;
+        }
+        
+        document.getElementById('otherStateRow').style.display = (t === 'private') ? 'flex' : 'none';
+        initSetup();
     }
 
-    function handleCategory() {
-        const cat = document.getElementById('cat').value;
-        const sys = document.getElementById('sys');
-        if(cat === "Private") {
-            sys.value = "Annual";
-            sys.disabled = true;
+    function initSetup() {
+        const uni = document.getElementById('uni').value;
+        const loc = document.getElementById('studentLoc').value;
+        const btnPrivate = document.getElementById('btn-private');
+        
+        // MSU Rule: No Private [cite: 19]
+        btnPrivate.style.display = (uni === "MSU") ? "none" : "inline-block";
+        if(uni === "MSU" && activeTab === 'private') setTab('main');
+        
+        
+
+        // Campus hides College Type [cite: 2, 128]
+        document.getElementById('collTypeBox').style.display = (loc === "Campus") ? "none" : "block";
+
+        handleCourseChange();
+    }
+
+    function handleCourseChange() {
+        const uni = document.getElementById('uni').value;
+        const loc = document.getElementById('studentLoc').value;
+        const lvl = document.getElementById('lvl').value;
+        const course = document.getElementById('course');
+        course.innerHTML = "";
+
+        // Filter course list based on Private/Main selection 
+        if(activeTab === 'private') {
+            ["B.A.", "B.Com.", "M.A.", "M.Com."].forEach(c => course.add(new Option(c, baseFees[c] || 1930)));
         } else {
-            sys.disabled = false;
+            for(let c in baseFees) {
+                let isUG = c.startsWith('B.') || c === 'LL.B.' || c === 'MBBS' || c === 'BDS';
+                let isPG = c.startsWith('M.') || c === 'LL.M.';
+                if(loc === "Campus") {
+                    if(["B.Tech.", "B.B.A", "M.A.", "M.Sc.", "LL.M.", "M.Ed."].includes(c)) course.add(new Option(c, baseFees[c]));
+                } else {
+                    if(lvl === "UG" && isUG) course.add(new Option(c, baseFees[c]));
+                    if(lvl === "PG" && isPG) course.add(new Option(c, baseFees[c]));
+                }
+            }
         }
         handleSystem();
     }
 
-    function handleLevel() {
-        const lvl = document.getElementById('lvl').value;
-        const course = document.getElementById('course');
-        course.innerHTML = '<option value="">Select Course</option>';
-        for(let c in theoryFees) {
-            if(lvl === "UG" && (c.startsWith('B.') || c === 'LL.B.')) course.add(new Option(c, theoryFees[c]));
-            if(lvl === "PG" && (c.startsWith('M.') || c === 'LL.M.')) course.add(new Option(c, theoryFees[c]));
-        }
-        calculate();
-    }
-
     function handleSystem() {
         const sys = document.getElementById('sys').value;
+        const courseName = document.getElementById('course').options[document.getElementById('course').selectedIndex]?.text || "";
         const time = document.getElementById('time');
         time.innerHTML = "";
-        if(sys === "Annual") {
-            ["1st Year", "2nd Year", "3rd Year", "Final Year"].forEach(v => time.add(new Option(v, v)));
+
+        if(sys === "Annual" || courseName === "B.Ed.") {
+            ["1st Year", "2nd Year", "Final Year"].forEach(v => time.add(new Option(v, v)));
         } else {
-            ["1st Sem", "2nd Sem", "3rd Sem", "Final Sem"].forEach(v => time.add(new Option(v, v)));
+            let maxSem = 6;
+            // Documented Final Semesters [cite: 8, 9, 10, 134, 135, 136]
+            if(["M.A.", "M.Sc.", "M.Sc. Ag.", "LL.M.", "M.Ed."].includes(courseName)) maxSem = 4;
+            if(courseName === "B.Com.LL.B.") maxSem = 10;
+            if(courseName.includes("Ag.")) maxSem = 8;
+            
+            for(let i=1; i<=maxSem; i++) {
+                let label = (i === maxSem) ? i + " (Final Sem)" : i + " Sem";
+                time.add(new Option(label, i));
+            }
         }
         calculate();
     }
 
     function calculate() {
-        const base = Number(document.getElementById('course').value);
-        if(!base) { document.getElementById('result-area').style.display = 'none'; return; }
+        const uni = document.getElementById('uni').value;
+        if(!uni) return;
 
-        const enrolled = document.getElementById('enrolled').value;
+        const courseName = document.getElementById('course').options[document.getElementById('course').selectedIndex]?.text || "";
         const timeVal = document.getElementById('time').value;
-        const lvl = document.getElementById('lvl').value;
+        const enrolled = document.getElementById('enrolled').value;
         const coll = document.getElementById('collType').value;
-        const loc = document.getElementById('location').value;
+        const loc = document.getElementById('studentLoc').value;
+        const isUP = document.getElementById('isUP').value;
 
-        let examFee = (activeTab === 'back') ? (lvl === "UG" ? 780 : 930) : base;
-        let marksheet = (activeTab === 'back') ? 0 : 80;
-        let enrollment = (enrolled === "No" && timeVal.includes("1st")) ? 160 : 0;
-        let degree = (timeVal.includes("Final")) ? 250 : 0;
-        
-        let isOddOrAnnual = timeVal.includes("1st") || timeVal.includes("3rd") || timeVal.includes("Annual");
-        let sports = (isOddOrAnnual) ? (coll === "Aided" ? 50 : 70) : 0;
-        let misc = isOddOrAnnual ? 17 : 0; // Cultural + Rovers
-        let extra = (activeTab !== 'main') ? 160 : 0; // Permission/Registration
+        let examFee = 0, marksheet = 80, enrollment = 0, degree = 0, misc = 0, registration = 0, permission = 0, verification = 0, professional = 0;
 
-        // Campus students usually have extra "Development" or "Campus Fund" (Example: ₹100)
-        let campusFund = (loc === "Campus") ? 100 : 0;
+        // 1. Private System 
+        if(activeTab === 'private') {
+            if(courseName.includes("B.")) examFee = 1930;
+            else examFee = 2460;
+            registration = 160; permission = 160;
+            verification = (activeTab === 'back') ? 235 : 635;
+            if(isUP === "No") enrollment = 6330; // Other State Fee 
+            else if(enrolled === "No") enrollment = 160;
+            if(timeVal.includes("Final")) degree = 250;
+        } 
+        // 2. Back Paper [cite: 25, 155, 168]
+        else if(activeTab === 'back') {
+            examFee = (document.getElementById('lvl').value === "PG") ? 930 : 780;
+            marksheet = 0; registration = 160;
+        }
+        // 3. Regular/Ex System [cite: 131, 139, 148]
+        else {
+            examFee = Number(document.getElementById('course').value);
+            if(enrolled === "No" && timeVal.includes("1")) enrollment = 160;
+            if(timeVal.includes("Final")) degree = 250;
+            
+            if(loc === "College") {
+                let isOdd = (parseInt(timeVal) % 2 !== 0) || timeVal.includes("Year");
+                if(isOdd) {
+                    misc = 17; // Cultural + Rovers [cite: 13]
+                    if(!courseName.includes("Ag.")) misc += (coll === "Aided") ? 50 : 70; // Sports [cite: 13]
+                }
+            }
+            if(activeTab === 'ex') { permission = 160; registration = 160; }
 
-        let total = examFee + marksheet + enrollment + degree + sports + misc + extra + campusFund;
+            // Professional SFS Charges 
+            if(coll === "SFS" && timeVal.includes("1") && (courseName.includes("LL.B") || courseName.includes("BBA") || courseName.includes("BCA"))) {
+                professional = 1540 + 470; // Infra + Uni Reg
+            }
+        }
 
-        document.getElementById('result-area').style.display = 'block';
+        let viva = Number(document.getElementById('viva').value);
+        let project = (document.getElementById('project').value === "Apply") ? (document.getElementById('lvl').value === "PG" ? 1000 : 800) : 0;
+
+        let total = examFee + marksheet + enrollment + degree + misc + registration + permission + verification + viva + project + professional;
+
+        document.getElementById('result-area').style.display = "block";
         document.getElementById('fee-val').innerText = `₹${total}`;
-        
-        document.getElementById('breakdown-items').innerHTML = `
-            <div class="line-item"><span>${loc} Exam Fee</span><span>₹${examFee}</span></div>
+        document.getElementById('breakdown').innerHTML = `
+            <div class="line-item"><span>Base Examination Fee</span><span>₹${examFee}</span></div>
             ${marksheet ? `<div class="line-item"><span>Marksheet Fee</span><span>₹${marksheet}</span></div>` : ''}
-            ${enrollment ? `<div class="line-item"><span>Enrollment Fee</span><span>₹${enrollment}</span></div>` : ''}
-            ${sports ? `<div class="line-item"><span>Sports Fee</span><span>₹${sports}</span></div>` : ''}
-            ${campusFund ? `<div class="line-item"><span>Campus Development Fund</span><span>₹${campusFund}</span></div>` : ''}
-            ${degree ? `<div class="line-item"><span>Degree Fee</span><span>₹${degree}</span></div>` : ''}
-            <div class="line-item bold"><span>Net Amount Payable</span><span>₹${total}</span></div>
+            ${enrollment ? `<div class="line-item"><span>Enrollment/Eligibility</span><span>₹${enrollment}</span></div>` : ''}
+            ${verification ? `<div class="line-item"><span>College Verification</span><span>₹${verification}</span></div>` : ''}
+            ${registration ? `<div class="line-item"><span>Registration/Permission</span><span>₹${registration + permission}</span></div>` : ''}
+            ${misc ? `<div class="line-item"><span>Misc (Sports/Cultural)</span><span>₹${misc}</span></div>` : ''}
+            ${viva ? `<div class="line-item"><span>Viva/Practical Fee</span><span>₹${viva}</span></div>` : ''}
+            ${project ? `<div class="line-item"><span>Project/Dissertation</span><span>₹${project}</span></div>` : ''}
+            ${degree ? `<div class="line-item"><span>Degree Fee (Final)</span><span>₹${degree}</span></div>` : ''}
+            <div class="line-item bold"><span>Net Payable</span><span>₹${total}</span></div>
         `;
     }
 
     function copyResult() {
-        const total = document.getElementById('fee-val').innerText;
-        const text = `📌 FEE BREAKDOWN\nUniversity: ${document.getElementById('uni').value}\nTotal: ${total}\n_Shared via Portal_`;
-        navigator.clipboard.writeText(text);
+        const val = document.getElementById('fee-val').innerText;
+        navigator.clipboard.writeText(`Fee Breakdown\nTotal: ${val}\nUniversity: ${document.getElementById('uni').value}`);
         alert("Breakdown Copied!");
     }
 
-    handleLevel();
-    handleCategory();
-    handleSystem();
+    initSetup();
 </script>
 </body>
 </html>
