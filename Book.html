@@ -239,6 +239,7 @@
         </div>
     </div>
 
+    <!-- Instructions Modal (Only used for the "How to Download" button now) -->
     <div id="instructionsModal" style="display: none; position: fixed; inset: 0; background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(4px); z-index: 1001; align-items: center; justify-content: center; padding: 20px;">
         <div class="bg-white rounded-2xl w-full max-w-lg overflow-hidden shadow-2xl relative p-8">
             <button onclick="closeInstructions()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-900 text-2xl">&times;</button>
@@ -313,27 +314,10 @@
             modal.style.display = 'flex';
         }
 
+        /* UPDATED: Direct redirect without "Confirm Purchase" popup */
         function redirectBuy(url) {
             if(url && url !== '#') {
-                currentBuyUrl = url;
-                const modal = document.getElementById('instructionsModal');
-                document.getElementById('modalHeading').innerHTML = '<i class="fas fa-shopping-cart mr-3 text-blue-600"></i>Confirm Purchase';
-                document.getElementById('modalContent').innerHTML = `
-                    <div class="bg-blue-50 p-4 rounded-xl border border-blue-100">
-                        <p class="text-sm text-blue-800 font-medium mb-2">Important Instructions:</p>
-                        <ul class="text-xs text-blue-700 space-y-2">
-                            <li>• Click on <strong>"Proceed to Payment"</strong> to go to the secure Razorpay gateway.</li>
-                            <li>• Enter your basic details: <strong>Name, Email and Mobile Number.</strong></li>
-                            <li>• Complete payment via <strong>UPI, Card, or Netbanking.</strong></li>
-                            <li>• <b>DO NOT</b> close or refresh the browser after payment.</li>
-                            <li>• After successful payment, the PDF will start downloading automatically within 10-15 seconds.</li>
-                        </ul>
-                    </div>
-                `;
-                const btn = document.getElementById('proceedBuyBtn');
-                btn.innerText = "Proceed to Payment";
-                btn.onclick = function() { window.location.href = currentBuyUrl; };
-                modal.style.display = 'flex';
+                window.location.href = url;
             } else {
                 alert("Will be available shortly!");
             }
