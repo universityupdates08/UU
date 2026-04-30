@@ -432,6 +432,22 @@
       background-color: var(--primary-color-dark);
     }
 
+  .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 12px;
+            color: #64748b;
+            font-weight: 500;
+            transition: all 0.2s;
+            border-bottom: 4px solid transparent;
+        }
+
+        .nav-item:hover, .nav-item.active {
+            background: #f8fafc;
+            color: #ef3c3c;
+            border-bottom-color: #ef3c3c;
+        }
     .badge-new {
       position: absolute;
       top: 10px;
@@ -444,6 +460,72 @@
       text-transform: uppercase;
       font-weight: 800;
     }
+    
+    .nav-btn{
+  display:flex;
+  gap:15px;
+  justify-content:center;
+  flex-wrap:wrap;
+}
+
+.nav-btn a{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  padding:12px 22px;
+  font-size:15px;
+  font-weight:600;
+  text-decoration:none;
+  border-radius:6px;
+  transition:all 0.3s ease;
+}
+
+.admission-bar{
+  display:flex;
+  justify-content:flex-end; /* move to right */
+  margin:10px 0;
+}
+
+/* capsule container */
+.admission-bar a{
+  padding:8px 16px;
+  font-weight:700;
+  text-decoration:none;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  font-size:16px;
+}
+
+/* left side of capsule */
+.admission-btn{
+  background:#3070C0;
+  color:white;
+  border-radius:40px 0 0 40px;
+}
+
+/* right side of capsule */
+.result-btn{
+  background: #ef3c3c;
+  color:white;
+  border-radius:0 40px 40px 0;
+}
+
+/* MOBILE */
+@media (max-width:768px){
+
+  .admission-bar{
+    flex-direction:column;
+    align-items:stretch;
+    gap:10px;
+  }
+
+  .admission-btn,
+  .result-btn{
+    border-radius:40px;
+    justify-content:center;
+  }
+}
     /* Scroll to top button */
     #topBtn {
       display: none;
@@ -605,7 +687,7 @@
 <body class="text-slate-900">
   <!-- Utility Bar -->
   <div class="utility-bar">
-    <div class="max-w-7xl mx-auto px-4 flex justify-between items-center">
+    <div class="max-w-10xl mx-auto px-4 flex justify-between items-center">
       <div class="flex items-center gap-4">
         <a href="https://t.me/HelpforDMBot" target="_blank" class="flex items-center gap-1">
           <i class="fas fa-envelope text-xs"></i>
@@ -654,12 +736,12 @@
 
   <!-- Header -->
   <header class="main-nav">
-    <div class="max-w-7xl mx-auto px-4 py-3 flex flex-col md:flex-row items-center justify-between gap-3">
+    <div class="max-w-10xl mx-auto px-4 py-3 flex flex-col md:flex-row items-center justify-between gap-3">
       <div class="flex items-center gap-3">
         <img
           src="https://i.ibb.co/nMC0877T/UNIVERSITY-UPDATES-LOGO-removebg-preview.png"
           alt="University Updates Logo"
-          class="h-14 md:h-16 drop-shadow-md"
+          class="h-12 md:h-16 drop-shadow-md"
         />
         <div class="hidden sm:block">
           <div class="primary-chip">
@@ -667,34 +749,40 @@
             UNIVERSITY UPDATES
           </div>
           <p class="text-xs text-slate-500 mt-1">
-            Free Study Resources • Tools • Notifications
+            Established Excellence
           </p>
         </div>
       </div>
 
       <!-- Desktop Nav -->
       <nav class="hidden md:flex items-center gap-4 text-sm font-medium">
-        <div class="relative group">
-          <button class="nav-link inline-flex items-center gap-1">
+        
+         <a href="#" class="nav-item active"><i class="fas fa-home"></i> Home</a>
+         <div class="relative group"> <button class="nav-item inline-flex items-center gap-1"><i class="fas fa-info-circle"></i>
             About Us
             <span>▾</span>
           </button>
           <div
             class="nav-dropdown absolute right-0 mt-2 w-56 bg-white shadow-lg border border-slate-100 hidden group-hover:block"
           >
-            <a href="#about-us" class="block px-4 py-2 text-sm hover:bg-slate-50">
+            <a href="#about-us" class=" nav-item block px-4 py-2 text-sm hover:bg-slate-50"><i class="fas fa-info-circle"></i>
               About Us
             </a>
-            <a href="#our-journey" class="block px-4 py-2 text-sm hover:bg-slate-50">
-              Our Journey
-            </a>
-            <a href="#mission-vision" class="block px-4 py-2 text-sm hover:bg-slate-50">
+            <a href="#mission-vision" class="nav-item block px-4 py-2 text-sm hover:bg-slate-50"> <i class="fas fa-bullseye"></i>
               Mission &amp; Vision
             </a>
           </div>
         </div>
-
-        <a href="#administrations" class="nav-link">Administrations</a>
+        
+        <div class="relative group"> <button class="nav-item inline-flex items-center gap-1"><i class="fas fa-tools"></i>Tools<span>▾</span></button>
+          <div class="nav-dropdown absolute right-0 mt-2 w-56 bg-white shadow-lg border border-slate-100 hidden group-hover:block">
+            <a href="ExamSearch.html" class=" nav-item block px-4 py-2 text-sm hover:bg-slate-50"><i class="fas fa-search"></i> CCSU Digital Exam Schedule</a>
+            <a href="datesheet.html" class="nav-item block px-4 py-2 text-sm hover:bg-slate-50"> <i class="fas fa-calendar-alt"></i> CCSU Datesheet Generator</a>
+            <a href="vivanew.html" class="nav-item block px-4 py-2 text-sm hover:bg-slate-50"><i class="fas fa-user-graduate"></i> Viva Center</a>
+            
+          </div>
+        </div>
+<a href="/Book.html" class="nav-item"><i class="fas fa-shopping-cart"></i> Book Store</a>
       </nav>
 
       <!-- Mobile Nav Toggle -->
@@ -711,46 +799,43 @@
       class="hidden md:hidden bg-white border-t border-slate-200 px-4 pb-3 space-y-2"
     >
       <div>
-        <button
-          id="btn-about"
-          class="w-full text-left text-sm font-medium py-2 flex items-center justify-between"
-        >
-          <span>About Us</span>
+      <a href="#" class="nav-item"><i class="fas fa-home"></i> Home</a>
+        <button id="btn-about" class="nav-item"><span> <i class="fas fa-info-circle"></i> About Us</span>
           <span>▾</span>
         </button>
         <div class="pl-3 hidden" id="mobile-about">
-          <a href="#about-us" class="block px-2 py-1 text-sm hover:bg-slate-50 rounded">
-            About Us
+          <a href="#about-us" class="nav-item block px-2 py-1 text-sm hover:bg-slate-50 rounded">
+             <i class="fas fa-info-circle"></i> About Us
           </a>
-          <a href="#our-journey" class="block px-2 py-1 text-sm hover:bg-slate-50 rounded">
-            Our Journey
-          </a>
-          <a href="#mission-vision" class="block px-2 py-1 text-sm hover:bg-slate-50 rounded">
-            Mission &amp; Vision
+          <a href="#mission-vision" class="nav-item block px-2 py-1 text-sm hover:bg-slate-50 rounded"> <i class="fas fa-bullseye"></i> Mission &amp; Vision
           </a>
         </div>
-      </div>
+      <button id="btn-tools" class="nav-item"><span> <i class="fas fa-tools"></i> Tools</span>
+          <span>▾</span>
+        </button>
+        <div class="pl-3 hidden" id="mobile-tools">
+          <a href="ExamSearch.html" class="nav-item block px-2 py-1 text-sm hover:bg-slate-50 rounded">
+             <i class="fas fa-search"></i> CCSU Digital Exam Schedule
+          </a>
+          <a href="datesheet.html" class="nav-item block px-2 py-1 text-sm hover:bg-slate-50 rounded"> <i class="fas fa-calendar-alt"></i> CCSU Datesheet Generator
+          </a>
+        </div>
 
-      <a
-        href="#administrations"
-        class="block text-sm font-medium py-2 border-t border-slate-100 mt-1"
-      >
-        Administrations
-      </a>
-    </div>
+      <a href="/Book.html" class="nav-item"><i class="fas fa-shopping-cart"></i> Book Store</a>
+    </div></div>
   </header>
 
   <!-- Greeting Strip -->
-  <div class="bg-slate-100/80 border-y border-slate-200">
-    <div
-      class="max-w-7xl mx-auto px-4 py-2 flex flex-col md:flex-row items-center justify-center gap-2"
-    >
-      <p class="greeting-blink text-center">
-        University Updates Welcomes You...!!!
-      </p>
-    </div>
-  </div>
+ <div class="admission-bar">
+  <a href="https://universityupdates.pythonanywhere.com/" class="admission-btn">
+   <i class="fas fa-user"></i> Login
+  </a>
 
+  <a href="https://universityupdates.pythonanywhere.com/register" target="_blank" class="result-btn">
+    <i class="fas fa-user-plus"></i> Register
+  </a>
+</div>
+ 
   <!-- Announcement Ticker -->
   <div class="announcement-bar">
     <div class="max-w-7xl mx-auto flex items-center gap-2 px-4 w-full overflow-hidden">
@@ -898,68 +983,6 @@
       </div>
     </section>
 
-<section id="book-store" class="section-card fade-slide">
-      <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
-        <div>
-          <p class="primary-chip mb-2">Shop</p>
-          <h2 class="section-title">University Updates Book Store</h2>
-          <p class="section-subtitle">Buy latest model papers, refreshers, and competitive exam guides.</p>
-        </div>
-        <div class="flex items-center gap-2 text-xs font-medium text-slate-500">
-          <i class="fas fa-truck-moving text-blue-500"></i> PDF
-        </div>
-      </div>
-
-      <div class="store-grid">
-        <div class="product-card">
-          <span class="badge-new">NEW</span>
-          <div class="product-image">
-             <i class="fas fa-university"></i> </div>
-          <h3 class="font-bold text-sm text-slate-800 line-clamp-2">हिंदी व्याकरण और संप्रेषण</h3>
-          <p class="text-[10px] text-slate-500 mt-1">Language: Hindi</p>
-          <div class="mt-3 flex items-center justify-between">
-            <span class="price-tag">₹35</span>
-            <span class="text-xs text-slate-400 line-through">₹45</span>
-          </div>
-          <a href="https://ezezeez2.pythonanywhere.com/" class="buy-btn">
-            <i class="fas fa-shopping-cart text-xs"></i> Buy Now
-          </a>
-        </div>
-
-        <div class="product-card">
-          <div class="product-image">
-             <i class="fas fa-university"></i>
-          </div>
-          <h3 class="font-bold text-sm text-slate-800 line-clamp-2">Social Responsibility and Community Engagement</h3>
-          <p class="text-[10px] text-slate-500 mt-1">Language: English</p>
-          <div class="mt-3 flex items-center justify-between">
-            <span class="price-tag">₹25</span>
-            <span class="text-xs text-slate-400 line-through">₹35</span>
-          </div>
-          <a href="https://ezezeez2.pythonanywhere.com/" class="buy-btn">
-            <i class="fas fa-shopping-cart text-xs"></i> Buy Now
-          </a>
-        </div>
-
-        <div class="product-card">
-          <span class="badge-new">New</span>
-          <div class="product-image">
-             <i class="fas fa-university"></i>
-          </div>
-          <h3 class="font-bold text-sm text-slate-800 line-clamp-2">सामाजिक उत्तरदायित्व और सामुदायिक सहभागिता</h3>
-          <p class="text-[10px] text-slate-500 mt-1">Language: Hindi</p>
-          <div class="mt-3 flex items-center justify-between">
-            <span class="price-tag">₹25</span>
-            <span class="text-xs text-slate-400 line-through">₹35</span>
-          </div>
-          <a href="https://ezezeez2.pythonanywhere.com/" class="buy-btn">
-            <i class="fas fa-shopping-cart text-xs"></i> Buy Now
-          </a>
-        </div>
-
-        
-      </div>
-    </section>
     
     <!-- Exam Date Generator -->
     <section class="section-card fade-slide">
@@ -1094,35 +1117,6 @@
           Watch Tutorial Video
         </a>
 
-      </div>
-    </section>
-    
-    <!-- MCQ Sample Papers -->
-    <section class="section-card fade-slide">
-      <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-3">
-        <div>
-          <p class="primary-chip mb-2">MCQ Sample Papers</p>
-          <h2 class="section-title">
-            Objective Sample Papers
-          </h2>
-          <p class="section-subtitle">
-            Objective Type Exam Preparation – Smart Exam Preparation Made Easy.
-          </p>
-        </div>
-      </div>
-
-      <div class="flex flex-col md:flex-row justify-center items-center gap-4">
-        <!-- UPDATED: Added book-open icon -->
-        <a
-          href="mcq.html"
-          class="cta-card card-calculator w-full md:w-1/3"
-          target="_blank"
-        >
-          <i class="fas fa-book-open text-lg"></i>
-         MCQ Live Quiz (AI)
-        </a>
-
-        
       </div>
     </section>
 
@@ -1295,237 +1289,7 @@
       </div>
     </section>
 
-    <!-- Our Journey (NEW DESIGN) -->
-    <section id="our-journey" class="section-card fade-slide">
-      <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-3 mb-4">
-        <div>
-          <p class="primary-chip mb-2">Journey</p>
-          <h1 class="section-title mb-1">🚀 Our Journey</h1>
-          <p class="section-subtitle">
-            From a small student initiative to a growing digital ecosystem for learners.
-          </p>
-        </div>
-        <div class="text-xs md:text-sm text-slate-500">
-          Step-by-step growth from <span class="font-semibold text-red-600">2022</span> to
-          <span class="font-semibold text-red-600">2025</span>.
-        </div>
-      </div>
-
-      <!-- NEW: Year quick-jump badges -->
-      <div class="flex flex-wrap items-center gap-2 mb-6">
-        <button
-          type="button"
-          onclick="document.getElementById('journey-2022').scrollIntoView({ behavior: 'smooth' })"
-          class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-50 text-red-700 text-xs font-semibold border border-red-100 hover:bg-red-100"
-        >
-          <i class="fas fa-book-open text-xs"></i> 2022
-        </button>
-        <button
-          type="button"
-          onclick="document.getElementById('journey-2023').scrollIntoView({ behavior: 'smooth' })"
-          class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-blue-700 text-xs font-semibold border border-blue-100 hover:bg-blue-100"
-        >
-          <i class="fas fa-chart-line text-xs"></i> 2023
-        </button>
-        <button
-          type="button"
-          onclick="document.getElementById('journey-2024').scrollIntoView({ behavior: 'smooth' })"
-          class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 text-xs font-semibold border border-emerald-100 hover:bg-emerald-100"
-        >
-          <i class="fas fa-robot text-xs"></i> 2024
-        </button>
-        <button
-          type="button"
-          onclick="document.getElementById('journey-2025').scrollIntoView({ behavior: 'smooth' })"
-          class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-50 text-indigo-700 text-xs font-semibold border border-indigo-100 hover:bg-indigo-100"
-        >
-          <i class="fas fa-rocket text-xs"></i> 2025
-        </button>
-      </div>
-
-      <!-- New Timeline Layout -->
-      <div class="relative mt-2">
-        <!-- Center line for desktop -->
-        <div class="hidden md:block absolute left-1/2 top-0 bottom-0 w-px bg-slate-200"></div>
-
-        <!-- 2022 – Beginning -->
-        <div
-          id="journey-2022"
-          class="relative md:grid md:grid-cols-2 md:gap-10 items-center mb-10"
-        >
-          <!-- Year badge (left side text) -->
-          <div class="md:text-right md:pr-10 mb-3 md:mb-0">
-            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-50 text-red-700 text-xs font-semibold mb-2">
-              <span class="text-lg">📖</span>
-              <span>2022 • Beginning</span>
-            </div>
-            <h3 class="font-semibold text-sm md:text-base text-slate-800">
-              The Start of University Channels & Groups
-            </h3>
-            <p class="text-xs md:text-sm text-slate-600 mt-2 leading-relaxed">
-              Our journey started with <b>University Channels &amp; Groups</b>, a small
-              initiative to share information, free notes, and guides with students who
-              needed reliable academic support.
-            </p>
-          </div>
-
-          <!-- Card on the right -->
-          <div class="md:pl-10">
-            <!-- Dot in center for desktop -->
-            <div
-              class="hidden md:flex items-center justify-center absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
-            >
-              <div class="h-11 w-11 rounded-full bg-red-500 text-white flex items-center justify-center shadow-lg text-xl">
-                1
-              </div>
-            </div>
-
-            <div
-              class="bg-white border border-slate-100 rounded-xl p-4 shadow-sm hover:shadow-md transition"
-            >
-              <p class="text-xs md:text-sm text-slate-700 leading-relaxed">
-                What began as <b>simple Telegram and WhatsApp groups</b> slowly turned
-                into a small but committed community of learners who trusted our content
-                and shared it with their friends.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <!-- 2023 – Growth -->
-        <div
-          id="journey-2023"
-          class="relative md:grid md:grid-cols-2 md:gap-10 items-center mb-10"
-        >
-          <!-- Card on the left (swap) -->
-          <div class="md:pr-10 order-2 md:order-1">
-            <!-- Dot in center -->
-            <div
-              class="hidden md:flex items-center justify-center absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
-            >
-              <div class="h-11 w-11 rounded-full bg-blue-600 text-white flex items-center justify-center shadow-lg text-xl">
-                2
-              </div>
-            </div>
-
-            <div
-              class="bg-white border border-slate-100 rounded-xl p-4 shadow-sm hover:shadow-md transition"
-            >
-              <p class="text-xs md:text-sm text-slate-700 leading-relaxed">
-                We expanded our content and introduced <b>Government Job Hub</b> to help
-                aspirants stay updated with exam notifications, job alerts, and important
-                dates – all in one place.
-              </p>
-            </div>
-          </div>
-
-          <!-- Year badge (right side text) -->
-          <div class="md:pl-10 mb-3 md:mb-0 order-1 md:order-2">
-            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-blue-700 text-xs font-semibold mb-2">
-              <span class="text-lg">🌐</span>
-              <span>2023 • Growth</span>
-            </div>
-            <h3 class="font-semibold text-sm md:text-base text-slate-800">
-              Expanding Resources & Reach
-            </h3>
-            <p class="text-xs md:text-sm text-slate-600 mt-2 leading-relaxed">
-              Through consistent updates and helpful resources, we reached
-              <b>thousands of students</b> across different universities and competitive
-              exam segments.
-            </p>
-          </div>
-        </div>
-
-        <!-- 2024 – Innovation -->
-        <div
-          id="journey-2024"
-          class="relative md:grid md:grid-cols-2 md:gap-10 items-center mb-10"
-        >
-          <!-- Year badge (left side text) -->
-          <div class="md:text-right md:pr-10 mb-3 md:mb-0">
-            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 text-xs font-semibold mb-2">
-              <span class="text-lg">🤖</span>
-              <span>2024 • Innovation</span>
-            </div>
-            <h3 class="font-semibold text-sm md:text-base text-slate-800">
-              Launch of ExamHelper Bot & myLibrary Base
-            </h3>
-            <p class="text-xs md:text-sm text-slate-600 mt-2 leading-relaxed">
-              We launched <b>ExamHelper Bot</b>, a Telegram-based solution where students
-              can donate notes, sample papers and use them for <b>self-practice</b>. This
-              laid the foundation for what later became <b>myLibrary</b>.
-            </p>
-          </div>
-
-          <!-- Card on the right -->
-          <div class="md:pl-10">
-            <!-- Dot in center -->
-            <div
-              class="hidden md:flex items-center justify-center absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
-            >
-              <div class="h-11 w-11 rounded-full bg-emerald-500 text-white flex items-center justify-center shadow-lg text-xl">
-                3
-              </div>
-            </div>
-
-            <div
-              class="bg-white border border-slate-100 rounded-xl p-4 shadow-sm hover:shadow-md transition"
-            >
-              <p class="text-xs md:text-sm text-slate-700 leading-relaxed">
-                With automation and smart tools, we moved closer to our goal of building a
-                <b>structured digital library</b> that any student can access from anywhere,
-                anytime.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <!-- 2025 – New Launch -->
-        <div
-          id="journey-2025"
-          class="relative md:grid md:grid-cols-2 md:gap-10 items-center mb-2"
-        >
-          <!-- Card on the left (swap) -->
-          <div class="md:pr-10 order-2 md:order-1">
-            <!-- Dot in center -->
-            <div
-              class="hidden md:flex items-center justify-center absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
-            >
-              <div class="h-11 w-11 rounded-full bg-indigo-600 text-white flex items-center justify-center shadow-lg text-xl">
-                4
-              </div>
-            </div>
-
-            <div
-              class="bg-white border border-slate-100 rounded-xl p-4 shadow-sm hover:shadow-md transition"
-            >
-              <p class="text-xs md:text-sm text-slate-700 leading-relaxed">
-                In <b>2025</b>, we are focusing on <b>advanced digital tools</b>, improved
-                study platforms, and the <b>University Updates YouTube Channel</b> to
-                deliver visual, easy-to-understand content for students across India.
-              </p>
-            </div>
-          </div>
-
-          <!-- Year badge (right side text) -->
-          <div class="md:pl-10 mb-3 md:mb-0 order-1 md:order-2">
-            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-50 text-indigo-700 text-xs font-semibold mb-2">
-              <span class="text-lg">🚀</span>
-              <span>2025 • New Launch</span>
-            </div>
-            <h3 class="font-semibold text-sm md:text-base text-slate-800">
-              Towards a Complete Student Ecosystem
-            </h3>
-            <p class="text-xs md:text-sm text-slate-600 mt-2 leading-relaxed">
-              Step-by-step, <b>University Updates</b> is evolving into a
-              <b>one-stop ecosystem</b> for notes, tools, notifications, and guidance – all
-              created <b>by students, for students</b>.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
+  
 
     <!-- Administrations -->
     <section id="administrations" class="section-card fade-slide">
