@@ -492,55 +492,57 @@
 
   <button id="topBtn" title="Go to top" class="flex items-center justify-center"><i class="fas fa-arrow-up"></i></button>
   
- <!-- Pop Up -->
-  <div id="portalPopup" class="fixed inset-0 z-[100] flex items-center justify-center bg-slate-900/60 backdrop-blur-sm hidden">
-  <div class="relative w-full max-w-md mx-4 bg-white rounded-2xl shadow-2xl border border-slate-200 overflow-hidden transform transition-all">
+<!-- Enhanced Pop Up (Global Front-Runner) -->
+<div id="portalPopup" class="fixed inset-0 flex items-center justify-center bg-slate-900/90 backdrop-blur-md hidden" style="z-index: 9999;">
+  <div id="popupContent" class="relative w-full max-w-md mx-4 bg-white dark:bg-slate-900 rounded-[2rem] shadow-[0_35px_60px_-15px_rgba(0,0,0,0.5)] overflow-hidden transform transition-all duration-500 scale-95 opacity-0">
     
-    <button id="closePopup" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 transition-colors">
-      <i class="fas fa-times text-xl"></i>
+    <!-- Close Button -->
+    <button id="closePopup" class="absolute top-6 right-6 z-[10000] w-10 h-10 flex items-center justify-center bg-white/10 hover:bg-white/20 text-white rounded-full transition-colors">
+      <i class="fas fa-times text-lg"></i>
     </button>
 
-    <div class="bg-gradient-to-r from-red-600 to-red-500 p-6 text-center">
-      <div class="inline-flex items-center justify-center w-16 h-16 bg-white/20 rounded-full mb-3">
-        <i class="fas fa-external-link-alt text-white text-2xl"></i>
+    <!-- Header Section -->
+    <div class="bg-gradient-to-br from-red-600 to-red-700 p-10 text-center text-white">
+      <div class="inline-flex items-center justify-center w-20 h-20 bg-white/20 rounded-3xl mb-4 rotate-3 shadow-inner">
+        <i class="fas fa-external-link-alt text-3xl"></i>
       </div>
-      <h3 class="text-white font-bold text-xl uppercase tracking-wide">New Portals</h3>
+      <h3 class="font-poppins font-bold text-2xl uppercase tracking-tight">Active Portals</h3>
+      <p class="text-red-100 text-xs mt-2 font-medium uppercase tracking-widest opacity-80">University Resource Access</p>
     </div>
 
-    <div class="p-6 space-y-4">
-      <p class="text-slate-600 text-sm text-center mb-4">
-        Select a portal below to access the latest university resources and services.
-      </p>
-
-      <a href="https://universityupdates08.github.io/UU/ExamSearch.html" target="_blank" class="flex items-center gap-4 p-4 rounded-xl border border-slate-100 bg-slate-50 hover:bg-red-50 hover:border-red-200 transition-all group">
-        <div class="bg-red-100 text-red-600 p-3 rounded-lg group-hover:bg-red-600 group-hover:text-white transition-colors">
+    <!-- Body Section -->
+    <div class="p-8 space-y-4 bg-white dark:bg-slate-900">
+      <a href="https://universityupdates08.github.io/UU/ExamSearch.html" target="_blank" class="flex items-center gap-4 p-5 rounded-2xl bg-slate-50 dark:bg-slate-800 hover:bg-red-50 dark:hover:bg-red-900/10 border border-slate-100 dark:border-slate-700 transition-all group">
+        <div class="bg-white dark:bg-slate-700 p-3 rounded-xl shadow-sm text-brand-red group-hover:bg-brand-red group-hover:text-white transition-colors">
           <i class="fas fa-university"></i>
         </div>
         <div>
-          <span class="block font-bold text-slate-800">CCSU Digital Exam Schedule Portal</span>
-          <span class="text-xs text-slate-500 text-left">Access Digital Exam Schedule At A Single Place</span>
+          <span class="block font-bold text-slate-800 dark:text-white">Exam Schedule Portal</span>
+          <span class="text-[10px] text-slate-500 font-medium">CCSU Digital Exam Schedule Hub</span>
         </div>
-        <i class="fas fa-chevron-right ml-auto text-slate-300"></i>
+        <i class="fas fa-chevron-right ml-auto text-slate-300 group-hover:text-brand-red transition-transform group-hover:translate-x-1"></i>
       </a>
       
-      <a href="https://universityupdates08.github.io/UU/vivanew.html" target="_blank" class="flex items-center gap-4 p-4 rounded-xl border border-slate-100 bg-slate-50 hover:bg-blue-50 hover:border-blue-200 transition-all group">
-        <div class="bg-blue-100 text-blue-600 p-3 rounded-lg group-hover:bg-blue-600 group-hover:text-white transition-colors">
+      <a href="https://universityupdates08.github.io/UU/vivanew.html" target="_blank" class="flex items-center gap-4 p-5 rounded-2xl bg-slate-50 dark:bg-slate-800 hover:bg-blue-50 dark:hover:bg-blue-900/10 border border-slate-100 dark:border-slate-700 transition-all group">
+        <div class="bg-white dark:bg-slate-700 p-3 rounded-xl shadow-sm text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-colors">
           <i class="fas fa-user-graduate"></i>
         </div>
         <div>
-          <span class="block font-bold text-slate-800">(Private) Viva-Voce</span>
-          <span class="text-xs text-slate-500 text-left">View Date & Center</span>
+          <span class="block font-bold text-slate-800 dark:text-white">Viva-Voce Finder</span>
+          <span class="text-[10px] text-slate-500 font-medium">Private Examination Center Details</span>
         </div>
-        <i class="fas fa-chevron-right ml-auto text-slate-300"></i>
+        <i class="fas fa-chevron-right ml-auto text-slate-300 group-hover:text-blue-600 transition-transform group-hover:translate-x-1"></i>
       </a>
     </div>
 
-    <div class="px-6 py-4 bg-slate-50 border-t border-slate-100 text-center">
-      <p class="text-[10px] text-slate-400 uppercase tracking-widest font-semibold">Powered by University Updates</p>
+    <!-- Footer Decoration -->
+    <div class="px-8 py-5 bg-slate-50 dark:bg-slate-800/50 text-center border-t border-slate-100 dark:border-slate-700">
+      <p class="text-[10px] text-slate-400 uppercase tracking-[0.3em] font-bold">University Updates Initiative</p>
     </div>
   </div>
 </div>
 
+  
   <script>
     // --- DARK MODE TOGGLE ---
     function toggleDarkMode() {
@@ -632,12 +634,37 @@
     }
     
     // Popup logic
-    window.onload = function() {
+    // Updated Popup Logic with Animation
+  window.addEventListener('load', function() {
+    const popup = document.getElementById('portalPopup');
+    const content = document.getElementById('popupContent');
+    const closeBtn = document.getElementById('closePopup');
+
+    // Show popup after 1.5 seconds
+    setTimeout(() => {
+      popup.classList.remove('hidden');
+      // Trigger animation frame
+      requestAnimationFrame(() => {
+        content.classList.remove('scale-95', 'opacity-0');
+        content.classList.add('scale-100', 'opacity-100');
+      });
+    }, 1500);
+
+    const hidePopup = () => {
+      content.classList.remove('scale-100', 'opacity-100');
+      content.classList.add('scale-95', 'opacity-0');
       setTimeout(() => {
-        document.getElementById('portalPopup').classList.remove('hidden');
-      }, 2000);
-      document.getElementById('closePopup').onclick = () => document.getElementById('portalPopup').classList.add('hidden');
+        popup.classList.add('hidden');
+      }, 500); // Wait for transition to finish
     };
+
+    closeBtn.onclick = hidePopup;
+    
+    // Close on click outside content
+    popup.onclick = (e) => {
+      if (e.target === popup) hidePopup();
+    };
+  });
 
     // Counter API
     async function getHits() {
