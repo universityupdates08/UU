@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Viva Center Finder - University Updates</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-color: #EF3C3C;
+            --secondary-color: #2C4B9E;
+            --bg-color: #f3f4f6;
+            --text-color: #1f2937;
+            --footer-bg: #2C4B9E;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+        }
+
+        .a-tab-hidden { display: none; }
+
+        .utility-bar { background-color: var(--primary-color); color: white; padding: 8px 20px; font-size: 0.9rem; z-index: 10; }
+
+        .tab-btn {
+            flex: 1; padding: 16px; font-weight: 700; text-align: center; cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); border-bottom: 4px solid #e5e7eb; background: #f9fafb;
+            color: #6b7280; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px;
+        }
+        .tab-btn.active {
+            background: white; color: var(--secondary-color); border-bottom-color: var(--primary-color);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .premium-card {
+            background: #ffffff;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .result-badge {
+            background: rgba(44, 75, 158, 0.1);
+            color: var(--secondary-color);
+            padding: 4px 12px;
+            border-radius: 9999px;
+            font-size: 0.7rem;
+            font-weight: 800;
+            text-transform: uppercase;
+        }
+
+        .news-gif { height: 14px; display: inline-block; margin-left: 5px; }
+        
+        /* Background decorative icons */
+        .bg-icon { position: fixed; opacity: 0.05; color: var(--secondary-color); z-index: -1; pointer-events: none; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+    <i class="fas fa-university bg-icon" style="top: 10%; left: 5%; font-size: 15rem;"></i>
+    <i class="fas fa-map-marked-alt bg-icon" style="bottom: 10%; right: 5%; font-size: 15rem;"></i>
+
+    <header class="utility-bar">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <a href="https://t.me/HelpforDMBot" class="hover:underline"><i class="fas fa-headset mr-2"></i>Contact Support</a>
+            <div class="flex items-center space-x-4">
+                <a href="https://t.me/CCSUniversityMRT" class="text-lg"><i class="fab fa-telegram"></i></a>
+                <a href="https://whatsapp.com/channel/0029Va9jtav4tRrmKPxos138" class="text-lg"><i class="fab fa-whatsapp"></i></a>
+            </div>
+        </div>
+    </header>
+
+    <div class="py-6 flex justify-center">
+        <img src="https://i.ibb.co/nMC0877T/UNIVERSITY-UPDATES-LOGO-removebg-preview.png" alt="Logo" class="h-24 md:h-32 drop-shadow-xl">
+    </div>
+
+    <main class="flex-grow max-w-7xl mx-auto w-full px-4 mb-12">
+        
+        <div id="initialLoader" class="text-center py-20">
+            <div class="inline-block animate-spin rounded-full h-12 w-12 border-4 border-blue-600 border-t-transparent"></div>
+            <p class="mt-4 font-bold text-gray-500">Syncing Private Viva Data...</p>
+        </div>
+
+        <div id="mainContent" class="a-tab-hidden premium-card overflow-hidden">
+            <div class="grid md:grid-cols-3">
+                
+                <!-- Left Section: Search Tool -->
+                <div class="md:col-span-2 border-r border-gray-100 flex flex-col">
+                    <div class="flex">
+                        <div id="tabCollege" class="tab-btn active" onclick="switchMode('college')">By College</div>
+                        <div id="tabCenter" class="tab-btn" onclick="switchMode('center')">By Viva Center</div>
+                    </div>
+
+                    <div class="p-8 space-y-8">
+                        <div>
+                            <h2 class="text-2xl font-extrabold text-gray-800">Private Viva Finder 2026</h2>
+                            <p id="header-branding" class="text-xs text-blue-600 font-bold mt-1"></p>
+                        </div>
+
+                        <div class="space-y-5">
+                            <div>
+                                <label class="block text-xs font-black text-gray-400 uppercase mb-2">Step 1: Choose Course</label>
+                                <select id="courseSelect" class="w-full p-4 bg-gray-50 border-2 border-transparent focus:border-blue-500 focus:bg-white rounded-2xl outline-none transition-all font-semibold">
+                                    <option value="">-- SELECT COURSE --</option>
+                                    <option value="M.Com.">M.Com. (Private)</option>
+                                    <option value="M.A.">M.A. (Private)</option>
+                                </select>
+                            </div>
+
+                            <div id="subjectGroup" class="a-tab-hidden">
+                                <label class="block text-xs font-black text-gray-400 uppercase mb-2">Step 2: Choose Subject</label>
+                                <select id="subjectSelect" class="w-full p-4 bg-gray-50 border-2 border-transparent focus:border-blue-500 focus:bg-white rounded-2xl outline-none transition-all font-semibold"></select>
+                            </div>
+
+                            <!-- College Mode -->
+                            <div id="collegeFlow" class="space-y-5">
+                                <div id="districtGroup" class="a-tab-hidden">
+                                    <label class="block text-xs font-black text-gray-400 uppercase mb-2">Step 3: Select District</label>
+                                    <select id="districtSelect" class="w-full p-4 bg-gray-50 border-2 border-transparent focus:border-blue-500 rounded-2xl outline-none font-semibold"></select>
+                                </div>
+                                <div id="collegeGroup" class="a-tab-hidden">
+                                    <label class="block text-xs font-black text-gray-400 uppercase mb-2">Step 4: Your College Name</label>
+                                    <select id="collegeSelect" class="w-full p-4 bg-gray-50 border-2 border-transparent focus:border-blue-500 rounded-2xl outline-none font-semibold"></select>
+                                </div>
+                            </div>
+
+                            <!-- Center Mode -->
+                            <div id="centerFlow" class="a-tab-hidden">
+                                <label class="block text-xs font-black text-gray-400 uppercase mb-2">Step 3: Choose Examination Center</label>
+                                <select id="centerSelect" class="w-full p-4 bg-gray-50 border-2 border-transparent focus:border-blue-500 rounded-2xl outline-none font-semibold"></select>
+                            </div>
+                        </div>
+
+                        <!-- Result Display -->
+                        <div id="resultsCard" class="a-tab-hidden pt-4">
+                            <div id="resultOutput"></div>
+                        </div>
+
+                        <div id="errorCard" class="a-tab-hidden p-6 bg-red-50 border-2 border-red-100 rounded-2xl">
+                            <h4 class="text-red-700 font-black flex items-center uppercase text-sm"><i class="fas fa-exclamation-triangle mr-2"></i> Notice</h4>
+                            <p id="errorMessage" class="text-red-600 text-sm mt-1"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Section: Sidebar -->
+                <aside class="bg-gray-50 p-8">
+                    <h3 class="font-black text-gray-800 uppercase text-sm tracking-widest mb-6 border-b pb-4">Latest Notifications</h3>
+                    <div class="space-y-6">
+                        <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 transition hover:scale-105 cursor-pointer">
+                            <a href="Viva/IP.jpg" class="text-blue-800 font-bold text-sm leading-snug block">Bulanshahar M.Com. Viva Date 2026 <img src="https://msuniversity.ac.in/assets/images/new.gif" class="news-gif"></a>
+                            <span class="text-[10px] text-gray-400 font-bold uppercase mt-2 block">May 10, 2026</span>
+                        </div>
+                        <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 transition hover:scale-105 cursor-pointer">
+                            <a href="Viva/viva.pdf" class="text-blue-800 font-bold text-sm leading-snug block">Download Full Viva Center List PDF</a>
+                            <span class="text-[10px] text-gray-400 font-bold uppercase mt-2 block">May 08, 2026</span>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-[#2C4B9E] text-white pt-12 pb-6 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 grid md:grid-cols-3 gap-12">
+            <div>
+                <h4 class="font-black uppercase text-sm mb-4 border-b border-blue-400 pb-2">Official Disclaimer</h4>
+                <p class="text-xs text-blue-100 leading-relaxed text-justify">
+                    This portal is designed to help students find their Viva centers quickly. All data is extracted from official PDF notices. Students are strictly advised to <b>re-verify</b> dates with their respective college office. We are not liable for changes made by the University.
+                </p>
+            </div>
+            <div class="text-center">
+                <h4 class="font-black uppercase text-sm mb-4 border-b border-blue-400 pb-2">Quick Links</h4>
+                <div class="flex flex-col space-y-3 text-xs">
+                    <a href="https://t.me/HelpforDMBot" class="hover:text-red-400 font-bold tracking-wide">Contact Administrator</a>
+                    <a href="https://whatsapp.com/channel/0029Va9jtav4tRrmKPxos138" class="hover:text-red-400 font-bold tracking-wide">Join WhatsApp Updates</a>
+                </div>
+            </div>
+            <div class="text-center md:text-right">
+                <h4 class="font-black uppercase text-sm mb-4 border-b border-blue-400 pb-2">System Status</h4>
+                <div id="live-footer-time" class="text-xs font-mono mb-4 text-blue-200"></div>
+                <div class="inline-flex items-center bg-blue-900 rounded-lg px-4 py-2">
+                    <i class="fas fa-users text-yellow-400 mr-2"></i>
+                    <span class="text-xs font-bold">LIVE VISITORS:</span>
+                    <span id="new-count" class="ml-2 font-black text-white">0</span>
+                </div>
+            </div>
+        </div>
+        <p class="text-center text-[10px] mt-12 opacity-40 uppercase tracking-widest font-bold">© 2026 University Updates | Designed for CCSU Students</p>
+    </footer>
+
+    <script>
+        const config = {
+            currentMode: 'college',
+            subjectMap: {
+                "M.Com.": [{ text: "M.Com. (I-304)", value: "I-304" }],
+                "M.A.": [
+                    { text: "Economics (G-806)", value: "G-806" }, { text: "English (G-812)", value: "G-812" },
+                    { text: "Hindi (G-825)", value: "G-825" }, { text: "History (G-837)", value: "G-837" },
+                    { text: "Political Science (G-870)", value: "G-870" }, { text: "Sociology (G-887)", value: "G-887" }
+                ]
+            },
+            fileMap: {
+                "I-304": "Viva/VIVA CENTER.xlsx - M.Com.csv",
+                "G-806": "Viva/VIVA CENTER.xlsx - G-806.csv",
+                "G-812": "Viva/VIVA CENTER.xlsx - G-812.csv",
+                "G-825": "Viva/VIVA CENTER.xlsx - G-825.csv",
+                "G-837": "Viva/VIVA CENTER.xlsx - G-837.csv",
+                "G-870": "Viva/VIVA CENTER.xlsx - G-870.csv",
+                "G-887": "Viva/VIVA CENTER.xlsx - G-887.csv"
+            },
+            allData: {},
+            failedSubs: []
+        };
+
+        const dom = {
+            courseSelect: document.getElementById('courseSelect'),
+            subjectSelect: document.getElementById('subjectSelect'),
+            subjectGroup: document.getElementById('subjectGroup'),
+            collegeFlow: document.getElementById('collegeFlow'),
+            districtGroup: document.getElementById('districtGroup'),
+            districtSelect: document.getElementById('districtSelect'),
+            collegeGroup: document.getElementById('collegeGroup'),
+            collegeSelect: document.getElementById('collegeSelect'),
+            centerFlow: document.getElementById('centerFlow'),
+            centerSelect: document.getElementById('centerSelect'),
+            resultsCard: document.getElementById('resultsCard'),
+            resultOutput: document.getElementById('resultOutput'),
+            errorCard: document.getElementById('errorCard'),
+            errorMessage: document.getElementById('errorMessage'),
+            initialLoader: document.getElementById('initialLoader'),
+            mainContent: document.getElementById('mainContent'),
+            footerTime: document.getElementById('live-footer-time'),
+            headerBranding: document.getElementById('header-branding')
+        };
+
+        function show(el) { el.classList.remove('a-tab-hidden'); }
+        function hide(el) { el.classList.add('a-tab-hidden'); }
+        function resetSelect(el, text) { el.innerHTML = `<option value="">-- ${text} --</option>`; }
+
+        window.switchMode = function(mode) {
+            config.currentMode = mode;
+            document.getElementById('tabCollege').classList.toggle('active', mode === 'college');
+            document.getElementById('tabCenter').classList.toggle('active', mode === 'center');
+            mode === 'college' ? show(dom.collegeFlow) : hide(dom.collegeFlow);
+            mode === 'center' ? show(dom.centerFlow) : hide(dom.centerFlow);
+            dom.courseSelect.value = ""; hide(dom.subjectGroup); hide(dom.resultsCard); hide(dom.errorCard);
+        };
+
+        function parseCSV(text) {
+            const lines = text.trim().split('\n');
+            if (lines.length < 2) return [];
+            const headers = lines[0].split(',').map(h => h.trim().replace(/"/g, ''));
+            return lines.slice(1).map(line => {
+                const values = []; let cell = '', inQuotes = false;
+                for (let char of line) {
+                    if (char === '"') inQuotes = !inQuotes;
+                    else if (char === ',' && !inQuotes) { values.push(cell.trim()); cell = ''; }
+                    else cell += char;
+                }
+                values.push(cell.trim());
+                let obj = {}; headers.forEach((h, idx) => obj[h] = values[idx]?.replace(/^"|"$/g, ''));
+                return obj;
+            });
+        }
+
+        dom.courseSelect.onchange = function() {
+            resetSelect(dom.subjectSelect, "CHOOSE SUBJECT");
+            hide(dom.resultsCard);
+            if (this.value) {
+                config.subjectMap[this.value].forEach(s => dom.subjectSelect.add(new Option(s.text, s.value)));
+                show(dom.subjectGroup);
+            }
+        };
+
+        dom.subjectSelect.onchange = function() {
+            hide(dom.resultsCard); hide(dom.errorCard);
+            if (!this.value) return;
+            if (config.failedSubs.includes(this.value)) {
+                dom.errorMessage.innerHTML = `Admin has not uploaded the file for <b>${this.value}</b> yet. Please check back in 24 hours.`;
+                show(dom.errorCard); return;
+            }
+            const data = config.allData[this.value];
+            if (config.currentMode === 'college') {
+                resetSelect(dom.districtSelect, "CHOOSE DISTRICT");
+                [...new Set(data.map(r => r.District))].sort().forEach(d => dom.districtSelect.add(new Option(d, d)));
+                show(dom.districtGroup);
+            } else {
+                resetSelect(dom.centerSelect, "CHOOSE CENTER");
+                [...new Set(data.map(r => r['Name of Center']))].sort().forEach(c => dom.centerSelect.add(new Option(c, c)));
+            }
+        };
+
+        dom.districtSelect.onchange = function() {
+            resetSelect(dom.collegeSelect, "CHOOSE COLLEGE");
+            const colleges = [...new Set(config.allData[dom.subjectSelect.value].filter(r => r.District === this.value).map(r => r['Attached Colleges']))].sort();
+            colleges.forEach(c => dom.collegeSelect.add(new Option(c, c)));
+            show(dom.collegeGroup);
+        };
+
+        dom.collegeSelect.onchange = function() {
+            if (this.value) renderResult(config.allData[dom.subjectSelect.value].find(r => r['Attached Colleges'] === this.value), 'college');
+        };
+
+        dom.centerSelect.onchange = function() {
+            if (this.value) renderResult(config.allData[dom.subjectSelect.value].filter(r => r['Name of Center'] === this.value), 'center');
+        };
+
+        function renderResult(data, mode) {
+            hide(dom.resultsCard);
+            let content = '';
+            if (mode === 'college') {
+                content = `
+                    <div class="bg-blue-900 text-white p-6 rounded-t-3xl">
+                        <span class="result-badge bg-white/20 text-white">College Search Success</span>
+                        <h3 class="text-lg font-black mt-2 leading-tight">${data['Attached Colleges']}</h3>
+                    </div>
+                    <div class="p-6 border-2 border-t-0 border-blue-50 rounded-b-3xl bg-white space-y-6">
+                        <div class="flex items-center gap-4">
+                            <div class="h-12 w-12 bg-red-100 text-red-600 rounded-2xl flex items-center justify-center text-xl shadow-inner"><i class="fas fa-university"></i></div>
+                            <div><p class="text-[10px] font-black text-gray-400 uppercase">Viva Center Assigned</p><p class="font-bold text-gray-800">${data['Name of Center']}</p></div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="bg-gray-50 p-4 rounded-2xl border border-gray-100">
+                                <p class="text-[10px] font-black text-gray-400 uppercase">Exam Date</p>
+                                <p class="font-black text-red-600 text-lg">${data.Date || 'TBA'}</p>
+                            </div>
+                            <div class="bg-gray-50 p-4 rounded-2xl border border-gray-100">
+                                <p class="text-[10px] font-black text-gray-400 uppercase">Reporting Time</p>
+                                <p class="font-black text-gray-800 text-lg">${data.Time || 'As Noted'}</p>
+                            </div>
+                        </div>
+                    </div>`;
+            } else {
+                const head = data[0];
+                content = `
+                    <div class="bg-indigo-900 text-white p-6 rounded-t-3xl">
+                        <span class="result-badge bg-white/20 text-white">Center Info Dashboard</span>
+                        <h3 class="text-lg font-black mt-2 leading-tight">${head['Name of Center']}</h3>
+                    </div>
+                    <div class="p-6 border-2 border-t-0 border-blue-50 rounded-b-3xl bg-white space-y-6">
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="bg-indigo-50 p-4 rounded-2xl border border-indigo-100">
+                                <p class="text-[10px] font-black text-indigo-400 uppercase">Viva Date</p>
+                                <p class="font-black text-indigo-900 text-lg">${head.Date || 'TBA'}</p>
+                            </div>
+                            <div class="bg-indigo-50 p-4 rounded-2xl border border-indigo-100">
+                                <p class="text-[10px] font-black text-indigo-400 uppercase">Start Time</p>
+                                <p class="font-black text-indigo-900 text-lg">${head.Time || 'Check Notice'}</p>
+                            </div>
+                        </div>
+                        <div class="bg-gray-50 p-5 rounded-2xl">
+                            <p class="text-[10px] font-black text-gray-400 uppercase mb-3">Colleges Under This Center</p>
+                            <ul class="space-y-2 text-xs font-bold text-gray-600">
+                                ${data.map(m => `<li class="flex items-center gap-2"><i class="fas fa-chevron-right text-[8px] text-indigo-400"></i> ${m['Attached Colleges']}</li>`).join('')}
+                            </ul>
+                        </div>
+                    </div>`;
+            }
+            dom.resultOutput.innerHTML = content; show(dom.resultsCard);
+        }
+
+        async function init() {
+            const loadTasks = Object.keys(config.fileMap).map(async sub => {
+                try {
+                    const res = await fetch(config.fileMap[sub]);
+                    if (!res.ok) throw new Error();
+                    config.allData[sub] = parseCSV(await res.text());
+                } catch (e) { config.failedSubs.push(sub); }
+            });
+            await Promise.all(loadTasks); hide(dom.initialLoader); show(dom.mainContent);
+        }
+
+        setInterval(() => {
+            const now = new Date();
+            const str = now.toLocaleString('en-IN', { weekday: 'short', day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit', second: '2-digit' });
+            dom.footerTime.innerHTML = `<i class="far fa-calendar-alt text-yellow-400 mr-2"></i> ${str}`;
+            dom.headerBranding.textContent = `SYSTEM ONLINE | ${str}`;
+        }, 1000);
+
+        async function getStats() {
+            try {
+                const res = await fetch('https://api.counterapi.dev/v1/university_updates_uu/main/up');
+                const data = await res.json();
+                document.getElementById('new-count').innerText = data.count;
+            } catch (e) {}
+        }
+
+        document.addEventListener('DOMContentLoaded', () => { init(); getStats(); });
+    </script>
+</body>
+</html>
