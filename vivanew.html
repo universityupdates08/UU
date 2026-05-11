@@ -156,10 +156,9 @@
     <header class="utility-bar">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
             <div class="flex space-x-4">
-                <a href="#" class="utility-link"><i class="fas fa-home mr-1"></i> Home</a>
                 <a href="https://t.me/HelpforDMBot" class="utility-link"><i class="fas fa-headset mr-1"></i> Contact Us</a>
             </div>
-            <div class="flex items-center space-x-4">
+            <div class="flex items-center space-x-2">
                 <a href="https://t.me/CCSUniversityMRT" class="social-icon text-sm hover:text-gray-300 transition"><i class="fab fa-telegram"></i></a>
                 <span class="mx-2">|</span>
                 <a href="https://whatsapp.com/channel/0029Va9jtav4tRrmKPxos138" class="social-icon text-sm hover:text-gray-300 transition"><i class="fab fa-whatsapp"></i></a>
@@ -179,7 +178,7 @@
         
     <p style="color: white; font-style: italic; font-size: 15px; background-color: crimson; display: flex; align-items: center; height: 25px;">
         <marquee onmouseover="this.stop();" direction="left" onmouseout="this.start();">
-            <b style="color: white">➤</b> 📢 Welcome to Viva Voce Center Finder - UNIVERSITY UPDATES (Designed for CCSU Private Courses)
+            <b style="color: white">➤</b> 📢 Designed for CCSU Private Courses
         </marquee>
     </p>
 
@@ -273,7 +272,6 @@
                         <p class="text-sm text-blue-700">
                             <b>Note:</b> Always confirm dates and centers with your respective <b>College / Center</b> administration.
                         </p>
-                        <p id="result-branding" class="text-xs text-blue-600 italic mt-3">Powered by University Updates</p>
                     </div>
                 </div>
 
@@ -293,7 +291,7 @@
                         <li class="flex items-start gap-2">
                             <i class="fas fa-calendar-alt text-blue-600 mt-1"></i>
                             <div>
-                                <a href="Viva/IP.jpg" class="text-blue-700 hover:underline font-medium">Ishwardayal Parsandidevi (Post-Graduate) College, Bulanshahar Viva Date
+                                <a href="Viva/IP.jpg" class="text-blue-700 hover:underline font-medium">Ishwardayal Parsandidevi (Post-Graduate) College, Bulanshahar M.Com. Viva Date
                                     <img src="https://msuniversity.ac.in/assets/images/new.gif" alt="NEW" class="news-gif"> 
                                 </a>
                                 <p class="text-xs text-gray-500">Updated: May 10, 2026</p>                  </div></li>
@@ -480,7 +478,7 @@
             
             // Trigger Error Card only now if file data is missing
             if (config.loadedData.length === 0) {
-                dom.errorMessage.innerHTML = `Data for <b>${subjectCode}</b> is currently unavailable or the file is missing. Please contact administration.`;
+                dom.errorMessage.innerHTML = `Data for <b>${subjectCode}</b> is currently unavailable or the file is not uploaded by Admin. Please <a href="https://t.me/HelpforDMBot" class="utility-link"><i class="fas fa-headset mr-1"></i> Contact</a>  administration.`;
                 show(dom.errorCard);
                 return;
             }
