@@ -275,12 +275,16 @@
                             <span>Total Visitors:</span>
                             <span id="new-count" class="font-bold text-slate-800 bg-slate-200 px-2 py-0.5 rounded">0</span>
                         </div>
+                        <div class="flex items-center justify-center gap-2 mt-4 text-white text-xs">
+                            <i class="text-yellow-500"></i>
+                            <span>Last Updated on: Tuesday, 12 May, 2026, 11:57 AM</span>
+                        </div>
                     </div>
                 </div>
             </div>
             
             <div class="text-center pt-4 border-t border-white border-opacity-30">
-                <p class="text-sm opacity-70">&copy; 2026 University Updates. All rights reserved.</p>
+                <p class="text-sm opacity-70">&copy; 2025-2026 University Updates. All rights reserved.</p>
             </div>
         </div>
     </footer>
@@ -307,7 +311,7 @@
                 ]
             },
             fileMap: {
-                "I-304": "Viva/VIVA CENTER.xlsx - M.Com.csv",
+                "I-304": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRZiv_e1A0gciQkWuUvmcsf-efhajUNQWUYF2-5JIljXgkM7iFTz5LOlEVklVALuZY1HuQ-T4SpcXDa/pub?output=csv",
                 "G-895": "Viva/VIVA CENTER.xlsx - G-895.csv",
                 "G-806": "Viva/VIVA CENTER.xlsx - G-806.csv",
                 "G-803": "Viva/VIVA CENTER.xlsx - G-803,G-804.csv",
@@ -468,17 +472,24 @@
         }
 
         async function init() {
-            const loadTasks = Object.keys(config.fileMap).map(async sub => {
-                try {
-                    const res = await fetch(config.fileMap[sub]);
-                    if (!res.ok) throw new Error();
-                    config.allData[sub] = parseCSV(await res.text());
-                } catch (e) { config.failedSubs.push(sub); }
-            });
-            await Promise.all(loadTasks);
-            hide(dom.initialLoader);
-            show(dom.mainContent);
+    const loadTasks = Object.keys(config.fileMap).map(async sub => {
+        try {
+            // Append a timestamp to prevent browser caching
+            const url = config.fileMap[sub] + (config.fileMap[sub].includes('?') ? '&' : '?') + 't=' + new Date().getTime();
+            
+            const res = await fetch(url);
+            if (!res.ok) throw new Error();
+            const text = await res.text();
+            config.allData[sub] = parseCSV(text);
+        } catch (e) { 
+            console.error(`Error loading data for ${sub}:`, e);
+            config.failedSubs.push(sub); 
         }
+    });
+    await Promise.all(loadTasks);
+    hide(dom.initialLoader);
+    show(dom.mainContent);
+}
 
         function clock() {
             const now = new Date();
