@@ -61,3 +61,39 @@
 
         .social-icon { color: white; font-size: 1.5rem; transition: color 0.3s; }
         .social-icon:hover { color: var(--primary-color); }
+
+.side-admission-btn {
+    position: fixed;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    background: linear-gradient(to bottom, #90ee90, #006400); /* Red to Orange gradient like image_d1961a.jpg */
+    color: white;
+    padding: 15px 10px;
+    writing-mode: vertical-rl; /* Vertically rotates the text */
+    text-orientation: mixed;
+    transform: translateY(-50%) rotate(180deg); /* Aligns text direction to match the reference */
+    font-weight: bold;
+    font-family: 'Poppins', sans-serif;
+    border-radius: 0 8px 8px 0; /* Rounded corners on the left side only */
+    z-index: 1000;
+    text-decoration: none;
+    box-shadow: -2px 2px 10px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+    font-size: 14px;
+    letter-spacing: 1px;
+}
+
+.side-admission-btn:hover {
+    padding-right: 20px; /* Slight pull-out effect on hover */
+    color: #fff;
+    filter: brightness(1.1);
+}
+
+/* Hide on very small screens if it overlaps content too much */
+@media (max-width: 640px) {
+    .side-admission-btn {
+        font-size: 12px;
+        padding: 10px 5px;
+    }
+}
