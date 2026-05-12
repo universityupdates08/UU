@@ -458,7 +458,7 @@
                 const list = data.map(m => `<li>• ${m['Attached Colleges']}</li>`).join('');
                 html = `<p><b>Viva Center Name:</b> <span class="text-blue-700 font-bold">${head['Name of Center']}</span></p>
                         <p><b>Examination Date:</b> <span class="text-red-600 font-bold">${head.Date || 'TBA (Contact to your college or viva center)'}</span></p>
-                        <p><b>Reporting Time:</b> ${data.Time || 'Not Fixed'}</p>
+                        <p><b>Reporting Time:</b> ${head.Time || 'Not Fixed'}</p>
                         <hr class="my-2 opacity-20">
                         <p class="text-xs font-bold text-gray-400 uppercase">Attached Colleges:</p>
                         <ul class="text-xs mt-1 space-y-1 font-medium">${list}</ul>`;
