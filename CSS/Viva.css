@@ -97,3 +97,17 @@
         padding: 10px 5px;
     }
 }
+
+/* ALert Slider Styles */
+        .single-slider { overflow: hidden; position: relative; width: 100%; border-radius: 12px; background: #fff; border: 1px solid #e2e8f0; }
+        .single-track { display: flex; transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
+        .single-card { min-width: 100%; padding: 20px; box-sizing: border-box; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        .single-title { font-weight: 800; color: #1e40af; font-size: 1rem; margin-bottom: 4px; line-height: 1.2; }
+        .single-sub { font-size: 0.85rem; color: #475569; margin-bottom: 10px; font-weight: 500; }
+        .alert-heading { background: #ef4444; color: white; padding: 8px 12px; font-weight: 800; font-size: 14px; text-transform: uppercase; display: flex; align-items: center; justify-content: center; gap: 8px; }
+        .mini-notice-btn { display: inline-block; background: #2563eb; color: white; padding: 6px 16px; border-radius: 6px; font-size: 12px; font-weight: 700; transition: 0.3s; margin-top: 5px; }
+        .mini-notice-btn:hover { background: #1d4ed8; transform: translateY(-1px); }
+        .slider-dots { display: flex; justify-content: center; gap: 6px; padding: 10px; background: #f8fafc; }
+        .slider-dot { width: 8px; height: 8px; background: #cbd5e1; border-radius: 50%; cursor: pointer; transition: 0.3s; }
+        .slider-dot.active { background: #ef4444; width: 22px; border-radius: 10px; }
+        .pending-box { padding: 30px; text-align: center; color: #64748b; font-weight: 600; background: white; border: 1px solid #e2e8f0; border-radius: 12px; }
