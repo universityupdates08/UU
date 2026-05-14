@@ -111,3 +111,59 @@
         .slider-dot { width: 8px; height: 8px; background: #cbd5e1; border-radius: 50%; cursor: pointer; transition: 0.3s; }
         .slider-dot.active { background: #ef4444; width: 22px; border-radius: 10px; }
         .pending-box { padding: 30px; text-align: center; color: #64748b; font-weight: 600; background: white; border: 1px solid #e2e8f0; border-radius: 12px; }
+
+/* --- Floating Toggle Styling --- */
+        .theme-float {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 10px;
+            border-radius: 50px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border: 1px solid #ddd;
+        }
+
+        /* Toggle Switch Slider */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 34px;
+            height: 20px;
+        }
+        .switch input { opacity: 0; width: 0; height: 0; }
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 14px; width: 14px;
+            left: 3px; bottom: 3px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        input:checked + .slider { background-color: #2196F3; }
+        input:checked + .slider:before { transform: translateX(14px); }
+
+        /* --- Dark Mode Styles --- */
+        body.dark-mode {
+            background-color: #121212;
+            color: #e0e0e0;
+        }
+        .dark-mode .bg-white { background-color: #1e1e1e !important; color: #fff; }
+        .dark-mode .text-gray-800, .dark-mode .text-blue-900 { color: #f0f0f0 !important; }
+        .dark-mode .border-gray-100, .dark-mode .border-gray-200 { border-color: #333 !important; }
+        .dark-mode .theme-float { background: #333; border-color: #444; color: #fff; }
+        .dark-mode aside, .dark-mode .bg-gray-50 { background-color: #252525 !important; }
+
