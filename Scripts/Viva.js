@@ -1,4 +1,4 @@
-const config = {
+onst config = {
             currentMode: 'college',
             subjectMap: {
                 "M.Com.": [{ text: "M.Com. (I-304)", value: "I-304" }],
@@ -62,6 +62,12 @@ const config = {
         function hide(el) { el.classList.add('a-tab-hidden'); }
         function resetSelect(el, text) { el.innerHTML = `<option value="">-- ${text} --</option>`; }
 
+        function toggleDarkMode() {
+            const isDark = document.getElementById('themeToggle').checked;
+            document.body.classList.toggle('dark-mode', isDark);
+            document.getElementById('toggleCircle').style.left = isDark ? '20px' : '0';
+        }
+
         window.switchMode = function(mode) {
             config.currentMode = mode;
             document.getElementById('tabCollege').classList.toggle('active', mode === 'college');
@@ -96,16 +102,13 @@ const config = {
         }
 
         function parseCustomDate(dateStr) {
-            if (!dateStr || dateStr.toLowerCase().includes('not') || dateStr.toLowerCase().includes('tba')) return null;
+            if (!dateStr || /not|tba/i.test(dateStr)) return null;
             try {
                 let cleanStr = dateStr.includes(',') ? dateStr.split(',')[1].trim() : dateStr.trim();
                 let d = new Date(cleanStr);
                 if (isNaN(d.getTime())) {
                     const parts = cleanStr.replace(/[-.]/g, '/').split('/');
-                    if (parts.length === 3) {
-                        if (parts[0].length === 4) d = new Date(parts[0], parts[1] - 1, parts[2]);
-                        else d = new Date(parts[2], parts[1] - 1, parts[0]);
-                    }
+                    if (parts.length === 3) d = parts[0].length === 4 ? new Date(parts[0], parts[1]-1, parts[2]) : new Date(parts[2], parts[1]-1, parts[0]);
                 }
                 return isNaN(d.getTime()) ? null : d;
             } catch (e) { return null; }
@@ -139,31 +142,40 @@ const config = {
             uniqueEntries.sort((a, b) => a.DateObj - b.DateObj);
 
             if (uniqueEntries.length === 0) {
-                alertContainer.innerHTML = `<div class="pending-box p-4 bg-gray-100 text-center rounded-xl">📢 No Upcoming Viva scheduled for the next 5 days.</div>`;
+                alertContainer.innerHTML = `<div class="p-4 bg-gray-100 text-center">📢 No Upcoming Viva scheduled for the next 5 days.</div>`;
                 return;
             }
 
             alertContainer.innerHTML = `
-                <div class="alert-heading bg-blue-600 text-white p-3 font-bold"><i class="fas fa-bolt"></i> Upcoming Viva Alerts</div>
-                <div class="single-slider overflow-hidden relative bg-white p-6">
-                    <div class="single-track flex transition-transform duration-500" id="singleTrack">
+                <div class="bg-blue-600 text-white p-2 font-bold"><i class="fas fa-bolt"></i> Upcoming Viva Alerts</div>
+                <div class="overflow-hidden relative h-32 bg-white" id="sliderParent">
+                    <div class="flex transition-transform duration-500" id="singleTrack" style="width: ${uniqueEntries.length * 100}%">
                         ${uniqueEntries.map(item => `
-                            <div class="single-card min-w-full">
-                                <div class="font-bold text-lg">🏫 ${item.Center}</div>
-                                <div class="text-sm text-gray-600">${item.Course} | ${item.Subject}</div>
-                                <div class="text-red-600 font-bold mt-2"><i class="far fa-calendar-alt"></i> ${item.DateStr}</div>
-                                ${item.Notice ? `<a href="${item.Notice}" target="_blank" class="inline-block mt-2 text-blue-600 underline">View Notice</a>` : ''}
+                            <div class="w-full flex-shrink-0 p-4 border-r">
+                                <div class="font-bold text-blue-800">🏫 ${item.Center}</div>
+                                <div class="text-sm">${item.Course} | ${item.Subject}</div>
+                                <div class="text-red-600 text-xs font-bold">${item.DateStr} @ ${item.Time}</div>
+                                ${item.Notice ? `<a href="${item.Notice}" target="_blank" class="text-xs text-blue-500 underline">View Notice</a>` : ''}
                             </div>
                         `).join('')}
                     </div>
                 </div>`;
+
+            let current = 0;
+            if(uniqueEntries.length > 1) {
+                setInterval(() => {
+                    current = (current + 1) % uniqueEntries.length;
+                    document.getElementById('singleTrack').style.transform = `translateX(-${(current * 100) / uniqueEntries.length}%)`;
+                }, 4000);
+            }
         }
 
         async function init() {
             const loadTasks = Object.keys(config.fileMap).map(async sub => {
                 try {
-                    const url = config.fileMap[sub] + '&t=' + new Date().getTime();
+                    const url = config.fileMap[sub] + (config.fileMap[sub].includes('?') ? '&' : '?') + 't=' + Date.now();
                     const res = await fetch(url);
+                    if (!res.ok) throw new Error();
                     const text = await res.text();
                     config.allData[sub] = parseCSV(text);
                 } catch (e) { config.failedSubs.push(sub); }
@@ -191,7 +203,7 @@ const config = {
             resetSelect(dom.centerSelect, "Select Viva Center");
             if (!subCode) return;
             if (config.failedSubs.includes(subCode)) {
-                dom.errorMessage.innerHTML = "Data currently unavailable.";
+                dom.errorMessage.innerHTML = `Data unavailable. <a href="https://t.me/HelpforDMBot" class="underline font-bold">Contact Support</a>.`;
                 show(dom.errorCard); return;
             }
             const data = config.allData[subCode];
@@ -202,13 +214,12 @@ const config = {
             } else {
                 const centers = [...new Set(data.map(r => r['Name of Center']).filter(Boolean))].sort();
                 centers.forEach(c => dom.centerSelect.add(new Option(c, c)));
-                show(dom.centerFlow);
             }
         };
 
         dom.districtSelect.onchange = function() {
             const dist = this.value;
-            hide(dom.collegeGroup);
+            hide(dom.collegeGroup); hide(dom.resultsCard);
             resetSelect(dom.collegeSelect, "Select Your College");
             if (!dist) return;
             const colleges = [...new Set(config.allData[dom.subjectSelect.value].filter(r => r.District === dist).map(r => r['Attached Colleges']))].sort();
@@ -234,31 +245,36 @@ const config = {
                 html = `<p><b>College:</b> ${data['Attached Colleges']}</p>
                         <p><b>Center:</b> <span class="text-blue-700 font-bold">${data['Name of Center']}</span></p>
                         <p><b>Date:</b> <span class="text-red-600 font-bold">${data.Date || 'TBA'}</span></p>
-                        ${data.Notice ? `<a href="${data.Notice}" target="_blank" class="inline-block mt-3 bg-blue-600 text-white px-4 py-2 rounded">View Official Notice</a>` : ''}`;
+                        <p><b>Time:</b> ${data.Time || 'N/A'}</p>
+                        ${data.Notice ? `<a href="${data.Notice}" target="_blank" class="inline-block mt-2 bg-blue-600 text-white px-3 py-1 rounded text-xs">📄 View Notice</a>` : ''}`;
             } else {
                 const head = data[0];
                 const list = data.map(m => `<li>• ${m['Attached Colleges']}</li>`).join('');
                 html = `<p><b>Center:</b> <span class="text-blue-700 font-bold">${head['Name of Center']}</span></p>
                         <p><b>Date:</b> <span class="text-red-600 font-bold">${head.Date || 'TBA'}</span></p>
-                        <hr class="my-2">
-                        <p class="text-xs font-bold uppercase">Attached Colleges:</p>
-                        <ul class="text-xs mt-1 space-y-1">${list}</ul>
-                        ${head.Notice ? `<a href="${head.Notice}" target="_blank" class="inline-block mt-3 bg-blue-600 text-white px-4 py-2 rounded">View Official Notice</a>` : ''}`;
+                        <p><b>Time:</b> ${head.Time || 'N/A'}</p>
+                        <ul class="text-xs mt-2 border-t pt-2">${list}</ul>
+                        ${head.Notice ? `<a href="${head.Notice}" target="_blank" class="inline-block mt-2 bg-blue-600 text-white px-3 py-1 rounded text-xs">📄 View Notice</a>` : ''}`;
             }
             dom.resultOutput.innerHTML = html;
             show(dom.resultsCard);
         }
 
-        function toggleDarkMode() {
-            const isDark = document.getElementById('themeToggle').checked;
-            document.body.classList.toggle('dark-mode', isDark);
-            document.getElementById('toggleCircle').style.left = isDark ? '20px' : '0';
+        function clock() {
+            const now = new Date();
+            if (dom.footerTime) dom.footerTime.innerHTML = `<i class="far fa-clock text-yellow-400 mr-2"></i> ${now.toLocaleString('en-IN')}`;
+        }
+
+        async function visitor() {
+            try {
+                const res = await fetch('https://api.counterapi.dev/v1/university_updates_uu/main/up');
+                const data = await res.json();
+                document.getElementById('new-count').innerText = data.count;
+            } catch (e) {}
         }
 
         document.addEventListener('DOMContentLoaded', () => {
             init();
-            setInterval(() => {
-                const now = new Date();
-                dom.footerTime.innerHTML = now.toLocaleString('en-IN');
-            }, 1000);
+            visitor();
+            setInterval(clock, 1000);
         });
