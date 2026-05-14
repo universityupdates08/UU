@@ -59,11 +59,11 @@ const config = {
             headerBranding: document.getElementById('header-branding')
         };
 
-       function show(el) { el.classList.remove('a-tab-hidden'); }
+        function show(el) { el.classList.remove('a-tab-hidden'); }
         function hide(el) { el.classList.add('a-tab-hidden'); }
         function resetSelect(el, text) { el.innerHTML = `<option value="">-- ${text} --</option>`; }
 
-         window.switchMode = function(mode) {
+        window.switchMode = function(mode) {
             config.currentMode = mode;
             document.getElementById('tabCollege').classList.toggle('active', mode === 'college');
             document.getElementById('tabCenter').classList.toggle('active', mode === 'center');
@@ -79,20 +79,26 @@ const config = {
             const lines = text.trim().split('\n');
             if (lines.length < 2) return [];
             const headers = lines[0].split(',').map(h => h.trim().replace(/"/g, ''));
-            return lines.slice(1).map(line => {
-                const values = []; let cell = '', inQuotes = false;
-                for (let char of line) {
+            const data = [];
+            for (let i = 1; i < lines.length; i++) {
+                const values = [];
+                let cell = '', inQuotes = false;
+                for (let char of lines[i]) {
                     if (char === '"') inQuotes = !inQuotes;
                     else if (char === ',' && !inQuotes) { values.push(cell.trim()); cell = ''; }
                     else cell += char;
                 }
                 values.push(cell.trim());
-                const obj = {}; headers.forEach((h, idx) => obj[h] = values[idx]?.replace(/^"|"$/g, ''));
-                return obj;
-            });
+                if (values.length >= headers.length) {
+                    const obj = {};
+                    headers.forEach((h, idx) => obj[h] = values[idx]?.replace(/^"|"$/g, ''));
+                    data.push(obj);
+                }
+            }
+            return data;
         }
 
-        /* --- UPDATED ROBUST DATE PARSER FOR: Tuesday, 18 May 2026 --- */
+ /* --- UPDATED ROBUST DATE PARSER FOR: Tuesday, 18 May 2026 --- */
         function parseCustomDate(dateStr) {
             if (!dateStr || dateStr.toLowerCase().includes('not') || dateStr.toLowerCase().includes('tba')) return null;
             try {
@@ -198,11 +204,16 @@ const config = {
             loadUpcomingAlerts();
         }
 
-        // --- SEARCH EVENT HANDLERS ---
+
+// --- SEARCH EVENT HANDLERS ---
         dom.courseSelect.onchange = function() {
-            const course = this.value; hide(dom.subjectGroup); hide(dom.resultsCard); hide(dom.errorCard);
+            const course = this.value;
+            hide(dom.subjectGroup); hide(dom.resultsCard); hide(dom.errorCard);
             resetSelect(dom.subjectSelect, "Select Subject");
-            if (course) { config.subjectMap[course].forEach(s => dom.subjectSelect.add(new Option(s.text, s.value))); show(dom.subjectGroup); }
+            if (course) {
+                config.subjectMap[course].forEach(s => dom.subjectSelect.add(new Option(s.text, s.value)));
+                show(dom.subjectGroup);
+            }
         };
 
         dom.subjectSelect.onchange = function() {
@@ -232,10 +243,13 @@ const config = {
         };
 
         dom.districtSelect.onchange = function() {
-            const dist = this.value; hide(dom.collegeGroup); resetSelect(dom.collegeSelect, "Select Your College");
+            const dist = this.value;
+            hide(dom.collegeGroup); hide(dom.resultsCard);
+            resetSelect(dom.collegeSelect, "Select Your College");
             if (!dist) return;
             const colleges = [...new Set(config.allData[dom.subjectSelect.value].filter(r => r.District === dist).map(r => r['Attached Colleges']))].sort();
-            colleges.forEach(c => dom.collegeSelect.add(new Option(c, c))); show(dom.collegeGroup);
+            colleges.forEach(c => dom.collegeSelect.add(new Option(c, c)));
+            show(dom.collegeGroup);
         };
 
         dom.collegeSelect.onchange = function() {
@@ -259,6 +273,7 @@ const config = {
                         <p><b>Assigned Viva Center:</b> <span class="text-blue-700 font-bold">${data['Name of Center']}</span></p>
                         <p><b>Examination Date:</b> <span class="text-red-600 font-bold">${data.Date || 'Not Fixed (Contact to you college or center)'}</span></p>
                         <p><b>Reporting Time:</b> ${data.Time || 'Not Fixed'}</p>`;
+                        ${item.Notice ? `<a href="${item.Notice}" target="_blank" class="mini-notice-btn">📄 View Notice</a>` : ''}
             } else {
                 const head = data[0];
                 const list = data.map(m => `<li>• ${m['Attached Colleges']}</li>`).join('');
@@ -268,12 +283,40 @@ const config = {
                         <hr class="my-2 opacity-20">
                         <p class="text-xs font-bold text-gray-400 uppercase">Attached Colleges:</p>
                         <ul class="text-xs mt-1 space-y-1 font-medium">${list}</ul>`;
+                        ${item.Notice ? `<a href="${item.Notice}" target="_blank" class="mini-notice-btn">📄 View Notice</a>` : ''}
             }
             dom.resultOutput.innerHTML = html;
             show(dom.resultsCard);
         }
 
-async function visitor() {
+        async function init() {
+    const loadTasks = Object.keys(config.fileMap).map(async sub => {
+        try {
+            // Append a timestamp to prevent browser caching
+            const url = config.fileMap[sub] + (config.fileMap[sub].includes('?') ? '&' : '?') + 't=' + new Date().getTime();
+            
+            const res = await fetch(url);
+            if (!res.ok) throw new Error();
+            const text = await res.text();
+            config.allData[sub] = parseCSV(text);
+        } catch (e) { 
+            console.error(`Error loading data for ${sub}:`, e);
+            config.failedSubs.push(sub); 
+        }
+    });
+    await Promise.all(loadTasks);
+    hide(dom.initialLoader);
+    show(dom.mainContent);
+}
+
+        function clock() {
+            const now = new Date();
+            const timeStr = now.toLocaleString('en-IN', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' });
+            if (dom.footerTime) dom.footerTime.innerHTML = `<i class="far fa-clock text-yellow-400 mr-2"></i> ${timeStr}`;
+            if (dom.headerBranding) dom.headerBranding.textContent = `Powered by University Updates | ${timeStr}`;
+        }
+
+        async function visitor() {
             try {
                 const res = await fetch('https://api.counterapi.dev/v1/university_updates_uu/main/up');
                 const data = await res.json();
