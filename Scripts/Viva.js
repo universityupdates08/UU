@@ -235,17 +235,28 @@ const config = {
         };
 
         function renderResult(data, mode) {
-            hide(dom.resultsCard); let html = '';
-            const item = mode === 'college' ? data : data[0];
-            const noticeBtn = item.Notice ? `<a href="${item.Notice}" target="_blank" class="inline-block mt-4 bg-blue-600 text-white px-4 py-2 rounded-lg font-bold text-xs hover:bg-blue-700 transition">View Official Notice</a>` : '';
+            hide(dom.resultsCard);
+            let html = '';
             if (mode === 'college') {
-                html = `<p><b>College:</b> ${data['Attached Colleges']}</p><p><b>Center:</b> <span class="text-blue-700 font-bold">${data['Name of Center']}</span></p><p><b>Subject:</b> ${data.Subject} (${data['Subject Code']})</p><p><b>Date:</b> <span class="text-red-600 font-bold">${data.Date || 'Not Fixed'}</span></p>${noticeBtn}`;
+                html = `<p><b>Student College:</b> ${data['Attached Colleges']}</p>
+                        <hr class="my-2 opacity-20">
+                        <p><b>Assigned Viva Center:</b> <span class="text-blue-700 font-bold">${data['Name of Center']}</span></p>
+                        <p><b>Examination Date:</b> <span class="text-red-600 font-bold">${data.Date || 'Not Fixed (Contact to you college or center)'}</span></p>
+                        <p><b>Reporting Time:</b> ${data.Time || 'Not Fixed'}</p>`;
             } else {
+                const head = data[0];
                 const list = data.map(m => `<li>• ${m['Attached Colleges']}</li>`).join('');
-                html = `<p><b>Center:</b> <span class="text-blue-700 font-bold">${item['Name of Center']}</span></p><p><b>Subject:</b> ${item.Subject} (${item['Subject Code']})</p><p><b>Date:</b> <span class="text-red-600 font-bold">${item.Date || 'TBA'}</span></p><ul class="text-xs mt-1">${list}</ul>${noticeBtn}`;
+                html = `<p><b>Viva Center Name:</b> <span class="text-blue-700 font-bold">${head['Name of Center']}</span></p>
+                        <p><b>Examination Date:</b> <span class="text-red-600 font-bold">${head.Date || 'TBA (Contact to your college or viva center)'}</span></p>
+                        <p><b>Reporting Time:</b> ${head.Time || 'Not Fixed'}</p>
+                        <hr class="my-2 opacity-20">
+                        <p class="text-xs font-bold text-gray-400 uppercase">Attached Colleges:</p>
+                        <ul class="text-xs mt-1 space-y-1 font-medium">${list}</ul>`;
             }
-            dom.resultOutput.innerHTML = html; show(dom.resultsCard);
+            dom.resultOutput.innerHTML = html;
+            show(dom.resultsCard);
         }
+
 
         function clock() {
             const now = new Date();
