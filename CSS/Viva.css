@@ -1,4 +1,4 @@
-:root {
+ :root {
             --primary-color: #EF3C3C; /* Crimson Red */
             --secondary-color: #2C4B9E; /* Deep Blue */
             --bg-color: #f8f9fa;
@@ -19,7 +19,7 @@
             overflow-x: hidden;
         }
 
-        .a-tab-hidden { display: none; }
+        .a-tab-hidden { display: none !important; }
 
         .utility-bar {
             background-color: var(--footer-bg);
@@ -62,43 +62,42 @@
         .social-icon { color: white; font-size: 1.5rem; transition: color 0.3s; }
         .social-icon:hover { color: var(--primary-color); }
 
-.side-admission-btn {
-    position: fixed;
-    right: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    background: linear-gradient(to bottom, #90ee90, #006400); /* Red to Orange gradient like image_d1961a.jpg */
-    color: white;
-    padding: 15px 10px;
-    writing-mode: vertical-rl; /* Vertically rotates the text */
-    text-orientation: mixed;
-    transform: translateY(-50%) rotate(180deg); /* Aligns text direction to match the reference */
-    font-weight: bold;
-    font-family: 'Poppins', sans-serif;
-    border-radius: 0 8px 8px 0; /* Rounded corners on the left side only */
-    z-index: 1000;
-    text-decoration: none;
-    box-shadow: -2px 2px 10px rgba(0,0,0,0.2);
-    transition: all 0.3s ease;
-    font-size: 14px;
-    letter-spacing: 1px;
-}
+        .side-admission-btn {
+            position: fixed;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            background: linear-gradient(to bottom, #90ee90, #006400);
+            color: white;
+            padding: 15px 10px;
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            transform: translateY(-50%) rotate(180deg);
+            font-weight: bold;
+            font-family: 'Poppins', sans-serif;
+            border-radius: 0 8px 8px 0;
+            z-index: 1000;
+            text-decoration: none;
+            box-shadow: -2px 2px 10px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            font-size: 14px;
+            letter-spacing: 1px;
+        }
 
-.side-admission-btn:hover {
-    padding-right: 20px; /* Slight pull-out effect on hover */
-    color: #fff;
-    filter: brightness(1.1);
-}
+        .side-admission-btn:hover {
+            padding-right: 20px;
+            color: #fff;
+            filter: brightness(1.1);
+        }
 
-/* Hide on very small screens if it overlaps content too much */
-@media (max-width: 640px) {
-    .side-admission-btn {
-        font-size: 12px;
-        padding: 10px 5px;
-    }
-}
+        @media (max-width: 640px) {
+            .side-admission-btn {
+                font-size: 12px;
+                padding: 10px 5px;
+            }
+        }
 
-/* ALert Slider Styles */
+        /* ALert Slider Styles */
         .single-slider { overflow: hidden; position: relative; width: 100%; border-radius: 12px; background: #fff; border: 1px solid #e2e8f0; }
         .single-track { display: flex; transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
         .single-card { min-width: 100%; padding: 20px; box-sizing: border-box; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; }
@@ -112,7 +111,7 @@
         .slider-dot.active { background: #ef4444; width: 22px; border-radius: 10px; }
         .pending-box { padding: 30px; text-align: center; color: #64748b; font-weight: 600; background: white; border: 1px solid #e2e8f0; border-radius: 12px; }
 
-/* --- Floating Toggle Styling --- */
+        /* Floating Toggle Styling */
         .theme-float {
             position: fixed;
             bottom: 20px;
@@ -128,7 +127,6 @@
             border: 1px solid #ddd;
         }
 
-        /* Toggle Switch Slider */
         .switch {
             position: relative;
             display: inline-block;
@@ -156,8 +154,8 @@
         input:checked + .slider { background-color: #2196F3; }
         input:checked + .slider:before { transform: translateX(14px); }
 
-        /* --- Dark Mode Styles --- */
-       body.dark-mode {
+        /* Dark Mode Styles */
+        body.dark-mode {
             background-color: #121212;
             color: #e0e0e0;
         }
@@ -169,7 +167,7 @@
         .dark-mode #resultsCard { background-color: #1a2a3a !important; border-color: #2563eb !important; }
         .dark-mode #resultsCard p, .dark-mode #resultsCard b { color: #ffffff !important; }
         
-        .a-tab-hidden { display: none; }
         .tab-btn.active { border-bottom: 2px solid #2563eb; font-weight: bold; }
         .skeleton { background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%); background-size: 200% 100%; animation: loading 1.5s infinite; }
+        .dark-mode .skeleton { background: linear-gradient(90deg, #2d2d2d 25%, #3d3d3d 50%, #2d2d2d 75%); background-size: 200% 100%; }
         @keyframes loading { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
