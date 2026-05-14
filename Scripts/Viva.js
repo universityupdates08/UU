@@ -79,23 +79,17 @@ const config = {
             const lines = text.trim().split('\n');
             if (lines.length < 2) return [];
             const headers = lines[0].split(',').map(h => h.trim().replace(/"/g, ''));
-            const data = [];
-            for (let i = 1; i < lines.length; i++) {
-                const values = [];
-                let cell = '', inQuotes = false;
-                for (let char of lines[i]) {
+            return lines.slice(1).map(line => {
+                const values = []; let cell = '', inQuotes = false;
+                for (let char of line) {
                     if (char === '"') inQuotes = !inQuotes;
                     else if (char === ',' && !inQuotes) { values.push(cell.trim()); cell = ''; }
                     else cell += char;
                 }
                 values.push(cell.trim());
-                if (values.length >= headers.length) {
-                    const obj = {};
-                    headers.forEach((h, idx) => obj[h] = values[idx]?.replace(/^"|"$/g, ''));
-                    data.push(obj);
-                }
-            }
-            return data;
+                const obj = {}; headers.forEach((h, idx) => obj[h] = values[idx]?.replace(/^"|"$/g, ''));
+                return obj;
+            });
         }
 
         /* --- UPDATED ROBUST DATE PARSER FOR: Tuesday, 18 May 2026 --- */
