@@ -255,24 +255,3 @@ const config = {
 
         document.addEventListener('DOMContentLoaded', () => { init(); setInterval(clock, 1000); });
 
-function toggleDarkMode() {
-            const body = document.body;
-            const isChecked = document.getElementById('themeToggle').checked;
-            
-            if (isChecked) {
-                body.classList.add('dark-mode');
-                localStorage.setItem('theme', 'dark');
-            } else {
-                body.classList.remove('dark-mode');
-                localStorage.setItem('theme', 'light');
-            }
-        }
-
-        // Check for saved theme on page load
-        window.onload = function() {
-            const savedTheme = localStorage.getItem('theme');
-            if (savedTheme === 'dark') {
-                document.getElementById('themeToggle').checked = true;
-                document.body.classList.add('dark-mode');
-            }
-        };
