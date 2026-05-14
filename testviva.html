@@ -1,259 +1,766 @@
-<!DOCTYPE html><html lang="en"><head>    <meta charset="UTF-8">    <meta name="viewport" content="width=device-width, initial-scale=1.0">    <title>Viva Center Finder | University Updates</title>    <script src="https://cdn.tailwindcss.com"></script>    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">    <link rel="stylesheet" href="CSS/Viva.css">    </head><body>
-    <!-- Background Icons -->    <div class="background-icons">        <i class="fas fa-map-marker-alt icon-1"></i>        <i class="fas fa-university icon-2"></i>        <i class="fas fa-school icon-3"></i>        <i class="fas fa-file-alt icon-4"></i>    </div>
-    <!-- Header / Utility Bar -->    <header class="utility-bar">        <div class="max-w-7xl mx-auto flex justify-between items-center">            <div class="flex space-x-4">                <a href="https://t.me/HelpforDMBot" class="utility-link"><i class="fas fa-headset mr-1"></i> Contact Us</a>            </div>            <div class="flex items-center space-x-2">                <a href="https://t.me/CCSUniversityMRT" class="social-icon text-sm hover:text-gray-300 transition"><i class="fab fa-telegram"></i></a>                <span class="mx-2">|</span>                <a href="https://whatsapp.com/channel/0029Va9jtav4tRrmKPxos138" class="social-icon text-sm hover:text-gray-300 transition"><i class="fab fa-whatsapp"></i></a>                <span class="mx-2">|</span>                <a href="https://www.instagram.com/UniversityUpdates_UU" class="social-icon text-sm hover:text-gray-300 transition"><i class="fab fa-instagram"></i></a>                <span class="mx-2">|</span>                <a href="https://www.x.com/Uni_Updates08" class="social-icon text-sm hover:text-gray-300 transition"><i class="fab fa-x"></i></a>                <span class="mx-2">|</span>                <a href="https://www.youtube.com/@University-Updates-UU" class="social-icon text-sm hover:text-gray-300 transition"><i class="fab fa-youtube"></i></a>            </div>        </div>    </header>
-     <!-- Logo and Title Section -->    <div class="max-w-6xl mx-auto flex flex-row items-end justify-center p-4 relative z-10 gap-4">        <!-- Logo -->        <img src="https://i.ibb.co/nMC0877T/UNIVERSITY-UPDATES-LOGO-removebg-preview.png" alt="Logo" class="w-24 md:w-32">                <!-- Vertical Separator Line -->        <div class="h-12 border-l-2 border-gray-300 mx-4 md:mx-6"></div>                <!-- Viva Finder Title (Right Side) -->        <div class="mb-2">            <h1 class="text-2xl md:text-3xl font-extrabold text-gray-800 flex items-center">                <i class="fas fa-search-location text-blue-600 mr-2"></i> Viva Finder            </h1>        </div>    </div>            <!-- Marquee -->    <p style="color: white; font-style: italic; font-size: 15px; background-color: crimson; display: flex; align-items: center; height: 25px;">        <marquee onmouseover="this.stop();" direction="left" onmouseout="this.start();">            <b style="color: white">➤</b> 📢 Designed for CCSU Private Courses - Viva Voce Center Finder 2026        </marquee>    </p>
-    <!-- Main Content -->    <main class="flex-grow w-full flex flex-col justify-center items-center p-4 md:p-8">
-        <!-- Initial Loader -->        <div id="initialLoader" class="text-center p-8">            <svg class="animate-spin h-12 w-12 text-blue-600 mx-auto" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>            </svg>            <p class="text-gray-600 text-lg mt-4 font-semibold">Initializing...</p>        </div>
-              <!-- Floating WhatsApp Button --><a href="https://whatsapp.com/channel/0029Va9jtav4tRrmKPxos138" class="side-admission-btn">    <i class="fab fa-whatsapp mb-2 text-xl"></i> Join us on Whatsapp</a>                                     <!-- Main Content Card -->        <div id="mainContent" class="a-tab-hidden bg-white shadow-2xl rounded-2xl overflow-hidden w-full max-w-6xl flex flex-col border border-gray-100">                        <div class="p-6 md:p-10 grid md:grid-cols-3 gap-8">                                <!-- Left Section: Tabs and Form (2 Cols) -->                <section class="md:col-span-2 flex flex-col">                                        <!-- Mode Tabs -->                    <div class="flex border-b mb-6 rounded-lg overflow-hidden border border-gray-200">                        <div id="tabCollege" class="tab-btn active" onclick="switchMode('college')">Search by College</div>                        <div id="tabCenter" class="tab-btn" onclick="switchMode('center')">Search by Viva Center</div>                    </div>
-                   
-                    <div class="space-y-6">                        <!-- Step 1 -->                        <div>                            <label class="block text-xs font-bold text-gray-500 uppercase mb-1">1. Select Course</label>                            <select id="courseSelect" class="w-full p-3 border border-gray-300 rounded-lg outline-none focus:ring-2 focus:ring-blue-500">                                <option value="">-- Select Course --</option>                                <option value="M.Com.">M.Com.</option>                                <option value="M.A.">M.A.</option>                            </select>                        </div>
-                        <!-- Step 2 -->                        <div id="subjectGroup" class="a-tab-hidden">                            <label class="block text-xs font-bold text-gray-500 uppercase mb-1">2. Select Subject</label>                            <select id="subjectSelect" class="w-full p-3 border border-gray-300 rounded-lg outline-none focus:ring-2 focus:ring-blue-500"></select>                        </div>
-                        <!-- Mode: College Search -->                        <div id="collegeFlow" class="space-y-6">                            <div id="districtGroup" class="a-tab-hidden">                                <label class="block text-xs font-bold text-gray-500 uppercase mb-1">3. Select District</label>                                <select id="districtSelect" class="w-full p-3 border border-gray-300 rounded-lg outline-none focus:ring-2 focus:ring-blue-500"></select>                            </div>                            <div id="collegeGroup" class="a-tab-hidden">                                <label class="block text-xs font-bold text-gray-500 uppercase mb-1">4. Select Your College</label>                                <select id="collegeSelect" class="w-full p-3 border border-gray-300 rounded-lg outline-none focus:ring-2 focus:ring-blue-500"></select>                            </div>                        </div>
-                        <!-- Mode: Center Search -->                        <div id="centerFlow" class="a-tab-hidden">                            <label class="block text-xs font-bold text-gray-500 uppercase mb-1">3. Select Viva Center</label>                            <select id="centerSelect" class="w-full p-3 border border-gray-300 rounded-lg outline-none focus:ring-2 focus:ring-blue-500"></select>                        </div>                    </div>
-                    <!-- Result Output -->                    <div id="resultsCard" class="a-tab-hidden mt-10 bg-blue-50 border-l-4 border-blue-600 p-6 rounded-lg shadow-inner">                        <h2 class="text-xl font-bold text-blue-900 mb-4 flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> Examination Details</h2>                        <div id="resultOutput" class="space-y-3 text-sm text-gray-800"></div>                    </div>
-                    <!-- Error Output -->                    <div id="errorCard" class="a-tab-hidden mt-8 bg-red-50 border-l-4 border-red-500 p-6 rounded-lg">                        <h2 class="text-lg font-bold text-red-800 mb-1">Notice</h2>                        <p id="errorMessage" class="text-red-700"></p>                    </div>                </section>
-                <!-- Right Section: Sidebar (1 Col) -->                <aside class="bg-gray-50 p-0 rounded-xl border border-gray-100 h-fit">                    <h3 class="font-bold p-4 text-lg mb-4 text-blue-900 border-b pb-2"><i class="fas fa-bullhorn text-red-500 mr-2"></i>Latest Notifications</h3>                    <!-- External Site Embed Frame --><div class="rounded-lg overflow-hidden max-w-6xl w-full">    <div class="bg-white shadow-2xl overflow-hidden border border-gray-100">                <div class="relative w-full h-[400px]">            <iframe                 src="https://universityupdates08.github.io/UU/VivaUpdates.html"                 class="absolute top-0 left-0 w-full h-full border-none"                title="External Portal"                loading="lazy">            </iframe>        </div>    </div></div>                </aside>
-            </div>        </div>    </main>
-    <!-- Footer -->    <footer class="footer">        <div class="max-w-7xl mx-auto">            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-6">                <!-- Disclaimer -->                <div>                    <div class="text-center md:text-left">                        <h3 class="text-xl font-bold mb-3 border-b-2 border-primary-color pb-1 inline-block">Disclaimer</h3>                        <div class="text-justify">                            <p class="text-sm opacity-90">                                The Viva Center and Date information provided here is sourced from the college's & center's recent official notices and is for informational purposes only. Students must <b>always confirm</b> the details from their respective college administration. We are not responsible for any last-minute changes or inaccuracies. We are an independent platform Not affiliated with or endorsed by CCSU.                            </p>                        </div>                    </div>                </div>
-                <!-- Quick Links -->                <div>                    <div class="text-center">                        <h3 class="text-xl font-bold mb-3 border-b-2 border-primary-color pb-1 inline-block">Quick Links</h3>                        <ul class="space-y-1 text-sm">                            <li><i class="fas fa-circle-notch text-xs text-yellow-500 mr-2"></i><a href="https://ccsuniversity.blr1.cdn.digitaloceanspaces.com/public/pdf/2026/05/Scan%20Copy%20M.Com%20M.A.%20Private%20June-2026.pdf" class="hover:text-primary-color transition"><b>Download Private Viva-Voce Center List - 2026</b></a></li>                            <li><i class="fas fa-circle-notch text-xs text-yellow-500 mr-2"></i><a href="https://t.me/HelpforDMBot" class="hover:text-primary-color transition"><b>Contact Support</b></a></li>                        </ul>                    </div>                </div>
-                <!-- Connect -->                <div>                    <div class="text-center">                        <h3 class="text-xl font-bold mb-3 border-b-2 border-primary-color pb-1 inline-block">Connect With Us</h3>                        <div class="flex space-x-4 justify-center">                            <a href="https://whatsapp.com/channel/0029Va9jtav4tRrmKPxos138" class="social-icon" title="Whatsapp"><i class="fab fa-whatsapp"></i></a>                            <a href="https://t.me/CCSUniversityMRT" class="social-icon" title="Telegram"><i class="fab fa-telegram-plane"></i></a>                            <a href="https://instagram.com/universityupdates_uu" class="social-icon" title="Instagram"><i class="fab fa-instagram"></i></a>                            <a href="https://x.com/uni_updates08" class="social-icon" title="X"><i class="fab fa-x"></i></a>                        </div>                        <div class="mt-4">                            <p id="live-footer-time" class="text-sm text-gray-200 font-medium tracking-wide flex items-center justify-center gap-2"></p>                        </div>                        <div class="flex items-center justify-center gap-2 mt-4 text-white text-xs">                            <i class="fas fa-users text-yellow-500"></i>                            <span>Total Visitors:</span>                            <span id="new-count" class="font-bold text-slate-800 bg-slate-200 px-2 py-0.5 rounded">0</span>                        </div>                        <div class="flex items-center justify-center gap-2 mt-4 text-white text-xs">                            <i class="text-yellow-500"></i>                            <span>Last Updated on: Thursday, 14 May, 2026, 08:27 PM</span>                        </div>                    </div>                </div>            </div>                        <div class="text-center pt-4 border-t border-white border-opacity-30">                <p class="text-sm opacity-70">&copy; 2025-2026 University Updates. All rights reserved.</p>            </div>        </div>    </footer>
-    <script>const config = {
-            currentMode: 'college',
-            subjectMap: {
-                "M.Com.": [{ text: "M.Com. (I-304)", value: "I-304" }],
-                "M.A.": [
-                    { text: "Defence Studies (G-895)", value: "G-895" },
-                    { text: "Economics (G-806)", value: "G-806" },
-                    { text: "Education (G-803)", value: "G-803" },
-                    { text: "Education (G-804)", value: "G-804" },
-                    { text: "English (G-812)", value: "G-812" },
-                    { text: "Hindi (G-825)", value: "G-825" },
-                    { text: "History (G-837)", value: "G-837" },
-                    { text: "Mathematics (G-850)", value: "G-850" },
-                    { text: "Philosophy (G-845)", value: "G-845" },
-                    { text: "Political Science (G-870)", value: "G-870" },
-                    { text: "Sanskrit (G-882)", value: "G-882" },
-                    { text: "Sociology (G-887)", value: "G-887" },
-                    { text: "Urdu (G-862)", value: "G-862" }
-                ]
-            },
-            fileMap: {
-                "I-304": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRZiv_e1A0gciQkWuUvmcsf-efhajUNQWUYF2-5JIljXgkM7iFTz5LOlEVklVALuZY1HuQ-T4SpcXDa/pub?gid=0&single=true&output=csv",
-                "G-895": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRZiv_e1A0gciQkWuUvmcsf-efhajUNQWUYF2-5JIljXgkM7iFTz5LOlEVklVALuZY1HuQ-T4SpcXDa/pub?gid=247840887&single=true&output=csv",
-                "G-806": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRZiv_e1A0gciQkWuUvmcsf-efhajUNQWUYF2-5JIljXgkM7iFTz5LOlEVklVALuZY1HuQ-T4SpcXDa/pub?gid=641233544&single=true&output=csv",
-                "G-803": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRZiv_e1A0gciQkWuUvmcsf-efhajUNQWUYF2-5JIljXgkM7iFTz5LOlEVklVALuZY1HuQ-T4SpcXDa/pub?gid=211843497&single=true&output=csv",
-                "G-804": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRZiv_e1A0gciQkWuUvmcsf-efhajUNQWUYF2-5JIljXgkM7iFTz5LOlEVklVALuZY1HuQ-T4SpcXDa/pub?gid=211843497&single=true&output=csv",
-                "G-812": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRZiv_e1A0gciQkWuUvmcsf-efhajUNQWUYF2-5JIljXgkM7iFTz5LOlEVklVALuZY1HuQ-T4SpcXDa/pub?gid=1289928464&single=true&output=csv",
-                "G-825": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRZiv_e1A0gciQkWuUvmcsf-efhajUNQWUYF2-5JIljXgkM7iFTz5LOlEVklVALuZY1HuQ-T4SpcXDa/pub?gid=1710636826&single=true&output=csv",
-                "G-837": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRZiv_e1A0gciQkWuUvmcsf-efhajUNQWUYF2-5JIljXgkM7iFTz5LOlEVklVALuZY1HuQ-T4SpcXDa/pub?gid=1673491282&single=true&output=csv",
-                "G-850": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRZiv_e1A0gciQkWuUvmcsf-efhajUNQWUYF2-5JIljXgkM7iFTz5LOlEVklVALuZY1HuQ-T4SpcXDa/pub?gid=634965624&single=true&output=csv",
-                "G-845": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRZiv_e1A0gciQkWuUvmcsf-efhajUNQWUYF2-5JIljXgkM7iFTz5LOlEVklVALuZY1HuQ-T4SpcXDa/pub?gid=122536702&single=true&output=csv",
-                "G-870": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRZiv_e1A0gciQkWuUvmcsf-efhajUNQWUYF2-5JIljXgkM7iFTz5LOlEVklVALuZY1HuQ-T4SpcXDa/pub?gid=1880701720&single=true&output=csv",
-                "G-882": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRZiv_e1A0gciQkWuUvmcsf-efhajUNQWUYF2-5JIljXgkM7iFTz5LOlEVklVALuZY1HuQ-T4SpcXDa/pub?gid=1599191084&single=true&output=csv",
-                "G-887": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRZiv_e1A0gciQkWuUvmcsf-efhajUNQWUYF2-5JIljXgkM7iFTz5LOlEVklVALuZY1HuQ-T4SpcXDa/pub?gid=1852586580&single=true&output=csv",
-                "G-862": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRZiv_e1A0gciQkWuUvmcsf-efhajUNQWUYF2-5JIljXgkM7iFTz5LOlEVklVALuZY1HuQ-T4SpcXDa/pub?gid=1872629374&single=true&output=csv"
-            },
-            allData: {},
-            failedSubs: []
-        };
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Viva Center Finder | University Updates</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #EF3C3C; /* Crimson Red */
+            --secondary-color: #2C4B9E; /* Deep Blue */
+            --bg-color: #f8f9fa;
+            --text-color: #333;
+            --footer-bg: #2C4B9E;
+            --footer-text: #ffffff;
+        }
 
-        const dom = {
-            courseSelect: document.getElementById('courseSelect'),
-            subjectSelect: document.getElementById('subjectSelect'),
-            subjectGroup: document.getElementById('subjectGroup'),
-            collegeFlow: document.getElementById('collegeFlow'),
-            districtGroup: document.getElementById('districtGroup'),
-            districtSelect: document.getElementById('districtSelect'),
-            collegeGroup: document.getElementById('collegeGroup'),
-            collegeSelect: document.getElementById('collegeSelect'),
-            centerFlow: document.getElementById('centerFlow'),
-            centerSelect: document.getElementById('centerSelect'),
-            resultsCard: document.getElementById('resultsCard'),
-            resultOutput: document.getElementById('resultOutput'),
-            errorCard: document.getElementById('errorCard'),
-            errorMessage: document.getElementById('errorMessage'),
-            mainContent: document.getElementById('mainContent'),
-            initialLoader: document.getElementById('initialLoader'),
-            footerTime: document.getElementById('live-footer-time'),
-            headerBranding: document.getElementById('header-branding')
-        };
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0; padding: 0; 
+            min-height: 100vh; 
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow-x: hidden;
+        }
 
-        function show(el) { el.classList.remove('a-tab-hidden'); }
-        function hide(el) { el.classList.add('a-tab-hidden'); }
-        function resetSelect(el, text) { el.innerHTML = `<option value="">-- ${text} --</option>`; }
+        .a-tab-hidden { display: none !important; }
 
-        window.switchMode = function(mode) {
-            config.currentMode = mode;
-            document.getElementById('tabCollege').classList.toggle('active', mode === 'college');
-            document.getElementById('tabCenter').classList.toggle('active', mode === 'center');
-            mode === 'college' ? show(dom.collegeFlow) : hide(dom.collegeFlow);
-            mode === 'center' ? show(dom.centerFlow) : hide(dom.centerFlow);
+        .utility-bar {
+            background-color: var(--footer-bg);
+            color: white;
+            padding: 8px 20px;
+            font-size: 0.9rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        .footer {
+            background-color: var(--footer-bg);
+            color: var(--footer-text);
+            padding: 40px 20px 20px 20px;
+            margin-top: 40px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .background-icons {
+            position: fixed; inset: 0; pointer-events: none; opacity: 0.07; z-index: 0;
+        }
+        .background-icons i { position: absolute; font-size: 110px; color: var(--secondary-color); }
+        .background-icons .icon-1 { top: 30%; left: 5%; }
+        .background-icons .icon-2 { top: 30%; right: 10%; }
+        .background-icons .icon-3 { bottom: 25%; left: 12%; }
+        .background-icons .icon-4 { bottom: 10%; right: 5%; }
+
+        .tab-btn {
+            flex: 1; padding: 15px; font-weight: 700; text-align: center; cursor: pointer;
+            transition: all 0.3s; border-bottom: 4px solid #e2e8f0; background: #f8fafc;
+            color: #64748b; text-transform: uppercase; font-size: 0.85rem;
+        }
+        .tab-btn.active {
+            background: white; color: var(--secondary-color); border-bottom-color: var(--primary-color);
+        }
+
+        .news-gif { height: 14px; display: inline-block; margin-left: 5px; }
+
+        .social-icon { color: white; font-size: 1.5rem; transition: color 0.3s; }
+        .social-icon:hover { color: var(--primary-color); }
+
+        .side-admission-btn {
+            position: fixed;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            background: linear-gradient(to bottom, #90ee90, #006400);
+            color: white;
+            padding: 15px 10px;
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            transform: translateY(-50%) rotate(180deg);
+            font-weight: bold;
+            font-family: 'Poppins', sans-serif;
+            border-radius: 0 8px 8px 0;
+            z-index: 1000;
+            text-decoration: none;
+            box-shadow: -2px 2px 10px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            font-size: 14px;
+            letter-spacing: 1px;
+        }
+
+        .side-admission-btn:hover {
+            padding-right: 20px;
+            color: #fff;
+            filter: brightness(1.1);
+        }
+
+        @media (max-width: 640px) {
+            .side-admission-btn {
+                font-size: 12px;
+                padding: 10px 5px;
+            }
+        }
+
+        /* ALert Slider Styles */
+        .single-slider { overflow: hidden; position: relative; width: 100%; border-radius: 12px; background: #fff; border: 1px solid #e2e8f0; }
+        .single-track { display: flex; transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
+        .single-card { min-width: 100%; padding: 20px; box-sizing: border-box; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        .single-title { font-weight: 800; color: #1e40af; font-size: 1rem; margin-bottom: 4px; line-height: 1.2; }
+        .single-sub { font-size: 0.85rem; color: #475569; margin-bottom: 10px; font-weight: 500; }
+        .alert-heading { background: #ef4444; color: white; padding: 8px 12px; font-weight: 800; font-size: 14px; text-transform: uppercase; display: flex; align-items: center; justify-content: center; gap: 8px; }
+        .mini-notice-btn { display: inline-block; background: #2563eb; color: white; padding: 6px 16px; border-radius: 6px; font-size: 12px; font-weight: 700; transition: 0.3s; margin-top: 5px; }
+        .mini-notice-btn:hover { background: #1d4ed8; transform: translateY(-1px); }
+        .slider-dots { display: flex; justify-content: center; gap: 6px; padding: 10px; background: #f8fafc; }
+        .slider-dot { width: 8px; height: 8px; background: #cbd5e1; border-radius: 50%; cursor: pointer; transition: 0.3s; }
+        .slider-dot.active { background: #ef4444; width: 22px; border-radius: 10px; }
+        .pending-box { padding: 30px; text-align: center; color: #64748b; font-weight: 600; background: white; border: 1px solid #e2e8f0; border-radius: 12px; }
+
+        /* Floating Toggle Styling */
+        .theme-float {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 10px;
+            border-radius: 50px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border: 1px solid #ddd;
+        }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 34px;
+            height: 20px;
+        }
+        .switch input { opacity: 0; width: 0; height: 0; }
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 14px; width: 14px;
+            left: 3px; bottom: 3px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        input:checked + .slider { background-color: #2196F3; }
+        input:checked + .slider:before { transform: translateX(14px); }
+
+        /* Dark Mode Styles */
+        body.dark-mode {
+            background-color: #121212;
+            color: #e0e0e0;
+        }
+        .dark-mode .bg-white { background-color: #1e1e1e !important; color: #ffffff; }
+        .dark-mode .text-gray-800, .dark-mode .text-gray-500 { color: #cccccc !important; }
+        .dark-mode .bg-gray-50 { background-color: #2d2d2d !important; }
+        .dark-mode select { background-color: #333 !important; color: white !important; border-color: #444 !important; }
+        .dark-mode select option { background-color: #333 !important; color: white !important; }
+        .dark-mode #resultsCard { background-color: #1a2a3a !important; border-color: #2563eb !important; }
+        .dark-mode #resultsCard p, .dark-mode #resultsCard b { color: #ffffff !important; }
+        
+        .tab-btn.active { border-bottom: 2px solid #2563eb; font-weight: bold; }
+        .skeleton { background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%); background-size: 200% 100%; animation: loading 1.5s infinite; }
+        .dark-mode .skeleton { background: linear-gradient(90deg, #2d2d2d 25%, #3d3d3d 50%, #2d2d2d 75%); background-size: 200% 100%; }
+        @keyframes loading { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+    </style>
+</head>
+<body>
+
+    <!-- Background Icons -->
+    <div class="background-icons">
+        <i class="fas fa-map-marker-alt icon-1"></i>
+        <i class="fas fa-university icon-2"></i>
+        <i class="fas fa-school icon-3"></i>
+        <i class="fas fa-file-alt icon-4"></i>
+    </div>
+
+    <!-- Header / Utility Bar -->
+    <header class="utility-bar">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex space-x-4">
+                <a href="https://t.me/HelpforDMBot" class="utility-link"><i class="fas fa-headset mr-1"></i> Contact Us</a>
+            </div>
+            <div class="flex items-center space-x-2">
+                <a href="https://t.me/CCSUniversityMRT" class="social-icon text-sm hover:text-gray-300 transition"><i class="fab fa-telegram"></i></a>
+                <span class="mx-2">|</span>
+                <a href="https://whatsapp.com/channel/0029Va9jtav4tRrmKPxos138" class="social-icon text-sm hover:text-gray-300 transition"><i class="fab fa-whatsapp"></i></a>
+                <span class="mx-2">|</span>
+                <a href="https://www.instagram.com/UniversityUpdates_UU" class="social-icon text-sm hover:text-gray-300 transition"><i class="fab fa-instagram"></i></a>
+                <span class="mx-2">|</span>
+                <a href="https://www.x.com/Uni_Updates08" class="social-icon text-sm hover:text-gray-300 transition"><i class="fab fa-x"></i></a>
+                <span class="mx-2">|</span>
+                <a href="https://www.youtube.com/@University-Updates-UU" class="social-icon text-sm hover:text-gray-300 transition"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+    </header>
+
+     <!-- Logo and Title Section -->
+    <div class="max-w-6xl mx-auto flex flex-row items-end justify-center p-4 relative z-10 gap-4">
+        <img src="https://i.ibb.co/nMC0877T/UNIVERSITY-UPDATES-LOGO-removebg-preview.png" alt="Logo" class="w-24 md:w-32">
+        <div class="h-12 border-l-2 border-gray-300 mx-4 md:mx-6"></div>
+        <div class="mb-2">
+            <h1 class="text-2xl md:text-3xl font-extrabold text-gray-800 flex items-center">
+                <i class="fas fa-search-location text-blue-600 mr-2"></i> Viva Finder
+            </h1>
+        </div>
+    </div>
+        
+    <!-- Marquee -->
+    <p style="color: white; font-style: italic; font-size: 15px; background-color: crimson; display: flex; align-items: center; height: 25px;">
+        <marquee onmouseover="this.stop();" direction="left" onmouseout="this.start();">
+            <b style="color: white">➤</b> 📢 Designed for CCSU Private Courses - Viva Voce Center Finder 2026
+        </marquee>
+    </p>
+
+    <!-- Main Content -->
+    <main class="flex-grow w-full flex flex-col justify-center items-center p-4 md:p-8">
+
+        <!-- Initial Loader -->
+        <div id="initialLoader" class="text-center p-8">
+            <svg class="animate-spin h-12 w-12 text-blue-600 mx-auto" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            </svg>
+            <p class="text-gray-600 text-lg mt-4 font-semibold">Initializing...</p>
+        </div>
+        
+        <div id="portalWrapper" class="a-tab-hidden w-full max-w-6xl">
+            <!-- UPCOMING ALERTS SLIDER -->
+            <div id="upcomingAlerts" class="mb-8 shadow-xl rounded-2xl overflow-hidden"></div>
+    
+            <!-- Floating WhatsApp Button -->
+            <a href="https://whatsapp.com/channel/0029Va9jtav4tRrmKPxos138" class="side-admission-btn">
+                <i class="fab fa-whatsapp mb-2 text-xl"></i> Join us on Whatsapp
+            </a>         
+                    
+            <!-- Main Content Card -->
+            <div id="mainContent" class="bg-white shadow-2xl rounded-2xl overflow-hidden w-full max-w-6xl flex flex-col border border-gray-100">
+                
+                <div class="p-6 md:p-10 grid md:grid-cols-3 gap-8">
+                    
+                    <!-- Left Section: Tabs and Form (2 Cols) -->
+                    <section class="md:col-span-2 flex flex-col">
+                        
+                        <!-- Mode Tabs -->
+                        <div class="flex border-b mb-6 rounded-lg overflow-hidden border border-gray-200">
+                            <div id="tabCollege" class="tab-btn active" onclick="switchMode('college')">Search by College</div>
+                            <div id="tabCenter" class="tab-btn" onclick="switchMode('center')">Search by Viva Center</div>
+                        </div>
+
+                        <div class="space-y-6">
+                            <!-- Step 1 -->
+                            <div>
+                                <label class="block text-xs font-bold text-gray-500 uppercase mb-1">1. Select Course</label>
+                                <select id="courseSelect" class="w-full p-3 border border-gray-300 rounded-lg outline-none focus:ring-2 focus:ring-blue-500">
+                                    <option value="">-- Select Course --</option>
+                                    <option value="M.Com.">M.Com.</option>
+                                    <option value="M.A.">M.A.</option>
+                                </select>
+                            </div>
+
+                            <!-- Step 2 -->
+                            <div id="subjectGroup" class="a-tab-hidden">
+                                <label class="block text-xs font-bold text-gray-500 uppercase mb-1">2. Select Subject</label>
+                                <select id="subjectSelect" class="w-full p-3 border border-gray-300 rounded-lg outline-none focus:ring-2 focus:ring-blue-500"></select>
+                            </div>
+
+                            <!-- Mode: College Search -->
+                            <div id="collegeFlow" class="space-y-6">
+                                <div id="districtGroup" class="a-tab-hidden">
+                                    <label class="block text-xs font-bold text-gray-500 uppercase mb-1">3. Select District</label>
+                                    <select id="districtSelect" class="w-full p-3 border border-gray-300 rounded-lg outline-none focus:ring-2 focus:ring-blue-500"></select>
+                                </div>
+                                <div id="collegeGroup" class="a-tab-hidden">
+                                    <label class="block text-xs font-bold text-gray-500 uppercase mb-1">4. Select Your College</label>
+                                    <select id="collegeSelect" class="w-full p-3 border border-gray-300 rounded-lg outline-none focus:ring-2 focus:ring-blue-500"></select>
+                                </div>
+                            </div>
+
+                            <!-- Mode: Center Search -->
+                            <div id="centerFlow" class="a-tab-hidden">
+                                <label class="block text-xs font-bold text-gray-500 uppercase mb-1">3. Select Viva Center</label>
+                                <select id="centerSelect" class="w-full p-3 border border-gray-300 rounded-lg outline-none focus:ring-2 focus:ring-blue-500"></select>
+                            </div>
+                        </div>
+
+                        <!-- Result Output -->
+                        <div id="resultsCard" class="a-tab-hidden mt-10 bg-blue-50 border-l-4 border-blue-600 p-6 rounded-lg shadow-inner">
+                            <h2 class="text-xl font-bold text-blue-900 mb-4 flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> Examination Details</h2>
+                            <div id="resultOutput" class="space-y-3 text-sm text-gray-800"></div>
+                        </div>
+
+                        <!-- Error Output -->
+                        <div id="errorCard" class="a-tab-hidden mt-8 bg-red-50 border-l-4 border-red-500 p-6 rounded-lg">
+                            <h2 class="text-lg font-bold text-red-800 mb-1">Notice</h2>
+                            <p id="errorMessage" class="text-red-700"></p>
+                        </div>
+                    </section>
+
+                    <!-- Right Section: Sidebar (1 Col) -->
+                    <aside class="bg-gray-50 p-0 rounded-xl border border-gray-100 h-fit">
+                        <h3 class="font-bold p-4 text-lg mb-4 text-blue-900 border-b pb-2"><i class="fas fa-bullhorn text-red-500 mr-2"></i>Latest Notifications</h3>
+                        <!-- External Site Embed Frame -->
+                        <div class="rounded-lg overflow-hidden max-w-6xl w-full">
+                            <div class="bg-white shadow-2xl overflow-hidden border border-gray-100">
+                                <div class="relative w-full h-[400px]">
+                                    <iframe 
+                                        src="https://universityupdates08.github.io/UU/VivaUpdates.html" 
+                                        class="absolute top-0 left-0 w-full h-full border-none"
+                                        title="External Portal"
+                                        loading="lazy">
+                                    </iframe>
+                                </div>
+                            </div>
+                        </div>
+                    </aside>
+
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Floating Dark Mode Toggle -->
+    <div class="fixed bottom-4 right-4 z-50 bg-white dark:bg-gray-800 p-2 rounded-full shadow-lg border border-gray-200">
+        <label class="flex items-center cursor-pointer">
+            <i class="fas fa-sun mr-2 text-yellow-500"></i>
+            <input type="checkbox" id="themeToggle" onchange="toggleDarkMode()" class="hidden">
+            <div class="w-10 h-5 bg-gray-300 rounded-full relative">
+                <div id="toggleCircle" class="w-5 h-5 bg-blue-600 rounded-full absolute transition-all duration-300 left-0"></div>
+            </div>
+            <i class="fas fa-moon ml-2 text-gray-600"></i>
+        </label>
+    </div>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-6">
+                <!-- Disclaimer -->
+                <div>
+                    <div class="text-center md:text-left">
+                        <h3 class="text-xl font-bold mb-3 border-b-2 border-primary-color pb-1 inline-block">Disclaimer</h3>
+                        <div class="text-justify">
+                            <p class="text-sm opacity-90">
+                                The Viva Center and Date information provided here is sourced from the college's & center's recent official notices and is for informational purposes only. Students must <b>always confirm</b> the details from their respective college administration. We are not responsible for any last-minute changes or inaccuracies. We are an independent platform Not affiliated with or endorsed by CCSU.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <div class="text-center">
+                        <h3 class="text-xl font-bold mb-3 border-b-2 border-primary-color pb-1 inline-block">Quick Links</h3>
+                        <ul class="space-y-1 text-sm">
+                            <li><i class="fas fa-circle-notch text-xs text-yellow-500 mr-2"></i><a href="https://ccsuniversity.blr1.cdn.digitaloceanspaces.com/public/pdf/2026/05/Scan%20Copy%20M.Com%20M.A.%20Private%20June-2026.pdf" class="hover:text-primary-color transition"><b>Download Private Viva-Voce Center List - 2026</b></a></li>
+                            <li><i class="fas fa-circle-notch text-xs text-yellow-500 mr-2"></i><a href="https://t.me/HelpforDMBot" class="hover:text-primary-color transition"><b>Contact Support</b></a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Connect -->
+                <div>
+                    <div class="text-center">
+                        <h3 class="text-xl font-bold mb-3 border-b-2 border-primary-color pb-1 inline-block">Connect With Us</h3>
+                        <div class="flex space-x-4 justify-center">
+                            <a href="https://whatsapp.com/channel/0029Va9jtav4tRrmKPxos138" class="social-icon" title="Whatsapp"><i class="fab fa-whatsapp"></i></a>
+                            <a href="https://t.me/CCSUniversityMRT" class="social-icon" title="Telegram"><i class="fab fa-telegram-plane"></i></a>
+                            <a href="https://instagram.com/universityupdates_uu" class="social-icon" title="Instagram"><i class="fab fa-instagram"></i></a>
+                            <a href="https://x.com/uni_updates08" class="social-icon" title="X"><i class="fab fa-x"></i></a>
+                        </div>
+                        <div class="mt-4">
+                            <p id="live-footer-time" class="text-sm text-gray-200 font-medium tracking-wide flex items-center justify-center gap-2"></p>
+                        </div>
+                        <div class="flex items-center justify-center gap-2 mt-4 text-white text-xs">
+                            <i class="fas fa-users text-yellow-500"></i>
+                            <span>Total Visitors:</span>
+                            <span id="new-count" class="font-bold text-slate-800 bg-slate-200 px-2 py-0.5 rounded">0</span>
+                        </div>
+                        <div class="flex items-center justify-center gap-2 mt-4 text-white text-xs">
+                            <i class="text-yellow-500"></i>
+                            <span>Last Updated on: Tuesday, 12 May, 2026, 11:57 AM</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
             
-            // Reset state
-            dom.courseSelect.value = "";
-            hide(dom.subjectGroup); hide(dom.resultsCard); hide(dom.errorCard);
-        };
+            <div class="text-center pt-4 border-t border-white border-opacity-30">
+                <p class="text-sm opacity-70">&copy; 2025-2026 University Updates. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+<script>
+    function toggleDarkMode() {
+        const isDark = document.getElementById('themeToggle').checked;
+        document.body.classList.toggle('dark-mode', isDark);
+        document.getElementById('toggleCircle').style.left = isDark ? '20px' : '0';
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    }
+</script>
+   
+<script>
+    const config = {
+        currentMode: 'college',
+        subjectMap: {
+            "M.Com.": [{ text: "M.Com. (I-304)", value: "I-304" }],
+            "M.A.": [
+                { text: "Defence Studies (G-895)", value: "G-895" },
+                { text: "Economics (G-806)", value: "G-806" },
+                { text: "Education (G-803)", value: "G-803" },
+                { text: "Education (G-804)", value: "G-804" },
+                { text: "English (G-812)", value: "G-812" },
+                { text: "Hindi (G-825)", value: "G-825" },
+                { text: "History (G-837)", value: "G-837" },
+                { text: "Mathematics (G-850)", value: "G-850" },
+                { text: "Philosophy (G-845)", value: "G-845" },
+                { text: "Political Science (G-870)", value: "G-870" },
+                { text: "Sanskrit (G-882)", value: "G-882" },
+                { text: "Sociology (G-887)", value: "G-887" },
+                { text: "Urdu (G-862)", value: "G-862" }
+            ]
+        },
+        fileMap: {
+            "I-304": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRZiv_e1A0gciQkWuUvmcsf-efhajUNQWUYF2-5JIljXgkM7iFTz5LOlEVklVALuZY1HuQ-T4SpcXDa/pub?gid=0&single=true&output=csv",
+            "G-895": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRZiv_e1A0gciQkWuUvmcsf-efhajUNQWUYF2-5JIljXgkM7iFTz5LOlEVklVALuZY1HuQ-T4SpcXDa/pub?gid=247840887&single=true&output=csv",
+            "G-806": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRZiv_e1A0gciQkWuUvmcsf-efhajUNQWUYF2-5JIljXgkM7iFTz5LOlEVklVALuZY1HuQ-T4SpcXDa/pub?gid=641233544&single=true&output=csv",
+            "G-803": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRZiv_e1A0gciQkWuUvmcsf-efhajUNQWUYF2-5JIljXgkM7iFTz5LOlEVklVALuZY1HuQ-T4SpcXDa/pub?gid=211843497&single=true&output=csv",
+            "G-804": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRZiv_e1A0gciQkWuUvmcsf-efhajUNQWUYF2-5JIljXgkM7iFTz5LOlEVklVALuZY1HuQ-T4SpcXDa/pub?gid=211843497&single=true&output=csv",
+            "G-812": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRZiv_e1A0gciQkWuUvmcsf-efhajUNQWUYF2-5JIljXgkM7iFTz5LOlEVklVALuZY1HuQ-T4SpcXDa/pub?gid=1289928464&single=true&output=csv",
+            "G-825": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRZiv_e1A0gciQkWuUvmcsf-efhajUNQWUYF2-5JIljXgkM7iFTz5LOlEVklVALuZY1HuQ-T4SpcXDa/pub?gid=1710636826&single=true&output=csv",
+            "G-837": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRZiv_e1A0gciQkWuUvmcsf-efhajUNQWUYF2-5JIljXgkM7iFTz5LOlEVklVALuZY1HuQ-T4SpcXDa/pub?gid=1673491282&single=true&output=csv",
+            "G-850": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRZiv_e1A0gciQkWuUvmcsf-efhajUNQWUYF2-5JIljXgkM7iFTz5LOlEVklVALuZY1HuQ-T4SpcXDa/pub?gid=634965624&single=true&output=csv",
+            "G-845": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRZiv_e1A0gciQkWuUvmcsf-efhajUNQWUYF2-5JIljXgkM7iFTz5LOlEVklVALuZY1HuQ-T4SpcXDa/pub?gid=122536702&single=true&output=csv",
+            "G-870": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRZiv_e1A0gciQkWuUvmcsf-efhajUNQWUYF2-5JIljXgkM7iFTz5LOlEVklVALuZY1HuQ-T4SpcXDa/pub?gid=1880701720&single=true&output=csv",
+            "G-882": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRZiv_e1A0gciQkWuUvmcsf-efhajUNQWUYF2-5JIljXgkM7iFTz5LOlEVklVALuZY1HuQ-T4SpcXDa/pub?gid=1599191084&single=true&output=csv",
+            "G-887": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRZiv_e1A0gciQkWuUvmcsf-efhajUNQWUYF2-5JIljXgkM7iFTz5LOlEVklVALuZY1HuQ-T4SpcXDa/pub?gid=1852586580&single=true&output=csv",
+            "G-862": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRZiv_e1A0gciQkWuUvmcsf-efhajUNQWUYF2-5JIljXgkM7iFTz5LOlEVklVALuZY1HuQ-T4SpcXDa/pub?gid=1872629374&single=true&output=csv"
+        },
+        allData: {},
+        failedSubs: []
+    };
 
-        function parseCSV(text) {
-            const lines = text.trim().split('\n');
-            if (lines.length < 2) return [];
-            const headers = lines[0].split(',').map(h => h.trim().replace(/"/g, ''));
-            const data = [];
-            for (let i = 1; i < lines.length; i++) {
-                const values = [];
-                let cell = '', inQuotes = false;
-                for (let char of lines[i]) {
-                    if (char === '"') inQuotes = !inQuotes;
-                    else if (char === ',' && !inQuotes) { values.push(cell.trim()); cell = ''; }
-                    else cell += char;
-                }
-                values.push(cell.trim());
-                if (values.length >= headers.length) {
-                    const obj = {};
-                    headers.forEach((h, idx) => obj[h] = values[idx]?.replace(/^"|"$/g, ''));
-                    data.push(obj);
-                }
+    const dom = {
+        courseSelect: document.getElementById('courseSelect'),
+        subjectSelect: document.getElementById('subjectSelect'),
+        subjectGroup: document.getElementById('subjectGroup'),
+        collegeFlow: document.getElementById('collegeFlow'),
+        districtGroup: document.getElementById('districtGroup'),
+        districtSelect: document.getElementById('districtSelect'),
+        collegeGroup: document.getElementById('collegeGroup'),
+        collegeSelect: document.getElementById('collegeSelect'),
+        centerFlow: document.getElementById('centerFlow'),
+        centerSelect: document.getElementById('centerSelect'),
+        resultsCard: document.getElementById('resultsCard'),
+        resultOutput: document.getElementById('resultOutput'),
+        errorCard: document.getElementById('errorCard'),
+        errorMessage: document.getElementById('errorMessage'),
+        portalWrapper: document.getElementById('portalWrapper'),
+        initialLoader: document.getElementById('initialLoader'),
+        footerTime: document.getElementById('live-footer-time')
+    };
+
+    function show(el) { el.classList.remove('a-tab-hidden'); }
+    function hide(el) { el.classList.add('a-tab-hidden'); }
+    function resetSelect(el, text) { el.innerHTML = `<option value="">-- ${text} --</option>`; }
+
+    window.switchMode = function(mode) {
+        config.currentMode = mode;
+        document.getElementById('tabCollege').classList.toggle('active', mode === 'college');
+        document.getElementById('tabCenter').classList.toggle('active', mode === 'center');
+        mode === 'college' ? show(dom.collegeFlow) : hide(dom.collegeFlow);
+        mode === 'center' ? show(dom.centerFlow) : hide(dom.centerFlow);
+
+        // Reset state
+        dom.courseSelect.value = "";
+        hide(dom.subjectGroup); hide(dom.resultsCard); hide(dom.errorCard);
+        hide(dom.districtGroup); hide(dom.collegeGroup);
+        resetSelect(dom.subjectSelect, "Select Subject");
+        resetSelect(dom.districtSelect, "Select District");
+        resetSelect(dom.collegeSelect, "Select Your College");
+        resetSelect(dom.centerSelect, "Select Viva Center");
+    };
+
+    function parseCSV(text) {
+        const lines = text.trim().split('\n');
+        if (lines.length < 2) return [];
+        const headers = lines[0].split(',').map(h => h.trim().replace(/"/g, ''));
+        const data = [];
+        for (let i = 1; i < lines.length; i++) {
+            const values = [];
+            let cell = '', inQuotes = false;
+            for (let char of lines[i]) {
+                if (char === '"') inQuotes = !inQuotes;
+                else if (char === ',' && !inQuotes) { values.push(cell.trim()); cell = ''; }
+                else cell += char;
             }
-            return data;
+            values.push(cell.trim());
+            if (values.length >= headers.length) {
+                const obj = {};
+                headers.forEach((h, idx) => obj[h] = values[idx]?.replace(/^"|"$/g, ''));
+                data.push(obj);
+            }
         }
+        return data;
+    }
 
-        dom.courseSelect.onchange = function() {
-            const course = this.value;
-            hide(dom.subjectGroup); hide(dom.resultsCard); hide(dom.errorCard);
-            resetSelect(dom.subjectSelect, "Select Subject");
-            if (course) {
-                config.subjectMap[course].forEach(s => dom.subjectSelect.add(new Option(s.text, s.value)));
-                show(dom.subjectGroup);
-            }
-        };
-
-        dom.subjectSelect.onchange = function() {
-            const subCode = this.value;
-            hide(dom.resultsCard); hide(dom.errorCard);
-            resetSelect(dom.districtSelect, "Select District");
-            resetSelect(dom.centerSelect, "Select Viva Center");
-
-            if (!subCode) return;
-
-            if (config.failedSubs.includes(subCode)) {
-                dom.errorMessage.innerHTML = `Data for <b>${subCode}</b> is currently unavailable or the file is not uploaded by Admin. Please <a href="https://t.me/HelpforDMBot" class="text-blue-700 underline font-bold">Contact Support</a>.`;
-                show(dom.errorCard);
-                hide(dom.districtGroup); hide(dom.collegeGroup);
-                return;
-            }
-
-            const data = config.allData[subCode];
-            if (config.currentMode === 'college') {
-                const districts = [...new Set(data.map(r => r.District).filter(Boolean))].sort();
-                districts.forEach(d => dom.districtSelect.add(new Option(d, d)));
-                show(dom.districtGroup);
-            } else {
-                const centers = [...new Set(data.map(r => r['Name of Center']).filter(Boolean))].sort();
-                centers.forEach(c => dom.centerSelect.add(new Option(c, c)));
-            }
-        };
-
-        dom.districtSelect.onchange = function() {
-            const dist = this.value;
-            hide(dom.collegeGroup); hide(dom.resultsCard);
-            resetSelect(dom.collegeSelect, "Select Your College");
-            if (!dist) return;
-            const colleges = [...new Set(config.allData[dom.subjectSelect.value].filter(r => r.District === dist).map(r => r['Attached Colleges']))].sort();
-            colleges.forEach(c => dom.collegeSelect.add(new Option(c, c)));
-            show(dom.collegeGroup);
-        };
-
-        dom.collegeSelect.onchange = function() {
-            if (!this.value) return;
-            const res = config.allData[dom.subjectSelect.value].find(r => r['Attached Colleges'] === this.value);
-            renderResult(res, 'college');
-        };
-
-        dom.centerSelect.onchange = function() {
-            if (!this.value) return;
-            const matches = config.allData[dom.subjectSelect.value].filter(r => r['Name of Center'] === this.value);
-            renderResult(matches, 'center');
-        };
-
-        function checkUpcoming(dateStr) {
-            if(!dateStr || dateStr.includes('Not Fixed') || dateStr.includes('TBA')) return false;
-            try {
-                const parts = dateStr.split('/');
-                const examDate = new Date(parts[2], parts[1]-1, parts[0]);
-                const today = new Date();
-                today.setHours(0,0,0,0);
-                const diffTime = examDate - today;
-                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-                return (diffDays >= 0 && diffDays <= 5);
-            } catch(e) { return false; }
-        }
-
-        function renderResult(data, mode) {
-            hide(dom.resultsCard);
-            let html = '';
-            const item = mode === 'college' ? data : data[0];
-            const isUpcoming = checkUpcoming(item.Date);
-            const noticeBtn = item.Notice ? `<a href="${item.Notice}" target="_blank" class="inline-block mt-4 bg-blue-600 text-white px-4 py-2 rounded-lg font-bold text-xs hover:bg-blue-700 transition"><i class="fas fa-file-pdf mr-2"></i> View Official Notice</a>` : '';
-            const alertBox = isUpcoming ? `<div class="bg-orange-100 border-l-4 border-orange-500 p-3 mb-4 animate-pulse"><p class="text-orange-700 font-bold text-xs"><i class="fas fa-exclamation-triangle mr-2"></i> URGENT: Viva scheduled within 5 days!</p></div>` : '';
-
-            if (mode === 'college') {
-                html = `${alertBox}
-                        <p><b>Student College:</b> ${data['Attached Colleges']}</p>
-                        <hr class="my-2 opacity-20">
-                        <p><b>Assigned Viva Center:</b> <span class="text-blue-700 font-bold">${data['Name of Center']}</span></p>
-                        <p><b>Examination Date:</b> <span class="text-red-600 font-bold">${data.Date || 'Not Fixed (Contact to you college or center)'}</span></p>
-                        <p><b>Reporting Time:</b> ${data.Time || 'Not Fixed'}</p>
-                        ${noticeBtn}`;
-            } else {
-                const list = data.map(m => `<li>• ${m['Attached Colleges']}</li>`).join('');
-                html = `${alertBox}
-                        <p><b>Viva Center Name:</b> <span class="text-blue-700 font-bold">${item['Name of Center']}</span></p>
-                        <p><b>Examination Date:</b> <span class="text-red-600 font-bold">${item.Date || 'TBA (Contact to your college or viva center)'}</span></p>
-                        <p><b>Reporting Time:</b> ${item.Time || 'Not Fixed'}</p>
-                        <hr class="my-2 opacity-20">
-                        <p class="text-xs font-bold text-gray-400 uppercase">Attached Colleges:</p>
-                        <ul class="text-xs mt-1 space-y-1 font-medium">${list}</ul>
-                        ${noticeBtn}`;
-            }
-            dom.resultOutput.innerHTML = html;
-            show(dom.resultsCard);
-        }
-
-        async function init() {
-    const loadTasks = Object.keys(config.fileMap).map(async sub => {
+    function parseCustomDate(dateStr) {
+        if (!dateStr || dateStr.toLowerCase().includes('not') || dateStr.toLowerCase().includes('tba')) return null;
         try {
-            const url = config.fileMap[sub] + (config.fileMap[sub].includes('?') ? '&' : '?') + 't=' + new Date().getTime();
-            const res = await fetch(url);
-            if (!res.ok) throw new Error();
-            const text = await res.text();
-            config.allData[sub] = parseCSV(text);
-        } catch (e) { 
-            console.error(`Error loading data for ${sub}:`, e);
-            config.failedSubs.push(sub); 
-        }
-    });
-    await Promise.all(loadTasks);
-    hide(dom.initialLoader);
-    show(dom.mainContent);
-}
+            let cleanStr = dateStr.includes(',') ? dateStr.split(',')[1].trim() : dateStr.trim();
+            let d = new Date(cleanStr);
+            if (isNaN(d.getTime())) {
+                const parts = cleanStr.replace(/[-.]/g, '/').split('/');
+                if (parts.length === 3) {
+                    if (parts[0].length === 4) d = new Date(parts[0], parts[1] - 1, parts[2]);
+                    else d = new Date(parts[2], parts[1] - 1, parts[0]);
+                }
+            }
+            return isNaN(d.getTime()) ? null : d;
+        } catch (e) { return null; }
+    }
 
-        function clock() {
-            const now = new Date();
-            const timeStr = now.toLocaleString('en-IN', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' });
-            if (dom.footerTime) dom.footerTime.innerHTML = `<i class="far fa-clock text-yellow-400 mr-2"></i> ${timeStr}`;
-            if (dom.headerBranding) dom.headerBranding.textContent = `Powered by University Updates | ${timeStr}`;
+    function loadUpcomingAlerts() {
+        const alertContainer = document.getElementById('upcomingAlerts');
+        const today = new Date(); today.setHours(0, 0, 0, 0);
+        const next5Days = new Date(today); next5Days.setDate(today.getDate() + 5);
+
+        let allEntries = [];
+
+        Object.keys(config.allData).forEach(subKey => {
+            config.allData[subKey].forEach(item => {
+                const vDate = parseCustomDate(item.Date);
+                if (vDate && vDate >= today && vDate <= next5Days) {
+                    allEntries.push({
+                        Center: item['Name of Center'],
+                        Course: item.Course || "N/A",
+                        Subject: item.Subject || "N/A",
+                        SubCode: item['Subject Code'] || "",
+                        DateStr: item.Date,
+                        DateObj: vDate,
+                        Time: item.Time || "N/A",
+                        Notice: item.Notice
+                    });
+                }
+            });
+        });
+
+        const uniqueEntries = Array.from(new Map(allEntries.map(item => [`${item.Center}-${item.SubCode}-${item.DateStr}`, item])).values());
+        uniqueEntries.sort((a, b) => a.DateObj - b.DateObj);
+
+        if (uniqueEntries.length === 0) {
+            alertContainer.innerHTML = `<div class="pending-box">📢 No Upcoming Viva scheduled for the next 5 days.</div>`;
+            return;
         }
 
-        async function visitor() {
+        alertContainer.innerHTML = `
+            <div class="alert-heading"><i class="fas fa-bolt"></i> Upcoming Viva Alerts (Next 5 Days)</div>
+            <div class="single-slider">
+                <div class="single-track" id="singleTrack">
+                    ${uniqueEntries.map(item => `
+                        <div class="single-card">
+                            <div class="single-title">🏫 ${item.Center}</div>
+                            <div class="single-sub">${item.Course} | ${item.Subject} ${item.SubCode ? '('+item.SubCode+')' : ''}</div>
+                            <div class="text-red-600 font-bold text-sm mb-1"><i class="far fa-calendar-alt"></i> ${item.DateStr} | <i class="far fa-clock"></i> ${item.Time}</div>
+                            ${item.Notice ? `<a href="${item.Notice}" target="_blank" class="mini-notice-btn">📄 View Notice</a>` : ''}
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+            <div class="slider-dots">
+                ${uniqueEntries.map((_, i) => `<div class="slider-dot ${i === 0 ? 'active' : ''}" data-index="${i}"></div>`).join('')}
+            </div>`;
+
+        const track = document.getElementById('singleTrack');
+        const dots = document.querySelectorAll('.slider-dot');
+        let current = 0;
+
+        function showSlide(index) {
+            track.style.transform = `translateX(-${index * 100}%)`;
+            dots.forEach(dot => dot.classList.remove('active'));
+            dots[index].classList.add('active');
+            current = index;
+        }
+
+        if(uniqueEntries.length > 1) {
+            setInterval(() => { current = (current + 1) % uniqueEntries.length; showSlide(current); }, 5000);
+        }
+        dots.forEach(dot => dot.addEventListener('click', () => showSlide(parseInt(dot.dataset.index))));
+    }
+
+    async function init() {
+        // Show main content instantly, unblocking the user
+        hide(dom.initialLoader);
+        show(dom.portalWrapper);
+        
+        // Show loading state just for the alerts section
+        const alertContainer = document.getElementById('upcomingAlerts');
+        alertContainer.innerHTML = `<div class="pending-box skeleton text-blue-600 font-bold">📢 Syncing Latest Viva Updates... Please wait.</div>`;
+
+        // Load data in the background concurrently
+        const loadTasks = Object.keys(config.fileMap).map(async sub => {
             try {
-                const res = await fetch('https://api.counterapi.dev/v1/university_updates_uu/main/up');
-                const data = await res.json();
-                document.getElementById('new-count').innerText = data.count;
-            } catch (e) {}
+                const url = config.fileMap[sub] + (config.fileMap[sub].includes('?') ? '&' : '?') + 't=' + new Date().getTime();
+                const res = await fetch(url);
+                if (!res.ok) throw new Error();
+                const text = await res.text();
+                config.allData[sub] = parseCSV(text);
+            } catch (e) {
+                console.error(`Error loading data for ${sub}:`, e);
+                config.failedSubs.push(sub);
+            }
+        });
+        
+        // Wait for all background tasks, then populate alerts
+        await Promise.allSettled(loadTasks);
+        loadUpcomingAlerts();
+    }
+
+    // --- SEARCH EVENT HANDLERS ---
+    dom.courseSelect.onchange = function() {
+        const course = this.value;
+        hide(dom.subjectGroup); hide(dom.resultsCard); hide(dom.errorCard);
+        hide(dom.districtGroup); hide(dom.collegeGroup); hide(dom.centerFlow);
+        resetSelect(dom.subjectSelect, "Select Subject");
+        resetSelect(dom.districtSelect, "Select District");
+        resetSelect(dom.collegeSelect, "Select Your College");
+        resetSelect(dom.centerSelect, "Select Viva Center");
+        if (course) {
+            config.subjectMap[course].forEach(s => dom.subjectSelect.add(new Option(s.text, s.value)));
+            show(dom.subjectGroup);
+        }
+    };
+
+    dom.subjectSelect.onchange = async function() {
+        const subCode = this.value;
+        hide(dom.resultsCard); hide(dom.errorCard);
+        hide(dom.districtGroup); hide(dom.collegeGroup);
+        resetSelect(dom.districtSelect, "Select District");
+        resetSelect(dom.centerSelect, "Select Viva Center");
+
+        if (!subCode) return;
+
+        // If data isn't loaded yet (user is super fast), fetch it on demand
+        if (!config.allData[subCode] && !config.failedSubs.includes(subCode)) {
+            dom.resultOutput.innerHTML = `<p class="skeleton p-3 text-center text-blue-700 font-bold rounded-lg shadow">Fetching specific data for ${subCode}...</p>`;
+            show(dom.resultsCard);
+            try {
+                const url = config.fileMap[subCode] + (config.fileMap[subCode].includes('?') ? '&' : '?') + 't=' + new Date().getTime();
+                const res = await fetch(url);
+                if (!res.ok) throw new Error();
+                const text = await res.text();
+                config.allData[subCode] = parseCSV(text);
+                hide(dom.resultsCard);
+            } catch (e) {
+                config.failedSubs.push(subCode);
+                hide(dom.resultsCard);
+            }
         }
 
-        document.addEventListener('DOMContentLoaded', () => {
-            init();
-            visitor();
-            setInterval(clock, 1000);
-        });</script>    </body></html>
+        if (config.failedSubs.includes(subCode) || !config.allData[subCode]) {
+            dom.errorMessage.innerHTML = `Data for <b>${subCode}</b> is currently unavailable or the file is not uploaded by Admin. Please <a href="https://t.me/HelpforDMBot" class="text-blue-700 underline font-bold">Contact Support</a>.`;
+            show(dom.errorCard);
+            hide(dom.districtGroup); hide(dom.collegeGroup); hide(dom.centerFlow);
+            return;
+        }
+
+        const data = config.allData[subCode];
+        if (config.currentMode === 'college') {
+            const districts = [...new Set(data.map(r => r.District).filter(Boolean))].sort();
+            districts.forEach(d => dom.districtSelect.add(new Option(d, d)));
+            show(dom.districtGroup);
+        } else {
+            const centers = [...new Set(data.map(r => r['Name of Center']).filter(Boolean))].sort();
+            centers.forEach(c => dom.centerSelect.add(new Option(c, c)));
+            show(dom.centerFlow);
+        }
+    };
+
+    dom.districtSelect.onchange = function() {
+        const dist = this.value;
+        hide(dom.collegeGroup); hide(dom.resultsCard);
+        resetSelect(dom.collegeSelect, "Select Your College");
+        if (!dist) return;
+        const colleges = [...new Set(config.allData[dom.subjectSelect.value].filter(r => r.District === dist).map(r => r['Attached Colleges']))].sort();
+        colleges.forEach(c => dom.collegeSelect.add(new Option(c, c)));
+        show(dom.collegeGroup);
+    };
+
+    dom.collegeSelect.onchange = function() {
+        if (!this.value) return;
+        const res = config.allData[dom.subjectSelect.value].find(r => r['Attached Colleges'] === this.value);
+        renderResult(res, 'college');
+    };
+
+    dom.centerSelect.onchange = function() {
+        if (!this.value) return;
+        const matches = config.allData[dom.subjectSelect.value].filter(r => r['Name of Center'] === this.value);
+        renderResult(matches, 'center');
+    };
+
+    function renderResult(data, mode) {
+        hide(dom.resultsCard);
+        let html = '';
+        if (mode === 'college') {
+            html = `<p><b>Student College:</b> ${data['Attached Colleges']}</p>
+                    <hr class="my-2 opacity-20">
+                    <p><b>Assigned Viva Center:</b> <span class="text-blue-700 font-bold">${data['Name of Center']}</span></p>
+                    <p><b>Examination Date:</b> <span class="text-red-600 font-bold">${data.Date || 'Not Fixed (Contact to you college or center)'}</span></p>
+                    <p><b>Reporting Time:</b> ${data.Time || 'Not Fixed'}</p>
+                    ${data.Notice ? `<a href="${data.Notice}" target="_blank" class="mini-notice-btn">📄 View Notice</a>` : ''}`;
+        } else {
+            const head = data[0];
+            const list = data.map(m => `<li>• ${m['Attached Colleges']}</li>`).join('');
+            html = `<p><b>Viva Center Name:</b> <span class="text-blue-700 font-bold">${head['Name of Center']}</span></p>
+                    <p><b>Examination Date:</b> <span class="text-red-600 font-bold">${head.Date || 'TBA (Contact to your college or viva center)'}</span></p>
+                    <p><b>Reporting Time:</b> ${head.Time || 'Not Fixed'}</p>
+                    <hr class="my-2 opacity-20">
+                    <p class="text-xs font-bold text-gray-400 uppercase">Attached Colleges:</p>
+                    <ul class="text-xs mt-1 space-y-1 font-medium">${list}</ul>
+                    ${head.Notice ? `<a href="${head.Notice}" target="_blank" class="mini-notice-btn">📄 View Notice</a>` : ''}`;
+        }
+        dom.resultOutput.innerHTML = html;
+        show(dom.resultsCard);
+    }
+
+    function clock() {
+        const now = new Date();
+        const timeStr = now.toLocaleString('en-IN', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' });
+        if (dom.footerTime) dom.footerTime.innerHTML = `<i class="far fa-clock text-yellow-400 mr-2"></i> ${timeStr}`;
+    }
+
+    async function visitor() {
+        try {
+            const res = await fetch('https://api.counterapi.dev/v1/university_updates_uu/main/up');
+            const data = await res.json();
+            document.getElementById('new-count').innerText = data.count;
+        } catch (e) {}
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        init();
+        visitor();
+        setInterval(clock, 1000);
+    });
+</script>
+</body>
+</html>
