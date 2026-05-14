@@ -1,0 +1,221 @@
+const config = {
+            currentMode: 'college',
+            subjectMap: {
+                "M.Com.": [{ text: "M.Com. (I-304)", value: "I-304" }],
+                "M.A.": [
+                    { text: "Defence Studies (G-895)", value: "G-895" },
+                    { text: "Economics (G-806)", value: "G-806" },
+                    { text: "Education (G-803)", value: "G-803" },
+                    { text: "Education (G-804)", value: "G-804" },
+                    { text: "English (G-812)", value: "G-812" },
+                    { text: "Hindi (G-825)", value: "G-825" },
+                    { text: "History (G-837)", value: "G-837" },
+                    { text: "Mathematics (G-850)", value: "G-850" },
+                    { text: "Philosophy (G-845)", value: "G-845" },
+                    { text: "Political Science (G-870)", value: "G-870" },
+                    { text: "Sanskrit (G-882)", value: "G-882" },
+                    { text: "Sociology (G-887)", value: "G-887" },
+                    { text: "Urdu (G-862)", value: "G-862" }
+                ]
+            },
+            fileMap: {
+                "I-304": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRZiv_e1A0gciQkWuUvmcsf-efhajUNQWUYF2-5JIljXgkM7iFTz5LOlEVklVALuZY1HuQ-T4SpcXDa/pub?gid=0&single=true&output=csv",
+                "G-895": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRZiv_e1A0gciQkWuUvmcsf-efhajUNQWUYF2-5JIljXgkM7iFTz5LOlEVklVALuZY1HuQ-T4SpcXDa/pub?gid=247840887&single=true&output=csv",
+                "G-806": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRZiv_e1A0gciQkWuUvmcsf-efhajUNQWUYF2-5JIljXgkM7iFTz5LOlEVklVALuZY1HuQ-T4SpcXDa/pub?gid=641233544&single=true&output=csv",
+                "G-803": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRZiv_e1A0gciQkWuUvmcsf-efhajUNQWUYF2-5JIljXgkM7iFTz5LOlEVklVALuZY1HuQ-T4SpcXDa/pub?gid=211843497&single=true&output=csv",
+                "G-804": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRZiv_e1A0gciQkWuUvmcsf-efhajUNQWUYF2-5JIljXgkM7iFTz5LOlEVklVALuZY1HuQ-T4SpcXDa/pub?gid=211843497&single=true&output=csv",
+                "G-812": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRZiv_e1A0gciQkWuUvmcsf-efhajUNQWUYF2-5JIljXgkM7iFTz5LOlEVklVALuZY1HuQ-T4SpcXDa/pub?gid=1289928464&single=true&output=csv",
+                "G-825": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRZiv_e1A0gciQkWuUvmcsf-efhajUNQWUYF2-5JIljXgkM7iFTz5LOlEVklVALuZY1HuQ-T4SpcXDa/pub?gid=1710636826&single=true&output=csv",
+                "G-837": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRZiv_e1A0gciQkWuUvmcsf-efhajUNQWUYF2-5JIljXgkM7iFTz5LOlEVklVALuZY1HuQ-T4SpcXDa/pub?gid=1673491282&single=true&output=csv",
+                "G-850": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRZiv_e1A0gciQkWuUvmcsf-efhajUNQWUYF2-5JIljXgkM7iFTz5LOlEVklVALuZY1HuQ-T4SpcXDa/pub?gid=634965624&single=true&output=csv",
+                "G-845": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRZiv_e1A0gciQkWuUvmcsf-efhajUNQWUYF2-5JIljXgkM7iFTz5LOlEVklVALuZY1HuQ-T4SpcXDa/pub?gid=122536702&single=true&output=csv",
+                "G-870": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRZiv_e1A0gciQkWuUvmcsf-efhajUNQWUYF2-5JIljXgkM7iFTz5LOlEVklVALuZY1HuQ-T4SpcXDa/pub?gid=1880701720&single=true&output=csv",
+                "G-882": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRZiv_e1A0gciQkWuUvmcsf-efhajUNQWUYF2-5JIljXgkM7iFTz5LOlEVklVALuZY1HuQ-T4SpcXDa/pub?gid=1599191084&single=true&output=csv",
+                "G-887": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRZiv_e1A0gciQkWuUvmcsf-efhajUNQWUYF2-5JIljXgkM7iFTz5LOlEVklVALuZY1HuQ-T4SpcXDa/pub?gid=1852586580&single=true&output=csv",
+                "G-862": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRZiv_e1A0gciQkWuUvmcsf-efhajUNQWUYF2-5JIljXgkM7iFTz5LOlEVklVALuZY1HuQ-T4SpcXDa/pub?gid=1872629374&single=true&output=csv"
+            },
+            allData: {},
+            failedSubs: []
+        };
+
+        const dom = {
+            courseSelect: document.getElementById('courseSelect'),
+            subjectSelect: document.getElementById('subjectSelect'),
+            subjectGroup: document.getElementById('subjectGroup'),
+            collegeFlow: document.getElementById('collegeFlow'),
+            districtGroup: document.getElementById('districtGroup'),
+            districtSelect: document.getElementById('districtSelect'),
+            collegeGroup: document.getElementById('collegeGroup'),
+            collegeSelect: document.getElementById('collegeSelect'),
+            centerFlow: document.getElementById('centerFlow'),
+            centerSelect: document.getElementById('centerSelect'),
+            resultsCard: document.getElementById('resultsCard'),
+            resultOutput: document.getElementById('resultOutput'),
+            errorCard: document.getElementById('errorCard'),
+            errorMessage: document.getElementById('errorMessage'),
+            mainContent: document.getElementById('mainContent'),
+            initialLoader: document.getElementById('initialLoader'),
+            footerTime: document.getElementById('live-footer-time'),
+            headerBranding: document.getElementById('header-branding')
+        };
+
+        function show(el) { el.classList.remove('a-tab-hidden'); }
+        function hide(el) { el.classList.add('a-tab-hidden'); }
+        function resetSelect(el, text) { el.innerHTML = `<option value="">-- ${text} --</option>`; }
+
+        window.switchMode = function(mode) {
+            config.currentMode = mode;
+            document.getElementById('tabCollege').classList.toggle('active', mode === 'college');
+            document.getElementById('tabCenter').classList.toggle('active', mode === 'center');
+            mode === 'college' ? show(dom.collegeFlow) : hide(dom.collegeFlow);
+            mode === 'center' ? show(dom.centerFlow) : hide(dom.centerFlow);
+            
+            // Reset state
+            dom.courseSelect.value = "";
+            hide(dom.subjectGroup); hide(dom.resultsCard); hide(dom.errorCard);
+        };
+
+        function parseCSV(text) {
+            const lines = text.trim().split('\n');
+            if (lines.length < 2) return [];
+            const headers = lines[0].split(',').map(h => h.trim().replace(/"/g, ''));
+            const data = [];
+            for (let i = 1; i < lines.length; i++) {
+                const values = [];
+                let cell = '', inQuotes = false;
+                for (let char of lines[i]) {
+                    if (char === '"') inQuotes = !inQuotes;
+                    else if (char === ',' && !inQuotes) { values.push(cell.trim()); cell = ''; }
+                    else cell += char;
+                }
+                values.push(cell.trim());
+                if (values.length >= headers.length) {
+                    const obj = {};
+                    headers.forEach((h, idx) => obj[h] = values[idx]?.replace(/^"|"$/g, ''));
+                    data.push(obj);
+                }
+            }
+            return data;
+        }
+
+        dom.courseSelect.onchange = function() {
+            const course = this.value;
+            hide(dom.subjectGroup); hide(dom.resultsCard); hide(dom.errorCard);
+            resetSelect(dom.subjectSelect, "Select Subject");
+            if (course) {
+                config.subjectMap[course].forEach(s => dom.subjectSelect.add(new Option(s.text, s.value)));
+                show(dom.subjectGroup);
+            }
+        };
+
+        dom.subjectSelect.onchange = function() {
+            const subCode = this.value;
+            hide(dom.resultsCard); hide(dom.errorCard);
+            resetSelect(dom.districtSelect, "Select District");
+            resetSelect(dom.centerSelect, "Select Viva Center");
+
+            if (!subCode) return;
+
+            if (config.failedSubs.includes(subCode)) {
+                dom.errorMessage.innerHTML = `Data for <b>${subCode}</b> is currently unavailable or the file is not uploaded by Admin. Please <a href="https://t.me/HelpforDMBot" class="text-blue-700 underline font-bold">Contact Support</a>.`;
+                show(dom.errorCard);
+                hide(dom.districtGroup); hide(dom.collegeGroup);
+                return;
+            }
+
+            const data = config.allData[subCode];
+            if (config.currentMode === 'college') {
+                const districts = [...new Set(data.map(r => r.District).filter(Boolean))].sort();
+                districts.forEach(d => dom.districtSelect.add(new Option(d, d)));
+                show(dom.districtGroup);
+            } else {
+                const centers = [...new Set(data.map(r => r['Name of Center']).filter(Boolean))].sort();
+                centers.forEach(c => dom.centerSelect.add(new Option(c, c)));
+            }
+        };
+
+        dom.districtSelect.onchange = function() {
+            const dist = this.value;
+            hide(dom.collegeGroup); hide(dom.resultsCard);
+            resetSelect(dom.collegeSelect, "Select Your College");
+            if (!dist) return;
+            const colleges = [...new Set(config.allData[dom.subjectSelect.value].filter(r => r.District === dist).map(r => r['Attached Colleges']))].sort();
+            colleges.forEach(c => dom.collegeSelect.add(new Option(c, c)));
+            show(dom.collegeGroup);
+        };
+
+        dom.collegeSelect.onchange = function() {
+            if (!this.value) return;
+            const res = config.allData[dom.subjectSelect.value].find(r => r['Attached Colleges'] === this.value);
+            renderResult(res, 'college');
+        };
+
+        dom.centerSelect.onchange = function() {
+            if (!this.value) return;
+            const matches = config.allData[dom.subjectSelect.value].filter(r => r['Name of Center'] === this.value);
+            renderResult(matches, 'center');
+        };
+
+        function renderResult(data, mode) {
+            hide(dom.resultsCard);
+            let html = '';
+            if (mode === 'college') {
+                html = `<p><b>Student College:</b> ${data['Attached Colleges']}</p>
+                        <hr class="my-2 opacity-20">
+                        <p><b>Assigned Viva Center:</b> <span class="text-blue-700 font-bold">${data['Name of Center']}</span></p>
+                        <p><b>Examination Date:</b> <span class="text-red-600 font-bold">${data.Date || 'Not Fixed (Contact to you college or center)'}</span></p>
+                        <p><b>Reporting Time:</b> ${data.Time || 'Not Fixed'}</p>`;
+            } else {
+                const head = data[0];
+                const list = data.map(m => `<li>• ${m['Attached Colleges']}</li>`).join('');
+                html = `<p><b>Viva Center Name:</b> <span class="text-blue-700 font-bold">${head['Name of Center']}</span></p>
+                        <p><b>Examination Date:</b> <span class="text-red-600 font-bold">${head.Date || 'TBA (Contact to your college or viva center)'}</span></p>
+                        <p><b>Reporting Time:</b> ${head.Time || 'Not Fixed'}</p>
+                        <hr class="my-2 opacity-20">
+                        <p class="text-xs font-bold text-gray-400 uppercase">Attached Colleges:</p>
+                        <ul class="text-xs mt-1 space-y-1 font-medium">${list}</ul>`;
+            }
+            dom.resultOutput.innerHTML = html;
+            show(dom.resultsCard);
+        }
+
+        async function init() {
+    const loadTasks = Object.keys(config.fileMap).map(async sub => {
+        try {
+            // Append a timestamp to prevent browser caching
+            const url = config.fileMap[sub] + (config.fileMap[sub].includes('?') ? '&' : '?') + 't=' + new Date().getTime();
+            
+            const res = await fetch(url);
+            if (!res.ok) throw new Error();
+            const text = await res.text();
+            config.allData[sub] = parseCSV(text);
+        } catch (e) { 
+            console.error(`Error loading data for ${sub}:`, e);
+            config.failedSubs.push(sub); 
+        }
+    });
+    await Promise.all(loadTasks);
+    hide(dom.initialLoader);
+    show(dom.mainContent);
+}
+
+        function clock() {
+            const now = new Date();
+            const timeStr = now.toLocaleString('en-IN', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' });
+            if (dom.footerTime) dom.footerTime.innerHTML = `<i class="far fa-clock text-yellow-400 mr-2"></i> ${timeStr}`;
+            if (dom.headerBranding) dom.headerBranding.textContent = `Powered by University Updates | ${timeStr}`;
+        }
+
+        async function visitor() {
+            try {
+                const res = await fetch('https://api.counterapi.dev/v1/university_updates_uu/main/up');
+                const data = await res.json();
+                document.getElementById('new-count').innerText = data.count;
+            } catch (e) {}
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            init();
+            visitor();
+            setInterval(clock, 1000);
+        });
