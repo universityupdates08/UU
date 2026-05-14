@@ -235,7 +235,14 @@
             </div>
         </div>
     </footer>
-   
+   <script>
+    function toggleDarkMode() {
+        const isDark = document.getElementById('themeToggle').checked;
+        document.body.classList.toggle('dark-mode', isDark);
+        document.getElementById('toggleCircle').style.left = isDark ? '20px' : '0';
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    }
+</script>
     <script src="Scripts/Viva.js"></script>
     
 </body>
