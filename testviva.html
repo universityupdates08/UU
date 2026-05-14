@@ -1,196 +1,57 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Viva Center Finder - University Updates</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    
-    <style>
-        :root {
-            --primary-color: #EF3C3C;
-            --secondary-color: #2C4B9E;
-            --bg-color: #f3f4f6;
-        }
-
-        body { font-family: 'Poppins', sans-serif; background-color: var(--bg-color); }
-
-        .a-tab-hidden { display: none; }
-
-        /* Premium Tabs */
-        .tab-btn {
-            flex: 1; padding: 18px; font-weight: 800; text-align: center; cursor: pointer;
-            transition: 0.3s; border-bottom: 4px solid #e5e7eb; background: #f9fafb;
-            color: #94a3b8; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 1px;
-        }
-        .tab-btn.active {
-            background: white; color: var(--secondary-color); border-bottom-color: var(--primary-color);
-        }
-
-        /* Premium Modal (Popup) */
-        #resultModal {
-            transition: opacity 0.3s ease, visibility 0.3s ease;
-            z-index: 100;
-        }
-        .modal-content {
-            transform: scale(0.9);
-            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
-        #resultModal.active .modal-content { transform: scale(1); }
-        
-        .news-gif { height: 14px; display: inline-block; margin-left: 5px; }
-        .bg-icon { position: fixed; opacity: 0.04; color: var(--secondary-color); z-index: -1; pointer-events: none; }
-        
-        /* Glassmorphism Sidebar */
-        .sidebar-card { background: rgba(255, 255, 255, 0.6); backdrop-filter: blur(10px); }
-    </style>
-</head>
-<body class="min-h-screen flex flex-col">
-
-    <i class="fas fa-university bg-icon" style="top: 10%; left: 5%; font-size: 15rem;"></i>
-    <i class="fas fa-map-marked-alt bg-icon" style="bottom: 10%; right: 5%; font-size: 15rem;"></i>
-
-    <!-- Utility Bar -->
-    <header class="bg-[#EF3C3C] text-white py-2 px-4 shadow-md z-50">
-        <div class="max-w-7xl mx-auto flex justify-between items-center text-xs font-bold uppercase tracking-widest">
-            <a href="https://t.me/HelpforDMBot" class="hover:text-black"><i class="fas fa-headset mr-2"></i>Helpdesk</a>
-            <div class="flex gap-4">
-                <a href="https://t.me/CCSUniversityMRT" class="hover:scale-110 transition"><i class="fab fa-telegram scale-125"></i></a>
-                <a href="https://whatsapp.com/channel/0029Va9jtav4tRrmKPxos138" class="hover:scale-110 transition"><i class="fab fa-whatsapp scale-125"></i></a>
-            </div>
-        </div>
-    </header>
-
-    <div class="py-8 flex justify-center">
-        <img src="https://i.ibb.co/nMC0877T/UNIVERSITY-UPDATES-LOGO-removebg-preview.png" alt="Logo" class="h-24 md:h-28 drop-shadow-2xl">
-    </div>
-
-    <!-- Main Dashboard -->
-    <main class="flex-grow max-w-7xl mx-auto w-full px-4 pb-12">
-        <div id="initialLoader" class="text-center py-20">
-            <div class="inline-block animate-spin rounded-full h-10 w-10 border-4 border-blue-600 border-t-transparent"></div>
-            <p class="mt-4 font-black text-gray-400 uppercase text-xs tracking-widest">Loading Records...</p>
-        </div>
-
-        <div id="mainContent" class="a-tab-hidden bg-white shadow-2xl rounded-3xl overflow-hidden border border-gray-100 flex flex-col md:flex-row">
-            
-            <!-- Left: Search Column -->
-            <div class="md:w-2/3 border-r border-gray-100">
-                <div class="flex">
-                    <div id="tabCollege" class="tab-btn active" onclick="switchMode('college')">By College</div>
-                    <div id="tabCenter" class="tab-btn" onclick="switchMode('center')">By Center</div>
-                </div>
-
-                <div class="p-8 md:p-12 space-y-8">
-                    <div>
-                        <h2 class="text-3xl font-black text-gray-800 tracking-tight">Viva-Voce Finder</h2>
-                        <p id="header-branding" class="text-[10px] text-blue-600 font-bold uppercase mt-1 tracking-widest"></p>
-                    </div>
-
-                    <div class="grid gap-6">
-                        <div class="group">
-                            <label class="block text-[10px] font-black text-gray-400 uppercase mb-2 ml-1">1. Choose Course</label>
-                            <select id="courseSelect" class="w-full p-4 bg-gray-50 border-2 border-transparent focus:border-blue-500 focus:bg-white rounded-2xl outline-none transition-all font-bold text-gray-700">
-                                <option value="">-- SELECT COURSE --</option>
-                                <option value="M.Com.">M.Com. (Private)</option>
-                                <option value="M.A.">M.A. (Private)</option>
-                            </select>
-                        </div>
-
-                        <div id="subjectGroup" class="a-tab-hidden">
-                            <label class="block text-[10px] font-black text-gray-400 uppercase mb-2 ml-1">2. Select Subject</label>
-                            <select id="subjectSelect" class="w-full p-4 bg-gray-50 border-2 border-transparent focus:border-blue-500 focus:bg-white rounded-2xl outline-none transition-all font-bold text-gray-700"></select>
-                        </div>
-
-                        <div id="collegeFlow" class="space-y-6">
-                            <div id="districtGroup" class="a-tab-hidden">
-                                <label class="block text-[10px] font-black text-gray-400 uppercase mb-2 ml-1">3. Select District</label>
-                                <select id="districtSelect" class="w-full p-4 bg-gray-50 border-2 border-transparent focus:border-blue-500 rounded-2xl outline-none font-bold text-gray-700"></select>
-                            </div>
-                            <div id="collegeGroup" class="a-tab-hidden">
-                                <label class="block text-[10px] font-black text-gray-400 uppercase mb-2 ml-1">4. Select Your College</label>
-                                <select id="collegeSelect" class="w-full p-4 bg-gray-50 border-2 border-transparent focus:border-blue-500 rounded-2xl outline-none font-bold text-gray-700"></select>
-                            </div>
-                        </div>
-
-                        <div id="centerFlow" class="a-tab-hidden">
-                            <label class="block text-[10px] font-black text-gray-400 uppercase mb-2 ml-1">3. Select Viva Center</label>
-                            <select id="centerSelect" class="w-full p-4 bg-gray-50 border-2 border-transparent focus:border-blue-500 rounded-2xl outline-none font-bold text-gray-700"></select>
-                        </div>
-                    </div>
-
-                    <div id="errorCard" class="a-tab-hidden p-6 bg-red-50 border-2 border-red-100 rounded-2xl">
-                        <p id="errorMessage" class="text-red-600 text-sm font-bold"></p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Right: Updates Sidebar -->
-            <aside class="md:w-1/3 bg-gray-50 p-8 space-y-6">
-                <h3 class="font-black text-gray-800 uppercase text-xs tracking-widest border-b pb-4">Notifications</h3>
-                <div class="space-y-4">
-                    <a href="Viva/IP.jpg" class="block bg-white p-4 rounded-2xl shadow-sm hover:shadow-md transition border border-gray-100">
-                        <p class="text-blue-700 font-bold text-sm">Bulanshahar M.Com. Viva Date 2026 <img src="https://msuniversity.ac.in/assets/images/new.gif" class="news-gif"></p>
-                        <span class="text-[9px] text-gray-400 font-bold uppercase mt-2 block">May 11, 2026</span>
-                    </a>
-                </div>
-            </aside>
-        </div>
-    </main>
-
-    <!-- POPUP MODAL -->
-    <div id="resultModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 invisible opacity-0">
-        <div class="modal-content bg-white w-full max-w-lg rounded-[2.5rem] overflow-hidden shadow-2xl relative">
-            <button onclick="closeModal()" class="absolute top-6 right-6 h-10 w-10 bg-gray-100 hover:bg-red-500 hover:text-white rounded-full transition-all flex items-center justify-center z-10">
-                <i class="fas fa-times"></i>
-            </button>
-            <div id="popupBody"></div>
-        </div>
-    </div>
-
-    <!-- Footer -->
-    <footer class="bg-[#2C4B9E] text-white pt-12 pb-6">
-        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-12">
-            <div>
-                <h4 class="font-black uppercase text-xs mb-4 border-b border-blue-400 pb-2 tracking-widest">Disclaimer</h4>
-                <p class="text-[11px] text-blue-100 leading-relaxed text-justify">Confirm all dates with your college administration. We are not responsible for inaccuracies in the provided data.</p>
-            </div>
-            <div class="text-center">
-                <h4 class="font-black uppercase text-xs mb-4 border-b border-blue-400 pb-2 tracking-widest">Support</h4>
-                <a href="https://t.me/HelpforDMBot" class="text-xs font-bold hover:text-red-400">Telegram Admin Support</a>
-            </div>
-            <div class="text-center md:text-right">
-                <p id="live-footer-time" class="text-[10px] font-mono mb-4 text-blue-300"></p>
-                <div class="inline-flex items-center bg-blue-900 rounded-full px-5 py-2">
-                    <span class="text-[10px] font-black uppercase tracking-widest">Visitors:</span>
-                    <span id="new-count" class="ml-2 font-black text-white">0</span>
-                </div>
-            </div>
-        </div>
-        <p class="text-center text-[9px] mt-12 opacity-30 font-bold uppercase tracking-widest">© 2026 University Updates</p>
-    </footer>
-
-    <script>
-        const config = {
+<!DOCTYPE html><html lang="en"><head>    <meta charset="UTF-8">    <meta name="viewport" content="width=device-width, initial-scale=1.0">    <title>Viva Center Finder | University Updates</title>    <script src="https://cdn.tailwindcss.com"></script>    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">    <link rel="stylesheet" href="CSS/Viva.css">    </head><body>
+    <!-- Background Icons -->    <div class="background-icons">        <i class="fas fa-map-marker-alt icon-1"></i>        <i class="fas fa-university icon-2"></i>        <i class="fas fa-school icon-3"></i>        <i class="fas fa-file-alt icon-4"></i>    </div>
+    <!-- Header / Utility Bar -->    <header class="utility-bar">        <div class="max-w-7xl mx-auto flex justify-between items-center">            <div class="flex space-x-4">                <a href="https://t.me/HelpforDMBot" class="utility-link"><i class="fas fa-headset mr-1"></i> Contact Us</a>            </div>            <div class="flex items-center space-x-2">                <a href="https://t.me/CCSUniversityMRT" class="social-icon text-sm hover:text-gray-300 transition"><i class="fab fa-telegram"></i></a>                <span class="mx-2">|</span>                <a href="https://whatsapp.com/channel/0029Va9jtav4tRrmKPxos138" class="social-icon text-sm hover:text-gray-300 transition"><i class="fab fa-whatsapp"></i></a>                <span class="mx-2">|</span>                <a href="https://www.instagram.com/UniversityUpdates_UU" class="social-icon text-sm hover:text-gray-300 transition"><i class="fab fa-instagram"></i></a>                <span class="mx-2">|</span>                <a href="https://www.x.com/Uni_Updates08" class="social-icon text-sm hover:text-gray-300 transition"><i class="fab fa-x"></i></a>                <span class="mx-2">|</span>                <a href="https://www.youtube.com/@University-Updates-UU" class="social-icon text-sm hover:text-gray-300 transition"><i class="fab fa-youtube"></i></a>            </div>        </div>    </header>
+     <!-- Logo and Title Section -->    <div class="max-w-6xl mx-auto flex flex-row items-end justify-center p-4 relative z-10 gap-4">        <!-- Logo -->        <img src="https://i.ibb.co/nMC0877T/UNIVERSITY-UPDATES-LOGO-removebg-preview.png" alt="Logo" class="w-24 md:w-32">                <!-- Vertical Separator Line -->        <div class="h-12 border-l-2 border-gray-300 mx-4 md:mx-6"></div>                <!-- Viva Finder Title (Right Side) -->        <div class="mb-2">            <h1 class="text-2xl md:text-3xl font-extrabold text-gray-800 flex items-center">                <i class="fas fa-search-location text-blue-600 mr-2"></i> Viva Finder            </h1>        </div>    </div>            <!-- Marquee -->    <p style="color: white; font-style: italic; font-size: 15px; background-color: crimson; display: flex; align-items: center; height: 25px;">        <marquee onmouseover="this.stop();" direction="left" onmouseout="this.start();">            <b style="color: white">➤</b> 📢 Designed for CCSU Private Courses - Viva Voce Center Finder 2026        </marquee>    </p>
+    <!-- Main Content -->    <main class="flex-grow w-full flex flex-col justify-center items-center p-4 md:p-8">
+        <!-- Initial Loader -->        <div id="initialLoader" class="text-center p-8">            <svg class="animate-spin h-12 w-12 text-blue-600 mx-auto" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>            </svg>            <p class="text-gray-600 text-lg mt-4 font-semibold">Initializing...</p>        </div>
+              <!-- Floating WhatsApp Button --><a href="https://whatsapp.com/channel/0029Va9jtav4tRrmKPxos138" class="side-admission-btn">    <i class="fab fa-whatsapp mb-2 text-xl"></i> Join us on Whatsapp</a>                                     <!-- Main Content Card -->        <div id="mainContent" class="a-tab-hidden bg-white shadow-2xl rounded-2xl overflow-hidden w-full max-w-6xl flex flex-col border border-gray-100">                        <div class="p-6 md:p-10 grid md:grid-cols-3 gap-8">                                <!-- Left Section: Tabs and Form (2 Cols) -->                <section class="md:col-span-2 flex flex-col">                                        <!-- Mode Tabs -->                    <div class="flex border-b mb-6 rounded-lg overflow-hidden border border-gray-200">                        <div id="tabCollege" class="tab-btn active" onclick="switchMode('college')">Search by College</div>                        <div id="tabCenter" class="tab-btn" onclick="switchMode('center')">Search by Viva Center</div>                    </div>
+                   
+                    <div class="space-y-6">                        <!-- Step 1 -->                        <div>                            <label class="block text-xs font-bold text-gray-500 uppercase mb-1">1. Select Course</label>                            <select id="courseSelect" class="w-full p-3 border border-gray-300 rounded-lg outline-none focus:ring-2 focus:ring-blue-500">                                <option value="">-- Select Course --</option>                                <option value="M.Com.">M.Com.</option>                                <option value="M.A.">M.A.</option>                            </select>                        </div>
+                        <!-- Step 2 -->                        <div id="subjectGroup" class="a-tab-hidden">                            <label class="block text-xs font-bold text-gray-500 uppercase mb-1">2. Select Subject</label>                            <select id="subjectSelect" class="w-full p-3 border border-gray-300 rounded-lg outline-none focus:ring-2 focus:ring-blue-500"></select>                        </div>
+                        <!-- Mode: College Search -->                        <div id="collegeFlow" class="space-y-6">                            <div id="districtGroup" class="a-tab-hidden">                                <label class="block text-xs font-bold text-gray-500 uppercase mb-1">3. Select District</label>                                <select id="districtSelect" class="w-full p-3 border border-gray-300 rounded-lg outline-none focus:ring-2 focus:ring-blue-500"></select>                            </div>                            <div id="collegeGroup" class="a-tab-hidden">                                <label class="block text-xs font-bold text-gray-500 uppercase mb-1">4. Select Your College</label>                                <select id="collegeSelect" class="w-full p-3 border border-gray-300 rounded-lg outline-none focus:ring-2 focus:ring-blue-500"></select>                            </div>                        </div>
+                        <!-- Mode: Center Search -->                        <div id="centerFlow" class="a-tab-hidden">                            <label class="block text-xs font-bold text-gray-500 uppercase mb-1">3. Select Viva Center</label>                            <select id="centerSelect" class="w-full p-3 border border-gray-300 rounded-lg outline-none focus:ring-2 focus:ring-blue-500"></select>                        </div>                    </div>
+                    <!-- Result Output -->                    <div id="resultsCard" class="a-tab-hidden mt-10 bg-blue-50 border-l-4 border-blue-600 p-6 rounded-lg shadow-inner">                        <h2 class="text-xl font-bold text-blue-900 mb-4 flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> Examination Details</h2>                        <div id="resultOutput" class="space-y-3 text-sm text-gray-800"></div>                    </div>
+                    <!-- Error Output -->                    <div id="errorCard" class="a-tab-hidden mt-8 bg-red-50 border-l-4 border-red-500 p-6 rounded-lg">                        <h2 class="text-lg font-bold text-red-800 mb-1">Notice</h2>                        <p id="errorMessage" class="text-red-700"></p>                    </div>                </section>
+                <!-- Right Section: Sidebar (1 Col) -->                <aside class="bg-gray-50 p-0 rounded-xl border border-gray-100 h-fit">                    <h3 class="font-bold p-4 text-lg mb-4 text-blue-900 border-b pb-2"><i class="fas fa-bullhorn text-red-500 mr-2"></i>Latest Notifications</h3>                    <!-- External Site Embed Frame --><div class="rounded-lg overflow-hidden max-w-6xl w-full">    <div class="bg-white shadow-2xl overflow-hidden border border-gray-100">                <div class="relative w-full h-[400px]">            <iframe                 src="https://universityupdates08.github.io/UU/VivaUpdates.html"                 class="absolute top-0 left-0 w-full h-full border-none"                title="External Portal"                loading="lazy">            </iframe>        </div>    </div></div>                </aside>
+            </div>        </div>    </main>
+    <!-- Footer -->    <footer class="footer">        <div class="max-w-7xl mx-auto">            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-6">                <!-- Disclaimer -->                <div>                    <div class="text-center md:text-left">                        <h3 class="text-xl font-bold mb-3 border-b-2 border-primary-color pb-1 inline-block">Disclaimer</h3>                        <div class="text-justify">                            <p class="text-sm opacity-90">                                The Viva Center and Date information provided here is sourced from the college's & center's recent official notices and is for informational purposes only. Students must <b>always confirm</b> the details from their respective college administration. We are not responsible for any last-minute changes or inaccuracies. We are an independent platform Not affiliated with or endorsed by CCSU.                            </p>                        </div>                    </div>                </div>
+                <!-- Quick Links -->                <div>                    <div class="text-center">                        <h3 class="text-xl font-bold mb-3 border-b-2 border-primary-color pb-1 inline-block">Quick Links</h3>                        <ul class="space-y-1 text-sm">                            <li><i class="fas fa-circle-notch text-xs text-yellow-500 mr-2"></i><a href="https://ccsuniversity.blr1.cdn.digitaloceanspaces.com/public/pdf/2026/05/Scan%20Copy%20M.Com%20M.A.%20Private%20June-2026.pdf" class="hover:text-primary-color transition"><b>Download Private Viva-Voce Center List - 2026</b></a></li>                            <li><i class="fas fa-circle-notch text-xs text-yellow-500 mr-2"></i><a href="https://t.me/HelpforDMBot" class="hover:text-primary-color transition"><b>Contact Support</b></a></li>                        </ul>                    </div>                </div>
+                <!-- Connect -->                <div>                    <div class="text-center">                        <h3 class="text-xl font-bold mb-3 border-b-2 border-primary-color pb-1 inline-block">Connect With Us</h3>                        <div class="flex space-x-4 justify-center">                            <a href="https://whatsapp.com/channel/0029Va9jtav4tRrmKPxos138" class="social-icon" title="Whatsapp"><i class="fab fa-whatsapp"></i></a>                            <a href="https://t.me/CCSUniversityMRT" class="social-icon" title="Telegram"><i class="fab fa-telegram-plane"></i></a>                            <a href="https://instagram.com/universityupdates_uu" class="social-icon" title="Instagram"><i class="fab fa-instagram"></i></a>                            <a href="https://x.com/uni_updates08" class="social-icon" title="X"><i class="fab fa-x"></i></a>                        </div>                        <div class="mt-4">                            <p id="live-footer-time" class="text-sm text-gray-200 font-medium tracking-wide flex items-center justify-center gap-2"></p>                        </div>                        <div class="flex items-center justify-center gap-2 mt-4 text-white text-xs">                            <i class="fas fa-users text-yellow-500"></i>                            <span>Total Visitors:</span>                            <span id="new-count" class="font-bold text-slate-800 bg-slate-200 px-2 py-0.5 rounded">0</span>                        </div>                        <div class="flex items-center justify-center gap-2 mt-4 text-white text-xs">                            <i class="text-yellow-500"></i>                            <span>Last Updated on: Thursday, 14 May, 2026, 08:27 PM</span>                        </div>                    </div>                </div>            </div>                        <div class="text-center pt-4 border-t border-white border-opacity-30">                <p class="text-sm opacity-70">&copy; 2025-2026 University Updates. All rights reserved.</p>            </div>        </div>    </footer>
+    <script>const config = {
             currentMode: 'college',
             subjectMap: {
                 "M.Com.": [{ text: "M.Com. (I-304)", value: "I-304" }],
                 "M.A.": [
-                    { text: "Economics (G-806)", value: "G-806" }, { text: "English (G-812)", value: "G-812" },
-                    { text: "Hindi (G-825)", value: "G-825" }, { text: "History (G-837)", value: "G-837" },
-                    { text: "Political Science (G-870)", value: "G-870" }, { text: "Sociology (G-887)", value: "G-887" }
+                    { text: "Defence Studies (G-895)", value: "G-895" },
+                    { text: "Economics (G-806)", value: "G-806" },
+                    { text: "Education (G-803)", value: "G-803" },
+                    { text: "Education (G-804)", value: "G-804" },
+                    { text: "English (G-812)", value: "G-812" },
+                    { text: "Hindi (G-825)", value: "G-825" },
+                    { text: "History (G-837)", value: "G-837" },
+                    { text: "Mathematics (G-850)", value: "G-850" },
+                    { text: "Philosophy (G-845)", value: "G-845" },
+                    { text: "Political Science (G-870)", value: "G-870" },
+                    { text: "Sanskrit (G-882)", value: "G-882" },
+                    { text: "Sociology (G-887)", value: "G-887" },
+                    { text: "Urdu (G-862)", value: "G-862" }
                 ]
             },
             fileMap: {
-                "I-304": "https://docs.google.com/spreadsheets/d/1M1giF2F6Lg1ampmxJuXxt1794k0ehvySSmFCPkaFrls/edit?usp=sharing",
-                "G-806": "Viva/VIVA CENTER.xlsx - G-806.csv",
-                "G-812": "Viva/VIVA CENTER.xlsx - G-812.csv",
-                "G-825": "Viva/VIVA CENTER.xlsx - G-825.csv",
-                "G-837": "Viva/VIVA CENTER.xlsx - G-837.csv",
-                "G-870": "Viva/VIVA CENTER.xlsx - G-870.csv",
-                "G-887": "Viva/VIVA CENTER.xlsx - G-887.csv"
+                "I-304": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRZiv_e1A0gciQkWuUvmcsf-efhajUNQWUYF2-5JIljXgkM7iFTz5LOlEVklVALuZY1HuQ-T4SpcXDa/pub?gid=0&single=true&output=csv",
+                "G-895": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRZiv_e1A0gciQkWuUvmcsf-efhajUNQWUYF2-5JIljXgkM7iFTz5LOlEVklVALuZY1HuQ-T4SpcXDa/pub?gid=247840887&single=true&output=csv",
+                "G-806": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRZiv_e1A0gciQkWuUvmcsf-efhajUNQWUYF2-5JIljXgkM7iFTz5LOlEVklVALuZY1HuQ-T4SpcXDa/pub?gid=641233544&single=true&output=csv",
+                "G-803": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRZiv_e1A0gciQkWuUvmcsf-efhajUNQWUYF2-5JIljXgkM7iFTz5LOlEVklVALuZY1HuQ-T4SpcXDa/pub?gid=211843497&single=true&output=csv",
+                "G-804": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRZiv_e1A0gciQkWuUvmcsf-efhajUNQWUYF2-5JIljXgkM7iFTz5LOlEVklVALuZY1HuQ-T4SpcXDa/pub?gid=211843497&single=true&output=csv",
+                "G-812": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRZiv_e1A0gciQkWuUvmcsf-efhajUNQWUYF2-5JIljXgkM7iFTz5LOlEVklVALuZY1HuQ-T4SpcXDa/pub?gid=1289928464&single=true&output=csv",
+                "G-825": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRZiv_e1A0gciQkWuUvmcsf-efhajUNQWUYF2-5JIljXgkM7iFTz5LOlEVklVALuZY1HuQ-T4SpcXDa/pub?gid=1710636826&single=true&output=csv",
+                "G-837": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRZiv_e1A0gciQkWuUvmcsf-efhajUNQWUYF2-5JIljXgkM7iFTz5LOlEVklVALuZY1HuQ-T4SpcXDa/pub?gid=1673491282&single=true&output=csv",
+                "G-850": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRZiv_e1A0gciQkWuUvmcsf-efhajUNQWUYF2-5JIljXgkM7iFTz5LOlEVklVALuZY1HuQ-T4SpcXDa/pub?gid=634965624&single=true&output=csv",
+                "G-845": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRZiv_e1A0gciQkWuUvmcsf-efhajUNQWUYF2-5JIljXgkM7iFTz5LOlEVklVALuZY1HuQ-T4SpcXDa/pub?gid=122536702&single=true&output=csv",
+                "G-870": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRZiv_e1A0gciQkWuUvmcsf-efhajUNQWUYF2-5JIljXgkM7iFTz5LOlEVklVALuZY1HuQ-T4SpcXDa/pub?gid=1880701720&single=true&output=csv",
+                "G-882": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRZiv_e1A0gciQkWuUvmcsf-efhajUNQWUYF2-5JIljXgkM7iFTz5LOlEVklVALuZY1HuQ-T4SpcXDa/pub?gid=1599191084&single=true&output=csv",
+                "G-887": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRZiv_e1A0gciQkWuUvmcsf-efhajUNQWUYF2-5JIljXgkM7iFTz5LOlEVklVALuZY1HuQ-T4SpcXDa/pub?gid=1852586580&single=true&output=csv",
+                "G-862": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRZiv_e1A0gciQkWuUvmcsf-efhajUNQWUYF2-5JIljXgkM7iFTz5LOlEVklVALuZY1HuQ-T4SpcXDa/pub?gid=1872629374&single=true&output=csv"
             },
             allData: {},
             failedSubs: []
@@ -207,12 +68,14 @@
             collegeSelect: document.getElementById('collegeSelect'),
             centerFlow: document.getElementById('centerFlow'),
             centerSelect: document.getElementById('centerSelect'),
+            resultsCard: document.getElementById('resultsCard'),
+            resultOutput: document.getElementById('resultOutput'),
             errorCard: document.getElementById('errorCard'),
             errorMessage: document.getElementById('errorMessage'),
-            initialLoader: document.getElementById('initialLoader'),
             mainContent: document.getElementById('mainContent'),
-            modal: document.getElementById('resultModal'),
-            popupBody: document.getElementById('popupBody')
+            initialLoader: document.getElementById('initialLoader'),
+            footerTime: document.getElementById('live-footer-time'),
+            headerBranding: document.getElementById('header-branding')
         };
 
         function show(el) { el.classList.remove('a-tab-hidden'); }
@@ -225,146 +88,163 @@
             document.getElementById('tabCenter').classList.toggle('active', mode === 'center');
             mode === 'college' ? show(dom.collegeFlow) : hide(dom.collegeFlow);
             mode === 'center' ? show(dom.centerFlow) : hide(dom.centerFlow);
-            dom.courseSelect.value = ""; hide(dom.subjectGroup); hide(dom.errorCard);
+            
+            // Reset state
+            dom.courseSelect.value = "";
+            hide(dom.subjectGroup); hide(dom.resultsCard); hide(dom.errorCard);
         };
 
         function parseCSV(text) {
             const lines = text.trim().split('\n');
+            if (lines.length < 2) return [];
             const headers = lines[0].split(',').map(h => h.trim().replace(/"/g, ''));
-            return lines.slice(1).map(line => {
-                const values = []; let cell = '', inQuotes = false;
-                for (let char of line) {
+            const data = [];
+            for (let i = 1; i < lines.length; i++) {
+                const values = [];
+                let cell = '', inQuotes = false;
+                for (let char of lines[i]) {
                     if (char === '"') inQuotes = !inQuotes;
                     else if (char === ',' && !inQuotes) { values.push(cell.trim()); cell = ''; }
                     else cell += char;
                 }
                 values.push(cell.trim());
-                let obj = {}; headers.forEach((h, idx) => obj[h] = values[idx]?.replace(/^"|"$/g, ''));
-                return obj;
-            });
+                if (values.length >= headers.length) {
+                    const obj = {};
+                    headers.forEach((h, idx) => obj[h] = values[idx]?.replace(/^"|"$/g, ''));
+                    data.push(obj);
+                }
+            }
+            return data;
         }
 
         dom.courseSelect.onchange = function() {
-            resetSelect(dom.subjectSelect, "CHOOSE SUBJECT");
-            if (this.value) {
-                config.subjectMap[this.value].forEach(s => dom.subjectSelect.add(new Option(s.text, s.value)));
+            const course = this.value;
+            hide(dom.subjectGroup); hide(dom.resultsCard); hide(dom.errorCard);
+            resetSelect(dom.subjectSelect, "Select Subject");
+            if (course) {
+                config.subjectMap[course].forEach(s => dom.subjectSelect.add(new Option(s.text, s.value)));
                 show(dom.subjectGroup);
             }
         };
 
         dom.subjectSelect.onchange = function() {
-            hide(dom.errorCard);
-            if (!this.value) return;
-            if (config.failedSubs.includes(this.value)) {
-                dom.errorMessage.innerHTML = `File for <b>${this.value}</b> is not yet uploaded by the Admin.`;
-                show(dom.errorCard); return;
+            const subCode = this.value;
+            hide(dom.resultsCard); hide(dom.errorCard);
+            resetSelect(dom.districtSelect, "Select District");
+            resetSelect(dom.centerSelect, "Select Viva Center");
+
+            if (!subCode) return;
+
+            if (config.failedSubs.includes(subCode)) {
+                dom.errorMessage.innerHTML = `Data for <b>${subCode}</b> is currently unavailable or the file is not uploaded by Admin. Please <a href="https://t.me/HelpforDMBot" class="text-blue-700 underline font-bold">Contact Support</a>.`;
+                show(dom.errorCard);
+                hide(dom.districtGroup); hide(dom.collegeGroup);
+                return;
             }
-            const data = config.allData[this.value];
+
+            const data = config.allData[subCode];
             if (config.currentMode === 'college') {
-                resetSelect(dom.districtSelect, "CHOOSE DISTRICT");
-                [...new Set(data.map(r => r.District))].sort().forEach(d => dom.districtSelect.add(new Option(d, d)));
+                const districts = [...new Set(data.map(r => r.District).filter(Boolean))].sort();
+                districts.forEach(d => dom.districtSelect.add(new Option(d, d)));
                 show(dom.districtGroup);
             } else {
-                resetSelect(dom.centerSelect, "CHOOSE CENTER");
-                [...new Set(data.map(r => r['Name of Center']))].sort().forEach(c => dom.centerSelect.add(new Option(c, c)));
+                const centers = [...new Set(data.map(r => r['Name of Center']).filter(Boolean))].sort();
+                centers.forEach(c => dom.centerSelect.add(new Option(c, c)));
             }
         };
 
         dom.districtSelect.onchange = function() {
-            resetSelect(dom.collegeSelect, "CHOOSE COLLEGE");
-            const colleges = [...new Set(config.allData[dom.subjectSelect.value].filter(r => r.District === this.value).map(r => r['Attached Colleges']))].sort();
+            const dist = this.value;
+            hide(dom.collegeGroup); hide(dom.resultsCard);
+            resetSelect(dom.collegeSelect, "Select Your College");
+            if (!dist) return;
+            const colleges = [...new Set(config.allData[dom.subjectSelect.value].filter(r => r.District === dist).map(r => r['Attached Colleges']))].sort();
             colleges.forEach(c => dom.collegeSelect.add(new Option(c, c)));
             show(dom.collegeGroup);
         };
 
         dom.collegeSelect.onchange = function() {
-            if (this.value) openModal(config.allData[dom.subjectSelect.value].find(r => r['Attached Colleges'] === this.value), 'college');
+            if (!this.value) return;
+            const res = config.allData[dom.subjectSelect.value].find(r => r['Attached Colleges'] === this.value);
+            renderResult(res, 'college');
         };
 
         dom.centerSelect.onchange = function() {
-            if (this.value) openModal(config.allData[dom.subjectSelect.value].filter(r => r['Name of Center'] === this.value), 'center');
+            if (!this.value) return;
+            const matches = config.allData[dom.subjectSelect.value].filter(r => r['Name of Center'] === this.value);
+            renderResult(matches, 'center');
         };
 
-        function openModal(data, mode) {
-            let content = '';
-            if (mode === 'college') {
-                content = `
-                    <div class="bg-blue-600 text-white p-10">
-                        <span class="bg-white/20 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest">College Profile</span>
-                        <h3 class="text-2xl font-black mt-3 leading-tight">${data['Attached Colleges']}</h3>
-                    </div>
-                    <div class="p-10 space-y-8 bg-white">
-                        <div class="flex items-center gap-5">
-                            <div class="h-14 w-14 bg-red-100 text-red-600 rounded-2xl flex items-center justify-center text-2xl"><i class="fas fa-university"></i></div>
-                            <div><p class="text-[10px] font-black text-gray-400 uppercase tracking-widest">Assigned Center</p><p class="font-black text-gray-800 text-lg">${data['Name of Center']}</p></div>
-                        </div>
-                        <div class="grid grid-cols-2 gap-6">
-                            <div class="bg-gray-50 p-5 rounded-3xl border border-gray-100">
-                                <p class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">Date</p>
-                                <p class="font-black text-red-600 text-xl">${data.Date || 'TBA'}</p>
-                            </div>
-                            <div class="bg-gray-50 p-5 rounded-3xl border border-gray-100">
-                                <p class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">Time</p>
-                                <p class="font-black text-gray-800 text-xl">${data.Time || '10:00 AM'}</p>
-                            </div>
-                        </div>
-                    </div>`;
-            } else {
-                const head = data[0];
-                content = `
-                    <div class="bg-[#1e293b] text-white p-10">
-                        <span class="bg-blue-500/20 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest text-blue-400">Center Dashboard</span>
-                        <h3 class="text-2xl font-black mt-3 leading-tight">${head['Name of Center']}</h3>
-                    </div>
-                    <div class="p-10 space-y-8 bg-white">
-                        <div class="grid grid-cols-2 gap-6">
-                            <div class="bg-blue-50 p-5 rounded-3xl border border-blue-100">
-                                <p class="text-[10px] font-black text-blue-400 uppercase tracking-widest mb-1">Exam Date</p>
-                                <p class="font-black text-blue-900 text-xl">${head.Date || 'TBA'}</p>
-                            </div>
-                            <div class="bg-blue-50 p-5 rounded-3xl border border-blue-100">
-                                <p class="text-[10px] font-black text-blue-400 uppercase tracking-widest mb-1">Reporting</p>
-                                <p class="font-black text-blue-900 text-xl">${head.Time || 'TBA'}</p>
-                            </div>
-                        </div>
-                        <div class="bg-gray-50 p-6 rounded-3xl border border-gray-100">
-                            <p class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-4">Colleges Attached</p>
-                            <ul class="space-y-2 text-xs font-bold text-gray-600">
-                                ${data.map(m => `<li class="flex items-center gap-3"><i class="fas fa-chevron-right text-[8px] text-blue-500"></i> ${m['Attached Colleges']}</li>`).join('')}
-                            </ul>
-                        </div>
-                    </div>`;
-            }
-            dom.popupBody.innerHTML = content;
-            dom.modal.classList.add('active');
-            dom.modal.style.visibility = 'visible';
-            dom.modal.style.opacity = '1';
+        function checkUpcoming(dateStr) {
+            if(!dateStr || dateStr.includes('Not Fixed') || dateStr.includes('TBA')) return false;
+            try {
+                const parts = dateStr.split('/');
+                const examDate = new Date(parts[2], parts[1]-1, parts[0]);
+                const today = new Date();
+                today.setHours(0,0,0,0);
+                const diffTime = examDate - today;
+                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                return (diffDays >= 0 && diffDays <= 5);
+            } catch(e) { return false; }
         }
 
-        window.closeModal = function() {
-            dom.modal.classList.remove('active');
-            dom.modal.style.opacity = '0';
-            setTimeout(() => { dom.modal.style.visibility = 'hidden'; }, 300);
-        };
+        function renderResult(data, mode) {
+            hide(dom.resultsCard);
+            let html = '';
+            const item = mode === 'college' ? data : data[0];
+            const isUpcoming = checkUpcoming(item.Date);
+            const noticeBtn = item.Notice ? `<a href="${item.Notice}" target="_blank" class="inline-block mt-4 bg-blue-600 text-white px-4 py-2 rounded-lg font-bold text-xs hover:bg-blue-700 transition"><i class="fas fa-file-pdf mr-2"></i> View Official Notice</a>` : '';
+            const alertBox = isUpcoming ? `<div class="bg-orange-100 border-l-4 border-orange-500 p-3 mb-4 animate-pulse"><p class="text-orange-700 font-bold text-xs"><i class="fas fa-exclamation-triangle mr-2"></i> URGENT: Viva scheduled within 5 days!</p></div>` : '';
+
+            if (mode === 'college') {
+                html = `${alertBox}
+                        <p><b>Student College:</b> ${data['Attached Colleges']}</p>
+                        <hr class="my-2 opacity-20">
+                        <p><b>Assigned Viva Center:</b> <span class="text-blue-700 font-bold">${data['Name of Center']}</span></p>
+                        <p><b>Examination Date:</b> <span class="text-red-600 font-bold">${data.Date || 'Not Fixed (Contact to you college or center)'}</span></p>
+                        <p><b>Reporting Time:</b> ${data.Time || 'Not Fixed'}</p>
+                        ${noticeBtn}`;
+            } else {
+                const list = data.map(m => `<li>• ${m['Attached Colleges']}</li>`).join('');
+                html = `${alertBox}
+                        <p><b>Viva Center Name:</b> <span class="text-blue-700 font-bold">${item['Name of Center']}</span></p>
+                        <p><b>Examination Date:</b> <span class="text-red-600 font-bold">${item.Date || 'TBA (Contact to your college or viva center)'}</span></p>
+                        <p><b>Reporting Time:</b> ${item.Time || 'Not Fixed'}</p>
+                        <hr class="my-2 opacity-20">
+                        <p class="text-xs font-bold text-gray-400 uppercase">Attached Colleges:</p>
+                        <ul class="text-xs mt-1 space-y-1 font-medium">${list}</ul>
+                        ${noticeBtn}`;
+            }
+            dom.resultOutput.innerHTML = html;
+            show(dom.resultsCard);
+        }
 
         async function init() {
-            const tasks = Object.keys(config.fileMap).map(async sub => {
-                try {
-                    const res = await fetch(config.fileMap[sub]);
-                    if (!res.ok) throw new Error();
-                    config.allData[sub] = parseCSV(await res.text());
-                } catch (e) { config.failedSubs.push(sub); }
-            });
-            await Promise.all(tasks); hide(dom.initialLoader); show(dom.mainContent);
+    const loadTasks = Object.keys(config.fileMap).map(async sub => {
+        try {
+            const url = config.fileMap[sub] + (config.fileMap[sub].includes('?') ? '&' : '?') + 't=' + new Date().getTime();
+            const res = await fetch(url);
+            if (!res.ok) throw new Error();
+            const text = await res.text();
+            config.allData[sub] = parseCSV(text);
+        } catch (e) { 
+            console.error(`Error loading data for ${sub}:`, e);
+            config.failedSubs.push(sub); 
+        }
+    });
+    await Promise.all(loadTasks);
+    hide(dom.initialLoader);
+    show(dom.mainContent);
+}
+
+        function clock() {
+            const now = new Date();
+            const timeStr = now.toLocaleString('en-IN', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' });
+            if (dom.footerTime) dom.footerTime.innerHTML = `<i class="far fa-clock text-yellow-400 mr-2"></i> ${timeStr}`;
+            if (dom.headerBranding) dom.headerBranding.textContent = `Powered by University Updates | ${timeStr}`;
         }
 
-        setInterval(() => {
-            const now = new Date();
-            document.getElementById('live-footer-time').innerHTML = now.toLocaleString('en-IN');
-            document.getElementById('header-branding').textContent = `System Active | ${now.toLocaleTimeString()}`;
-        }, 1000);
-
-        async function getStats() {
+        async function visitor() {
             try {
                 const res = await fetch('https://api.counterapi.dev/v1/university_updates_uu/main/up');
                 const data = await res.json();
@@ -372,7 +252,8 @@
             } catch (e) {}
         }
 
-        document.addEventListener('DOMContentLoaded', () => { init(); getStats(); });
-    </script>
-</body>
-</html>
+        document.addEventListener('DOMContentLoaded', () => {
+            init();
+            visitor();
+            setInterval(clock, 1000);
+        });</script>    </body></html>
