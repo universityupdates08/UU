@@ -55,20 +55,24 @@ const config = {
             errorMessage: document.getElementById('errorMessage'),
             mainContent: document.getElementById('mainContent'),
             initialLoader: document.getElementById('initialLoader'),
-            footerTime: document.getElementById('live-footer-time')
+            footerTime: document.getElementById('live-footer-time'),
+            headerBranding: document.getElementById('header-branding')
         };
 
-        function show(el) { el.classList.remove('a-tab-hidden'); }
+       function show(el) { el.classList.remove('a-tab-hidden'); }
         function hide(el) { el.classList.add('a-tab-hidden'); }
         function resetSelect(el, text) { el.innerHTML = `<option value="">-- ${text} --</option>`; }
 
-        window.switchMode = function(mode) {
+         window.switchMode = function(mode) {
             config.currentMode = mode;
             document.getElementById('tabCollege').classList.toggle('active', mode === 'college');
             document.getElementById('tabCenter').classList.toggle('active', mode === 'center');
             mode === 'college' ? show(dom.collegeFlow) : hide(dom.collegeFlow);
             mode === 'center' ? show(dom.centerFlow) : hide(dom.centerFlow);
-            dom.courseSelect.value = ""; hide(dom.subjectGroup); hide(dom.resultsCard); hide(dom.errorCard);
+            
+            // Reset state
+            dom.courseSelect.value = "";
+            hide(dom.subjectGroup); hide(dom.resultsCard); hide(dom.errorCard);
         };
 
         function parseCSV(text) {
@@ -202,16 +206,28 @@ const config = {
         };
 
         dom.subjectSelect.onchange = function() {
-            const subCode = this.value; hide(dom.resultsCard); hide(dom.errorCard);
-            resetSelect(dom.districtSelect, "Select District"); resetSelect(dom.centerSelect, "Select Viva Center");
+            const subCode = this.value;
+            hide(dom.resultsCard); hide(dom.errorCard);
+            resetSelect(dom.districtSelect, "Select District");
+            resetSelect(dom.centerSelect, "Select Viva Center");
+
             if (!subCode) return;
+
+            if (config.failedSubs.includes(subCode)) {
+                dom.errorMessage.innerHTML = `Data for <b>${subCode}</b> is currently unavailable or the file is not uploaded by Admin. Please <a href="https://t.me/HelpforDMBot" class="text-blue-700 underline font-bold">Contact Support</a>.`;
+                show(dom.errorCard);
+                hide(dom.districtGroup); hide(dom.collegeGroup);
+                return;
+            }
+
             const data = config.allData[subCode];
             if (config.currentMode === 'college') {
-                const dists = [...new Set(data.map(r => r.District).filter(Boolean))].sort();
-                dists.forEach(d => dom.districtSelect.add(new Option(d, d))); show(dom.districtGroup);
+                const districts = [...new Set(data.map(r => r.District).filter(Boolean))].sort();
+                districts.forEach(d => dom.districtSelect.add(new Option(d, d)));
+                show(dom.districtGroup);
             } else {
                 const centers = [...new Set(data.map(r => r['Name of Center']).filter(Boolean))].sort();
-                centers.forEach(c => dom.centerSelect.add(new Option(c, c))); show(dom.centerFlow);
+                centers.forEach(c => dom.centerSelect.add(new Option(c, c)));
             }
         };
 
@@ -257,33 +273,6 @@ const config = {
             show(dom.resultsCard);
         }
 
-async function init() {
-    const loadTasks = Object.keys(config.fileMap).map(async sub => {
-        try {
-            // Append a timestamp to prevent browser caching
-            const url = config.fileMap[sub] + (config.fileMap[sub].includes('?') ? '&' : '?') + 't=' + new Date().getTime();
-            
-            const res = await fetch(url);
-            if (!res.ok) throw new Error();
-            const text = await res.text();
-            config.allData[sub] = parseCSV(text);
-        } catch (e) { 
-            console.error(`Error loading data for ${sub}:`, e);
-            config.failedSubs.push(sub); 
-        }
-    });
-    await Promise.all(loadTasks);
-    hide(dom.initialLoader);
-    show(dom.mainContent);
-}
-
-
-        function clock() {
-            const now = new Date();
-            const timeStr = now.toLocaleString('en-IN', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' });
-            if (dom.footerTime) dom.footerTime.innerHTML = `<i class="far fa-clock text-yellow-400 mr-2"></i> ${timeStr}`;
-        }
-
 async function visitor() {
             try {
                 const res = await fetch('https://api.counterapi.dev/v1/university_updates_uu/main/up');
@@ -291,5 +280,9 @@ async function visitor() {
                 document.getElementById('new-count').innerText = data.count;
             } catch (e) {}
         }
-        document.addEventListener('DOMContentLoaded', () => { init(); visitor(); setInterval(clock, 1000); });
 
+        document.addEventListener('DOMContentLoaded', () => {
+            init();
+            visitor();
+            setInterval(clock, 1000);
+        });
