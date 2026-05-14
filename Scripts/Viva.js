@@ -257,6 +257,26 @@ const config = {
             show(dom.resultsCard);
         }
 
+async function init() {
+    const loadTasks = Object.keys(config.fileMap).map(async sub => {
+        try {
+            // Append a timestamp to prevent browser caching
+            const url = config.fileMap[sub] + (config.fileMap[sub].includes('?') ? '&' : '?') + 't=' + new Date().getTime();
+            
+            const res = await fetch(url);
+            if (!res.ok) throw new Error();
+            const text = await res.text();
+            config.allData[sub] = parseCSV(text);
+        } catch (e) { 
+            console.error(`Error loading data for ${sub}:`, e);
+            config.failedSubs.push(sub); 
+        }
+    });
+    await Promise.all(loadTasks);
+    hide(dom.initialLoader);
+    show(dom.mainContent);
+}
+
 
         function clock() {
             const now = new Date();
@@ -264,5 +284,12 @@ const config = {
             if (dom.footerTime) dom.footerTime.innerHTML = `<i class="far fa-clock text-yellow-400 mr-2"></i> ${timeStr}`;
         }
 
-        document.addEventListener('DOMContentLoaded', () => { init(); setInterval(clock, 1000); });
+async function visitor() {
+            try {
+                const res = await fetch('https://api.counterapi.dev/v1/university_updates_uu/main/up');
+                const data = await res.json();
+                document.getElementById('new-count').innerText = data.count;
+            } catch (e) {}
+        }
+        document.addEventListener('DOMContentLoaded', () => { init(); visitor(); setInterval(clock, 1000); });
 
