@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -43,13 +42,8 @@
 
      <!-- Logo and Title Section -->
     <div class="max-w-6xl mx-auto flex flex-row items-end justify-center p-4 relative z-10 gap-4">
-        <!-- Logo -->
         <img src="https://i.ibb.co/nMC0877T/UNIVERSITY-UPDATES-LOGO-removebg-preview.png" alt="Logo" class="w-24 md:w-32">
-        
-        <!-- Vertical Separator Line -->
         <div class="h-12 border-l-2 border-gray-300 mx-4 md:mx-6"></div>
-        
-        <!-- Viva Finder Title (Right Side) -->
         <div class="mb-2">
             <h1 class="text-2xl md:text-3xl font-extrabold text-gray-800 flex items-center">
                 <i class="fas fa-search-location text-blue-600 mr-2"></i> Viva Finder
@@ -76,104 +70,102 @@
             <p class="text-gray-600 text-lg mt-4 font-semibold">Initializing...</p>
         </div>
         
-<div id="mainContent" class="a-tab-hidden w-full max-w-6xl">
+        <div id="portalWrapper" class="a-tab-hidden w-full max-w-6xl">
             <!-- UPCOMING ALERTS SLIDER -->
             <div id="upcomingAlerts" class="mb-8 shadow-xl rounded-2xl overflow-hidden"></div>
     
-              <!-- Floating WhatsApp Button -->
-<a href="https://whatsapp.com/channel/0029Va9jtav4tRrmKPxos138" class="side-admission-btn">
-    <i class="fab fa-whatsapp mb-2 text-xl"></i> Join us on Whatsapp
-</a>         
+            <!-- Floating WhatsApp Button -->
+            <a href="https://whatsapp.com/channel/0029Va9jtav4tRrmKPxos138" class="side-admission-btn">
+                <i class="fab fa-whatsapp mb-2 text-xl"></i> Join us on Whatsapp
+            </a>         
                     
-        <!-- Main Content Card -->
-        <div id="mainContent" class="a-tab-hidden bg-white shadow-2xl rounded-2xl overflow-hidden w-full max-w-6xl flex flex-col border border-gray-100">
-            
-            <div class="p-6 md:p-10 grid md:grid-cols-3 gap-8">
+            <!-- Main Content Card -->
+            <div id="mainContent" class="bg-white shadow-2xl rounded-2xl overflow-hidden w-full max-w-6xl flex flex-col border border-gray-100">
                 
-                <!-- Left Section: Tabs and Form (2 Cols) -->
-                <section class="md:col-span-2 flex flex-col">
+                <div class="p-6 md:p-10 grid md:grid-cols-3 gap-8">
                     
-                    <!-- Mode Tabs -->
-                    <div class="flex border-b mb-6 rounded-lg overflow-hidden border border-gray-200">
-                        <div id="tabCollege" class="tab-btn active" onclick="switchMode('college')">Search by College</div>
-                        <div id="tabCenter" class="tab-btn" onclick="switchMode('center')">Search by Viva Center</div>
-                    </div>
-
-                   
-
-                    <div class="space-y-6">
-                        <!-- Step 1 -->
-                        <div>
-                            <label class="block text-xs font-bold text-gray-500 uppercase mb-1">1. Select Course</label>
-                            <select id="courseSelect" class="w-full p-3 border border-gray-300 rounded-lg outline-none focus:ring-2 focus:ring-blue-500">
-                                <option value="">-- Select Course --</option>
-                                <option value="M.Com.">M.Com.</option>
-                                <option value="M.A.">M.A.</option>
-                            </select>
+                    <!-- Left Section: Tabs and Form (2 Cols) -->
+                    <section class="md:col-span-2 flex flex-col">
+                        
+                        <!-- Mode Tabs -->
+                        <div class="flex border-b mb-6 rounded-lg overflow-hidden border border-gray-200">
+                            <div id="tabCollege" class="tab-btn active" onclick="switchMode('college')">Search by College</div>
+                            <div id="tabCenter" class="tab-btn" onclick="switchMode('center')">Search by Viva Center</div>
                         </div>
 
-                        <!-- Step 2 -->
-                        <div id="subjectGroup" class="a-tab-hidden">
-                            <label class="block text-xs font-bold text-gray-500 uppercase mb-1">2. Select Subject</label>
-                            <select id="subjectSelect" class="w-full p-3 border border-gray-300 rounded-lg outline-none focus:ring-2 focus:ring-blue-500"></select>
-                        </div>
-
-                        <!-- Mode: College Search -->
-                        <div id="collegeFlow" class="space-y-6">
-                            <div id="districtGroup" class="a-tab-hidden">
-                                <label class="block text-xs font-bold text-gray-500 uppercase mb-1">3. Select District</label>
-                                <select id="districtSelect" class="w-full p-3 border border-gray-300 rounded-lg outline-none focus:ring-2 focus:ring-blue-500"></select>
+                        <div class="space-y-6">
+                            <!-- Step 1 -->
+                            <div>
+                                <label class="block text-xs font-bold text-gray-500 uppercase mb-1">1. Select Course</label>
+                                <select id="courseSelect" class="w-full p-3 border border-gray-300 rounded-lg outline-none focus:ring-2 focus:ring-blue-500">
+                                    <option value="">-- Select Course --</option>
+                                    <option value="M.Com.">M.Com.</option>
+                                    <option value="M.A.">M.A.</option>
+                                </select>
                             </div>
-                            <div id="collegeGroup" class="a-tab-hidden">
-                                <label class="block text-xs font-bold text-gray-500 uppercase mb-1">4. Select Your College</label>
-                                <select id="collegeSelect" class="w-full p-3 border border-gray-300 rounded-lg outline-none focus:ring-2 focus:ring-blue-500"></select>
+
+                            <!-- Step 2 -->
+                            <div id="subjectGroup" class="a-tab-hidden">
+                                <label class="block text-xs font-bold text-gray-500 uppercase mb-1">2. Select Subject</label>
+                                <select id="subjectSelect" class="w-full p-3 border border-gray-300 rounded-lg outline-none focus:ring-2 focus:ring-blue-500"></select>
+                            </div>
+
+                            <!-- Mode: College Search -->
+                            <div id="collegeFlow" class="space-y-6">
+                                <div id="districtGroup" class="a-tab-hidden">
+                                    <label class="block text-xs font-bold text-gray-500 uppercase mb-1">3. Select District</label>
+                                    <select id="districtSelect" class="w-full p-3 border border-gray-300 rounded-lg outline-none focus:ring-2 focus:ring-blue-500"></select>
+                                </div>
+                                <div id="collegeGroup" class="a-tab-hidden">
+                                    <label class="block text-xs font-bold text-gray-500 uppercase mb-1">4. Select Your College</label>
+                                    <select id="collegeSelect" class="w-full p-3 border border-gray-300 rounded-lg outline-none focus:ring-2 focus:ring-blue-500"></select>
+                                </div>
+                            </div>
+
+                            <!-- Mode: Center Search -->
+                            <div id="centerFlow" class="a-tab-hidden">
+                                <label class="block text-xs font-bold text-gray-500 uppercase mb-1">3. Select Viva Center</label>
+                                <select id="centerSelect" class="w-full p-3 border border-gray-300 rounded-lg outline-none focus:ring-2 focus:ring-blue-500"></select>
                             </div>
                         </div>
 
-                        <!-- Mode: Center Search -->
-                        <div id="centerFlow" class="a-tab-hidden">
-                            <label class="block text-xs font-bold text-gray-500 uppercase mb-1">3. Select Viva Center</label>
-                            <select id="centerSelect" class="w-full p-3 border border-gray-300 rounded-lg outline-none focus:ring-2 focus:ring-blue-500"></select>
+                        <!-- Result Output -->
+                        <div id="resultsCard" class="a-tab-hidden mt-10 bg-blue-50 border-l-4 border-blue-600 p-6 rounded-lg shadow-inner">
+                            <h2 class="text-xl font-bold text-blue-900 mb-4 flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> Examination Details</h2>
+                            <div id="resultOutput" class="space-y-3 text-sm text-gray-800"></div>
                         </div>
-                    </div>
 
-                    <!-- Result Output -->
-                    <div id="resultsCard" class="a-tab-hidden mt-10 bg-blue-50 border-l-4 border-blue-600 p-6 rounded-lg shadow-inner">
-                        <h2 class="text-xl font-bold text-blue-900 mb-4 flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> Examination Details</h2>
-                        <div id="resultOutput" class="space-y-3 text-sm text-gray-800"></div>
-                    </div>
+                        <!-- Error Output -->
+                        <div id="errorCard" class="a-tab-hidden mt-8 bg-red-50 border-l-4 border-red-500 p-6 rounded-lg">
+                            <h2 class="text-lg font-bold text-red-800 mb-1">Notice</h2>
+                            <p id="errorMessage" class="text-red-700"></p>
+                        </div>
+                    </section>
 
-                    <!-- Error Output -->
-                    <div id="errorCard" class="a-tab-hidden mt-8 bg-red-50 border-l-4 border-red-500 p-6 rounded-lg">
-                        <h2 class="text-lg font-bold text-red-800 mb-1">Notice</h2>
-                        <p id="errorMessage" class="text-red-700"></p>
-                    </div>
-                </section>
+                    <!-- Right Section: Sidebar (1 Col) -->
+                    <aside class="bg-gray-50 p-0 rounded-xl border border-gray-100 h-fit">
+                        <h3 class="font-bold p-4 text-lg mb-4 text-blue-900 border-b pb-2"><i class="fas fa-bullhorn text-red-500 mr-2"></i>Latest Notifications</h3>
+                        <!-- External Site Embed Frame -->
+                        <div class="rounded-lg overflow-hidden max-w-6xl w-full">
+                            <div class="bg-white shadow-2xl overflow-hidden border border-gray-100">
+                                <div class="relative w-full h-[400px]">
+                                    <iframe 
+                                        src="https://universityupdates08.github.io/UU/VivaUpdates.html" 
+                                        class="absolute top-0 left-0 w-full h-full border-none"
+                                        title="External Portal"
+                                        loading="lazy">
+                                    </iframe>
+                                </div>
+                            </div>
+                        </div>
+                    </aside>
 
-                <!-- Right Section: Sidebar (1 Col) -->
-                <aside class="bg-gray-50 p-0 rounded-xl border border-gray-100 h-fit">
-                    <h3 class="font-bold p-4 text-lg mb-4 text-blue-900 border-b pb-2"><i class="fas fa-bullhorn text-red-500 mr-2"></i>Latest Notifications</h3>
-                    <!-- External Site Embed Frame -->
-<div class="rounded-lg overflow-hidden max-w-6xl w-full">
-    <div class="bg-white shadow-2xl overflow-hidden border border-gray-100">
-        
-        <div class="relative w-full h-[400px]">
-            <iframe 
-                src="https://universityupdates08.github.io/UU/VivaUpdates.html" 
-                class="absolute top-0 left-0 w-full h-full border-none"
-                title="External Portal"
-                loading="lazy">
-            </iframe>
-        </div>
-    </div>
-</div>
-                </aside>
-
+                </div>
             </div>
         </div>
     </main>
     
-<!-- Floating Dark Mode Toggle -->
+    <!-- Floating Dark Mode Toggle -->
     <div class="fixed bottom-4 right-4 z-50 bg-white dark:bg-gray-800 p-2 rounded-full shadow-lg border border-gray-200">
         <label class="flex items-center cursor-pointer">
             <i class="fas fa-sun mr-2 text-yellow-500"></i>
@@ -243,14 +235,6 @@
             </div>
         </div>
     </footer>
-<script>
-    function toggleDarkMode() {
-            const isDark = document.getElementById('themeToggle').checked;
-            document.body.classList.toggle('dark-mode', isDark);
-            document.getElementById('toggleCircle').style.left = isDark ? '20px' : '0';
-            localStorage.setItem('theme', isDark ? 'dark' : 'light');
-        }
-</script>
    
     <script src="Scripts/Viva.js"></script>
     
