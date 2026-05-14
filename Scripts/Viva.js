@@ -55,8 +55,7 @@ const config = {
             errorMessage: document.getElementById('errorMessage'),
             mainContent: document.getElementById('mainContent'),
             initialLoader: document.getElementById('initialLoader'),
-            footerTime: document.getElementById('live-footer-time'),
-            headerBranding: document.getElementById('header-branding')
+            footerTime: document.getElementById('live-footer-time')
         };
 
         function show(el) { el.classList.remove('a-tab-hidden'); }
@@ -69,8 +68,6 @@ const config = {
             document.getElementById('tabCenter').classList.toggle('active', mode === 'center');
             mode === 'college' ? show(dom.collegeFlow) : hide(dom.collegeFlow);
             mode === 'center' ? show(dom.centerFlow) : hide(dom.centerFlow);
-            
-            // Reset state
             dom.courseSelect.value = "";
             hide(dom.subjectGroup); hide(dom.resultsCard); hide(dom.errorCard);
         };
@@ -98,15 +95,11 @@ const config = {
             return data;
         }
 
- /* --- UPDATED ROBUST DATE PARSER FOR: Tuesday, 18 May 2026 --- */
         function parseCustomDate(dateStr) {
             if (!dateStr || dateStr.toLowerCase().includes('not') || dateStr.toLowerCase().includes('tba')) return null;
             try {
-                // Remove day name and comma if exists (e.g., "Tuesday, 18 May 2026" -> "18 May 2026")
                 let cleanStr = dateStr.includes(',') ? dateStr.split(',')[1].trim() : dateStr.trim();
                 let d = new Date(cleanStr);
-                
-                // Fallback for slash formats like 18/05/2026
                 if (isNaN(d.getTime())) {
                     const parts = cleanStr.replace(/[-.]/g, '/').split('/');
                     if (parts.length === 3) {
@@ -122,14 +115,11 @@ const config = {
             const alertContainer = document.getElementById('upcomingAlerts');
             const today = new Date(); today.setHours(0, 0, 0, 0);
             const next5Days = new Date(today); next5Days.setDate(today.getDate() + 5);
-
             let allEntries = [];
 
-            // Combine data from every subject sheet loaded in config.allData
             Object.keys(config.allData).forEach(subKey => {
                 config.allData[subKey].forEach(item => {
                     const vDate = parseCustomDate(item.Date);
-                    // Filter: Date must be between today and next 5 days (e.g., May 14 to May 19)
                     if (vDate && vDate >= today && vDate <= next5Days) {
                         allEntries.push({
                             Center: item['Name of Center'],
@@ -145,48 +135,28 @@ const config = {
                 });
             });
 
-            // Remove duplicates and sort by date ascending
             const uniqueEntries = Array.from(new Map(allEntries.map(item => [`${item.Center}-${item.SubCode}-${item.DateStr}`, item])).values());
             uniqueEntries.sort((a, b) => a.DateObj - b.DateObj);
 
             if (uniqueEntries.length === 0) {
-                alertContainer.innerHTML = `<div class="pending-box">📢 No Upcoming Viva scheduled for the next 5 days.</div>`;
+                alertContainer.innerHTML = `<div class="pending-box p-4 bg-gray-100 text-center rounded-xl">📢 No Upcoming Viva scheduled for the next 5 days.</div>`;
                 return;
             }
 
             alertContainer.innerHTML = `
-                <div class="alert-heading"><i class="fas fa-bolt"></i> Upcoming Viva Alerts (Next 5 Days)</div>
-                <div class="single-slider">
-                    <div class="single-track" id="singleTrack">
+                <div class="alert-heading bg-blue-600 text-white p-3 font-bold"><i class="fas fa-bolt"></i> Upcoming Viva Alerts</div>
+                <div class="single-slider overflow-hidden relative bg-white p-6">
+                    <div class="single-track flex transition-transform duration-500" id="singleTrack">
                         ${uniqueEntries.map(item => `
-                            <div class="single-card">
-                                <div class="single-title">🏫 ${item.Center}</div>
-                                <div class="single-sub">${item.Course} | ${item.Subject} ${item.SubCode ? '('+item.SubCode+')' : ''}</div>
-                                <div class="text-red-600 font-bold text-sm mb-1"><i class="far fa-calendar-alt"></i> ${item.DateStr} | <i class="far fa-clock"></i> ${item.Time}</div>
-                                ${item.Notice ? `<a href="${item.Notice}" target="_blank" class="mini-notice-btn">📄 View Notice</a>` : ''}
+                            <div class="single-card min-w-full">
+                                <div class="font-bold text-lg">🏫 ${item.Center}</div>
+                                <div class="text-sm text-gray-600">${item.Course} | ${item.Subject}</div>
+                                <div class="text-red-600 font-bold mt-2"><i class="far fa-calendar-alt"></i> ${item.DateStr}</div>
+                                ${item.Notice ? `<a href="${item.Notice}" target="_blank" class="inline-block mt-2 text-blue-600 underline">View Notice</a>` : ''}
                             </div>
                         `).join('')}
                     </div>
-                </div>
-                <div class="slider-dots">
-                    ${uniqueEntries.map((_, i) => `<div class="slider-dot ${i === 0 ? 'active' : ''}" data-index="${i}"></div>`).join('')}
                 </div>`;
-
-            const track = document.getElementById('singleTrack');
-            const dots = document.querySelectorAll('.slider-dot');
-            let current = 0;
-
-            function showSlide(index) {
-                track.style.transform = `translateX(-${index * 100}%)`;
-                dots.forEach(dot => dot.classList.remove('active'));
-                dots[index].classList.add('active');
-                current = index;
-            }
-
-            if(uniqueEntries.length > 1) {
-                setInterval(() => { current = (current + 1) % uniqueEntries.length; showSlide(current); }, 5000);
-            }
-            dots.forEach(dot => dot.addEventListener('click', () => showSlide(parseInt(dot.dataset.index))));
         }
 
         async function init() {
@@ -204,8 +174,6 @@ const config = {
             loadUpcomingAlerts();
         }
 
-
-// --- SEARCH EVENT HANDLERS ---
         dom.courseSelect.onchange = function() {
             const course = this.value;
             hide(dom.subjectGroup); hide(dom.resultsCard); hide(dom.errorCard);
@@ -221,16 +189,11 @@ const config = {
             hide(dom.resultsCard); hide(dom.errorCard);
             resetSelect(dom.districtSelect, "Select District");
             resetSelect(dom.centerSelect, "Select Viva Center");
-
             if (!subCode) return;
-
             if (config.failedSubs.includes(subCode)) {
-                dom.errorMessage.innerHTML = `Data for <b>${subCode}</b> is currently unavailable or the file is not uploaded by Admin. Please <a href="https://t.me/HelpforDMBot" class="text-blue-700 underline font-bold">Contact Support</a>.`;
-                show(dom.errorCard);
-                hide(dom.districtGroup); hide(dom.collegeGroup);
-                return;
+                dom.errorMessage.innerHTML = "Data currently unavailable.";
+                show(dom.errorCard); return;
             }
-
             const data = config.allData[subCode];
             if (config.currentMode === 'college') {
                 const districts = [...new Set(data.map(r => r.District).filter(Boolean))].sort();
@@ -239,12 +202,13 @@ const config = {
             } else {
                 const centers = [...new Set(data.map(r => r['Name of Center']).filter(Boolean))].sort();
                 centers.forEach(c => dom.centerSelect.add(new Option(c, c)));
+                show(dom.centerFlow);
             }
         };
 
         dom.districtSelect.onchange = function() {
             const dist = this.value;
-            hide(dom.collegeGroup); hide(dom.resultsCard);
+            hide(dom.collegeGroup);
             resetSelect(dom.collegeSelect, "Select Your College");
             if (!dist) return;
             const colleges = [...new Set(config.allData[dom.subjectSelect.value].filter(r => r.District === dist).map(r => r['Attached Colleges']))].sort();
@@ -265,67 +229,36 @@ const config = {
         };
 
         function renderResult(data, mode) {
-            hide(dom.resultsCard);
             let html = '';
             if (mode === 'college') {
-                html = `<p><b>Student College:</b> ${data['Attached Colleges']}</p>
-                        <hr class="my-2 opacity-20">
-                        <p><b>Assigned Viva Center:</b> <span class="text-blue-700 font-bold">${data['Name of Center']}</span></p>
-                        <p><b>Examination Date:</b> <span class="text-red-600 font-bold">${data.Date || 'Not Fixed (Contact to you college or center)'}</span></p>
-                        <p><b>Reporting Time:</b> ${data.Time || 'Not Fixed'}</p>`;
-                        ${item.Notice ? `<a href="${item.Notice}" target="_blank" class="mini-notice-btn">📄 View Notice</a>` : ''}
+                html = `<p><b>College:</b> ${data['Attached Colleges']}</p>
+                        <p><b>Center:</b> <span class="text-blue-700 font-bold">${data['Name of Center']}</span></p>
+                        <p><b>Date:</b> <span class="text-red-600 font-bold">${data.Date || 'TBA'}</span></p>
+                        ${data.Notice ? `<a href="${data.Notice}" target="_blank" class="inline-block mt-3 bg-blue-600 text-white px-4 py-2 rounded">View Official Notice</a>` : ''}`;
             } else {
                 const head = data[0];
                 const list = data.map(m => `<li>• ${m['Attached Colleges']}</li>`).join('');
-                html = `<p><b>Viva Center Name:</b> <span class="text-blue-700 font-bold">${head['Name of Center']}</span></p>
-                        <p><b>Examination Date:</b> <span class="text-red-600 font-bold">${head.Date || 'TBA (Contact to your college or viva center)'}</span></p>
-                        <p><b>Reporting Time:</b> ${head.Time || 'Not Fixed'}</p>
-                        <hr class="my-2 opacity-20">
-                        <p class="text-xs font-bold text-gray-400 uppercase">Attached Colleges:</p>
-                        <ul class="text-xs mt-1 space-y-1 font-medium">${list}</ul>`;
-                        ${item.Notice ? `<a href="${item.Notice}" target="_blank" class="mini-notice-btn">📄 View Notice</a>` : ''}
+                html = `<p><b>Center:</b> <span class="text-blue-700 font-bold">${head['Name of Center']}</span></p>
+                        <p><b>Date:</b> <span class="text-red-600 font-bold">${head.Date || 'TBA'}</span></p>
+                        <hr class="my-2">
+                        <p class="text-xs font-bold uppercase">Attached Colleges:</p>
+                        <ul class="text-xs mt-1 space-y-1">${list}</ul>
+                        ${head.Notice ? `<a href="${head.Notice}" target="_blank" class="inline-block mt-3 bg-blue-600 text-white px-4 py-2 rounded">View Official Notice</a>` : ''}`;
             }
             dom.resultOutput.innerHTML = html;
             show(dom.resultsCard);
         }
 
-        async function init() {
-    const loadTasks = Object.keys(config.fileMap).map(async sub => {
-        try {
-            // Append a timestamp to prevent browser caching
-            const url = config.fileMap[sub] + (config.fileMap[sub].includes('?') ? '&' : '?') + 't=' + new Date().getTime();
-            
-            const res = await fetch(url);
-            if (!res.ok) throw new Error();
-            const text = await res.text();
-            config.allData[sub] = parseCSV(text);
-        } catch (e) { 
-            console.error(`Error loading data for ${sub}:`, e);
-            config.failedSubs.push(sub); 
-        }
-    });
-    await Promise.all(loadTasks);
-    hide(dom.initialLoader);
-    show(dom.mainContent);
-}
-
-        function clock() {
-            const now = new Date();
-            const timeStr = now.toLocaleString('en-IN', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' });
-            if (dom.footerTime) dom.footerTime.innerHTML = `<i class="far fa-clock text-yellow-400 mr-2"></i> ${timeStr}`;
-            if (dom.headerBranding) dom.headerBranding.textContent = `Powered by University Updates | ${timeStr}`;
-        }
-
-        async function visitor() {
-            try {
-                const res = await fetch('https://api.counterapi.dev/v1/university_updates_uu/main/up');
-                const data = await res.json();
-                document.getElementById('new-count').innerText = data.count;
-            } catch (e) {}
+        function toggleDarkMode() {
+            const isDark = document.getElementById('themeToggle').checked;
+            document.body.classList.toggle('dark-mode', isDark);
+            document.getElementById('toggleCircle').style.left = isDark ? '20px' : '0';
         }
 
         document.addEventListener('DOMContentLoaded', () => {
             init();
-            visitor();
-            setInterval(clock, 1000);
+            setInterval(() => {
+                const now = new Date();
+                dom.footerTime.innerHTML = now.toLocaleString('en-IN');
+            }, 1000);
         });
