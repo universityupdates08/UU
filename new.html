@@ -1,0 +1,4543 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>University Updates | Established Excellence</title>
+
+  
+    <meta property="og:title" content="University Updates">
+    <meta property="og:description" content="University Updates | Established Excellence">
+    <meta property="og:image" content="https://universityupdates.pythonanywhere.com/static/logo.png">
+    <meta property="og:type" content="website">
+
+  <link rel="stylesheet" href="/CSS/main.css" />
+  <link rel="stylesheet" href="/CSS/global.css" />
+  
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+    crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css" />
+  
+  
+  <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: "en",
+        includedLanguages: "en,hi",
+        layout: google.translate.TranslateElement.InlineLayout.HORIZONTAL,
+      },
+        "google_translate_element"
+      );
+    }
+  </script>
+
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MWTX6MCL0R"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-MWTX6MCL0R');
+</script>
+
+  <style>
+    /* Dropdown container */
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    /* Dropdown button */
+    .dropbtn {
+      background-color: #f9f9f9;
+      color: #333;
+      padding: 10px 15px;
+      font-size: 16px;
+      border: none;
+      cursor: pointer;
+    }
+
+    /* Dropdown content (hidden by default) */
+    .dropdown-content {
+      background-color: #f9f9f9;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      border-radius: 5px;
+    }
+
+    /* Links inside the dropdown */
+    .dropdown-content a {
+      color: #333;
+      text-decoration: none;
+      display: block;
+      padding: 10px;
+    }
+
+    /* Change color of dropdown links on hover */
+    .dropdown-content a:hover {
+      background-color: #f1f1f1;
+    }
+
+    /* Show the dropdown content when the dropdown button is clicked */
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    /* Style icon */
+    .dropdown-content a i {
+      margin-left: 5px;
+    }
+
+    /* Style for search results container */
+    #searchResultsContainer ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    #searchResultsContainer ul li {
+      padding: 10px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    #searchResultsContainer ul li:last-child {
+      border-bottom: none;
+    }
+
+    #searchResultsContainer ul li a {
+      color: #333;
+      text-decoration: none;
+    }
+
+    #searchResultsContainer ul li a:hover {
+      text-decoration: underline;
+    }
+
+    #searchResultsContainer p {
+      padding: 20px;
+    }
+
+    .search-result-div {
+      margin-top: 60px;
+      height: 300px;
+      max-height: 300px;
+      overflow-y: scroll;
+      width: 25rem;
+      padding: 10px;
+      border-radius: 10px;
+      border: 2px dashed gray;
+      background: #14297a;
+      position: absolute;
+      z-index: 999999;
+
+      &::-webkit-scrollbar-track {
+        -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+        border-radius: 20px;
+        background-color: #f5f5f5;
+      }
+
+      &::-webkit-scrollbar {
+        width: 5px;
+        background-color: #f5f5f5;
+        height: 3px !important;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+        background-color: grey;
+      }
+    }
+
+    @media screen and (max-width: 1250px) {
+      .search-result-div {
+        width: 21rem;
+      }
+    }
+
+    @media screen and (max-width: 991px) {
+      .search-result-div {
+        width: 24rem;
+      }
+    }
+
+    @media screen and (max-width: 640px) {
+      .search-result-div {
+        width: 21rem;
+        margin-top: 40px;
+      }
+    }
+
+    #navbar-mainn {
+      .nav-item {
+        font-weight: 800;
+
+        &:hover {
+          background: #0f172a;
+
+          .fa-circle-plus {
+            color: #fff;
+          }
+
+          .nav-link {
+            color: #14297a;
+          }
+        }
+
+        @media (max-width: 830px) {
+          &:hover {
+            background: transparent;
+
+            .nav-link {
+            color: #fff;
+          }
+          }
+
+          .navbar-nav .dropdown-menu {
+            width: 100% !important;
+          }
+
+        }
+      }
+    }
+
+    @media (max-width: 830px) {
+      .navbar-nav .dropdown-menu {
+        width: 100% !important;
+      }
+    }
+
+#main-nav{
+  .welcome-sub-slider-main {
+     
+     background: #14297a;
+     border-right: 5px solid #f4c751;
+     height: 100px;
+     box-shadow: 0 0 20px 2px #FFF, 0.1rem 0.25rem 10px #13092d;
+     width: 350px;
+
+     #carouselExampleIndicators {
+       padding: 20px;
+       
+       .carousel-indicators {
+         margin-bottom: 0;
+         display:none;
+       }
+
+       .carousel-inner {
+         .carousel-control-prev,
+         .carousel-control-next {
+           display: none !important;
+         }
+
+         .carousel-item {
+           .carousel-item-inner {
+             display: flex;
+             justify-content: center;
+             align-items: center;
+             gap: 20px;
+
+             .item-image {
+               background: #FFF;
+               border-radius: 50%;
+               img {
+                 width: 60px;
+                 height: 60px;
+                 border-radius: 50%;
+                 opacity: 1;
+               }
+             }
+
+             h6 {
+               color: #fff194;
+               font-size: 20px;
+               margin-bottom: 0px;
+               font-weight: 700;
+
+              
+             }
+
+             p {
+               color: #FFF;
+               font-size: 14px;
+               font-weight: normal;
+               margin-bottom: 0px;
+             }
+           }
+         }
+       }
+     }
+     @media(max-width:1500px){
+      display: none;
+     }
+   }
+}
+
+
+/* #new-blink{
+animation: blink-text 1s linear infinite;
+}
+
+@keyframes blink-text {
+  0%{
+    color: transparent;
+  }
+  50%{
+    visibility: #db4e4e;
+  }
+  100%{
+    color: #db4e4e;
+  }
+} */
+
+    
+
+  </style>
+</head>
+
+<body>
+  <section id="main-nav">
+    <div class="logo d-flex" style="justify-content: center; align-items: center">
+      <div class="nav-img">
+        <a href="/">
+          <img src="https://universityupdates.pythonanywhere.com/static/logo.png" alt="" />
+        </a>
+      </div>
+      <div class="nav-content">
+        <h1>University Updates</h1>
+        <p>
+        Academic Excellence</span>
+        </p>
+      </div>
+    </div>
+    
+    <div class="searchs d-flex">
+      <div id="search">
+        
+        <form id="searchinput">
+          <input type="search" autocomplete="off" id="searchInput" placeholder="Search here" />
+          <button type="submit">
+            <i class="fa fa-search" aria-hidden="true"></i>
+          </button>
+        </form>
+        <div class="search-result-div d-none">
+          <div id="searchResultsContainer" class="dropdown-content" style="position: relative">
+            <ul id="searchResultsList"></ul>
+            <p id="noResults" class="d-none">No results found.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="nav-btn">
+        <a href="/login" class="first-button">Login</a>
+        <a href="/register class="second-button">
+          <i class="fas fa-file" style="padding-right: 5px;"></i>
+          
+          Register
+        </a>
+      </div>
+    </div>
+  </section>
+
+  
+
+  
+
+  <nav class="navbar navbar-expand-lg navbar-dark" id="navbar-mainn">
+    <div class="container-fluid justify-content-end" style="margin-left: 10px">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+        aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation" style="border: 1px solid #fff;">
+        
+        <div class="bars">
+          <div class="bar bg-white"></div>
+          <div class="bar bg-white"></div>
+          <div class="bar bg-white"></div>
+        </div>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav flex-column flex-lg-row flex-wrap" style="justify-content: center">
+          <li class="nav-item dropdown dropdown-hover">
+            <a href="/" class="nav-link"><i class="fa-solid fa-house" style="color: #f4c751;"></i></a>
+          </li>
+          <li class="nav-item dropdown dropdown-hover">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              ABOUT US
+              <i class="fa-solid fa-caret-down"></i>
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <li>
+                <a class="dropdown-item" href="/about-us.php">History</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="/vision-mission.php">Vision & Mission</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="/charan-singh-ji.php">Hon'ble Chaudhary Charan Singh Ji</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="/chancellor.php">H.E. Chancellor</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="/vice-chancellor.php">Vice Chancellor's Message</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="/governance.php">Government framework</a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown dropdown-hover">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              ADMINISTRATION
+              <i class="fa-solid fa-caret-down"></i>
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <li>
+                <a class="dropdown-item" href="/administration.php">Administrative office</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="/deans-faculty.php">Deans</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="/wardens.php">Wardens</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="/deans-students-welfare.php">Deans Students Welfare</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="/proctors.php">Proctors</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="/officer-incharge.php">Officer/Incharge</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="/cell-and-coordinators.php">Cell and Coordinators</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="/engineering-section.php">Engineering Section</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="/dispensary.php">Dispensary</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="/finance-committee.php">Finance Committee</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="/sgrc.php">SGRC</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="/icc.php">ICC</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="/sedg.php">SEDG</a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown dropdown-hover position-static">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-mdb-toggle="dropdown"
+              aria-expanded="false">
+              Institutes/Departments/Constituent colleges
+              <i class="fa-solid fa-caret-down"></i>
+            </a>
+            
+            <div class="dropdown-menu mt-0" aria-labelledby="navbarDropdown" style="
+                  border-top-left-radius: 0;
+                  border-top-right-radius: 0;
+                  padding-left: 20px;
+                  padding-right: 20px;
+                ">
+              
+              <div class="row my-4">
+                <div class="col-md-6 mb-3 mb-lg-0">
+                  <div class="pb-3">
+                    <h4 style="text-align: center">Institutes</h4>
+                  </div>
+                  <div>
+                    <div>
+                      <a class="dropdown-item" href="https://www.csopccsu.com/" target="_blank">Charak School of
+                        Pharmacy</a>
+                    </div>
+                    <div>
+                      <a class="dropdown-item" href="https://scriet.ccsuniversity.ac.in" target="_blank" style="text-wrap:wrap;">Sir Chhotu
+                        Ram Institute of Engineering Technology</a>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 mb-3 mb-lg-0">
+                  <div class="pb-3">
+                    <h4 style="text-align: center">Constituent Colleges</h4>
+                  </div>
+                  <div>
+                  <div>
+                      <a class="dropdown-item" href="https://www.llrmmedicalcollege.org/" target="_blank"  style="text-wrap:wrap;">Lala Lajpat Rai Memorial Medical College</a>
+                    </div>
+                    <div>
+                      <a class="dropdown-item" href="https://gccjr.org/" target="_blank "  style="text-wrap:wrap;">Shanti Devi Government Degree College Jewar (Rabupura)</a>
+                    </div>
+                    <div>
+                      <a class="dropdown-item" href="https://gcph.in/web/" target="_blank"  style="text-wrap:wrap;">Government College, Pandwan, Hastinapur (Meerut)</a>
+                    </div>
+                    <div>
+                      <a class="dropdown-item" href="https://gcsh.in/" target="_blank "  style="text-wrap:wrap;">Government College, Salarpur, Hapur</a>
+                    </div>
+                    <div>
+                      <a class="dropdown-item" href="https://gcpb.in/web/  " target="_blank "  style="text-wrap:wrap;">Government College Pabla</a>
+                    </div>
+                    
+                   
+                  
+                  </div>
+                </div>
+                <div class="col-md-12 mb-3 mb-lg-0">
+                  <div class="pb-3">
+                    <h4 style="text-align: center">Departments</h4>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-4">
+                    <div class="list-group list-group-flush">                    <a href="/faculty/Science/department/Biotechnology" class="list-group-item list-group-item-action">
+                      Biotechnology                    </a>
+                                        <a href="/faculty/Science/department/Botany" class="list-group-item list-group-item-action">
+                      Botany                    </a>
+                                        <a href="https://csop.ccsuniversity.ac.in/" class="list-group-item list-group-item-action">
+                      Charak School of Pharmacy                    </a>
+                                        <a href="/faculty/Science/department/Chemistry" class="list-group-item list-group-item-action">
+                      Chemistry                    </a>
+                                        <a href="/faculty/Commerce_and_Management/department/Commerce" class="list-group-item list-group-item-action">
+                      Commerce                    </a>
+                                        <a href="https://scriet.ccsuniversity.ac.in/Department-MCA.php" class="list-group-item list-group-item-action">
+                      Computer Application                    </a>
+                                        <a href="/faculty/Art/department/Economics" class="list-group-item list-group-item-action">
+                      Economics                    </a>
+                                        <a href="/faculty/Education/department/Education " class="list-group-item list-group-item-action">
+                      Education                     </a>
+                                        <a href="/faculty/Art/department/English" class="list-group-item list-group-item-action">
+                      English                    </a>
+                                        <a href="/faculty/Science/department/Environmental_Science" class="list-group-item list-group-item-action">
+                      Environmental Science                    </a>
+                                        <a href="/faculty/Agriculture/department/Food_Science_and_Technology" class="list-group-item list-group-item-action">
+                      Food Science & Technology                    </a>
+                                        <a href="/faculty/Art/department/Foreign_Language" class="list-group-item list-group-item-action">
+                      Foreign Language                    </a>
+                                        <a href="/faculty/Science/department/Forensic_Science" class="list-group-item list-group-item-action">
+                      Forensic Science                    </a>
+                                        <a href="/faculty/Agriculture/department/Genetics_and_Plant_Breeding" class="list-group-item list-group-item-action">
+                      Genetics & Plant Breeding                    </a>
+                    </div>
+                    </div><div class="col-md-4">
+                    <div class="list-group list-group-flush">                    <a href="/faculty/Art/department/Geography " class="list-group-item list-group-item-action">
+                      Geography                     </a>
+                                        <a href="/faculty/Art/department/Hindi" class="list-group-item list-group-item-action">
+                      Hindi और आधुनिक भारतीय भाषा विभाग                    </a>
+                                        <a href="/faculty/Art/department/History" class="list-group-item list-group-item-action">
+                      History                    </a>
+                                        <a href="/faculty/Art/department/Home_Science " class="list-group-item list-group-item-action">
+                      Home Science                     </a>
+                                        <a href="/faculty/Agriculture/department/Horticulture" class="list-group-item list-group-item-action">
+                      Horticulture                    </a>
+                                        <a href="/faculty/Commerce_and_Management/department/Institute_of_Business_Studies" class="list-group-item list-group-item-action">
+                      Institute of Business Studies                     </a>
+                                        <a href="https://scriet.ccsuniversity.ac.in/" class="list-group-item list-group-item-action">
+                      Institute of Engineering & Technology                    </a>
+                                        <a href="/faculty/Art/department/Institute_Fine_Arts" class="list-group-item list-group-item-action">
+                      Institute of Fine Arts                    </a>
+                                        <a href="/faculty/Art/department/Jewellery_Design_&_Technology" class="list-group-item list-group-item-action">
+                      Jewellery Design & Technology                    </a>
+                                        <a href="/faculty/Law/department/Legal_Studies" class="list-group-item list-group-item-action">
+                      Legal Studies                    </a>
+                                        <a href="/faculty/Art/department/Library_and_Information_Science" class="list-group-item list-group-item-action">
+                      Library and Information Science                    </a>
+                                        <a href="/faculty/Science/department/Mathematics" class="list-group-item list-group-item-action">
+                      Mathematics                    </a>
+                                        <a href="/faculty/Science/department/Microbiology" class="list-group-item list-group-item-action">
+                      Microbiology                    </a>
+                                        <a href="/faculty/Education/department/Physical_Education " class="list-group-item list-group-item-action">
+                      Physical Education                     </a>
+                    </div>
+                    </div><div class="col-md-4">
+                    <div class="list-group list-group-flush">                    <a href="/faculty/Science/department/Physics" class="list-group-item list-group-item-action">
+                      Physics                    </a>
+                                        <a href="/faculty/Agriculture/department/Plant_Protection" class="list-group-item list-group-item-action">
+                      Plant Protection                    </a>
+                                        <a href="/faculty/Art/department/Political_Science" class="list-group-item list-group-item-action">
+                      Political Science                    </a>
+                                        <a href="/faculty/Art/department/Psychology" class="list-group-item list-group-item-action">
+                      Psychology                    </a>
+                                        <a href="/faculty/Art/department/Sanskrit" class="list-group-item list-group-item-action">
+                      Sanskrit                    </a>
+                                        <a href="/faculty/Agriculture/department/Seed_Science_and_Technology" class="list-group-item list-group-item-action">
+                      Seed Science & Technology                    </a>
+                                        <a href="/faculty/Art/department/Sociology" class="list-group-item list-group-item-action">
+                      Sociology                    </a>
+                                        <a href="/faculty/Science/department/Statistics" class="list-group-item list-group-item-action">
+                      Statistics                    </a>
+                                        <a href="http://www.ccsutsmc.in/index.php" class="list-group-item list-group-item-action">
+                      Tilak School of Journalism and Mass Communication                    </a>
+                                        <a href="/faculty/Science/department/Toxicology" class="list-group-item list-group-item-action">
+                      Toxicology                    </a>
+                                        <a href="/faculty/Art/department/Urdu" class="list-group-item list-group-item-action">
+                      Urdu                    </a>
+                                        <a href="/faculty/Art/department/Yoga_Science" class="list-group-item list-group-item-action">
+                      Yoga Science                    </a>
+                                        <a href="/faculty/Science/department/Zoology" class="list-group-item list-group-item-action">
+                      Zoology                    </a>
+                    </div>
+                    </div>                  </div>
+                </div>
+
+              </div>
+            </div>
+          </li>
+
+          <li class="nav-item dropdown dropdown-hover position-static">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-mdb-toggle="dropdown"
+              aria-expanded="false">
+              ACADEMIC
+              <i class="fa-solid fa-caret-down"></i>
+            </a>
+            
+            <div class="dropdown-menu mt-0" aria-labelledby="navbarDropdown" style="
+                  border-top-left-radius: 0;
+                  border-top-right-radius: 0;
+                  padding-left: 20px;
+                  padding-right: 20px;
+                ">
+              
+              <div class="row my-4">
+                <div class="col-md-6 mb-3 mb-lg-0">
+                  <div class="pb-3">
+                    <h4 style="text-align: center">Faculties</h4>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="list-group list-group-flush">
+                        <a href="/faculty/" class="list-group-item list-group-item-action">
+                          All
+                        </a>
+                        <a href="/faculty/Agriculture" class="list-group-item list-group-item-action">
+                          Agriculture
+                        </a>
+                        <a href="/faculty/Art" class="list-group-item list-group-item-action">Art</a>
+                        <a href="/faculty/Commerce_and_Management"
+                          class="list-group-item list-group-item-action">Commerce & Management</a>
+                        <a href="/faculty/Education" class="list-group-item list-group-item-action">Education</a>
+                        <a href="/faculty/Engineering_and_Technology"
+                          class="list-group-item list-group-item-action">Engineering & Technology</a>
+                        <a href="/faculty/Law" class="list-group-item list-group-item-action">Law</a>
+                        <a href="/faculty/Pharmacy" class="list-group-item list-group-item-action">Pharmacy</a>
+                        <a href="/faculty/Science" class="list-group-item list-group-item-action">Science</a>
+                      </div>
+                    </div>
+                    
+                  </div>
+                </div>
+
+                <div class="col-md-6 mb-3 mb-lg-0">
+                  <div class="pb-3">
+                    <h4 style="text-align: center">Programmes</h4>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="list-group list-group-flush">
+                        <a href="/prog-offered-courses.php" class="list-group-item list-group-item-action">
+                          All Programmes
+                        </a>
+                        <a href="/reg-course.php" class="list-group-item list-group-item-action">Regular Courses</a>
+                        <a href="/self-course.php" class="list-group-item list-group-item-action">Self-Financial
+                          Courses</a>
+                        <a href="/syllabus-skill-dev-nep-2020.php" class="list-group-item list-group-item-action">Skill Development Courses</a>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="pb-3">
+                    <h4 style="text-align: center">Syllabus</h4>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="list-group list-group-flush">
+                        <a href="/campus-syllabus.php" class="list-group-item list-group-item-action">
+                          Campus Syllabus
+                        </a>
+                        <a href="/college-syllabus.php" class="list-group-item list-group-item-action">College
+                          Syllabus</a>
+                        <a href="/syllabus-nep-2020.php" class="list-group-item list-group-item-action">NEP-2020
+                          Syllabus</a>
+                        <a href="/syllabus-skill-dev-nep-2020.php" class="list-group-item list-group-item-action">Skill
+                          Development Syllabus</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+
+
+
+
+
+          <li class="nav-item dropdown dropdown-hover">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Infrastructure
+              <i class="fa-solid fa-caret-down"></i>
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <li>
+                <a class="dropdown-item" href="/facilities.php">Facilities</a>
+              </li>
+              
+              
+              
+
+              
+              <li>
+                <a class="dropdown-item" href="library.php">Library</a>
+              </li>
+              
+            </ul>
+          </li>
+          <li class="nav-item dropdown dropdown-hover">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              LIBRARY
+              <i class="fa-solid fa-caret-down"></i>
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <div class="row">
+                <div class="col-md-12">
+                  <li>
+                    <a class="dropdown-item" href="/library.php">Central Library</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="https://digital-lib.ccsuniversity.ac.in/"
+                      target="_blank">Digital Library</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="https://bridge-library.ccsuniversity.ac.in/" target="_blank">Bridge
+                      Library</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="http://ir.ccsuniversity.ac.in/jspui/" target="_blank">Institutional
+                      Repository</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="https://heecontent.upsdc.gov.in/Home.aspx" target="_blank">UPHEDL</a>
+                  </li>
+                </div>
+              </div>
+            </ul>
+          </li>
+          <li class="nav-item dropdown dropdown-hover">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              IQAC
+              <i class="fa-solid fa-caret-down"></i>
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <div class="new-menu-try">
+                <div class="col-lg-5">
+                  <li><a class="dropdown-item" href="/iqac.php">IQAC</a></li>
+                  
+                  <li>
+                    <a class="dropdown-item" href="/iqac-aqar-report.php">AQAR Reports</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="/iqac-meet.php">Minutes of IQAC Meetings</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="/iqac-practices.php">Best Practices</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="/iqac-letter.php">IQAC Committee Letter</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="/iqac-notifications.php">Notifications</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="/distinctiveness.php">Institutional Distinctiveness</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="/industry-consultancy-cell.php">Industry Consultancy Cell</a>
+                  </li>
+                </div>
+                <div class="col-lg-6">
+                  <li>
+                    <a class="dropdown-item" href="/facilities.php">Facilities</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="/Proceeding-AC-BOS.php">Proceeding AC/BOS</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item"
+                      href="https://filesccsu.blr1.cdn.digitaloceanspaces.com/public/pdf/ccsum/iqac/student_projects.pdf"
+                      target="_blank">Student Projects/ Field Reports</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="/academic-calendar.php">Academic Calendar</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item"
+                      href="https://filesccsu.blr1.cdn.digitaloceanspaces.com/public/pdf/ccsu/pdf-files/Budget-2015-21.pdf"
+                      target="_blank">Audited Statement of Income Expenditure</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="/iqac-feedback.php">Feedback</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="/iqac-activities.php">Activities</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="/iqac-contact.php">Contact</a>
+                  </li>
+                </div>
+              </div>
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown dropdown-hover">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Admission
+              <i class="fa-solid fa-caret-down"></i>
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <div class="row">
+                <div class="col-md-12">
+                  <li>
+                    <a class="dropdown-item" href="/admission-brochure-2023.php">Admission Brochure
+                    </a>
+                  </li>
+                </div>
+              </div>
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown dropdown-hover">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Examination
+              <i class="fa-solid fa-caret-down"></i>
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <li>
+                <a class="dropdown-item" href="/exam-rules.php">Exam Rules (समस्त परीक्षा नियम)</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="/exam-related-info.php">Exam Related Information (परीक्षा से सम्बन्धित सूचनाएं)</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="/exam-schedule.php">Exam Schedule/Revised Exam Schedule</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="/exam-form.php">Examination Forms (परीक्षा फार्म का link)</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="/downloads.php">Code Books</a>
+              </li>
+            </ul>
+          </li>
+
+
+          <li class="nav-item dropdown dropdown-hover">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              STUDENTS CORNER
+              <i class="fa-solid fa-caret-down"></i>
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="left:-360px">
+              <div class="new-menu-try">
+                <div class="col-md-6">
+                  <li>
+                    <a class="dropdown-item" href="/syllabus.php">Syllabus</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="https://result.ccsuniversity.ac.in/">Result</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="/anti-ragging.php">Anti ragging</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="/conduct-discipline.php">Conduct & Discipline</a>
+                  </li>
+                  
+
+                  <li>
+                    <a class="dropdown-item" href="http://ccsuniversityhostel.com/" target="blank">Hostel
+                      Registration</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="https://exams.ccsuforms.in/FeePayPanel/" target="blank">Online Fees
+                      Payment for Campus Courses</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="https://forms.ccsuforms.in/Campus_Fee/" target="blank">Campus Fee
+                      Payment</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="https://forms.ccsuforms.in/onlinecertificate/" target="blank">Online
+                      Provisional & Migration Certificate</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="/student-council.php">Student Council</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="https://cdn.ccsuniversity.ac.in/public/jpeg/2025/05/fee_refund_policy_2024_2025.jpeg" target="blank">Fee Refund Policy</a>
+                  </li>
+                </div>
+                <div class="col-md-6">
+                  
+                  <li>
+                    <a class="dropdown-item" href="https://filesccsu.blr1.cdn.digitaloceanspaces.com/public/pdf/ccsu/All-PDF/Students-Handbook.pdf"
+                      target="blank">Student Handbook</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item"
+                      href="https://docs.google.com/forms/d/e/1FAIpQLSerV466RZUBe0Jlaeds0XVq9sy36gq6_yECroPFieqOcYxMRQ/viewform?usp=sf_link"
+                      target="blank">Student Satisfaction Survey</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item"
+                      href="https://docs.google.com/forms/d/e/1FAIpQLScYaQi-uCHCKYghmRzDjUR3w7yYs726MGAUShzakyPD0I535g/viewform?usp=sf_link"
+                      target="blank">Student Feedback form</a>
+                  </li>
+
+                  <li>
+                    <a class="dropdown-item" href="/omr/">OMR Keys, Sheet & Response</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="https://ccsuwebonline.in/" target="blank">Student Help Desk <span style="color:#db4e4e;">'New'</span></a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="https://ccsuanswerview.com/" target="blank">Answer Book Viewing &
+                      Challenge Evaluation</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="/women-cell.php">Women Cell</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="/left-out-practical.php">Apply for left out practical/viva</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="/verification.php">Document Verification</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="https://ncc.ccsuniversity.ac.in" target="blank">NCC</a>
+                  </li>
+                </div>
+              </div>
+            </ul>
+          </li>
+
+          
+          
+
+
+
+
+
+          <li class="nav-item">
+            <a class="nav-link" href="/career.php"> Jobs Opening </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://swayam.inflibnet.ac.in/" target="_blank"> SWAYAM portal </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <script type="text/javascript"
+    src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+  <link rel="stylesheet" href="/assests/css/main.css" />
+<link rel="stylesheet" href="/assests/css/global.css" />
+<style>
+  /* Styling for the Google Translate dropdown */
+  .goog-te-combo {
+    color: white;
+    /* Text color */
+    border: none;
+    /* Remove border */
+    background-color: #14297a;
+    /* Background color */
+  }
+
+  /* Styling for the dropdown arrow */
+  .goog-te-combo-arrow {
+    color: white;
+    /* Arrow color */
+  }
+
+  /* Styling for the dropdown arrow icon */
+  .goog-te-combo-arrow-img {
+    filter: invert(1);
+    /* Invert the arrow color */
+  }
+
+  /* Hide the "Powered by Google" watermark */
+  .goog-logo-link {
+    display: none !important;
+  }
+
+  a.VIpgJd-ZVi9od-l4eHX-hSRGPd {
+    display: none;
+  }
+
+  .dropdown a {
+    /* font-size:11px; */
+  }
+
+  #new-dropmenu a {
+    line-height: 25px;
+    text-transform: capitalize !important;
+  }
+
+  .translated-ltr {
+    margin-top: -40px;
+  }
+
+  .goog-te-banner-frame {
+    display: none;
+    margin-top: -20px;
+  }
+
+  .goog-te-gadget {
+    color: transparent !important;
+  }
+
+  .google-translate-container {
+    text-decoration: none !important;
+  }
+
+  .fa-linkedin-in:hover {
+  color: #f4c751 !important;
+}
+.fa-instagram:hover {
+  color: #f4c751 !important;
+}
+.fa-youtube:hover {
+  color: #f4c751 !important;
+}
+.fa-x-twitter:hover {
+  color: #f4c751 !important;
+}
+.fa-facebook-f:hover {
+  color: #f4c751 !important;
+}
+
+.fa-book-open-reader:hover{
+  color: #f4c751 !important;
+}
+ul{
+  user-select: none !important;
+}
+</style>
+<div class="top-bar">
+  <div class="hamburger-menu">
+    <div class="menu-top-icon" id="topbarHamburger">
+    <i class="fa-solid fa-chevron-down"></i>
+    </div>
+  </div>
+
+  <div id="top-sub-section">
+    <ul>
+      <div class="dropdown" id="new-dropmenu">
+        <button
+          type="button"
+          id="dropdownMenuButton"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          <li>Yoga Certificate Course</li>
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a
+            class="dropdown-item"
+            href="https://docs.google.com/forms/d/e/1FAIpQLSc6-OMxveZ0d6JdzvDiLCvSFdz7hPEdK8pRW-PGa7mMUFGfyw/viewform?usp=sf_link"
+            target="_blank"
+            >certificate course in concept and application of meditation (three
+            months)- yoga science department</a
+          >
+          <a
+            class="dropdown-item"
+            href="https://docs.google.com/forms/d/e/1FAIpQLScLZF_qqXPuy878AcPM5bHGcbguUw8tr9-FKc8IV99lg-RFsQ/viewform?usp=sf_link"
+            target="_blank"
+            >certificate course in advance yogasana (three months ) - yoga
+            science department</a
+          >
+          <a
+            class="dropdown-item"
+            href="https://docs.google.com/forms/d/e/1FAIpQLScfuJxfU0pQcxER3qSDXapxItsDVRvKAAziDtChe-jAtinRJw/vi"
+            target="_blank"
+            >certificate course in pranayama (three months ) - yoga science
+            department</a
+          >
+          <a
+            class="dropdown-item"
+            href="https://docs.google.com/forms/d/e/1FAIpQLSfQD1yDj--Wd3HhMZ8e3e8_bryl-ry0jRwl8L6td6FbP8ohHQ/viewform?usp=sf_link"
+            target="_blank"
+            >certificate course in yogasana (three months ) - yoga science
+            department</a
+          >
+        </div>
+      </div>
+
+      
+
+      
+      
+      
+      <a href="/departments.php">
+        <li>Departments</li>
+      </a>
+      <a href="/list-holidays.php">
+        <li>List of Holidays</li>
+      </a>
+      <a href="/35convocation-2023.php">
+        <li>36th Convocation-2024</li>
+      </a>
+      
+      <a href="/contact.php">
+        <li>Contact Us</li>
+      </a>
+      <a href="https://cv.ccsuniversity.ac.in/dynamic-cv/" target="_blank">
+        <li>Dynamic CV</li>
+      </a>
+      <a href="https://ccsuniversity.samarth.ac.in/" target="_blank">
+        <li>CCSU Samarth</li>
+      </a>
+      <a href="/rankings.php" >
+        <li style="color: #14297a; background:#f4c751; padding:5px 20px; border-radius: 50px;">CCSU Rankings</li>
+      </a>
+      <a href="/sustainability.php">
+      <li style="color: #14297a; background:#f4c751; padding:5px 20px; border-radius: 50px;">Sustainability@CCSU </li>
+      </a> 
+    </ul>
+    <ul>
+      <li><a href="https://www.facebook.com/CCSUFB" target="_blank"><i class="fa-brands fa-facebook-f text-white"></i></a></li>
+      <li><a href="https://twitter.com/ccsumeerut" target="_blank"><i class="fa-brands fa-x-twitter text-white"></i></a></li>
+      <li><a href="https://youtube.com/channel/UCBRUtlVs5IJiAM61KZqDXrg" target="_blank"><i class="fa-brands fa-youtube text-white"></i></a></li>
+      <li><a href="https://instagram.com/ccsuinsta" target="_blank"><i class="fa-brands fa-instagram text-white"></i></a></li>
+      <li><a href="https://www.linkedin.com/company/ch-charan-singh-university-meerut/" target="_blank"><i class="fa-brands fa-linkedin-in text-white"></i></i></a></li>
+      <li><a href="/"><i class="fa-solid fa-house text-white"></i> <span id="home" class="text-white">Home</span></a></li>
+      <a href="/screen-reader.php">
+        <li title="Screen Reader">
+          <i class="fa-solid fa-book-open-reader"></i>
+        </li>
+      </a>
+      <li class="controllers" onclick="adjustFontSize('increase')">A+</li>
+      <li class="controllers" onclick="resetFontSize()">A</li>
+      <li class="controllers" onclick="adjustFontSize('decrease')">A-</li>
+      <li class="google-translate-container">
+        <div id="google_translate_element"></div>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<script>
+  var topHam = document.getElementById("topbarHamburger");
+  var topHamDetail = document.getElementById("top-sub-section");
+
+  topHam.addEventListener("click", () => {
+    if (
+      topHamDetail.style.display === "none" ||
+      topHamDetail.style.display === ""
+    ) {
+      topHamDetail.style.display = "block";
+    } else {
+      topHamDetail.style.display = "none";
+    }
+  });
+</script>  
+  
+  
+  
+  
+
+  
+</body>
+
+</html>
+
+<style>
+  .banner-main {
+    display: flex;
+    align-items: start;
+
+    @media (max-width:1100px) {
+      flex-wrap: wrap;
+    }
+
+    .home-slider-main {
+      position: relative;
+      width: 85%;
+
+      @media (max-width:1100px) {
+        width: 100%;
+      }
+
+      .home-slider-inner {
+        #carouselExample {
+          margin: 0 !important;
+          padding: 0 !important;
+          background: #fff;
+
+          .carousel-inner {
+            width: 100%;
+            max-width: 100%;
+
+            @media (max-width:600px) {
+              height: 250px;
+            }
+
+            .carousel-item {
+              img {
+                object-fit: cover;
+                width: 100%;
+                height: 650px;
+
+                @media (max-width:1766px) {
+                  height: 500px;
+                }
+
+                @media (max-width:1536px) {
+                  height: 500px;
+                }
+
+                @media (max-width:1100px) {
+                  height: 340px;
+                  width: 100%;
+                }
+
+                @media (max-width:600px) {
+                  height: 180px;
+                  width: 100%;
+                  object-fit:fill;
+                }
+              }
+
+              .home-slider-title {
+                width: 100%;
+                background: #f0f6fd;
+                padding: 16px 4px;
+
+                @media (max-width:600px){
+                  padding:2px;
+                }
+
+                p {
+                  color: #14297a;
+                  text-align: center;
+                  margin: 0;
+                  font-size: 17px;
+
+                  @media (max-width:600px){
+                    font-size:12px;
+                  }
+                }
+              }
+            }
+          }
+
+          &:hover {
+
+            .carousel-control-prev,
+            .carousel-control-next {
+              opacity: 1;
+            }
+          }
+
+          .carousel-control-prev,
+          .carousel-control-next {
+            opacity: 0;
+            transition: 0.3s;
+            height: 50px;
+            width: 50px;
+            top: 50%;
+            background-color: rgba(0, 0, 0, 0.4);
+
+            @media (max-width:830px) {
+              top: 35%;
+            }
+
+            @media (max-width:600px) {
+              display: flex !important;
+              width: 30px;
+              height: 30px;
+              top: 35%;
+            }
+          }
+        }
+      }
+
+      .welcome-sub-slider-main {
+        width: 25%;
+        background: #0d4e9486;
+        border-right: 5px solid #f4c751;
+        /* height: 25%; */
+        height: 170px;
+        position: absolute;
+        left: 2%;
+        bottom: 6%;
+        box-shadow: 0 0 20px 2px #FFF, 0.1rem 0.25rem 10px #13092d;
+
+        @media (max-width:1500px) {
+          height: 150px;
+        }
+
+        @media (max-width:1300px) {
+          height: 120px;
+        }
+
+        @media (max-width:1100px) {
+          height: 100px;
+          bottom: 13%;
+          left: 72.5%;
+        }
+
+        @media (max-width:600px) {
+          width: 100%;
+          height: 120px;
+          position: relative;
+          left: 0 !important;
+          right: 0 !important;
+          top: -20px !important;
+          margin-bottom: 5px !important;
+          background: #14297a !important;
+        }
+
+        #carouselExampleIndicators3 {
+          padding: 1rem;
+
+          .carousel-indicators {
+            bottom: -40px;
+
+            @media (max-width:1500px) {
+              bottom: -20px;
+            }
+
+            @media (max-width:1300px) {
+              bottom: -10px;
+            }
+
+            @media (max-width:1100px) {
+              bottom: -15px;
+            }
+          }
+
+          .carousel-inner {
+
+            .carousel-control-prev,
+            .carousel-control-next {
+              display: none !important;
+            }
+
+            .carousel-item {
+              .carousel-item-inner {
+                display: flex;
+                justify-content: start;
+                align-items: center;
+                gap: 50px;
+
+                @media (max-width:830px) {
+                  gap: 20px
+                }
+
+                .item-image {
+                  background: #FFF;
+                  border-radius: 50%;
+                  /* filter: drop-shadow(0 0 15px #fff); */
+
+                  img {
+                    width: 100px;
+                    height: 100px;
+                    border-radius: 50%;
+                    opacity: 1;
+
+                    @media (max-width:1300px) {
+                      width: 80px;
+                      height: 80px;
+                    }
+
+                    @media (max-width:1100px) {
+                      width: 60px;
+                      height: 60px;
+                    }
+
+                    @media (max-width:600px) {
+                      width: 80px;
+                      height: 80px;
+                    }
+                  }
+                }
+
+                h6 {
+                  color: #fff194;
+                  font-size: 1.5vw;
+                  margin-bottom: 0px;
+                  font-weight: 700;
+
+                  @media (max-width:600px) {
+                    font-size: 5.9vw !important;
+                  }
+                }
+
+                p {
+                  color: #FFF;
+                  font-size: 16px;
+                  font-weight: normal;
+                  margin-bottom: 0px;
+
+                  @media (max-width:600px) {
+                    font-size: 3.9vw !important;
+                  }
+                }
+              }
+            }
+          }
+        }
+        @media(min-width:1500px){
+          display: none;
+        }
+      }
+    }
+
+    .home-slider-profile {
+      width: 15%;
+
+      @media (max-width:1100px) {
+        width: 100%;
+      }
+
+      .boxes {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        padding: 5px 10px;
+
+        @media (max-width:1100px) {
+          flex-direction: row;
+          margin-top: 1rem;
+          margin-bottom: 1rem;
+        }
+
+        @media (max-width:600px) {
+          flex-direction: column;
+          margin-top: 1rem;
+          margin-bottom: 1rem;
+        }
+
+        .box {
+          width: 100%;
+          /* border: 1px solid #14297a; */
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          padding: 10px;
+          background: #f0f6fd;
+
+          @media (max-width:600px){
+            padding: 5px !important;
+          }
+
+          .box-inner {
+            img {
+              width: 110px;
+              height: 110px;
+              object-fit: cover;
+              border-radius: 50%;
+
+              @media (max-width:1766px){
+                height: 63px;
+                width: 63px;
+              }
+            }
+            .middle {
+              margin-top: 5px;
+
+              h6 {
+                font-size: 14px;
+                color: #14297a;
+                font-weight: 600;
+                text-align: center;
+
+                @media (max-width:1766px){
+                  font-size:12px;
+                }
+              }
+
+              p {
+                font-size: 14px;
+                color: #14297a;
+                text-align: center;
+                @media (max-width:1766px){
+                  font-size:12px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+</style>
+
+<main class="banner-main">
+  <section class="home-slider-main">
+    <div class="home-slider-inner">
+      <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+                    <div class="carousel-item active">
+            <img src="https://ccsuniversity.blr1.cdn.digitaloceanspaces.com/public/jpg/2026/04/Untitled%20design%20(1).jpg" class="d-block w-100 peinture-ombre-interne-fine" alt="..." />
+            <div class="home-slider-title">
+              <p>
+                MIICCIA Legend Enterprises Award - 2026              </p>
+            </div>
+          </div>
+                    <div class="carousel-item ">
+            <img src="https://cdn.ccsuniversity.ac.in/public/jpg/2026/03/cervical%20canceer%20program.jpg" class="d-block w-100 peinture-ombre-interne-fine" alt="..." />
+            <div class="home-slider-title">
+              <p>
+                              </p>
+            </div>
+          </div>
+                    <div class="carousel-item ">
+            <img src="https://cdn.ccsuniversity.ac.in/public/jpg/2026/02/ai-submit-02.jpg" class="d-block w-100 peinture-ombre-interne-fine" alt="..." />
+            <div class="home-slider-title">
+              <p>
+                AI Impact Summit              </p>
+            </div>
+          </div>
+                    <div class="carousel-item ">
+            <img src="https://cdn.ccsuniversity.ac.in/public/jpg/2026/02/ai-submit-01.jpg" class="d-block w-100 peinture-ombre-interne-fine" alt="..." />
+            <div class="home-slider-title">
+              <p>
+                AI Impact Summit              </p>
+            </div>
+          </div>
+                    <div class="carousel-item ">
+            <img src="https://cdn.ccsuniversity.ac.in/public/jpg/2026/01/02-01-2026.jpg" class="d-block w-100 peinture-ombre-interne-fine" alt="..." />
+            <div class="home-slider-title">
+              <p>
+                              </p>
+            </div>
+          </div>
+                    <div class="carousel-item ">
+            <img src="https://cdn.ccsuniversity.ac.in/public/jpg/2025/12/banner-24-12-25.jpg" class="d-block w-100 peinture-ombre-interne-fine" alt="..." />
+            <div class="home-slider-title">
+              <p>
+                MoU Signed Ministry Skilled Development and Enterpreneurship, CCSU & Google Cloud India Pvt. Ltd.               </p>
+            </div>
+          </div>
+                    <div class="carousel-item ">
+            <img src="https://cdn.ccsuniversity.ac.in/public/jpg/2025/12/samvad.jpg" class="d-block w-100 peinture-ombre-interne-fine" alt="..." />
+            <div class="home-slider-title">
+              <p>
+                साहित्यिक सांस्कृतिक परिषद मालिनी अवस्थी की कृति चन्दन किंवाड़ पर संवाद               </p>
+            </div>
+          </div>
+                    <div class="carousel-item ">
+            <img src="https://cdn.ccsuniversity.ac.in/public/jpg/2025/11/img05.jpg" class="d-block w-100 peinture-ombre-interne-fine" alt="..." />
+            <div class="home-slider-title">
+              <p>
+                CCS University through Center for Excellence Sports Goods Manufacturing (Badminton Racquet Unit) is empowering women of neighbouring villages to facilitate the formation of Chaudhary Charan Singh University Self Help Group (C.C.S.U.-SHG)              </p>
+            </div>
+          </div>
+                    <div class="carousel-item ">
+            <img src="https://cdn.ccsuniversity.ac.in/public/jpg/2025/11/Inaugration.jpg" class="d-block w-100 peinture-ombre-interne-fine" alt="..." />
+            <div class="home-slider-title">
+              <p>
+                Inauguration of Center for Excellence Sports Goods Manufacturing (Badminton Racquet Unit) Powered by: Women Self-Help Group Chaudhary Charan Singh University, Meerut.              </p>
+            </div>
+          </div>
+                    <div class="carousel-item ">
+            <img src="https://cdn.ccsuniversity.ac.in/public/jpg/2025/11/banner.jpg" class="d-block w-100 peinture-ombre-interne-fine" alt="..." />
+            <div class="home-slider-title">
+              <p>
+                शैक्षणिक भ्रमण राजकीय कन्या इण्टर कालेज सिसौली मुजफ्फरनगर              </p>
+            </div>
+          </div>
+                    <div class="carousel-item ">
+            <img src="https://cdn.ccsuniversity.ac.in/public/jpg/2025/09/37th-convocation%20(2).jpg" class="d-block w-100 peinture-ombre-interne-fine" alt="..." />
+            <div class="home-slider-title">
+              <p>
+                37th Convocation 2025              </p>
+            </div>
+          </div>
+                    <div class="carousel-item ">
+            <img src="https://cdn.ccsuniversity.ac.in/public/jpg/2025/09/nirf-ranking%20(3).jpg" class="d-block w-100 peinture-ombre-interne-fine" alt="..." />
+            <div class="home-slider-title">
+              <p>
+                NIRF Ranking 2025              </p>
+            </div>
+          </div>
+                    <div class="carousel-item ">
+            <img src="https://cdn.ccsuniversity.ac.in/public/jpg/2025/09/nirf-ranking%20(2).jpg" class="d-block w-100 peinture-ombre-interne-fine" alt="..." />
+            <div class="home-slider-title">
+              <p>
+                NIRF Ranking 2025              </p>
+            </div>
+          </div>
+                    <div class="carousel-item ">
+            <img src="https://cdn.ccsuniversity.ac.in/public/jpg/2025/08/id-01.jpg" class="d-block w-100 peinture-ombre-interne-fine" alt="..." />
+            <div class="home-slider-title">
+              <p>
+                Independence Day Celebration 2025              </p>
+            </div>
+          </div>
+                    <div class="carousel-item ">
+            <img src="https://cdn.ccsuniversity.ac.in/public/jpg/2025/08/id-04.jpg" class="d-block w-100 peinture-ombre-interne-fine" alt="..." />
+            <div class="home-slider-title">
+              <p>
+                Independence Day Celebration 2025              </p>
+            </div>
+          </div>
+                    <div class="carousel-item ">
+            <img src="https://cdn.ccsuniversity.ac.in/public/jpg/2025/08/id-02.jpg" class="d-block w-100 peinture-ombre-interne-fine" alt="..." />
+            <div class="home-slider-title">
+              <p>
+                Independence Day Celebration 2025              </p>
+            </div>
+          </div>
+                    <div class="carousel-item ">
+            <img src="https://cdn.ccsuniversity.ac.in/public/jpg/2025/08/banner-02.jpg" class="d-block w-100 peinture-ombre-interne-fine" alt="..." />
+            <div class="home-slider-title">
+              <p>
+                Deekshotsav Program               </p>
+            </div>
+          </div>
+                    <div class="carousel-item ">
+            <img src="https://cdn.ccsuniversity.ac.in/public/jpg/2025/08/banner-01.jpg" class="d-block w-100 peinture-ombre-interne-fine" alt="..." />
+            <div class="home-slider-title">
+              <p>
+                              </p>
+            </div>
+          </div>
+                    <div class="carousel-item ">
+            <img src="https://cdn.ccsuniversity.ac.in/public/jpg/2025/06/y0-02.jpg" class="d-block w-100 peinture-ombre-interne-fine" alt="..." />
+            <div class="home-slider-title">
+              <p>
+                Yoga Day Celebration              </p>
+            </div>
+          </div>
+                    <div class="carousel-item ">
+            <img src="https://cdn.ccsuniversity.ac.in/public/jpg/2025/06/y0-01.jpg" class="d-block w-100 peinture-ombre-interne-fine" alt="..." />
+            <div class="home-slider-title">
+              <p>
+                Yoga Day Celebration              </p>
+            </div>
+          </div>
+                    <div class="carousel-item ">
+            <img src="https://cdn.ccsuniversity.ac.in/public/jpg/2025/06/y-03.jpg" class="d-block w-100 peinture-ombre-interne-fine" alt="..." />
+            <div class="home-slider-title">
+              <p>
+                Yog Divas 18-06-2025              </p>
+            </div>
+          </div>
+                    <div class="carousel-item ">
+            <img src="https://cdn.ccsuniversity.ac.in/public/jpg/2025/06/y-02.jpg" class="d-block w-100 peinture-ombre-interne-fine" alt="..." />
+            <div class="home-slider-title">
+              <p>
+                Yog Divas 18-06-2025              </p>
+            </div>
+          </div>
+                    <div class="carousel-item ">
+            <img src="https://cdn.ccsuniversity.ac.in/public/jpg/2025/06/y-01.jpg" class="d-block w-100 peinture-ombre-interne-fine" alt="..." />
+            <div class="home-slider-title">
+              <p>
+                Yog Divas 18-06-2025              </p>
+            </div>
+          </div>
+                    <div class="carousel-item ">
+            <img src="https://cdn.ccsuniversity.ac.in/public/jpg/2025/06/yog-divas-01.jpg" class="d-block w-100 peinture-ombre-interne-fine" alt="..." />
+            <div class="home-slider-title">
+              <p>
+                अंतरराष्ट्रीय योग दिवस              </p>
+            </div>
+          </div>
+                    <div class="carousel-item ">
+            <img src="https://cdn.ccsuniversity.ac.in/public/jpg/2025/06/yog-divas-03.jpg" class="d-block w-100 peinture-ombre-interne-fine" alt="..." />
+            <div class="home-slider-title">
+              <p>
+                अंतरराष्ट्रीय योग दिवस              </p>
+            </div>
+          </div>
+                    <div class="carousel-item ">
+            <img src="https://cdn.ccsuniversity.ac.in/public/jpg/2025/06/yog-divas-02.jpg" class="d-block w-100 peinture-ombre-interne-fine" alt="..." />
+            <div class="home-slider-title">
+              <p>
+                अंतरराष्ट्रीय योग दिवस              </p>
+            </div>
+          </div>
+                    <div class="carousel-item ">
+            <img src="https://cdn.ccsuniversity.ac.in/public/jpg/2025/05/vietnam-banner-02.jpg" class="d-block w-100 peinture-ombre-interne-fine" alt="..." />
+            <div class="home-slider-title">
+              <p>
+                MoU with HO CHI MINH CITY OPEN UNIVERSITY              </p>
+            </div>
+          </div>
+                    <div class="carousel-item ">
+            <img src="https://cdn.ccsuniversity.ac.in/public/jpg/2025/05/vietnam-banner-01.jpg" class="d-block w-100 peinture-ombre-interne-fine" alt="..." />
+            <div class="home-slider-title">
+              <p>
+                MoU with HO CHI MINH CITY OPEN UNIVERSITY              </p>
+            </div>
+          </div>
+                    <div class="carousel-item ">
+            <img src="https://cdn.ccsuniversity.ac.in/public/jpg/2025/05/banner-06-05-2025.jpg" class="d-block w-100 peinture-ombre-interne-fine" alt="..." />
+            <div class="home-slider-title">
+              <p>
+                              </p>
+            </div>
+          </div>
+                    <div class="carousel-item ">
+            <img src="https://cdn.ccsuniversity.ac.in/public/jpg/2025/05/banner-04-05-25.jpg" class="d-block w-100 peinture-ombre-interne-fine" alt="..." />
+            <div class="home-slider-title">
+              <p>
+                              </p>
+            </div>
+          </div>
+                    <div class="carousel-item ">
+            <img src="https://cdn.ccsuniversity.ac.in/public/jpg/2025/03/banner-mar-05.jpg" class="d-block w-100 peinture-ombre-interne-fine" alt="..." />
+            <div class="home-slider-title">
+              <p>
+                A Workshop on Building World Class Universities with a Thrust on National and International Ranking 5th March, 2025              </p>
+            </div>
+          </div>
+                    <div class="carousel-item ">
+            <img src="https://cdn.ccsuniversity.ac.in/public/jpg/2025/03/naya-bharat.jpg" class="d-block w-100 peinture-ombre-interne-fine" alt="..." />
+            <div class="home-slider-title">
+              <p>
+                Naya Bharat              </p>
+            </div>
+          </div>
+                    <div class="carousel-item ">
+            <img src="https://cdn.ccsuniversity.ac.in/public/jpg/2025/02/banner-feb-25-02.jpg" class="d-block w-100 peinture-ombre-interne-fine" alt="..." />
+            <div class="home-slider-title">
+              <p>
+                चौधरी चरण सिंह विश्वविद्यालय, मेरठ में हिंदी विषय के मेधावी छात्रों को सम्मानित किया गया              </p>
+            </div>
+          </div>
+                    <div class="carousel-item ">
+            <img src="https://cdn.ccsuniversity.ac.in/public/jpg/2025/02/banner-feb-25-01.jpg" class="d-block w-100 peinture-ombre-interne-fine" alt="..." />
+            <div class="home-slider-title">
+              <p>
+                चौधरी चरण सिंह विश्वविद्यालय, मेरठ में हिंदी विषय के मेधावी छात्रों को सम्मानित किया गया              </p>
+            </div>
+          </div>
+                    <div class="carousel-item ">
+            <img src="https://cdn.ccsuniversity.ac.in/public/jpg/2025/02/conf-img-09-02-25.jpg" class="d-block w-100 peinture-ombre-interne-fine" alt="..." />
+            <div class="home-slider-title">
+              <p>
+                Innovative Computing & Communication in The Field of Life Sciences, Agriculture and Technology              </p>
+            </div>
+          </div>
+                    <div class="carousel-item ">
+            <img src="https://cdn.ccsuniversity.ac.in/public/jpg/2025/02/b-02-25-05.jpg" class="d-block w-100 peinture-ombre-interne-fine" alt="..." />
+            <div class="home-slider-title">
+              <p>
+                National Integration Tour 2025              </p>
+            </div>
+          </div>
+                    <div class="carousel-item ">
+            <img src="https://cdn.ccsuniversity.ac.in/public/jpg/2025/02/b-02-25-04.jpg" class="d-block w-100 peinture-ombre-interne-fine" alt="..." />
+            <div class="home-slider-title">
+              <p>
+                National Integration Tour 2025              </p>
+            </div>
+          </div>
+                    <div class="carousel-item ">
+            <img src="https://cdn.ccsuniversity.ac.in/public/jpg/2025/02/b-02-25-03.jpg" class="d-block w-100 peinture-ombre-interne-fine" alt="..." />
+            <div class="home-slider-title">
+              <p>
+                National Integration Tour 2025              </p>
+            </div>
+          </div>
+                    <div class="carousel-item ">
+            <img src="https://cdn.ccsuniversity.ac.in/public/jpg/2025/02/b-02-25-02.jpg" class="d-block w-100 peinture-ombre-interne-fine" alt="..." />
+            <div class="home-slider-title">
+              <p>
+                National Integration Tour 2025              </p>
+            </div>
+          </div>
+                    <div class="carousel-item ">
+            <img src="https://cdn.ccsuniversity.ac.in/public/jpg/2025/02/b-02-25-01.jpg" class="d-block w-100 peinture-ombre-interne-fine" alt="..." />
+            <div class="home-slider-title">
+              <p>
+                National Integration Tour 2025              </p>
+            </div>
+          </div>
+                    <div class="carousel-item ">
+            <img src="https://cdn.ccsuniversity.ac.in/public/jpg/2025/01/Untitled%20design.jpg" class="d-block w-100 peinture-ombre-interne-fine" alt="..." />
+            <div class="home-slider-title">
+              <p>
+                MoU Meeting               </p>
+            </div>
+          </div>
+                    <div class="carousel-item ">
+            <img src="https://cdn.ccsuniversity.ac.in/public/jpg/2025/01/reappointment-vc.jpg" class="d-block w-100 peinture-ombre-interne-fine" alt="..." />
+            <div class="home-slider-title">
+              <p>
+                Prof. Sangeeta Shukla Reappointed as VC of CCS University, Meerut!              </p>
+            </div>
+          </div>
+                    <div class="carousel-item ">
+            <img src="https://cdn.ccsuniversity.ac.in/public/jpg/2024/10/botanical-conf-1.jpg" class="d-block w-100 peinture-ombre-interne-fine" alt="..." />
+            <div class="home-slider-title">
+              <p>
+                XLVII All Indian Botanical Conference              </p>
+            </div>
+          </div>
+                    <div class="carousel-item ">
+            <img src="https://cdn.ccsuniversity.ac.in/public/png/2024/07/banner-image.png" class="d-block w-100 peinture-ombre-interne-fine" alt="..." />
+            <div class="home-slider-title">
+              <p>
+                Foundation Day Celebration of University (2024)              </p>
+            </div>
+          </div>
+                    <div class="carousel-item ">
+            <img src="https://cdn.ccsuniversity.ac.in/public/jpg/2024/08/world-record.jpg" class="d-block w-100 peinture-ombre-interne-fine" alt="..." />
+            <div class="home-slider-title">
+              <p>
+                CCSU University Receives Award from Governer for the Record of Maximum Yoga Pledges              </p>
+            </div>
+          </div>
+                    <div class="carousel-item ">
+            <img src="https://cdn.ccsuniversity.ac.in/public/jpg/2024/05/naac-2023-3.jpg" class="d-block w-100 peinture-ombre-interne-fine" alt="..." />
+            <div class="home-slider-title">
+              <p>
+                अखिल भारतीय आयुर्वेद महासम्मेलन एवं आयुर्वेद सम्मलेन उत्तर प्रदेश              </p>
+            </div>
+          </div>
+                    <div class="carousel-item ">
+            <img src="https://cdn.ccsuniversity.ac.in/public/png/2024/06/slide-16923.png" class="d-block w-100 peinture-ombre-interne-fine" alt="..." />
+            <div class="home-slider-title">
+              <p>
+                Inauguration of Exchange centre for Open education in Foreign and Russian Language              </p>
+            </div>
+          </div>
+                  </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+
+      <div class="welcome-sub-slider-main">
+        <div id="carouselExampleIndicators3" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleIndicators3" data-bs-slide-to="0" class="active"
+              aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators3" data-bs-slide-to="1"
+              aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators3" data-bs-slide-to="2"
+              aria-label="Slide 3"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators3" data-bs-slide-to="3"
+              aria-label="Slide 4"></button>
+          </div>
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <div class="carousel-item-inner">
+                <div class="item-image">
+                  <img src="../../assests/images/ccsu-logo-half.svg" alt="">
+                </div>
+                <div>
+                  <h6 class="text-uppercase">CCSU Rankings</h6>
+                </div>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <div class="carousel-item-inner">
+                <div class="item-image">
+                  <img src="../../assests/images/circle-category/naac-logo.png" alt="">
+                </div>
+                <div>
+                  <h6>NAAC</h6>
+                  <p>'A++'-Grade</p>
+                </div>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <div class="carousel-item-inner">
+                <div class="item-image">
+                  <img src="../../assests/images/circle-category/ranking1.png" alt="">
+                </div>
+                <div>
+                  <h6>#701-750</h6>
+                  <p>in QS Asia University Rankings | 2024</p>
+                </div>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <div class="carousel-item-inner">
+                <div class="item-image">
+                  <img src="../../assests/images/circle-category/ranking1.png" alt="">
+                </div>
+                <div>
+                  <h6>#219</h6>
+                  <p>in QS Asia University Rankings 2024: Southern Asia</p>
+                </div>
+              </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+              data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+              data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
+        </div>
+      </div>
+  </section>
+
+  <section class="home-slider-profile">
+    <div class="boxes">
+      <div class="box">
+        <div class="box-inner">
+          <div class="d-flex justify-content-center">
+            <img src="../../assests/images/ccs-1-22.jpg" alt="chaudhary charan singh">
+          </div>
+        <div class="middle">
+        <h6>Hon'ble Chaudhary Charan Singh Ji</h6>
+          <p>Bharat Ratna & Former Prime Minister</p>
+          <div class="d-flex justify-content-center">
+            <a href="/charan-singh-ji.php" class="normal-button" style="padding:5px; font-size:13px !important; background-color: #f0f6fd;">Read More</a>
+          </div>
+        </div>
+        </div>
+      </div>
+      <div class="box">
+        <div class="box-inner">
+          <div class="d-flex justify-content-center">
+            <img src="../../assests/images/chancellor.png" alt="">
+          </div>
+          <div class="middle">
+            <h6>Smt. Anandiben Patel</h6>
+            <p>Hon'ble Chancellor</p>
+
+            <div class="d-flex justify-content-center align-items-center gap-2">
+              <a href="/chancellor.php" class="normal-button"
+                style="padding:5px; font-size:13px !important; background-color: #f0f6fd;">Profile</a>
+              
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="box">
+        <div class="box-inner">
+         <div class="d-flex justify-content-center">
+          <img src="../../assests/images/vc-img.jpg" alt="vc">
+         </div>
+          <div class="middle">
+            <h6>Prof. Sangeeta Shukla</h6>
+            <p>Hon'ble Vice-Chancellor</p>
+            <div class="d-flex justify-content-center align-items-center gap-2">
+              <a href="/vice-chancellor.php" class="normal-button"
+                style="padding:5px; font-size:13px !important; background-color: #f0f6fd;">Profile</a>
+              <a href="/vice-chancellor-message.php" class="normal-button"
+                style="padding:5px; font-size:13px !important; background-color: #f0f6fd;">Message</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
+<script>
+  $(document).ready(function () {
+    // Initialize First Carousel with Interval 4000 milliseconds (4 seconds)
+    $('#carouselExample').carousel({
+      interval: 5000
+    });
+
+    // Initialize Second Carousel with Interval 6000 milliseconds (6 seconds)
+    $('#carouselExampleIndicators').carousel({
+      interval: 3000
+    });
+
+    // Initialize Second Carousel with Interval 6000 milliseconds (6 seconds)
+    $('#carouselExampleIndicators3').carousel({
+      interval: 3000
+    });
+  });
+</script><div class="container-fluid">
+    <div class="row">
+        <div class="col-md-2 announcement-area">
+            <h5>Latest @CCSU</h5>
+        </div>
+        <div class="col-md-10 announcement-content">
+            
+            <marquee behavior="scroll" onmouseover="this.stop();" onmouseout="this.start();">
+                                
+                <a href="https://ccsuexam.in/" target="_blank"
+                    class="blu">Download Admit Card for System Manager Recruitment test-2026(Advt. No.-Gen/01/2026) to be held on May 17, 2026</a> &nbsp; &nbsp; | &nbsp; &nbsp;
+                                
+                <a href="https://ccsuniversity.blr1.cdn.digitaloceanspaces.com/public/pdf/2026/05/Press%20Note%20(2).pdf" target="_blank"
+                    class="blu">Press Note Regarding Downloading Admit Card for System Manager Recruitment Test-2026</a> &nbsp; &nbsp; | &nbsp; &nbsp;
+                                
+                <a href="https://pminternship.mca.gov.in/login/" target="_blank"
+                    class="blu">High Growth opportunities Skills to showcase:Turn your internship into a full-time role</a> &nbsp; &nbsp; | &nbsp; &nbsp;
+                                
+                <a href="https://ccsuexam.in/" target="_blank"
+                    class="blu">Download Admit Card for Assistant Professor Recruitment Test-2026 (Advt. No.-Acad/03/2025 dated 26-09-2025 and dated 31-12-2025)</a> &nbsp; &nbsp; | &nbsp; &nbsp;
+                                
+                <a href="https://cdn.ccsuniversity.ac.in/public/pdf/2026/02/IMG-20260217-WA0000.pdf" target="_blank"
+                    class="blu">Notice Regarding &ldquo;Rozgar Mahotsav 2026&rdquo;</a> &nbsp; &nbsp; | &nbsp; &nbsp;
+                                
+                <a href="https://forms.gle/mqQED2rTw9nUJrtQ8" target="_blank"
+                    class="blu">List of colleges</a> &nbsp; &nbsp; | &nbsp; &nbsp;
+                                
+                <a href="https://cdn.ccsuniversity.ac.in/public/pdf/2025/08/Recruitment%20Notice%20(IPR%20Chair%20Professor).pdf" target="_blank"
+                    class="blu">Recruitment Notice (For the Post IPR Chair Professor)</a> &nbsp; &nbsp; | &nbsp; &nbsp;
+                                
+                <a href="https://cdn.ccsuniversity.ac.in/public/pdf/2025/08/Recruitment%20Notice%20(For%20the%20post%20of%20O.D.L.).pdf" target="_blank"
+                    class="blu">Recruitment Notice (For the post of O.D.L.)</a> &nbsp; &nbsp; | &nbsp; &nbsp;
+                                
+                <a href="https://forms.ccsuforms.in/Recruitment/" target="_blank"
+                    class="blu">Recruitment link for Regular Post in CCS University&nbsp;Meerut</a> &nbsp; &nbsp; | &nbsp; &nbsp;
+                                
+                <a href="https://cdn.ccsuniversity.ac.in/public/pdf/2025/07/COLLEGE%20DETAILS%20PROFORMA.pdf" target="_blank"
+                    class="blu">College Details Proforma</a> &nbsp; &nbsp; | &nbsp; &nbsp;
+                            </marquee>
+        </div>
+    </div>
+</div><style>
+  .circle-main {
+    padding: 1rem;
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+
+    @media (max-width:600px) {
+      margin-top: 0rem !important;
+    }
+
+    .circle-inner {
+      display: flex;
+      justify-content: start;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+
+      @media (max-width:830px) {
+        gap: 0.3rem;
+        justify-content: center;
+      }
+
+      @media (max-width:600px) {
+        gap: 0.3rem;
+        justify-content: center;
+      }
+
+      a {
+        text-decoration: none;
+        color: #000;
+        text-align: center;
+        display: block;
+        background: #f0f6fd;
+        border-radius: 10px;
+        padding: 5px;
+        height: 130px;
+        width: 90px;
+
+        &:hover {
+          background: #14297a;
+          border-radius: 10px;
+          color: #FFF;
+          transition: .3s;
+        }
+
+        @media (max-width:600px) {
+          width: 100px;
+          height: 100px;
+        }
+
+        @media (max-width:360px) {
+          width: 140px;
+          height: 140px;
+        }
+
+        img {
+          height: 70px;
+          width: 70px;
+          border-radius: 50%;
+          padding: 5px;
+          object-fit: cover;
+          /* filter: brightness(100%) contrast(100%) saturate(92%) blur(0) hue-rotate(271deg); */
+
+          &:hover {
+            /* animation: circle .4s; */
+            /* transform: translateY(-10px);
+            transition: .3s; */
+          }
+
+          @media (max-width:600px) {
+            height: 58px;
+            width: 58px;
+          }
+          @media (max-width:360px) {
+            height:70px;
+            width:70px;
+          }
+        }
+
+        h6 {
+          margin-top: 10px;
+          font-size: 11px;
+          font-weight: 500;
+
+          @media (max-width:600px) {
+            font-size: 0.5rem;
+          }
+          @media (max-width:360px) {
+            font-size: 0.7rem;
+          }
+        }
+      }
+    }
+  }
+
+  @keyframes circle {
+    0% {
+      transform: rotate(0deg);
+    }
+
+    50% {
+      transform: rotate(20deg);
+    }
+
+    100% {
+      transform: rotate(0deg);
+    }
+  }
+</style>
+
+<section class="circle-main">
+  <div class="container circle-inner">
+    <a href="../admission.php">
+      <img src="../assests/images/circle-category/admission.png" alt="Admissions" />
+      <h6>Admissions</h6>
+    </a>
+    <a href="../exam-related-info.php">
+      <img src="../assests/images/circle-category/exam.png" alt="Examination" />
+      <h6>Examination</h6>
+    </a>
+    <a href="https://result.ccsuniversity.ac.in/" target="_blank">
+      <img src="../assests/images/circle-category/Result.png" alt="Result" />
+      <h6>Result</h6>
+    </a>
+    <a href="/omr">
+      <img src="../assests/images/circle-category/omr icon.png" alt="OMR Result" />
+      <h6>OMR Answer Keys</h6>
+    </a>
+    <a href="#">
+      <img src="../assests/images/circle-category/odl 2.png" alt="odl" />
+      <h6>ODL</h6>
+    </a>
+    <a href="affiliation.php">
+      <img src="../assests/images/circle-category/affiliation.png" alt="Affiliation" />
+      <h6>Affiliation</h6>
+    </a>
+
+    <a href="syllabus.php">
+      <img src="../assests/images/circle-category/syllabus.png" alt="syllabus" />
+      <h6>Syllabus</h6>
+    </a>
+    <a href="http://ccsuniversityhostel.com/" target="_blank">
+      <img src="../assests/images/circle-category/HOSTEL.png" alt="HOSTEL" />
+      <h6>Hostel</h6>
+    </a>
+    <a href="../admission-brochure-2023.php">
+      <img src="../assests/images/circle-category/brochure.png" alt="brochure" />
+      <h6>Brochure</h6>
+    </a>
+    <a href="../admission.php">
+      <img src="../assests/images/circle-category/registration.png" alt="registration" />
+      <h6>Registration</h6>
+    </a>
+
+    <a href="../prog-offered.php">
+      <img src="../assests/images/circle-category/programs offered.png" alt="programs offered" />
+      <h6>Programs Offered</h6>
+    </a>
+    <a href="https://scriet.ccsuniversity.ac.in" target="_blank">
+      <img src="../assests/images/circle-category/university.png" alt="university" />
+      <h6>University Engineering College</h6>
+    </a>
+    <a href="https://www.llrmmedicalcollege.org/" target="_blank">
+      <img src="../assests/images/circle-category/University Medical College.png" alt="University Medical College" />
+      <h6>University Medical College</h6>
+    </a>
+
+
+
+    <a href="https://forms.ccsuforms.in/FeePayPanel/" target="_blank">
+      <img src="../assests/images/circle-category/online pay.png" alt="online fees payment" />
+      <h6>Online Fees Payment</h6>
+    </a>
+    <a href="https://forms.ccsuforms.in/Alumni/proud-alumni.php" target="_blank">
+      <img src="../assests/images/circle-category/notable alumni.png" alt="notable alumni" />
+      <h6>Alumni</h6>
+    </a>
+
+    <a href="../career.php">
+      <img src="../assests/images/circle-category/recruitment.png" alt="Recruitments" />
+      <h6>Recruitments</h6>
+    </a>
+    <a href="../iqac.php">
+      <img src="../assests/images/circle-category/iqac.png" alt="IQAC" />
+      <h6>IQAC</h6>
+    </a>
+    <a href="https://education-policy.ccsuniversity.ac.in/" target="_blank">
+      <img src="../assests/images/circle-category/nep.png" alt="NEP" />
+      <h6>NEP</h6>
+    </a>
+
+
+    <a href="research.php">
+      <img src="../assests/images/circle-category/research.png" alt="research" />
+      <h6>Research</h6>
+    </a>
+    <a href="../university-news-letter.php">
+      <img src="../assests/images/circle-category/news letters.png" alt="news letters" />
+      <h6>News Letters (Insight)</h6>
+    </a>
+
+    <a href="tenders.php">
+      <img src="../assests/images/circle-category/tenders.png" alt="tenders" />
+      <h6>Tenders</h6>
+    </a>
+    <a href="http://naac.gov.in/index.php/en/" target="_blank">
+      <img src="../assests/images/circle-category/naac-logo.png" alt="NAAC" />
+      <h6>NAAC</h6>
+    </a>
+    <a href="#">
+      <img src="../assests/images/circle-category/LOGO-MISSION SHAKTI-CCSU-1.jpg" alt="UGC Circulars" />
+      <h6>Mission Shakti</h6>
+    </a>
+    <a href="../sponsoring-body.php">
+      <img src="../assests/images/circle-category/sponsor.jpg" alt="Sponsoring Body" />
+      <h6>Sponsoring Body</h6>
+    </a>
+    <a href="https://aishe.ccsuniversity.ac.in" target="_blank">
+      <img src="../assests/images/circle-category/aishe.avif" alt="Aishe" />
+      <h6>AISHE</h6>
+    </a>
+    <a href="../nirf.php">
+      <img src="../assests/images/circle-category/nirf.avif" alt="NIRF" />
+      <h6>NIRF</h6>
+    </a>
+  </div>
+</section><link rel="stylesheet" href="../assests/css/notices/main.css" />
+
+<style>
+    .custom-scroll {
+        overflow: hidden;
+    }
+
+    .custom-scroll-inner {
+        /* display: flex; */
+        animation: scroll 10s linear infinite;
+    }
+
+
+    .border-pills-hover{
+        border:0 !important;
+
+        &:hover{
+           background: #14297a;
+           color: #FFF !important;
+        }
+    }
+</style>
+
+<div class="notices mt-5 py-5">
+   <div class="d-flex justify-content-center" style="background-color: #14297a; padding: 5px;">
+    <h1 class="my-heading text-white m-0">News and Notification</h1>
+   </div>
+    <div class="container notices-main">
+        
+        
+
+        <div class="tab-content" id="pills-tabContent">
+
+            <div class="tab-pane fade show active" id="pills-history" role="tabpanel" aria-labelledby="pills-history-tab">
+                <div class="notice" id="student">
+                    <div class="col-lg-6 box">
+                        <div class="top">
+                           <div class="left">
+                           <h1>NOTIFICATIONS/ PRESS RELEASE</h1>
+                           </div>
+                            <div class="right">
+                            <a href="/search-news.php?id=Notice&page=1" class="normal-button">View all</a>
+                            </div>
+                        </div>
+                        <div class="down custom-scroll">
+                            
+                    <div class="single">
+                        <p class="date">16 May 2026</p>
+                        <a href="https://ccsuniversity.blr1.cdn.digitaloceanspaces.com/public/pdf/2026/05/DocScanner%2016%20May%202026%203-45%E2%80%AFpm.pdf" class="notify" target="_blank">Notice Regarding Display of Institute Name on Admission Portal for Law Courses – Session 2026–27<span>New</span></a>
+                            </div>
+                        
+                    <div class="single">
+                        <p class="date">16 May 2026</p>
+                        <a href="https://ccsuniversity.blr1.cdn.digitaloceanspaces.com/public/pdf/2026/05/589.pdf" class="notify" target="_blank">Energy Conservation Awareness and Fuel Saving Initiative<span>New</span></a>
+                            </div>
+                        
+                    <div class="single">
+                        <p class="date">15 May 2026</p>
+                        <a href="https://ccsuniversity.blr1.cdn.digitaloceanspaces.com/public/pdf/2026/05/Exam%20Schedule%20B.Sc.%20(Home%20Science),%20B.Sc.%20(Home%20Science%20CND)%20&%20M.A.%20(Phychology)%20NEP.pdf" class="notify" target="_blank">Exam Schedule B.Sc. (Home Science), B.Sc. (Home Science CND) & M.A. (Phychology) NEP<span>New</span></a>
+                            </div>
+                        
+                    <div class="single">
+                        <p class="date">14 May 2026</p>
+                        <a href="https://ccsuniversity.blr1.cdn.digitaloceanspaces.com/public/pdf/2026/05/003%20(4).pdf" class="notify" target="_blank">Challenge Evaluation Result Sr.no.- 10494 to 10669<span>New</span></a>
+                            </div>
+                        
+                    <div class="single">
+                        <p class="date">14 May 2026</p>
+                        <a href="https://ccsuniversity.blr1.cdn.digitaloceanspaces.com/public/pdf/2026/05/001%20-%202026-05-14T154815.015.pdf" class="notify" target="_blank">Result of Scrutiny Sr.no.- 1544 to 1554<span>New</span></a>
+                            </div>
+                        
+                    <div class="single">
+                        <p class="date">14 May 2026</p>
+                        <a href="https://ccsuniversity.blr1.cdn.digitaloceanspaces.com/public/pdf/2026/05/Adobe%20Scan%2013-May-2026.pdf" class="notify" target="_blank">Online Examination Form Notice for BDS II, III & IV Year Exams (Main & Supplementary)<span>New</span></a>
+                            </div>
+                        
+                    <div class="single">
+                        <p class="date">14 May 2026</p>
+                        <a href="https://ccsuniversity.blr1.cdn.digitaloceanspaces.com/public/pdf/2026/05/Revised%20Exam%20Schedule%20M.A.%20Pol.%20Science.pdf" class="notify" target="_blank">Revised Exam Schedule for M.A. Political Science<span>New</span></a>
+                            </div>
+                        
+                    <div class="single">
+                        <p class="date">14 May 2026</p>
+                        <a href="https://ccsuniversity.blr1.cdn.digitaloceanspaces.com/public/pdf/2026/05/B.Sc.%20Ag%20(Hons.),%20B.Sc.%20Ag.%20&%20M.Sc.%20Ag%20Exam%20Schedule.pdf" class="notify" target="_blank">Exam Schedule for B.Sc. Agriculture, Home Science & M.Sc. Agriculture Courses<span>New</span></a>
+                            </div>
+                        
+                    <div class="single">
+                        <p class="date">13 May 2026</p>
+                        <a href="https://ccsuniversity.blr1.cdn.digitaloceanspaces.com/public/pdf/2026/05/001%20(29).pdf" class="notify" target="_blank">UFM Result BBA, BCA, BAJMC, BAJMC (HONS.), BPES, B.SC. (COMP. SCI.) & B.Tech Examination, December-2025<span>New</span></a>
+                            </div>
+                        
+                    <div class="single">
+                        <p class="date">13 May 2026</p>
+                        <a href="https://ccsuniversity.blr1.cdn.digitaloceanspaces.com/public/pdf/2026/05/Press%20Note%20(2).pdf" class="notify" target="_blank">Press Note Regarding Downloading Admit Card for System Manager Recruitment Test-2026<span>New</span></a>
+                            </div>
+                        
+                    <div class="single">
+                        <p class="date">13 May 2026</p>
+                        <a href="https://ccsuniversity.blr1.cdn.digitaloceanspaces.com/public/pdf/2026/05/RDC%20Education.pdf" class="notify" target="_blank">Notice for RAC in Education<span>New</span></a>
+                            </div>
+                        
+                    <div class="single">
+                        <p class="date">13 May 2026</p>
+                        <a href="https://ccsuniversity.blr1.cdn.digitaloceanspaces.com/public/pdf/2026/05/RDC%20Hindi%20(3).pdf" class="notify" target="_blank">Notice for RDC in Hindi<span>New</span></a>
+                            </div>
+                        
+                    <div class="single">
+                        <p class="date">12 May 2026</p>
+                        <a href="https://ccsuniversity.blr1.cdn.digitaloceanspaces.com/public/pdf/2026/05/Exam%20Schedule%20M.Sc.%20(Math)%20IV%20Sem..pdf" class="notify" target="_blank">Revised Examination Programme for M.Sc. (Mathematics) IV Semester – NEP PG Exams 2026<span>New</span></a>
+                            </div>
+                        
+                    <div class="single">
+                        <p class="date">12 May 2026</p>
+                        <a href="https://ccsuniversity.blr1.cdn.digitaloceanspaces.com/public/pdf/2026/05/LLM%20Exam%20postponed.pdf" class="notify" target="_blank">Postponement Notice: LL.M. II Semester Examination Programme – May 2026<span>New</span></a>
+                            </div>
+                        
+                    <div class="single">
+                        <p class="date">12 May 2026</p>
+                        <a href="https://ccsuniversity.blr1.cdn.digitaloceanspaces.com/public/pdf/2026/05/ug_pg_mark.pdf" class="notify" target="_blank">UG PG Course First Semester Dec-2025 Internal/External/Practical/Viva Marks Upload<span>New</span></a>
+                            </div>
+                                                </div>
+                    </div>
+                    <div class="col-lg-6 box">
+                        <div class="top">
+                            <div class="left">
+                            <h1>Events</h1>
+                            </div>
+                           <div class="right">
+                           <a href="/search-news.php?id=Events" target="_blank" class="normal-button">View all</a>
+                           </div>
+                        </div>
+                        <div class="down custom-scroll">
+                        
+                            
+                                        <div class="single">
+                                            <p class="date">25 Apr 2026</p>
+                                            <a href="https://ccsuniversity.blr1.cdn.digitaloceanspaces.com/public/pdf/2026/04/circular%20(1)%20(1).pdf" class="notify" target="_blank">Programme Notice on the Death Anniversary of Raja Mahendra Pratap Ji<span>New</span></a>
+                                        </div>
+                                    
+                                        <div class="single">
+                                            <p class="date">08 Apr 2026</p>
+                                            <a href="https://ccsuniversity.blr1.cdn.digitaloceanspaces.com/public/pdf/2026/04/posh%20program.pdf" class="notify" target="_blank">One-day training on the POSH Act 2013 (Sexual Harassment Act, 2013) & UGC Compliances<span>New</span></a>
+                                        </div>
+                                    
+                                        <div class="single">
+                                            <p class="date">06 Apr 2026</p>
+                                            <a href="https://cdn.ccsuniversity.ac.in/public/pdf/2026/04/Ai-for-all.pdf" class="notify" target="_blank">AI for ALL awareness campaign<span>New</span></a>
+                                        </div>
+                                    
+                                        <div class="single">
+                                            <p class="date">17 Mar 2026</p>
+                                            <a href="https://cdn.ccsuniversity.ac.in/public/pdf/2026/03/Revised%20Schedule%20Inter%20Hostel%20Competition.pdf" class="notify" target="_blank">Revised Inter Hostel Competition Schedule<span>New</span></a>
+                                        </div>
+                                    
+                                        <div class="single">
+                                            <p class="date">16 Mar 2026</p>
+                                            <a href="https://cdn.ccsuniversity.ac.in/public/pdf/2026/03/placement-notice.pdf" class="notify" target="_blank">One-Day Seminar on Investment Banking Operations (TimesPro) and Placement Drives with IDFC First Bank & Care Health Insurance<span>New</span></a>
+                                        </div>
+                                    
+                                        <div class="single">
+                                            <p class="date">14 Mar 2026</p>
+                                            <a href="https://cdn.ccsuniversity.ac.in/public/pdf/2026/03/Sankat%20Mochan.pdf" class="notify" target="_blank">Information Regarding Political Science Book for Competitive Examinations by Dr. Munesh Kumar<span>New</span></a>
+                                        </div>
+                                    
+                                        <div class="single">
+                                            <p class="date">07 Mar 2026</p>
+                                            <a href="https://cdn.ccsuniversity.ac.in/public/pdf/2026/03/RO.%20366%20Date%2009.03.2026.pdf" class="notify" target="_blank">Participation in International Women’s Day 2026 – Sports and Cultural Events (08 March 2026)<span>New</span></a>
+                                        </div>
+                                    
+                                        <div class="single">
+                                            <p class="date">05 Mar 2026</p>
+                                            <a href="https://cdn.ccsuniversity.ac.in/public/pdf/2026/03/International%20Conference_24-25March2026_12032026.pdf" class="notify" target="_blank">International Conference on Growth, Equity and Sustainable Edvelopment: Challenge and opportunities in 21 century on 24 & 25 March, 2026<span>New</span></a>
+                                        </div>
+                                    
+                                        <div class="single">
+                                            <p class="date">28 Feb 2026</p>
+                                            <a href="https://cdn.ccsuniversity.ac.in/public/pdf/2026/02/INTERNATIONAL%20CONFERENCE%20ON.pdf" class="notify" target="_blank">Registration for International Conference on "Scientific Collaboration on Research Innovation, Education and Technology" SCRIET-2026<span>New</span></a>
+                                        </div>
+                                    
+                                        <div class="single">
+                                            <p class="date">28 Feb 2026</p>
+                                            <a href="https://cdn.ccsuniversity.ac.in/public/pdf/2026/02/INTERNATIONAL%20CONFERENCE%20SCRITE%20-%202026%20.pdf" class="notify" target="_blank">International Conference on "Scientific Collaboration on Research Innovation, Education and Technology" on 11-12 March, 2026<span>New</span></a>
+                                        </div>
+                                    
+                                        <div class="single">
+                                            <p class="date">26 Feb 2026</p>
+                                            <a href="https://cdn.ccsuniversity.ac.in/public/pdf/2026/02/B.D.%20Sharma%2027.01.2026%20(1).pdf" class="notify" target="_blank">National Seminar (on Hybrid mode) on "Water & Gender Equality" (Global theme from United Nations Organisation) Sunday, 22nd March, 2026<span>New</span></a>
+                                        </div>
+                                    
+                                        <div class="single">
+                                            <p class="date">24 Feb 2026</p>
+                                            <a href="https://cdn.ccsuniversity.ac.in/public/pdf/2026/02/IMG-20260217-WA0000.pdf" class="notify" target="_blank">Notice Regarding “Rozgar Mahotsav 2026”<span>New</span></a>
+                                        </div>
+                                    
+                                        <div class="single">
+                                            <p class="date">23 Feb 2026</p>
+                                            <a href="https://cdn.ccsuniversity.ac.in/public/pdf/2026/03/shared%20image%20(16)%20(1).pdf" class="notify" target="_blank">International Seminar on Frontiers in Algal Research: Biodiversity and Bio-technology on 9th March 2026<span>New</span></a>
+                                        </div>
+                                    
+                                        <div class="single">
+                                            <p class="date">21 Feb 2026</p>
+                                            <a href="https://cdn.ccsuniversity.ac.in/public/pdf/2026/02/D2-National%20Seminar%20Bioinformatics%20NSD%20KSS%20%20flyer.pdf" class="notify" target="_blank">National Seminar on Bioinformatics & Startup Innovation (National Science Day 2026)<span>New</span></a>
+                                        </div>
+                                    
+                                        <div class="single">
+                                            <p class="date">18 Feb 2026</p>
+                                            <a href="https://cdn.ccsuniversity.ac.in/public/pdf/2026/02/National%20Seminar%20Brochure%2023-24%20February%20Final.pdf" class="notify" target="_blank">Two Days National Conference on भारतीय भाषा परिवार : एकत्व और एकात्मताon February 23-24, 2026<span>New</span></a>
+                                        </div>
+                                                            </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="tab-pane fade" id="pills-vision-mision" role="tabpanel" aria-labelledby="pills-vision-mision-tab">
+                <div class="notice" id="student">
+                    <div class="col-lg-8 box">
+                        <div class="top">
+                            <h1>Student Notifications</h1>
+                            <a href="/search-news.php?id=49f993fc-e779-11ee-b639-0242ac120005" target="_blank" class="normal-button">View all</a>
+                        </div>
+                        <hr />
+                        <div class="down custom-scroll">
+                            <p>No student notifications available.</p>                        </div>
+                    </div>
+                    <div class="col-lg-4 box">
+                        <div class="top">
+                            <h1>important notice</h1>
+                            <a href="/search-news.php?id=4552eb40-e779-11ee-b639-0242ac120005" target="_blank" class="normal-button">View all</a>
+                        </div>
+                        <hr />
+                        <div class="down custom-scroll">
+                            
+                    <div class="single">
+                        <p class="notify">Programme Notice on the Death Anniversary of Raja Mahendra Pratap Ji</p>
+                    </div>
+                
+                    <div class="single">
+                        <p class="notify">One-day training on the POSH Act 2013 (Sexual Harassment Act, 2013) & UGC Compliances</p>
+                    </div>
+                
+                    <div class="single">
+                        <p class="notify">AI for ALL awareness campaign</p>
+                    </div>
+                
+                    <div class="single">
+                        <p class="notify">Revised Inter Hostel Competition Schedule</p>
+                    </div>
+                
+                    <div class="single">
+                        <p class="notify">One-Day Seminar on Investment Banking Operations (TimesPro) and Placement Drives with IDFC First Bank & Care Health Insurance</p>
+                    </div>
+                
+                    <div class="single">
+                        <p class="notify">Information Regarding Political Science Book for Competitive Examinations by Dr. Munesh Kumar</p>
+                    </div>
+                
+                    <div class="single">
+                        <p class="notify">Participation in International Women’s Day 2026 – Sports and Cultural Events (08 March 2026)</p>
+                    </div>
+                
+                    <div class="single">
+                        <p class="notify">International Conference on Growth, Equity and Sustainable Edvelopment: Challenge and opportunities in 21 century on 24 & 25 March, 2026</p>
+                    </div>
+                
+                    <div class="single">
+                        <p class="notify">Registration for International Conference on "Scientific Collaboration on Research Innovation, Education and Technology" SCRIET-2026</p>
+                    </div>
+                
+                    <div class="single">
+                        <p class="notify">International Conference on "Scientific Collaboration on Research Innovation, Education and Technology" on 11-12 March, 2026</p>
+                    </div>
+                
+                    <div class="single">
+                        <p class="notify">National Seminar (on Hybrid mode) on "Water & Gender Equality" (Global theme from United Nations Organisation) Sunday, 22nd March, 2026</p>
+                    </div>
+                
+                    <div class="single">
+                        <p class="notify">Notice Regarding “Rozgar Mahotsav 2026”</p>
+                    </div>
+                
+                    <div class="single">
+                        <p class="notify">International Seminar on Frontiers in Algal Research: Biodiversity and Bio-technology on 9th March 2026</p>
+                    </div>
+                
+                    <div class="single">
+                        <p class="notify">National Seminar on Bioinformatics & Startup Innovation (National Science Day 2026)</p>
+                    </div>
+                
+                    <div class="single">
+                        <p class="notify">Two Days National Conference on भारतीय भाषा परिवार : एकत्व और एकात्मताon February 23-24, 2026</p>
+                    </div>
+                
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="tab-pane fade" id="pills-founder" role="tabpanel" aria-labelledby="pills-founder-tab">
+                <div class="notice" id="student">
+                    <div class="col-lg-8 box">
+                        <div class="top">
+                            <h1>College Notifications</h1>
+                            <a href="/search-news.php?id=4dc9ba2f-e779-11ee-b639-0242ac120005" target="_blank" class="normal-button">View all</a>
+                        </div>
+                        <hr />
+                        <div class="down custom-scroll">
+                            <p>No student notifications available.</p>                        </div>
+                    </div>
+                    <div class="col-lg-4 box">
+                        <div class="top">
+                            <h1>important notice</h1>
+                            <a href="/search-news.php?id=4552eb40-e779-11ee-b639-0242ac120005" target="_blank" class="normal-button">View all</a>
+                        </div>
+                        <hr />
+                        <div class="down custom-scroll">
+                            
+                    <div class="single">
+                        <p class="notify">Programme Notice on the Death Anniversary of Raja Mahendra Pratap Ji</p>
+                    </div>
+                
+                    <div class="single">
+                        <p class="notify">One-day training on the POSH Act 2013 (Sexual Harassment Act, 2013) & UGC Compliances</p>
+                    </div>
+                
+                    <div class="single">
+                        <p class="notify">AI for ALL awareness campaign</p>
+                    </div>
+                
+                    <div class="single">
+                        <p class="notify">Revised Inter Hostel Competition Schedule</p>
+                    </div>
+                
+                    <div class="single">
+                        <p class="notify">One-Day Seminar on Investment Banking Operations (TimesPro) and Placement Drives with IDFC First Bank & Care Health Insurance</p>
+                    </div>
+                
+                    <div class="single">
+                        <p class="notify">Information Regarding Political Science Book for Competitive Examinations by Dr. Munesh Kumar</p>
+                    </div>
+                
+                    <div class="single">
+                        <p class="notify">Participation in International Women’s Day 2026 – Sports and Cultural Events (08 March 2026)</p>
+                    </div>
+                
+                    <div class="single">
+                        <p class="notify">International Conference on Growth, Equity and Sustainable Edvelopment: Challenge and opportunities in 21 century on 24 & 25 March, 2026</p>
+                    </div>
+                
+                    <div class="single">
+                        <p class="notify">Registration for International Conference on "Scientific Collaboration on Research Innovation, Education and Technology" SCRIET-2026</p>
+                    </div>
+                
+                    <div class="single">
+                        <p class="notify">International Conference on "Scientific Collaboration on Research Innovation, Education and Technology" on 11-12 March, 2026</p>
+                    </div>
+                
+                    <div class="single">
+                        <p class="notify">National Seminar (on Hybrid mode) on "Water & Gender Equality" (Global theme from United Nations Organisation) Sunday, 22nd March, 2026</p>
+                    </div>
+                
+                    <div class="single">
+                        <p class="notify">Notice Regarding “Rozgar Mahotsav 2026”</p>
+                    </div>
+                
+                    <div class="single">
+                        <p class="notify">International Seminar on Frontiers in Algal Research: Biodiversity and Bio-technology on 9th March 2026</p>
+                    </div>
+                
+                    <div class="single">
+                        <p class="notify">National Seminar on Bioinformatics & Startup Innovation (National Science Day 2026)</p>
+                    </div>
+                
+                    <div class="single">
+                        <p class="notify">Two Days National Conference on भारतीय भाषा परिवार : एकत्व और एकात्मताon February 23-24, 2026</p>
+                    </div>
+                
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="pills-chancellor" role="tabpanel" aria-labelledby="pills-chancellor-tab">
+
+                <div class="notice" id="student">
+                    <div class="col-lg-8 box">
+                        <div class="top">
+                            <h1>Campus Notifications</h1>
+                            <a href="/search-news.php?id=516126f5-e779-11ee-b639-0242ac120005" target="_blank" class="normal-button">View all</a>
+                        </div>
+                        <hr />
+                        <div class="down custom-scroll">
+                            <p>No student notifications available.</p>                        </div>
+                    </div>
+                    <div class="col-lg-4 box">
+                        <div class="top">
+                            <h1>important notice</h1>
+                            <a href="/search-news.php?id=4552eb40-e779-11ee-b639-0242ac120005" target="_blank" class="normal-button">View all</a>
+                        </div>
+                        <hr />
+                        <div class="down custom-scroll">
+                            
+                    <div class="single">
+                        <p class="notify">Programme Notice on the Death Anniversary of Raja Mahendra Pratap Ji</p>
+                    </div>
+                
+                    <div class="single">
+                        <p class="notify">One-day training on the POSH Act 2013 (Sexual Harassment Act, 2013) & UGC Compliances</p>
+                    </div>
+                
+                    <div class="single">
+                        <p class="notify">AI for ALL awareness campaign</p>
+                    </div>
+                
+                    <div class="single">
+                        <p class="notify">Revised Inter Hostel Competition Schedule</p>
+                    </div>
+                
+                    <div class="single">
+                        <p class="notify">One-Day Seminar on Investment Banking Operations (TimesPro) and Placement Drives with IDFC First Bank & Care Health Insurance</p>
+                    </div>
+                
+                    <div class="single">
+                        <p class="notify">Information Regarding Political Science Book for Competitive Examinations by Dr. Munesh Kumar</p>
+                    </div>
+                
+                    <div class="single">
+                        <p class="notify">Participation in International Women’s Day 2026 – Sports and Cultural Events (08 March 2026)</p>
+                    </div>
+                
+                    <div class="single">
+                        <p class="notify">International Conference on Growth, Equity and Sustainable Edvelopment: Challenge and opportunities in 21 century on 24 & 25 March, 2026</p>
+                    </div>
+                
+                    <div class="single">
+                        <p class="notify">Registration for International Conference on "Scientific Collaboration on Research Innovation, Education and Technology" SCRIET-2026</p>
+                    </div>
+                
+                    <div class="single">
+                        <p class="notify">International Conference on "Scientific Collaboration on Research Innovation, Education and Technology" on 11-12 March, 2026</p>
+                    </div>
+                
+                    <div class="single">
+                        <p class="notify">National Seminar (on Hybrid mode) on "Water & Gender Equality" (Global theme from United Nations Organisation) Sunday, 22nd March, 2026</p>
+                    </div>
+                
+                    <div class="single">
+                        <p class="notify">Notice Regarding “Rozgar Mahotsav 2026”</p>
+                    </div>
+                
+                    <div class="single">
+                        <p class="notify">International Seminar on Frontiers in Algal Research: Biodiversity and Bio-technology on 9th March 2026</p>
+                    </div>
+                
+                    <div class="single">
+                        <p class="notify">National Seminar on Bioinformatics & Startup Innovation (National Science Day 2026)</p>
+                    </div>
+                
+                    <div class="single">
+                        <p class="notify">Two Days National Conference on भारतीय भाषा परिवार : एकत्व और एकात्मताon February 23-24, 2026</p>
+                    </div>
+                                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="pills-vice-chancellorunder" role="tabpanel" aria-labelledby="pills-vice-chancellorunder-tab">
+
+                <div class="notice" id="student">
+                    <div class="col-lg-8 box">
+                        <div class="top">
+                            <h1>Exam Notifications</h1>
+                            <a href="/search-news.php?id=5ac2ccbe-e779-11ee-b639-0242ac120005" target="_blank" class="normal-button">View all</a>
+                        </div>
+                        <hr />
+                        <div class="down custom-scroll">
+                            <p>No student notifications available.</p>                        </div>
+                    </div>
+                    <div class="col-lg-4 box">
+                        <div class="top">
+                            <h1>important notice</h1>
+                            <a href="/search-news.php?id=4552eb40-e779-11ee-b639-0242ac120005" target="_blank" class="normal-button">View all</a>
+                        </div>
+                        <hr />
+                        <div class="down custom-scroll">
+                            
+                    <div class="single">
+                        <p class="notify">Programme Notice on the Death Anniversary of Raja Mahendra Pratap Ji</p>
+                    </div>
+                
+                    <div class="single">
+                        <p class="notify">One-day training on the POSH Act 2013 (Sexual Harassment Act, 2013) & UGC Compliances</p>
+                    </div>
+                
+                    <div class="single">
+                        <p class="notify">AI for ALL awareness campaign</p>
+                    </div>
+                
+                    <div class="single">
+                        <p class="notify">Revised Inter Hostel Competition Schedule</p>
+                    </div>
+                
+                    <div class="single">
+                        <p class="notify">One-Day Seminar on Investment Banking Operations (TimesPro) and Placement Drives with IDFC First Bank & Care Health Insurance</p>
+                    </div>
+                
+                    <div class="single">
+                        <p class="notify">Information Regarding Political Science Book for Competitive Examinations by Dr. Munesh Kumar</p>
+                    </div>
+                
+                    <div class="single">
+                        <p class="notify">Participation in International Women’s Day 2026 – Sports and Cultural Events (08 March 2026)</p>
+                    </div>
+                
+                    <div class="single">
+                        <p class="notify">International Conference on Growth, Equity and Sustainable Edvelopment: Challenge and opportunities in 21 century on 24 & 25 March, 2026</p>
+                    </div>
+                
+                    <div class="single">
+                        <p class="notify">Registration for International Conference on "Scientific Collaboration on Research Innovation, Education and Technology" SCRIET-2026</p>
+                    </div>
+                
+                    <div class="single">
+                        <p class="notify">International Conference on "Scientific Collaboration on Research Innovation, Education and Technology" on 11-12 March, 2026</p>
+                    </div>
+                
+                    <div class="single">
+                        <p class="notify">National Seminar (on Hybrid mode) on "Water & Gender Equality" (Global theme from United Nations Organisation) Sunday, 22nd March, 2026</p>
+                    </div>
+                
+                    <div class="single">
+                        <p class="notify">Notice Regarding “Rozgar Mahotsav 2026”</p>
+                    </div>
+                
+                    <div class="single">
+                        <p class="notify">International Seminar on Frontiers in Algal Research: Biodiversity and Bio-technology on 9th March 2026</p>
+                    </div>
+                
+                    <div class="single">
+                        <p class="notify">National Seminar on Bioinformatics & Startup Innovation (National Science Day 2026)</p>
+                    </div>
+                
+                    <div class="single">
+                        <p class="notify">Two Days National Conference on भारतीय भाषा परिवार : एकत्व और एकात्मताon February 23-24, 2026</p>
+                    </div>
+                                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="pills-governance" role="tabpanel" aria-labelledby="pills-governance-tab">
+
+                <div class="notice" id="student">
+                    <div class="col-lg-8 box">
+                        <div class="top">
+                            <h1>Affiliation Notifications</h1>
+                            <a href="/search-news.php?id=5ac2ccbe-e779-11ee-b639-0242ac120005" class="normal-button" target="_blank">View all</a>
+                        </div>
+                        <hr />
+                        <div class="down custom-scroll">
+                            <p>No student notifications available.</p>                        </div>
+                    </div>
+                    <div class="col-lg-4 box">
+                        <div class="top">
+                            <h1>important notice</h1>
+                            <a href="/search-news.php?id=4552eb40-e779-11ee-b639-0242ac120005" target="_blank" class="normal-button">View all</a>
+                        </div>
+                        <hr />
+                        <div class="down custom-scroll">
+                            
+                    <div class="single">
+                        <p class="notify">Programme Notice on the Death Anniversary of Raja Mahendra Pratap Ji</p>
+                    </div>
+                
+                    <div class="single">
+                        <p class="notify">One-day training on the POSH Act 2013 (Sexual Harassment Act, 2013) & UGC Compliances</p>
+                    </div>
+                
+                    <div class="single">
+                        <p class="notify">AI for ALL awareness campaign</p>
+                    </div>
+                
+                    <div class="single">
+                        <p class="notify">Revised Inter Hostel Competition Schedule</p>
+                    </div>
+                
+                    <div class="single">
+                        <p class="notify">One-Day Seminar on Investment Banking Operations (TimesPro) and Placement Drives with IDFC First Bank & Care Health Insurance</p>
+                    </div>
+                
+                    <div class="single">
+                        <p class="notify">Information Regarding Political Science Book for Competitive Examinations by Dr. Munesh Kumar</p>
+                    </div>
+                
+                    <div class="single">
+                        <p class="notify">Participation in International Women’s Day 2026 – Sports and Cultural Events (08 March 2026)</p>
+                    </div>
+                
+                    <div class="single">
+                        <p class="notify">International Conference on Growth, Equity and Sustainable Edvelopment: Challenge and opportunities in 21 century on 24 & 25 March, 2026</p>
+                    </div>
+                
+                    <div class="single">
+                        <p class="notify">Registration for International Conference on "Scientific Collaboration on Research Innovation, Education and Technology" SCRIET-2026</p>
+                    </div>
+                
+                    <div class="single">
+                        <p class="notify">International Conference on "Scientific Collaboration on Research Innovation, Education and Technology" on 11-12 March, 2026</p>
+                    </div>
+                
+                    <div class="single">
+                        <p class="notify">National Seminar (on Hybrid mode) on "Water & Gender Equality" (Global theme from United Nations Organisation) Sunday, 22nd March, 2026</p>
+                    </div>
+                
+                    <div class="single">
+                        <p class="notify">Notice Regarding “Rozgar Mahotsav 2026”</p>
+                    </div>
+                
+                    <div class="single">
+                        <p class="notify">International Seminar on Frontiers in Algal Research: Biodiversity and Bio-technology on 9th March 2026</p>
+                    </div>
+                
+                    <div class="single">
+                        <p class="notify">National Seminar on Bioinformatics & Startup Innovation (National Science Day 2026)</p>
+                    </div>
+                
+                    <div class="single">
+                        <p class="notify">Two Days National Conference on भारतीय भाषा परिवार : एकत्व और एकात्मताon February 23-24, 2026</p>
+                    </div>
+                
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var notificationTable = document.getElementById('notificationTable');
+        var tbody = notificationTable.querySelector('tbody');
+        var clone = tbody.cloneNode(true);
+        notificationTable.appendChild(clone);
+    });
+</script><div class="events py-4">
+  <div class="container">
+    <h1 class="my-heading" style="margin-left:1rem;">Campus Life</h1>
+    <p class="ms-4 fs-5">A vibrant hub for innovation & Creativity</p>
+  </div>
+  <div class="container main-events d-flex">
+    <div class="calenders col-lg-9">
+      <div class="col-lg-4">
+        <div class="box">
+          <div class="top">
+            <h1>Sports</h1>
+          </div>
+          <div class="middle">
+            <img src="../../assests/images/sprts-11.jpg" alt="sports" />
+          </div>
+          <div class="content">
+            <div class="d-flex justify-content-center align-items-center">
+              <a href="/sports-gallery.php" class="normal-button">View More</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="box">
+          <div class="top">
+            <h1>Cultural</h1>
+          </div>
+          <div class="middle">
+            <img src="../../assests/images/cultural-program.jpg" alt="cultural-program" />
+          </div>
+          <div class="content">
+            <div class="d-flex justify-content-center align-items-center">
+              <a href="/cultural-gallery.php" class="normal-button">View More</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="box">
+          <div class="top">
+            <h1>Academics</h1>
+          </div>
+          <div class="middle">
+            <img src="https://ccsuniversity.blr1.cdn.digitaloceanspaces.com/public/jpg/2024/05/Sports/Department/8.jpg"
+              alt="" />
+          </div>
+          <div class="content">
+
+            <div class="d-flex justify-content-center align-items-center">
+              <a href="/academic-gallery.php" class="normal-button">View More</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-3 imp-links">
+      <div class="box">
+        <div class="top">
+          <h1>Information Corner</h1>
+        </div>
+        <div class="content">
+          <div class="accordion" id="accordionExample">
+            <div class="accordion-item">
+              <li class="accordion-header" id="headingOne">
+                <button type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true"
+                  aria-controls="collapseOne">
+                  UP State Universities Act
+                  <img src="../assests/images/faq-plus.svg" alt="" />
+                </button>
+              </li>
+              <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
+                data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                  <li>
+                    <a href="http://uphed.gov.in/pdf/univeristy_Acta.pdf" target="_blank"
+                      style="text-decoration: none; color: #14297a; font-size: 12px;">UP State Universities Act</a>
+                  </li>
+                  <li>
+                    <a href="https://ccsuniversity.blr1.cdn.digitaloceanspaces.com/public/pdf/2024/05/Ist-statude-of-the-ccsum.pdf"
+                      target="_blank" style="text-decoration: none; color: #14297a;font-size: 12px;">University
+                      Statutes</a>
+                  </li>
+                  <li>
+                    <a href="../../governance.php" target="_blank"
+                      style="text-decoration: none; color: #14297a;font-size: 12px;">University Ordinances</a>
+                  </li>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <hr />
+          <li>
+            <a href="../../rti.php" style="text-decoration: none; color: #14297a">Information Regarding RTI Act</a>
+          </li>
+          <hr />
+          <li>
+            <a href="../../iqac.php" style="text-decoration: none; color: #14297a">Internal Quality Assurance Cell</a>
+          </li>
+          <hr />
+          <li>
+            <a href="https://scic.ccsuniversity.ac.in" target="_blank"
+              style="text-decoration: none; color: #14297a">Startup Cell & Incubation Center</a>
+          </li>
+          <hr />
+          <li>
+            <a href="../../it-policy.php" style="text-decoration: none; color: #14297a">Information Technology
+              Policy-2022</a>
+          </li>
+          <hr />
+          <li>
+            <a href="https://filesccsu.blr1.cdn.digitaloceanspaces.com/public/pdf/ccsum/policy/IPR%20POLICY.pdf"
+              target="_blank" style="text-decoration: none; color: #14297a">IPR Policy 2022</a>
+          </li>
+          <hr />
+          <li>
+            <a href="https://cdn.ccsuniversity.ac.in/public/pdf/2025/05/reservation-roster-01.pdf"
+              target="_blank" style="text-decoration: none; color: #14297a">Reservation Roster</a>
+          </li>
+          <hr />
+          <li>
+            <a href="../../phd-dlit.php" target="_blank" style="text-decoration: none; color: #14297a">Ph.D./
+              D.Litt.</a>
+          </li>
+          <hr />
+          <li>
+            <a href="/verification.php" style="text-decoration: none; color: #14297a">Documents Verification</a>
+          </li>
+          <hr />
+          <li>
+            <a href="https://nodal.ccsuniversity.ac.in" target="_blank"
+              style="text-decoration: none; color: #14297a">Online Inventory for Campus</a>
+          </li>
+          <hr />
+          <li>
+            <a href="https://ccsums.ccsuniversity.ac.in/" target="_blank" style="text-decoration: none; color: #14297a">CCTV Control
+              Room Daily Report</a>
+          </li>
+          <hr />
+        </div>
+      </div>
+    </div>
+  </div>
+</div><link rel="stylesheet" href="../assests/css/quick-links/main.css" />
+<style>
+  @keyframes scroll {
+    0% {
+      transform: translateX(0);
+    }
+
+    100% {
+      transform: translateX(calc(-237px * 19));
+    }
+  }
+
+  .quick-links .new-classs {
+    overflow: hidden;
+    position: relative;
+  }
+
+  .quick-links .new-classs:hover .boxes {
+    animation-play-state: paused;
+  }
+
+  .quick-links .boxes {
+    animation: scroll 40s linear infinite;
+    display: flex;
+    width: calc(250px * 19);
+  }
+</style>
+
+<div class="quick-links">
+  <h1 class="my-heading text-center my-4">Quick Links</h1>
+  <div class="container new-classs">
+    <div class="boxes">
+      <div class="box">
+        <a href="research.php">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <p>Research</p>
+        </a>
+      </div>
+      <div class="box">
+        <a href="sahityik-sanskritik-parishad.php">
+          <i class="fas fa-university"></i>
+          <p>Sahityik Sanskritik <br> Parishad</p>
+        </a>
+      </div>
+      <div class="box">
+        <a href="https://forms.ccsuforms.in/Alumni" target="blank">
+          <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+          <p>Alumni</p>
+        </a>
+      </div>
+      <div class="box">
+        <a href="http://ccsuniversityhostel.com/" target="blank">
+          <i class="fa-solid fa-hotel"></i>
+          <p>Hostel</p>
+        </a>
+      </div>
+      <div class="box">
+        <a href="onlinepayment.php"><i class="fas fa-money-check-alt"></i>
+          <p>Online Fee Payment</p>
+        </a>
+      </div>
+      <div class="box">
+        <a href="colleges.php">
+          <i class="fas fa-university"></i>
+          <p>List of Colleges</p>
+        </a>
+      </div>
+      <div class="box">
+        <a href="http://forms.ccsuresults.com/exams/teacher/" target="_blank">
+          <i class="fas fa-chalkboard-teacher"></i>
+          <p>Teacher Registration</p>
+        </a>
+      </div>
+      <div class="box">
+        <a href="../../syllabus.php">
+          <i class="fas fa-book"></i>
+          <p>Syllabus</p>
+        </a>
+      </div>
+      <div class="box">
+        <a href="../../activities.php">
+          <i class="fas fa-trophy"></i>
+          <p>Activities</p>
+        </a>
+      </div>
+      <div class="box">
+        <a href="https://ccsuniversity.samarth.edu.in" target="_blank">
+          <i class="fas fa-university"></i>
+          <p>Samarth login for Students</p>
+        </a>
+      </div>
+      <div class="box">
+        <a href="../../sports.php">
+          <i class="fas fa-calendar"></i>
+          <p>Sports Calendar</p>
+        </a>
+      </div>
+      <div class="box">
+        <a href="../../media.php">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <p>Media Report</p>
+        </a>
+      </div>
+      <div class="box">
+        <a href="../../gallery.php">
+          <i class="fas fa-camera-retro"></i>
+          <p>Photo Gallery</p>
+        </a>
+      </div>
+      <div class="box">
+        <a href="../../courses.php">
+          <i class="fas fa-address-book"></i>
+          <p>Courses</p>
+        </a>
+      </div>
+      <div class="box">
+        <a href="../../enquiry-numbers.php">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <p>Enquiry Numbers</p>
+        </a>
+      </div>
+      <div class="box">
+        <a href="https://henoc.upsdc.gov.in/" target="_blank">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <p>Affiliation</p>
+        </a>
+      </div>
+    </div>
+
+    
+
+    
+  </div>
+</div><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<style>
+  .owl-dots{
+    display: none
+  }
+  .owl-nav{
+    display: flex;
+    justify-content: center;
+    button{
+      height: 50px;
+      width: 50px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 35px;
+      span{
+        font-size: 40px;
+      }
+    }
+  }
+  .fancybox-inner{
+
+    /* position: relative; */
+    .fancybox-toolbar{
+
+      position: relative;
+    z-index: 99999999999;
+    top: calc(100% - 50px);
+    }
+  }
+</style>
+
+<div class="achievements" id="achievements">
+  <div class="container" style="position: relative;">
+    <h1 class="my-heading" style="padding-left:20px">
+      Achievements & Rankings
+    </h1>
+    <div class="certificates" id="awidth">
+      
+      <div class="owl-carousel owl-theme">
+
+
+        <div class="card item">
+          <div class="card-image">
+            <a href="../../assests/images/certificate/certificate1.jpeg" data-fancybox="gallery">
+              <img src="../../assests/images/certificate/small/1.png" alt="Image Gallery" />
+            </a>
+          </div>
+        </div>
+        <div class="card item">
+          <div class="card-image">
+            <a href="../../assests/images/certificate/certificate5.jpeg" data-fancybox="gallery">
+              <img src="../../assests/images/certificate/small/2.png" alt="Image Gallery" />
+            </a>
+          </div>
+        </div>
+        <div class="card item">
+          <div class="card-image">
+            <a href="../../assests/images/certificate/certificate2.jpeg" data-fancybox="gallery">
+              <img src="../../assests/images/certificate/small/3.png" alt="Image Gallery" />
+            </a>
+          </div>
+        </div>
+        <div class="card item">
+          <div class="card-image">
+            <a href="../../assests/images/certificate/certificate3.jpeg" data-fancybox="gallery">
+              <img src="../../assests/images/certificate/small/4.png" alt="Image Gallery" />
+            </a>
+          </div>
+        </div>
+        <div class="card item">
+          <div class="card-image">
+            <a href="../../assests/images/certificate/certificate6.jpg" data-fancybox="gallery">
+              <img src="../../assests/images/certificate/small/5.png" alt="Image Gallery" />
+            </a>
+          </div>
+        </div>
+        <div class="card item">
+          <div class="card-image">
+            <a href="../../assests/images/certificate/certificate7.jpg" data-fancybox="gallery">
+              <img src="../../assests/images/certificate/small/6.png" alt="Image Gallery" />
+            </a>
+          </div>
+        </div>
+
+
+        
+      </div>
+
+    </div>
+  </div>
+<script>
+  $('.owl-carousel').owlCarousel({
+    loop:true,
+    margin:10,
+    nav:true,
+    responsive:{
+        0:{
+            items:1
+        },
+        600:{
+            items:2
+        },
+        1000:{
+            items:3
+        }
+    }
+})
+</script><script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<div class="part-ccsu mt-5 mb-5">
+    <div class="overlay"></div>
+   <div>
+   <h1 class="my-heading text-center mb-3 text-white">Be proud to be a part of CCSU</h1>
+   </div>
+    <div class="container main-box">
+        <div class="boxes">
+            <div class="box">
+                <img src="assests/images/part-icon-1.svg" alt="" />
+                <div class="down">
+                    <h1 class="counter" id="departmentsCounter">0</h1>
+                    <p>Departments</p>
+                </div>
+            </div>
+            <div class="box">
+                <img src="assests/images/part-icon-2.svg" alt="" />
+                <div class="down">
+                    <h1 class="counter" id="facultiesCounter">0</h1>
+                    <p>Faculties</p>
+                </div>
+            </div>
+            <div class="box">
+                <img src="assests/images/part-icon-3.svg" alt="" />
+                <div class="down">
+                    <h1 class="counter" id="programsCounter">0</h1>
+                    <p>Programs Offered</p>
+                </div>
+            </div>
+            <div class="box">
+                <img src="assests/images/part-icon-4.svg" alt="" />
+                <div class="down">
+                    <h1 class="counter" id="collegesCounter">0</h1>
+                    <p>Affiliated Colleges</p>
+                </div>
+            </div>
+            <div class="box">
+                <img src="assests/images/part-icon-5.svg" alt="" />
+                <div class="down">
+                    <h1 class="counter" id="acresCounter">0</h1>
+                    <p>Acres</p>
+                </div>
+            </div>
+            <div class="box">
+                <img src="assests/images/part-icon-6.svg" alt="" />
+                <div class="down">
+                    <h1 class="counter" id="ugcCounter">0</h1>
+                    <p>UGC Sponsored</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+// Function to check if element is in viewport
+function isElementInViewport(el) {
+    var rect = el.getBoundingClientRect();
+    return (
+        rect.top >= 0 &&
+        rect.left >= 0 &&
+        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+        rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+    );
+}
+
+$(document).ready(function() {
+    var countersTriggered = false;
+
+    // Function to trigger counters when section is in viewport
+    function triggerCountersOnScroll() {
+        if (!countersTriggered && isElementInViewport($(".part-ccsu")[0])) {
+          animateCounter('#departmentsCounter', 0, 40, 2000); // Change the second parameter to the desired start value, third parameter to the final value, and fourth parameter to the duration in milliseconds
+    animateCounter('#facultiesCounter', 0, 214, 2000); // Change the parameters as needed
+    animateCounter('#programsCounter', 0, 98, 2000); // Change the parameters as needed
+    animateCounter('#collegesCounter', 0, 724, 2000); // Change the parameters as needed
+    animateCounter('#acresCounter', 0, 222, 2000); // Change the parameters as needed
+    animateCounter('#ugcCounter', 0, 22, 2000); // Change the parameters as needed
+
+            countersTriggered = true; // Set flag to prevent re-triggering
+        }
+    }
+
+    // Function to animate counter
+    function animateCounter(selector, start, end, duration) {
+        $(selector).prop('Counter', start).animate({
+            Counter: end
+        }, {
+            duration: duration,
+            easing: 'swing',
+            step: function(now) {
+                $(this).text(Math.ceil(now));
+            }
+        });
+    }
+
+    // Trigger counters when scrolling
+    $(window).on('scroll', function() {
+        triggerCountersOnScroll();
+    });
+
+    // Trigger counters on page load if section is initially in viewport
+    triggerCountersOnScroll();
+});
+</script><div class="social py-5">
+  <div class="overlay"></div>
+  <div class="container main-box">
+    <h1 class="my-heading" style="padding-left: 20px; margin-bottom: 20px">
+      Follow us on Social Media
+    </h1>
+    <div class="boxes">
+      
+      <div class="box">
+        <div class="top">
+          <img src="assests/images/ccsu-logo-half.svg" alt="" />
+          <div class="right">
+            <h2>Chaudhary Charan Singh<br />University, Meerut</h2>
+          </div>
+        </div>
+        <a href="https://www.facebook.com/CCSUFB" target="_blank">
+          <img src="assests/images/facebook.svg" class="center-logo" alt="" />
+        </a>
+        <div class="down">
+
+          <iframe
+            src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FCCSUFB&tabs=timeline&width=416&height=296&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId"
+            width="296" height="500" style="width:416px;border: none; overflow: hidden" scrolling="no" frameborder="0"
+            allowfullscreen="true"
+            allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+        </div>
+      </div>
+      <div class="box">
+        <div class="top">
+          <img src="assests/images/ccsu-logo-half.svg" alt="" />
+          <div class="right">
+            <h2>Chaudhary Charan Singh<br />University, Meerut</h2>
+          </div>
+        </div>
+        <a href="https://www.instagram.com/ccsuinsta/" target="_blank">
+          <img src="assests/images/instagram.svg" class="center-logo" alt="" />
+        </a>
+        <div class="down">
+          
+          <iframe src="https://widget.tagembed.com/146283?view"
+            style=" width:416px;height:396px;overflow: auto; margin-top: -48px;" frameborder="0"
+            allowtransparency="true"></iframe>
+          
+        </div>
+      </div>
+      <div class="box">
+        <div class="top">
+          <img src="assests/images/ccsu-logo-half.svg" alt="" />
+          <div class="right">
+            <h2>Chaudhary Charan Singh<br />University, Meerut</h2>
+          </div>
+        </div>
+        <a href="https://twitter.com/ccsumeerut" target="_blank">
+          <img src="assests/images/twitter.svg" class="center-logo"
+            style="background-color: #000; padding: 7px; border-radius: 5px" alt="" />
+        </a>
+        <div class="down">
+          <a class="twitter-timeline" data-width="416" data-height="296" data-theme="light"
+            href="https://twitter.com/ccsumeerut?ref_src=twsrc%5Etfw">Tweets by ccsumeerut</a>
+          <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+        </div>
+      </div>
+    </div>
+  </div>
+</div><style>
+  .gallery-main {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 5px;
+    flex-wrap: wrap;
+
+    @media (max-width:600px){
+      gap:1px;
+    }
+    .gallery-item {
+      width: 12rem;
+      height: 8rem;
+
+      img {
+        width: 100%;
+        height: 100%;
+        border-radius:10px;
+      }
+    }
+  }
+
+  @media screen and (max-width: 600px) {
+    .box {
+      padding: 0 !important;
+    }
+    .video-sec {
+      width: 20rem !important;
+      iframe {
+        height: 430px;
+        width: 100%;
+      }
+    }
+
+    .gallery-item {
+      width: 6rem !important;
+      height: 5rem !important;
+    }
+  }
+</style>
+
+<div class="faq">
+  <div class="container main-box">
+    <div class="back d-flex align-items-center">
+      
+      <div class="col-lg-6 col-sm-12 box" style="padding-right: 30px">
+        <div class="video-sec" id="player"></div>
+      </div>
+      <div
+        class="col-lg-6 col-sm-12 box"
+        style="
+          border-left: 3px solid rgba(128, 128, 128, 0.425);
+          padding-left: 30px;
+        "
+      >
+        <div class="top d-flex justify-content-between align-items-center">
+          <h1 class="my-heading">PHOTO GALLERY</h1>
+          <a href="/gallery.php" class="normal-button">View All</a>
+        </div>
+        <p></p>
+        <div class="gallery">
+          <div class="gallery-main">
+            <div class="gallery-item">
+              <img src="../../assests/images/gallery/ccsu-1.jpg" alt="" />
+            </div>
+            <div class="gallery-item">
+              <img src="../../assests/images/gallery/workshop2.jpg" alt="" />
+            </div>
+            <div class="gallery-item">
+              <img src="../../assests/images/gallery/ccsu-2.jpg" alt="" />
+            </div>
+            <div class="gallery-item">
+              <img src="../../assests/images/gallery/34convo-01.jpg" alt="" />
+            </div>
+            <div class="gallery-item">
+              <img src="../../assests/images/gallery/culture2.jpg" alt="" />
+            </div>
+            <div class="gallery-item">
+              <img src="../../assests/images/gallery/env2.jpg" alt="" />
+            </div>
+            <div class="gallery-item">
+              <img
+                src="../../assests/images/gallery/Gandhi-2oct-02.jpg"
+                alt=""
+              />
+            </div>
+            <div class="gallery-item">
+              <img
+                src="../../assests/images/gallery/vivekanand-jayanti3.jpg"
+                alt=""
+              />
+            </div>
+            <div class="gallery-item">
+              <img
+                src="../../assests/images/gallery/yoga-270722-01.jpg"
+                alt=""
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="https://www.youtube.com/iframe_api"></script>
+<script>
+  var player;
+
+  function onYouTubeIframeAPIReady() {
+    player = new YT.Player("player", {
+      height: "430",
+      width: "100%",
+      // videoId: "pVRRzlo7gF0",
+      videoId: "maaSvBzivcc",
+      // videoId: "3wGQ6XuEzTY",
+      events: {
+        onReady: onPlayerReady,
+        onStateChange: onPlayerStateChange,
+      },
+    });
+  }
+
+  function onPlayerReady(event) {
+    // The API will call this function when the video player is ready.
+    // You can set the video to start playing automatically here if needed.
+    // event.target.playVideo();
+  }
+
+  function onPlayerStateChange(event) {
+    // This function can be used to react to player state changes.
+    if (event.data == YT.PlayerState.ENDED) {
+      player.playVideo(); // Play the video again if it ends.
+    }
+  }
+
+  document.addEventListener("visibilitychange", function () {
+    if (document.visibilityState === "hidden") {
+      player.pauseVideo();
+    }
+    // Optionally, you can resume playback when the tab is focused again
+    // else if (document.visibilityState === 'visible') {
+    //     player.playVideo();
+    // }
+  });
+</script>
+
+
+
+
+
+
+    <style>
+    @keyframes scroll {
+        0% {
+            transform: translateX(0);
+        }
+
+        100% {
+            transform: translateX(calc(-250px * 7));
+        }
+    }
+
+    .slider {
+        height: 150px;
+        margin: auto;
+        overflow: hidden;
+        position: relative;
+        width: auto;
+    }
+
+    .slider:hover .slide-track {
+        animation-play-state: paused;
+    }
+
+    .slider .slide-track {
+        animation: scroll 40s linear infinite;
+        display: flex;
+        width: calc(220px * 20);
+    }
+</style>
+
+
+
+
+
+
+
+
+<div class="important-links py-5">
+    <div class="container main-box">
+        <h1 class="my-heading">Important Websites</h1>
+        <div class="slider">
+            <div class="slide-track boxes">
+                <a href="https://mhrd.gov.in/" target="_blank">
+                  <div class="box slide">
+                    <img src="..\assests\images\images\MHRD.png" alt="" />
+                  </div>
+                </a>
+                <a href="https://icssr.org/" target="_blank">
+                  <div class="box slide">
+                    <img src="..\assests\images\images\Indian-council.png" alt="" />
+                  </div>
+                </a>
+                <a href="http://socialjustice.nic.in/" target="_blank">
+                  <div class="box slide">
+                    <img src="..\assests\images\images\Minsitry.png" alt="" />
+                  </div>
+                </a>
+                <a href="https://nad.gov.in/students" target="_blank">
+                  <div class="box slide">
+                    <img src="..\assests\images\images\NAD.png" alt="" />
+                  </div>
+                </a>
+                <a href="https://nad.digitallocker.gov.in/students" target="_blank">
+                  <div class="box slide">
+                    <img src="..\assests\images\images\Digilocker.png" alt="" />
+                  </div>
+                </a>
+                <a href="https://dst.gov.in/hi" target="_blank">
+                  <div class="box slide">
+                    <img src="..\assests\images\images\Ministry-science.png" alt="" />
+                  </div>
+                </a>
+                <a href="http://upgovernor.gov.in/" target="_blank">
+                  <div class="box slide">
+                    <img src="..\assests\images\images\icn-rajbhavan.jpg" alt="" />
+                  </div>
+                </a>
+                <a href="https://www.ugc.ac.in/" target="_blank">
+                  <div class="box slide">
+                    <img src="..\assests\images\images\icn-ugc.jpg" alt="" />
+                  </div>
+                </a>
+                <a href="http://uphed.gov.in/hi" target="_blank">
+                  <div class="box slide">
+                    <img src="..\assests\images\images\icn-uphe.jpg" alt="" />
+                  </div>
+                </a>
+                <a href="https://www.vlab.co.in/" target="_blank">
+                  <div class="box slide">
+                    <img src="..\assests\images\images\icn-vl.jpg" alt="" />
+                  </div>
+                </a>
+
+
+                
+
+                <a href="https://mhrd.gov.in/" target="_blank">
+                  <div class="box slide">
+                    <img src="..\assests\images\images\MHRD.png" alt="" />
+                  </div>
+                </a>
+                <a href="https://icssr.org/" target="_blank">
+                  <div class="box slide">
+                    <img src="..\assests\images\images\Indian-council.png" alt="" />
+                  </div>
+                </a>
+                <a href="http://socialjustice.nic.in/" target="_blank">
+                  <div class="box slide">
+                    <img src="..\assests\images\images\Minsitry.png" alt="" />
+                  </div>
+                </a>
+                <a href="https://nad.gov.in/students" target="_blank">
+                  <div class="box slide">
+                    <img src="..\assests\images\images\NAD.png" alt="" />
+                  </div>
+                </a>
+                <a href="https://nad.digitallocker.gov.in/students" target="_blank">
+                  <div class="box slide">
+                    <img src="..\assests\images\images\Digilocker.png" alt="" />
+                  </div>
+                </a>
+                <a href="https://dst.gov.in/hi" target="_blank">
+                  <div class="box slide">
+                    <img src="..\assests\images\images\Ministry-science.png" alt="" />
+                  </div>
+                </a>
+                <a href="http://upgovernor.gov.in/" target="_blank">
+                  <div class="box slide">
+                    <img src="..\assests\images\images\icn-rajbhavan.jpg" alt="" />
+                  </div>
+                </a>
+                <a href="https://www.ugc.ac.in/" target="_blank">
+                  <div class="box slide">
+                    <img src="..\assests\images\images\icn-ugc.jpg" alt="" />
+                  </div>
+                </a>
+                <a href="http://uphed.gov.in/hi" target="_blank">
+                  <div class="box slide">
+                    <img src="..\assests\images\images\icn-uphe.jpg" alt="" />
+                  </div>
+                </a>
+                <a href="https://www.vlab.co.in/" target="_blank">
+                  <div class="box slide">
+                    <img src="..\assests\images\images\icn-vl.jpg" alt="" />
+                  </div>
+                </a> 
+
+            </div>
+           
+        </div>
+    </div>
+</div><style>
+    /* footer weather */
+    .weather-container {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        background-color: #c0c0c0;
+        padding: 10px;
+        border-radius: 10px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .visitor-button {
+        margin: 0 2px;
+        /* Adjust the value as needed for spacing */
+        padding: 5px 10px;
+        /* Adjust the value as needed for spacing */
+    }
+
+    @media screen and (max-width:1680px) {
+        .weather-container {
+            padding: 3px !important;
+        }
+
+        .weather-details h2 {
+            margin-bottom: 0px !important;
+        }
+
+        .page-visitor button {
+            padding: 0px !important;
+            width: 20px !important;
+            height: 20px !important;
+            margin-bottom: 5px !important;
+            font-size: 13px !important;
+        }
+
+        .footer .styled-icons i {
+            height: 30px !important;
+            width: 30px !important;
+        }
+
+        .convocation-head-footer {
+            font-size: 17px !important;
+        }
+    }
+
+    .weather-icon img {
+        width: 60px;
+        height: auto;
+        margin-right: 10px;
+    }
+
+    .weather-details {
+        flex: 1;
+    }
+
+    .weather-details h2 {
+        margin-top: 0;
+        margin-bottom: 10px;
+        font-size: 20px;
+        font-weight: 700;
+    }
+
+    .weather-details p {
+        margin: 0;
+        margin-bottom: 0 !important;
+        margin-bottom: 5px;
+        font-size: 15px;
+        color: black;
+        margin-left: -15px;
+        font-weight: 800;
+    }
+
+    .app {
+        width: 100%;
+        margin: 20px auto;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        padding: 10px;
+        overflow: hidden;
+        text-align: center;
+        background-color: #c0c0c0;
+        height: 22vh;
+        border: 2px solid red;
+    }
+
+    .app .heading {
+        /* float: left;
+            width: 30%; */
+        font-size: 20px;
+        font-weight: bold;
+        margin: 0;
+    }
+
+    /* .app .images {
+            float: right;
+            width: 50%;
+            text-align: right;
+        } */
+    .app .images img {
+        /* width: 100px; */
+        /* margin-left: 20px; */
+        margin: 0 5px;
+    }
+
+    @media (max-width: 768px) {
+        .app {
+            width: 100%;
+            height: 15vh;
+        }
+
+        .app .heading,
+        .images {
+            width: 100%;
+            float: none;
+            text-align: center;
+        }
+
+        .app .images img {
+            display: block;
+            margin: 10px auto;
+        }
+
+    }
+
+    @media screen and (max-width:1030px) {
+        .visitor-desk {
+            display: none !important;
+        }
+
+        #realTime {
+            margin: 0 !important;
+        }
+
+        .weather-container {
+            margin-top: 1rem;
+        }
+    }
+
+    @media screen and (min-width:600px) {
+        .visitor-mobile {
+            display: none !important;
+        }
+    }
+
+    .images img:nth-child(2) {
+        /* Selecting the second image */
+        margin-top: -50px !important;
+        /* Decreasing margin from the top */
+    }
+
+    .page-visitor p {
+        font-size: 1rem;
+        font-weight: 400;
+    }
+
+    .page-visitor button {
+        background-color: #fff;
+        border-radius: 5px;
+        padding: 2px;
+        width: 25px;
+        height: 25px;
+        border: none;
+        outline: none;
+        margin-bottom: 5px;
+        cursor: auto;
+
+        font-size: 15px;
+        color: #000;
+        font-weight: 600;
+    }
+
+    .app-store {
+        background-color: #c0c0c0;
+        padding: 10px 20px;
+        border-radius: 10px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        margin-top: 10px;
+        gap: 10px;
+
+        @media (max-width:1030px) {
+            margin-top: 14.5rem;
+        }
+
+        @media (max-width:600px) {
+            margin-top: 1rem !important;
+        }
+    }
+
+    .app-store h6 {
+        font-size: 1.1rem;
+        font-weight: 800;
+        color: #14297a;
+        text-align: right;
+    }
+
+    .app-store img {
+        width: 100%;
+    }
+
+    .footer ul li a {
+        color: #FFF !important;
+    }
+
+    .footer ul li a:hover {
+        color: #f4c751 !important;
+        transition: 0.2s;
+    }
+</style>
+
+
+<footer id="footer" class="footer">
+    <div class="container-fluid p-40">
+        <div class="row">
+            <div class="col-sm-4 col-md-4 col-lg-2">
+                <div class="widget dark">
+                    <img class="mb-1" style="height: 200px;" alt="" src="/assests/images/footer/CCSU-footer-logo.png">
+                    <p id="nacc" class="text-center m-0 p-0">NAAC A++</p>
+                    <p class="text-center" id="nacdd"><strong class="text-center">Chaudhary Charan Singh University,
+                            Meerut</strong></p>
+                    <ul class="mt-1 p-0">
+                        <li class="m-0 pr-10" style="display:block">
+                            <a href="tel:01212763539"><i class="fa fa-phone"></i> +91 121 2763539</a>
+                        </li>
+                        <li class="m-0 pr-10" style="display:block;">
+                            <a href="tel:01212764777"><i class="fa fa-fax"></i> +91 121 2764777</a>
+                        </li>
+                    </ul>
+                    <ul class="styled-icons icon-sm icon-bordered icon-circled clearfix mt-10">
+                        <li><a href="https://www.facebook.com/CCSUFB" target="_blank"><i class="fa fa-facebook"
+                                    style="color: white"></i></a></li>
+                        <li><a href="https://twitter.com/ccsumeerut" target="_blank"><i class="fa fa-x-twitter"
+                                    style="color: white"></i></a></li>
+                        <li><a href="https://youtube.com/channel/UCBRUtlVs5IJiAM61KZqDXrg" target="_blank"><i
+                                    class="fa fa-youtube" style="color: white;"></i></a></li>
+                        
+                        <li><a href="https://instagram.com/ccsuinsta" target="_blank"><i class="fa fa-instagram"
+                                    style="color: white"></i></a></li>
+                        <li><a href="https://www.linkedin.com/company/ch-charan-singh-university-meerut/"
+                                target="_blank"><i class="fa fa-linkedin" style="color: white"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-sm-4 col-md-4 col-lg-2">
+                <div class="widget dark">
+                    <h4 class="widget-title line-bottom-theme-colored-2">Academics</h4>
+                    <ul class="angle-double-right list-border pt-15">
+                        <li><a href="/academic-calendar.php">Academic Calendar</a></li>
+                        <li><a href="https://filesccsu.blr1.cdn.digitaloceanspaces.com/public/pdf/ccsum/pdf-files/Calendar-BoS-AC_RDC.pdf"
+                                target="blank">Calender for BoS/ AC and RDC</a></li>
+                        <li><a href="/departments.php">Departments</a></li>
+                        <li><a href="/list-holidays.php">List of Holidays</a></li>
+                        
+                    </ul>
+
+
+                </div>
+
+                <div class="widget dark mt-3">
+                    <h4 class="widget-title line-bottom-theme-colored-2">Important Links</h4>
+                    <ul class="angle-double-right list-border pt-15">
+                        <li><a href="https://uphed.gov.in/pdf/univeristy_Acta.pdf" target="_blank">UP State Universities
+                                Act</a></li>
+                        <li><a href="/rti.php">Information Regarding RTI Act</a></li>
+                        <li><a href="https://scic.ccsuniversity.ac.in" target="_blank">Startup Cell & Incubation
+                                Center</a></li>
+                        <li><a href=" https://nodal.ccsuniversity.ac.in" target="_blank">Online Inventory for
+                                Campus</a></li>
+                        <li><a href="https://ccsums.ccsuniversity.ac.in/" target="_blank">CCTV Control Room Daily
+                                Report</a></li>
+                        <li><a href="/verification.php">Document Verification</a></li>
+                        
+                    </ul>
+                    <div class="d-flex justify-content-between align-items-center page-visitor visitor-desk mt-5">
+                        <div>
+                            <p class="p-0 m-0" style="font-size: 14px;">Total Visitor</p>
+                        </div>
+                        <div id="visitor-buttons">
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+
+            </div>
+            <div class="col-sm-4 col-md-4 col-lg-2">
+                <div class="widget dark">
+                    <h4 class="widget-title line-bottom-theme-colored-2">Policies</h4>
+                    <ul class="angle-double-right list-border pt-15">
+                        <li><a href="https://cdn.ccsuniversity.ac.in/public/pdf/2025/05/International%20Corporation%20Policy%202025.pdf"
+                                target="_blank">International
+                                Cooperation Policy</a></li>
+                        <li><a href="https://cdn.ccsuniversity.ac.in/public/pdf/2025/04/ipr-policy.pdf"
+                                target="_blank">IPR Policy</a></li>
+                        <li><a href="https://cdn.ccsuniversity.ac.in/public/pdf/2025/04/research_innov.pdf"
+                                target="_blank">Research Policy</a></li>
+                        <li><a href="https://cdn.ccsuniversity.ac.in/public/pdf/2025/04/IT-policy.pdf"
+                                target="_blank">IT Policy</a></li>
+                        <li><a href="https://cdn.ccsuniversity.ac.in/public/pdf/2025/04/icc-policy.pdf"
+                                target="_blank">Industry Consultancy</a></li>
+                        <li><a href="https://cdn.ccsuniversity.ac.in/public/pdf/2025/04/environment-policy.pdf"
+                                target="_blank">Environment Policy</a></li>
+                        <li><a href="https://filesccsu.blr1.cdn.digitaloceanspaces.com/public/pdf/ccsum/policy/Centre%20for%20Translational%20Research.pdf"
+                                target="_blank">Centre for
+                                Translational Research</a></li>
+                        <li><a href="https://cdn.ccsuniversity.ac.in/public/pdf/2025/04/infrastructure%20maintain.pdf"
+                                target="_blank">Infrastructure</a></li>
+                        <li><a href="https://cdn.ccsuniversity.ac.in/public/pdf/2025/04/gender-policy.pdf"
+                                target="_blank">Gender Equity</a>
+                        </li>
+                        <li><a href="https://cdn.ccsuniversity.ac.in/public/pdf/2025/05/Divyangjan%20Policy2025_updated.pdf"
+                                target="_blank">Divyangjan Policy</a></li>
+                        <li><a href="https://cdn.ccsuniversity.ac.in/public/pdf/2025/04/ethics_values.pdf"
+                                    target="_blank">Ethics & Values Policy</a></li>
+                        <li>
+                            <a href="https://cdn.ccsuniversity.ac.in/public/jpeg/2025/05/fee_refund_policy_2024_2025.jpeg" target="blank">Fee Refund Policy</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-sm-4 col-md-4 col-lg-2">
+                <div class="widget dark">
+                    <h4 class="widget-title line-bottom-theme-colored-2">Cells</h4>
+                    <ul class="angle-double-right list-border pt-15">
+                        <li><a href="https://cic.ccsuniversity.ac.in" target="_blank">International Cooperation Cell</a></li>
+                        <li><a href="/industry-consultancy-cell.php" target="_blank">Industry Consultancy Cell</a></li>
+                        <li><a href="https://abacus.ccsuniversity.ac.in" target="_blank">ABACUS-UP</a></li>
+                        <li><a href="https://placement-cell.ccsuniversity.ac.in" target="_blank">Placement Cell</a></li>
+                        <li><a href="https://aishe.ccsuniversity.ac.in" target="_blank">AISHE</a></li>
+                        <li><a href="https://ipr.ccsuniversity.ac.in" target="_blank">Intellectual Property</a></li>
+                        <li><a href="/sedg-cell.php">SEDG Cell</a></li>
+                    </ul>
+                </div>
+
+                <div class="d-flex justify-content-between align-items-center page-visitor page-visitor-tab"
+                    id="pageVisitorTab" style="margin-top:11rem;">
+                    <div>
+                        <p class="p-0 m-0" style="font-size: 0.8rem;">Total Visitor</p>
+                    </div>
+                    <div id="visitor-buttons">
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4 col-md-4 col-lg-2">
+                <div class="widget dark">
+                    <h4 class="widget-title line-bottom-theme-colored-2">Quick Links</h4>
+                    <ul class="angle-double-right list-border pt-15">
+                        <li><a href="https://filesccsu.blr1.cdn.digitaloceanspaces.com/public/pdf/ccsum/pdf-files/Adoption-IDF.pdf"
+                                target="_blank">Institutional Development Plan (IDP)</a></li>
+                        <li><a href="https://login.microsoftonline.com/common/oauth2/v2.0/authorize?response_type=id_token&amp;scope=openid%20profile&amp;client_id=5e3ce6c0-2b1f-4285-8d4b-75ee78787346&amp;redirect_uri=https%3A%2F%2Fteams.microsoft.com%2Fgo&amp;state=eyJpZCI6IjUxOTExMGE1LTlkMmMtNGY5Ny05OTg0LTYzODViMTFjZGQ5NyIsInRzIjoxNjY0Mjc3NzAzLCJtZXRob2QiOiJyZWRpcmVjdEludGVyYWN0aW9uIn0%3D&amp;nonce=ce8ced2e-2f0c-495f-adf4-7f371a72001b&amp;client_info=1&amp;x-client-SKU=MSAL.JS&amp;x-client-Ver=1.3.4&amp;client-request-id=8bfb27cc-a73d-43bf-8ee1-93edd8dc70ab&amp;response_mode=fragment"
+                                target="_blank">Microsoft Teams</a></li>
+                        <li><a href="/downloads.php">Download</a>
+                        </li>
+                        <li><a href="/contact.php">Contact Us</a></li>
+                        <li><a href="/iqac.php">IQAC</a></li>
+                        <li><a href="/gallery.php">Gallery</a></li>
+                        <li><a href="/university-news-letter.php" target="_blank">University News Letter</a></li>
+                        <li><a href="https://education-policy.ccsuniversity.ac.in/" target="_blank">NEP-2020</a>
+                        <li><a href="/rti.php">RTI Act</a></li>
+                        <li><a href="https://ccsuniversity.samarth.edu.in" target="_blank">Samarth login for
+                                Students</a></li>
+                        <li><a href="https://ccsuniversity.blr1.cdn.digitaloceanspaces.com/public/pdf/2024/09/User%20Manual%20for%20Registration%20at%20the%20Student%20Portal_.pdf"
+                                target="_blank">Samarth portal user manual for student login</a></li>
+                        </li>
+                        <li><a href="/sahityik-sanskritik-parishad.php">Sahityik Sanskritik Parishad</a></li>
+                        <li><a href="https://swayam.inflibnet.ac.in/" target="_blank">SWAYAM Portal</a></li>
+                        <li><a href="/sustainability.php">Sustainability@CCSU </a></li>
+                        <li><a href="https://samadhaan.ugc.ac.in/" target="_blank">UGC e-Samadhan portal</a></li>
+                        <li><a href="/35convocation-2023.php" target="_blank"><b class="h6 convocation-head-footer"
+                                    style="color: #f4c751; font-size:20px; font-weight:700;">
+                                    36th CONVOCATION 2024</b></a></li>
+                    </ul>
+                </div>
+
+                <div class="weather-container weather-container-tab" style="margin-top:.5rem">
+                    <div class="weather-icon">
+                        <img id="weather-icon2" src="/assests/images/cloudy.png" alt="Weather Icon">
+                    </div>
+                    <div class="weather-details">
+                        <h2 id="weather-description2">Cloudy</h2>
+                        <p id="weather-temp2"><strong>Temperature:</strong> 25°C</p>
+                        <p id="weather-humidity2"><strong>Humidity:</strong> 60%</p>
+                        <p id="weather-wind2"><strong>Wind:</strong> 10 km/h</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4 col-md-4 col-lg-2">
+                <div class="widget dark d-none">
+                    <h4 class="widget-title line-bottom-theme-colored-2">Google Form Link <br>For Sending Report</h4>
+                    <ul class="angle-double-right list-border pt-15">
+                        <li><a href="https://forms.gle/n8TwxTk245um5yep6" target="_blank"><i class="fa fa-link"></i>
+                                पीपल के पेड़ो का वृक्षारोपण </a></li>
+                        <li><a href="https://forms.gle/XamwVRf4WbXudKWp7" target="_blank" class=""><i
+                                    class="fa fa-link"></i> महिला अध्ययन केंद्र की गतिविधियां</a></li>
+                        <li><a href="https://docs.google.com/forms/d/1iH5GiSplzhdJ7xYEtOKT_MdcUjs14wA-uAnZeUyi0uA/edit?usp=sharing"
+                                target="_blank" class="blink- "><i class="fa fa-link"></i>&nbsp;राष्ट्रीय शिक्षा
+                                नीति प्रकोष्ठ</a></li>
+                    </ul>
+                </div>
+
+                <div class="widget dark mt-4">
+                    <h4 class="widget-title line-bottom-theme-colored-2">Meerut, Uttar Pradesh, India</h4>
+                    <p id="realTime" class="pt-2" style="margin-left: -15px;"></p>
+
+
+                </div>
+
+                <div class="weather-container weather-container-general">
+                    <div class="weather-icon">
+                        <img id="weather-icon" src="/assests/images/cloudy.png" alt="Weather Icon">
+                    </div>
+                    <div class="weather-details">
+                        <h2 id="weather-description">Cloudy</h2>
+                        <p id="weather-temp"><strong>Temperature:</strong> 25°C</p>
+                        <p id="weather-humidity"><strong>Humidity:</strong> 60%</p>
+                        <p id="weather-wind"><strong>Wind:</strong> 10 km/h</p>
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-around align-items-center app-store">
+                    <div>
+                        <h6>CCSU MOBILE APP </h6>
+                    </div>
+                    <div>
+                        <a href="https://play.google.com/store/apps/details?id=com.ccsu&pli=1" target="_blank">
+                            <img src="../assests/images/android_store.png" alt="android-store">
+                        </a>
+                        <a href="https://apps.apple.com/in/app/ccsu-meerut-official/id6446219464" target="_blank">
+                            <img src="../assests/images/ios_store.png" alt="ios-store">
+                        </a>
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-between align-items-center page-visitor visitor-mobile mt-3">
+                    <div>
+                        <p class="p-0 m-0">Total Visitor</p>
+                    </div>
+                    <div id="visitor-buttons">
+                        
+                    </div>
+                </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <div class="container-fluid pt-15" style="background: none; background-color: #f4c751;">
+            <div class="row">
+                <div class="col-md-12">
+                    <p class="font-12 m-0 text-center pb-3" style=" color: #14297a;">© Copyright Protected. Chaudhary
+                        Charan Singh
+                        University, Meerut.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.min.js"></script>
+<script src="/assests/js/search.js"></script>
+<script src="/assests/js/weather.js"></script>
+
+<script>
+    $(document).on('click', '[data-toggle="lightbox"]', function (event) {
+        event.preventDefault();
+        $(this).ekkoLightbox();
+    });
+</script>
+
+
+
+
+
+
+
+
+<script>
+    // Auto scroll on left and right click for gallery images
+    $('#gallerySlider').on('click', '.scroll-icon', function () {
+        $('#gallerySlider').carousel($(this).data('slide'));
+    });
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        console.log('Page loaded');
+
+        // Function to get the current timestamp in seconds
+        function getCurrentTimestamp() {
+            return Math.floor(Date.now() / 1000);
+        }
+
+        // Fixed starting timestamp (e.g., June 5, 2024, 00:00:00 IST)
+        const fixedStartTimestamp = 1714886400; // Example timestamp
+        // Fixed starting visitor count
+        const fixedStartCount = 370087;
+
+        // Function to calculate the current visitor count
+        function calculateVisitorCount() {
+            const currentTimestamp = getCurrentTimestamp();
+            // Calculate the number of 5-minute intervals since the fixed start timestamp
+            const intervalsPassed = Math.floor((currentTimestamp - fixedStartTimestamp) / 30);
+            // Calculate the current visitor count
+            return fixedStartCount + intervalsPassed;
+        }
+
+        // Function to display the visitor count
+        function displayVisitorCount(count) {
+            console.log('Displaying count:', count);
+            const countStr = count.toString();
+            const buttonsContainer = document.getElementById('visitor-buttons');
+            buttonsContainer.innerHTML = ''; // Clear previous buttons
+            for (let char of countStr) {
+                const button = document.createElement('button');
+                button.classList.add('visitor-button');
+                button.textContent = char;
+                buttonsContainer.appendChild(button);
+            }
+        }
+
+        // Display the visitor count on page load
+        displayVisitorCount(calculateVisitorCount());
+
+        // Set an interval to update the visitor count every 5 minutes
+        setInterval(() => {
+            displayVisitorCount(calculateVisitorCount());
+        }, 30000); // 300000 ms = 5 minutes
+    });
+</script>
+
+<script>
+    // Function to adjust font size
+    function adjustFontSize(action) {
+        // Get the current font size of the body
+        var currentSize = parseFloat(window.getComputedStyle(document.body, null).getPropertyValue('font-size'));
+
+        // Adjust font size based on action
+        if (action === 'increase') {
+            // Increase font size by 2 pixels
+            var newSize = currentSize + 2;
+        } else if (action === 'decrease') {
+            // Decrease font size by 2 pixels
+            var newSize = currentSize - 2;
+        }
+
+        // Set the new font size to the body
+        document.body.style.fontSize = newSize + 'px';
+
+        // Set font size for header navbar
+        var navbarItems = document.querySelectorAll('.navbar li a');
+        navbarItems.forEach(function (item) {
+            item.style.fontSize = newSize + 'px';
+        });
+
+        // Set font size for main navigation
+        var mainNavItems = document.querySelectorAll('#main-nav li a');
+        mainNavItems.forEach(function (item) {
+            item.style.fontSize = newSize + 'px';
+        });
+
+
+    }
+
+    // Function to reset font size to default
+    function resetFontSize() {
+        // Set the font size to default (16px)
+        document.body.style.fontSize = '16px';
+
+        // Set default font size for header navbar
+        var navbarItems = document.querySelectorAll('.navbar li a');
+        navbarItems.forEach(function (item) {
+            item.style.fontSize = '16px';
+        });
+
+        // Set default font size for main navigation
+        var mainNavItems = document.querySelectorAll('#main-nav li a');
+        mainNavItems.forEach(function (item) {
+            item.style.fontSize = '16px';
+        });
+
+
+    }
+</script>
+
+
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var zohoScript = document.createElement("script");
+        zohoScript.src = "https://salesiq.zohopublic.in/widget?wc=siq8432fabe1a8737ee8d28ed80839c25cd096ff21d3c59a18a3bcd6a785360e342";
+        zohoScript.defer = true;
+        document.body.appendChild(zohoScript);
+    });
+
+    window.$zoho = window.$zoho || {};
+    $zoho.salesiq = $zoho.salesiq || { ready: function () { } };
+</script>
+
+
+</body>
+
+</html><style>
+  .menu-wrapper {
+    position: fixed;
+    left: 0px;
+    top: 278px;
+    /* transform: translateX(-50%); */
+    background-color: #f4c751;
+    /* Background color */
+    padding: 7px;
+    /* Adjust padding as needed */
+    border-top-right-radius: 10px;
+    /* Border radius for top right corner */
+    border-bottom-right-radius: 10px;
+    /* Border radius for bottom right corner */
+    z-index: 99999999;
+  }
+
+  .hamburger-menu {
+    cursor: pointer;
+  }
+
+  .bar {
+    width: 25px;
+    height: 3px;
+    background-color: #14297a;
+    margin: 5px 0;
+  }
+
+  .slide-nav {
+    position: fixed;
+    top: 0;
+    left: -300px;
+    /* Initially hidden */
+    width: 250px;
+    height: 100%;
+    background-color: #FFF;
+    color: white;
+    padding: 20px;
+    transition: left 0.3s ease;
+    @media(max-width:991px){
+      overflow: scroll;
+    }
+  }
+
+  .slide-nav a {
+    display: block;
+    margin-bottom: 10px;
+    text-decoration: none;
+    color: #000000;
+    translate: (1.1rem);
+    font-weight: 700;
+
+    @media only screen and (max-width: 1536px) and (max-height: 864px) {
+      margin-bottom: 5px;
+      font-size: 14px;
+    }
+  }
+
+  .close-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: #14297a;
+    border-radius: 50%;
+    cursor: pointer;
+    /* color: #14297a; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    width: 40px;
+    padding: 0 !important;
+    margin: 0 !important;
+    color: #fff;
+    font-size: 20px;
+  }
+
+  #main-nav-bar {
+    position: fixed;
+    height: 100vh;
+    width: calc(100vw - 250px);
+    background-color: rgba(0, 0, 0, 0.5);
+    top: 0;
+    left: 100vw;
+    z-index: 111;
+    transition: left 0.3s ease;
+  }
+</style>
+<div class="menu-wrapper">
+  <div class="hamburger-menu" onclick="toggleNav()">
+    <div class="bar"></div>
+    <div class="bar"></div>
+    <div class="bar"></div>
+  </div>
+  <div class="main">
+    <div class="slide-nav" id="slideNav">
+      <span class="close-btn" onclick="toggleNav()"><i class="fa-solid fa-xmark"></i></span> 
+      
+      <a href="/anti-ragging.php">Anti Ragging</a>
+      <a href="https://mail.google.com/">CCSU E-mail</a>
+      <a href="/downloads.php">Downloads</a>
+      <a href="/enquiry-numbers.php">Enquiry Numbers</a>
+      <a href="/imp-email.php">Important E-mail</a>
+      <a href="/tenders.php">Tenders</a>
+      <a href="/dept-sports.php">Sports</a>
+      <a href="/career.php">Employment/Vacancies</a>
+      <a href="/nirf.php">NIRF</a>
+      <a href="https://education-policy.ccsuniversity.ac.in/" target="_blank">NEP-2020</a>
+      <a href="/infra.php">Infrastructure</a>
+      <a href="/admission-brochure-2023.php">Brochure Download</a>
+      <a href="/syllabus.php">Syllabus</a>
+      <a href="/admission.php">Admission</a>
+      <a href="/contact.php">Contact Us</a>
+      <a href="/gallery.php">Gallery</a>
+      <a href="/mobile-app.php">CCSU, Mobile App</a>
+      <a href="/35convocation-2023.php">36th Convocation-2024</a>
+      <a href="https://scriet.ccsuniversity.ac.in" target="_blank">Institute of Engineering & Technology</a>
+      <a href="https://gccjr.org/" target="_blank">Shanti Devi Government College(Constituent College)</a>
+
+
+    </div>
+    <div id="main-nav-bar"></div>
+  </div>
+
+</div>
+
+
+
+<script>
+
+  document.addEventListener('DOMContentLoaded', function () {
+    var mainnav = document.getElementById('main-nav-bar');
+
+    mainnav.addEventListener('click', function () {
+      toggleNav();
+    });
+  });
+
+  function toggleNav() {
+  var nav = document.querySelector('.slide-nav');
+  var mainnav = document.getElementById('main-nav-bar');
+
+  if (nav.style.left === '' || nav.style.left === '-300px') {
+    mainnav.style.left = "250px";
+    nav.style.left = '0';
+  } else {
+    nav.style.left = '-300px';
+    mainnav.style.left = "100vw";
+  }
+}
+
+
+
+</script>
