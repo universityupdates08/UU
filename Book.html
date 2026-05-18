@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>BUY BOOKS ONLINE - UNIVERSITY UPDATES</title>
+    <title>UNIVERSITY UPDATES | ESTABLISHED EXCELLENCE</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -17,7 +17,6 @@
             --base-font-size: 16px;
         }
         
-        /* Dark Mode configuration variable hooks */
         [data-theme="dark"] {
             --slate-bg: #0f172a;
         }
@@ -34,20 +33,19 @@
             transition: background-color 0.3s, color 0.3s;
         }
         
-        /* Global rules for dark mode typography override */
         [data-theme="dark"] body {
             color: #f1f5f9;
         }
         [data-theme="dark"] .bg-white {
             background-color: #1e293b !important;
         }
-        [data-theme="dark"] .text-slate-900, [data-theme="dark"] .text-slate-800 {
+        [data-theme="dark"] .text-slate-900, [data-theme="dark"] .text-slate-800, [data-theme="dark"] .text-slate-950 {
             color: #f8fafc !important;
         }
         [data-theme="dark"] .text-slate-500, [data-theme="dark"] .text-slate-600 {
             color: #cbd5e1 !important;
         }
-        [data-theme="dark"] .border-slate-200, [data-theme="dark"] .border-b, [data-theme="dark"] border-t {
+        [data-theme="dark"] .border-slate-200, [data-theme="dark"] .border-b, [data-theme="dark"] border-t, [data-theme="dark"] .border-slate-100 {
             border-color: #334155 !important;
         }
 
@@ -66,11 +64,7 @@
         .tab-content { display: none; }
         .tab-content.active { display: block; }
         
-        /* WARNING UI COMPONENT */
-        .warning-banner { background: #fffbeb; border-left: 4px solid #f59e0b; padding: 1rem; border-radius: 0.75rem; margin-bottom: 2rem; }
-        
-        /* FIX: Ensure hidden class works globally */
-        .hidden { display: none !important; }
+        .modal-hidden { display: none !important; }
                 
         #previewModal { display: none; position: fixed; inset: 0; background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(4px); z-index: 1000; align-items: center; justify-content: center; padding: 20px; }
         .loader { border: 3px solid #f3f3f3; border-top: 3px solid var(--primary); border-radius: 50%; width: 30px; height: 30px; animation: spin 1s linear infinite; }
@@ -79,14 +73,13 @@
 </head>
 <body>
 
-    <!-- 1. UTILITY BAR -->
-    <div class="bg-black text-slate-300 py-2 text-[12px] font-medium border-b border-zinc-800">
-        <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
+    <div class="bg-black text-slate-300 py-2 text-[12px] font-medium border-b border-zinc-800 relative z-[60]">
+        <div class="max-w-8xl mx-auto px-6 flex justify-between items-center">
             <div class="flex gap-4">
-                <a href="https://t.me/HelpforDMBot" class="hover:text-white transition flex items-center gap-1"><i class="fas fa-headset text-blue-500"></i> Contact Us</a>
+                <a href="https://t.me/HelpforDMBot" class="hover:text-white transition flex items-center gap-1"><i class="fas fa-headset text-white-500"></i> Contact Us</a>
             </div>
-            <div class="flex gap-6 items-center">
-                <!-- Social Icons Links Section -->
+            
+            <div class="hidden sm:flex gap-6 items-center">
                 <div class="flex gap-4 items-center border-r border-zinc-700 pr-4">
                     <a href="#"><i class="fas fa-home hover:text-white transition"></i></a>
                     <a href="https://www.youtube.com/@University-Updates-UU" target="_blank"><i class="fab fa-youtube hover:text-red-500 transition"></i></a>
@@ -94,58 +87,100 @@
                     <a href="https://t.me/UniversityUpdates_UU" target="_blank"><i class="fab fa-telegram hover:text-blue-400 transition"></i></a>
                     <a href="https://x.com/uni_updates08" target="_blank"><i class="fab fa-x-twitter hover:text-white transition"></i></a>
                 </div>
-                <!-- Interactive Action Adjustments Controls -->
                 <div class="flex gap-2 items-center">
                     <button onclick="adjustFont(-1)" class="bg-zinc-800 hover:bg-zinc-700 px-2 py-0.5 rounded text-[10px] text-white font-bold" title="Decrease Font">A-</button>
-                    <button onclick="resetFont()" class="bg-zinc-800 hover:bg-zinc-700 px-2 py-0.5 rounded text-[10px] text-white font-bold" title="Normal Font">Normal</button>
+                    <button onclick="resetFont()" class="bg-zinc-800 hover:bg-zinc-700 px-2 py-0.5 rounded text-[10px] text-white font-bold" title="Normal Font">A</button>
                     <button onclick="adjustFont(1)" class="bg-zinc-800 hover:bg-zinc-700 px-2 py-0.5 rounded text-[10px] text-white font-bold" title="Increase Font">A+</button>
-                    <button onclick="toggleDarkMode()" class="bg-blue-600 hover:bg-blue-700 text-white px-2 py-0.5 rounded text-[10px] font-bold flex items-center gap-1 ml-1">
-                        <i class="fas fa-moon"></i> Mode
+                    <button onclick="toggleDarkMode()" class="bg-blue-600 hover:bg-blue-800 text-white px-2 py-0.5 rounded text-[10px] font-bold flex items-center gap-1 ml-1">
+                        <i class="fas fa-moon"></i> 
+                    </button>
+                </div>
+            </div>
+
+            <div class="sm:hidden flex items-center">
+                <button onclick="toggleUtilityDropdown()" class="text-slate-400 hover:text-white flex items-center gap-1 text-xs focus:outline-none bg-zinc-900 px-2.5 py-1 rounded border border-zinc-800">
+                    Settings <i id="utilityArrowIcon" class="fas fa-chevron-down transition-transform duration-200"></i>
+                </button>
+            </div>
+        </div>
+
+        <div id="utilityMobileDropdown" class="hidden absolute top-full left-0 w-full bg-black border-b border-zinc-800 px-6 py-3 flex flex-col gap-4 shadow-xl sm:hidden">
+            <div class="flex justify-between items-center border-b border-zinc-800 pb-2">
+                <span class="text-[10px] uppercase text-zinc-500 tracking-wider font-bold">Follow Us</span>
+                <div class="flex gap-4 text-sm">
+                    <a href="#"><i class="fas fa-home hover:text-white transition"></i></a>
+                    <a href="https://www.youtube.com/@University-Updates-UU" target="_blank"><i class="fab fa-youtube hover:text-red-500 transition"></i></a>
+                    <a href="https://instagram.com/universityupdates_uu" target="_blank"><i class="fab fa-instagram hover:text-pink-500 transition"></i></a>
+                    <a href="https://t.me/UniversityUpdates_UU" target="_blank"><i class="fab fa-telegram hover:text-blue-400 transition"></i></a>
+                    <a href="https://x.com/uni_updates08" target="_blank"><i class="fab fa-x-twitter hover:text-white transition"></i></a>
+                </div>
+            </div>
+            <div class="flex justify-between items-center">
+                <span class="text-[10px] uppercase text-zinc-500 tracking-wider font-bold">Preferences</span>
+                <div class="flex gap-2 items-center">
+                    <button onclick="adjustFont(-1)" class="bg-zinc-800 hover:bg-zinc-700 px-2 py-1 rounded text-[10px] text-white font-bold">A-</button>
+                    <button onclick="resetFont()" class="bg-zinc-800 hover:bg-zinc-700 px-2 py-1 rounded text-[10px] text-white font-bold">A</button>
+                    <button onclick="adjustFont(1)" class="bg-zinc-800 hover:bg-zinc-700 px-2 py-1 rounded text-[10px] text-white font-bold">A+</button>
+                    <button onclick="toggleDarkMode()" class="bg-blue-600 hover:bg-blue-800 text-white px-2.5 py-1 rounded text-[10px] font-bold flex items-center gap-1 ml-1">
+                        <i class="fas fa-moon"></i> Theme
                     </button>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- 2. MAIN HEADER (Logo, Search Bar & Auth Capsule) -->
     <header class="bg-white border-b border-slate-100 transition-colors">
-        <div class="max-w-7xl mx-auto px-6 py-4 flex flex-col md:flex-row justify-between items-center gap-4">
-            <!-- Brand Logo Frame -->
-            <div class="flex items-center gap-3">
-                <img src="https://i.ibb.co/nMC0877T/UNIVERSITY-UPDATES-LOGO-removebg-preview.png" alt="Logo" class="h-10 md:h-12" />
-                <span class="heading-font font-bold text-xl tracking-tight text-slate-950 hidden sm:inline">University Updates</span>
+        <div class="max-w-8xl mx-auto px-6 py-4 flex flex-col lg:flex-row justify-between items-center gap-5">
+            
+            <div class="flex items-center gap-3 flex-shrink-0 w-full lg:w-auto justify-center lg:justify-start">
+                <img src="https://i.ibb.co/nMC0877T/UNIVERSITY-UPDATES-LOGO-removebg-preview.png" alt="Logo" class="h-10 md:h-12 flex-shrink-0" />
+                <div class="border-l pl-4 border-slate-200 dark:border-slate-700">
+                    <h1 class="font-poppins font-bold text-base md:text-lg leading-tight tracking-tight text-slate-800 dark:text-white whitespace-nowrap">UNIVERSITY UPDATES</h1>
+                    <p class="text-[9px] md:text-[10px] uppercase tracking-[0.2em] font-bold text-red-500 whitespace-nowrap">Established Excellence</p>
+                </div>
             </div>
             
-            <!-- Global Interactive Content Search Bar -->
-            <div class="w-full md:max-w-lg relative flex items-center">
-                <input type="text" placeholder="Search for university books, codes, syllabi..." class="w-full px-4 py-2.5 pl-10 pr-4 text-sm bg-slate-50 border border-slate-200 rounded-full focus:outline-none focus:border-blue-500 text-slate-900 transition-all" />
-                <i class="fas fa-search absolute left-3.5 text-slate-400 text-sm"></i>
+            <div class="w-full max-w-xl relative flex items-center flex-grow">
+                <input id="globalSearchInput" oninput="executeLiveSearch()" type="text" placeholder="Search for university books, codes, summaries..." class="w-full px-5 py-2.5 pl-11 pr-4 text-sm bg-slate-50 border border-slate-200 rounded-full focus:outline-none focus:border-blue-500 focus:bg-white text-slate-900 transition-all dark:bg-slate-800 dark:border-slate-700 dark:text-white" />
+                <i class="fas fa-search absolute left-4 text-slate-400 text-sm"></i>
             </div>
 
-            <!-- Integrated Capsule Structure (Login / Register) -->
-            <div class="bg-slate-100 border border-slate-200 p-1 rounded-full flex items-center gap-1 shadow-inner">
-                <a href="#" class="text-xs font-semibold px-4 py-1.5 rounded-full text-slate-700 hover:text-slate-950 transition">Login</a>
+            <div class="bg-slate-100 border border-slate-200 p-1.5 rounded-full flex items-center gap-1 shadow-inner dark:bg-slate-800 dark:border-slate-700 flex-shrink-0">
+                <a href="#" class="text-xs font-semibold px-4 py-1.5 rounded-full text-slate-700 dark:text-slate-300 hover:text-slate-950 dark:hover:text-white transition">Login</a>
                 <a href="#" class="text-xs font-semibold px-4 py-1.5 rounded-full bg-blue-600 text-white shadow-sm hover:bg-blue-700 transition">Register</a>
             </div>
         </div>
     </header>
 
-    <!-- 3. NAVIGATION BAR -->
     <nav class="glass-nav sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-6 py-1 flex justify-between items-center">
-            <ul class="flex overflow-x-auto whitespace-nowrap scrollbar-none py-2 text-sm font-medium tracking-wide">
-                <li><a href="#" class="text-blue-600 px-4 py-2 rounded-lg bg-blue-50/50 font-bold">Home</a></li>
-                <li><a href="#store" class="text-slate-600 hover:text-blue-600 px-4 py-2 transition">Books Store</a></li>
-                <li><a href="#tab-section" onclick="showTab('instructions')" class="text-slate-600 hover:text-blue-600 px-4 py-2 transition">How to Buy</a></li>
-                <li><a href="#tab-section" onclick="showTab('about')" class="text-slate-600 hover:text-blue-600 px-4 py-2 transition">About Curriculum</a></li>
-                <li><a href="#tab-section" onclick="showTab('pp')" class="text-slate-600 hover:text-blue-600 px-4 py-2 transition">Privacy Policy</a></li>
-                <li><a href="#tab-section" onclick="showTab('terms')" class="text-slate-600 hover:text-blue-600 px-4 py-2 transition">Terms & Conditions</a></li>
+        <div class="max-w-7xl mx-auto px-6 py-1 flex justify-between items-center relative">
+            <div class="hidden md:block w-32"></div>
+
+            <ul class="hidden md:flex space-x-2 py-2 text-sm font-medium tracking-wide justify-center items-center flex-grow">
+                <li><a href="#" class="text-blue-600 px-4 py-2 rounded-lg bg-blue-50/50 dark:bg-slate-800 font-bold">Home</a></li>
+                <li><a href="#tab-section" onclick="showTab('about')" class="text-slate-600 hover:text-blue-600 px-4 py-2 transition dark:text-slate-300">About Us</a></li>
+                <li><a href="#store" class="text-slate-600 hover:text-blue-600 px-4 py-2 transition dark:text-slate-300">Books Store</a></li>
             </ul>
+
+            <div class="md:hidden flex items-center justify-between w-full py-2">
+                <span class="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">Menu</span>
+                <button onclick="toggleMobileMenu()" class="text-slate-700 dark:text-white hover:text-blue-600 focus:outline-none p-2 text-xl" title="Menu">
+                    <i class="fas fa-ellipsis-v"></i>
+                </button>
+            </div>
+
             <button onclick="openInstructionsOnly()" class="hidden md:inline-block bg-blue-600 text-white px-4 py-1.5 rounded-lg text-xs font-bold shadow-md shadow-blue-200 hover:bg-blue-700 transition flex-shrink-0">How to Download?</button>
+
+            <div id="mobileDropdownMenu" class="hidden absolute top-full left-0 w-full bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-700 shadow-xl flex flex-col p-4 space-y-3 z-50">
+                <a href="#" onclick="toggleMobileMenu()" class="text-blue-600 font-bold text-sm px-3 py-2 rounded-lg bg-blue-50 dark:bg-slate-800">Home</a>
+                <a href="#tab-section" onclick="showTab('about'); toggleMobileMenu();" class="text-slate-600 dark:text-slate-300 text-sm px-3 py-2 transition">About Us</a>
+                <a href="#store" onclick="toggleMobileMenu()" class="text-slate-600 dark:text-slate-300 text-sm px-3 py-2 transition">Books Store</a>
+                <hr class="border-slate-200 dark:border-slate-700">
+                <button onclick="openInstructionsOnly(); toggleMobileMenu();" class="w-full bg-blue-600 text-white text-center py-2 rounded-lg text-xs font-bold">How to Download?</button>
+            </div>
         </div>
     </nav>
 
-    <!-- HERO SECTION -->
     <header class="bg-white border-b overflow-hidden transition-colors">
         <div class="max-w-7xl mx-auto px-6 py-12 md:py-16 grid md:grid-cols-2 items-center gap-12">
             <div>
@@ -164,14 +199,12 @@
          </div>
     </header>
 
-    <!-- ANNOUNCEMENT BAR -->
     <div class="announcement-bar">
         <div class="announcement-inner">
             ✨ LAUNCH OFFER: 20% off use Promo Code (NEW20) • Get instant PDF Delivery after Payment • Verified Academic Content
         </div>
     </div>
 
-    <!-- MAIN PRODUCT SECTION (With Category Filter Tab Links) -->
     <main id="store" class="max-w-7xl mx-auto px-6 py-12">
         <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
             <div>
@@ -179,20 +212,27 @@
                 <p class="text-slate-500 mt-2">Instant access to high-quality PDF study guides.</p>
             </div>
             <div class="flex bg-white p-1.5 rounded-xl border border-slate-200 shadow-sm transition-colors">
-                <button onclick="filterCategory('all', this)" class="category-btn px-6 py-2 rounded-lg text-sm font-semibold bg-slate-900 text-white transition">All Books</button>
-                <button onclick="filterCategory('ug-nep', this)" class="category-btn px-6 py-2 rounded-lg text-sm font-semibold text-slate-600 hover:bg-slate-50 transition">UG-NEP</button>
+                <button id="catBtn-all" onclick="filterCategory('all', this)" class="category-btn px-6 py-2 rounded-lg text-sm font-semibold bg-slate-900 text-white transition">All Books</button>
+                <button id="catBtn-ug-nep" onclick="filterCategory('ug-nep', this)" class="category-btn px-6 py-2 rounded-lg text-sm font-semibold text-slate-600 hover:bg-slate-50 transition">UG-NEP</button>
             </div>
         </div>
 
+        <div id="searchEmptyState" class="hidden text-center py-16 max-w-md mx-auto">
+            <div class="w-16 h-16 bg-slate-100 dark:bg-slate-800 rounded-full flex items-center justify-center mx-auto mb-4 text-slate-400">
+                <i class="fas fa-book-open text-2xl"></i>
+            </div>
+            <h3 class="text-lg font-bold text-slate-900 dark:text-white">No items match your search</h3>
+            <p class="text-sm text-slate-500 mt-1">Double check spelling or swap book filter criteria settings above.</p>
+        </div>
+
         <div id="book-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            <!-- Book Card 1 -->
-            <div class="book-card bg-white rounded-2xl overflow-hidden flex flex-col transition-colors" data-category="ug-nep">
+            <div class="book-card bg-white rounded-2xl overflow-hidden flex flex-col transition-colors" data-category="ug-nep" data-searchable-keywords="hindi vyakaran hindi व्याकरण और संप्रेषण university updates team">
                 <div class="h-64 bg-slate-100 p-8 relative">
                     <img src="images/HVS.png" alt="Hindi" class="w-full h-full object-contain drop-shadow-xl" onerror="this.src='https://via.placeholder.com/200x280?text=Hindi+Vyakaran'">
                     <span class="absolute top-4 right-4 bg-green-500 text-white text-[10px] font-black px-2.5 py-1 rounded-full uppercase">PDF</span>
                 </div>
                 <div class="p-6 flex-grow flex flex-col">
-                    <h3 class="font-bold text-slate-800 leading-snug">हिंदी व्याकरण और संप्रेषण</h3>
+                    <h3 class="font-bold text-slate-800 leading-snug card-title">हिंदी व्याकरण और संप्रेषण</h3>
                     <p class="text-xs text-slate-400 mt-1 uppercase tracking-tighter">BY UNIVERSITY UPDATES</p>
                     <div class="mt-6 flex items-center justify-between">
                         <div class="flex flex-col">
@@ -202,19 +242,18 @@
                     </div>
                 </div>
                 <div class="p-5 pt-0 grid grid-cols-2 gap-2">
-                    <button onclick="openPreviewModal('हिंदी व्याकरण और संप्रेषण', 'previews/hvs-sample.pdf', '100% Quality', 'Hindi', 'PDF', 'https://universityupdates.pythonanywhere.com/')" class="text-xs font-bold py-2.5 bg-slate-100 text-slate-700 rounded-lg hover:bg-slate-200 transition">View Info</button>
+                    <button onclick="openPreviewModal('हिंदी व्याकरण और संप्रेषण', 'previews/hvs-sample.pdf', '100% Quality', 'Hindi', 'PDF', 'https://universityupdates.pythonanywhere.com/', 'University Updates Team', 'यह पुस्तक विश्वविद्यालय स्तर के राष्ट्रीय शिक्षा नीति (NEP) पाठ्यक्रम के अंतर्गत हिंदी व्याकरण और शुद्ध संप्रेषण कौशल को सरल रूप में समझाने के लिए तैयार की गई है।')" class="text-xs font-bold py-2.5 bg-slate-100 text-slate-700 rounded-lg hover:bg-slate-200 transition">View Info</button>
                     <button onclick="redirectBuy('https://universityupdates.pythonanywhere.com/')" class="text-xs font-bold py-2.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 shadow-lg shadow-blue-100 transition">Buy Now</button>
                 </div>
             </div>
 
-            <!-- Book Card 2 -->
-            <div class="book-card bg-white rounded-2xl overflow-hidden flex flex-col transition-colors" data-category="ug-nep">
+            <div class="book-card bg-white rounded-2xl overflow-hidden flex flex-col transition-colors" data-category="ug-nep" data-searchable-keywords="social responsibility community engagement civic english academic experts division">
                 <div class="h-64 bg-slate-100 p-8 relative">
                     <img src="images/SRCE.png" alt="Social Responsibility" class="w-full h-full object-contain drop-shadow-xl" onerror="this.src='https://via.placeholder.com/200x280?text=Social+Responsibility'">
                     <span class="absolute top-4 right-4 bg-green-500 text-white text-[10px] font-black px-2.5 py-1 rounded-full uppercase">PDF</span>
                 </div>
                 <div class="p-6 flex-grow flex flex-col">
-                    <h3 class="font-bold text-slate-800 leading-snug">Social Responsibility and Community Engagement (English)</h3>
+                    <h3 class="font-bold text-slate-800 leading-snug card-title">Social Responsibility and Community Engagement (English)</h3>
                     <p class="text-xs text-slate-400 mt-1 uppercase tracking-tighter">BY UNIVERSITY UPDATES</p>
                     <div class="mt-6 flex items-center justify-between">
                         <div class="flex flex-col">
@@ -224,19 +263,18 @@
                     </div>
                 </div>
                 <div class="p-5 pt-0 grid grid-cols-2 gap-2">
-                    <button onclick="openPreviewModal('Social Responsibility and Community Engagement', 'previews/srce-sample.pdf', '100% Quality', 'English', 'PDF', 'https://universityupdates.pythonanywhere.com/')" class="text-xs font-bold py-2.5 bg-slate-100 text-slate-700 rounded-lg hover:bg-slate-200 transition">View Info</button>
+                    <button onclick="openPreviewModal('Social Responsibility and Community Engagement', 'previews/missing-file.pdf', '100% Quality', 'English', 'PDF', 'https://universityupdates.pythonanywhere.com/', 'Academic Experts Division', 'An introductory guidebook designed to cover civic responsibility, framework parameters of NGO systems, and localized outreach initiatives.')" class="text-xs font-bold py-2.5 bg-slate-100 text-slate-700 rounded-lg hover:bg-slate-200 transition">View Info</button>
                     <button onclick="redirectBuy('https://universityupdates.pythonanywhere.com/')" class="text-xs font-bold py-2.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 shadow-lg shadow-blue-100 transition">Buy Now</button>
                 </div>
             </div>
 
-            <!-- Book Card 3 -->
-            <div class="book-card bg-white rounded-2xl overflow-hidden flex flex-col transition-colors" data-category="ug-nep">
+            <div class="book-card bg-white rounded-2xl overflow-hidden flex flex-col transition-colors" data-category="ug-nep" data-searchable-keywords="सामाजिक उत्तरदायित्व और सामुदायिक सहभागिता hindi samajik uttardayitwa uu editorial guild">
                 <div class="h-64 bg-slate-100 p-8 relative">
                     <img src="images/SRCEH.png" alt="Social Responsibility Hindi" class="w-full h-full object-contain drop-shadow-xl" onerror="this.src='https://via.placeholder.com/200x280?text=Social+Responsibility+Hindi'">
                     <span class="absolute top-4 right-4 bg-green-500 text-white text-[10px] font-black px-2.5 py-1 rounded-full uppercase">PDF</span>
                 </div>
                 <div class="p-6 flex-grow flex flex-col">
-                    <h3 class="font-bold text-slate-800 leading-snug">सामाजिक उत्तरदायित्व और सामुदायिक सहभागिता</h3>
+                    <h3 class="font-bold text-slate-800 leading-snug card-title">सामाजिक उत्तरदायित्व और सामुदायिक सहभागिता</h3>
                     <p class="text-xs text-slate-400 mt-1 uppercase tracking-tighter">BY UNIVERSITY UPDATES</p>
                     <div class="mt-6 flex items-center justify-between">
                         <div class="flex flex-col">
@@ -246,112 +284,118 @@
                     </div>
                 </div>
                 <div class="p-5 pt-0 grid grid-cols-2 gap-2">
-                    <button onclick="openPreviewModal('सामाजिक उत्तरदायित्व और सामुदायिक सहभागिता', 'previews/srceh-sample.pdf', '100% Quality', 'Hindi', 'PDF', 'https://universityupdates.pythonanywhere.com/')" class="text-xs font-bold py-2.5 bg-slate-100 text-slate-700 rounded-lg hover:bg-slate-200 transition">View Info</button>
+                    <button onclick="openPreviewModal('सामाजिक उत्तरदायित्व और सामुदायिक सहभागिता', 'previews/srceh-sample.pdf', '100% Quality', 'Hindi', 'PDF', 'https://universityupdates.pythonanywhere.com/', 'UU Editorial Guild', 'यह नोट्स सामुदायिक जुड़ाव, सामाजिक सेवा और नैतिक जिम्मेदारियों के विभिन्न सिद्धांतों को सहज हिंदी व्याख्याओं के माध्यम से छात्रों तक पहुंचाते हैं।')" class="text-xs font-bold py-2.5 bg-slate-100 text-slate-700 rounded-lg hover:bg-slate-200 transition">View Info</button>
                     <button onclick="redirectBuy('https://universityupdates.pythonanywhere.com/')" class="text-xs font-bold py-2.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 shadow-lg shadow-blue-100 transition">Buy Now</button>
                 </div>
             </div>
         </div>
     </main>
 
-    <!-- TAB INFRASTRUCTURE COMPONENT SECTION -->
     <section id="tab-section" class="bg-slate-900 text-white py-12">
         <div class="max-w-4xl mx-auto px-6">
             <div class="flex flex-wrap justify-center gap-4 mb-12">
                 <button onclick="showTab('instructions')" class="tab-btn border-b-2 border-blue-500 px-4 py-2 text-sm font-bold text-white">How to Buy</button>
-                <button onclick="showTab('about')" class="tab-btn border-b-2 border-transparent px-4 py-2 text-sm font-bold text-slate-400">About Books</button>
+                <button onclick="showTab('about')" class="tab-btn border-b-2 border-transparent px-4 py-2 text-sm font-bold text-slate-400">About Notes</button>
                 <button onclick="showTab('pp')" class="tab-btn border-b-2 border-transparent px-4 py-2 text-sm font-bold text-slate-400">Privacy Policy</button>
+                <button onclick="showTab('rp')" class="tab-btn border-b-2 border-transparent px-4 py-2 text-sm font-bold text-slate-400">Refund Policy</button>
                 <button onclick="showTab('terms')" class="tab-btn border-b-2 border-transparent px-4 py-2 text-sm font-bold text-slate-400">Terms & Conditions</button>
+                <button onclick="showTab('contact')" class="tab-btn border-b-2 border-transparent px-4 py-2 text-sm font-bold text-slate-400">Contact Us</button>
             </div>
             
             <div id="instructions" class="tab-content active space-y-4">
                 <h3 class="text-2xl font-bold heading-font">4-Step Simple Process</h3>
                 <ol class="space-y-4 text-slate-400">
-                    <li class="flex gap-4 items-start"><span class="bg-blue-600 text-white w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 font-bold text-xs mt-0.5">1</span> Choose your book and click "Buy Now" which redirects to our secure <strong>University Updates</strong> webpage.</li>
+                    <li class="flex gap-4 items-start"><span class="bg-blue-600 text-white w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 font-bold text-xs mt-0.5">1</span> Choose your notes and click "Buy Now" which redirects to our secure University Updates login webpage.</li>
                     <li class="flex gap-4 items-start"><span class="bg-blue-600 text-white w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 font-bold text-xs mt-0.5">2</span> Login or Register (If you are a new user).</li>
-                    <li class="flex gap-4 items-start"><span class="bg-blue-600 text-white w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 font-bold text-xs mt-0.5">3</span> Buy Book & Complete payment via UPI, Card or Netbanking.</li>
-                    <li class="flex gap-4 items-start"><span class="bg-blue-600 text-white w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 font-bold text-xs mt-0.5">4</span> After payment, Wait 5 seconds. The PDF will be available automatically in your login.</li>
-                </ol>
+                    <li class="flex gap-4 items-start"><span class="bg-blue-600 text-white w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 font-bold text-xs mt-0.5">3</span> Select Notes and click on Add to Cart then Checkout & Complete payment via UPI, Card or Netbanking.</li>
+                    <li class="flex gap-4 items-start"><span class="bg-blue-600 text-white w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 font-bold text-xs mt-0.5">4</span> After successful payment, Wait for 5 seconds. The PDF will be available automatically in your login.</li>
+                </ol> 
             </div>
             
             <div id="about" class="tab-content space-y-6">
                 <h3 class="text-2xl font-bold heading-font">Expertly Crafted Study Material</h3>
-                <p class="text-slate-400 leading-relaxed">Our books are specifically designed for university students following the <span class="text-white">New Education Policy (NEP)</span>. We focus on simplified explanations and exam-oriented summaries.</p>
-                <div class="grid grid-cols-2 gap-6 mt-8">
-                    <div class="bg-slate-800 p-4 rounded-xl">
-                        <i class="fas fa-check-circle text-blue-400 mb-2"></i>
-                        <h4 class="font-bold">Syllabus Aligned</h4>
-                        <p class="text-xs text-slate-400">Directly mapped to university guidelines.</p>
-                    </div>
-                    <div class="bg-slate-800 p-4 rounded-xl">
-                        <i class="fas fa-mobile-alt text-blue-400 mb-2"></i>
-                        <h4 class="font-bold">Mobile Friendly</h4>
-                        <p class="text-xs text-slate-400">Optimized for reading on phones and tablets.</p>
-                    </div>
-                </div>
+                <p class="text-slate-400 leading-relaxed">Our books are specifically designed for university students following the New Education Policy (NEP).</p>
             </div>
             
             <div id="terms" class="tab-content space-y-4">
-                <h3 class="text-2xl font-bold heading-font">Refunds & Usage</h3>
-                <div class="text-slate-400 text-sm space-y-3">
-                    <p>• <strong>Non-exclusive use:</strong> Content is for personal use only. Sharing, reselling, or commercial distribution is strictly prohibited.</p>
-                    <p>• <strong>Non-transferable:</strong> You can't transfer the E-Book to others.</p>
-                    <p>• Due to the nature of digital goods, we do not offer refunds once the download link is accessed.</p>
-                    <p>• <strong>No Editing:</strong> You can't edit, copy, annotate, or highlight the E-Book.</p>
-                    <p>• <strong>No Reproduction:</strong> You can't reproduce the E-Book in any form without written permission from the publisher.</p>
-                    <p>• If you face any payment issues, contact support via Telegram within 24 hours with your transaction ID.</p>
-                </div>
+                <h3 class="text-2xl font-bold heading-font">Terms & Conditions</h3>
+                <p class="text-slate-400 text-sm">• Authorized distribution, reproduction, or misuse of our content is strictly prohibited.</p>
+            </div>
+            
+            <div id="rp" class="tab-content space-y-4">
+                <h3 class="text-2xl font-bold heading-font">Refund Policy</h3>
+                <p class="text-slate-400 text-sm">• All refund requests must be submitted with valid proof of purchase parameters.</p>
+            </div>
+            
+            <div id="contact" class="tab-content space-y-4">
+                <h3 class="text-2xl font-bold heading-font">Contact Us</h3>
+                <p class="text-slate-400 text-sm">• For any support, feel free to reach out to us via E-Mail at universityupdates08@gmail.com.</p>
             </div>
             
             <div id="pp" class="tab-content space-y-4">
                 <h3 class="text-2xl font-bold heading-font">Privacy Policy</h3>
-                <div class="text-slate-400 text-sm space-y-3">
-                    <p>• You agree to share information entered on this payment page with UNIVERSITY UPDATES and Razorpay.</p>
-                </div>
+                <p class="text-slate-400 text-sm">We are committed to protecting the privacy of users who access the website.</p>
             </div>
         </div>
     </section>
 
-    <!-- VIEW PREVIEW DATA MODAL -->
     <div id="previewModal">
-        <div class="bg-white rounded-2xl w-full max-w-2xl overflow-hidden flex flex-col md:flex-row shadow-2xl relative transition-colors">
-            <button onclick="closeModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-900 text-xl z-10">&times;</button>
-            <div class="md:w-1/2 bg-slate-100 p-4 flex items-center justify-center min-h-[300px]">
-                <div id="modalLoader" class="loader hidden"></div>
-                <iframe id="pdfPreview" src="" class="w-full h-full border-0 hidden rounded shadow-md" title="PDF Preview"></iframe>
-            </div>
-            <div class="md:w-1/2 p-8">
-                <h3 id="modalTitle" class="heading-font text-xl font-bold text-slate-900 mb-4">Book Details</h3>
-                <div class="space-y-3 mb-8">
-                    <div class="flex justify-between text-xs border-b pb-2"><span class="text-slate-400">Quality</span><span id="modalQuality" class="font-bold text-slate-900"></span></div>
-                    <div class="flex justify-between text-xs border-b pb-2"><span class="text-slate-400">Language</span><span id="modalLang" class="font-bold text-slate-900"></span></div>
-                    <div class="flex justify-between text-xs border-b pb-2"><span class="text-slate-400">Format</span><span id="modalFormat" class="font-bold text-blue-600"></span></div>
+        <div class="bg-white rounded-2xl w-full max-w-3xl overflow-hidden flex flex-col md:flex-row shadow-2xl relative transition-colors dark:bg-slate-900">
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-900 dark:hover:text-white text-2xl z-20">&times;</button>
+            
+            <div class="md:w-1/2 bg-slate-100 dark:bg-slate-800 p-4 flex flex-col items-center justify-center min-h-[350px] relative border-b md:border-b-0 md:border-r border-slate-200 dark:border-slate-700">
+                <div id="modalLoader" class="loader modal-hidden absolute"></div>
+                
+                <div id="noPreviewFallback" class="modal-hidden flex flex-col items-center justify-center text-center p-6 text-slate-400 dark:text-slate-500">
+                    <i class="fas fa-file-pdf text-5xl mb-3 text-slate-300 dark:text-slate-600"></i>
+                    <p class="text-sm font-semibold">No preview available</p>
+                    <p class="text-xs mt-1">Full content is unlocked immediately upon purchase execution.</p>
                 </div>
-                <div class="bg-blue-50 p-4 rounded-xl mb-6">
-                    <p class="text-[11px] text-blue-700 leading-relaxed font-medium"><i class="fas fa-info-circle mr-1"></i> Preview shows selected pages only. Full content is delivered immediately after purchase.</p>
+
+                <iframe id="pdfPreview" src="" class="w-full h-full min-h-[320px] border-0 modal-hidden rounded shadow-md" title="PDF Preview"></iframe>
+            </div>
+            
+            <div class="md:w-1/2 p-8 flex flex-col justify-between">
+                <div>
+                    <h3 id="modalTitle" class="heading-font text-xl font-bold text-slate-900 mb-4">Book Details</h3>
+                    
+                    <div class="space-y-3 mb-6">
+                        <div class="flex justify-between text-xs border-b pb-2"><span class="text-slate-400">Quality</span><span id="modalQuality" class="font-bold text-slate-900"></span></div>
+                        <div class="flex justify-between text-xs border-b pb-2"><span class="text-slate-400">Language</span><span id="modalLang" class="font-bold text-slate-900"></span></div>
+                        <div class="flex justify-between text-xs border-b pb-2"><span class="text-slate-400">Format</span><span id="modalFormat" class="font-bold text-blue-600"></span></div>
+                        <div class="flex justify-between text-xs border-b pb-2"><span class="text-slate-400">Made by:</span><span id="modalMadeBy" class="font-bold text-slate-900"></span></div>
+                    </div>
+
+                    <div class="mb-6">
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">About book:</h4>
+                        <p id="modalAboutBook" class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed max-h-24 overflow-y-auto pr-1"></p>
+                    </div>
+
+                    <div class="bg-blue-50 dark:bg-slate-800/50 p-3 rounded-xl mb-6">
+                        <p class="text-[11px] text-blue-700 dark:text-blue-400 leading-relaxed font-medium"><i class="fas fa-info-circle mr-1"></i> Preview shows selected pages only. Full content is delivered immediately after purchase.</p>
+                    </div>
                 </div>
                 <button id="modalBuyBtn" class="w-full bg-blue-600 text-white py-3 rounded-xl font-bold hover:bg-blue-700 transition">Get Full Access Now</button>
             </div>
         </div>
     </div>
 
-    <!-- INSTRUCTIONS ENTRY DIALOG MODAL -->
     <div id="instructionsModal" style="display: none; position: fixed; inset: 0; background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(4px); z-index: 1001; align-items: center; justify-content: center; padding: 20px;">
-        <div class="bg-white rounded-2xl w-full max-w-lg overflow-hidden shadow-2xl relative p-8 transition-colors">
-            <button onclick="closeInstructions()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-900 text-2xl">&times;</button>
+        <div class="bg-white rounded-2xl w-full max-w-lg overflow-hidden shadow-2xl relative p-8 transition-colors dark:bg-slate-900">
+            <button onclick="closeInstructions()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-900 dark:hover:text-white text-2xl">&times;</button>
             <h3 id="modalHeading" class="heading-font text-2xl font-bold text-slate-900 mb-6 flex items-center">
                 <i class="fas fa-download mr-3 text-blue-600"></i>How to Download?
             </h3>
-            <div id="modalContent" class="space-y-6 text-slate-700"></div>
-            <button id="proceedBuyBtn" class="w-full mt-8 bg-slate-900 text-white py-3 rounded-xl font-bold hover:bg-slate-800 transition">Proceed to Payment</button>
+            <div id="modalContent" class="space-y-6 text-slate-700 dark:text-slate-300"></div>
+            <button id="proceedBuyBtn" class="w-full mt-8 bg-slate-900 text-white py-3 rounded-xl font-bold hover:bg-slate-800 transition">Proceed to Buy</button>
         </div>
     </div>
 
-    <!-- FOOTER TERMINAL CONTAINER -->
     <footer class="bg-white py-8 border-t border-slate-100 transition-colors">
-        <div class="max-w-7xl mx-auto px-6 text-center">
+        <div class="max-w-8xl mx-auto px-6 text-center">
             <img src="images/Universityupdates.png" class="h-12 mx-auto grayscale opacity-50 mb-6" alt="Footer Logo" onerror="this.src='https://via.placeholder.com/150x50?text=University+Updates'">
             <p class="text-slate-500 text-sm max-w-md mx-auto">Helping students bridge the gap between learning and excellence. Trusted by thousands of university students.</p>
-            <div class="mt-8 pt-8 border-t border-slate-100 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="mt-8 pt-8 border-t border-slate-100 flex flex-col md:flex-row justify-between items-center gap-2">
                 <p class="text-xs text-slate-400">© 2026 | University Updates. All academic content is copyrighted.</p>
                 <div class="flex gap-6 text-xs font-semibold text-slate-600 uppercase tracking-widest">
                     <a href="https://t.me/HelpforDMBot" class="hover:text-blue-600 transition">Help Desk</a>
@@ -360,11 +404,75 @@
         </div>
     </footer>
 
-    <!-- INTERACTIVE SCRIPTS CONTROL ENGINE -->
     <script>
         let currentBuyUrl = "";
+        let selectedCategory = "all";
 
-        // Dark Mode Controller Function Hook
+        // FUNCTIONALITY: Engine logic to dynamically filter grid content using header search input keywords
+        function executeLiveSearch() {
+            const searchQuery = document.getElementById('globalSearchInput').value.toLowerCase().trim();
+            const books = document.querySelectorAll('.book-card');
+            const emptyState = document.getElementById('searchEmptyState');
+            let visibleCount = 0;
+
+            books.forEach(book => {
+                const bookCategory = book.getAttribute('data-category');
+                const keywords = book.getAttribute('data-searchable-keywords').toLowerCase();
+                
+                // Matches active filter criteria tag AND matching keyword criteria strings
+                const matchCategory = (selectedCategory === 'all' || bookCategory === selectedCategory);
+                const matchSearch = (searchQuery === "" || keywords.includes(searchQuery));
+
+                if (matchCategory && matchSearch) {
+                    book.style.setProperty('display', 'flex', 'important');
+                    visibleCount++;
+                } else {
+                    book.style.setProperty('display', 'none', 'important');
+                }
+            });
+
+            // Toggle empty placeholder view state when visibility array metrics equal zero
+            if (visibleCount === 0) {
+                emptyState.classList.remove('hidden');
+            } else {
+                emptyState.classList.add('hidden');
+            }
+        }
+
+        function filterCategory(category, btn) {            
+            selectedCategory = category;
+            document.querySelectorAll('.category-btn').forEach(b => {                
+                b.classList.remove('bg-slate-900', 'text-white');                
+                b.classList.add('text-slate-600');            
+            });            
+            btn.classList.add('bg-slate-900', 'text-white');            
+            
+            // Re-run dynamic search parameters matrix to safely balance categories and strings
+            executeLiveSearch();
+        }
+
+        function toggleUtilityDropdown() {
+            const dropdown = document.getElementById('utilityMobileDropdown');
+            const arrow = document.getElementById('utilityArrowIcon');
+            
+            if (dropdown.classList.contains('hidden')) {
+                dropdown.classList.remove('hidden');
+                arrow.classList.add('rotate-180');
+            } else {
+                dropdown.classList.add('hidden');
+                arrow.classList.remove('rotate-180');
+            }
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileDropdownMenu');
+            if (menu.classList.contains('hidden')) {
+                menu.classList.remove('hidden');
+            } else {
+                menu.classList.add('hidden');
+            }
+        }
+
         function toggleDarkMode() {
             const rootAttr = document.documentElement.getAttribute('data-theme');
             if (rootAttr === 'dark') {
@@ -374,7 +482,6 @@
             }
         }
 
-        // Font Adjustment Layout Matrix Controller Engine
         let baseSize = 16;
         function adjustFont(val) {
             baseSize += val;
@@ -385,19 +492,6 @@
         function resetFont() {
             baseSize = 16;
             document.documentElement.style.setProperty('--base-font-size', '16px');
-        }
-
-        function filterCategory(category, btn) {            
-            document.querySelectorAll('.category-btn').forEach(b => {                
-                b.classList.remove('bg-slate-900', 'text-white');                
-                b.classList.add('text-slate-600');            
-            });            
-            btn.classList.add('bg-slate-900', 'text-white');            
-            const books = document.querySelectorAll('.book-card');            
-            books.forEach(book => {                
-                const cat = book.getAttribute('data-category');                
-                book.style.display = (category === 'all' || cat === category) ? 'flex' : 'none';            
-            });        
         }
 
         function showTab(tabId) {            
@@ -422,10 +516,10 @@
             document.getElementById('modalHeading').innerHTML = '<i class="fas fa-download mr-3 text-blue-600"></i>How to Download?';            
             document.getElementById('modalContent').innerHTML = `                
                 <div class="space-y-4">                    
-                    <p class="text-sm">1. Choose the book and click on <strong>"Buy Now"</strong> to go to the <strong>University Updates</strong> official secure webpage.</p>                    
-                    <p class="text-sm">2. Click on Register (If you are a new user)</p>                    
-                    <p class="text-sm">3. Buy Book & Complete payment via <strong>UPI, Card or Netbanking.</strong></p>                    
-                    <p class="text-sm">4. After payment, <strong>Wait 5 seconds</strong>. The PDF will be available automatically in your login. Do not refresh!</p>                
+                    <p class="text-sm">1. Choose your notes and click "Buy Now" which redirects to our secure University Updates login webpage.</p>                    
+                    <p class="text-sm">2. Click on Register (If you are a new user) or Login.</p>                    
+                    <p class="text-sm">3. elect Notes and click on Add to Cart then Checkout & Complete payment via UPI, Card or Netbanking.</p>                    
+                    <p class="text-sm">4. After successful payment, <strong>Wait for 5 seconds</strong>. The PDF will be available automatically in your login. Do not refresh!</p>                
                 </div>            `;            
             const btn = document.getElementById('proceedBuyBtn');            
             btn.innerText = "Got it, Thanks!";            
@@ -434,6 +528,7 @@
         }
 
         function redirectBuy(url) {            
+            alert("Login is required to buy.");
             if(url && url !== '#') {                
                 window.location.href = url;            
             } else {                
@@ -441,24 +536,53 @@
             }        
         }
 
-        function openPreviewModal(title, pdfSrc, quality, lang, format, buyUrl) {            
+        function openPreviewModal(title, pdfSrc, quality, lang, format, buyUrl, madeBy, aboutBook) {            
             const modal = document.getElementById('previewModal');            
             const loader = document.getElementById('modalLoader');            
-            const iframe = document.getElementById('pdfPreview');                        
+            const iframe = document.getElementById('pdfPreview');            
+            const fallback = document.getElementById('noPreviewFallback');
+                        
             document.getElementById('modalTitle').innerText = title;            
             document.getElementById('modalQuality').innerText = quality;            
             document.getElementById('modalLang').innerText = lang;            
             document.getElementById('modalFormat').innerText = format;            
-            document.getElementById('modalBuyBtn').onclick = () => redirectBuy(buyUrl);                        
+            document.getElementById('modalMadeBy').innerText = madeBy || "University Updates";            
+            document.getElementById('modalAboutBook').innerText = aboutBook || "No description provided.";            
             
-            loader.classList.remove('hidden');            
-            iframe.classList.add('hidden');            
-            iframe.src = pdfSrc;                        
+            document.getElementById('modalBuyBtn').onclick = () => {
+                closeModal();
+                redirectBuy(buyUrl);
+            };            
             
-            iframe.onload = function() {                
-                loader.classList.add('hidden');                
-                iframe.classList.remove('hidden');            
-            };                        
+            loader.classList.remove('modal-hidden');            
+            iframe.classList.add('modal-hidden');            
+            fallback.classList.add('modal-hidden');
+            
+            let connectionTimeout = setTimeout(() => {
+                if (!iframe.src.includes(pdfSrc) || iframe.classList.contains('modal-hidden')) {
+                    loader.classList.add('modal-hidden');
+                    iframe.classList.add('modal-hidden');
+                    fallback.classList.remove('modal-hidden');
+                }
+            }, 3500);
+
+            iframe.src = pdfSrc;            
+                        
+            iframe.onload = function() {            
+                clearTimeout(connectionTimeout);
+                try {
+                    if (iframe.contentWindow.location.href === "about:blank" || pdfSrc.includes("missing-file")) {
+                        throw new Error("Missing File Resource");
+                    }
+                    loader.classList.add('modal-hidden');            
+                    iframe.classList.remove('modal-hidden');            
+                } catch(err) {
+                    loader.classList.add('modal-hidden');            
+                    iframe.classList.add('modal-hidden');            
+                    fallback.classList.remove('modal-hidden');
+                }
+            };            
+            
             modal.style.display = 'flex';            
             document.body.style.overflow = 'hidden';        
         }
@@ -466,8 +590,10 @@
         function closeModal() {            
             document.getElementById('previewModal').style.display = 'none';            
             document.getElementById('pdfPreview').src = "";            
-            document.getElementById('modalLoader').classList.add('hidden');            
-            document.body.style.overflow = 'auto';        }
+            document.getElementById('modalLoader').classList.add('modal-hidden');            
+            document.getElementById('noPreviewFallback').classList.add('modal-hidden');            
+            document.body.style.overflow = 'auto';        
+        }
 
         function closeInstructions() {            
             document.getElementById('instructionsModal').style.display = 'none';            
