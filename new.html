@@ -7,11 +7,8 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
-      <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
     <style>
         :root { 
@@ -19,388 +16,142 @@
             --accent: #ef4444; 
             --slate-bg: #f8fafc; 
             --base-font-size: 16px;
-        }
-        
-        [data-theme="dark"] {
-            --slate-bg: #0f172a;
-        }
-
-        html {
-            font-size: var(--base-font-size);
-        }
-
-        body { 
-            font-family: "Inter", sans-serif; 
-            background-color: var(--slate-bg); 
-            color: #1e293b; 
-            scroll-behavior: smooth; 
-            transition: background-color 0.3s, color 0.3s;
-        }
-        
-        [data-theme="dark"] body {
-            color: #f1f5f9;
-        }
-        [data-theme="dark"] .bg-white {
-            background-color: #1e293b !important;
-        }
-        [data-theme="dark"] .text-slate-900, [data-theme="dark"] .text-slate-800, [data-theme="dark"] .text-slate-950 {
-            color: #f8fafc !important;
-        }
-        [data-theme="dark"] .text-slate-500, [data-theme="dark"] .text-slate-600 {
-            color: #cbd5e1 !important;
-        }
-        [data-theme="dark"] .border-slate-200, [data-theme="dark"] .border-b, [data-theme="dark"] border-t, [data-theme="dark"] .border-slate-100 {
-            border-color: #334155 !important;
-        }
-
-        .heading-font { font-family: "Poppins", sans-serif; }
-        .glass-nav { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(226, 232, 240, 0.8); }
-        [data-theme="dark"] .glass-nav { background: rgba(30, 41, 59, 0.8); border-bottom: 1px solid rgba(51, 65, 85, 0.8); }
-        
-        .book-card { transition: transform 0.2s ease, box-shadow 0.2s ease; border: 1px solid #e2e8f0; }
-        [data-theme="dark"] .book-card { border-color: #334155; }
-        .book-card:hover { transform: translateY(-4px); box-shadow: 0 12px 24px -10px rgba(0,0,0,0.1); }
-        
-        .announcement-bar { background: linear-gradient(90deg, #1e293b 0%, #334155 100%); color: white; font-size: 0.75rem; height: 35px; display: flex; align-items: center; overflow: hidden; }
-        .announcement-inner { white-space: nowrap; animation: ticker 30s linear infinite; display: inline-block; }
-        @keyframes ticker { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
-        
-        .tab-content { display: none; }
-        .tab-content.active { display: block; }
-        
-        .modal-hidden { display: none !important; }
-                
-        #previewModal { display: none; position: fixed; inset: 0; background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(4px); z-index: 1000; align-items: center; justify-content: center; padding: 20px; }
-        .loader { border: 3px solid #f3f3f3; border-top: 3px solid var(--primary); border-radius: 50%; width: 30px; height: 30px; animation: spin 1s linear infinite; }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-
-        .search-dropdown-wrapper {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            right: 0;
-            margin-top: 0.5rem;
-            max-height: 320px;
-            overflow-y: auto;
-            z-index: 110;
-            border-radius: 1rem;
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-        }
-    </style>
-     <style>
-        :root {
-            --primary: #5850ec;
             --primary-light: #eef2ff;
-            --text-dark: #1f2937;
+            --text-dark: #1e293b;
             --text-muted: #6b7280;
-            --bg-light: #f9fafb;
             --white: #ffffff;
-            
-            /* Feature colors */
             --color-purple: #8b5cf6;
             --color-green: #10b981;
             --color-amber: #f59e0b;
             --color-blue: #3b82f6;
+            --hero-grad-start: #f6f8ff;
+            --hero-grad-end: #f4f1fe;
         }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
+        [data-theme="dark"] {
+            --slate-bg: #0f172a;
+            --text-dark: #f8fafc;
+            --text-muted: #cbd5e1;
+            --white: #1e293b;
+            --hero-grad-start: #1e293b;
+            --hero-grad-end: #0f172a;
         }
-
-        body {
-            background-color: var(--bg-light);
-            color: var(--text-dark);
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { font-size: var(--base-font-size); }
+        body { 
+            font-family: "Inter", sans-serif; 
+            background-color: var(--slate-bg); 
+            color: var(--text-dark); 
+            scroll-behavior: smooth; 
+            transition: background-color 0.3s, color 0.3s;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
         }
-
-        
-
-        /* --- MAIN HERO SECTION --- */
-        .main-container {
-            max-width: 1400px;
-            width: 90%;
-            margin: 2rem auto;
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
+        [data-theme="dark"] .bg-white { background-color: #1e293b !important; }
+        [data-theme="dark"] .text-slate-900, [data-theme="dark"] .text-slate-800, [data-theme="dark"] .text-slate-950, [data-theme="dark"] .heading-font { color: #f8fafc !important; }
+        [data-theme="dark"] .text-slate-500, [data-theme="dark"] .text-slate-600 { color: #cbd5e1 !important; }
+        [data-theme="dark"] .border-slate-200, [data-theme="dark"] .border-b, [data-theme="dark"] .border-t, [data-theme="dark"] .border-slate-100 { border-color: #334155 !important; }
+        .heading-font { font-family: "Poppins", sans-serif; }
+        .glass-nav { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(226, 232, 240, 0.8); }
+        [data-theme="dark"] .glass-nav { background: rgba(30, 41, 59, 0.8); border-bottom: 1px solid rgba(51, 65, 85, 0.8); }
+        .book-card { transition: transform 0.2s ease, box-shadow 0.2s ease; border: 1px solid #e2e8f0; width: 100%; }
+        [data-theme="dark"] .book-card { border-color: #334155; }
+        .book-card:hover { transform: translateY(-4px); box-shadow: 0 12px 24px -10px rgba(0,0,0,0.1); }
+        .announcement-bar { background: linear-gradient(90deg, #1e293b 0%, #334155 100%); color: white; font-size: 0.75rem; height: 35px; display: flex; align-items: center; overflow: hidden; }
+        .announcement-inner { white-space: nowrap; animation: ticker 30s linear infinite; display: inline-block; }
+        @keyframes ticker { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        .modal-hidden { display: none !important; }
+        #previewModal { display: none; position: fixed; inset: 0; background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(4px); z-index: 1000; align-items: center; justify-content: center; padding: 20px; }
+        .loader { border: 3px solid #f3f3f3; border-top: 3px solid var(--primary); border-radius: 50%; width: 30px; height: 30px; animation: spin 1s linear infinite; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        .search-dropdown-wrapper {
+            position: absolute; top: 100%; left: 0; right: 0; margin-top: 0.5rem; max-height: 320px; overflow-y: auto; z-index: 110; border-radius: 1rem;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
         }
-
+        .main-container { max-width: 1400px; width: 90%; margin: 0 auto 2rem auto; display: flex; flex-direction: column; gap: 2rem; }
         .hero-banner {
-            background: linear-gradient(100deg, #f6f8ff 0%, #f4f1fe 100%);
-            border-radius: 24px;
-            padding: 4rem 4% 0 4%;
-            display: grid;
-            grid-template-columns: 1.1fr 0.9fr;
-            align-items: center;
-            position: relative;
-            overflow: hidden;
+            background: linear-gradient(100deg, var(--hero-grad-start) 0%, var(--hero-grad-end) 100%);
+            padding: 4rem 5% 6rem 5%; display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 2rem; align-items: center; position: relative; overflow: hidden; width: 100%;
+            border-bottom: 1px solid rgba(226, 232, 240, 0.5);
         }
-
-        .hero-text {
-            padding-bottom: 4rem;
-        }
-
-        .hero-text h3 {
-            color: var(--text-muted);
-            font-size: 1.1rem;
-            font-weight: 500;
-            margin-bottom: 1rem;
-        }
-
-        .hero-text h1 {
-            font-size: 3.5rem;
-            font-weight: 800;
-            line-height: 1.15;
-            color: var(--text-dark);
-            margin-bottom: 1.5rem;
-        }
-
-        .hero-text h1 span.accent {
-            color: var(--primary);
-        }
-
-        .hero-text p {
-            color: var(--text-muted);
-            font-size: 1.1rem;
-            line-height: 1.5;
-            margin-bottom: 2.5rem;
-            max-width: 450px;
-        }
-
-        .cta-group {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 3.5rem;
-        }
-
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.8rem 1.8rem;
-            border-radius: 12px;
-            font-weight: 600;
-            font-size: 0.95rem;
-            text-decoration: none;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .btn-primary {
-            background-color: var(--primary);
-            color: var(--white);
-            border: none;
-            box-shadow: 0 4px 14px rgba(88, 80, 236, 0.25);
-        }
-
-        .btn-primary:hover {
-            background-color: #4338ca;
-        }
-
-        .btn-secondary {
-            background-color: var(--white);
-            color: var(--text-dark);
-            border: 1px solid #e5e7eb;
-        }
-
-        .btn-secondary:hover {
-            background-color: #f9fafb;
-        }
-
-        /* Mini features */
-        .hero-features {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 1.5rem;
-        }
-
-        .feat-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 0.75rem;
-        }
-
-        .feat-icon-box {
-            padding: 0.5rem;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
+        [data-theme="dark"] .hero-banner { border-bottom-color: rgba(51, 65, 85, 0.5); }
+        .hero-text { padding-bottom: 0; }
+        .hero-text h1 { font-size: 3.5rem; font-weight: 800; line-height: 1.15; color: var(--text-dark); margin-bottom: 1.5rem; }
+        .hero-text h1 span.accent { color: var(--primary); }
+        .hero-text p { color: var(--text-muted); font-size: 1.1rem; line-height: 1.5; margin-bottom: 2.5rem; max-width: 450px; }
+        .cta-group { display: flex; gap: 1rem; margin-bottom: 3.5rem; }
+        .btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.8rem 1.8rem; border-radius: 12px; font-weight: 600; font-size: 0.95rem; text-decoration: none; cursor: pointer; transition: all 0.2s ease; }
+        .btn-primary { background-color: var(--primary); color: #ffffff; border: none; box-shadow: 0 4px 14px rgba(88, 80, 236, 0.25); }
+        .btn-primary:hover { background-color: #4338ca; }
+        .btn-secondary { background-color: var(--white); color: var(--text-dark); border: 1px solid #e5e7eb; }
+        [data-theme="dark"] .btn-secondary { border-color: #475569; }
+        .btn-secondary:hover { background-color: #f9fafb; }
+        [data-theme="dark"] .btn-secondary:hover { background-color: #334155; }
+        .hero-features { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; width: 100%; }
+        .feat-item { display: flex; align-items: flex-start; gap: 0.5rem; min-w: 0; }
+        .feat-icon-box { padding: 0.5rem; border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
         .feat-item.easy .feat-icon-box { background-color: #f5f3ff; color: var(--color-purple); }
+        [data-theme="dark"] .feat-item.easy .feat-icon-box { background-color: #312e81; }
         .feat-item.sync .feat-icon-box { background-color: #ecfdf5; color: var(--color-green); }
+        [data-theme="dark"] .feat-item.sync .feat-icon-box { background-color: #064e3b; }
         .feat-item.secure .feat-icon-box { background-color: #fffbeb; color: var(--color-amber); }
+        [data-theme="dark"] .feat-item.secure .feat-icon-box { background-color: #78350f; }
         .feat-item.update .feat-icon-box { background-color: #eff6ff; color: var(--color-blue); }
-
-        .feat-info h4 {
-            font-size: 0.85rem;
-            font-weight: 600;
-            margin-bottom: 0.2rem;
-        }
-
-        .feat-info p {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            margin: 0;
-            line-height: 1.3;
-        }
-
-        /* --- GRAPHIC AREA WITH ABSTRACT LINES --- */
-        .hero-graphic {
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: flex-end;
-            height: 100%;
-            align-self: flex-end;
-        }
-
-        .abstract-bg-svg {
-            position: absolute;
-            top: -10%;
-            left: -10%;
-            width: 120%;
-            height: 120%;
-            z-index: 1;
-            pointer-events: none;
-        }
-
-        .mock-character-img {
-            position: relative;
-            z-index: 2;
-            width: 100%;
-            max-width: 440px;
-            height: auto;
-            display: block;
-            filter: drop-shadow(0px 15px 30px rgba(0,0,0,0.08));
-        }
-
-        /* Decorative Sparkles */
-        .sparkle {
-            position: absolute;
-            color: #c084fc;
-            opacity: 0.6;
-            z-index: 1;
-            font-size: 1.2rem;
-        }
+        [data-theme="dark"] .feat-item.update .feat-icon-box { background-color: #1e3a8a; }
+        .feat-info { min-w: 0; }
+        .feat-info h4 { font-size: 0.85rem; font-weight: 600; margin-bottom: 0.2rem; color: var(--text-dark); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .feat-info p { font-size: 0.75rem; color: var(--text-muted); margin: 0; line-height: 1.3; overflow: hidden; text-overflow: ellipsis; }
+        .hero-graphic { position: relative; display: flex; justify-content: center; align-items: flex-end; height: 100%; width: 100%; }
+        .abstract-bg-svg { position: absolute; top: -10%; left: -10%; width: 120%; height: 120%; z-index: 1; pointer-events: none; }
+        [data-theme="dark"] .abstract-bg-svg path { stroke: #334155; }
+        .mock-character-img { position: relative; z-index: 2; width: 100%; max-width: 520px; height: auto; display: block; filter: drop-shadow(0px 15px 30px rgba(0,0,0,0.08)); margin: 0 auto; }
+        .sparkle { position: absolute; color: #c084fc; opacity: 0.6; z-index: 1; font-size: 1.2rem; }
         .sp-1 { top: 15%; left: 5%; }
         .sp-2 { top: 45%; left: -8%; font-size: 1.5rem; }
         .sp-3 { top: 40%; right: 5%; }
-
-        /* Floating UI Nodes */
-        .floating-node {
-            position: absolute;
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            padding: 12px;
-            border-radius: 16px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04), inset 0 0 0 1px rgba(255,255,255,0.6);
-            z-index: 3;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: transform 0.3s ease;
-        }
-        
-        .floating-node:hover {
-            transform: translateY(-50%) scale(1.05) !important;
-        }
-        
+        .floating-node { position: absolute; background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); padding: 12px; border-radius: 16px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04), inset 0 0 0 1px rgba(255,255,255,0.6); z-index: 3; display: flex; align-items: center; justify-content: center; transition: transform 0.3s ease; }
+        [data-theme="dark"] .floating-node { background: rgba(30, 41, 59, 0.85); box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+        .floating-node:hover { transform: translateY(-50%) scale(1.05) !important; }
         .fn-1 { top: 25%; left: 12%; color: var(--color-purple); transform: translateY(-50%); }
         .fn-2 { top: 45%; left: -2%; color: var(--color-amber); transform: translateY(-50%); }
         .fn-3 { top: 32%; right: 2%; color: var(--color-green); transform: translateY(-50%); }
         .fn-4 { top: 60%; right: -5%; color: var(--color-blue); transform: translateY(-50%); }
-
-        /* --- STATS FOOTER ROW --- */
-        .stats-row {
-            background-color: var(--white);
-            border-radius: 20px;
-            padding: 1.5rem 2rem;
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+        .stats-row { 
+            background-color: var(--white); border-radius: 20px; padding: 1.5rem 2rem; display: grid; grid-template-columns: repeat(4, 1fr); 
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+            margin-top: -3.5rem; position: relative; z-index: 10;
+            border: 1px solid rgba(226, 232, 240, 0.8);
         }
-
-        .stat-card {
-            display: flex;
-            align-items: center;
-            gap: 1.25rem;
-            padding: 0.5rem 1.5rem;
-        }
-
-        .stat-card:not(:last-child) {
-            border-right: 1px solid #f3f4f6;
-        }
-
-        .stat-icon-wrapper {
-            width: 48px;
-            height: 48px;
-            border-radius: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
+        [data-theme="dark"] .stats-row { border-color: rgba(51, 65, 85, 0.8); }
+        .stat-card { display: flex; align-items: center; gap: 1.25rem; padding: 0.5rem 1.5rem; }
+        .stat-card:not(:last-child) { border-right: 1px solid #f3f4f6; }
+        [data-theme="dark"] .stat-card:not(:last-child) { border-right-color: #334155; }
+        .stat-icon-wrapper { width: 48px; height: 48px; border-radius: 14px; display: flex; align-items: center; justify-content: center; }
         .sc-notes .stat-icon-wrapper { background-color: #f3e8ff; color: var(--color-purple); }
+        [data-theme="dark"] .sc-notes .stat-icon-wrapper { background-color: #312e81; }
         .sc-notebooks .stat-icon-wrapper { background-color: #d1fae5; color: var(--color-green); }
+        [data-theme="dark"] .sc-notebooks .stat-icon-wrapper { background-color: #064e3b; }
         .sc-tags .stat-icon-wrapper { background-color: #fef3c7; color: var(--color-amber); }
+        [data-theme="dark"] .sc-tags .stat-icon-wrapper { background-color: #78350f; }
         .sc-reminders .stat-icon-wrapper { background-color: #dbeafe; color: var(--color-blue); }
-
-        .stat-data h2 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--text-dark);
-            min-width: 60px; /* Prevents text shifting during animation */
+        [data-theme="dark"] .sc-reminders .stat-icon-wrapper { background-color: #1e3a8a; }
+        .stat-data h2 { font-size: 1.5rem; font-weight: 700; color: var(--text-dark); min-width: 60px; }
+        .stat-data p { font-size: 0.85rem; color: var(--text-muted); font-weight: 500; }
+        
+        @media (max-width: 1024px) {
+            .hero-banner { grid-template-columns: 1fr; padding-bottom: 5rem; text-align: center; }
+            .hero-text p { margin-left: auto; margin-right: auto; }
+            .cta-group { justify-content: center; }
+            .hero-features { grid-template-columns: repeat(2, 1fr); gap: 1.25rem; }
+            .stats-row { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+            .stat-card:not(:last-child) { border-right: none; }
         }
-
-        .stat-data p {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            font-weight: 500;
-        }
-
-        /* Responsive Breakpoints */
-        @media (max-width: 1100px) {
-            .hero-banner {
-                grid-template-columns: 1fr;
-                padding-bottom: 4rem;
-            }
-            .hero-text {
-                padding-bottom: 0;
-            }
-            .hero-graphic {
-                display: none;
-            }
-            .stats-row {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 1.5rem;
-            }
-            .stat-card:not(:last-child) {
-                border-right: none;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .nav-center {
-                display: none;
-            }
-            .hero-features {
-                grid-template-columns: 1fr;
-                gap: 1rem;
-            }
-            .stats-row {
-                grid-template-columns: 1fr;
-            }
-            .hero-text h1 {
-                font-size: 2.6rem;
-            }
+        @media (max-width: 640px) {
+            .hero-features { grid-template-columns: 1fr; gap: 1rem; }
+            .stats-row { grid-template-columns: 1fr; margin-top: -4.5rem; }
+            .hero-text h1 { font-size: 2.4rem; }
         }
     </style>
 </head>
@@ -520,91 +271,91 @@
         </div>
     </nav>
 
-     <main class="main-container">
+    <section class="hero-banner">
+        <div class="hero-text">
+            <h1>Organize today.<br><span class="accent">Achieve</span> tomorrow.</h1>
+            <p>All your notes, ideas, and tasks in one place. Stay organized, stay focused.</p>
+            
+            <div class="cta-group">
+                <button class="btn btn-primary">
+                    <span class="material-icons-round">add</span> New Note
+                </button>
+                <button class="btn btn-secondary">
+                    <span class="material-icons-round">folder_open</span> View Notes
+                </button>
+            </div>
+
+            <div class="hero-features">
+                <div class="feat-item easy">
+                    <div class="feat-icon-box">
+                        <span class="material-icons-round">description</span>
+                    </div>
+                    <div class="feat-info">
+                        <h4>Easy to Use</h4>
+                        <p>Create and manage notes effortlessly</p>
+                    </div>
+                </div>
+                <div class="feat-item sync">
+                    <div class="feat-icon-box">
+                        <span class="material-icons-round">cloud_sync</span>
+                    </div>
+                    <div class="feat-info">
+                        <h4>Sync Anywhere</h4>
+                        <p>Access your notes on any device</p>
+                    </div>
+                </div>
+                <div class="feat-item secure">
+                    <div class="feat-icon-box">
+                        <span class="material-icons-round">lock</span>
+                    </div>
+                    <div class="feat-info">
+                        <h4>Private & Secure</h4>
+                        <p>Your notes are safe and protected</p>
+                    </div>
+                </div>
+                <div class="feat-item update">
+                    <div class="feat-icon-box">
+                        <span class="material-icons-round">notifications</span>
+                    </div>
+                    <div class="feat-info">
+                        <h4>Stay Updated</h4>
+                        <p>Never miss important reminders</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="hero-graphic">
+            <svg class="abstract-bg-svg" viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M 150,250 A 100,100 0 1,1 350,250 A 100,100 0 1,1 150,250" stroke="#e0dbff" stroke-width="1.5" stroke-dasharray="4 4" />
+                <path d="M 100,250 A 150,150 0 1,1 400,250 A 150,150 0 1,1 100,250" stroke="#dbd5ff" stroke-width="1.5" />
+                <path d="M 50,250 A 200,200 0 1,1 450,250 A 200,200 0 1,1 50,250" stroke="#e8e5ff" stroke-width="1" />
+                <path d="M-20,380 Q 120,340 220,240 T 480,180" stroke="#dcd6ff" stroke-width="2" fill="none"/>
+                <path d="M10,410 Q 140,370 230,290 T 490,210" stroke="#e4e0ff" stroke-width="1.5" fill="none"/>
+                <g fill="#cbd5e1" opacity="0.4">
+                    <circle cx="440" cy="80" r="2"/> <circle cx="455" cy="80" r="2"/> <circle cx="470" cy="80" r="2"/>
+                    <circle cx="440" cy="95" r="2"/> <circle cx="455" cy="95" r="2"/> <circle cx="470" cy="95" r="2"/>
+                    <circle cx="440" cy="110" r="2"/> <circle cx="455" cy="110" r="2"/> <circle cx="470" cy="110" r="2"/>
+                    <circle cx="440" cy="125" r="2"/> <circle cx="455" cy="125" r="2"/> <circle cx="470" cy="125" r="2"/>
+                    <circle cx="440" cy="140" r="2"/> <circle cx="455" cy="140" r="2"/> <circle cx="470" cy="140" r="2"/>
+                </g>
+            </svg>
+
+            <span class="material-icons-round sparkle sp-1">auto_awesome</span>
+            <span class="material-icons-round sparkle sp-2">add</span>
+            <span class="material-icons-round sparkle sp-3">auto_awesome</span>
+
+            <div class="floating-node fn-1"><span class="material-icons-round">calendar_month</span></div>
+            <div class="floating-node fn-2"><span class="material-icons-round">folder</span></div>
+            <div class="floating-node fn-3"><span class="material-icons-round">local_offer</span></div>
+            <div class="floating-node fn-4"><span class="material-icons-round">notifications</span></div>
+            
+            <img src="/images/noteshero.png" alt="Student holding notes" class="mock-character-img">
+        </div>
+    </section>
+
+    <main class="main-container">
         
-        <section class="hero-banner">
-            <div class="hero-text">
-                <h1>Organize today.<br><span class="accent">Achieve</span> tomorrow.</h1>
-                <p>All your notes, ideas, and tasks in one place. Stay organized, stay focused.</p>
-                
-                <div class="cta-group">
-                    <button class="btn btn-primary">
-                        <span class="material-icons-round">add</span> New Note
-                    </button>
-                    <button class="btn btn-secondary">
-                        <span class="material-icons-round">folder_open</span> View Notes
-                    </button>
-                </div>
-
-                <div class="hero-features">
-                    <div class="feat-item easy">
-                        <div class="feat-icon-box">
-                            <span class="material-icons-round">description</span>
-                        </div>
-                        <div class="feat-info">
-                            <h4>Easy to Use</h4>
-                            <p>Create and manage notes effortlessly</p>
-                        </div>
-                    </div>
-                    <div class="feat-item sync">
-                        <div class="feat-icon-box">
-                            <span class="material-icons-round">cloud_sync</span>
-                        </div>
-                        <div class="feat-info">
-                            <h4>Sync Anywhere</h4>
-                            <p>Access your notes on any device</p>
-                        </div>
-                    </div>
-                    <div class="feat-item secure">
-                        <div class="feat-icon-box">
-                            <span class="material-icons-round">lock</span>
-                        </div>
-                        <div class="feat-info">
-                            <h4>Private & Secure</h4>
-                            <p>Your notes are safe and protected</p>
-                        </div>
-                    </div>
-                    <div class="feat-item update">
-                        <div class="feat-icon-box">
-                            <span class="material-icons-round">notifications</span>
-                        </div>
-                        <div class="feat-info">
-                            <h4>Stay Updated</h4>
-                            <p>Never miss important reminders</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="hero-graphic">
-                <svg class="abstract-bg-svg" viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M 150,250 A 100,100 0 1,1 350,250 A 100,100 0 1,1 150,250" stroke="#e0dbff" stroke-width="1.5" stroke-dasharray="4 4" />
-                    <path d="M 100,250 A 150,150 0 1,1 400,250 A 150,150 0 1,1 100,250" stroke="#dbd5ff" stroke-width="1.5" />
-                    <path d="M 50,250 A 200,200 0 1,1 450,250 A 200,200 0 1,1 50,250" stroke="#e8e5ff" stroke-width="1" />
-                    <path d="M-20,380 Q 120,340 220,240 T 480,180" stroke="#dcd6ff" stroke-width="2" fill="none"/>
-                    <path d="M10,410 Q 140,370 230,290 T 490,210" stroke="#e4e0ff" stroke-width="1.5" fill="none"/>
-                    <g fill="#cbd5e1" opacity="0.4">
-                        <circle cx="440" cy="80" r="2"/> <circle cx="455" cy="80" r="2"/> <circle cx="470" cy="80" r="2"/>
-                        <circle cx="440" cy="95" r="2"/> <circle cx="455" cy="95" r="2"/> <circle cx="470" cy="95" r="2"/>
-                        <circle cx="440" cy="110" r="2"/> <circle cx="455" cy="110" r="2"/> <circle cx="470" cy="110" r="2"/>
-                        <circle cx="440" cy="125" r="2"/> <circle cx="455" cy="125" r="2"/> <circle cx="470" cy="125" r="2"/>
-                        <circle cx="440" cy="140" r="2"/> <circle cx="455" cy="140" r="2"/> <circle cx="470" cy="140" r="2"/>
-                    </g>
-                </svg>
-
-                <span class="material-icons-round sparkle sp-1">auto_awesome</span>
-                <span class="material-icons-round sparkle sp-2">add</span>
-                <span class="material-icons-round sparkle sp-3">auto_awesome</span>
-
-                <div class="floating-node fn-1"><span class="material-icons-round">calendar_month</span></div>
-                <div class="floating-node fn-2"><span class="material-icons-round">folder</span></div>
-                <div class="floating-node fn-3"><span class="material-icons-round">local_offer</span></div>
-                <div class="floating-node fn-4"><span class="material-icons-round">notifications</span></div>
-                
-                <img src="images/noteshero.png" alt="Student holding notes" class="mock-character-img">
-            </div>
-        </section>
-
         <section class="stats-row">
             <div class="stat-card sc-notes">
                 <div class="stat-icon-wrapper">
@@ -656,14 +407,22 @@
     </div>
 
     <main id="store" class="max-w-7xl mx-auto px-6 py-12">
-        <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6 border-b border-slate-100 dark:border-slate-800 pb-6">
-            <div>
+        <div class="flex flex-col lg:flex-row lg:items-center justify-between mb-8 gap-6 border-b border-slate-100 dark:border-slate-800 pb-6 w-full">
+            <div class="max-w-md">
                 <h2 id="librarySectionHeading" class="heading-font text-3xl font-bold text-slate-900">Popular Books/Notes</h2>
-                <p id="librarySectionSubtext" class="text-slate-500 mt-2">Explore our full repository of digital resource guides.</p>
+                <p id="librarySectionSubtext" class="text-slate-500 mt-2 text-sm">Explore our full repository of digital resource guides.</p>
             </div>
-            <div class="flex bg-slate-100 dark:bg-slate-800 p-1.5 rounded-xl border border-slate-200 dark:border-slate-700 transition-colors">
-                <button id="catBtn-all" onclick="filterCategory('all', this)" class="category-btn px-6 py-2 rounded-lg text-sm font-semibold bg-slate-900 text-white transition">Popular Books/Notes</button>
-                <button id="catBtn-ug-nep" onclick="filterCategory('ug-nep', this)" class="category-btn px-6 py-2 rounded-lg text-sm font-semibold text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700 transition">UG-NEP</button>
+            
+            <!-- STORE FILTER CONTROL RAMP FRAMEWORK BLOCK -->
+            <div class="flex flex-col sm:flex-row gap-4 items-center w-full lg:w-auto flex-grow justify-end">
+                <div class="relative w-full sm:max-w-xs">
+                    <input id="storeSearchInput" oninput="executeStoreFiltering()" type="text" placeholder="Filter current view..." class="w-full px-4 py-2 pl-9 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-blue-500 text-slate-900 dark:bg-slate-800 dark:border-slate-700 dark:text-white" autocomplete="off" />
+                    <i class="fas fa-filter absolute left-3 top-3 text-slate-400 text-[10px]"></i>
+                </div>
+                <div class="flex bg-slate-100 dark:bg-slate-800 p-1.5 rounded-xl border border-slate-200 dark:border-slate-700 transition-colors w-full sm:w-auto justify-center">
+                    <button id="catBtn-all" onclick="filterCategory('all', this)" class="category-btn px-5 py-2 rounded-lg text-xs font-semibold bg-slate-900 text-white transition whitespace-nowrap">Popular Books/Notes</button>
+                    <button id="catBtn-ug-nep" onclick="filterCategory('ug-nep', this)" class="category-btn px-5 py-2 rounded-lg text-xs font-semibold text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700 transition whitespace-nowrap">UG-NEP</button>
+                </div>
             </div>
         </div>
 
@@ -675,17 +434,16 @@
             <p class="text-sm text-slate-500 mt-1">Double check spelling or swap book filter criteria settings above.</p>
         </div>
 
-        <!-- REPOSITORY SECTIONS WRAPPER Container framework block -->
-        <div id="libraryContainer" class="space-y-12">
+        <div id="libraryContainer" class="space-y-12 w-full">
             
             <!-- SEMESTER 2 ROW WRAPPER -->
-            <div id="semesterSection-2" class="semester-wrapper space-y-4" data-semester="2">
-                <div class="semester-header-title bg-slate-900 text-white px-5 py-3 rounded-xl font-bold text-sm uppercase tracking-wider shadow-sm flex justify-between items-center">
+            <div id="semesterSection-2" class="semester-wrapper space-y-4 w-full" data-semester="2">
+                <div class="semester-header-title bg-slate-900 text-white px-5 py-3 rounded-xl font-bold text-sm uppercase tracking-wider shadow-sm flex justify-between items-center w-full">
                     <span class="header-text-placeholder">Course Section — Semester II</span>
                     <span class="text-xs font-normal opacity-70">Available Library Records</span>
                 </div>
 
-                <div class="library-items-target-zone">
+                <div class="library-items-target-zone w-full">
                     
                     <div id="book-hvs" class="book-card" data-category="ug-nep" data-semester="2" data-popular="true" data-searchable-keywords="hindi vyakaran hindi व्याकरण और संप्रेषण university updates team sem2 semester 2 ug-nep" data-title="हिंदी व्याकरण और संप्रेषण" data-madeby="University Updates Team" data-price="₹35" data-oldprice="₹45">
                         <div class="img-container-node h-64 bg-slate-100 p-8 relative">
@@ -712,13 +470,13 @@
             </div>
 
             <!-- SEMESTER 4 ROW WRAPPER -->
-            <div id="semesterSection-4" class="semester-wrapper space-y-4" data-semester="4">
-                <div class="semester-header-title bg-slate-900 text-white px-5 py-3 rounded-xl font-bold text-sm uppercase tracking-wider shadow-sm flex justify-between items-center">
+            <div id="semesterSection-4" class="semester-wrapper space-y-4 w-full" data-semester="4">
+                <div class="semester-header-title bg-slate-900 text-white px-5 py-3 rounded-xl font-bold text-sm uppercase tracking-wider shadow-sm flex justify-between items-center w-full">
                     <span class="header-text-placeholder">Course Section — Semester IV</span>
                     <span class="text-xs font-normal opacity-70">Available Library Records</span>
                 </div>
 
-                <div class="library-items-target-zone">
+                <div class="library-items-target-zone w-full">
                     
                     <div id="book-srcee" class="book-card" data-category="ug-nep" data-semester="4" data-popular="true" data-searchable-keywords="social responsibility community engagement civic english academic experts division sem4 semester 4 ug-nep" data-title="Social Responsibility and Community Engagement (English)" data-madeby="Academic Experts Division" data-price="₹25" data-oldprice="₹35">
                         <div class="img-container-node h-64 bg-slate-100 p-8 relative">
@@ -768,7 +526,6 @@
         </div>
     </main>
 
-    <!-- TAB INFRASTRUCTURE COMPONENT SECTION -->
     <section id="tab-section" class="bg-slate-900 text-white py-12">
         <div class="max-w-4xl mx-auto px-6">
             <div class="flex flex-wrap justify-center gap-4 mb-12">
@@ -782,12 +539,12 @@
             
             <div id="instructions" class="tab-content active space-y-4">
                 <h3 class="text-2xl font-bold heading-font">4-Step Simple Process</h3>
-                <ol class="space-y-4 text-slate-400">
-                    <ul><li class="flex gap-4 items-start"><span class="bg-blue-600 text-white w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 font-bold text-xs mt-0.5">1</span> Choose your notes and click "Buy Now" which redirects to our secure University Updates login webpage.</li>
+                <div class="space-y-4 text-slate-400">
+                    <ul class="space-y-4"><li class="flex gap-4 items-start"><span class="bg-blue-600 text-white w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 font-bold text-xs mt-0.5">1</span> Choose your notes and click "Buy Now" which redirects to our secure University Updates login webpage.</li>
                     <li class="flex gap-4 items-start"><span class="bg-blue-600 text-white w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 font-bold text-xs mt-0.5">2</span> Login or Register (If you are a new user).</li>
                     <li class="flex gap-4 items-start"><span class="bg-blue-600 text-white w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 font-bold text-xs mt-0.5">3</span> Select Notes and click on Add to Cart then Checkout & Complete payment via UPI, Card or Netbanking.</li>
                     <li class="flex gap-4 items-start"><span class="bg-blue-600 text-white w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 font-bold text-xs mt-0.5">4</span> After successful payment, Wait for 5 seconds. The PDF will be available automatically in your login.</li></ul>
-                </ol> 
+                </div> 
             </div>
             
             <div id="about" class="tab-content space-y-6">
@@ -875,9 +632,9 @@
                         <strong class="text-white block mb-1">Your Privacy Rights:</strong>
                         <ul class="list-disc pl-5 space-y-1">
                             <li>Access and request correction of your personal data</li>
-<li>Request deletion of your personal data</li>
-<li>Object to the processing of your personal data</li>
-<li>Request data portability</li>
+                            <li>Request deletion of your personal data</li>
+                            <li>Object to the processing of your personal data</li>
+                            <li>Request data portability</li>
                         </ul>
                     </div>
                     <div>
@@ -903,14 +660,13 @@
                         <ul class="list-disc pl-5 space-y-1">
                             <li>You have the option to opt out of providing information or withdraw information you have already provided.</li>
                             <li>For deletion of your account please contact us via E-Mail universityupdates08@gmail.com</li>
-                           <li> This Policy is subject to change, and we will notify you of any changes.</li>
+                            <li> This Policy is subject to change, and we will notify you of any changes.</li>
                         </ul>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-
 
     <div id="previewModal">
         <div class="bg-white rounded-2xl w-full max-w-3xl overflow-hidden flex flex-col md:flex-row shadow-2xl relative transition-colors dark:bg-slate-900">
@@ -985,38 +741,35 @@
             renderActiveViewEngine();
         });
 
-        // VIEW RENDERING SWITCH: Dynamic UI layout formatting engine
         function renderActiveViewEngine() {
             const wrappers = document.querySelectorAll('.semester-wrapper');
             const heading = document.getElementById('librarySectionHeading');
             const subtext = document.getElementById('librarySectionSubtext');
-            const searchQuery = document.getElementById('globalSearchInput').value.toLowerCase().trim();
+            const storeSearch = document.getElementById('storeSearchInput').value.toLowerCase().trim();
+            const globalSearch = document.getElementById('globalSearchInput').value.toLowerCase().trim();
+            
+            // Combine active terms for structural processing logic
+            const integratedQuery = storeSearch || globalSearch;
 
-            if (selectedCategory === "all" && searchQuery === "") {
-                // ALL BOOKS TAB SELECTED -> Show absolute visual standard book grid format cards natively
-                heading.innerText = "All Books";
+            if (selectedCategory === "all" && integratedQuery === "") {
+                heading.innerText = "Popular Books/Notes";
                 subtext.innerText = "Explore our full repository of digital resource guides.";
-                
                 wrappers.forEach(wrap => {
                     const headerNode = wrap.querySelector('.semester-header-title');
-                    headerNode.classList.add('hidden'); // Hide the tabular horizontal course headings panel
-                    
+                    headerNode.classList.add('hidden');
                     const targetZone = wrap.querySelector('.library-items-target-zone');
-                    targetZone.className = "library-items-target-zone grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8";
-                    
+                    targetZone.className = "library-items-target-zone grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 w-full";
                     const books = targetZone.querySelectorAll('.book-card');
                     books.forEach(book => {
                         book.style.setProperty('display', 'flex', 'important');
-                        restoreOriginalCardMarkup(book); // Force standard block element formatting rules
+                        restoreOriginalCardMarkup(book);
                     });
-
                     wrap.style.setProperty('display', 'block', 'important');
                 });
             } else {
-                // COURSE FILTER/SEARCH SELECTED -> Collapse objects directly into thin list data rows grouped under header markers
-                if(searchQuery !== "") {
+                if (integratedQuery !== "") {
                     heading.innerText = "Search Results";
-                    subtext.innerText = `Showing matching assets for "${searchQuery}"`;
+                    subtext.innerText = `Showing matching assets for "${integratedQuery}"`;
                 } else {
                     heading.innerText = `${selectedCategory.toUpperCase()} Study Materials`;
                     subtext.innerText = "Available resources arranged sequentially by Academic Semesters.";
@@ -1026,25 +779,22 @@
                     const headerNode = wrap.querySelector('.semester-header-title');
                     const labelPlaceholder = headerNode.querySelector('.header-text-placeholder');
                     const currentSem = wrap.getAttribute('data-semester');
-                    
                     labelPlaceholder.innerText = `${selectedCategory.toUpperCase()} — Semester ${currentSem}`;
                     
                     const targetZone = wrap.querySelector('.library-items-target-zone');
-                    targetZone.className = "library-items-target-zone flex flex-col gap-3 mt-4";
+                    targetZone.className = "library-items-target-zone flex flex-col gap-3 mt-4 w-full";
                     
                     let activeCount = 0;
                     const books = targetZone.querySelectorAll('.book-card');
-                    
                     books.forEach(book => {
                         const cat = book.getAttribute('data-category');
                         const keywords = book.getAttribute('data-searchable-keywords').toLowerCase();
-                        
                         const matchCat = (selectedCategory === "all" || cat === selectedCategory);
-                        const matchSearch = (searchQuery === "" || keywords.includes(searchQuery));
+                        const matchSearch = (integratedQuery === "" || keywords.includes(integratedQuery));
                         
                         if (matchCat && matchSearch) {
                             book.style.setProperty('display', 'block', 'important');
-                            transformCardToTableRowMarkup(book); // Force fluid responsive inline-table structure transformations
+                            transformCardToTableRowMarkup(book);
                             activeCount++;
                         } else {
                             book.style.setProperty('display', 'none', 'important');
@@ -1065,70 +815,53 @@
             document.querySelectorAll('.book-card').forEach(b => {
                 if(b.style.display !== 'none') visibleTotal++;
             });
-
             document.getElementById('searchEmptyState').classList.toggle('hidden', visibleTotal > 0);
         }
 
-        // ELEMENT MUTATOR LOGIC: Converts block elements directly into clean desktop horizontal/mobile vertical line rows
+        function executeStoreFiltering() {
+            renderActiveViewEngine();
+        }
+
         function transformCardToTableRowMarkup(cardNode) {
-            cardNode.className = "book-card bg-white dark:bg-slate-900 rounded-xl p-4 flex flex-col md:flex-row md:items-center justify-between gap-4 border border-slate-100 dark:border-slate-800 shadow-sm transition-all";
-            
+            cardNode.className = "book-card bg-white dark:bg-slate-900 rounded-xl p-4 flex flex-col md:flex-row md:items-center justify-between gap-4 border border-slate-100 dark:border-slate-800 shadow-sm transition-all w-full";
             const imgBlock = cardNode.querySelector('.img-container-node');
             if (imgBlock) imgBlock.className = "hidden"; 
-            
             const infoBlock = cardNode.querySelector('.info-container-node');
             if (infoBlock) infoBlock.className = "flex-grow flex flex-col md:flex-row md:items-center md:justify-between gap-2";
-            
             const titleNode = cardNode.querySelector('.card-title');
             if (titleNode) titleNode.className = "font-bold text-slate-800 dark:text-white text-sm md:w-1/3 card-title";
-            
             const subtitleNode = cardNode.querySelector('.author-subtext');
             if (subtitleNode) subtitleNode.className = "text-[10px] bg-slate-100 text-slate-500 dark:bg-slate-800 dark:text-slate-400 px-2.5 py-1 rounded font-bold tracking-tight uppercase max-w-max author-subtext";
-            
             const priceWrapper = cardNode.querySelector('.price-wrapper-node');
             if (priceWrapper) priceWrapper.className = "flex items-center gap-2 mt-1 md:mt-0 price-wrapper-node";
-            
             const mainPrice = cardNode.querySelector('.main-price-val');
             if (mainPrice) mainPrice.className = "text-base font-bold text-blue-600 main-price-val";
-
             const actionsBlock = cardNode.querySelector('.actions-container-node');
             if (actionsBlock) actionsBlock.className = "flex gap-2 w-full md:w-auto mt-2 md:mt-0 border-t pt-3 md:pt-0 md:border-0 border-slate-100 dark:border-slate-800 actions-container-node";
-
             const infoBtn = cardNode.querySelector('.btn-info-target');
             if (infoBtn) infoBtn.className = "text-[11px] font-bold px-4 py-2 bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 transition flex-1 md:flex-none text-center btn-info-target";
-
             const buyBtn = cardNode.querySelector('.btn-buy-target');
             if (buyBtn) buyBtn.className = "text-[11px] font-bold px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 shadow-sm transition flex-1 md:flex-none text-center btn-buy-target";
         }
 
-        // ELEMENT MUTATOR LOGIC: Restores the card styles
         function restoreOriginalCardMarkup(cardNode) {
-            cardNode.className = "book-card bg-white rounded-2xl overflow-hidden flex flex-col transition-colors";
-            
+            cardNode.className = "book-card bg-white dark:bg-slate-900 rounded-2xl overflow-hidden flex flex-col transition-colors w-full";
             const imgBlock = cardNode.querySelector('.img-container-node');
-            if (imgBlock) imgBlock.className = "h-64 bg-slate-100 p-8 relative img-container-node";
-            
+            if (imgBlock) imgBlock.className = "h-64 bg-slate-100 dark:bg-slate-800 p-8 relative img-container-node";
             const infoBlock = cardNode.querySelector('.info-container-node');
             if (infoBlock) infoBlock.className = "p-6 flex-grow flex flex-col info-container-node";
-            
             const titleNode = cardNode.querySelector('.card-title');
-            if (titleNode) titleNode.className = "font-bold text-slate-800 leading-snug card-title";
-            
+            if (titleNode) titleNode.className = "font-bold text-slate-800 dark:text-white leading-snug card-title";
             const subtitleNode = cardNode.querySelector('.author-subtext');
             if (subtitleNode) subtitleNode.className = "text-xs text-slate-400 mt-1 uppercase tracking-tighter author-subtext";
-            
             const priceWrapper = cardNode.querySelector('.price-wrapper-node');
             if (priceWrapper) priceWrapper.className = "mt-6 flex items-center justify-between price-wrapper-node";
-            
             const mainPrice = cardNode.querySelector('.main-price-val');
-            if (mainPrice) mainPrice.className = "text-2xl font-bold text-slate-900 main-price-val";
-
+            if (mainPrice) mainPrice.className = "text-2xl font-bold text-slate-900 dark:text-white main-price-val";
             const actionsBlock = cardNode.querySelector('.actions-container-node');
             if (actionsBlock) actionsBlock.className = "p-5 pt-0 grid grid-cols-2 gap-2 actions-container-node";
-
             const infoBtn = cardNode.querySelector('.btn-info-target');
             if (infoBtn) infoBtn.className = "text-xs font-bold py-2.5 bg-slate-100 text-slate-700 rounded-lg hover:bg-slate-200 transition btn-info-target";
-
             const buyBtn = cardNode.querySelector('.btn-buy-target');
             if (buyBtn) buyBtn.className = "text-xs font-bold py-2.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 shadow-lg shadow-blue-100 transition btn-buy-target";
         }
@@ -1138,22 +871,18 @@
             const books = document.querySelectorAll('.book-card');
             const dropdown = document.getElementById('globalSearchDropdown');
             const container = document.getElementById('dropdownItemsContainer');
-            
             container.innerHTML = "";
             let matchPool = [];
-
             books.forEach(book => {
                 const keywords = book.getAttribute('data-searchable-keywords').toLowerCase();
                 const title = book.getAttribute('data-title');
                 const targetId = book.getAttribute('id');
                 const cat = book.getAttribute('data-category').toUpperCase();
                 const sem = book.getAttribute('data-semester');
-
                 if (searchQuery !== "" && keywords.includes(searchQuery)) {
                     matchPool.push({ title, id: targetId, cat, sem });
                 }
             });
-
             if (matchPool.length > 0) {
                 dropdown.classList.remove('hidden');
                 matchPool.forEach(item => {
@@ -1167,17 +896,13 @@
                         </div>
                         <span class="text-[9px] bg-blue-50 text-blue-600 dark:bg-slate-800 dark:text-blue-400 px-2 py-0.5 rounded-full font-bold uppercase tracking-tight">${item.cat} | Sem ${item.sem}</span>
                     `;
-                    
                     row.onclick = () => {
                         document.getElementById('globalSearchInput').value = item.title;
                         dropdown.classList.add('hidden');
-                        
                         selectedCategory = "all";
                         document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('bg-slate-900', 'text-white'));
                         document.getElementById('catBtn-all').classList.add('bg-slate-900', 'text-white');
-                        
                         renderActiveViewEngine();
-                        
                         const targetElement = document.getElementById(item.id);
                         if(targetElement) {
                             targetElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -1190,7 +915,6 @@
             } else {
                 dropdown.classList.add('hidden');
             }
-
             renderActiveViewEngine();
         }
 
@@ -1202,14 +926,12 @@
             });            
             btn.classList.add('bg-slate-900', 'text-white');            
             btn.classList.remove('text-slate-600', 'dark:text-slate-400');
-            
             renderActiveViewEngine();
         }
 
         function toggleUtilityDropdown() {
             const dropdown = document.getElementById('utilityMobileDropdown');
             const arrow = document.getElementById('utilityArrowIcon');
-            
             if (dropdown.classList.contains('hidden')) {
                 dropdown.classList.remove('hidden');
                 arrow.classList.add('rotate-180');
@@ -1221,11 +943,7 @@
 
         function toggleMobileMenu() {
             const menu = document.getElementById('mobileDropdownMenu');
-            if (menu.classList.contains('hidden')) {
-                menu.classList.remove('hidden');
-            } else {
-                menu.classList.add('hidden');
-            }
+            menu.classList.toggle('hidden');
         }
 
         function toggleDarkMode() {
@@ -1249,7 +967,6 @@
             document.documentElement.style.setProperty('--base-font-size', '16px');
         }
 
-        // FUNCTIONALITY: Active content tab tracking
         function showTab(tabId) {            
             document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));            
             document.querySelectorAll('.tab-btn').forEach(btn => {                
@@ -1297,7 +1014,7 @@
             const loader = document.getElementById('modalLoader');            
             const iframe = document.getElementById('pdfPreview');            
             const fallback = document.getElementById('noPreviewFallback');
-                                    
+                                            
             document.getElementById('modalTitle').innerText = title;            
             document.getElementById('modalQuality').innerText = quality;            
             document.getElementById('modalLang').innerText = lang;            
@@ -1323,7 +1040,7 @@
             }, 3500);
 
             iframe.src = pdfSrc;            
-                                    
+                                            
             iframe.onload = function() {            
                 clearTimeout(connectionTimeout);
                 try {
@@ -1366,32 +1083,22 @@
                 searchMenu.classList.add('hidden');
             }
         }
-        
-        
     </script>
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             const counters = document.querySelectorAll('.counter');
-            
             counters.forEach(counter => {
-                // Force reset to pure 0 instantly before starting calculation
                 counter.innerText = "0"; 
-                
                 const target = parseInt(counter.getAttribute('data-target'), 10);
                 const suffix = counter.getAttribute('data-suffix') || "";
-                const duration = 12000; // Animation duration in milliseconds (1.2 seconds)
+                const duration = 12000; 
                 const startTime = performance.now();
 
                 const updateCounter = (currentTime) => {
                     const elapsedTime = currentTime - startTime;
-                    
-                    // Progress ratio clamped between 0 and 1
                     const progress = Math.min(elapsedTime / duration, 1);
-                    
-                    // Smooth ease-out quad calculation for realistic pacing
                     const easeOutProgress = progress * (2 - progress);
                     const currentValue = Math.floor(easeOutProgress * target);
-
                     counter.innerText = currentValue + suffix;
 
                     if (progress < 1) {
@@ -1400,8 +1107,6 @@
                         counter.innerText = target + suffix;
                     }
                 };
-
-                // Use requestAnimationFrame for high performance 60fps execution
                 requestAnimationFrame(updateCounter);
             });
         });
