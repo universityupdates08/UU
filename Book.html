@@ -69,6 +69,19 @@
         #previewModal { display: none; position: fixed; inset: 0; background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(4px); z-index: 1000; align-items: center; justify-content: center; padding: 20px; }
         .loader { border: 3px solid #f3f3f3; border-top: 3px solid var(--primary); border-radius: 50%; width: 30px; height: 30px; animation: spin 1s linear infinite; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        .search-dropdown-wrapper {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            margin-top: 0.5rem;
+            max-height: 320px;
+            overflow-y: auto;
+            z-index: 110;
+            border-radius: 1rem;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
     </style>
 </head>
 <body>
@@ -129,7 +142,7 @@
         </div>
     </div>
 
-    <header class="bg-white border-b border-slate-100 transition-colors">
+    <header class="bg-white border-b border-slate-100 transition-colors relative z-50">
         <div class="max-w-8xl mx-auto px-6 py-4 flex flex-col lg:flex-row justify-between items-center gap-5">
             
             <div class="flex items-center gap-3 flex-shrink-0 w-full lg:w-auto justify-center lg:justify-start">
@@ -140,9 +153,15 @@
                 </div>
             </div>
             
-            <div class="w-full max-w-xl relative flex items-center flex-grow">
-                <input id="globalSearchInput" oninput="executeLiveSearch()" type="text" placeholder="Search for university books, codes, summaries..." class="w-full px-5 py-2.5 pl-11 pr-4 text-sm bg-slate-50 border border-slate-200 rounded-full focus:outline-none focus:border-blue-500 focus:bg-white text-slate-900 transition-all dark:bg-slate-800 dark:border-slate-700 dark:text-white" />
-                <i class="fas fa-search absolute left-4 text-slate-400 text-sm"></i>
+            <div class="w-full max-w-xl relative flex flex-col justify-center flex-grow">
+                <div class="relative flex items-center w-full">
+                    <input id="globalSearchInput" oninput="executeLiveSearch()" type="text" placeholder="Search for university books, codes, summaries..." class="w-full px-5 py-2.5 pl-11 pr-4 text-sm bg-slate-50 border border-slate-200 rounded-full focus:outline-none focus:border-blue-500 focus:bg-white text-slate-900 transition-all dark:bg-slate-800 dark:border-slate-700 dark:text-white" autocomplete="off" />
+                    <i class="fas fa-search absolute left-4 text-slate-400 text-sm"></i>
+                </div>
+                
+                <div id="globalSearchDropdown" class="search-dropdown-wrapper hidden bg-white border border-slate-200 dark:bg-slate-900 dark:border-slate-700">
+                    <div id="dropdownItemsContainer" class="flex flex-col py-2"></div>
+                </div>
             </div>
 
             <div class="bg-slate-100 border border-slate-200 p-1.5 rounded-full flex items-center gap-1 shadow-inner dark:bg-slate-800 dark:border-slate-700 flex-shrink-0">
@@ -152,7 +171,7 @@
         </div>
     </header>
 
-    <nav class="glass-nav sticky top-0 z-50">
+    <nav class="glass-nav sticky top-0 z-30">
         <div class="max-w-7xl mx-auto px-6 py-1 flex justify-between items-center relative">
             <div class="hidden md:block w-32"></div>
 
@@ -206,14 +225,14 @@
     </div>
 
     <main id="store" class="max-w-7xl mx-auto px-6 py-12">
-        <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6 border-b border-slate-100 dark:border-slate-800 pb-6">
             <div>
-                <h2 class="heading-font text-3xl font-bold text-slate-900">Digital Resource Library</h2>
-                <p class="text-slate-500 mt-2">Instant access to high-quality PDF study guides.</p>
+                <h2 id="librarySectionHeading" class="heading-font text-3xl font-bold text-slate-900">Popular Books/Notes</h2>
+                <p id="librarySectionSubtext" class="text-slate-500 mt-2">Explore our full repository of digital resource guides.</p>
             </div>
-            <div class="flex bg-white p-1.5 rounded-xl border border-slate-200 shadow-sm transition-colors">
-                <button id="catBtn-all" onclick="filterCategory('all', this)" class="category-btn px-6 py-2 rounded-lg text-sm font-semibold bg-slate-900 text-white transition">All Books</button>
-                <button id="catBtn-ug-nep" onclick="filterCategory('ug-nep', this)" class="category-btn px-6 py-2 rounded-lg text-sm font-semibold text-slate-600 hover:bg-slate-50 transition">UG-NEP</button>
+            <div class="flex bg-slate-100 dark:bg-slate-800 p-1.5 rounded-xl border border-slate-200 dark:border-slate-700 transition-colors">
+                <button id="catBtn-all" onclick="filterCategory('all', this)" class="category-btn px-6 py-2 rounded-lg text-sm font-semibold bg-slate-900 text-white transition">Popular Books/Notes</button>
+                <button id="catBtn-ug-nep" onclick="filterCategory('ug-nep', this)" class="category-btn px-6 py-2 rounded-lg text-sm font-semibold text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700 transition">UG-NEP</button>
             </div>
         </div>
 
@@ -225,73 +244,100 @@
             <p class="text-sm text-slate-500 mt-1">Double check spelling or swap book filter criteria settings above.</p>
         </div>
 
-        <div id="book-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div class="book-card bg-white rounded-2xl overflow-hidden flex flex-col transition-colors" data-category="ug-nep" data-searchable-keywords="hindi vyakaran hindi व्याकरण और संप्रेषण university updates team">
-                <div class="h-64 bg-slate-100 p-8 relative">
-                    <img src="images/HVS.png" alt="Hindi" class="w-full h-full object-contain drop-shadow-xl" onerror="this.src='https://via.placeholder.com/200x280?text=Hindi+Vyakaran'">
-                    <span class="absolute top-4 right-4 bg-green-500 text-white text-[10px] font-black px-2.5 py-1 rounded-full uppercase">PDF</span>
+        <!-- REPOSITORY SECTIONS WRAPPER Container framework block -->
+        <div id="libraryContainer" class="space-y-12">
+            
+            <!-- SEMESTER 2 ROW WRAPPER -->
+            <div id="semesterSection-2" class="semester-wrapper space-y-4" data-semester="2">
+                <div class="semester-header-title bg-slate-900 text-white px-5 py-3 rounded-xl font-bold text-sm uppercase tracking-wider shadow-sm flex justify-between items-center">
+                    <span class="header-text-placeholder">Course Section — Semester II</span>
+                    <span class="text-xs font-normal opacity-70">Available Library Records</span>
                 </div>
-                <div class="p-6 flex-grow flex flex-col">
-                    <h3 class="font-bold text-slate-800 leading-snug card-title">हिंदी व्याकरण और संप्रेषण</h3>
-                    <p class="text-xs text-slate-400 mt-1 uppercase tracking-tighter">BY UNIVERSITY UPDATES</p>
-                    <div class="mt-6 flex items-center justify-between">
-                        <div class="flex flex-col">
-                            <span class="text-2xl font-bold text-slate-900">₹35</span>
-                            <span class="text-xs line-through text-slate-400">₹45</span>
+
+                <div class="library-items-target-zone">
+                    
+                    <div id="book-hvs" class="book-card" data-category="ug-nep" data-semester="2" data-popular="true" data-searchable-keywords="hindi vyakaran hindi व्याकरण और संप्रेषण university updates team sem2 semester 2 ug-nep" data-title="हिंदी व्याकरण और संप्रेषण" data-madeby="University Updates Team" data-price="₹35" data-oldprice="₹45">
+                        <div class="img-container-node h-64 bg-slate-100 p-8 relative">
+                            <img src="images/HVS.png" alt="Hindi" class="w-full h-full object-contain drop-shadow-xl" onerror="this.src='https://via.placeholder.com/200x280?text=Hindi+Vyakaran'">
+                            <span class="absolute top-4 right-4 bg-green-500 text-white text-[10px] font-black px-2.5 py-1 rounded-full uppercase">PDF</span>
+                        </div>
+                        <div class="info-container-node p-6 flex flex-col">
+                            <h3 class="font-bold text-slate-800 leading-snug card-title">हिंदी व्याकरण और संप्रेषण</h3>
+                            <p class="text-xs text-slate-400 mt-1 uppercase tracking-tighter author-subtext">BY UNIVERSITY UPDATES</p>
+                            <div class="price-wrapper-node mt-6 flex items-center justify-between">
+                                <div class="flex flex-col">
+                                    <span class="text-2xl font-bold text-slate-900 main-price-val">₹35</span>
+                                    <span class="text-xs line-through text-slate-400 old-price-val">₹45</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="actions-container-node p-5 pt-0 grid grid-cols-2 gap-2">
+                            <button onclick="openPreviewModal('हिंदी व्याकरण और संप्रेषण', 'previews/hvs-sample.pdf', '100% Quality', 'Hindi', 'PDF', 'https://universityupdates.pythonanywhere.com/', 'University Updates Team', 'यह पुस्तक विश्वविद्यालय स्तर के राष्ट्रीय शिक्षा नीति (NEP) पाठ्यक्रम के अंतर्गत हिंदी व्याकरण और शुद्ध संप्रेषण कौशल को सरल रूप में समझाने के लिए तैयार की गई है।')" class="text-xs font-bold py-2.5 bg-slate-100 text-slate-700 rounded-lg hover:bg-slate-200 transition btn-info-target">View Info</button>
+                            <button onclick="redirectBuy('https://universityupdates.pythonanywhere.com/')" class="text-xs font-bold py-2.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 shadow-lg shadow-blue-100 transition btn-buy-target">Buy Now</button>
                         </div>
                     </div>
-                </div>
-                <div class="p-5 pt-0 grid grid-cols-2 gap-2">
-                    <button onclick="openPreviewModal('हिंदी व्याकरण और संप्रेषण', 'previews/hvs-sample.pdf', '100% Quality', 'Hindi', 'PDF', 'https://universityupdates.pythonanywhere.com/', 'University Updates Team', 'यह पुस्तक विश्वविद्यालय स्तर के राष्ट्रीय शिक्षा नीति (NEP) पाठ्यक्रम के अंतर्गत हिंदी व्याकरण और शुद्ध संप्रेषण कौशल को सरल रूप में समझाने के लिए तैयार की गई है।')" class="text-xs font-bold py-2.5 bg-slate-100 text-slate-700 rounded-lg hover:bg-slate-200 transition">View Info</button>
-                    <button onclick="redirectBuy('https://universityupdates.pythonanywhere.com/')" class="text-xs font-bold py-2.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 shadow-lg shadow-blue-100 transition">Buy Now</button>
+
                 </div>
             </div>
 
-            <div class="book-card bg-white rounded-2xl overflow-hidden flex flex-col transition-colors" data-category="ug-nep" data-searchable-keywords="social responsibility community engagement civic english academic experts division">
-                <div class="h-64 bg-slate-100 p-8 relative">
-                    <img src="images/SRCE.png" alt="Social Responsibility" class="w-full h-full object-contain drop-shadow-xl" onerror="this.src='https://via.placeholder.com/200x280?text=Social+Responsibility'">
-                    <span class="absolute top-4 right-4 bg-green-500 text-white text-[10px] font-black px-2.5 py-1 rounded-full uppercase">PDF</span>
+            <!-- SEMESTER 4 ROW WRAPPER -->
+            <div id="semesterSection-4" class="semester-wrapper space-y-4" data-semester="4">
+                <div class="semester-header-title bg-slate-900 text-white px-5 py-3 rounded-xl font-bold text-sm uppercase tracking-wider shadow-sm flex justify-between items-center">
+                    <span class="header-text-placeholder">Course Section — Semester IV</span>
+                    <span class="text-xs font-normal opacity-70">Available Library Records</span>
                 </div>
-                <div class="p-6 flex-grow flex flex-col">
-                    <h3 class="font-bold text-slate-800 leading-snug card-title">Social Responsibility and Community Engagement (English)</h3>
-                    <p class="text-xs text-slate-400 mt-1 uppercase tracking-tighter">BY UNIVERSITY UPDATES</p>
-                    <div class="mt-6 flex items-center justify-between">
-                        <div class="flex flex-col">
-                            <span class="text-2xl font-bold text-slate-900">₹25</span>
-                            <span class="text-xs line-through text-slate-400">₹35</span>
+
+                <div class="library-items-target-zone">
+                    
+                    <div id="book-srcee" class="book-card" data-category="ug-nep" data-semester="4" data-popular="true" data-searchable-keywords="social responsibility community engagement civic english academic experts division sem4 semester 4 ug-nep" data-title="Social Responsibility and Community Engagement (English)" data-madeby="Academic Experts Division" data-price="₹25" data-oldprice="₹35">
+                        <div class="img-container-node h-64 bg-slate-100 p-8 relative">
+                            <img src="images/SRCE.png" alt="Social Responsibility" class="w-full h-full object-contain drop-shadow-xl" onerror="this.src='https://via.placeholder.com/200x280?text=Social+Responsibility'">
+                            <span class="absolute top-4 right-4 bg-green-500 text-white text-[10px] font-black px-2.5 py-1 rounded-full uppercase">PDF</span>
+                        </div>
+                        <div class="info-container-node p-6 flex flex-col">
+                            <h3 class="font-bold text-slate-800 leading-snug card-title">Social Responsibility and Community Engagement (English)</h3>
+                            <p class="text-xs text-slate-400 mt-1 uppercase tracking-tighter author-subtext">BY UNIVERSITY UPDATES</p>
+                            <div class="price-wrapper-node mt-6 flex items-center justify-between">
+                                <div class="flex flex-col">
+                                    <span class="text-2xl font-bold text-slate-900 main-price-val">₹25</span>
+                                    <span class="text-xs line-through text-slate-400 old-price-val">₹35</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="actions-container-node p-5 pt-0 grid grid-cols-2 gap-2">
+                            <button onclick="openPreviewModal('Social Responsibility and Community Engagement', 'previews/missing-file.pdf', '100% Quality', 'English', 'PDF', 'https://universityupdates.pythonanywhere.com/', 'Academic Experts Division', 'An introductory guidebook designed to cover civic responsibility, framework parameters of NGO systems, and localized outreach initiatives.')" class="text-xs font-bold py-2.5 bg-slate-100 text-slate-700 rounded-lg hover:bg-slate-200 transition btn-info-target">View Info</button>
+                            <button onclick="redirectBuy('https://universityupdates.pythonanywhere.com/')" class="text-xs font-bold py-2.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 shadow-lg shadow-blue-100 transition btn-buy-target">Buy Now</button>
                         </div>
                     </div>
-                </div>
-                <div class="p-5 pt-0 grid grid-cols-2 gap-2">
-                    <button onclick="openPreviewModal('Social Responsibility and Community Engagement', 'previews/missing-file.pdf', '100% Quality', 'English', 'PDF', 'https://universityupdates.pythonanywhere.com/', 'Academic Experts Division', 'An introductory guidebook designed to cover civic responsibility, framework parameters of NGO systems, and localized outreach initiatives.')" class="text-xs font-bold py-2.5 bg-slate-100 text-slate-700 rounded-lg hover:bg-slate-200 transition">View Info</button>
-                    <button onclick="redirectBuy('https://universityupdates.pythonanywhere.com/')" class="text-xs font-bold py-2.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 shadow-lg shadow-blue-100 transition">Buy Now</button>
+
+                    <div id="book-srceh" class="book-card" data-category="ug-nep" data-semester="4" data-popular="true" data-searchable-keywords="सामाजिक उत्तरदायित्व और सामुदायिक सहभागिता hindi samajik uttardayitwa uu editorial guild sem4 semester 4 ug-nep" data-title="सामाजिक उत्तरदायित्व और सामुदायिक सहभागिता" data-madeby="UU Editorial Guild" data-price="₹25" data-oldprice="₹35">
+                        <div class="img-container-node h-64 bg-slate-100 p-8 relative">
+                            <img src="images/SRCEH.png" alt="Social Responsibility Hindi" class="w-full h-full object-contain drop-shadow-xl" onerror="this.src='https://via.placeholder.com/200x280?text=Social+Responsibility+Hindi'">
+                            <span class="absolute top-4 right-4 bg-green-500 text-white text-[10px] font-black px-2.5 py-1 rounded-full uppercase">PDF</span>
+                        </div>
+                        <div class="info-container-node p-6 flex flex-col">
+                            <h3 class="font-bold text-slate-800 leading-snug card-title">सामाजिक उत्तरदायित्व और सामुदायिक सहभागिता</h3>
+                            <p class="text-xs text-slate-400 mt-1 uppercase tracking-tighter author-subtext">BY UNIVERSITY UPDATES</p>
+                            <div class="price-wrapper-node mt-6 flex items-center justify-between">
+                                <div class="flex flex-col">
+                                    <span class="text-2xl font-bold text-slate-900 main-price-val">₹25</span>
+                                    <span class="text-xs line-through text-slate-400 old-price-val">₹35</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="actions-container-node p-5 pt-0 grid grid-cols-2 gap-2">
+                            <button onclick="openPreviewModal('सामाजिक उत्तरदायित्व और सामुदायिक सहभागिता', 'previews/srceh-sample.pdf', '100% Quality', 'Hindi', 'PDF', 'https://universityupdates.pythonanywhere.com/', 'UU Editorial Guild', 'यह नोट्स सामुदायिक जुड़ाव, सामाजिक सेवा और नैतिक जिम्मेदारियों के विभिन्न सिद्धांतों को सहज हिंदी व्याख्याओं के माध्यम से छात्रों तक पहुंचाते हैं।')" class="text-xs font-bold py-2.5 bg-slate-100 text-slate-700 rounded-lg hover:bg-slate-200 transition btn-info-target">View Info</button>
+                            <button onclick="redirectBuy('https://universityupdates.pythonanywhere.com/')" class="text-xs font-bold py-2.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 shadow-lg shadow-blue-100 transition btn-buy-target">Buy Now</button>
+                        </div>
+                    </div>
+
                 </div>
             </div>
 
-            <div class="book-card bg-white rounded-2xl overflow-hidden flex flex-col transition-colors" data-category="ug-nep" data-searchable-keywords="सामाजिक उत्तरदायित्व और सामुदायिक सहभागिता hindi samajik uttardayitwa uu editorial guild">
-                <div class="h-64 bg-slate-100 p-8 relative">
-                    <img src="images/SRCEH.png" alt="Social Responsibility Hindi" class="w-full h-full object-contain drop-shadow-xl" onerror="this.src='https://via.placeholder.com/200x280?text=Social+Responsibility+Hindi'">
-                    <span class="absolute top-4 right-4 bg-green-500 text-white text-[10px] font-black px-2.5 py-1 rounded-full uppercase">PDF</span>
-                </div>
-                <div class="p-6 flex-grow flex flex-col">
-                    <h3 class="font-bold text-slate-800 leading-snug card-title">सामाजिक उत्तरदायित्व और सामुदायिक सहभागिता</h3>
-                    <p class="text-xs text-slate-400 mt-1 uppercase tracking-tighter">BY UNIVERSITY UPDATES</p>
-                    <div class="mt-6 flex items-center justify-between">
-                        <div class="flex flex-col">
-                            <span class="text-2xl font-bold text-slate-900">₹25</span>
-                            <span class="text-xs line-through text-slate-400">₹35</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="p-5 pt-0 grid grid-cols-2 gap-2">
-                    <button onclick="openPreviewModal('सामाजिक उत्तरदायित्व और सामुदायिक सहभागिता', 'previews/srceh-sample.pdf', '100% Quality', 'Hindi', 'PDF', 'https://universityupdates.pythonanywhere.com/', 'UU Editorial Guild', 'यह नोट्स सामुदायिक जुड़ाव, सामाजिक सेवा और नैतिक जिम्मेदारियों के विभिन्न सिद्धांतों को सहज हिंदी व्याख्याओं के माध्यम से छात्रों तक पहुंचाते हैं।')" class="text-xs font-bold py-2.5 bg-slate-100 text-slate-700 rounded-lg hover:bg-slate-200 transition">View Info</button>
-                    <button onclick="redirectBuy('https://universityupdates.pythonanywhere.com/')" class="text-xs font-bold py-2.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 shadow-lg shadow-blue-100 transition">Buy Now</button>
-                </div>
-            </div>
         </div>
     </main>
 
-        <!-- TAB INFRASTRUCTURE COMPONENT SECTION -->
+    <!-- TAB INFRASTRUCTURE COMPONENT SECTION -->
     <section id="tab-section" class="bg-slate-900 text-white py-12">
         <div class="max-w-4xl mx-auto px-6">
             <div class="flex flex-wrap justify-center gap-4 mb-12">
@@ -306,10 +352,10 @@
             <div id="instructions" class="tab-content active space-y-4">
                 <h3 class="text-2xl font-bold heading-font">4-Step Simple Process</h3>
                 <ol class="space-y-4 text-slate-400">
-                    <li class="flex gap-4 items-start"><span class="bg-blue-600 text-white w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 font-bold text-xs mt-0.5">1</span> Choose your notes and click "Buy Now" which redirects to our secure University Updates login webpage.</li>
+                    <ul><li class="flex gap-4 items-start"><span class="bg-blue-600 text-white w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 font-bold text-xs mt-0.5">1</span> Choose your notes and click "Buy Now" which redirects to our secure University Updates login webpage.</li>
                     <li class="flex gap-4 items-start"><span class="bg-blue-600 text-white w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 font-bold text-xs mt-0.5">2</span> Login or Register (If you are a new user).</li>
                     <li class="flex gap-4 items-start"><span class="bg-blue-600 text-white w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 font-bold text-xs mt-0.5">3</span> Select Notes and click on Add to Cart then Checkout & Complete payment via UPI, Card or Netbanking.</li>
-                    <li class="flex gap-4 items-start"><span class="bg-blue-600 text-white w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 font-bold text-xs mt-0.5">4</span> After successful payment, Wait for 5 seconds. The PDF will be available automatically in your login.</li>
+                    <li class="flex gap-4 items-start"><span class="bg-blue-600 text-white w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 font-bold text-xs mt-0.5">4</span> After successful payment, Wait for 5 seconds. The PDF will be available automatically in your login.</li></ul>
                 </ol> 
             </div>
             
@@ -375,10 +421,65 @@
                             <li>Prevent fraud and illegal activities</li>
                         </ul>
                     </div>
+                    
+                    <div>
+                        <strong class="text-white block mb-1">Sharing Your Information:</strong>
+                        <ul class="list-disc pl-5 space-y-1">
+                            <li>We may share your information with third parties only if they adopt appropriate security standards and only for the purposes mentioned above.</li>
+                        </ul>
+                    </div>
+                     <div>
+                        <strong class="text-white block mb-1">Data Retention:</strong>
+                        <ul class="list-disc pl-5 space-y-1">
+                            <li>We retain information for as long as necessary to fulfill the purposes outlined in this policy. Chat and test attempt data are kept for 2 years and then automatically deleted.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <strong class="text-white block mb-1">Cookies and Third-Party Links:</strong>
+                        <ul class="list-disc pl-5 space-y-1">
+                            <li>We use cookies to improve your experience and track user trends. You can disable cookies in your browser settings. Our website may contain links to third-party sites with different privacy policies. We are not responsible for their practices.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <strong class="text-white block mb-1">Your Privacy Rights:</strong>
+                        <ul class="list-disc pl-5 space-y-1">
+                            <li>Access and request correction of your personal data</li>
+<li>Request deletion of your personal data</li>
+<li>Object to the processing of your personal data</li>
+<li>Request data portability</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <strong class="text-white block mb-1">Updates to this Policy:</strong>
+                        <ul class="list-disc pl-5 space-y-1">
+                            <li>We may update this policy at any time. We will notify you of any changes that affect your rights.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <strong class="text-white block mb-1">Governing Law and Jurisdiction:</strong>
+                        <ul class="list-disc pl-5 space-y-1">
+                            <li>This policy is governed by Indian law, and any disputes will be resolved through arbitration in Muzaffarnagar.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <strong class="text-white block mb-1">Age Requirements:</strong>
+                        <ul class="list-disc pl-5 space-y-1">
+                            <li>The minimum age to use our platform is 16 for India. If you are under the required age, parental consent is necessary.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <strong class="text-white block mb-1">Additional Information:</strong>
+                        <ul class="list-disc pl-5 space-y-1">
+                            <li>You have the option to opt out of providing information or withdraw information you have already provided.</li>
+                            <li>For deletion of your account please contact us via E-Mail universityupdates08@gmail.com</li>
+                           <li> This Policy is subject to change, and we will notify you of any changes.</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
+
 
     <div id="previewModal">
         <div class="bg-white rounded-2xl w-full max-w-3xl overflow-hidden flex flex-col md:flex-row shadow-2xl relative transition-colors dark:bg-slate-900">
@@ -449,47 +550,229 @@
         let currentBuyUrl = "";
         let selectedCategory = "all";
 
-        // FUNCTIONALITY: Engine logic to dynamically filter grid content using header search input keywords
+        document.addEventListener("DOMContentLoaded", () => {
+            renderActiveViewEngine();
+        });
+
+        // VIEW RENDERING SWITCH: Dynamic UI layout formatting engine
+        function renderActiveViewEngine() {
+            const wrappers = document.querySelectorAll('.semester-wrapper');
+            const heading = document.getElementById('librarySectionHeading');
+            const subtext = document.getElementById('librarySectionSubtext');
+            const searchQuery = document.getElementById('globalSearchInput').value.toLowerCase().trim();
+
+            if (selectedCategory === "all" && searchQuery === "") {
+                // ALL BOOKS TAB SELECTED -> Show absolute visual standard book grid format cards natively
+                heading.innerText = "All Books";
+                subtext.innerText = "Explore our full repository of digital resource guides.";
+                
+                wrappers.forEach(wrap => {
+                    const headerNode = wrap.querySelector('.semester-header-title');
+                    headerNode.classList.add('hidden'); // Hide the tabular horizontal course headings panel
+                    
+                    const targetZone = wrap.querySelector('.library-items-target-zone');
+                    targetZone.className = "library-items-target-zone grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8";
+                    
+                    const books = targetZone.querySelectorAll('.book-card');
+                    books.forEach(book => {
+                        book.style.setProperty('display', 'flex', 'important');
+                        restoreOriginalCardMarkup(book); // Force standard block element formatting rules
+                    });
+
+                    wrap.style.setProperty('display', 'block', 'important');
+                });
+            } else {
+                // COURSE FILTER/SEARCH SELECTED -> Collapse objects directly into thin list data rows grouped under header markers
+                if(searchQuery !== "") {
+                    heading.innerText = "Search Results";
+                    subtext.innerText = `Showing matching assets for "${searchQuery}"`;
+                } else {
+                    heading.innerText = `${selectedCategory.toUpperCase()} Study Materials`;
+                    subtext.innerText = "Available resources arranged sequentially by Academic Semesters.";
+                }
+
+                wrappers.forEach(wrap => {
+                    const headerNode = wrap.querySelector('.semester-header-title');
+                    const labelPlaceholder = headerNode.querySelector('.header-text-placeholder');
+                    const currentSem = wrap.getAttribute('data-semester');
+                    
+                    labelPlaceholder.innerText = `${selectedCategory.toUpperCase()} — Semester ${currentSem}`;
+                    
+                    const targetZone = wrap.querySelector('.library-items-target-zone');
+                    targetZone.className = "library-items-target-zone flex flex-col gap-3 mt-4";
+                    
+                    let activeCount = 0;
+                    const books = targetZone.querySelectorAll('.book-card');
+                    
+                    books.forEach(book => {
+                        const cat = book.getAttribute('data-category');
+                        const keywords = book.getAttribute('data-searchable-keywords').toLowerCase();
+                        
+                        const matchCat = (selectedCategory === "all" || cat === selectedCategory);
+                        const matchSearch = (searchQuery === "" || keywords.includes(searchQuery));
+                        
+                        if (matchCat && matchSearch) {
+                            book.style.setProperty('display', 'block', 'important');
+                            transformCardToTableRowMarkup(book); // Force fluid responsive inline-table structure transformations
+                            activeCount++;
+                        } else {
+                            book.style.setProperty('display', 'none', 'important');
+                        }
+                    });
+
+                    if (activeCount > 0) {
+                        wrap.style.setProperty('display', 'block', 'important');
+                        headerNode.classList.remove('hidden');
+                    } else {
+                        wrap.style.setProperty('display', 'none', 'important');
+                        headerNode.classList.add('hidden');
+                    }
+                });
+            }
+
+            let visibleTotal = 0;
+            document.querySelectorAll('.book-card').forEach(b => {
+                if(b.style.display !== 'none') visibleTotal++;
+            });
+
+            document.getElementById('searchEmptyState').classList.toggle('hidden', visibleTotal > 0);
+        }
+
+        // ELEMENT MUTATOR LOGIC: Converts block elements directly into clean desktop horizontal/mobile vertical line rows
+        function transformCardToTableRowMarkup(cardNode) {
+            cardNode.className = "book-card bg-white dark:bg-slate-900 rounded-xl p-4 flex flex-col md:flex-row md:items-center justify-between gap-4 border border-slate-100 dark:border-slate-800 shadow-sm transition-all";
+            
+            const imgBlock = cardNode.querySelector('.img-container-node');
+            if (imgBlock) imgBlock.className = "hidden"; 
+            
+            const infoBlock = cardNode.querySelector('.info-container-node');
+            if (infoBlock) infoBlock.className = "flex-grow flex flex-col md:flex-row md:items-center md:justify-between gap-2";
+            
+            const titleNode = cardNode.querySelector('.card-title');
+            if (titleNode) titleNode.className = "font-bold text-slate-800 dark:text-white text-sm md:w-1/3 card-title";
+            
+            const subtitleNode = cardNode.querySelector('.author-subtext');
+            if (subtitleNode) subtitleNode.className = "text-[10px] bg-slate-100 text-slate-500 dark:bg-slate-800 dark:text-slate-400 px-2.5 py-1 rounded font-bold tracking-tight uppercase max-w-max author-subtext";
+            
+            const priceWrapper = cardNode.querySelector('.price-wrapper-node');
+            if (priceWrapper) priceWrapper.className = "flex items-center gap-2 mt-1 md:mt-0 price-wrapper-node";
+            
+            const mainPrice = cardNode.querySelector('.main-price-val');
+            if (mainPrice) mainPrice.className = "text-base font-bold text-blue-600 main-price-val";
+
+            const actionsBlock = cardNode.querySelector('.actions-container-node');
+            if (actionsBlock) actionsBlock.className = "flex gap-2 w-full md:w-auto mt-2 md:mt-0 border-t pt-3 md:pt-0 md:border-0 border-slate-100 dark:border-slate-800 actions-container-node";
+
+            const infoBtn = cardNode.querySelector('.btn-info-target');
+            if (infoBtn) infoBtn.className = "text-[11px] font-bold px-4 py-2 bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 transition flex-1 md:flex-none text-center btn-info-target";
+
+            const buyBtn = cardNode.querySelector('.btn-buy-target');
+            if (buyBtn) buyBtn.className = "text-[11px] font-bold px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 shadow-sm transition flex-1 md:flex-none text-center btn-buy-target";
+        }
+
+        // ELEMENT MUTATOR LOGIC: Restores the card styles
+        function restoreOriginalCardMarkup(cardNode) {
+            cardNode.className = "book-card bg-white rounded-2xl overflow-hidden flex flex-col transition-colors";
+            
+            const imgBlock = cardNode.querySelector('.img-container-node');
+            if (imgBlock) imgBlock.className = "h-64 bg-slate-100 p-8 relative img-container-node";
+            
+            const infoBlock = cardNode.querySelector('.info-container-node');
+            if (infoBlock) infoBlock.className = "p-6 flex-grow flex flex-col info-container-node";
+            
+            const titleNode = cardNode.querySelector('.card-title');
+            if (titleNode) titleNode.className = "font-bold text-slate-800 leading-snug card-title";
+            
+            const subtitleNode = cardNode.querySelector('.author-subtext');
+            if (subtitleNode) subtitleNode.className = "text-xs text-slate-400 mt-1 uppercase tracking-tighter author-subtext";
+            
+            const priceWrapper = cardNode.querySelector('.price-wrapper-node');
+            if (priceWrapper) priceWrapper.className = "mt-6 flex items-center justify-between price-wrapper-node";
+            
+            const mainPrice = cardNode.querySelector('.main-price-val');
+            if (mainPrice) mainPrice.className = "text-2xl font-bold text-slate-900 main-price-val";
+
+            const actionsBlock = cardNode.querySelector('.actions-container-node');
+            if (actionsBlock) actionsBlock.className = "p-5 pt-0 grid grid-cols-2 gap-2 actions-container-node";
+
+            const infoBtn = cardNode.querySelector('.btn-info-target');
+            if (infoBtn) infoBtn.className = "text-xs font-bold py-2.5 bg-slate-100 text-slate-700 rounded-lg hover:bg-slate-200 transition btn-info-target";
+
+            const buyBtn = cardNode.querySelector('.btn-buy-target');
+            if (buyBtn) buyBtn.className = "text-xs font-bold py-2.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 shadow-lg shadow-blue-100 transition btn-buy-target";
+        }
+
         function executeLiveSearch() {
             const searchQuery = document.getElementById('globalSearchInput').value.toLowerCase().trim();
             const books = document.querySelectorAll('.book-card');
-            const emptyState = document.getElementById('searchEmptyState');
-            let visibleCount = 0;
+            const dropdown = document.getElementById('globalSearchDropdown');
+            const container = document.getElementById('dropdownItemsContainer');
+            
+            container.innerHTML = "";
+            let matchPool = [];
 
             books.forEach(book => {
-                const bookCategory = book.getAttribute('data-category');
                 const keywords = book.getAttribute('data-searchable-keywords').toLowerCase();
-                
-                // Matches active filter criteria tag AND matching keyword criteria strings
-                const matchCategory = (selectedCategory === 'all' || bookCategory === selectedCategory);
-                const matchSearch = (searchQuery === "" || keywords.includes(searchQuery));
+                const title = book.getAttribute('data-title');
+                const targetId = book.getAttribute('id');
+                const cat = book.getAttribute('data-category').toUpperCase();
+                const sem = book.getAttribute('data-semester');
 
-                if (matchCategory && matchSearch) {
-                    book.style.setProperty('display', 'flex', 'important');
-                    visibleCount++;
-                } else {
-                    book.style.setProperty('display', 'none', 'important');
+                if (searchQuery !== "" && keywords.includes(searchQuery)) {
+                    matchPool.push({ title, id: targetId, cat, sem });
                 }
             });
 
-            // Toggle empty placeholder view state when visibility array metrics equal zero
-            if (visibleCount === 0) {
-                emptyState.classList.remove('hidden');
+            if (matchPool.length > 0) {
+                dropdown.classList.remove('hidden');
+                matchPool.forEach(item => {
+                    const row = document.createElement('button');
+                    row.type = "button";
+                    row.className = "w-full text-left px-5 py-3 text-xs font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors flex items-center justify-between border-b border-slate-50 dark:border-slate-800/50 last:border-0";
+                    row.innerHTML = `
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-book text-blue-500 text-[10px]"></i>
+                            <span class="font-semibold">${item.title}</span>
+                        </div>
+                        <span class="text-[9px] bg-blue-50 text-blue-600 dark:bg-slate-800 dark:text-blue-400 px-2 py-0.5 rounded-full font-bold uppercase tracking-tight">${item.cat} | Sem ${item.sem}</span>
+                    `;
+                    
+                    row.onclick = () => {
+                        document.getElementById('globalSearchInput').value = item.title;
+                        dropdown.classList.add('hidden');
+                        
+                        selectedCategory = "all";
+                        document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('bg-slate-900', 'text-white'));
+                        document.getElementById('catBtn-all').classList.add('bg-slate-900', 'text-white');
+                        
+                        renderActiveViewEngine();
+                        
+                        const targetElement = document.getElementById(item.id);
+                        if(targetElement) {
+                            targetElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                            targetElement.classList.add('ring-2', 'ring-blue-500');
+                            setTimeout(() => targetElement.classList.remove('ring-2', 'ring-blue-500'), 2000);
+                        }
+                    };
+                    container.appendChild(row);
+                });
             } else {
-                emptyState.classList.add('hidden');
+                dropdown.classList.add('hidden');
             }
+
+            renderActiveViewEngine();
         }
 
         function filterCategory(category, btn) {            
             selectedCategory = category;
             document.querySelectorAll('.category-btn').forEach(b => {                
                 b.classList.remove('bg-slate-900', 'text-white');                
-                b.classList.add('text-slate-600');            
+                b.classList.add('text-slate-600', 'dark:text-slate-400');            
             });            
             btn.classList.add('bg-slate-900', 'text-white');            
+            btn.classList.remove('text-slate-600', 'dark:text-slate-400');
             
-            // Re-run dynamic search parameters matrix to safely balance categories and strings
-            executeLiveSearch();
+            renderActiveViewEngine();
         }
 
         function toggleUtilityDropdown() {
@@ -535,6 +818,7 @@
             document.documentElement.style.setProperty('--base-font-size', '16px');
         }
 
+        // FUNCTIONALITY: Active content tab tracking
         function showTab(tabId) {            
             document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));            
             document.querySelectorAll('.tab-btn').forEach(btn => {                
@@ -559,7 +843,7 @@
                 <div class="space-y-4">                    
                     <p class="text-sm">1. Choose your notes and click "Buy Now" which redirects to our secure University Updates login webpage.</p>                    
                     <p class="text-sm">2. Click on Register (If you are a new user) or Login.</p>                    
-                    <p class="text-sm">3. elect Notes and click on Add to Cart then Checkout & Complete payment via UPI, Card or Netbanking.</p>                    
+                    <p class="text-sm">3. Select Notes and click on Add to Cart then Checkout & Complete payment via UPI, Card or Netbanking.</p>                    
                     <p class="text-sm">4. After successful payment, <strong>Wait for 5 seconds</strong>. The PDF will be available automatically in your login. Do not refresh!</p>                
                 </div>            `;            
             const btn = document.getElementById('proceedBuyBtn');            
@@ -582,7 +866,7 @@
             const loader = document.getElementById('modalLoader');            
             const iframe = document.getElementById('pdfPreview');            
             const fallback = document.getElementById('noPreviewFallback');
-                        
+                                    
             document.getElementById('modalTitle').innerText = title;            
             document.getElementById('modalQuality').innerText = quality;            
             document.getElementById('modalLang').innerText = lang;            
@@ -608,7 +892,7 @@
             }, 3500);
 
             iframe.src = pdfSrc;            
-                        
+                                    
             iframe.onload = function() {            
                 clearTimeout(connectionTimeout);
                 try {
@@ -643,7 +927,13 @@
 
         window.onclick = function(event) {            
             if (event.target == document.getElementById('previewModal')) closeModal();            
-            if (event.target == document.getElementById('instructionsModal')) closeInstructions();        
+            if (event.target == document.getElementById('instructionsModal')) closeInstructions();            
+            
+            const searchInput = document.getElementById('globalSearchInput');
+            const searchMenu = document.getElementById('globalSearchDropdown');
+            if (event.target !== searchInput && !searchMenu.contains(event.target)) {
+                searchMenu.classList.add('hidden');
+            }
         }
     </script>
 </body>
