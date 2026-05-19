@@ -311,6 +311,7 @@
             .course__tabs2 { padding: 4px 0px; gap: 6px; }
             .course__tabs2 .nav-link { padding: 6px 12px; font-size: 9.5px; letter-spacing: 0.01em; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
             .course_btn_navnew { display: none !important; } /* Eliminate button collision rules */
+             
             .mock-character-img { max-width: 280px; }
         }
     </style>
@@ -541,29 +542,29 @@
                     <a class="course_btn_navnew btnPrevious" onclick="scrollTabs(-1)"><i class="fa fa-angle-left"></i></a>
                     
                     <ul id="tabsContainer" class="nav nav-tabs tbsew-ew course__tabs2" role="tablist">
-                        <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#tabs_upsssc-exams" role="tab" aria-selected="false"><b>UPSSSC Exams</b></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#tabs_uppsc-exams" role="tab" aria-selected="false"><b>UPPSC Exams</b></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#tabs_central-govt-exams" role="tab" aria-selected="false"><b>Central Govt Exams</b></a>
-                        </li>
                         <li class="nav-item active">
-                            <a class="nav-link active show" data-toggle="tab" href="#tabs_teaching-exams" role="tab" aria-selected="true"><b>Teaching Exams</b></a>
+                            <a class="nav-link active show" data-toggle="tab" href="#tabs_popular" role="tab" aria-selected="true"><b>Popular PDFs</b></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#tabs_si/asi/police-exams" role="tab"><b>SI/ASI/Police Exams</b></a>
+                            <a class="nav-link" data-toggle="tab" href="#tabs_ug-nep" role="tab" aria-selected="false"><b>UG-NEP</b></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#tabs_subject-wise-foundation" role="tab"><b>Subject Wise Foundation</b></a>
+                            <a class="nav-link" data-toggle="tab" href="#tabs_pg-nep" role="tab" aria-selected="false"><b>PG-NEP</b></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#tabs_ahc/uppcl-exams" role="tab"><b>AHC/UPPCL Exams</b></a>
+                            <a class="nav-link" data-toggle="tab" href="#tabs_llb" role="tab" aria-selected="false"><b>LL.B.</b></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#tabs_miscellaneous/state&nbsp;exams" role="tab"><b>Miscellaneous/State Exams</b></a>
+                            <a class="nav-link" data-toggle="tab" href="#tabs_law-others" role="tab"><b>Other Law Courses</b></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#tabs_bba" role="tab"><b>BBA</b></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#tabs_bca" role="tab"><b>BCA</b></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#tabs_miscellaneous-exams" role="tab"><b>Miscellaneous Exams</b></a>
                         </li>
                     </ul>
                     
@@ -599,29 +600,40 @@
             <p class="text-sm text-slate-500 mt-1">Double check spelling or swap book filter criteria settings above.</p>
         </div>
 
-        <div id="libraryContainer" class="space-y-12 w-full">
+        <div id="libraryContainer" class="space-y-4 w-full">
             
-            <div id="semesterSection-2" class="semester-wrapper space-y-4 w-full" data-semester="2">
-                <div class="semester-header-title bg-slate-900 text-white px-5 py-3 rounded-xl font-bold text-sm uppercase tracking-wider shadow-sm flex justify-between items-center w-full">
+            <div id="semesterSection-2" class="semester-wrapper space-y-1 w-full" data-semester="2">
+                <div class="semester-header-title bg-slate-900 text-white px-5 py-1 rounded-xl font-bold text-sm uppercase tracking-wider shadow-sm flex justify-between items-center w-full">
                     <span class="header-text-placeholder">Course Section — Semester II</span>
-                    <span class="text-xs font-normal opacity-70">Available Library Records</span>
-                </div>
+                   </div>
 
                 <div class="library-items-target-zone w-full">
                     
                     
-                    <div id="book-hvs" class="book-card" data-category="ug-nep" data-semester="2" data-popular="true" data-searchable-keywords="hindi vyakaran hindi व्याकरण और संप्रेषण university updates team sem2 semester 2 ug-nep" data-title="हिंदी व्याकरण और संप्रेषण" data-madeby="University Updates Team" data-price="₹35" data-oldprice="₹45">
+                    
+
+                </div>
+            </div>
+
+            <div id="semesterSection-4" class="semester-wrapper space-y-1 w-full" data-semester="4">
+                <div class="semester-header-title bg-slate-900 text-white px-5 py-1 rounded-xl font-bold text-sm uppercase tracking-wider shadow-sm flex justify-between items-center w-full">
+                    <span class="header-text-placeholder">Course Section — Semester IV</span>
+                 </div>
+
+                <div class="library-items-target-zone w-full">
+                    
+                    <div id="book-hvs" class="book-card" data-category="ug-nep" data-semester="4" data-popular="true" data-searchable-keywords="hindi vyakaran hindi व्याकरण और संप्रेषण university updates team sem4 semester 4 ug-nep" data-title="हिंदी व्याकरण और संप्रेषण" data-madeby="University Updates Team" data-price="₹49" data-oldprice="₹65">
                         <div class="img-container-node h-64 bg-slate-100 p-8 relative">
                             <img src="images/HVS.png" alt="Hindi" class="w-full h-full object-contain drop-shadow-xl" onerror="this.src='https://via.placeholder.com/200x280?text=Hindi+Vyakaran'">
                             <span class="absolute top-4 right-4 bg-green-500 text-white text-[10px] font-black px-2.5 py-1 rounded-full uppercase">PDF</span>
                         </div>
                         <div class="info-container-node p-6 flex flex-col">
                             <h3 class="font-bold text-slate-800 leading-snug card-title">हिंदी व्याकरण और संप्रेषण</h3>
-                            <p class="text-xs text-slate-400 mt-1 uppercase tracking-tighter author-subtext">BY UNIVERSITY UPDATES</p>
+                            <p class="text-xs text-slate-400 mt-1 uppercase tracking-tighter author-subtext">BY TEAM UNIVERSITY UPDATES</p>
                             <div class="price-wrapper-node mt-6 flex items-center justify-between">
                                 <div class="flex flex-col">
-                                    <span class="text-2xl font-bold text-slate-900 main-price-val">₹35</span>
-                                    <span class="text-xs line-through text-slate-400 old-price-val">₹45</span>
+                                    <span class="text-2xl font-bold text-slate-900 main-price-val">₹49</span>
+                                    <span class="text-xs line-through text-slate-400 old-price-val">₹65</span>
                                 </div>
                             </div>
                         </div>
@@ -630,31 +642,20 @@
                             <button onclick="redirectBuy('https://universityupdates.pythonanywhere.com/')" class="text-xs font-bold py-2.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 shadow-lg shadow-blue-100 transition btn-buy-target">Buy Now</button>
                         </div>
                     </div>
-
-                </div>
-            </div>
-
-            <div id="semesterSection-4" class="semester-wrapper space-y-4 w-full" data-semester="4">
-                <div class="semester-header-title bg-slate-900 text-white px-5 py-3 rounded-xl font-bold text-sm uppercase tracking-wider shadow-sm flex justify-between items-center w-full">
-                    <span class="header-text-placeholder">Course Section — Semester IV</span>
-                    <span class="text-xs font-normal opacity-70">Available Library Records</span>
-                </div>
-
-                <div class="library-items-target-zone w-full">
                     
                     
-                    <div id="book-srcee" class="book-card" data-category="ug-nep" data-semester="4" data-popular="true" data-searchable-keywords="social responsibility community engagement civic english academic experts division sem4 semester 4 ug-nep" data-title="Social Responsibility and Community Engagement (English)" data-madeby="Academic Experts Division" data-price="₹25" data-oldprice="₹35">
+                    <div id="book-srcee" class="book-card" data-category="ug-nep" data-semester="4" data-popular="true" data-searchable-keywords="social responsibility community engagement civic english academic experts division sem4 semester 4 ug-nep" data-title="Social Responsibility and Community Engagement (English)" data-madeby="Academic Experts Division" data-price="₹49" data-oldprice="₹65">
                         <div class="img-container-node h-64 bg-slate-100 p-8 relative">
                             <img src="images/SRCE.png" alt="Social Responsibility" class="w-full h-full object-contain drop-shadow-xl" onerror="this.src='https://via.placeholder.com/200x280?text=Social+Responsibility'">
                             <span class="absolute top-4 right-4 bg-green-500 text-white text-[10px] font-black px-2.5 py-1 rounded-full uppercase">PDF</span>
                         </div>
                         <div class="info-container-node p-6 flex flex-col">
                             <h3 class="font-bold text-slate-800 leading-snug card-title">Social Responsibility and Community Engagement (English)</h3>
-                            <p class="text-xs text-slate-400 mt-1 uppercase tracking-tighter author-subtext">BY UNIVERSITY UPDATES</p>
+                            <p class="text-xs text-slate-400 mt-1 uppercase tracking-tighter author-subtext">BY TEAM UNIVERSITY UPDATES</p>
                             <div class="price-wrapper-node mt-6 flex items-center justify-between">
                                 <div class="flex flex-col">
-                                    <span class="text-2xl font-bold text-slate-900 main-price-val">₹25</span>
-                                    <span class="text-xs line-through text-slate-400 old-price-val">₹35</span>
+                                    <span class="text-2xl font-bold text-slate-900 main-price-val">₹49</span>
+                                    <span class="text-xs line-through text-slate-400 old-price-val">₹65</span>
                                 </div>
                             </div>
                         </div>
@@ -664,18 +665,18 @@
                         </div>
                     </div>
 
-                    <div id="book-srceh" class="book-card" data-category="ug-nep" data-semester="4" data-popular="true" data-searchable-keywords="सामाजिक उत्तरदायित्व और सामुदायिक सहभागिता hindi samajik uttardayitwa uu editorial guild sem4 semester 4 ug-nep" data-title="सामाजिक उत्तरदायित्व और सामुदायिक सहभागिता" data-madeby="UU Editorial Guild" data-price="₹25" data-oldprice="₹35">
+                    <div id="book-srceh" class="book-card" data-category="ug-nep" data-semester="4" data-popular="true" data-searchable-keywords="सामाजिक उत्तरदायित्व और सामुदायिक सहभागिता hindi samajik uttardayitwa uu editorial guild sem4 semester 4 ug-nep" data-title="सामाजिक उत्तरदायित्व और सामुदायिक सहभागिता" data-madeby="UU Editorial Guild" data-price="₹49" data-oldprice="₹65">
                         <div class="img-container-node h-64 bg-slate-100 p-8 relative">
                             <img src="images/SRCEH.png" alt="Social Responsibility Hindi" class="w-full h-full object-contain drop-shadow-xl" onerror="this.src='https://via.placeholder.com/200x280?text=Social+Responsibility+Hindi'">
                             <span class="absolute top-4 right-4 bg-green-500 text-white text-[10px] font-black px-2.5 py-1 rounded-full uppercase">PDF</span>
                         </div>
                         <div class="info-container-node p-6 flex flex-col">
                             <h3 class="font-bold text-slate-800 leading-snug card-title">सामाजिक उत्तरदायित्व और सामुदायिक सहभागिता</h3>
-                            <p class="text-xs text-slate-400 mt-1 uppercase tracking-tighter author-subtext">BY UNIVERSITY UPDATES</p>
+                            <p class="text-xs text-slate-400 mt-1 uppercase tracking-tighter author-subtext">BY TEAM UNIVERSITY UPDATES</p>
                             <div class="price-wrapper-node mt-6 flex items-center justify-between">
                                 <div class="flex flex-col">
-                                    <span class="text-2xl font-bold text-slate-900 main-price-val">₹25</span>
-                                    <span class="text-xs line-through text-slate-400 old-price-val">₹35</span>
+                                    <span class="text-2xl font-bold text-slate-900 main-price-val">₹49</span>
+                                    <span class="text-xs line-through text-slate-400 old-price-val">₹65</span>
                                 </div>
                             </div>
                         </div>
@@ -691,13 +692,14 @@
     </main>
 
     <section id="tab-section" class="bg-slate-900 text-white py-12">
-        <div class="max-w-4xl mx-auto px-6">
+        <div class="max-w-5xl mx-auto px-6">
             <div class="flex flex-wrap justify-center gap-2 sm:gap-4 mb-12 border-b border-slate-800 pb-4">
                 <button onclick="showTab('instructions')" class="tab-btn border-b-2 border-blue-500 px-3 py-2 text-sm font-bold text-white transition-all">How to Buy</button>
                 <button onclick="showTab('about')" class="tab-btn border-b-2 border-transparent px-3 py-2 text-sm font-bold text-slate-400 transition-all">About Notes</button>
                 <button onclick="showTab('pp')" class="tab-btn border-b-2 border-transparent px-3 py-2 text-sm font-bold text-slate-400 transition-all">Privacy Policy</button>
                 <button onclick="showTab('rp')" class="tab-btn border-b-2 border-transparent px-3 py-2 text-sm font-bold text-slate-400 transition-all">Refund Policy</button>
                 <button onclick="showTab('terms')" class="tab-btn border-b-2 border-transparent px-3 py-2 text-sm font-bold text-slate-400 transition-all">Terms & Conditions</button>
+                <button onclick="showTab('faq')" class="tab-btn border-b-2 border-transparent px-3 py-2 text-sm font-bold text-slate-400 transition-all">FAQs</button>
                 <button onclick="showTab('contact')" class="tab-btn border-b-2 border-transparent px-3 py-2 text-sm font-bold text-slate-400 transition-all">Contact Us</button>
             </div>
             
@@ -734,6 +736,13 @@
                 <h3 class="text-2xl font-bold heading-font">Terms & Conditions</h3>
                 <div class="text-slate-400 text-sm space-y-3">
                     <p>• By accessing and using University Updates, you agree to abide by our terms and conditions. Our platform provides educational content for University Exams, and users must use the material solely for personal learning purposes. Unauthorized distribution, reproduction, or misuse of our content is strictly prohibited. We reserve the right to modify, update, or discontinue any service without prior notice. Users are responsible for maintaining the confidentiality of their accounts. Any violation of these terms may result in suspension or termination of access to our platform.</p>
+                </div>
+            </div>
+            
+            <div id="faq" class="tab-content space-y-4">
+                <h3 class="text-2xl font-bold heading-font">Frequently Ask Questions</h3>
+                <div class="text-slate-400 text-sm space-y-3">
+                    <p>• Coming Soon</p>
                 </div>
             </div>
             
@@ -852,7 +861,7 @@
             
             <div class="md:w-1/2 p-6 md:p-8 flex flex-col justify-between">
                 <div>
-                    <h3 id="modalTitle" class="heading-font text-xl font-bold text-slate-900 mb-4">Book Details</h3>
+                    <h3 id="modalTitle" class="heading-font text-xl font-bold text-slate-900 mb-4">PDF Details</h3>
                     
                     <div class="space-y-3 mb-6">
                         <div class="flex justify-between text-xs border-b pb-2"><span class="text-slate-400">Quality</span><span id="modalQuality" class="font-bold text-slate-900 dark:text-white"></span></div>
@@ -862,7 +871,7 @@
                     </div>
 
                     <div class="mb-6">
-                        <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">About book:</h4>
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">About PDF:</h4>
                         <p id="modalAboutBook" class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed max-h-24 overflow-y-auto pr-1"></p>
                     </div>
 
@@ -901,7 +910,7 @@
 
     <script>
         let currentBuyUrl = "";
-        let selectedCategory = "teaching-exams";
+        let selectedCategory = "popular";
         let siteIndex = [];
         let storeSearchIndex = [];
 
