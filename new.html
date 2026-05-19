@@ -11,11 +11,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
     <style>
-        :root { 
-            --primary: #2563eb; 
-            --accent: #ef4444; 
-            --slate-bg: #f8fafc; 
-            --base-font-size: 16px;
+        :root {
+             --primary: #2563eb;
+             --accent: #ef4444;
+             --slate-bg: #f8fafc;
+             --base-font-size: 16px;
             --primary-light: #eef2ff;
             --text-dark: #1e293b;
             --text-muted: #6b7280;
@@ -37,12 +37,12 @@
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { font-size: var(--base-font-size); overflow-x: hidden; }
-        body { 
-            font-family: "Inter", sans-serif; 
-            background-color: var(--slate-bg); 
-            color: var(--text-dark); 
-            scroll-behavior: smooth; 
-            transition: background-color 0.3s, color 0.3s;
+        body {
+             font-family: "Inter", sans-serif;
+             background-color: var(--slate-bg);
+             color: var(--text-dark);
+             scroll-behavior: smooth;
+             transition: background-color 0.3s, color 0.3s;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -133,9 +133,9 @@
         .fn-3 { top: 32%; right: 2%; color: var(--color-green); transform: translateY(-50%); }
         .fn-4 { top: 60%; right: -5%; color: var(--color-blue); transform: translateY(-50%); }
         
-        .stats-row { 
-            background-color: var(--white); border-radius: 20px; padding: 1.5rem 2rem; display: grid; grid-template-columns: repeat(4, 1fr); 
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+        .stats-row {
+             background-color: var(--white); border-radius: 20px; padding: 1.5rem 2rem; display: grid; grid-template-columns: repeat(4, 1fr);
+             box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
             margin-top: -5rem; position: relative; z-index: 10;
             border: 1px solid rgba(226, 232, 240, 0.8);
         }
@@ -193,6 +193,7 @@
             padding: 4px 44px;
             list-style: none;
             -webkit-overflow-scrolling: touch;
+            touch-action: pan-x;
         }
         .course__tabs2::-webkit-scrollbar { display: none; }
         .course__tabs2 { -ms-overflow-style: none; scrollbar-width: none; }
@@ -217,15 +218,15 @@
             color: #38bdf8;
             border-color: #1e293b;
         }
-        .course__tabs2 .nav-item.active .nav-link, 
-        .course__tabs2 .nav-link.active {
+        .course__tabs2 .nav-item.active .nav-link,
+         .course__tabs2 .nav-link.active {
             background: #000000 !important;
             color: #ffffff !important;
             border-color: #000000 !important;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
-        [data-theme="dark"] .course__tabs2 .nav-item.active .nav-link, 
-        [data-theme="dark"] .course__tabs2 .nav-link.active {
+        [data-theme="dark"] .course__tabs2 .nav-item.active .nav-link,
+         [data-theme="dark"] .course__tabs2 .nav-link.active {
             background: #ffffff !important;
             color: #000000 !important;
             border-color: #ffffff !important;
@@ -253,6 +254,25 @@
         .btnPrevious { left: 4px; }
         .btnNext { right: 4px; }
 
+        /* Mobile scroll fade hint to show more tabs exist */
+        @media (max-width: 640px) {
+            .tabviewNLparent::after {
+                content: '';
+                position: absolute;
+                right: 0;
+                top: 0;
+                bottom: 0;
+                width: 30px;
+                background: linear-gradient(to right, transparent, var(--slate-bg));
+                pointer-events: none;
+                z-index: 5;
+                border-radius: 0 12px 12px 0;
+            }
+            .course__tabs2 {
+                touch-action: pan-x;
+            }
+        }
+
         /* Tablet Responsive Enhancements */
         @media (max-width: 1024px) {
             html { font-size: 15px; }
@@ -273,7 +293,6 @@
             .course__tabs2 .nav-link { padding: 6px 14px; font-size: 10px; }
             .course_btn_navnew { display: none !important; } /* Hide buttons on touch screens */
         }
-
         /* Mobile Optimization Elements */
         @media (max-width: 640px) {
             html { font-size: 14px; }
@@ -296,7 +315,6 @@
     </style>
 </head>
 <body>
-
     <div class="bg-black text-slate-300 py-2 text-[12px] font-medium border-b border-zinc-800 relative z-[60]">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 flex justify-between items-center">
             <div class="flex gap-4">
@@ -316,8 +334,8 @@
                     <button onclick="resetFont()" class="bg-zinc-800 hover:bg-zinc-700 px-2 py-0.5 rounded text-[10px] text-white font-bold" title="Normal Font">A</button>
                     <button onclick="adjustFont(1)" class="bg-zinc-800 hover:bg-zinc-700 px-2 py-0.5 rounded text-[10px] text-white font-bold" title="Increase Font">A+</button>
                     <button onclick="toggleDarkMode()" class="bg-blue-600 hover:bg-blue-800 text-white px-2 py-0.5 rounded text-[10px] font-bold flex items-center gap-1 ml-1">
-                        <i class="fas fa-moon"></i> 
-                    </button>
+                        <i class="fas fa-moon"></i>
+                     </button>
                 </div>
             </div>
 
@@ -410,13 +428,13 @@
             </div>
         </div>
     </nav>
-    
+
     <div class="announcement-bar">
         <div class="announcement-inner">
             ✨ LAUNCH OFFER: Use Promo Code during checkout (If Available) • Get instant PDF Delivery after Payment • Verified Academic Content
         </div>
     </div>
-    
+
     <section class="hero-banner">
         <div class="hero-text">
             <h1>Organize today.<br><span class="accent">Achieve</span> tomorrow.</h1>
@@ -540,7 +558,6 @@
                 </div>
             </div>
         </section>
-
     </main>
 
     <main id="store" class="max-w-7xl mx-auto px-4 sm:px-6 py-12">
@@ -588,12 +605,17 @@
                 <p id="librarySectionSubtext" class="text-slate-500 mt-2 text-sm">Explore our full repository of digital resource guides.</p>
             </div>
             
+            <!-- MODIFIED: Store search now has a dropdown like header search -->
             <div class="flex flex-col sm:flex-row gap-4 items-center w-full lg:w-auto flex-grow justify-end">
                 <div class="relative w-full sm:max-w-xs">
-                    <input id="storeSearchInput" oninput="executeStoreFiltering()" type="text" placeholder="Search..." class="w-full px-4 py-2 pl-9 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-blue-500 text-slate-900 dark:bg-slate-800 dark:border-slate-700 dark:text-white" autocomplete="off" />
-                    <i class="fas fa-filter absolute left-3 top-3 text-slate-400 text-[10px]"></i>
+                    <input id="storeSearchInput" oninput="executeStoreFiltering()" type="text" placeholder="Search books..." class="w-full px-4 py-2 pl-9 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-blue-500 text-slate-900 dark:bg-slate-800 dark:border-slate-700 dark:text-white" autocomplete="off" />
+                    <i class="fas fa-search absolute left-3 top-3 text-slate-400 text-[10px]"></i>
+                    <div id="storeSearchDropdown" class="search-dropdown-wrapper hidden bg-white border border-slate-200 dark:bg-slate-900 dark:border-slate-700">
+                        <div id="storeDropdownItemsContainer" class="flex flex-col py-2"></div>
+                    </div>
                 </div>
             </div>
+            <!-- END MODIFIED -->
         </div>
 
         <div id="searchEmptyState" class="hidden text-center py-16 max-w-md mx-auto">
@@ -613,6 +635,7 @@
                 </div>
 
                 <div class="library-items-target-zone w-full">
+                    
                     
                     <div id="book-hvs" class="book-card" data-category="ug-nep" data-semester="2" data-popular="true" data-searchable-keywords="hindi vyakaran hindi व्याकरण और संप्रेषण university updates team sem2 semester 2 ug-nep" data-title="हिंदी व्याकरण और संप्रेषण" data-madeby="University Updates Team" data-price="₹35" data-oldprice="₹45">
                         <div class="img-container-node h-64 bg-slate-100 p-8 relative">
@@ -645,6 +668,7 @@
                 </div>
 
                 <div class="library-items-target-zone w-full">
+                    
                     
                     <div id="book-srcee" class="book-card" data-category="ug-nep" data-semester="4" data-popular="true" data-searchable-keywords="social responsibility community engagement civic english academic experts division sem4 semester 4 ug-nep" data-title="Social Responsibility and Community Engagement (English)" data-madeby="Academic Experts Division" data-price="₹25" data-oldprice="₹35">
                         <div class="img-container-node h-64 bg-slate-100 p-8 relative">
@@ -690,7 +714,6 @@
 
                 </div>
             </div>
-
         </div>
     </main>
 
@@ -714,8 +737,8 @@
                         <li class="flex gap-4 items-start"><span class="bg-blue-600 text-white w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 font-bold text-xs mt-0.5">3</span> Select Notes and click on Add to Cart then Checkout & Complete payment via UPI, Card or Netbanking.</li>
                         <li class="flex gap-4 items-start"><span class="bg-blue-600 text-white w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 font-bold text-xs mt-0.5">4</span> After successful payment, Wait for 5 seconds. The PDF will be available automatically in your login.</li>
                     </ul>
-                </div> 
-            </div>
+                </div>
+             </div>
             
             <div id="about" class="tab-content space-y-6">
                 <h3 class="text-2xl font-bold heading-font">Expertly Crafted Study Material</h3>
@@ -905,9 +928,59 @@
 
     <script>
         let currentBuyUrl = "";
-        let selectedCategory = "teaching-exams"; 
+        let selectedCategory = "teaching-exams";
+        let siteIndex = [];
+        let storeSearchIndex = [];
+
+        // MODIFIED: Build a site-wide search index including books and sections
+        function buildSiteIndex() {
+            const index = [];
+            
+            // Index books
+            document.querySelectorAll('.book-card').forEach(book => {
+                index.push({
+                    type: 'book',
+                    title: book.getAttribute('data-title'),
+                    keywords: (book.getAttribute('data-searchable-keywords') || '').toLowerCase(),
+                    id: book.getAttribute('id'),
+                    category: (book.getAttribute('data-category') || '').toUpperCase(),
+                    semester: book.getAttribute('data-semester'),
+                    element: book
+                });
+            });
+            
+            // Index site sections/pages
+            const sections = [
+                { id: 'about', title: 'About Us', keywords: 'about us notes study material mission team' },
+                { id: 'instructions', title: 'How to Buy', keywords: 'how to buy download instructions purchase steps payment' },
+                { id: 'pp', title: 'Privacy Policy', keywords: 'privacy policy data protection cookies personal information' },
+                { id: 'terms', title: 'Terms & Conditions', keywords: 'terms conditions legal rules user agreement' },
+                { id: 'rp', title: 'Refund Policy', keywords: 'refund policy money back return cancellation' },
+                { id: 'contact', title: 'Contact Us', keywords: 'contact us help support email telegram help desk' },
+                { id: 'store', title: 'Books Store', keywords: 'books store notes pdf buy purchase semester' },
+                { id: 'tab-section', title: 'Information Center', keywords: 'information center policies how to about' }
+            ];
+            
+            sections.forEach(sec => {
+                const el = document.getElementById(sec.id);
+                if (el) {
+                    index.push({
+                        type: 'section',
+                        title: sec.title,
+                        keywords: sec.keywords,
+                        id: sec.id,
+                        element: el
+                    });
+                }
+            });
+            
+            return index;
+        }
+        // END MODIFIED
 
         document.addEventListener("DOMContentLoaded", () => {
+            siteIndex = buildSiteIndex();
+            storeSearchIndex = siteIndex.filter(item => item.type === 'book');
             renderActiveViewEngine();
         });
 
@@ -988,15 +1061,60 @@
             document.getElementById('searchEmptyState').classList.toggle('hidden', visibleTotal > 0);
         }
 
+        // MODIFIED: Store search now shows a dropdown like the header search
         function executeStoreFiltering() {
+            const searchQuery = document.getElementById('storeSearchInput').value.toLowerCase().trim();
+            const dropdown = document.getElementById('storeSearchDropdown');
+            const container = document.getElementById('storeDropdownItemsContainer');
+            container.innerHTML = "";
+            
+            if (searchQuery === "") {
+                dropdown.classList.add('hidden');
+                renderActiveViewEngine();
+                return;
+            }
+            
+            let matchPool = storeSearchIndex.filter(item => item.keywords.includes(searchQuery));
+            
+            if (matchPool.length > 0) {
+                dropdown.classList.remove('hidden');
+                matchPool.forEach(item => {
+                    const row = document.createElement('button');
+                    row.type = "button";
+                    row.className = "w-full text-left px-5 py-3 text-xs font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors flex items-center justify-between border-b border-slate-50 dark:border-slate-800/50 last:border-0";
+                    row.innerHTML = `
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-book text-blue-500 text-[10px]"></i>
+                            <span class="font-semibold">${item.title}</span>
+                        </div>
+                        <span class="text-[9px] bg-blue-50 text-blue-600 dark:bg-slate-800 dark:text-blue-400 px-2 py-0.5 rounded-full font-bold uppercase tracking-tight">${item.category} | Sem ${item.semester}</span>
+                    `;
+                    row.onclick = () => {
+                        document.getElementById('storeSearchInput').value = item.title;
+                        dropdown.classList.add('hidden');
+                        renderActiveViewEngine();
+                        const targetElement = document.getElementById(item.id);
+                        if (targetElement) {
+                            targetElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                            targetElement.classList.add('ring-2', 'ring-blue-500');
+                            setTimeout(() => targetElement.classList.remove('ring-2', 'ring-blue-500'), 2000);
+                        }
+                    };
+                    container.appendChild(row);
+                });
+            } else {
+                dropdown.classList.add('hidden');
+            }
+            
             renderActiveViewEngine();
         }
+        // END MODIFIED
 
         function transformCardToTableRowMarkup(cardNode) {
             cardNode.className = "book-card bg-white dark:bg-slate-900 rounded-xl p-4 flex flex-col md:flex-row md:items-center justify-between gap-4 border border-slate-100 dark:border-slate-800 shadow-sm transition-all w-full";
             const imgBlock = cardNode.querySelector('.img-container-node');
-            if (imgBlock) imgBlock.className = "hidden"; 
-            const infoBlock = cardNode.querySelector('.info-container-node');
+            if (imgBlock) imgBlock.className = "hidden";
+             const infoBlock = cardNode.querySelector('.info-container-node');
             if (infoBlock) infoBlock.className = "flex-grow flex flex-col md:flex-row md:items-center md:justify-between gap-2";
             const titleNode = cardNode.querySelector('.card-title');
             if (titleNode) titleNode.className = "font-bold text-slate-800 dark:text-white text-sm md:w-1/3 card-title";
@@ -1036,54 +1154,104 @@
             if (buyBtn) buyBtn.className = "text-xs font-bold py-2.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 shadow-lg shadow-blue-100 transition btn-buy-target";
         }
 
+        // MODIFIED: Global search now searches entire site content
         function executeLiveSearch() {
             const searchQuery = document.getElementById('globalSearchInput').value.toLowerCase().trim();
-            const books = document.querySelectorAll('.book-card');
             const dropdown = document.getElementById('globalSearchDropdown');
             const container = document.getElementById('dropdownItemsContainer');
             container.innerHTML = "";
-            let matchPool = [];
-            books.forEach(book => {
-                const keywords = book.getAttribute('data-searchable-keywords').toLowerCase();
-                const title = book.getAttribute('data-title');
-                const targetId = book.getAttribute('id');
-                const cat = book.getAttribute('data-category').toUpperCase();
-                const sem = book.getAttribute('data-semester');
-                if (searchQuery !== "" && keywords.includes(searchQuery)) {
-                    matchPool.push({ title, id: targetId, cat, sem });
-                }
-            });
+            
+            if (searchQuery === "") {
+                dropdown.classList.add('hidden');
+                renderActiveViewEngine();
+                return;
+            }
+            
+            let matchPool = siteIndex.filter(item => item.keywords.includes(searchQuery));
+            
             if (matchPool.length > 0) {
                 dropdown.classList.remove('hidden');
-                matchPool.forEach(item => {
-                    const row = document.createElement('button');
-                    row.type = "button";
-                    row.className = "w-full text-left px-5 py-3 text-xs font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors flex items-center justify-between border-b border-slate-50 dark:border-slate-800/50 last:border-0";
-                    row.innerHTML = `
-                        <div class="flex items-center gap-2">
-                            <i class="fas fa-book text-blue-500 text-[10px]"></i>
-                            <span class="font-semibold">${item.title}</span>
-                        </div>
-                        <span class="text-[9px] bg-blue-50 text-blue-600 dark:bg-slate-800 dark:text-blue-400 px-2 py-0.5 rounded-full font-bold uppercase tracking-tight">${item.cat} | Sem ${item.sem}</span>
-                    `;
-                    row.onclick = () => {
-                        document.getElementById('globalSearchInput').value = item.title;
-                        dropdown.classList.add('hidden');
-                        renderActiveViewEngine();
-                        const targetElement = document.getElementById(item.id);
-                        if(targetElement) {
-                            targetElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                            targetElement.classList.add('ring-2', 'ring-blue-500');
-                            setTimeout(() => targetElement.classList.remove('ring-2', 'ring-blue-500'), 2000);
-                        }
-                    };
-                    container.appendChild(row);
-                });
+                
+                const books = matchPool.filter(i => i.type === 'book');
+                const sections = matchPool.filter(i => i.type === 'section');
+                
+                if (sections.length > 0) {
+                    const header = document.createElement('div');
+                    header.className = "px-5 py-2 text-[10px] font-bold uppercase tracking-wider text-slate-400 bg-slate-50 dark:bg-slate-800 border-b border-slate-100 dark:border-slate-700";
+                    header.innerText = "Site Pages";
+                    container.appendChild(header);
+                    
+                    sections.forEach(item => {
+                        const row = document.createElement('button');
+                        row.type = "button";
+                        row.className = "w-full text-left px-5 py-3 text-xs font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors flex items-center justify-between border-b border-slate-50 dark:border-slate-800/50 last:border-0";
+                        row.innerHTML = `
+                            <div class="flex items-center gap-2">
+                                <i class="fas fa-file-alt text-slate-400 text-[10px]"></i>
+                                <span class="font-semibold">${item.title}</span>
+                            </div>
+                            <span class="text-[9px] bg-slate-100 text-slate-500 dark:bg-slate-800 dark:text-slate-400 px-2 py-0.5 rounded-full font-bold uppercase tracking-tight">Page</span>
+                        `;
+                        row.onclick = () => {
+                            document.getElementById('globalSearchInput').value = item.title;
+                            dropdown.classList.add('hidden');
+                            // Activate tab if applicable
+                            if (['about', 'instructions', 'pp', 'terms', 'rp', 'contact'].includes(item.id)) {
+                                showTab(item.id);
+                                setTimeout(() => {
+                                    document.getElementById('tab-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
+                                }, 100);
+                            } else {
+                                const targetElement = document.getElementById(item.id);
+                                if (targetElement) {
+                                    targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                                    targetElement.classList.add('ring-2', 'ring-blue-500');
+                                    setTimeout(() => targetElement.classList.remove('ring-2', 'ring-blue-500'), 2000);
+                                }
+                            }
+                        };
+                        container.appendChild(row);
+                    });
+                }
+                
+                if (books.length > 0) {
+                    const header = document.createElement('div');
+                    header.className = "px-5 py-2 text-[10px] font-bold uppercase tracking-wider text-slate-400 bg-slate-50 dark:bg-slate-800 border-b border-slate-100 dark:border-slate-700";
+                    header.innerText = "Books & Notes";
+                    container.appendChild(header);
+                    
+                    books.forEach(item => {
+                        const row = document.createElement('button');
+                        row.type = "button";
+                        row.className = "w-full text-left px-5 py-3 text-xs font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors flex items-center justify-between border-b border-slate-50 dark:border-slate-800/50 last:border-0";
+                        row.innerHTML = `
+                            <div class="flex items-center gap-2">
+                                <i class="fas fa-book text-blue-500 text-[10px]"></i>
+                                <span class="font-semibold">${item.title}</span>
+                            </div>
+                            <span class="text-[9px] bg-blue-50 text-blue-600 dark:bg-slate-800 dark:text-blue-400 px-2 py-0.5 rounded-full font-bold uppercase tracking-tight">${item.category} | Sem ${item.semester}</span>
+                        `;
+                        row.onclick = () => {
+                            document.getElementById('globalSearchInput').value = item.title;
+                            dropdown.classList.add('hidden');
+                            renderActiveViewEngine();
+                            const targetElement = document.getElementById(item.id);
+                            if (targetElement) {
+                                targetElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                                targetElement.classList.add('ring-2', 'ring-blue-500');
+                                setTimeout(() => targetElement.classList.remove('ring-2', 'ring-blue-500'), 2000);
+                            }
+                        };
+                        container.appendChild(row);
+                    });
+                }
             } else {
                 dropdown.classList.add('hidden');
             }
+            
             renderActiveViewEngine();
         }
+        // END MODIFIED
 
         function scrollTabs(direction) {
             const container = document.getElementById('tabsContainer');
@@ -1144,70 +1312,107 @@
             document.documentElement.style.setProperty('--base-font-size', '16px');
         }
 
-        function showTab(tabId) {            
-            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));            
-            document.querySelectorAll('.tab-btn').forEach(btn => {                
-                btn.classList.remove('border-blue-500', 'text-white');                
-                btn.classList.add('border-transparent', 'text-slate-400');            
-            });            
-            document.getElementById(tabId).classList.add('active');            
-            const targetBtn = Array.from(document.querySelectorAll('.tab-btn')).find(btn =>                 
-                btn.getAttribute('onclick').includes(`'${tabId}'`)            
-            );            
-            if(targetBtn) {                
-                targetBtn.classList.add('border-blue-500', 'text-white');                
-                targetBtn.classList.remove('border-transparent', 'text-slate-400');            
-            }        
+        function showTab(tabId) {
+            
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                
+                btn.classList.remove('border-blue-500', 'text-white');
+                btn.classList.add('border-transparent', 'text-slate-400');
+            });
+            
+            document.getElementById(tabId).classList.add('active');
+            
+            const targetBtn = Array.from(document.querySelectorAll('.tab-btn')).find(btn =>
+                 btn.getAttribute('onclick').includes(`'${tabId}'`)
+            );
+            if(targetBtn) {
+                
+                targetBtn.classList.add('border-blue-500', 'text-white');
+                targetBtn.classList.remove('border-transparent', 'text-slate-400');
+            }
         }
 
-        function openInstructionsOnly() {            
-            currentBuyUrl = "";            
-            const modal = document.getElementById('instructionsModal');            
-            document.getElementById('modalHeading').innerHTML = '<i class="fas fa-download mr-3 text-blue-600"></i>How to Download?';            
-            document.getElementById('modalContent').innerHTML = `                
-                <div class="space-y-4">                    
-                    <p class="text-sm">1. Choose your notes and click "Buy Now" which redirects to our secure University Updates login webpage.</p>                    
-                    <p class="text-sm">2. Click on Register (If you are a new user) or Login.</p>                    
-                    <p class="text-sm">3. Select Notes and click on Add to Cart then Checkout & Complete payment via UPI, Card or Netbanking.</p>                    
-                    <p class="text-sm">4. After successful payment, <strong>Wait for 5 seconds</strong>. The PDF will be available automatically in your login. Do not refresh!</p>                
-                </div>            `;            
-            const btn = document.getElementById('proceedBuyBtn');            
-            btn.innerText = "Got it, Thanks!";            
-            btn.onclick = closeInstructions;            
-            modal.style.display = 'flex';        
+        function openInstructionsOnly() {
+            
+            currentBuyUrl = "";
+            
+            const modal = document.getElementById('instructionsModal');
+            
+            document.getElementById('modalHeading').innerHTML = '<i class="fas fa-download mr-3 text-blue-600"></i>How to Download?';
+            
+            document.getElementById('modalContent').innerHTML = `
+                
+                <div class="space-y-4">
+                    
+                    <p class="text-sm">1. Choose your notes and click "Buy Now" which redirects to our secure University Updates login webpage.</p>
+                    
+                    <p class="text-sm">2. Click on Register (If you are a new user) or Login.</p>
+                    
+                    <p class="text-sm">3. Select Notes and click on Add to Cart then Checkout & Complete payment via UPI, Card or Netbanking.</p>
+                    
+                    <p class="text-sm">4. After successful payment, <strong>Wait for 5 seconds</strong>. The PDF will be available automatically in your login. Do not refresh!</p>
+                </div>
+            `;
+            
+            const btn = document.getElementById('proceedBuyBtn');
+            btn.innerText = "Got it, Thanks!";
+            btn.onclick = closeInstructions;
+            
+            modal.style.display = 'flex';
         }
 
-        function redirectBuy(url) {            
+        function redirectBuy(url) {
+            
             alert("Login is required to buy.");
-            if(url && url !== '#') {                
-                window.location.href = url;            
-            } else {                
-                alert("Will be available shortly!");            
-            }        
+            if(url && url !== '#') {
+                
+                window.location.href = url;
+            } else {
+                
+                alert("Will be available shortly!");
+            }
         }
 
-        function openPreviewModal(title, pdfSrc, quality, lang, format, buyUrl, madeBy, aboutBook) {            
-            const modal = document.getElementById('previewModal');            
-            const loader = document.getElementById('modalLoader');            
-            const iframe = document.getElementById('pdfPreview');            
+        function openPreviewModal(title, pdfSrc, quality, lang, format, buyUrl, madeBy, aboutBook) {
+            
+            const modal = document.getElementById('previewModal');
+            
+            const loader = document.getElementById('modalLoader');
+            
+            const iframe = document.getElementById('pdfPreview');
+            
             const fallback = document.getElementById('noPreviewFallback');
-                                                                    
-            document.getElementById('modalTitle').innerText = title;            
-            document.getElementById('modalQuality').innerText = quality;            
-            document.getElementById('modalLang').innerText = lang;            
-            document.getElementById('modalFormat').innerText = format;            
-            document.getElementById('modalMadeBy').innerText = madeBy || "University Updates";            
-            document.getElementById('modalAboutBook').innerText = aboutBook || "No description provided.";            
+            
+            
+            
+            document.getElementById('modalTitle').innerText = title;
+            
+            document.getElementById('modalQuality').innerText = quality;
+            
+            document.getElementById('modalLang').innerText = lang;
+            
+            document.getElementById('modalFormat').innerText = format;
+            
+            document.getElementById('modalMadeBy').innerText = madeBy || "University Updates";
+            
+            document.getElementById('modalAboutBook').innerText = aboutBook || "No description provided.";
+            
             
             document.getElementById('modalBuyBtn').onclick = () => {
                 closeModal();
                 redirectBuy(buyUrl);
-            };            
+            };
             
-            loader.classList.remove('modal-hidden');            
-            iframe.classList.add('modal-hidden');            
+            loader.classList.remove('modal-hidden');
+            
+            iframe.classList.add('modal-hidden');
+            
             fallback.classList.add('modal-hidden');
-                                                            
+            
+            
+            
             let connectionTimeout = setTimeout(() => {
                 if (!iframe.src.includes(pdfSrc) || iframe.classList.contains('modal-hidden')) {
                     loader.classList.add('modal-hidden');
@@ -1216,60 +1421,91 @@
                 }
             }, 3500);
 
-            iframe.src = pdfSrc;            
-                                                                    
-            iframe.onload = function() {            
+            iframe.src = pdfSrc;
+            
+            
+            
+            
+            
+            
+            
+            iframe.onload = function() {
+                
                 clearTimeout(connectionTimeout);
                 try {
                     if (iframe.contentWindow.location.href === "about:blank" || pdfSrc.includes("missing-file")) {
                         throw new Error("Missing File Resource");
                     }
-                    loader.classList.add('modal-hidden');            
-                    iframe.classList.remove('modal-hidden');            
+                    loader.classList.add('modal-hidden');
+                    
+                    iframe.classList.remove('modal-hidden');
+                    
                 } catch(err) {
-                    loader.classList.add('modal-hidden');            
-                    iframe.classList.add('modal-hidden');            
+                    loader.classList.add('modal-hidden');
+                    
+                    iframe.classList.add('modal-hidden');
+                    
                     fallback.classList.remove('modal-hidden');
                 }
-            };            
+            };
             
-            modal.style.display = 'flex';            
-            document.body.style.overflow = 'hidden';        
+            
+            modal.style.display = 'flex';
+            
+            document.body.style.overflow = 'hidden';
         }
 
-        function closeModal() {            
-            document.getElementById('previewModal').style.display = 'none';            
-            document.getElementById('pdfPreview').src = "";            
-            document.getElementById('modalLoader').classList.add('modal-hidden');            
-            document.getElementById('noPreviewFallback').classList.add('modal-hidden');            
-            document.body.style.overflow = 'auto';        
+        function closeModal() {
+            
+            document.getElementById('previewModal').style.display = 'none';
+            
+            document.getElementById('pdfPreview').src = "";
+            
+            document.getElementById('modalLoader').classList.add('modal-hidden');
+            
+            document.getElementById('noPreviewFallback').classList.add('modal-hidden');
+            
+            document.body.style.overflow = 'auto';
         }
 
-        function closeInstructions() {            
-            document.getElementById('instructionsModal').style.display = 'none';            
-            document.body.style.overflow = 'auto';        
+        function closeInstructions() {
+            
+            document.getElementById('instructionsModal').style.display = 'none';
+            
+            document.body.style.overflow = 'auto';
         }
 
-        window.onclick = function(event) {            
-            if (event.target == document.getElementById('previewModal')) closeModal();            
-            if (event.target == document.getElementById('instructionsModal')) closeInstructions();            
+        // MODIFIED: Close dropdowns when clicking outside
+        window.onclick = function(event) {
+            
+            if (event.target == document.getElementById('previewModal')) closeModal();
+            
+            if (event.target == document.getElementById('instructionsModal')) closeInstructions();
+            
             
             const searchInput = document.getElementById('globalSearchInput');
             const searchMenu = document.getElementById('globalSearchDropdown');
             if (searchInput && searchMenu && event.target !== searchInput && !searchMenu.contains(event.target)) {
                 searchMenu.classList.add('hidden');
             }
+            
+            const storeSearchInput = document.getElementById('storeSearchInput');
+            const storeSearchMenu = document.getElementById('storeSearchDropdown');
+            if (storeSearchInput && storeSearchMenu && event.target !== storeSearchInput && !storeSearchMenu.contains(event.target)) {
+                storeSearchMenu.classList.add('hidden');
+            }
         }
+        // END MODIFIED
     </script>
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             const counters = document.querySelectorAll('.counter');
             counters.forEach(counter => {
-                counter.innerText = "0"; 
-                const target = parseInt(counter.getAttribute('data-target'), 10);
+                counter.innerText = "0";
+                 const target = parseInt(counter.getAttribute('data-target'), 10);
                 const suffix = counter.getAttribute('data-suffix') || "";
-                const duration = 2000; 
-                const startTime = performance.now();
+                const duration = 2000;
+                 const startTime = performance.now();
 
                 const updateCounter = (currentTime) => {
                     const elapsedTime = currentTime - startTime;
@@ -1280,9 +1516,9 @@
 
                     if (progress < 1) {
                         requestAnimationFrame(updateCounter);
-                    } else {
-                        counter.innerText = target + suffix;
-                    }
+                        } else {
+                            counter.innerText = target + suffix;
+                        }
                 };
                 requestAnimationFrame(updateCounter);
             });
