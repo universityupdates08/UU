@@ -82,17 +82,17 @@
         .main-container { max-width: 1400px; width: 90%; margin: 0 auto 2rem auto; display: flex; flex-direction: column; gap: 2rem; }
         
         .hero-banner {
-            background: linear-gradient(100deg, var(--hero-grad-start) 0%, var(--hero-grad-end) 100%);
+            background: radial-gradient(circle at top right, #e0f2fe 0%, #ffffff 50%);
             padding: 4rem 5%; display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 2rem; align-items: center; position: relative; overflow: hidden; width: 100%;
             border-bottom: 1px solid rgba(226, 232, 240, 0.5);
         }
-        [data-theme="dark"] .hero-banner { background: linear-gradient(100deg, var(--hero-grad-start) 0%, var(--hero-grad-end) 100%); border-bottom-color: rgba(51, 65, 85, 0.5); }
-        .hero-text h1 { font-size: 3.5rem; font-weight: 800; line-height: 1.15; color: var(--text-dark); margin-bottom: 1.5rem; }
+        [data-theme="dark"] .hero-banner { background: radial-gradient(circle at top right, #0c4a6e 0%, #020617 70%); border-bottom-color: rgba(51, 65, 85, 0.5); }
+        .hero-text h1 { font-size: 3.5rem; font-weight: 800; line-height: 1.15; color: var(--text-dark); margin-bottom: 15px; }
         .hero-text h1 span.accent { color: var(--primary); }
-        .hero-text p { color: var(--text-muted); font-size: 1.1rem; line-height: 1.5; margin-bottom: 2.5rem; max-width: 450px; }
-        .cta-group { display: flex; gap: 1rem; margin-bottom: 3.5rem; }
+        .hero-text p { color: var(--text-muted); font-size: 1.1rem; line-height: 1.5; margin-bottom: 15px; max-width: 450px; }
+        .cta-group { display: flex; gap: 1rem; margin-bottom: 1.5rem; }
         
-        .btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.8rem 1.8rem; border-radius: 12px; font-weight: 600; font-size: 0.95rem; text-decoration: none; cursor: pointer; transition: all 0.2s ease; }
+        .btn { display: inline-flex; align-items: center; padding: 0.8rem 1.8rem; border-radius: 12px; font-weight: 600; font-size: 0.95rem; text-decoration: none; cursor: pointer; transition: all 0.2s ease; }
         .btn-primary { background-color: var(--primary); color: #ffffff; border: none; box-shadow: 0 4px 14px rgba(88, 80, 236, 0.25); }
         .btn-primary:hover { background-color: #4338ca; }
         .btn-secondary { background-color: var(--white); color: var(--text-dark); border: 1px solid #e5e7eb; }
@@ -100,9 +100,9 @@
         .btn-secondary:hover { background-color: #f9fafb; }
         [data-theme="dark"] .btn-secondary:hover { background-color: #334155; }
         
-        .hero-features { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; width: 100%; }
-        .feat-item { display: flex; align-items: flex-start; gap: 0.5rem; min-width: 0; }
-        .feat-icon-box { padding: 0.5rem; border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .hero-features { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; flex-wrap: wrap; }
+        .feat-item { display: flex; align-items: center; gap: 12px; }
+        .feat-icon-box { width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 18px; }
         
         .feat-item.easy .feat-icon-box { background-color: #f5f3ff; color: var(--color-purple); }
         [data-theme="dark"] .feat-item.easy .feat-icon-box { background-color: #312e81; }
@@ -120,7 +120,7 @@
         .hero-graphic { position: relative; display: flex; justify-content: center; align-items: flex-end; height: 100%; width: 100%; }
         .abstract-bg-svg { position: absolute; top: -10%; left: -10%; width: 120%; height: 120%; z-index: 1; pointer-events: none; }
         [data-theme="dark"] .abstract-bg-svg path { stroke: #334155; }
-        .mock-character-img { position: relative; z-index: 2; width: 100%; max-width: 420px; height: auto; display: block; filter: drop-shadow(0px 15px 30px rgba(0,0,0,0.08)); margin: 0 auto; }
+        .mock-character-img { position: relative; z-index: 2; width: 100%; max-width: 100%; height: auto; display: block; filter: drop-shadow(0px 15px 30px rgba(0,0,0,0.08)); margin: 0 auto; }
         
         .sparkle { position: absolute; color: #c084fc; opacity: 0.6; z-index: 1; font-size: 1.2rem; }
         .sp-1 { top: 15%; left: 5%; }
@@ -136,13 +136,13 @@
         .fn-4 { top: 60%; right: -5%; color: var(--color-blue); transform: translateY(-50%); }
         
         .stats-row {
-             background-color: var(--white); border-radius: 20px; padding: 1.5rem 2rem; display: grid; grid-template-columns: repeat(4, 1fr);
+             background-color: var(--white); border-radius: 16px; padding: 24px; display: grid; grid-template-columns: repeat(4, 1fr);
              box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
-            margin-top: -5rem; position: relative; z-index: 10;
+            margin-top: -3rem; position: relative; z-index: 10;
             border: 1px solid rgba(226, 232, 240, 0.8);
         }
         [data-theme="dark"] .stats-row { border-color: rgba(51, 65, 85, 0.8); }
-        .stat-card { display: flex; align-items: center; gap: 1.25rem; padding: 0.5rem 1.5rem; width: 100%; min-width: 0; }
+        .stat-card { display: flex; align-items: center; justify-content: center; gap: 12px; padding: 0.5rem 1.5rem; width: 100%; min-width: 0; }
         .stat-card:not(:last-child) { border-right: 1px solid #f3f4f6; }
         [data-theme="dark"] .stat-card:not(:last-child) { border-right-color: #334155; }
         .stat-icon-wrapper { width: 48px; height: 48px; border-radius: 14px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
@@ -281,9 +281,9 @@
             .hero-banner { grid-template-columns: 1fr; padding: 3rem 5%; text-align: center; }
             .hero-text h1 { font-size: 2.8rem; }
             .hero-text p { margin-left: auto; margin-right: auto; }
-            .cta-group { justify-content: center; margin-bottom: 2.5rem; }
-            .hero-features { grid-template-columns: repeat(2, 1fr); gap: 1.25rem; }
-            .stats-row { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; margin-top: -2rem; padding: 1.5rem; }
+            .cta-group { justify-content: center; margin-bottom: 10px; }
+            .hero-features { grid-template-columns: repeat(2, 1fr); justify-content: center; gap: 1.25rem; }
+            .stats-row { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; margin-top: -3rem; padding: 1.5rem; }
             .stat-card:not(:last-child) { border-right: none; }
             .stat-card { border-bottom: 1px solid #f3f4f6; padding-bottom: 1rem; }
             [data-theme="dark"] .stat-card { border-bottom-color: #334155; }
@@ -299,8 +299,8 @@
             html { font-size: 14px; }
             .hero-banner { padding: 2rem 4%; }
             .hero-text h1 { font-size: 2.2rem; }
-            .hero-features { grid-template-columns: 1fr; gap: 1rem; }
-            .stats-row { grid-template-columns: 1fr; gap: 1rem; margin-top: -1.5rem; padding: 1rem; }
+            .hero-features {justify-content: center; gap: 1rem; }
+            .stats-row { grid-template-columns: 1fr; gap: 1rem; margin-top: -2.5rem; padding: 1rem; }
             .stat-card { border-right: none !important; border-bottom: 1px solid #f3f4f6; padding-bottom: 0.75rem; }
             [data-theme="dark"] .stat-card { border-bottom-color: #334155; }
             .stat-card:last-child { border-bottom: none; padding-bottom: 0; }
@@ -428,7 +428,7 @@
                     </div>
                     <div class="feat-info">
                         <h4>Easy to Use</h4>
-                        <p>Create and manage notes effortlessly</p>
+                        <p>Manage notes effortlessly</p>
                     </div>
                 </div>
                 <div class="feat-item sync">
@@ -438,24 +438,6 @@
                     <div class="feat-info">
                         <h4>Sync Anywhere</h4>
                         <p>Access your notes on any device</p>
-                    </div>
-                </div>
-                <div class="feat-item secure">
-                    <div class="feat-icon-box">
-                        <span class="material-icons-round">lock</span>
-                    </div>
-                    <div class="feat-info">
-                        <h4>Private & Secure</h4>
-                        <p>Your notes are safe and protected</p>
-                    </div>
-                </div>
-                <div class="feat-item update">
-                    <div class="feat-icon-box">
-                        <span class="material-icons-round">notifications</span>
-                    </div>
-                    <div class="feat-info">
-                        <h4>Stay Updated</h4>
-                        <p>Never miss important reminders</p>
                     </div>
                 </div>
             </div>
@@ -582,7 +564,7 @@
             
             <div class="flex flex-col sm:flex-row gap-4 items-center w-full lg:w-auto flex-grow justify-end">
                 <div class="relative w-full sm:max-w-xs">
-                    <input id="storeSearchInput" oninput="executeStoreFiltering()" type="text" placeholder="Search books..." class="w-full px-4 py-2 pl-9 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-blue-500 text-slate-900 dark:bg-slate-800 dark:border-slate-700 dark:text-white" autocomplete="off" />
+                    <input id="storeSearchInput" oninput="executeStoreFiltering()" type="text" placeholder="Search books..." class="w-full px-4 py-2 pl-9 text-xs bg-slate-50 border border-slate-800 rounded-xl focus:outline-none focus:border-blue-500 text-slate-900 dark:bg-slate-800 dark:border-slate-700 dark:text-white" autocomplete="off" />
                     <i class="fas fa-search absolute left-3 top-3 text-slate-400 text-[10px]"></i>
                     <div id="storeSearchDropdown" class="search-dropdown-wrapper hidden bg-white border border-slate-200 dark:bg-slate-900 dark:border-slate-700">
                         <div id="storeDropdownItemsContainer" class="flex flex-col py-2"></div>
@@ -614,7 +596,7 @@
         <span class="text-blue-600"> Updates</span>
         <span class="font-extrabold">Offers?</span>
       </h1>
-<p>University Updates is a technology based online learning initiative by University Updates. Add power of coaching to your online learning with University Updates.</p>
+<p>We started an initiative to provide the technology based online learning platforms. Add power of coaching to your online learning with University Updates.</p>
       <ul class="mt-4 space-y-2 text-sm md:text-base font-medium">
         <li><i class="fa fa-check"></i> Free Stuff - Study Materials, E-Books, PDF etc</li>
         <li><i class="fa fa-check"></i> Live Feed - Access to Important Videos & Questions</li>
@@ -823,7 +805,7 @@
                         <p class="text-[11px] text-blue-700 dark:text-blue-400 leading-relaxed font-medium"><i class="fas fa-info-circle mr-1"></i> Preview shows selected pages only. Full content is delivered immediately after purchase.</p>
                     </div>
                 </div>
-                <button id="modalBuyBtn" class="w-full bg-blue-600 text-white py-3 rounded-xl font-bold hover:bg-blue-700 transition">Get Full Access Now</button>
+                <button id="modalBuyBtn" class="w-full bg-blue-600 text-white py-3 rounded-xl font-bold hover:bg-blue-800 transition">Get Full Access Now</button>
             </div>
         </div>
     </div>
@@ -1215,7 +1197,7 @@
             const infoBtn = cardNode.querySelector('.btn-info-target');
             if (infoBtn) infoBtn.className = "text-xs font-bold py-2.5 bg-slate-100 text-slate-700 rounded-lg hover:bg-slate-200 transition btn-info-target";
             const buyBtn = cardNode.querySelector('.btn-buy-target');
-            if (buyBtn) buyBtn.className = "text-xs font-bold py-2.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 shadow-lg shadow-blue-100 transition btn-buy-target";
+            if (buyBtn) buyBtn.className = "text-xs font-bold py-2.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition btn-buy-target";
         }
 
         function executeLiveSearch() {
