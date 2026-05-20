@@ -985,17 +985,33 @@ if (imgUrl && imgUrl.includes('drive.google.com')) {
     }
 }
 
-// Fallback for missing images
-if (!imgUrl) {
-    imgUrl = 'https://via.placeholder.com/200x280/f1f5f9/94a3b8?text=' + encodeURIComponent((item.title || 'Note').substring(0, 15) + "...");
+// Determine what image HTML to render natively without external placeholder sites
+let imageHTML = '';
+if (imgUrl) {
+    // Tries to load image. If it fails, hides the img tag and shows the fallback text div below it
+    imageHTML = `
+        <img src="${imgUrl}" alt="${safeTitle}" class="w-full h-full object-contain drop-shadow-xl z-10 relative" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="absolute inset-0 items-center justify-center flex-col text-slate-400 font-bold text-sm text-center z-0" style="display: none;">
+            <i class="fas fa-image text-2xl block mb-2 opacity-50"></i>
+            No Preview<br>Available
+        </div>
+    `;
+} else {
+    // Shows fallback text immediately if the Google Sheet cell is completely empty
+    imageHTML = `
+        <div class="absolute inset-0 flex items-center justify-center flex-col text-slate-400 font-bold text-sm text-center z-0">
+            <i class="fas fa-image text-2xl block mb-2 opacity-50"></i>
+            No Preview<br>Available
+        </div>
+    `;
 }
 
-                    bookCard.innerHTML = `
-                        <div class="img-container-node h-64 bg-slate-100 p-8 relative">
-                            <img src="${imgUrl}" alt="${safeTitle}" class="w-full h-full object-contain drop-shadow-xl" onerror="this.src='https://via.placeholder.com/200x280?text=No+Cover'">
-                            <span class="absolute top-4 right-4 bg-green-500 text-white text-[10px] font-black px-2.5 py-1 rounded-full uppercase">${safeFormat}</span>
-                        </div>
-                        <div class="info-container-node p-6 flex flex-col">
+bookCard.innerHTML = `
+    <div class="img-container-node h-64 bg-slate-100 p-8 relative flex items-center justify-center">
+        ${imageHTML}
+        <span class="absolute top-4 right-4 bg-green-500 text-white text-[10px] font-black px-2.5 py-1 rounded-full uppercase z-20">${safeFormat}</span>
+    </div>
+    <div class="info-container-node p-6 flex flex-col">
                             <h3 class="font-bold text-slate-800 leading-snug card-title">${item.title}</h3>
                             <p class="text-xs text-slate-400 mt-1 uppercase tracking-tighter author-subtext">BY ${safeMadeBy}</p>
                             <div class="price-wrapper-node mt-6 flex items-center justify-between">
