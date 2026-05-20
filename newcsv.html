@@ -1464,14 +1464,22 @@ bookCard.innerHTML = `
         closeModal();
         redirectBuy(buyUrl);
     };
-    
+    // If link is missing entirely, show fallback instantly
+    if (!pdfSrc || pdfSrc.trim() === "" || pdfSrc.includes("missing-file")) {
+        loader.classList.add('modal-hidden');
+        iframe.classList.add('modal-hidden');
+        fallback.classList.remove('modal-hidden');
+        modal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+        return;
+    }
+
     loader.classList.remove('modal-hidden');
     iframe.classList.add('modal-hidden');
     fallback.classList.add('modal-hidden');
     
     // --- GOOGLE DRIVE URL FIX START ---
     let formattedPdfSrc = pdfSrc;
-    // Auto-convert standard Drive links to embeddable preview links
     if (formattedPdfSrc && formattedPdfSrc.includes('drive.google.com')) {
         const idMatch = formattedPdfSrc.match(/\/file\/d\/([a-zA-Z0-9_-]+)/);
         if (idMatch && idMatch[1]) {
@@ -1488,41 +1496,17 @@ bookCard.innerHTML = `
     }
     // --- GOOGLE DRIVE URL FIX END ---
 
-    let connectionTimeout = setTimeout(() => {
-        if (!iframe.src.includes(formattedPdfSrc) || iframe.classList.contains('modal-hidden')) {
-            loader.classList.add('modal-hidden');
-            iframe.classList.add('modal-hidden');
-            fallback.classList.remove('modal-hidden');
-        }
-    }, 3500);
-
     iframe.src = formattedPdfSrc;
     
+    // Natively handle presentation once Google loads successfully
     iframe.onload = function() {
-        clearTimeout(connectionTimeout);
-        try {
-            if (iframe.contentWindow.location.href === "about:blank" || formattedPdfSrc.includes("missing-file")) {
-                throw new Error("Missing File Resource");
-            }
-            loader.classList.add('modal-hidden');
-            iframe.classList.remove('modal-hidden');
-        } catch(err) {
-            // If the error is a cross-origin SecurityError, it actually means the Google Drive page LOADED SUCCESSFULLY.
-            if (err.name === 'SecurityError' || err.message.includes('cross-origin')) {
-                loader.classList.add('modal-hidden');
-                iframe.classList.remove('modal-hidden');
-            } else {
-                loader.classList.add('modal-hidden');
-                iframe.classList.add('modal-hidden');
-                fallback.classList.remove('modal-hidden');
-            }
-        }
+        loader.classList.add('modal-hidden');
+        iframe.classList.remove('modal-hidden');
     };
     
     modal.style.display = 'flex';
     document.body.style.overflow = 'hidden';
 }
-
         function closeModal() {
             document.getElementById('previewModal').style.display = 'none';
             document.getElementById('pdfPreview').src = "";
