@@ -905,6 +905,10 @@
          * NEW: Load Datesheet Data from CSV
          * Fetches 'datesheet.csv' and populates 'loadedDatesheetData'
          */
+        /**
+         * NEW: Load Datesheet Data from Google Sheets
+         * Fetches published CSV from Google Sheets and populates 'loadedDatesheetData'
+         */
         async function loadDatesheetData() {
             const dataLoader = document.getElementById('dataLoader');
             const dataError = document.getElementById('dataError');
@@ -915,22 +919,25 @@
             hide(dataError);
             
             try {
-                const response = await fetch('CCSUDatesheet.csv');
+                // PASTE YOUR GOOGLE SHEET CSV LINK HERE inside the quotes
+                const googleSheetCSV = 'https://docs.google.com/spreadsheets/d/e/YOUR_UNIQUE_ID_HERE/pub?output=csv';
+                
+                const response = await fetch(googleSheetCSV);
                 if (!response.ok) {
-                    throw new Error(`Failed to load datesheet.csv (Status: ${response.status})`);
+                    throw new Error(`Failed to load Google Sheet data (Status: ${response.status})`);
                 }
                 
                 const csvText = await response.text();
                 const parsedData = parseCSV(csvText);
 
                 if (parsedData.length === 0) {
-                      throw new Error(`datesheet.csv was loaded but appears to be empty or in the wrong format.`);
+                      throw new Error(`Google Sheet was loaded but appears to be empty or in the wrong format.`);
                 }
 
                 // Populate the new data object
                 // Assumes CSV has headers: 'Paper Code', 'Paper Name', 'Date', 'Day', 'Shift'
                 parsedData.forEach(row => {
-                    // Use a key from the CSV, e.g., 'Paper Code'
+                    // Use a key from the CSV
                     const paperCode = row['Paper Code'] || row['PAPER CODE']; 
                     if (paperCode) {
                         loadedDatesheetData[paperCode.trim().toUpperCase()] = {
@@ -958,18 +965,15 @@
                         <h2 class="text-2xl font-bold text-red-800 mb-3">Error 404: Exam Schedule is not Available.</h2>
                         <h3 class="font-bold text-red-800 mb-2">How to Fix This:</h3>
                         <ol class="list-decimal list-inside space-y-2">
-                            <li>Contact to Administrator.</li>
-                            
+                            <li>Check your internet connection.</li>
+                            <li>Contact the Administrator if the issue persists.</li>
                         </ol>
-                        
                     </div>
                 `;
                 show(dataError);
-                console.error("Failed to load datesheet data:", error);
+                console.error("Failed to load datesheet data from Google Sheets:", error);
             }
         }
-
-
         // --- MODAL AND INITIALIZATION LOGIC (UPDATED) ---
         document.addEventListener('DOMContentLoaded', () => {
             const modal = document.getElementById('disclaimer-modal');
