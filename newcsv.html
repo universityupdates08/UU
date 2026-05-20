@@ -957,10 +957,10 @@
                     const buyLink = escapeJS('https://universityupdates.pythonanywhere.com/'); 
 
                     // Fix Missing Currency Symbols natively
-                    let newP = String(item.new_price || '').trim();
-                    let oldP = String(item.old_price || '').trim();
-                    if(newP && /^\\d+/.test(newP) && !newP.includes('₹')) newP = '₹' + newP;
-                    if(oldP && /^\\d+/.test(oldP) && !oldP.includes('₹')) oldP = '₹' + oldP;
+let newP = String(item.new_price || '').trim();
+let oldP = String(item.old_price || '').trim();
+if(newP && /^[0-9]+/.test(newP) && !newP.includes('₹')) newP = '₹' + newP;
+if(oldP && /^[0-9]+/.test(oldP) && !oldP.includes('₹')) oldP = '₹' + oldP;
 
                     bookCard.setAttribute('data-price', newP);
                     bookCard.setAttribute('data-oldprice', oldP);
