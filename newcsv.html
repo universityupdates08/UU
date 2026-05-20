@@ -965,11 +965,30 @@ if(oldP && /^[0-9]+/.test(oldP) && !oldP.includes('₹')) oldP = '₹' + oldP;
                     bookCard.setAttribute('data-price', newP);
                     bookCard.setAttribute('data-oldprice', oldP);
 
-                    // Fix Missing Image URLs
-                    let imgUrl = String(item.image_url || '').trim();
-                    if (!imgUrl) {
-                        imgUrl = 'https://via.placeholder.com/200x280/f1f5f9/94a3b8?text=' + encodeURIComponent((item.title || 'Note').substring(0, 15) + "...");
-                    }
+                    // Fix Missing Image URLs and convert Google Drive Links
+let imgUrl = String(item.image_url || '').trim();
+
+// Auto-convert Google Drive links to direct image embed links
+if (imgUrl && imgUrl.includes('drive.google.com')) {
+    const idMatch = imgUrl.match(/\/file\/d\/([a-zA-Z0-9_-]+)/);
+    if (idMatch && idMatch[1]) {
+        // Converts standard share link to a direct thumbnail rendering link
+        imgUrl = `https://drive.google.com/thumbnail?id=${idMatch[1]}&sz=w800`;
+    } else if (imgUrl.includes('id=')) {
+        try {
+            const urlObj = new URL(imgUrl);
+            const fileId = urlObj.searchParams.get('id');
+            if (fileId) {
+                imgUrl = `https://drive.google.com/thumbnail?id=${fileId}&sz=w800`;
+            }
+        } catch(e) {}
+    }
+}
+
+// Fallback for missing images
+if (!imgUrl) {
+    imgUrl = 'https://via.placeholder.com/200x280/f1f5f9/94a3b8?text=' + encodeURIComponent((item.title || 'Note').substring(0, 15) + "...");
+}
 
                     bookCard.innerHTML = `
                         <div class="img-container-node h-64 bg-slate-100 p-8 relative">
@@ -1046,81 +1065,101 @@ if(oldP && /^[0-9]+/.test(oldP) && !oldP.includes('₹')) oldP = '₹' + oldP;
         }
 
         function renderActiveViewEngine() {
-            const wrappers = document.querySelectorAll('.semester-wrapper');
-            const heading = document.getElementById('librarySectionHeading');
-            const subtext = document.getElementById('librarySectionSubtext');
-            const storeSearch = document.getElementById('storeSearchInput').value.toLowerCase().trim();
-            const globalSearch = document.getElementById('globalSearchInput').value.toLowerCase().trim();
+    const wrappers = document.querySelectorAll('.semester-wrapper');
+    const heading = document.getElementById('librarySectionHeading');
+    const subtext = document.getElementById('librarySectionSubtext');
+    const storeSearch = document.getElementById('storeSearchInput').value.toLowerCase().trim();
+    const globalSearch = document.getElementById('globalSearchInput').value.toLowerCase().trim();
+    
+    const integratedQuery = storeSearch || globalSearch;
+
+    if (selectedCategory === "popular" && integratedQuery === "") {
+        heading.innerText = "All Popular Notes";
+        subtext.innerText = "Explore our full repository of digital resource guides.";
+        
+        let popularVisibleCount = 0; // Added counter to track visible notes
+        
+        wrappers.forEach(wrap => {
+            const headerNode = wrap.querySelector('.semester-header-title');
+            headerNode.classList.add('hidden');
+            const targetZone = wrap.querySelector('.library-items-target-zone');
+            targetZone.className = "library-items-target-zone grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-5 gap-4 w-full";
+            const books = targetZone.querySelectorAll('.book-card');
             
-            const integratedQuery = storeSearch || globalSearch;
-
-            if (selectedCategory === "popular" && integratedQuery === "") {
-                heading.innerText = "All Popular Notes";
-                subtext.innerText = "Explore our full repository of digital resource guides.";
-                wrappers.forEach(wrap => {
-                    const headerNode = wrap.querySelector('.semester-header-title');
-                    headerNode.classList.add('hidden');
-                    const targetZone = wrap.querySelector('.library-items-target-zone');
-                    targetZone.className = "library-items-target-zone grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-5 gap-4 w-full";
-                    const books = targetZone.querySelectorAll('.book-card');
-                    books.forEach(book => {
-                        book.style.setProperty('display', 'flex', 'important');
-                        restoreOriginalCardMarkup(book);
-                    });
-                    wrap.style.setProperty('display', 'block', 'important');
-                });
-            } else {
-                if (integratedQuery !== "") {
-                    heading.innerText = "Search Results";
-                    subtext.innerText = `Showing matching assets for "${integratedQuery}"`;
+            let wrapHasVisible = false;
+            
+            books.forEach(book => {
+                // Check if we haven't reached the 10 item limit yet
+                if (popularVisibleCount < 10) {
+                    book.style.setProperty('display', 'flex', 'important');
+                    restoreOriginalCardMarkup(book);
+                    popularVisibleCount++;
+                    wrapHasVisible = true;
                 } else {
-                    heading.innerText = `${selectedCategory.toUpperCase().replace('-', ' ').replace('_', ' ')} NOTES`;
-                    subtext.innerText = "Available resources arranged sequentially by Academic Semesters.";
+                    // Hide any books beyond the first 10
+                    book.style.setProperty('display', 'none', 'important');
                 }
-
-                wrappers.forEach(wrap => {
-                    const headerNode = wrap.querySelector('.semester-header-title');
-                    const labelPlaceholder = headerNode.querySelector('.header-text-placeholder');
-                    const currentSem = wrap.getAttribute('data-semester');
-                    labelPlaceholder.innerText = `${selectedCategory.toUpperCase().replace('-', ' ').replace('_', ' ')} — Semester ${currentSem}`;
-                    
-                    const targetZone = wrap.querySelector('.library-items-target-zone');
-                    targetZone.className = "library-items-target-zone flex flex-col gap-3 mt-4 w-full";
-                    
-                    let activeCount = 0;
-                    const books = targetZone.querySelectorAll('.book-card');
-                    books.forEach(book => {
-                        const cat = book.getAttribute('data-category');
-                        const keywords = book.getAttribute('data-searchable-keywords').toLowerCase();
-                        
-                        const matchCat = (selectedCategory === "popular" || cat === selectedCategory);
-                        const matchSearch = (integratedQuery === "" || keywords.includes(integratedQuery));
-                        
-                        if (matchCat && matchSearch) {
-                            book.style.setProperty('display', 'block', 'important');
-                            transformCardToTableRowMarkup(book);
-                            activeCount++;
-                        } else {
-                            book.style.setProperty('display', 'none', 'important');
-                        }
-                    });
-
-                    if (activeCount > 0) {
-                        wrap.style.setProperty('display', 'block', 'important');
-                        headerNode.classList.remove('hidden');
-                    } else {
-                        wrap.style.setProperty('display', 'none', 'important');
-                        headerNode.classList.add('hidden');
-                    }
-                });
-            }
-
-            let visibleTotal = 0;
-            document.querySelectorAll('.book-card').forEach(b => {
-                if(b.style.display !== 'none') visibleTotal++;
             });
-            document.getElementById('searchEmptyState').classList.toggle('hidden', visibleTotal > 0);
+            
+            if (wrapHasVisible) {
+                wrap.style.setProperty('display', 'block', 'important');
+            } else {
+                wrap.style.setProperty('display', 'none', 'important');
+            }
+        });
+    } else {
+        // ... rest of the original function logic remains unchanged ...
+        if (integratedQuery !== "") {
+            heading.innerText = "Search Results";
+            subtext.innerText = `Showing matching assets for "${integratedQuery}"`;
+        } else {
+            heading.innerText = `${selectedCategory.toUpperCase().replace('-', ' ').replace('_', ' ')} NOTES`;
+            subtext.innerText = "Available resources arranged sequentially by Academic Semesters.";
         }
+
+        wrappers.forEach(wrap => {
+            const headerNode = wrap.querySelector('.semester-header-title');
+            const labelPlaceholder = headerNode.querySelector('.header-text-placeholder');
+            const currentSem = wrap.getAttribute('data-semester');
+            labelPlaceholder.innerText = `${selectedCategory.toUpperCase().replace('-', ' ').replace('_', ' ')} — Semester ${currentSem}`;
+            
+            const targetZone = wrap.querySelector('.library-items-target-zone');
+            targetZone.className = "library-items-target-zone flex flex-col gap-3 mt-4 w-full";
+            
+            let activeCount = 0;
+            const books = targetZone.querySelectorAll('.book-card');
+            books.forEach(book => {
+                const cat = book.getAttribute('data-category');
+                const keywords = book.getAttribute('data-searchable-keywords').toLowerCase();
+                
+                const matchCat = (selectedCategory === "popular" || cat === selectedCategory);
+                const matchSearch = (integratedQuery === "" || keywords.includes(integratedQuery));
+                
+                if (matchCat && matchSearch) {
+                    book.style.setProperty('display', 'block', 'important');
+                    transformCardToTableRowMarkup(book);
+                    activeCount++;
+                } else {
+                    book.style.setProperty('display', 'none', 'important');
+                }
+            });
+
+            if (activeCount > 0) {
+                wrap.style.setProperty('display', 'block', 'important');
+                headerNode.classList.remove('hidden');
+            } else {
+                wrap.style.setProperty('display', 'none', 'important');
+                headerNode.classList.add('hidden');
+            }
+        });
+    }
+
+    let visibleTotal = 0;
+    document.querySelectorAll('.book-card').forEach(b => {
+        if(b.style.display !== 'none') visibleTotal++;
+    });
+    document.getElementById('searchEmptyState').classList.toggle('hidden', visibleTotal > 0);
+}
 
         function executeStoreFiltering() {
             const searchQuery = document.getElementById('storeSearchInput').value.toLowerCase().trim();
@@ -1390,58 +1429,83 @@ if(oldP && /^[0-9]+/.test(oldP) && !oldP.includes('₹')) oldP = '₹' + oldP;
         }
 
         function openPreviewModal(title, pdfSrc, quality, lang, format, buyUrl, madeBy, aboutBook) {
-            const modal = document.getElementById('previewModal');
-            const loader = document.getElementById('modalLoader');
-            const iframe = document.getElementById('pdfPreview');
-            const fallback = document.getElementById('noPreviewFallback');
-            
-            // Render text gracefully handling internal newlines safely encoded by escapeJS earlier
-            document.getElementById('modalTitle').innerText = title;
-            document.getElementById('modalQuality').innerText = quality;
-            document.getElementById('modalLang').innerText = lang;
-            document.getElementById('modalFormat').innerText = format;
-            document.getElementById('modalMadeBy').innerText = madeBy || "University Updates";
-            
-            // Re-apply newline visual formatting for HTML dynamically
-            document.getElementById('modalAboutBook').innerHTML = (aboutBook || "No description provided.").replace(/\\n/g, "<br>");
-            
-            document.getElementById('modalBuyBtn').onclick = () => {
-                closeModal();
-                redirectBuy(buyUrl);
-            };
-            
-            loader.classList.remove('modal-hidden');
-            iframe.classList.add('modal-hidden');
-            fallback.classList.add('modal-hidden');
-            
-            let connectionTimeout = setTimeout(() => {
-                if (!iframe.src.includes(pdfSrc) || iframe.classList.contains('modal-hidden')) {
-                    loader.classList.add('modal-hidden');
-                    iframe.classList.add('modal-hidden');
-                    fallback.classList.remove('modal-hidden');
+    const modal = document.getElementById('previewModal');
+    const loader = document.getElementById('modalLoader');
+    const iframe = document.getElementById('pdfPreview');
+    const fallback = document.getElementById('noPreviewFallback');
+    
+    // Render text gracefully handling internal newlines safely encoded by escapeJS earlier
+    document.getElementById('modalTitle').innerText = title;
+    document.getElementById('modalQuality').innerText = quality;
+    document.getElementById('modalLang').innerText = lang;
+    document.getElementById('modalFormat').innerText = format;
+    document.getElementById('modalMadeBy').innerText = madeBy || "University Updates";
+    
+    // Re-apply newline visual formatting for HTML dynamically
+    document.getElementById('modalAboutBook').innerHTML = (aboutBook || "No description provided.").replace(/\\n/g, "<br>");
+    
+    document.getElementById('modalBuyBtn').onclick = () => {
+        closeModal();
+        redirectBuy(buyUrl);
+    };
+    
+    loader.classList.remove('modal-hidden');
+    iframe.classList.add('modal-hidden');
+    fallback.classList.add('modal-hidden');
+    
+    // --- GOOGLE DRIVE URL FIX START ---
+    let formattedPdfSrc = pdfSrc;
+    // Auto-convert standard Drive links to embeddable preview links
+    if (formattedPdfSrc && formattedPdfSrc.includes('drive.google.com')) {
+        const idMatch = formattedPdfSrc.match(/\/file\/d\/([a-zA-Z0-9_-]+)/);
+        if (idMatch && idMatch[1]) {
+            formattedPdfSrc = `https://drive.google.com/file/d/${idMatch[1]}/preview`;
+        } else if (formattedPdfSrc.includes('id=')) {
+            try {
+                const urlObj = new URL(formattedPdfSrc);
+                const fileId = urlObj.searchParams.get('id');
+                if (fileId) {
+                    formattedPdfSrc = `https://drive.google.com/file/d/${fileId}/preview`;
                 }
-            }, 3500);
-
-            iframe.src = pdfSrc;
-            
-            iframe.onload = function() {
-                clearTimeout(connectionTimeout);
-                try {
-                    if (iframe.contentWindow.location.href === "about:blank" || pdfSrc.includes("missing-file")) {
-                        throw new Error("Missing File Resource");
-                    }
-                    loader.classList.add('modal-hidden');
-                    iframe.classList.remove('modal-hidden');
-                } catch(err) {
-                    loader.classList.add('modal-hidden');
-                    iframe.classList.add('modal-hidden');
-                    fallback.classList.remove('modal-hidden');
-                }
-            };
-            
-            modal.style.display = 'flex';
-            document.body.style.overflow = 'hidden';
+            } catch(e) {}
         }
+    }
+    // --- GOOGLE DRIVE URL FIX END ---
+
+    let connectionTimeout = setTimeout(() => {
+        if (!iframe.src.includes(formattedPdfSrc) || iframe.classList.contains('modal-hidden')) {
+            loader.classList.add('modal-hidden');
+            iframe.classList.add('modal-hidden');
+            fallback.classList.remove('modal-hidden');
+        }
+    }, 3500);
+
+    iframe.src = formattedPdfSrc;
+    
+    iframe.onload = function() {
+        clearTimeout(connectionTimeout);
+        try {
+            if (iframe.contentWindow.location.href === "about:blank" || formattedPdfSrc.includes("missing-file")) {
+                throw new Error("Missing File Resource");
+            }
+            loader.classList.add('modal-hidden');
+            iframe.classList.remove('modal-hidden');
+        } catch(err) {
+            // If the error is a cross-origin SecurityError, it actually means the Google Drive page LOADED SUCCESSFULLY.
+            if (err.name === 'SecurityError' || err.message.includes('cross-origin')) {
+                loader.classList.add('modal-hidden');
+                iframe.classList.remove('modal-hidden');
+            } else {
+                loader.classList.add('modal-hidden');
+                iframe.classList.add('modal-hidden');
+                fallback.classList.remove('modal-hidden');
+            }
+        }
+    };
+    
+    modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+}
 
         function closeModal() {
             document.getElementById('previewModal').style.display = 'none';
