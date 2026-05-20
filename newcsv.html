@@ -679,11 +679,62 @@
             </div>
             
             <div id="faq" class="tab-content space-y-4">
-                <h3 class="text-2xl font-bold heading-font">Frequently Ask Questions</h3>
-                <div class="text-slate-400 text-sm space-y-3">
-                    <p>• Coming Soon</p>
-                </div>
+    <h3 class="text-2xl font-bold heading-font mb-6">Frequently Asked Questions</h3>
+    
+    <div class="space-y-3 max-w-3xl mx-auto text-sm">
+        <!-- FAQ Item 1 -->
+        <div class="border border-slate-800 dark:border-slate-700 rounded-xl overflow-hidden bg-slate-800/40">
+            <button onclick="toggleFaq(this)" class="w-full flex justify-between items-center px-5 py-4 text-left font-semibold text-white hover:bg-slate-800 transition-colors group focus:outline-none">
+                <span>How will I receive my notes after making a payment?</span>
+                <i class="fas fa-chevron-down text-xs text-slate-400 group-hover:text-white transition-transform duration-200"></i>
+            </button>
+            <div class="faq-panel hidden bg-slate-900/50">
+                <p class="p-5 text-slate-400 leading-relaxed border-t border-slate-800/60">
+                    Immediately after a successful checkout, please **wait for 5 seconds** without closing the page. The system will automatically redirect you back to your portal dashboard, where your PDF file will be instantly unlocked and available for view or download.
+                </p>
             </div>
+        </div>
+
+        <!-- FAQ Item 2 -->
+        <div class="border border-slate-800 dark:border-slate-700 rounded-xl overflow-hidden bg-slate-800/40">
+            <button onclick="toggleFaq(this)" class="w-full flex justify-between items-center px-5 py-4 text-left font-semibold text-white hover:bg-slate-800 transition-colors group focus:outline-none">
+                <span>Are these study materials aligned with the New Education Policy (NEP)?</span>
+                <i class="fas fa-chevron-down text-xs text-slate-400 group-hover:text-white transition-transform duration-200"></i>
+            </button>
+            <div class="faq-panel hidden bg-slate-900/50">
+                <p class="p-5 text-slate-400 leading-relaxed border-t border-slate-800/60">
+                    Yes, absolutely. All our resources, summaries, and digital question banks are strictly compiled according to the latest **NEP-2020 guidelines** for undergraduate and postgraduate university curriculums.
+                </p>
+            </div>
+        </div>
+
+        <!-- FAQ Item 3 -->
+        <div class="border border-slate-800 dark:border-slate-700 rounded-xl overflow-hidden bg-slate-800/40">
+            <button onclick="toggleFaq(this)" class="w-full flex justify-between items-center px-5 py-4 text-left font-semibold text-white hover:bg-slate-800 transition-colors group focus:outline-none">
+                <span>What should I do if my payment succeeds but the download doesn't open?</span>
+                <i class="fas fa-chevron-down text-xs text-slate-400 group-hover:text-white transition-transform duration-200"></i>
+            </button>
+            <div class="faq-panel hidden bg-slate-900/50">
+                <p class="p-5 text-slate-400 leading-relaxed border-t border-slate-800/60">
+                    Don't worry at all. If you face any technical lag or accidentally close the tab during redirection, simply head over to our Telegram Support Helpdesk at <a href="https://t.me/HelpforDMBot" target="_blank" class="text-blue-400 underline hover:text-blue-300">@HelpforDMBot</a> or email us your payment screenshot at <span class="text-white font-medium">universityupdates08@gmail.com</span>. Our admin team will manually verify and deploy the copy to your account within minutes.
+                </p>
+            </div>
+        </div>
+
+        <!-- FAQ Item 4 -->
+        <div class="border border-slate-800 dark:border-slate-700 rounded-xl overflow-hidden bg-slate-800/40">
+            <button onclick="toggleFaq(this)" class="w-full flex justify-between items-center px-5 py-4 text-left font-semibold text-white hover:bg-slate-800 transition-colors group focus:outline-none">
+                <span>Can I access my purchased items on multiple devices?</span>
+                <i class="fas fa-chevron-down text-xs text-slate-400 group-hover:text-white transition-transform duration-200"></i>
+            </button>
+            <div class="faq-panel hidden bg-slate-900/50">
+                <p class="p-5 text-slate-400 leading-relaxed border-t border-slate-800/60">
+                    Yes. Once you register and log into your University Updates account, your storage tier is synced securely across all devices. You can read your content seamlessly on smartphones, laptops, or tablets anywhere.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
             
             <div id="rp" class="tab-content space-y-4">
                 <h3 class="text-2xl font-bold heading-font">Refund Policy</h3>
@@ -1563,6 +1614,29 @@ bookCard.innerHTML = `
                 requestAnimationFrame(updateCounter);
             });
         });
+        
+        function toggleFaq(button) {
+    const icon = button.querySelector('i');
+    const panel = button.nextElementSibling;
+    
+    // Close all other panels securely
+    document.querySelectorAll('.faq-panel').forEach(p => {
+        if (p !== panel) {
+            p.classList.add('hidden');
+            p.previousElementSibling.querySelector('i').classList.remove('rotate-180');
+        }
+    });
+
+    // Toggle targeted open element
+    if (panel.classList.contains('hidden')) {
+        panel.classList.remove('hidden');
+        icon.classList.add('rotate-180');
+    } else {
+        panel.classList.add('hidden');
+        icon.classList.remove('rotate-180');
+    }
+}
+
     </script>
 </body>
 </html>
