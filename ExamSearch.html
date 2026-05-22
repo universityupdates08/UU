@@ -10,6 +10,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+    <!-- html2canvas added for Save as PNG feature -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
     <style>
         :root {
@@ -112,11 +114,30 @@
             gap: 8px;
         }
         .btn-primary:hover { background-color: #152c6b; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(30,58,138,0.2); }
+        
+        .btn-download {
+            background-color: #10b981;
+            color: white;
+            padding: 10px 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: background-color 0.2s, transform 0.2s;
+        }
+        .btn-download:hover { background-color: #059669; transform: translateY(-1px); }
 
-        /* Tables */
+        /* Tables - Enforced Single Row Characters */
         .table-wrapper { overflow-x: auto; border-radius: 8px; border: 1px solid #e2e8f0; margin-top: 1rem; }
         table { width: 100%; border-collapse: collapse; text-align: left; background: white; }
-        th { background-color: #f8fafc; color: #475569; font-weight: 600; font-size: 0.85rem; text-transform: uppercase; padding: 14px 16px; letter-spacing: 0.05em; border-bottom: 1px solid #e2e8f0; white-space: nowrap; }
+        th, td { 
+            white-space: nowrap; /* ENFORCES SINGLE ROW */
+        }
+        th { background-color: #f8fafc; color: #475569; font-weight: 600; font-size: 0.85rem; text-transform: uppercase; padding: 14px 16px; letter-spacing: 0.05em; border-bottom: 1px solid #e2e8f0; }
         td { padding: 14px 16px; border-bottom: 1px solid #f1f5f9; color: #334155; font-size: 0.9rem; }
         tr:last-child td { border-bottom: none; }
         tbody tr:hover { background-color: #f8fafc; }
@@ -126,6 +147,38 @@
         .grid-results { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; margin-top: 20px; }
         .badge-shift { background-color: #e0e7ff; color: #3730a3; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 700; display: inline-block; }
         .badge-code { background-color: #f1f5f9; color: #475569; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; border: 1px solid #e2e8f0;}
+
+        /* Export State Styles */
+        .export-header { display: none; }
+        
+        .exporting {
+            padding: 24px;
+            background-color: #ffffff;
+            width: max-content !important;
+            min-width: 800px; /* Minimum width for a decent image */
+            max-width: none !important;
+            border-radius: 0;
+            border: none;
+        }
+        
+        .exporting .export-header { 
+            display: flex !important; 
+            justify-content: space-between; 
+            align-items: center; 
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+        
+        /* Disable scroll temporarily for capture to not cut off content */
+        .exporting .table-wrapper {
+            overflow: visible !important;
+            border: 1px solid #e2e8f0;
+        }
+        .exporting .grid-results {
+            display: flex;
+            flex-wrap: wrap;
+        }
 
         #topBtn { display: none; position: fixed; bottom: 24px; right: 24px; z-index: 40; background-color: #1e293b; color: white; width: 45px; height: 45px; border-radius: 50%; box-shadow: 0 10px 25px rgba(0,0,0,0.2); cursor: pointer; border:none; transition: all 0.3s; display: flex; align-items: center; justify-content: center; font-size: 1.2rem;}
         #topBtn:hover { transform: translateY(-3px); background-color: var(--secondary-color); }
@@ -285,7 +338,7 @@
                         <i class="fas fa-search"></i> Search
                     </button>
                 </div>
-                <div id="resultRow3" class="grid-results"></div>
+                <div id="resultRow3"></div>
             </div>
 
             <!-- Grid Layout for Tool 4 & 5 to save vertical space -->
@@ -485,6 +538,96 @@
         return `<div class="table-wrapper"><table>${htmlContent}</table></div>`;
     }
 
+    // Export Helper: Wraps content with hidden header for PNG export
+    function wrapWithExport(id, content, fileName) {
+        return `
+            <div id="${id}" class="export-container relative bg-white rounded-lg transition-all duration-300">
+                <div class="export-header">
+                    <div class="flex items-center gap-3">
+                        <img src="images/uuug.png" alt="Logo" class="h-12 object-contain" crossorigin="anonymous" onerror="this.onerror=null; this.src='https://via.placeholder.com/150x50?text=UNIVERSITY+UPDATES';">
+                        <div class="text-left">
+                            <div class="font-bold text-[#e11d48] text-sm md:text-base">UNIVERSITY UPDATES</div>
+                            <div class="text-xs text-slate-600 font-medium tracking-wide">OFFICIAL EXAM SCHEDULE</div>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2 text-right border-l-2 border-slate-100 pl-4">
+                        <div class="text-[10px] text-slate-500 font-semibold uppercase leading-tight">Scan QR<br>To Join<br>WhatsApp</div>
+                        <!-- Using an open CORS API for QR -->
+                        <img src="images/ccsuwsp.png" alt="QR Code" class="h-12 w-12 bg-white p-1 border border-slate-200 rounded-md" crossorigin="anonymous">
+                    </div>
+                </div>
+                ${content}
+            </div>
+            <div class="mt-4 flex justify-end">
+                <button onclick="downloadPNG('${id}', '${fileName}', this)" class="btn-download">
+                    <i class="fas fa-file-image"></i> Save as PNG
+                </button>
+            </div>
+        `;
+    }
+
+    // Robust Image Capture Engine (Mobile Friendly using Blob approach)
+    async function downloadPNG(containerId, fileName, btnElement) {
+        const container = document.getElementById(containerId);
+        if (!container) return;
+        
+        // 1. UI Feedback - change button text so user knows it's working
+        const originalText = btnElement.innerHTML;
+        btnElement.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving...';
+        btnElement.style.pointerEvents = 'none';
+        btnElement.style.opacity = '0.7';
+        
+        // 2. Enter Export Mode (expands layout, shows logo/QR, stops scrolling)
+        container.classList.add('exporting');
+        
+        // Give the mobile browser a moment to redraw the expanded elements properly
+        await new Promise(resolve => setTimeout(resolve, 400));
+        
+        try {
+            // 3. Capture with canvas
+            const canvas = await html2canvas(container, {
+                scale: window.devicePixelRatio || 2, // Retains high resolution
+                backgroundColor: "#ffffff",
+                useCORS: true, 
+                allowTaint: false, // Prevents security errors that block download
+                logging: false
+            });
+            
+            // 4. Download Trigger via BLOB (Most reliable method for iOS and Mobile Chrome)
+            canvas.toBlob(function(blob) {
+                if (!blob) {
+                    alert("Image generation failed. Please try again.");
+                    return;
+                }
+                const url = window.URL.createObjectURL(blob);
+                const link = document.createElement('a');
+                link.style.display = 'none';
+                link.href = url;
+                link.download = fileName + '.png';
+                
+                // Must be attached to the body for mobile downloads to trigger
+                document.body.appendChild(link);
+                link.click();
+                
+                // Cleanup safely
+                setTimeout(() => {
+                    document.body.removeChild(link);
+                    window.URL.revokeObjectURL(url);
+                }, 1000);
+            }, 'image/png', 1.0);
+            
+        } catch(e) {
+            console.error("Error generating PNG: ", e);
+            alert("Failed to save image. If you are using an in-app browser (like Instagram or WhatsApp), try opening this page directly in Google Chrome or Safari.");
+        } finally {
+            // 5. Restore View and Button
+            container.classList.remove('exporting');
+            btnElement.innerHTML = originalText;
+            btnElement.style.pointerEvents = 'auto';
+            btnElement.style.opacity = '1';
+        }
+    }
+
     function showLiveAlerts() {
         const today = new Date();
         const tomorrow = new Date();
@@ -516,13 +659,18 @@
         const date = formatDate(val);
         const results = csvData.filter(r => r.Date === date);
         const container = document.getElementById("dateResults");
-        if(results.length === 0) { container.innerHTML = `<p class="py-6 text-center text-slate-400 italic bg-slate-50 rounded-lg mt-4 border border-dashed border-slate-200">No Exams Found for this date</p>`; return; }
+        
+        if(results.length === 0) { 
+            container.innerHTML = `<p class="py-6 text-center text-slate-400 italic bg-slate-50 rounded-lg mt-4 border border-dashed border-slate-200">No Exams Found for this date</p>`; 
+            return; 
+        }
         
         let html = `<thead><tr><th>S.No</th><th>Date</th><th>Class</th><th>Subject</th><th>Paper Name</th><th>Paper Code</th><th>Shift</th></tr></thead><tbody>`;
         results.forEach((r, i) => {
             html += `<tr><td>${i+1}</td><td><div class="font-semibold">${r.Date}</div><div class="text-xs text-slate-400">${r.Day}</div></td><td>${r.Class}</td><td class="font-medium">${r.Subject}</td><td>${r['Paper Name']}</td><td><span class="badge-code">${r['Paper Code']}</span></td><td><span class="badge-shift">${r.Shift}</span></td></tr>`;
         });
-        container.innerHTML = wrapTable(html + `</tbody>`);
+        
+        container.innerHTML = wrapWithExport('export-date1', wrapTable(html + `</tbody>`), `Schedule_${date}`);
     }
 
     function searchByClassSubject() {
@@ -532,13 +680,18 @@
         if(!c || !s) { container.innerHTML = ""; return; }
         
         const results = csvData.filter(r => r.Class === c && r.Subject === s);
-        if(results.length === 0) { container.innerHTML = `<div class="py-6 text-center text-slate-400 italic mt-4 bg-slate-50 rounded-lg border border-dashed">No Records Found</div>`; return; }
+        if(results.length === 0) { 
+            container.innerHTML = `<div class="py-6 text-center text-slate-400 italic mt-4 bg-slate-50 rounded-lg border border-dashed">No Records Found</div>`; 
+            return; 
+        }
         
         let html = `<thead><tr><th>Date</th><th>Paper Name</th><th>Paper Code</th><th>Shift</th></tr></thead><tbody>`;
         results.forEach((r) => {
             html += `<tr><td><div class="font-semibold">${r.Date}</div><div class="text-xs text-slate-400">${r.Day}</div></td><td class="font-medium text-slate-800">${r['Paper Name']}</td><td><span class="badge-code">${r['Paper Code']}</span></td><td><span class="badge-shift">${r.Shift}</span></td></tr>`;
         });
-        container.innerHTML = `<h4 class="mt-6 mb-2 font-bold text-slate-800 flex items-center gap-2"><i class="fas fa-bookmark text-blue-500"></i> ${c} — ${s}</h4>` + wrapTable(html + `</tbody>`);
+        
+        let titleHtml = `<h4 class="mt-6 mb-2 font-bold text-slate-800 flex items-center gap-2"><i class="fas fa-bookmark text-blue-500"></i> ${c} — ${s}</h4>`;
+        container.innerHTML = wrapWithExport('export-class-subj', titleHtml + wrapTable(html + `</tbody>`), `${c}_${s}_Schedule`);
     }
 
     function searchByDateClass() {
@@ -548,10 +701,14 @@
         if(!d || !c) { container.innerHTML = ""; return; }
         
         const results = csvData.filter(r => r.Date === d && r.Class === c);
-        container.innerHTML = results.length ? "" : `<div class="py-6 text-center text-slate-400 italic col-span-full bg-slate-50 rounded-lg border border-dashed">No Exams Found</div>`;
+        if(results.length === 0) { 
+            container.innerHTML = `<div class="py-6 text-center text-slate-400 italic mt-4 bg-slate-50 rounded-lg border border-dashed">No Exams Found</div>`; 
+            return; 
+        }
         
+        let cardsHtml = `<div class="grid-results">`;
         results.forEach((r) => {
-            container.innerHTML += `
+            cardsHtml += `
                 <div class="card-result">
                     <div class="flex justify-between items-start mb-2">
                         <div>
@@ -572,6 +729,9 @@
                     </div>
                 </div>`;
         });
+        cardsHtml += `</div>`;
+        
+        container.innerHTML = wrapWithExport('export-date-class', cardsHtml, `${c}_${d}_Schedule`);
     }
 
     function searchByCode() {
@@ -580,10 +740,13 @@
         if(!code) { container.innerHTML = ""; return; }
         
         const results = csvData.filter(r => r['Paper Code'] === code);
-        if(results.length === 0) { container.innerHTML = `<div class="py-6 text-center text-slate-400 italic mt-4 bg-slate-50 rounded-lg border border-dashed">No Records Found</div>`; return; }
+        if(results.length === 0) { 
+            container.innerHTML = `<div class="py-6 text-center text-slate-400 italic mt-4 bg-slate-50 rounded-lg border border-dashed">No Records Found</div>`; 
+            return; 
+        }
         
         const r = results[0];
-        container.innerHTML = `
+        let cardHtml = `
             <div class="mt-6 bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-100 p-6 rounded-xl relative overflow-hidden">
                 <div class="absolute top-0 right-0 p-4 opacity-10 text-6xl"><i class="fas fa-file-alt"></i></div>
                 <div class="relative z-10">
@@ -605,6 +768,8 @@
                     </div>
                 </div>
             </div>`;
+            
+        container.innerHTML = wrapWithExport('export-code', cardHtml, `Paper_${code}_Schedule`);
     }
 
     function searchClassYearSubject() {
@@ -615,13 +780,18 @@
         if(!c || !y || !s) { container.innerHTML = ""; return; }
 
         const results = csvData.filter(r => r.Class === c && r.Subject === s && r.Year === y);
-        if(results.length === 0) { container.innerHTML = `<div class="py-6 text-center text-slate-400 italic mt-4 bg-slate-50 rounded-lg border border-dashed">No Records Found</div>`; return; }
+        if(results.length === 0) { 
+            container.innerHTML = `<div class="py-6 text-center text-slate-400 italic mt-4 bg-slate-50 rounded-lg border border-dashed">No Records Found</div>`; 
+            return; 
+        }
         
         let html = `<thead><tr><th>Date</th><th>Paper Name</th><th>Paper Code</th><th>Shift</th></tr></thead><tbody>`;
         results.forEach((r) => {
             html += `<tr><td><div class="font-semibold">${r.Date}</div><div class="text-xs text-slate-400">${r.Day}</div></td><td class="font-medium text-slate-800">${r['Paper Name']}</td><td><span class="badge-code">${r['Paper Code']}</span></td><td><span class="badge-shift">${r.Shift}</span></td></tr>`;
         });
-        container.innerHTML = `<h4 class="mt-6 mb-2 font-bold text-slate-800"><span class="text-blue-600">${c} (${y} Year/Sem)</span> — ${s}</h4>` + wrapTable(html + `</tbody>`);
+        
+        let titleHtml = `<h4 class="mt-6 mb-2 font-bold text-slate-800"><span class="text-blue-600">${c} (${y} Year/Sem)</span> — ${s}</h4>`;
+        container.innerHTML = wrapWithExport('export-adv', titleHtml + wrapTable(html + `</tbody>`), `Adv_Search_Schedule`);
     }
 
     // Hit Counter
