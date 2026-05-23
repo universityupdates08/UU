@@ -270,43 +270,65 @@
             localStorage.setItem('theme', isDark ? 'dark' : 'light');
         }
 
+        
         // Google Apps Script Form Submission Handling
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbzM1492R-5UgMZPgSDG51ax2_ndsHf-NETGkoqgzg2UwDXf__on5EVC9_s3ylfdA4JyAg/exec'; // REPLACE THIS WITH YOUR DEPLOYED MACRO URL
-        const form = document.forms['vivaNotifyForm'];
-        const btn = document.getElementById('submitNotifyBtn');
-        const msg = document.getElementById('formStatusMsg');
+const scriptURL = 'https://script.google.com/macros/s/AKfycbzM1492R-5UgMZPgSDG51ax2_ndsHf-NETGkoqgzg2UwDXf__on5EVC9_s3ylfdA4JyAg/exec'; // REPLACE THIS WITH YOUR ACTUAL DEPLOYED URL
+const form = document.forms['vivaNotifyForm'];
+const btn = document.getElementById('submitNotifyBtn');
+const msg = document.getElementById('formStatusMsg');
 
-        form.addEventListener('submit', e => {
-            e.preventDefault();
-            
-            const emailValue = document.getElementById('subscriberEmail').value;
+form.addEventListener('submit', e => {
+    e.preventDefault();
+    
+    const emailValue = document.getElementById('subscriberEmail').value;
+    
+    // NEW UPDATE 1: Helper function to get the actual text from your dropdown menus
+    const getSelectedText = (id) => {
+        const el = document.getElementById(id);
+        return (el && el.selectedIndex > 0) ? el.options[el.selectedIndex].text : 'Not Selected';
+    };
 
-            // Show Loading State
-            btn.disabled = true;
-            btn.innerHTML = '<i class="fas fa-circle-notch fa-spin mr-2"></i> Submitting...';
-            btn.classList.add('opacity-75', 'cursor-not-allowed');
-            msg.classList.add('hidden');
+    // NEW UPDATE 2: Grab the exact course, subject, college, and center the student selected
+    const courseValue = getSelectedText('courseSelect');
+    const subjectValue = getSelectedText('subjectSelect');
+    const collegeValue = getSelectedText('collegeSelect');
+    const centerValue = getSelectedText('centerSelect');
 
-            fetch(scriptURL, { method: 'POST', body: new FormData(form)})
-                .then(response => {
-                    // Success State
-                    msg.innerHTML = `<i class="fas fa-check-circle text-green-500 mr-1"></i> Successfully subscribed! Updates will be sent to <b>${emailValue}</b>.`;
-                    msg.className = "mt-3 text-sm text-green-700 font-medium block bg-green-50 p-2 rounded border border-green-200";
-                    form.reset();
-                })
-                .catch(error => {
-                    // Error State
-                    msg.innerHTML = `<i class="fas fa-exclamation-triangle text-red-500 mr-1"></i> Oops! Something went wrong. Please try again.`;
-                    msg.className = "mt-3 text-sm text-red-700 font-medium block bg-red-50 p-2 rounded border border-red-200";
-                    console.error('Error!', error.message);
-                })
-                .finally(() => {
-                    // Reset Button
-                    btn.disabled = false;
-                    btn.innerHTML = '<span>Notify Me</span> <i class="fas fa-paper-plane ml-1 text-xs"></i>';
-                    btn.classList.remove('opacity-75', 'cursor-not-allowed');
-                });
+    // Show Loading State on the button
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fas fa-circle-notch fa-spin mr-2"></i> Submitting...';
+    btn.classList.add('opacity-75', 'cursor-not-allowed');
+    msg.classList.add('hidden');
+
+    // NEW UPDATE 3: Bundle all 5 pieces of information together to send to Google Sheets
+    const formData = new FormData();
+    formData.append('email', emailValue);
+    formData.append('course', courseValue);
+    formData.append('subject', subjectValue);
+    formData.append('college', collegeValue);
+    formData.append('center', centerValue);
+
+    // Send the data to Google Apps Script
+    fetch(scriptURL, { method: 'POST', body: formData})
+        .then(response => {
+            // Success State (Shows a green success message on the screen)
+            msg.innerHTML = `<i class="fas fa-check-circle text-green-500 mr-1"></i> Successfully subscribed for <b>${subjectValue}</b> updates!`;
+            msg.className = "mt-3 text-sm text-green-700 font-medium block bg-green-50 p-2 rounded border border-green-200";
+            form.reset();
+        })
+        .catch(error => {
+            // Error State (Shows a red error message if something fails)
+            msg.innerHTML = `<i class="fas fa-exclamation-triangle text-red-500 mr-1"></i> Oops! Something went wrong. Please try again.`;
+            msg.className = "mt-3 text-sm text-red-700 font-medium block bg-red-50 p-2 rounded border border-red-200";
+            console.error('Error!', error.message);
+        })
+        .finally(() => {
+            // Reset Button back to normal
+            btn.disabled = false;
+            btn.innerHTML = '<span>Notify Me</span> <i class="fas fa-paper-plane ml-1 text-xs"></i>';
+            btn.classList.remove('opacity-75', 'cursor-not-allowed');
         });
+});
     </script>
     <script src="Scripts/Viva.js"></script>
     
