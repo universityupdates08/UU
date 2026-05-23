@@ -8,7 +8,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="CSS/Viva.css">
-    
 </head>
 <body>
 
@@ -130,10 +129,35 @@
                             </div>
                         </div>
 
-                        <!-- Result Output -->
+                        <!-- Result Output WITH EMAIL SUBSCRIPTION -->
                         <div id="resultsCard" class="a-tab-hidden mt-10 bg-blue-50 border-l-4 border-blue-600 p-6 rounded-lg shadow-inner">
                             <h2 class="text-xl font-bold text-blue-900 mb-4 flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> Examination Details</h2>
                             <div id="resultOutput" class="space-y-3 text-sm text-gray-800"></div>
+                            
+                            <!-- Email Update Subscription Box -->
+                            <div class="mt-8 bg-white p-5 rounded-lg border border-blue-100 shadow-sm">
+                                <h3 class="text-base font-bold text-blue-800 mb-2 flex items-center">
+                                    <i class="fas fa-envelope-open-text text-blue-500 mr-2"></i> Get Notified
+                                </h3>
+                                <p class="text-sm text-gray-600 mb-4">
+                                    To receive the viva updates on your E-Mail, enter your email below. When the date & time are available, an automated email will be sent to you.
+                                </p>
+                                
+                                <!-- Google Script Form Integration -->
+                                <form id="vivaNotifyForm" name="vivaNotifyForm" class="flex flex-col sm:flex-row gap-3">
+                                    <div class="relative flex-grow">
+                                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                            <i class="fas fa-envelope text-gray-400"></i>
+                                        </div>
+                                        <input type="email" id="subscriberEmail" name="email" required placeholder="Enter your Gmail ID" class="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg outline-none focus:ring-2 focus:ring-blue-500 transition-all text-sm bg-white text-gray-800">
+                                    </div>
+                                    <button type="submit" id="submitNotifyBtn" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-semibold text-sm transition-all shadow-md whitespace-nowrap flex items-center justify-center min-w-[120px]">
+                                        <span>Notify Me</span> <i class="fas fa-paper-plane ml-1 text-xs"></i>
+                                    </button>
+                                </form>
+                                <div id="formStatusMsg" class="hidden mt-3 text-sm font-medium"></div>
+
+                            </div>
                         </div>
 
                         <!-- Error Output -->
@@ -236,14 +260,54 @@
             </div>
         </div>
     </footer>
-   <script>
-    function toggleDarkMode() {
-        const isDark = document.getElementById('themeToggle').checked;
-        document.body.classList.toggle('dark-mode', isDark);
-        document.getElementById('toggleCircle').style.left = isDark ? '20px' : '0';
-        localStorage.setItem('theme', isDark ? 'dark' : 'light');
-    }
-</script>
+    
+    <script>
+        // Dark Mode Toggle
+        function toggleDarkMode() {
+            const isDark = document.getElementById('themeToggle').checked;
+            document.body.classList.toggle('dark-mode', isDark);
+            document.getElementById('toggleCircle').style.left = isDark ? '20px' : '0';
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        }
+
+        // Google Apps Script Form Submission Handling
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbzM1492R-5UgMZPgSDG51ax2_ndsHf-NETGkoqgzg2UwDXf__on5EVC9_s3ylfdA4JyAg/exec'; // REPLACE THIS WITH YOUR DEPLOYED MACRO URL
+        const form = document.forms['vivaNotifyForm'];
+        const btn = document.getElementById('submitNotifyBtn');
+        const msg = document.getElementById('formStatusMsg');
+
+        form.addEventListener('submit', e => {
+            e.preventDefault();
+            
+            const emailValue = document.getElementById('subscriberEmail').value;
+
+            // Show Loading State
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-circle-notch fa-spin mr-2"></i> Submitting...';
+            btn.classList.add('opacity-75', 'cursor-not-allowed');
+            msg.classList.add('hidden');
+
+            fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+                .then(response => {
+                    // Success State
+                    msg.innerHTML = `<i class="fas fa-check-circle text-green-500 mr-1"></i> Successfully subscribed! Updates will be sent to <b>${emailValue}</b>.`;
+                    msg.className = "mt-3 text-sm text-green-700 font-medium block bg-green-50 p-2 rounded border border-green-200";
+                    form.reset();
+                })
+                .catch(error => {
+                    // Error State
+                    msg.innerHTML = `<i class="fas fa-exclamation-triangle text-red-500 mr-1"></i> Oops! Something went wrong. Please try again.`;
+                    msg.className = "mt-3 text-sm text-red-700 font-medium block bg-red-50 p-2 rounded border border-red-200";
+                    console.error('Error!', error.message);
+                })
+                .finally(() => {
+                    // Reset Button
+                    btn.disabled = false;
+                    btn.innerHTML = '<span>Notify Me</span> <i class="fas fa-paper-plane ml-1 text-xs"></i>';
+                    btn.classList.remove('opacity-75', 'cursor-not-allowed');
+                });
+        });
+    </script>
     <script src="Scripts/Viva.js"></script>
     
 </body>
