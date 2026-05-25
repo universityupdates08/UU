@@ -54,21 +54,21 @@
                 </button>
             </div>
             <div class="p-6 overflow-y-auto flex-grow bg-gray-50">
-                <label class="block text-sm font-bold text-gray-700 uppercase mb-2">Select Viva Center</label>
+                <label class="block text-sm font-bold text-gray-700 uppercase mb-2">Search & Select Viva Center</label>
                 
                 <div class="relative mb-6">
-                    <select id="quickCenterSelect" onchange="renderCenterDetails()" class="w-full p-3 border border-gray-300 rounded-lg outline-none focus:ring-2 focus:ring-blue-500 text-black bg-white shadow-sm appearance-none cursor-pointer disabled:bg-gray-100 disabled:cursor-not-allowed">
-                        <option value="">-- Loading Centers... --</option>
-                    </select>
-                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-gray-500">
-                        <i class="fas fa-chevron-down"></i>
+                    <input list="centerDataList" id="quickCenterSelect" onchange="renderCenterDetails()" class="w-full p-3 border border-gray-300 rounded-lg outline-none focus:ring-2 focus:ring-blue-500 text-black bg-white shadow-sm placeholder-gray-500" placeholder="-- Loading Centers... --" autocomplete="off">
+                    <datalist id="centerDataList">
+                        </datalist>
+                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-gray-400">
+                        <i class="fas fa-search"></i>
                     </div>
                 </div>
 
                 <div id="quickCenterResults" class="hidden bg-white border border-gray-200 p-5 rounded-lg shadow-sm text-black transition-all">
                     <h3 id="selectedCenterTitle" class="font-bold text-blue-900 text-lg mb-4 border-b border-gray-200 pb-2"></h3>
                     <div id="quickCenterContent" class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -246,15 +246,11 @@
     </footer>
     
     <script>
-        // -------------------------------------------------------------------
-        // 1. UPDATE THIS URL WITH YOUR GOOGLE SHEET CSV EXPORT LINK
-        // -------------------------------------------------------------------
         const GOOGLE_SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRZiv_e1A0gciQkWuUvmcsf-efhajUNQWUYF2-5JIljXgkM7iFTz5LOlEVklVALuZY1HuQ-T4SpcXDa/pub?output=csv";
         
-        let globalCenterData = []; // Will store parsed JSON data
+        let globalCenterData = []; 
         let centersLoaded = false;
 
-        // Dark Mode Toggle
         function toggleDarkMode() {
             const isDark = document.getElementById('themeToggle').checked;
             document.body.classList.toggle('dark-mode', isDark);
@@ -262,7 +258,6 @@
             localStorage.setItem('theme', isDark ? 'dark' : 'light');
         }
 
-        // Mobile Header Collapse Logic
         function toggleSocialMenu() {
             const dropdown = document.getElementById('socialLinksDropdown');
             const icon = document.getElementById('socialToggleIcon');
@@ -274,7 +269,6 @@
             }
         }
 
-        // CSV Parser Function
         function parseCSV(csv) {
             const lines = csv.split(/\r?\n/);
             const headers = lines[0].split(',').map(h => h.trim());
@@ -302,7 +296,6 @@
                 row.push(val); 
                 
                 headers.forEach((h, index) => {
-                    // Match column headers dynamically (case-insensitive fallback)
                     obj[h.toLowerCase()] = (row[index] || '').trim();
                     obj[h] = (row[index] || '').trim(); 
                 });
@@ -311,47 +304,48 @@
             return result;
         }
 
-        // Fetch Data from Google Sheet
         async function fetchGoogleSheetData() {
-            const selectElement = document.getElementById('quickCenterSelect');
+            const inputElement = document.getElementById('quickCenterSelect');
+            const dataList = document.getElementById('centerDataList');
             
-            // Check if URL is completely empty
             if(!GOOGLE_SHEET_CSV_URL) {
-                selectElement.innerHTML = '<option value="">Error: Missing CSV Link</option>';
+                inputElement.placeholder = 'Error: Missing CSV Link';
                 return;
             }
 
             try {
+                inputElement.placeholder = 'Fetching centers...';
+                inputElement.disabled = true;
+
                 const response = await fetch(GOOGLE_SHEET_CSV_URL);
                 const csvData = await response.text();
                 globalCenterData = parseCSV(csvData);
                 
-                // Extract Unique Centers
                 const centers = [...new Set(globalCenterData.map(item => item['Center'] || item['center']).filter(Boolean))];
                 
-                // Populate Dropdown
-                selectElement.innerHTML = '<option value="">-- Choose a Center --</option>';
+                // Clear existing options
+                dataList.innerHTML = '';
+                
+                // Populate Datalist
                 centers.sort().forEach(center => {
                     const option = document.createElement('option');
                     option.value = center;
-                    option.textContent = center;
-                    selectElement.appendChild(option);
+                    dataList.appendChild(option);
                 });
                 
                 centersLoaded = true;
-                selectElement.disabled = false;
+                inputElement.disabled = false;
+                inputElement.placeholder = 'Type to search for your center...';
 
             } catch (error) {
                 console.error("Error fetching Google Sheet Data:", error);
-                selectElement.innerHTML = '<option value="">Failed to load centers. Check connection.</option>';
+                inputElement.placeholder = 'Failed to load centers.';
             }
         }
 
-        // Modal Controls
         function openQuickCenterModal() {
             document.getElementById('quickCenterModal').classList.remove('hidden');
             if (!centersLoaded) {
-                document.getElementById('quickCenterSelect').disabled = true;
                 fetchGoogleSheetData();
             }
         }
@@ -362,31 +356,28 @@
             document.getElementById('quickCenterResults').classList.add('hidden');
         }
 
-        // Render Subject Cards Based on Selection
         function renderCenterDetails() {
             const selectedCenter = document.getElementById('quickCenterSelect').value;
             const resultsDiv = document.getElementById('quickCenterResults');
             const contentDiv = document.getElementById('quickCenterContent');
             const titleElement = document.getElementById('selectedCenterTitle');
 
-            if (!selectedCenter) {
+            if (!selectedCenter || selectedCenter.trim() === '') {
                 resultsDiv.classList.add('hidden');
                 return;
             }
 
-            // Filter data for the selected center
             const filteredData = globalCenterData.filter(item => 
                 (item['Center'] === selectedCenter || item['center'] === selectedCenter)
             );
 
             titleElement.innerHTML = `<i class="fas fa-map-marker-alt text-blue-500 mr-2"></i> ${selectedCenter}`;
-            contentDiv.innerHTML = ""; // clear previous
+            contentDiv.innerHTML = ""; 
 
             if(filteredData.length === 0) {
-                contentDiv.innerHTML = `<p class="text-gray-500">No subjects found for this center.</p>`;
+                contentDiv.innerHTML = `<p class="text-gray-500">No subjects found. Please select a valid center from the list.</p>`;
             } else {
                 filteredData.forEach(row => {
-                    // Extract data (fallback to lowercase if headers differ)
                     const course = row['Course'] || row['course'] || 'N/A';
                     const subject = row['Subject'] || row['subject'] || 'All Subjects';
                     const date = row['Date'] || row['date'] || 'TBA';
@@ -400,7 +391,6 @@
                                       </div>`;
                     }
 
-                    // Build Card
                     const card = `
                         <div class="bg-gray-50 p-4 rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
                             <span class="inline-block px-2 py-1 bg-blue-100 text-blue-800 text-xs font-bold rounded mb-2">${course}</span>
