@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notification Portal | Academic Updates</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+    
+    <style>
+        .news-gif {
+            display: inline-block;
+            height: 12px;
+            margin-left: 5px;
+        }
+        body {
+            background-color: #f8f9fa;
+        }
+    </style>
+</head>
+<body class="py-1 px-1">
+
+    <ul id="notification-list" class="space-y-1 text-sm">
+        <li class="p-2 text-gray-500 italic text-center text-xs">
+            <i class="fas fa-spinner fa-spin mr-2"></i> Loading updates...
+        </li>
+    </ul>
+
+    <script>
+        // REPLACE THIS URL with your published Google Sheet CSV link
+        const sheetCSVUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRyybLh1y2Ohp7bZh9JHMZhqZr3vs4JrrAi2hi-w6w531NfyPi3RiO95waM4sFzEurkblg8RELMy6ts/pub?output=csv';
+
+        document.addEventListener('DOMContentLoaded', () => {
+            fetchNotifications();
+        });
+
+        function fetchNotifications() {
+            Papa.parse(sheetCSVUrl, {
+                download: true,
+                header: true,
+                skipEmptyLines: true,
+                complete: function(results) {
+                    const data = results.data;
+                    const listContainer = document.getElementById('notification-list');
+                    listContainer.innerHTML = ''; // Clear loading text
+
+                    // Filter out rows that might be completely empty
+                    const validData = data.filter(row => row.Title && row.Title.trim() !== '');
+
+                    // Fallback if no data is available
+                    if (validData.length === 0) {
+                        listContainer.innerHTML = `
+                            <li class="flex flex-col items-center justify-center p-4 text-gray-500 rounded bg-gray-50 border border-dashed border-gray-200">
+                                <i class="fas fa-bell-slash text-xl mb-2 text-gray-300"></i>
+                                <span>No new notifications available.</span>
+                            </li>`;
+                        return;
+                    }
+
+                    // Generate the list items
+                    validData.forEach(row => {
+                        // Default values to prevent errors if a cell is left blank
+                        const iconClass = row.Icon || 'fas fa-calendar-check text-blue-600';
+                        const linkColor = row.TextColor || 'text-blue-700';
+                        const showGif = (row.IsNew && row.IsNew.toLowerCase() === 'true') 
+                            ? '<img src="https://msuniversity.ac.in/assets/images/new.gif" class="news-gif" alt="New">' 
+                            : '';
+
+                        const li = document.createElement('li');
+                        li.className = 'flex items-start gap-2 hover:bg-gray-50 p-1 rounded transition';
+                        
+                        li.innerHTML = `
+                            <i class="${iconClass} mt-1"></i>
+                            <div>
+                                <a href="${row.Link}" target="_blank" rel="noopener noreferrer" class="${linkColor} hover:underline font-medium">
+                                    ${row.Title} ${showGif}
+                                </a>
+                                <p class="text-[10px] text-gray-400">Updated: ${row.Date}</p>
+                            </div>
+                        `;
+                        
+                        listContainer.appendChild(li);
+                    });
+                },
+                error: function(error) {
+                    console.error("Error fetching data:", error);
+                    document.getElementById('notification-list').innerHTML = `
+                        <li class="p-2 text-red-500 text-xs text-center">
+                            Failed to load notifications. Please try refreshing.
+                        </li>`;
+                }
+            });
+        }
+    </script>
+</body>
+</html>
