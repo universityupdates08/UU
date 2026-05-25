@@ -315,8 +315,9 @@
         async function fetchGoogleSheetData() {
             const selectElement = document.getElementById('quickCenterSelect');
             
-            if(GOOGLE_SHEET_CSV_URL === "https://docs.google.com/spreadsheets/d/e/2PACX-1vRZiv_e1A0gciQkWuUvmcsf-efhajUNQWUYF2-5JIljXgkM7iFTz5LOlEVklVALuZY1HuQ-T4SpcXDa/pub?output=csv") {
-                selectElement.innerHTML = '<option value="">Error: Add your CSV Link in code</option>';
+            // Check if URL is completely empty
+            if(!GOOGLE_SHEET_CSV_URL) {
+                selectElement.innerHTML = '<option value="">Error: Missing CSV Link</option>';
                 return;
             }
 
