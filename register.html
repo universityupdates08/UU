@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Register | University Updates</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --text-dark: #1e293b;
+            --bg-light: #fdfcfb;
+            --white: #ffffff;
+            --accent: #fb923c;
+            --muted: #64748b;
+            --border: #e2e8f0;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.5;
+        }
+
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* --- LEFT SIDE - DESIGNED GRADIENT & GRAPHICS --- */
+        .left {
+            flex: 1.2;
+            background-color: #ffecd2;
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(252, 182, 159, 0.8) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(251, 146, 60, 0.4) 0px, transparent 50%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .left-graphics {
+            position: absolute;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25' viewBox='0 0 1600 800'%3E%3Cpath fill='%237c2d12' fill-opacity='0.04' d='M-150,400 Q150,100 400,400 T800,400 T1200,400 T1600,400 L1600,800 L-150,800 Z'/%3E%3C/svg%3E");
+            background-size: cover;
+            z-index: 0;
+        }
+
+        .left img {
+            width: 90px;
+            margin-bottom: 24px;
+            z-index: 1;
+            filter: drop-shadow(0 8px 15px rgba(124, 45, 18, 0.1));
+        }
+
+        .left h3 {
+            margin: 0;
+            font-weight: 600;
+            color: #7c2d12;
+            letter-spacing: 2px;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            z-index: 1;
+            opacity: 0.6;
+        }
+
+        .left h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(45px, 6vw, 85px);
+            margin: 10px 0;
+            font-weight: 700;
+            font-style: italic;
+            line-height: 1;
+            color: #7c2d12;
+            z-index: 1;
+        }
+
+        /* --- RIGHT SIDE - THE REGISTER BOX --- */
+        .right {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+            background: var(--white);
+            position: relative;
+            z-index: 2;
+        }
+
+        .box {
+            width: 100%;
+            max-width: 440px;
+            padding: 40px;
+            background: var(--white);
+            border-radius: 24px;
+            box-shadow: 0 20px 40px rgba(124, 45, 18, 0.08);
+            border: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .tabs {
+            display: flex;
+            background: #f1f5f9;
+            padding: 4px;
+            border-radius: 14px;
+            margin-bottom: 25px;
+        }
+
+        .tab {
+            flex: 1;
+            padding: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 11px;
+            font-size: 14px;
+            transition: 0.2s;
+        }
+
+        .tab.active {
+            background: white;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            color: var(--accent);
+        }
+
+        input:not([type="checkbox"]) {
+            width: 100%;
+            padding: 14px;
+            margin: 8px 0;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            background: #fcfdfe;
+            font-family: inherit;
+            transition: 0.3s;
+        }
+
+        input:not([type="checkbox"]):focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 4px rgba(251, 146, 60, 0.1);
+        }
+
+        input[type="checkbox"] {
+            cursor: pointer;
+            accent-color: var(--accent);
+        }
+
+        .register-btn {
+            width: 100%;
+            padding: 16px;
+            border: none;
+            border-radius: 12px;
+            background: var(--text-dark);
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: 0.3s;
+        }
+
+        .register-btn:hover { background: #0f172a; transform: translateY(-1px); }
+
+        .terms-text {
+            font-size: 12px;
+            color: var(--muted);
+            text-align: left;
+            line-height: 1.4;
+        }
+
+        .link-btn {
+            color: var(--accent);
+            font-weight: 600;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+        .login-link {
+            color: #ef4444;
+            font-weight: 600;
+            margin-top: 20px;
+            display: block;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        /* --- MODALS --- */
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(4px);
+            z-index: 3000;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background: #fff;
+            max-width: 500px;
+            margin: 40px auto;
+            padding: 30px;
+            border-radius: 24px;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.2);
+        }
+
+        .modal-close-btn {
+            margin-top: 20px;
+            padding: 10px 25px;
+            cursor: pointer;
+            background: var(--text-dark);
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+        }
+
+        /* --- MOBILE CROSS-SECTION --- */
+        @media (max-width: 850px) {
+            .container { flex-direction: column; }
+            .left { padding: 60px 20px 100px 20px; min-height: 35vh; }
+            .left h1 { font-size: 45px; }
+            .right { padding: 20px; background: var(--bg-light); }
+            .box { margin-top: -80px; }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <div class="left">
+        <div class="left-graphics"></div>
+        <img src="/static/logo.png" alt="Logo">
+        <h3>Established Excellence
+</h3>
+        <h1>Welcome!</h1>
+    </div>
+
+    <div class="right">
+        <div class="box">
+            <h2 style="margin: 0 0 8px 0; font-weight: 700; font-size: 1.5rem;">Create Account</h2>
+            <p style="color: var(--muted); font-size: 14px; margin-bottom: 20px;">Start your academic journey today.</p>
+
+            <div class="tabs">
+                <div class="tab" onclick="window.location.href='/'">Login</div>
+                <div class="tab active">Register</div>
+            </div>
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div style="color:#ef4444; font-size:13px; font-weight:600; margin-bottom:15px;">{{ message }}</div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+
+            <form method="POST" action="/register">
+                <input type="text" name="name" placeholder="Full Name" required>
+                <input type="text" name="mobile" placeholder="Mobile Number" pattern="[0-9]{10}" required title="Please enter 10 digit mobile number">
+                <input type="email" name="email" placeholder="E-Mail Address" required>
+                <input type="password" name="password" placeholder="Password" required>
+
+                <div style="display:flex; align-items:flex-start; gap:10px; margin-top:15px; text-align: left;">
+                    <input type="checkbox" id="termsCheck" required style="margin-top: 3px;">
+                    <label for="termsCheck" class="terms-text">
+                        I agree to the 
+                        <span class="link-btn" onclick="openModal('termsModal')">Terms & Conditions</span> 
+                        and 
+                        <span class="link-btn" onclick="openModal('privacyModal')">Privacy Policy</span>.
+                    </label>
+                </div>
+
+                <button type="submit" class="register-btn">Register Now</button>
+            </form>
+
+            <a href="/" class="login-link">Already have an account? Sign In</a>
+        </div>
+    </div>
+</div>
+
+<div id="termsModal" class="modal">
+    <div class="modal-content">
+        <h3 style="font-family: 'Playfair Display', serif; font-style: italic;">Terms & Conditions</h3>
+        <div style="font-size:14px; line-height:1.7; color: var(--text-dark);">
+            • You must register with valid mobile and email.<br>
+            • Content is for personal use only.<br>
+            • Sharing or reselling is strictly prohibited.<br>
+            • No refunds after access.<br>
+            • Contact support via Telegram for issues.
+        </div>
+        <button class="modal-close-btn" onclick="closeModal('termsModal')">I Understand</button>
+    </div>
+</div>
+
+<div id="privacyModal" class="modal">
+    <div class="modal-content">
+        <h3 style="font-family: 'Playfair Display', serif; font-style: italic;">Privacy Policy</h3>
+        <div style="font-size:14px; line-height:1.7; color: var(--text-dark);">
+            • We collect your name, email, and mobile number to provide our services.<br>
+            • Your data is stored securely and never sold to third parties.<br>
+            • We use your contact info only for account updates.<br>
+            • You can request data deletion by contacting support.<br>
+            • We use cookies to improve your experience.
+        </div>
+        <button class="modal-close-btn" onclick="closeModal('privacyModal')">I Understand</button>
+    </div>
+</div>
+
+<script>
+function openModal(id) {
+    document.getElementById(id).style.display = "block";
+    document.body.style.overflow = "hidden";
+}
+
+function closeModal(id) {
+    document.getElementById(id).style.display = "none";
+    document.body.style.overflow = "auto";
+}
+
+window.onclick = function(event) {
+    if (event.target.className === 'modal') {
+        event.target.style.display = "none";
+        document.body.style.overflow = "auto";
+    }
+}
+</script>
+
+</body>
+</html>
