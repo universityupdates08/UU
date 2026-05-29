@@ -1,0 +1,1732 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>UNIVERSITY UPDATES | ESTABLISHED EXCELLENCE</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;1,700&family=Poppins:wght@600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+    <style>
+        :root {
+             --primary: #2563eb;
+             --accent: #ef4444;
+             --slate-bg: #f8fafc;
+             --base-font-size: 16px;
+            --primary-light: #eef2ff;
+            --text-dark: #1e293b;
+            --text-muted: #6b7280;
+            --white: #ffffff;
+            --color-purple: #8b5cf6;
+            --color-green: #10b981;
+            --color-amber: #f59e0b;
+            --color-blue: #3b82f6;
+        }
+        [data-theme="dark"] {
+            --slate-bg: #0f172a;
+            --text-dark: #f8fafc;
+            --text-muted: #cbd5e1;
+            --white: #1e293b;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { font-size: var(--base-font-size); overflow-x: hidden; }
+        body {
+             font-family: "Inter", sans-serif;
+             background-color: var(--slate-bg);
+             color: var(--text-dark);
+             scroll-behavior: smooth;
+             transition: background-color 0.3s, color 0.3s;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+            width: 100%;
+        }
+        [data-theme="dark"] .bg-white { background-color: #1e293b !important; }
+        [data-theme="dark"] .text-slate-900, [data-theme="dark"] .text-slate-800, [data-theme="dark"] .text-slate-950, [data-theme="dark"] .heading-font { color: #f8fafc !important; }
+        [data-theme="dark"] .text-slate-500, [data-theme="dark"] .text-slate-600 { color: #cbd5e1 !important; }
+        [data-theme="dark"] .border-slate-200, [data-theme="dark"] .border-b, [data-theme="dark"] .border-t, [data-theme="dark"] .border-slate-100 { border-color: #334155 !important; }
+        .heading-font { font-family: "Poppins", sans-serif; }
+        
+        .book-card { transition: transform 0.2s ease, box-shadow 0.2s ease; border: 1px solid #e2e8f0; width: 100%; }
+        [data-theme="dark"] .book-card { border-color: #334155; }
+        .book-card:hover { transform: translateY(-4px); box-shadow: 0 12px 24px -10px rgba(0,0,0,0.1); }
+        
+        .announcement-bar { background: linear-gradient(90deg, #1e293b 0%, #334155 100%); color: white; font-size: 0.75rem; height: 35px; display: flex; align-items: center; overflow: hidden; width: 100%; }
+        .announcement-inner { white-space: nowrap; animation: ticker 30s linear infinite; display: inline-block; padding-left: 100%; }
+        @keyframes ticker { 0% { transform: translate3d(0, 0, 0); } 100% { transform: translate3d(-100%, 0, 0); } }
+        
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        .modal-hidden { display: none !important; }
+        #previewModal { display: none; position: fixed; inset: 0; background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(4px); z-index: 1000; align-items: center; justify-content: center; padding: 20px; }
+        .loader { border: 3px solid #f3f3f3; border-top: 3px solid var(--primary); border-radius: 50%; width: 30px; height: 30px; animation: spin 1s linear infinite; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        
+        /* Slider Specific Hide Scrollbar */
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        .search-dropdown-wrapper {
+            position: absolute; top: 100%; left: 0; right: 0; margin-top: 0.5rem; max-height: 320px; overflow-y: auto; z-index: 110; border-radius: 1rem;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .main-container { max-width: 1400px; width: 90%; margin: 0 auto 2rem auto; display: flex; flex-direction: column; gap: 2rem; }
+        
+        .hero-banner {
+            background: radial-gradient(circle at top right, #e0f2fe 0%, #ffffff 50%);
+            padding: 30px 44px 60px; display: grid; align-items: center; grid-template-columns: 1.1fr 0.9fr; gap: 2rem; position: relative; overflow: hidden;
+            border-bottom: 1px solid rgba(226, 232, 240, 0.5);
+        }
+        [data-theme="dark"] .hero-banner { background: radial-gradient(circle at top right, #0c4a6e 0%, #020617 70%); border-bottom-color: rgba(51, 65, 85, 0.5); }
+        .hero-text h1 { font-size: 3.5rem; font-weight: 800; line-height: 1.15; color: var(--text-dark); margin-bottom: 15px; }
+        .hero-text h1 span.accent { color: var(--primary); }
+        .hero-text p { color: var(--text-muted); font-size: 1.1rem; line-height: 1.5; margin-bottom: 15px; max-width: 450px; }
+        .cta-group { display: flex; gap: 1rem; margin-bottom: 1.5rem; }
+        
+        .btn { display: inline-flex; align-items: center; padding: 0.8rem 1.8rem; border-radius: 12px; font-weight: 600; font-size: 0.95rem; text-decoration: none; cursor: pointer; transition: all 0.2s ease; }
+        .btn-primary { background-color: var(--primary); color: #ffffff; border: none; box-shadow: 0 4px 14px rgba(88, 80, 236, 0.25); }
+        .btn-primary:hover { background-color: #4338ca; }
+        .btn-secondary { background-color: var(--white); color: var(--text-dark); border: 1px solid #e5e7eb; }
+        [data-theme="dark"] .btn-secondary { border-color: #475569; }
+        .btn-secondary:hover { background-color: #f9fafb; }
+        [data-theme="dark"] .btn-secondary:hover { background-color: #334155; }
+        
+        .hero-features { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; flex-wrap: wrap; }
+        .feat-item { display: flex; align-items: center; gap: 12px; }
+        .feat-icon-box { width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 18px; }
+        
+        .feat-item.easy .feat-icon-box { background-color: #f5f3ff; color: var(--color-purple); }
+        [data-theme="dark"] .feat-item.easy .feat-icon-box { background-color: #312e81; }
+        .feat-item.sync .feat-icon-box { background-color: #ecfdf5; color: var(--color-green); }
+        [data-theme="dark"] .feat-item.sync .feat-icon-box { background-color: #064e3b; }
+        
+        .feat-info { min-width: 0; }
+        .feat-info h4 { font-size: 0.85rem; font-weight: 600; margin-bottom: 0.2rem; color: var(--text-dark); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .feat-info p { font-size: 0.75rem; color: var(--text-muted); margin: 0; line-height: 1.3; overflow: hidden; text-overflow: ellipsis; }
+        
+        .hero-graphic { position: relative; display: flex; justify-content: center; align-items: flex-end; height: 100%; width: 100%; }
+        .abstract-bg-svg { position: absolute; top: -10%; left: -10%; width: 120%; height: 120%; z-index: 1; pointer-events: none; }
+        [data-theme="dark"] .abstract-bg-svg path { stroke: #334155; }
+        .mock-character-img { position: relative; z-index: 2; width: 100%; max-width: 100%; height: auto; display: block; filter: drop-shadow(0px 15px 30px rgba(0,0,0,0.08)); margin: 0 auto; }
+        
+        .sparkle { position: absolute; color: #c084fc; opacity: 0.6; z-index: 1; font-size: 1.2rem; }
+        .sp-1 { top: 15%; left: 5%; }
+        .sp-2 { top: 45%; left: -8%; font-size: 1.5rem; }
+        .sp-3 { top: 40%; right: 5%; }
+        
+        .stats-row {
+             background-color: var(--white); border-radius: 16px; padding: 24px; display: grid; grid-template-columns: repeat(4, 1fr);
+             box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+            margin-top: -3.75rem; position: relative; z-index: 10;
+            border: 1px solid rgba(226, 232, 240, 0.8);
+        }
+        [data-theme="dark"] .stats-row { border-color: rgba(51, 65, 85, 0.8); }
+        .stat-card { display: flex; align-items: center; justify-content: center; gap: 12px; padding: 0.5rem 1.5rem; width: 100%; min-width: 0; }
+        .stat-card:not(:last-child) { border-right: 1px solid #f3f4f6; }
+        [data-theme="dark"] .stat-card:not(:last-child) { border-right-color: #334155; }
+        .stat-icon-wrapper { width: 48px; height: 48px; border-radius: 14px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        
+        .sc-notes .stat-icon-wrapper { background-color: #f3e8ff; color: var(--color-purple); }
+        [data-theme="dark"] .sc-notes .stat-icon-wrapper { background-color: #312e81; }
+        .sc-notebooks .stat-icon-wrapper { background-color: #d1fae5; color: var(--color-green); }
+        [data-theme="dark"] .sc-notebooks .stat-icon-wrapper { background-color: #064e3b; }
+        .sc-tags .stat-icon-wrapper { background-color: #fef3c7; color: var(--color-amber); }
+        [data-theme="dark"] .sc-tags .stat-icon-wrapper { background-color: #78350f; }
+        .sc-reminders .stat-icon-wrapper { background-color: #dbeafe; color: var(--color-blue); }
+        [data-theme="dark"] .sc-reminders .stat-icon-wrapper { background-color: #1e3a8a; }
+        .stat-data { min-width: 0; }
+        .stat-data h2 { font-size: 1.5rem; font-weight: 700; color: var(--text-dark); white-space: nowrap; }
+        .stat-data p { font-size: 0.85rem; color: var(--text-muted); font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        
+        .tabviewNLparent {
+            position: relative;
+            background: #ffffff;
+            border-radius: 9999px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.03);
+            padding: 4px;
+            display: flex;
+            align-items: center;
+            width: 100%;
+            max-width: 1300px;
+            margin: 0 auto;
+            border: 1px solid #e2e8f0;
+            overflow: hidden;
+        }
+        [data-theme="dark"] .tabviewNLparent {
+            background: #1e293b;
+            border-color: #334155;
+        }
+        .tabviewNL {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* TOUCH SCROLLABLE BASE SETUP */
+        .course__tabs2 {
+            display: flex;
+            gap: 12px;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            width: 100%;
+            padding: 4px 44px;
+            list-style: none;
+            -webkit-overflow-scrolling: touch;
+            touch-action: pan-x;
+        }
+        .course__tabs2::-webkit-scrollbar { display: none; }
+        .course__tabs2 { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        .course__tabs2 .nav-link {
+            display: inline-block;
+            white-space: nowrap;
+            padding: 8px 18px;
+            font-size: 11px;
+            text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: 0.03em;
+            color: #026496;
+            background: #f8fafc;
+            border-radius: 9999px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+            border: 1px solid #edf2f7;
+            transition: all 0.2s ease;
+        }
+        [data-theme="dark"] .course__tabs2 .nav-link {
+            background: #0f172a;
+            color: #38bdf8;
+            border-color: #1e293b;
+        }
+        .course__tabs2 .nav-item.active .nav-link,
+         .course__tabs2 .nav-link.active {
+            background: #000000 !important;
+            color: #ffffff !important;
+            border-color: #000000 !important;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        [data-theme="dark"] .course__tabs2 .nav-item.active .nav-link,
+         [data-theme="dark"] .course__tabs2 .nav-link.active {
+            background: #ffffff !important;
+            color: #000000 !important;
+            border-color: #ffffff !important;
+        }
+        .course_btn_navnew {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 34px;
+            height: 34px;
+            background: #000000;
+            color: #ffffff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+            font-size: 12px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            transition: opacity 0.2s;
+        }
+        [data-theme="dark"] .course_btn_navnew { background: #ffffff; color: #000000; }
+        .course_btn_navnew:hover { opacity: 0.9; }
+        .btnPrevious { left: 4px; }
+        .btnNext { right: 4px; }
+
+        /* Auth Modal Specific Styles from Provided Prompt */
+        .auth-left-bg {
+            background-color: #ffecd2;
+            background-image: radial-gradient(at 0% 0%, rgba(252, 182, 159, 0.8) 0px, transparent 50%), radial-gradient(at 100% 100%, rgba(251, 146, 60, 0.4) 0px, transparent 50%);
+        }
+        .auth-tab { cursor: pointer; transition: 0.2s; }
+        .auth-tab.active { background: white; box-shadow: 0 4px 10px rgba(0,0,0,0.05); color: #fb923c; }
+        [data-theme="dark"] .auth-tab.active { background: #1e293b; color: #fb923c; }
+        
+        .auth-input { width: 100%; padding: 14px; margin: 8px 0; border-radius: 12px; border: 1px solid #e2e8f0; background: #fcfdfe; transition: 0.3s; font-family: inherit; font-size: 14px;}
+        .auth-input:focus { outline: none; border-color: #fb923c; box-shadow: 0 0 0 4px rgba(251, 146, 60, 0.1); }
+        .auth-btn { width: 100%; padding: 16px; border: none; border-radius: 12px; background: #1e293b; color: white; font-size: 16px; font-weight: 600; cursor: pointer; margin-top: 15px; transition: 0.3s; }
+        .auth-btn:hover { background: #0f172a; transform: translateY(-1px); }
+        [data-theme="dark"] .auth-btn { background: #fb923c; }
+        [data-theme="dark"] .auth-btn:hover { background: #ea580c; }
+
+        @media (max-width: 640px) {
+            .tabviewNLparent::after {
+                content: ''; position: absolute; right: 0; top: 0; bottom: 0; width: 30px;
+                background: linear-gradient(to right, transparent, var(--slate-bg)); pointer-events: none; z-index: 5; border-radius: 0 12px 12px 0;
+            }
+            .course__tabs2 { touch-action: pan-x; }
+        }
+
+        @media (max-width: 1024px) {
+            html { font-size: 15px; }
+            .hero-banner { grid-template-columns: 1fr; padding: 3rem 5%; text-align: center; }
+            .hero-text h1 { font-size: 2.8rem; }
+            .hero-text p { margin-left: auto; margin-right: auto; }
+            .cta-group { justify-content: center; margin-bottom: 10px; }
+            .hero-features { grid-template-columns: repeat(2, 1fr); justify-content: center; gap: 1.25rem; }
+            .stats-row { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; margin-top: -3rem; padding: 1.5rem; }
+            .stat-card:not(:last-child) { border-right: none; }
+            .stat-card { border-bottom: 1px solid #f3f4f6; padding-bottom: 1rem; }
+            [data-theme="dark"] .stat-card { border-bottom-color: #334155; }
+            .stat-card:nth-child(3), .stat-card:nth-child(4) { border-bottom: none; padding-bottom: 0; pt: 1rem; }
+            
+            .tabviewNLparent { max-width: 100%; border-radius: 24px; padding: 3px; }
+            .course__tabs2 { padding: 4px 44px; gap: 8px; } 
+            .course__tabs2 .nav-link { padding: 6px 14px; font-size: 10px; }
+        }
+        @media (max-width: 640px) {
+            html { font-size: 14px; }
+            .hero-banner { padding: 2rem 4%; }
+            .hero-text h1 { font-size: 2.2rem; }
+            .hero-features {justify-content: center; gap: 1rem; }
+            .stats-row { grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: -2.5rem; padding: 1rem; }
+            .stat-card { border-right: none !important; border-bottom: 1px solid #f3f4f6; padding-bottom: 0.75rem; }
+            [data-theme="dark"] .stat-card { border-bottom-color: #334155; }
+            .stat-card:last-child { border-bottom: none; padding-bottom: 0; }
+            
+            .tabviewNLparent { max-width: 100%; border-radius: 12px; padding: 2px; border: none; box-shadow: none; background: transparent; position: relative; }
+            [data-theme="dark"] .tabviewNLparent { background: transparent; }
+            .course__tabs2 { padding: 4px 38px; gap: 6px; } 
+            .course__tabs2 .nav-link { padding: 6px 12px; font-size: 9.5px; letter-spacing: 0.01em; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+            
+            .course_btn_navnew { width: 28px; height: 28px; font-size: 10px; } 
+            .mock-character-img { max-width: 280px; }
+        }
+    </style>
+</head>
+<body>
+
+    <button id="scrollToTopBtn" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="fixed bottom-6 right-6 z-[90] hidden bg-blue-600 text-white w-12 h-12 rounded-full shadow-lg flex items-center justify-center hover:bg-blue-700 transition">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <div class="bg-black text-slate-300 py-2 text-[12px] font-medium border-b border-zinc-800 relative z-[60]">
+        <div class="max-w-8xl mx-auto px-4 sm:px-6 flex justify-between items-center">
+            <div class="flex gap-4">
+                <a href="https://t.me/HelpforDMBot" class="hover:text-white transition flex items-center gap-1"><i class="fas fa-headset text-white-500"></i> Contact Us</a>
+            </div>
+            
+            <div class="hidden sm:flex gap-6 items-center">
+                <div class="flex gap-4 items-center border-r border-zinc-700 pr-4">
+                    <a href="#"><i class="fas fa-home hover:text-white transition"></i></a>
+                    <a href="https://www.youtube.com/@University-Updates-UU" target="_blank"><i class="fab fa-youtube hover:text-red-500 transition"></i></a>
+                    <a href="https://instagram.com/universityupdates_uu" target="_blank"><i class="fab fa-instagram hover:text-pink-500 transition"></i></a>
+                    <a href="https://t.me/UniversityUpdates_UU" target="_blank"><i class="fab fa-telegram hover:text-blue-400 transition"></i></a>
+                    <a href="https://x.com/uni_updates08" target="_blank"><i class="fab fa-x-twitter hover:text-white transition"></i></a>
+                </div>
+                <div class="flex gap-2 items-center">
+                    <button onclick="adjustFont(-1)" class="bg-zinc-800 hover:bg-zinc-700 px-2 py-0.5 rounded text-[10px] text-white font-bold" title="Decrease Font">A-</button>
+                    <button onclick="resetFont()" class="bg-zinc-800 hover:bg-zinc-700 px-2 py-0.5 rounded text-[10px] text-white font-bold" title="Normal Font">A</button>
+                    <button onclick="adjustFont(1)" class="bg-zinc-800 hover:bg-zinc-700 px-2 py-0.5 rounded text-[10px] text-white font-bold" title="Increase Font">A+</button>
+                    <button onclick="toggleDarkMode()" class="bg-blue-600 hover:bg-blue-800 text-white px-2 py-0.5 rounded text-[10px] font-bold flex items-center gap-1 ml-1">
+                        <i class="fas fa-moon"></i>
+                     </button>
+                </div>
+            </div>
+
+            <div class="sm:hidden flex items-center">
+                <button onclick="toggleUtilityDropdown()" class="text-slate-400 hover:text-white flex items-center gap-1 text-xs focus:outline-none bg-zinc-900 px-2.5 py-1 rounded border border-zinc-800">
+                    Settings <i id="utilityArrowIcon" class="fas fa-chevron-down transition-transform duration-200"></i>
+                </button>
+            </div>
+        </div>
+
+        <div id="utilityMobileDropdown" class="hidden absolute top-full left-0 w-full bg-black border-b border-zinc-800 px-6 py-3 flex flex-col gap-4 shadow-xl sm:hidden">
+            <div class="flex justify-between items-center border-b border-zinc-800 pb-2">
+                <span class="text-[10px] uppercase text-zinc-500 tracking-wider font-bold">Follow Us</span>
+                <div class="flex gap-4 text-sm">
+                    <a href="#"><i class="fas fa-home hover:text-white transition"></i></a>
+                    <a href="https://www.youtube.com/@University-Updates-UU" target="_blank"><i class="fab fa-youtube hover:text-red-500 transition"></i></a>
+                    <a href="https://instagram.com/universityupdates_uu" target="_blank"><i class="fab fa-instagram hover:text-pink-500 transition"></i></a>
+                    <a href="https://t.me/UniversityUpdates_UU" target="_blank"><i class="fab fa-telegram hover:text-blue-400 transition"></i></a>
+                    <a href="https://x.com/uni_updates08" target="_blank"><i class="fab fa-x-twitter hover:text-white transition"></i></a>
+                </div>
+            </div>
+            <div class="flex justify-between items-center">
+                <span class="text-[10px] uppercase text-zinc-500 tracking-wider font-bold">Preferences</span>
+                <div class="flex gap-2 items-center">
+                    <button onclick="adjustFont(-1)" class="bg-zinc-800 hover:bg-zinc-700 px-2 py-1 rounded text-[10px] text-white font-bold">A-</button>
+                    <button onclick="resetFont()" class="bg-zinc-800 hover:bg-zinc-700 px-2 py-1 rounded text-[10px] text-white font-bold">A</button>
+                    <button onclick="adjustFont(1)" class="bg-zinc-800 hover:bg-zinc-700 px-2 py-1 rounded text-[10px] text-white font-bold">A+</button>
+                    <button onclick="toggleDarkMode()" class="bg-blue-600 hover:bg-blue-800 text-white px-2.5 py-1 rounded text-[10px] font-bold flex items-center gap-1 ml-1">
+                        <i class="fas fa-moon"></i> Theme
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <header class="bg-white border-b border-slate-100 transition-colors relative z-50">
+        <div class="max-w-8xl mx-auto px-4 sm:px-6 py-4 flex flex-col lg:flex-row justify-between items-center gap-5">
+            
+            <div class="flex items-center gap-3 flex-shrink-0 w-full lg:w-auto justify-center lg:justify-start">
+                <img src="https://i.ibb.co/nMC0877T/UNIVERSITY-UPDATES-LOGO-removebg-preview.png" alt="Logo" class="h-10 md:h-12 flex-shrink-0" />
+                <div class="border-l pl-4 border-slate-200 dark:border-slate-700">
+                    <h1 class="font-poppins font-bold text-base md:text-lg leading-tight tracking-tight text-slate-800 dark:text-white whitespace-nowrap">UNIVERSITY UPDATES</h1>
+                    <p class="text-[9px] md:text-[10px] uppercase tracking-[0.2em] font-bold text-red-500 whitespace-nowrap">Established Excellence</p>
+                </div>
+            </div>
+            
+            <div class="w-full max-w-xl relative flex flex-col justify-center flex-grow">
+                <div class="relative flex items-center w-full">
+                    <input id="globalSearchInput" oninput="executeLiveSearch()" type="text" placeholder="Search for university books, codes, summaries..." class="w-full px-5 py-2.5 pl-11 pr-4 text-sm bg-slate-50 border border-slate-400 rounded-full focus:outline-none focus:border-blue-500 focus:bg-white text-slate-900 transition-all dark:bg-slate-800 dark:border-slate-700 dark:text-white" autocomplete="off" />
+                    <i class="fas fa-search absolute left-4 text-slate-400 text-sm"></i>
+                </div>
+                
+                <div id="globalSearchDropdown" class="search-dropdown-wrapper hidden bg-white border border-slate-200 dark:bg-slate-900 dark:border-slate-700">
+                    <div id="dropdownItemsContainer" class="flex flex-col py-2"></div>
+                </div>
+            </div>
+
+            <div class="bg-slate-100 border border-red-400 p-1.5 rounded-full flex items-center gap-1 shadow-inner dark:bg-slate-800 dark:border-slate-700 flex-shrink-0">
+                <button onclick="openAuthModal('login')" class="text-xs font-semibold px-6 py-1.5 rounded-full text-slate-700 dark:text-slate-300 hover:text-slate-950 dark:hover:text-white transition">Login</button>
+                <button onclick="openAuthModal('register')" class="text-xs font-semibold px-6 py-1.5 rounded-full bg-blue-600 text-white shadow-sm hover:bg-blue-700 transition">Register</button>
+            </div>
+        </div>
+    </header>
+
+    <div class="announcement-bar">
+        <div class="announcement-inner">
+            ✨ LAUNCH OFFER: Use Promo Code during checkout (If Available) • Get instant PDF Delivery after Payment • Verified Academic Content
+        </div>
+    </div>
+
+    <section class="hero-banner">
+        <div class="hero-text">
+            <h1>Organize today.<br><span class="accent">Achieve</span> tomorrow.</h1>
+            <p>All your notes, ideas, and tasks in one place. Stay organized, stay focused.</p>
+            
+            <div class="cta-group">
+                <a href="#store" class="btn btn-secondary">
+                    <span class="material-icons-round">folder_open</span> View Notes
+                </a>
+            </div>
+
+            <div class="hero-features">
+                <div class="feat-item easy">
+                    <div class="feat-icon-box">
+                        <span class="material-icons-round">description</span>
+                    </div>
+                    <div class="feat-info">
+                        <h4>Easy to Use</h4>
+                        <p>Manage notes effortlessly</p>
+                    </div>
+                </div>
+                <div class="feat-item sync">
+                    <div class="feat-icon-box">
+                        <span class="material-icons-round">cloud_sync</span>
+                    </div>
+                    <div class="feat-info">
+                        <h4>Sync Anywhere</h4>
+                        <p>Access your notes on any device</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="hero-graphic">
+            <svg class="abstract-bg-svg" viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M 150,250 A 100,100 0 1,1 350,250 100,100 0 1,1 150,250" stroke="#e0dbff" stroke-width="1.5" stroke-dasharray="4 4" />
+                <path d="M 100,250 A 150,150 0 1,1 400,250 A 150,150 0 1,1 100,250" stroke="#dbd5ff" stroke-width="1.5" />
+                <path d="M 50,250 A 200,200 0 1,1 450,250 A 200,200 0 1,1 50,250" stroke="#e8e5ff" stroke-width="1" />
+                <path d="M-20,380 Q 120,340 220,240 T 480,180" stroke="#dcd6ff" stroke-width="2" fill="none"/>
+                <path d="M10,410 Q 140,370 230,290 T 490,210" stroke="#e4e0ff" stroke-width="1.5" fill="none"/>
+                <g fill="#cbd5e1" opacity="0.4">
+                    <circle cx="440" cy="80" r="2"/> <circle cx="455" cy="80" r="2"/> <circle cx="470" cy="80" r="2"/>
+                    <circle cx="440" cy="95" r="2"/> <circle cx="455" cy="95" r="2"/> <circle cx="470" cy="95" r="2"/>
+                    <circle cx="440" cy="110" r="2"/> <circle cx="455" cy="110" r="2"/> <circle cx="470" cy="110" r="2"/>
+                    <circle cx="440" cy="125" r="2"/> <circle cx="455" cy="125" r="2"/> <circle cx="470" cy="125" r="2"/>
+                    <circle cx="440" cy="140" r="2"/> <circle cx="455" cy="140" r="2"/> <circle cx="470" cy="140" r="2"/>
+                </g>
+            </svg>
+
+            <span class="material-icons-round sparkle sp-1">auto_awesome</span>
+            <span class="material-icons-round sparkle sp-2">add</span>
+            <span class="material-icons-round sparkle sp-3">auto_awesome</span>
+
+            <img src="https://universityupdates08.github.io/UU/images/noteshero.png" alt="Student holding notes" class="mock-character-img" onerror="this.src='https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=400&q=80'">
+        </div>
+    </section>
+
+    <main class="main-container">
+        
+       <section class="stats-row">
+    
+    <div class="stat-card sc-notes">
+        <div class="stat-icon-wrapper">
+            <span class="material-icons-round">menu_book</span>
+        </div>
+        <div class="stat-data">
+           <h2 class="counter" data-target="1000" data-suffix="+">0+</h2>
+            <p>Paid Notes</p>
+        </div>
+    </div>
+    
+    <div class="stat-card sc-notebooks">
+        <div class="stat-icon-wrapper">
+            <span class="material-icons-round">auto_stories</span>
+        </div>
+        <div class="stat-data">
+            <h2 class="counter" data-target="5000" data-suffix="+">0+</h2>
+            <p>Free Contents</p>
+        </div>
+    </div>
+
+    <div class="stat-card sc-tags">
+        <div class="stat-icon-wrapper">
+            <span class="material-icons-round">groups</span>
+        </div>
+        <div class="stat-data">
+           <h2 class="counter" data-target="9000" data-suffix="+">0+</h2>
+            <p>Students</p>
+        </div>
+    </div>
+
+    <div class="stat-card sc-reminders">
+        <div class="stat-icon-wrapper">
+            <span class="material-icons-round">school</span>
+        </div>
+        <div class="stat-data">
+            <h2 class="counter" data-target="20" data-suffix="+">0+</h2>
+            <p>Courses</p>
+        </div>
+    </div>
+
+</section>
+    </main>
+
+<section>
+  
+  <div class="bg-white shadow-sm py-1 px-6 mb-6">
+    <h2 class="text-xl md:text-2xl font-bold text-center">
+      <span class="text-red-600">University</span>
+      <span class="text-blue-600"> Updates</span> - Best Learing Platform
+    </h2>
+  
+  <p class="text-[12px] md:text-[10px] text-center">
+        Register Now and Start Learning with University Updates at Home.
+      </p></div>
+      </section>
+  
+    <main id="store" class="max-w-8xl px-4 sm:px-6 py-1">
+        
+        <div class="mb-10 w-full flex justify-center">
+            <div class="tabviewNLparent">
+                <div class="tabviewNL group-end">
+                    <a class="course_btn_navnew btnPrevious" onclick="scrollTabs(-1)"><i class="fa fa-angle-left"></i></a>
+                    
+                    <ul id="tabsContainer" class="nav nav-tabs tbsew-ew course__tabs2" role="tablist">
+                        </ul>
+                    
+                    <a class="course_btn_navnew btnNext" onclick="scrollTabs(1)"><i class="fa fa-angle-right"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex flex-col lg:flex-row lg:items-center justify-between mb-8 gap-6 border-b border-slate-100 dark:border-slate-800 pb-6 w-full">
+            <div class="max-w-md">
+                <h2 id="librarySectionHeading" class="heading-font text-3xl font-bold text-slate-900">Explore Books</h2>
+                <p id="librarySectionSubtext" class="text-slate-500 mt-2 text-sm">Explore our full repository of digital resource guides.</p>
+            </div>
+            
+            <div class="flex flex-col sm:flex-row gap-4 items-center w-full lg:w-auto flex-grow justify-end">
+                <div class="relative w-full sm:max-w-xs">
+                    <input id="storeSearchInput" oninput="executeStoreFiltering()" type="text" placeholder="Search books..." class="w-full px-4 py-2 pl-9 text-xs bg-slate-50 border border-slate-800 rounded-xl focus:outline-none focus:border-blue-500 text-slate-900 dark:bg-slate-800 dark:border-slate-700 dark:text-white" autocomplete="off" />
+                    <i class="fas fa-search absolute left-3 top-3 text-slate-400 text-[10px]"></i>
+                    <div id="storeSearchDropdown" class="search-dropdown-wrapper hidden bg-white border border-slate-200 dark:bg-slate-900 dark:border-slate-700">
+                        <div id="storeDropdownItemsContainer" class="flex flex-col py-2"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="searchEmptyState" class="hidden text-center py-16 max-w-md mx-auto">
+            <div class="w-16 h-16 bg-slate-100 dark:bg-slate-800 rounded-full flex items-center justify-center mx-auto mb-4 text-slate-400">
+                <i class="fas fa-book-open text-2xl"></i>
+            </div>
+            <h3 class="text-lg font-bold text-slate-900 dark:text-white">No items match your search</h3>
+            <p class="text-sm text-slate-500 mt-1">Double check spelling or swap book filter criteria settings above.</p>
+        </div>
+
+        <div id="libraryContainer" class="space-y-4 w-full"></div>
+    </main>
+
+<section class="bg-slate-200 text-black py-4">
+  <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">
+    
+    <div class="flex-1">
+  
+      <h1 class="text-2xl md:text-4xl font-bold mt-2">
+      <span class="font-extrabold">What</span>
+        <span class="text-red-600">University</span>
+        <span class="text-blue-600"> Updates</span>
+        <span class="font-extrabold">Offers?</span>
+      </h1>
+<p>We started an initiative to provide the technology based online learning platforms. Add power of coaching to your online learning with University Updates.</p>
+      <ul class="mt-4 space-y-2 text-sm md:text-base font-medium">
+        <li><i class="fa fa-check"></i> Free Stuff - Study Materials, E-Books, PDF etc</li>
+        <li><i class="fa fa-check"></i> Live Feed - Access to Important Videos & Questions</li>
+      </ul>
+    </div>
+
+    <div class="flex-1 flex justify-center">
+      <div class="bg-white rounded-xl shadow-lg p-3 w-full max-w-sm">
+        <img 
+          src="images/portal.png"
+          alt="University Updates"
+          class="rounded-lg w-full h-50 object-cover"
+        />
+      </div>
+    </div>
+
+  </div>
+</section>
+
+    <section id="tab-section" class="bg-slate-900 text-white py-4">
+        <div class="max-w-5xl mx-auto px-6">
+            <div class="flex flex-wrap justify-center gap-2 sm:gap-4 mb-12 border-b border-slate-800 pb-4">
+                <button onclick="showTab('instructions')" class="tab-btn border-b-2 border-blue-500 px-3 py-2 text-sm font-bold text-white transition-all">How to Buy</button>
+                <button onclick="showTab('about')" class="tab-btn border-b-2 border-transparent px-3 py-2 text-sm font-bold text-slate-400 transition-all">About Notes</button>
+                <button onclick="showTab('pp')" class="tab-btn border-b-2 border-transparent px-3 py-2 text-sm font-bold text-slate-400 transition-all">Privacy Policy</button>
+                <button onclick="showTab('rp')" class="tab-btn border-b-2 border-transparent px-3 py-2 text-sm font-bold text-slate-400 transition-all">Refund Policy</button>
+                <button onclick="showTab('terms')" class="tab-btn border-b-2 border-transparent px-3 py-2 text-sm font-bold text-slate-400 transition-all">Terms & Conditions</button>
+                <button onclick="showTab('faq')" class="tab-btn border-b-2 border-transparent px-3 py-2 text-sm font-bold text-slate-400 transition-all">FAQs</button>
+                <button onclick="showTab('contact')" class="tab-btn border-b-2 border-transparent px-3 py-2 text-sm font-bold text-slate-400 transition-all">Contact Us</button>
+            </div>
+            
+            <div id="instructions" class="tab-content active space-y-4">
+                <h3 class="text-2xl font-bold heading-font">4-Step Simple Process</h3>
+                <div class="space-y-4 text-slate-400">
+                    <ul class="space-y-4">
+                        <li class="flex gap-4 items-start"><span class="bg-blue-600 text-white w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 font-bold text-xs mt-0.5">1</span> Choose your notes and click "Buy Now" which redirects to our secure University Updates login webpage.</li>
+                        <li class="flex gap-4 items-start"><span class="bg-blue-600 text-white w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 font-bold text-xs mt-0.5">2</span> Login or Register (If you are a new user).</li>
+                        <li class="flex gap-4 items-start"><span class="bg-blue-600 text-white w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 font-bold text-xs mt-0.5">3</span> Select Notes and click on Add to Cart then Checkout & Complete payment via UPI, Card or Netbanking.</li>
+                        <li class="flex gap-4 items-start"><span class="bg-blue-600 text-white w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 font-bold text-xs mt-0.5">4</span> After successful payment, Wait for 5 seconds. The PDF will be available automatically in your login.</li>
+                    </ul>
+                </div>
+             </div>
+            
+            <div id="about" class="tab-content space-y-6">
+                <h3 class="text-2xl font-bold heading-font">Expertly Crafted Study Material</h3>
+                <p class="text-slate-400 leading-relaxed">Our books are specifically designed for university students following the <span class="text-white">New Education Policy (NEP)</span>. We focus on simplified explanations and exam-oriented summaries.</p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-8">
+                    <div class="bg-slate-800 p-4 rounded-xl">
+                        <i class="fas fa-check-circle text-blue-400 mb-2"></i>
+                        <h4 class="font-bold">Syllabus Aligned</h4>
+                        <p class="text-xs text-slate-400">Directly mapped to university guidelines.</p>
+                    </div>
+                    <div class="bg-slate-800 p-4 rounded-xl">
+                        <i class="fas fa-mobile-alt text-blue-400 mb-2"></i>
+                        <h4 class="font-bold">Mobile Friendly</h4>
+                        <p class="text-xs text-slate-400">Optimized for reading on phones and tablets.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="terms" class="tab-content space-y-4">
+                <h3 class="text-2xl font-bold heading-font">Terms & Conditions</h3>
+                <div class="text-slate-400 text-sm space-y-3">
+                    <p>• By accessing and using University Updates, you agree to abide by our terms and conditions. Our platform provides educational content for University Exams, and users must use the material solely for personal learning purposes. Unauthorized distribution, reproduction, or misuse of our content is strictly prohibited. We reserve the right to modify, update, or discontinue any service without prior notice. Users are responsible for maintaining the confidentiality of their accounts. Any violation of these terms may result in suspension or termination of access to our platform.</p>
+                </div>
+            </div>
+            
+            <div id="faq" class="tab-content space-y-4">
+    <h3 class="text-2xl font-bold heading-font mb-6">Frequently Asked Questions</h3>
+    
+    <div class="space-y-3 max-w-3xl mx-auto text-sm">
+        <div class="border border-slate-800 dark:border-slate-700 rounded-xl overflow-hidden bg-slate-800/40">
+            <button onclick="toggleFaq(this)" class="w-full flex justify-between items-center px-5 py-4 text-left font-semibold text-white hover:bg-slate-800 transition-colors group focus:outline-none">
+                <span>How will I receive my notes after making a payment?</span>
+                <i class="fas fa-chevron-down text-xs text-slate-400 group-hover:text-white transition-transform duration-200"></i>
+            </button>
+            <div class="faq-panel hidden bg-slate-900/50">
+                <p class="p-5 text-slate-400 leading-relaxed border-t border-slate-800/60">
+                    Immediately after a successful checkout, please **wait for 5 seconds** without closing the page. The system will automatically redirect you back to your portal dashboard, where your PDF file will be instantly unlocked and available for view or download.
+                </p>
+            </div>
+        </div>
+
+        <div class="border border-slate-800 dark:border-slate-700 rounded-xl overflow-hidden bg-slate-800/40">
+            <button onclick="toggleFaq(this)" class="w-full flex justify-between items-center px-5 py-4 text-left font-semibold text-white hover:bg-slate-800 transition-colors group focus:outline-none">
+                <span>Are these study materials aligned with the New Education Policy (NEP)?</span>
+                <i class="fas fa-chevron-down text-xs text-slate-400 group-hover:text-white transition-transform duration-200"></i>
+            </button>
+            <div class="faq-panel hidden bg-slate-900/50">
+                <p class="p-5 text-slate-400 leading-relaxed border-t border-slate-800/60">
+                    Yes, absolutely. All our resources, summaries, and digital question banks are strictly compiled according to the latest **NEP-2020 guidelines** for undergraduate and postgraduate university curriculums.
+                </p>
+            </div>
+        </div>
+
+        <div class="border border-slate-800 dark:border-slate-700 rounded-xl overflow-hidden bg-slate-800/40">
+            <button onclick="toggleFaq(this)" class="w-full flex justify-between items-center px-5 py-4 text-left font-semibold text-white hover:bg-slate-800 transition-colors group focus:outline-none">
+                <span>What should I do if my payment succeeds but the download doesn't open?</span>
+                <i class="fas fa-chevron-down text-xs text-slate-400 group-hover:text-white transition-transform duration-200"></i>
+            </button>
+            <div class="faq-panel hidden bg-slate-900/50">
+                <p class="p-5 text-slate-400 leading-relaxed border-t border-slate-800/60">
+                    Don't worry at all. If you face any technical lag or accidentally close the tab during redirection, simply head over to our Telegram Support Helpdesk at <a href="https://t.me/HelpforDMBot" target="_blank" class="text-blue-400 underline hover:text-blue-300">@HelpforDMBot</a> or email us your payment screenshot at <span class="text-white font-medium">universityupdates08@gmail.com</span>. Our admin team will manually verify and deploy the copy to your account within minutes.
+                </p>
+            </div>
+        </div>
+
+        <div class="border border-slate-800 dark:border-slate-700 rounded-xl overflow-hidden bg-slate-800/40">
+            <button onclick="toggleFaq(this)" class="w-full flex justify-between items-center px-5 py-4 text-left font-semibold text-white hover:bg-slate-800 transition-colors group focus:outline-none">
+                <span>Can I access my purchased items on multiple devices?</span>
+                <i class="fas fa-chevron-down text-xs text-slate-400 group-hover:text-white transition-transform duration-200"></i>
+            </button>
+            <div class="faq-panel hidden bg-slate-900/50">
+                <p class="p-5 text-slate-400 leading-relaxed border-t border-slate-800/60">
+                    Yes. Once you register and log into your University Updates account, your storage tier is synced securely across all devices. You can read your content seamlessly on smartphones, laptops, or tablets anywhere.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+            
+            <div id="rp" class="tab-content space-y-4">
+                <h3 class="text-2xl font-bold heading-font">Refund Policy</h3>
+                <div class="text-slate-400 text-sm space-y-3">
+                    <p>• University Updates aims to provide the best educational content and services. However, if you are unsatisfied with your purchase, you may request a refund within a specified period. Refunds are only applicable to specific courses and must meet eligibility criteria. All refund requests must be submitted with valid proof of purchase. The final decision on refunds rests with University Updates, and processing times may vary based on payment methods.</p>
+                </div>
+            </div>
+            
+            <div id="contact" class="tab-content space-y-4">
+                <h3 class="text-2xl font-bold heading-font">Contact Us</h3>
+                <div class="text-slate-400 text-sm space-y-3">
+                    <p class="mb-2">• For deletion of your account please contact us on Telegram or E-Mail universityupdates08@gmail.com</p>
+                    <p>• For any queries, support or assistance, feel free to reach out to us. Our team is always ready to help you with any concerns regarding courses, technical issues or general inquiries. You can contact us via E-Mail at universityupdates08@gmail.com. We strive to provide prompt and efficient support to ensure a seamless learning experience for all our users.</p>
+                </div>
+            </div>
+            
+            <div id="pp" class="tab-content space-y-4">
+                <h3 class="text-2xl font-bold heading-font">Privacy Policy</h3>
+                <div class="text-slate-400 text-sm space-y-4 max-h-[400px] overflow-y-auto pr-2">
+                    <p>We are committed to protecting the privacy of users ("Users") who access the website ("Website/App"). This Privacy Policy explains how creator collects, uses and discloses your information.</p>
+                    <div>
+                        <strong class="text-white block mb-1">Information We Collect:</strong>
+                        <ul class="list-disc pl-5 space-y-1">
+                            <li>Personal information (Name, E-Mail, Mobile Number, etc.)</li>
+                            <li>Usage Data (IP Address, Browser type)</li>
+                            <li>Information from Social Media logins (Name, Profile Picture, E-Mail)</li>
+                            <li>Contact Information from your device (Name, Phone Number, E-Mail)</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <strong class="text-white block mb-1">How We Use Your Information:</strong>
+                        <ul class="list-disc pl-5 space-y-1">
+                            <li>Provide and improve our services</li>
+                            <li>Understand how you use our platform</li>
+                            <li>Develop new features and functionalities</li>
+                            <li>Communicate with you about our services and offers</li>
+                            <li>Prevent fraud and illegal activities</li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <strong class="text-white block mb-1">Sharing Your Information:</strong>
+                        <ul class="list-disc pl-5 space-y-1">
+                            <li>We may share your information with third parties only if they adopt appropriate security standards and only for the purposes mentioned above.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <strong class="text-white block mb-1">Data Retention:</strong>
+                        <ul class="list-disc pl-5 space-y-1">
+                            <li>We retain information for as long as necessary to fulfill the purposes outlined in this policy. Chat and test attempt data are kept for 2 years and then automatically deleted.</li>
+                           <li>We will delete the seller’s data after two years from the date of joining. If a seller terminates their relationship with us and requests that we stop selling their notes/books, we will immediately remove all such content from our portal upon receiving a written request.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <strong class="text-white block mb-1">Cookies and Third-Party Links:</strong>
+                        <ul class="list-disc pl-5 space-y-1">
+                            <li>We use cookies to improve your experience and track user trends. You can disable cookies in your browser settings. Our website may contain links to third-party sites with different privacy policies. We are not responsible for their practices.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <strong class="text-white block mb-1">Your Privacy Rights:</strong>
+                        <ul class="list-disc pl-5 space-y-1">
+                            <li>Access and request correction of your personal data</li>
+                            <li>Request deletion of your personal data</li>
+                            <li>Object to the processing of your personal data</li>
+                            <li>Request data portability</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <strong class="text-white block mb-1">Updates to this Policy:</strong>
+                        <ul class="list-disc pl-5 space-y-1">
+                            <li>We may update this policy at any time. We will notify you of any changes that affect your rights.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <strong class="text-white block mb-1">Governing Law and Jurisdiction:</strong>
+                        <ul class="list-disc pl-5 space-y-1">
+                            <li>This policy is governed by Indian law, and any disputes will be resolved through arbitration in Muzaffarnagar.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <strong class="text-white block mb-1">Age Requirements:</strong>
+                        <ul class="list-disc pl-5 space-y-1">
+                            <li>The minimum age to use our platform is 16 for India. If you are under the required age, parental consent is necessary.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <strong class="text-white block mb-1">Additional Information:</strong>
+                        <ul class="list-disc pl-5 space-y-1">
+                            <li>You have the option to opt out of providing information or withdraw information you have already provided.</li>
+                            <li>For deletion of your account please contact us via E-Mail universityupdates08@gmail.com</li>
+                            <li> This Policy is subject to change, and we will notify you of any changes.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div id="authModal" class="fixed inset-0 z-[1002] hidden items-center justify-center bg-black/80 backdrop-blur-sm p-4">
+        <div class="flex flex-col md:flex-row w-full max-w-4xl bg-white dark:bg-slate-900 rounded-3xl overflow-hidden relative shadow-2xl max-h-[95vh]">
+            <button onclick="closeAuthModal()" class="absolute top-4 right-4 z-50 text-slate-400 hover:text-slate-900 dark:hover:text-white text-3xl">&times;</button>
+            
+            <div class="hidden md:flex md:w-5/12 auth-left-bg flex-col justify-center items-center text-center p-8 relative overflow-hidden">
+                <div class="absolute inset-0 z-0" style="background-image: url('data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'100%25\' height=\\'100%25\' viewBox=\'0 0 1600 800\'%3E%3Cpath fill=\'%237c2d12\' fill-opacity=\'0.04\' d=\'M-150,400 Q150,100 400,400 T800,400 T1200,400 T1600,400 L1600,800 L-150,800 Z\'/%3E%3C/svg%3E'); background-size: cover;"></div>
+                <img src="https://i.ibb.co/nMC0877T/UNIVERSITY-UPDATES-LOGO-removebg-preview.png" alt="Logo" class="w-28 mb-6 z-10 drop-shadow-xl">
+                <h3 class="font-semibold text-[#7c2d12] tracking-[2px] text-xs uppercase z-10 opacity-70 m-0">Established Excellence</h3>
+                <h1 class="font-bold italic leading-none text-[#7c2d12] z-10 mt-2 font-serif text-5xl">Welcome!</h1>
+            </div>
+
+            <div class="w-full md:w-7/12 p-8 md:p-12 overflow-y-auto bg-white dark:bg-slate-900">
+                <div class="max-w-sm mx-auto">
+                    <h2 class="m-0 mb-2 font-bold text-2xl text-slate-900 dark:text-white" id="authFormTitle">Create Account</h2>
+                    <p class="text-slate-500 dark:text-slate-400 text-sm mb-6" id="authFormSub">Start your academic journey today.</p>
+
+                    <div class="flex bg-slate-100 dark:bg-slate-800 p-1 rounded-2xl mb-8">
+                        <div id="loginTabBtn" onclick="switchAuthTab('login')" class="flex-1 p-2.5 font-semibold text-center rounded-xl text-sm auth-tab text-slate-500">Login</div>
+                        <div id="registerTabBtn" onclick="switchAuthTab('register')" class="flex-1 p-2.5 font-semibold text-center rounded-xl text-sm auth-tab active">Register</div>
+                    </div>
+
+                    <form id="registerForm" class="space-y-1 block">
+                        <input type="text" placeholder="Full Name" class="auth-input dark:bg-slate-800 dark:border-slate-700 dark:text-white" required>
+                        <input type="tel" placeholder="Mobile Number" class="auth-input dark:bg-slate-800 dark:border-slate-700 dark:text-white" pattern="[0-9]{10}" required>
+                        <input type="email" placeholder="E-Mail Address" class="auth-input dark:bg-slate-800 dark:border-slate-700 dark:text-white" required>
+                        <input type="password" placeholder="Password" class="auth-input dark:bg-slate-800 dark:border-slate-700 dark:text-white" required>
+                        
+                        <div class="flex items-start gap-2 mt-4 text-left">
+                            <input type="checkbox" required class="mt-1 accent-orange-400">
+                            <label class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+                                I agree to the <span class="text-orange-400 font-semibold underline cursor-pointer">Terms & Conditions</span> and <span class="text-orange-400 font-semibold underline cursor-pointer">Privacy Policy</span>.
+                            </label>
+                        </div>
+                        <button type="submit" class="auth-btn dark:bg-orange-500 dark:hover:bg-orange-600">Create Account</button>
+                    </form>
+
+                    <form id="loginForm" class="space-y-1 hidden">
+                        <input type="tel" placeholder="Mobile Number" class="auth-input dark:bg-slate-800 dark:border-slate-700 dark:text-white" required>
+                        <input type="password" placeholder="Password" class="auth-input dark:bg-slate-800 dark:border-slate-700 dark:text-white" required>
+                        <button type="submit" class="auth-btn dark:bg-orange-500 dark:hover:bg-orange-600">Secure Login</button>
+                        <a href="#" class="block text-red-500 text-sm font-semibold mt-5 text-center">Forgot Password?</a>
+                        <div style="margin-top: 30px; border-top: 1px solid var(--border); padding-top: 20px; font-size: 11px; color: var(--muted); text-align: center;">
+                            <b>Protected by Secure Access</b>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="previewModal">
+        <div class="bg-white rounded-2xl w-full max-w-3xl overflow-hidden flex flex-col md:flex-row shadow-2xl relative transition-colors dark:bg-slate-900 max-h-[90vh] overflow-y-auto md:overflow-visible">
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-900 dark:hover:text-white text-2xl z-20">&times;</button>
+            
+            <div class="md:w-1/2 bg-slate-100 dark:bg-slate-800 p-4 flex flex-col items-center justify-center min-h-[250px] md:min-h-[350px] relative border-b md:border-b-0 md:border-r border-slate-200 dark:border-slate-700">
+                <div id="modalLoader" class="loader modal-hidden absolute"></div>
+                
+                <div id="noPreviewFallback" class="modal-hidden flex flex-col items-center justify-center text-center p-6 text-slate-400 dark:text-slate-500">
+                    <i class="fas fa-file-pdf text-5xl mb-3 text-slate-300 dark:text-slate-600"></i>
+                    <p class="text-sm font-semibold">No preview available</p>
+                    <p class="text-xs mt-1">Full content is unlocked immediately upon purchase execution.</p>
+                </div>
+
+                <iframe id="pdfPreview" src="" class="w-full h-full min-h-[280px] md:min-h-[320px] border-0 modal-hidden rounded shadow-md" title="PDF Preview"></iframe>
+            </div>
+            
+            <div class="md:w-1/2 p-6 md:p-8 flex flex-col justify-between">
+                <div>
+                    <h3 id="modalTitle" class="heading-font text-xl font-bold text-slate-900 mb-4">PDF Details</h3>
+                    
+                    <div class="space-y-3 mb-6">
+                        <div class="flex justify-between text-xs border-b pb-2"><span class="text-slate-400">Quality</span><span id="modalQuality" class="font-bold text-slate-900 dark:text-white"></span></div>
+                        <div class="flex justify-between text-xs border-b pb-2"><span class="text-slate-400">Language</span><span id="modalLang" class="font-bold text-slate-900 dark:text-white"></span></div>
+                        <div class="flex justify-between text-xs border-b pb-2"><span class="text-slate-400">Format</span><span id="modalFormat" class="font-bold text-blue-600"></span></div>
+                        <div class="flex justify-between text-xs border-b pb-2"><span class="text-slate-400">Made by:</span><span id="modalMadeBy" class="font-bold text-slate-900 dark:text-white"></span></div>
+                    </div>
+
+                    <div class="mb-6">
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">About PDF:</h4>
+                        <p id="modalAboutBook" class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed max-h-24 overflow-y-auto pr-1"></p>
+                    </div>
+
+                    <div class="bg-blue-50 dark:bg-slate-800/50 p-3 rounded-xl mb-6">
+                        <p class="text-[11px] text-blue-700 dark:text-blue-400 leading-relaxed font-medium"><i class="fas fa-info-circle mr-1"></i> Preview shows selected pages only. Full content is delivered immediately after purchase.</p>
+                    </div>
+                </div>
+                <button id="modalBuyBtn" class="w-full bg-blue-600 text-white py-3 rounded-xl font-bold hover:bg-blue-800 transition">Get Full Access Now</button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-white py-8 border-t border-slate-100 transition-colors dark:bg-slate-900">
+        <div class="max-w-8xl mx-auto px-4 sm:px-6 text-center">
+            <img src="images/Universityupdates.png" class="h-12 mx-auto grayscale opacity-50 mb-6" alt="Footer Logo" onerror="this.src='https://via.placeholder.com/150x50?text=University+Updates'">
+            <p class="text-slate-500 text-sm mx-auto">Helping students bridge the gap between learning and excellence. Trusted by thousands of university students.</p>
+            <div class="mt-8 pt-4 border-t border-slate-100 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-xs text-slate-400">© 2026 | University Updates. All academic content is copyrighted.</p>
+                <div class="flex gap-6 text-xs font-semibold text-slate-600 uppercase tracking-widest">
+                    <a href="https://t.me/HelpforDMBot" class="hover:text-blue-600 transition">Help Desk</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ==========================================
+        // GOOGLE SHEETS LIVE CONFIGURATION
+        // ==========================================
+        const GOOGLE_SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQTvbuuG2kKcYHS_PudeySyxCrbzjVSLE2bzWvrL93FuTPQuiY3cctfcWCbV0G2kdz1ee16wyvVCujP/pub?output=csv";
+
+        let currentBuyUrl = "";
+        let selectedCategory = "popular";
+        let siteIndex = [];
+        let storeSearchIndex = [];
+
+        // ScrollToTop handlers
+        window.addEventListener('scroll', () => {
+            const btn = document.getElementById('scrollToTopBtn');
+            if (window.scrollY > 300) {
+                btn.style.display = 'flex';
+            } else {
+                btn.style.display = 'none';
+            }
+        });
+
+        // Authentication Modal Logic
+        function openAuthModal(tab) {
+            document.getElementById('authModal').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+            switchAuthTab(tab);
+        }
+
+        function closeAuthModal() {
+            document.getElementById('authModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        function switchAuthTab(tab) {
+            const title = document.getElementById('authFormTitle');
+            const sub = document.getElementById('authFormSub');
+            
+            if(tab === 'login') {
+                document.getElementById('loginForm').style.display = 'block';
+                document.getElementById('registerForm').style.display = 'none';
+                
+                document.getElementById('loginTabBtn').classList.add('active', 'bg-white', 'shadow-sm', 'text-orange-400');
+                document.getElementById('loginTabBtn').classList.remove('text-slate-500');
+                
+                document.getElementById('registerTabBtn').classList.remove('active', 'bg-white', 'shadow-sm', 'text-orange-400');
+                document.getElementById('registerTabBtn').classList.add('text-slate-500');
+                
+                title.innerText = "Account Login";
+                sub.innerText = "Access your digital study resources.";
+            } else {
+                document.getElementById('loginForm').style.display = 'none';
+                document.getElementById('registerForm').style.display = 'block';
+                
+                document.getElementById('registerTabBtn').classList.add('active', 'bg-white', 'shadow-sm', 'text-orange-400');
+                document.getElementById('registerTabBtn').classList.remove('text-slate-500');
+                
+                document.getElementById('loginTabBtn').classList.remove('active', 'bg-white', 'shadow-sm', 'text-orange-400');
+                document.getElementById('loginTabBtn').classList.add('text-slate-500');
+                
+                title.innerText = "Create Account";
+                sub.innerText = "Start your academic journey today.";
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            loadBooksFromSheet();
+        });
+
+        function loadBooksFromSheet() {
+            document.getElementById('libraryContainer').innerHTML = "<div class='text-center py-10'><div class='loader mx-auto'></div><p class='mt-4 text-slate-500 font-bold'>Loading study materials...</p></div>";
+
+            Papa.parse(GOOGLE_SHEET_CSV_URL, {
+                download: true,
+                header: true,
+                skipEmptyLines: true,
+                transformHeader: function(h) { return h.trim().toLowerCase(); },
+                complete: function(results) {
+                    if(results.data && results.data.length > 0) {
+                        generateDynamicTabs(results.data);
+                        renderBooksToHTML(results.data);
+                    } else {
+                        document.getElementById('libraryContainer').innerHTML = "<p class='text-center text-red-500'>No data found in Google Sheets.</p>";
+                    }
+                },
+                error: function(err) {
+                    console.error("Failed to load Google Sheet data:", err);
+                    document.getElementById('libraryContainer').innerHTML = "<p class='text-center text-red-500'>Failed to load data from Sheets.</p>";
+                }
+            });
+        }
+
+        function generateDynamicTabs(data) {
+            const tabsContainer = document.getElementById('tabsContainer');
+            tabsContainer.innerHTML = '';
+            
+            const categories = new Set();
+            data.forEach(item => {
+                let cat = (item.category || '').trim();
+                if(cat) categories.add(cat);
+            });
+
+            const allNotesLi = document.createElement('li');
+            allNotesLi.className = "nav-item active";
+            allNotesLi.innerHTML = `<a class="nav-link active show" data-toggle="tab" href="#tabs_popular" data-cat="popular" role="tab"><b>All Notes</b></a>`;
+            tabsContainer.appendChild(allNotesLi);
+
+            categories.forEach(cat => {
+                const li = document.createElement('li');
+                li.className = "nav-item";
+                const catSlug = cat.toLowerCase(); 
+                li.innerHTML = `<a class="nav-link" data-toggle="tab" href="#tabs_${catSlug.replace(/\s+/g, '-')}" data-cat="${escapeJS(catSlug)}" role="tab"><b>${cat}</b></a>`;
+                tabsContainer.appendChild(li);
+            });
+
+            document.querySelectorAll('.course__tabs2 .nav-link').forEach(tabLink => {
+                tabLink.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    document.querySelectorAll('.course__tabs2 .nav-link').forEach(l => l.classList.remove('active', 'show'));
+                    document.querySelectorAll('.course__tabs2 .nav-item').forEach(i => i.classList.remove('active'));
+                    
+                    this.classList.add('active', 'show');
+                    this.parentElement.classList.add('active');
+                    
+                    const targetCat = this.getAttribute('data-cat');
+                    selectedCategory = targetCat ? targetCat : "popular";
+                    renderActiveViewEngine();
+                });
+            });
+        }
+
+        function escapeJS(str) {
+            return String(str || '')
+                .replace(/\\/g, "\\\\")
+                .replace(/'/g, "\\'")
+                .replace(/"/g, "&quot;")
+                .replace(/\n/g, "\\n")
+                .replace(/\r/g, "");
+        }
+
+        function renderBooksToHTML(data) {
+            const container = document.getElementById('libraryContainer');
+            container.innerHTML = ''; 
+
+            const semGroups = {};
+            data.forEach((item, index) => {
+                let title = (item.title || '').trim();
+                let category = (item.category || '').trim().toLowerCase();
+                
+                if(!title) return; // Ignore blank rows
+
+                const sem = (item.semester || 'Other').trim();
+                if(!semGroups[sem]) semGroups[sem] = [];
+                
+                // Keep the exact index inside object to guarantee unique ID's
+                item._internal_id = item.id ? String(item.id).trim() : `book-auto-${index}`;
+                semGroups[sem].push(item);
+            });
+
+            const sortedSems = Object.keys(semGroups).sort((a,b) => {
+                let numA = parseInt(a);
+                let numB = parseInt(b);
+                if(isNaN(numA)) numA = 999;
+                if(isNaN(numB)) numB = 999;
+                return numA - numB;
+            });
+
+            sortedSems.forEach(sem => {
+                const wrap = document.createElement('div');
+                wrap.id = `semesterSection-${sem.replace(/\s+/g,'-')}`;
+                wrap.className = 'semester-wrapper space-y-1 w-full';
+                wrap.setAttribute('data-semester', sem);
+
+                wrap.innerHTML = `
+                    <div class="semester-header-title bg-slate-900 text-white px-5 py-1 rounded-xl font-bold text-sm uppercase tracking-wider shadow-sm flex justify-between items-center w-full">
+                        <span class="header-text-placeholder">Course Section — Semester ${sem}</span>
+                    </div>
+                    <div class="library-items-target-zone w-full"></div>
+                `;
+
+                const targetZone = wrap.querySelector('.library-items-target-zone');
+
+                semGroups[sem].forEach(item => {
+                    const bookCard = document.createElement('div');
+                    bookCard.id = item._internal_id;
+                    bookCard.className = 'book-card';
+                    bookCard.setAttribute('data-category', (item.category || '').toLowerCase());
+                    bookCard.setAttribute('data-semester', sem);
+                    bookCard.setAttribute('data-searchable-keywords', (item.keywords || item.title || '').toLowerCase());
+                    bookCard.setAttribute('data-title', item.title || '');
+                    bookCard.setAttribute('data-madeby', item.made_by || "University Updates");
+                    
+                    const safeTitle = escapeJS(item.title);
+                    const safePreview = escapeJS(item.preview_url);
+                    const safeQuality = escapeJS(item.quality || 'Standard Quality');
+                    const safeLang = escapeJS(item.language || 'English');
+                    const safeFormat = escapeJS(item.format || 'PDF');
+                    const safeMadeBy = escapeJS(item.made_by || 'University Updates');
+                    const safeAbout = escapeJS(item.about_book);
+                    const buyLink = escapeJS('https://universityupdates.pythonanywhere.com/'); 
+
+                    let newP = String(item.new_price || '').trim();
+                    let oldP = String(item.old_price || '').trim();
+                    if(newP && /^[0-9]+/.test(newP) && !newP.includes('₹')) newP = '₹' + newP;
+                    if(oldP && /^[0-9]+/.test(oldP) && !oldP.includes('₹')) oldP = '₹' + oldP;
+
+                    bookCard.setAttribute('data-price', newP);
+                    bookCard.setAttribute('data-oldprice', oldP);
+
+                    let imgUrl = String(item.image_url || '').trim();
+                    if (imgUrl && imgUrl.includes('drive.google.com')) {
+                        const idMatch = imgUrl.match(/\/file\/d\/([a-zA-Z0-9_-]+)/);
+                        if (idMatch && idMatch[1]) {
+                            imgUrl = `https://drive.google.com/thumbnail?id=${idMatch[1]}&sz=w800`;
+                        } else if (imgUrl.includes('id=')) {
+                            try {
+                                const urlObj = new URL(imgUrl);
+                                const fileId = urlObj.searchParams.get('id');
+                                if (fileId) {
+                                    imgUrl = `https://drive.google.com/thumbnail?id=${fileId}&sz=w800`;
+                                }
+                            } catch(e) {}
+                        }
+                    }
+
+                    let imageHTML = '';
+                    if (imgUrl) {
+                        imageHTML = `
+                            <img src="${imgUrl}" alt="${safeTitle}" class="w-full h-full object-contain drop-shadow-xl z-10 relative" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="absolute inset-0 items-center justify-center flex-col text-slate-400 font-bold text-sm text-center z-0" style="display: none;">
+                                <i class="fas fa-image text-2xl block mb-2 opacity-50"></i>
+                                No Preview<br>Available
+                            </div>
+                        `;
+                    } else {
+                        imageHTML = `
+                            <div class="absolute inset-0 flex items-center justify-center flex-col text-slate-400 font-bold text-sm text-center z-0">
+                                <i class="fas fa-image text-2xl block mb-2 opacity-50"></i>
+                                No Preview<br>Available
+                            </div>
+                        `;
+                    }
+
+                    bookCard.innerHTML = `
+                        <div class="img-container-node h-64 bg-slate-100 p-8 relative flex items-center justify-center">
+                            ${imageHTML}
+                            <span class="absolute top-4 right-4 bg-green-500 text-white text-[10px] font-black px-2.5 py-1 rounded-full uppercase z-20">${safeFormat}</span>
+                        </div>
+                        <div class="info-container-node p-6 flex flex-col">
+                            <h3 class="font-bold text-slate-800 leading-snug card-title">${item.title}</h3>
+                            <p class="text-xs text-slate-400 mt-1 uppercase tracking-tighter author-subtext">BY ${safeMadeBy}</p>
+                            <div class="price-wrapper-node mt-6 flex items-center justify-between">
+                                <div class="flex flex-col">
+                                    <span class="text-2xl font-bold text-slate-900 main-price-val">${newP}</span>
+                                    ${oldP ? `<span class="text-xs line-through text-slate-400 old-price-val">${oldP}</span>` : ''}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="actions-container-node p-5 pt-0 grid grid-cols-2 gap-2">
+                            <button onclick="openPreviewModal('${safeTitle}', '${safePreview}', '${safeQuality}', '${safeLang}', '${safeFormat}', '${buyLink}', '${safeMadeBy}', '${safeAbout}')" class="text-xs font-bold py-2.5 bg-slate-100 text-slate-700 rounded-lg hover:bg-slate-200 transition btn-info-target">View Info</button>
+                            <button onclick="redirectBuy('${buyLink}')" class="text-xs font-bold py-2.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 shadow-lg shadow-blue-100 transition btn-buy-target">Buy Now</button>
+                        </div>
+                    `;
+                    targetZone.appendChild(bookCard);
+                });
+                container.appendChild(wrap);
+            });
+
+            // Initialize Search Indexes and View Engine after rendering
+            siteIndex = buildSiteIndex();
+            storeSearchIndex = siteIndex.filter(item => item.type === 'book');
+            renderActiveViewEngine();
+        }
+
+        // Auto Slider Continuous Scroll function
+        setInterval(() => {
+            document.querySelectorAll('.slider-track').forEach(track => {
+                if(track.dataset.isHovered !== 'true') {
+                    track.scrollLeft += 1;
+                    if(track.scrollLeft >= (track.scrollWidth - track.clientWidth)) {
+                        // Loop back smoothly or snap
+                        track.scrollLeft = 0; 
+                    }
+                }
+            });
+        }, 30);
+
+        function buildSiteIndex() {
+            const index = [];
+            document.querySelectorAll('.book-card').forEach(book => {
+                index.push({
+                    type: 'book',
+                    title: book.getAttribute('data-title'),
+                    keywords: (book.getAttribute('data-searchable-keywords') || '').toLowerCase(),
+                    id: book.getAttribute('id'),
+                    category: (book.getAttribute('data-category') || '').toUpperCase(),
+                    semester: book.getAttribute('data-semester'),
+                    element: book
+                });
+            });
+            
+            const sections = [
+                { id: 'about', title: 'About Us', keywords: 'about us notes study material mission team' },
+                { id: 'instructions', title: 'How to Buy', keywords: 'how to buy download instructions purchase steps payment' },
+                { id: 'pp', title: 'Privacy Policy', keywords: 'privacy policy data protection cookies personal information' },
+                { id: 'terms', title: 'Terms & Conditions', keywords: 'terms conditions legal rules user agreement' },
+                { id: 'rp', title: 'Refund Policy', keywords: 'refund policy money back return cancellation' },
+                { id: 'contact', title: 'Contact Us', keywords: 'contact us help support email telegram help desk' },
+                { id: 'store', title: 'Books Store', keywords: 'books store notes pdf buy purchase semester' },
+                { id: 'tab-section', title: 'Information Center', keywords: 'information center policies how to about' }
+            ];
+            
+            sections.forEach(sec => {
+                const el = document.getElementById(sec.id);
+                if (el) {
+                    index.push({
+                        type: 'section',
+                        title: sec.title,
+                        keywords: sec.keywords,
+                        id: sec.id,
+                        element: el
+                    });
+                }
+            });
+            return index;
+        }
+
+        function transformCardToSliderMarkup(cardNode) {
+            cardNode.className = "book-card bg-white dark:bg-slate-900 rounded-2xl overflow-hidden flex flex-col transition-colors flex-none w-[260px] snap-center shrink-0 border border-slate-200 dark:border-slate-700";
+            
+            const imgBlock = cardNode.querySelector('.img-container-node');
+            if (imgBlock) imgBlock.className = "h-48 bg-slate-100 dark:bg-slate-800 p-4 relative flex items-center justify-center img-container-node";
+            
+            const infoBlock = cardNode.querySelector('.info-container-node');
+            if (infoBlock) infoBlock.className = "p-5 flex-grow flex flex-col info-container-node";
+            
+            const titleNode = cardNode.querySelector('.card-title');
+            if (titleNode) titleNode.className = "font-bold text-slate-800 dark:text-white leading-snug card-title text-sm";
+            
+            const subtitleNode = cardNode.querySelector('.author-subtext');
+            if (subtitleNode) subtitleNode.className = "text-[10px] text-slate-400 mt-1 uppercase tracking-tighter author-subtext";
+            
+            const priceWrapper = cardNode.querySelector('.price-wrapper-node');
+            if (priceWrapper) priceWrapper.className = "mt-4 flex items-center justify-between price-wrapper-node";
+            
+            const mainPrice = cardNode.querySelector('.main-price-val');
+            if (mainPrice) mainPrice.className = "text-xl font-bold text-slate-900 dark:text-white main-price-val";
+            
+            const actionsBlock = cardNode.querySelector('.actions-container-node');
+            if (actionsBlock) actionsBlock.className = "p-5 pt-0 flex flex-col gap-2 actions-container-node";
+            
+            const infoBtn = cardNode.querySelector('.btn-info-target');
+            if (infoBtn) infoBtn.className = "w-full text-xs font-bold py-2.5 bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 transition text-center btn-info-target";
+            
+            const buyBtn = cardNode.querySelector('.btn-buy-target');
+            if (buyBtn) buyBtn.className = "w-full text-xs font-bold py-2.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition text-center btn-buy-target";
+        }
+
+        function restoreOriginalCardMarkup(cardNode) {
+            cardNode.className = "book-card bg-white dark:bg-slate-900 rounded-2xl overflow-hidden flex flex-col transition-colors w-full";
+            const imgBlock = cardNode.querySelector('.img-container-node');
+            if (imgBlock) imgBlock.className = "h-64 bg-slate-100 dark:bg-slate-800 p-8 relative img-container-node";
+            const infoBlock = cardNode.querySelector('.info-container-node');
+            if (infoBlock) infoBlock.className = "p-6 flex-grow flex flex-col info-container-node";
+            const titleNode = cardNode.querySelector('.card-title');
+            if (titleNode) titleNode.className = "font-bold text-slate-800 dark:text-white leading-snug card-title";
+            const subtitleNode = cardNode.querySelector('.author-subtext');
+            if (subtitleNode) subtitleNode.className = "text-xs text-slate-400 mt-1 uppercase tracking-tighter author-subtext";
+            const priceWrapper = cardNode.querySelector('.price-wrapper-node');
+            if (priceWrapper) priceWrapper.className = "mt-6 flex items-center justify-between price-wrapper-node";
+            const mainPrice = cardNode.querySelector('.main-price-val');
+            if (mainPrice) mainPrice.className = "text-2xl font-bold text-slate-900 dark:text-white main-price-val";
+            const actionsBlock = cardNode.querySelector('.actions-container-node');
+            if (actionsBlock) actionsBlock.className = "p-5 pt-0 grid grid-cols-2 gap-2 actions-container-node";
+            const infoBtn = cardNode.querySelector('.btn-info-target');
+            if (infoBtn) infoBtn.className = "text-xs font-bold py-2.5 bg-slate-100 text-slate-700 rounded-lg hover:bg-slate-200 transition btn-info-target";
+            const buyBtn = cardNode.querySelector('.btn-buy-target');
+            if (buyBtn) buyBtn.className = "text-xs font-bold py-2.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition btn-buy-target";
+        }
+
+        function transformCardToTableRowMarkup(cardNode) {
+            cardNode.className = "book-card bg-white dark:bg-slate-900 rounded-xl p-4 flex flex-col md:flex-row md:items-center justify-between gap-4 border border-slate-100 dark:border-slate-800 shadow-sm transition-all w-full";
+            const imgBlock = cardNode.querySelector('.img-container-node');
+            if (imgBlock) imgBlock.className = "hidden";
+             const infoBlock = cardNode.querySelector('.info-container-node');
+            if (infoBlock) infoBlock.className = "flex-grow flex flex-col md:flex-row md:items-center md:justify-between gap-2";
+            const titleNode = cardNode.querySelector('.card-title');
+            if (titleNode) titleNode.className = "font-bold text-slate-800 dark:text-white text-sm md:w-1/3 card-title";
+            const subtitleNode = cardNode.querySelector('.author-subtext');
+            if (subtitleNode) subtitleNode.className = "text-[10px] bg-slate-100 text-slate-500 dark:bg-slate-800 dark:text-slate-400 px-2.5 py-1 rounded font-bold tracking-tight uppercase max-w-max author-subtext";
+            const priceWrapper = cardNode.querySelector('.price-wrapper-node');
+            if (priceWrapper) priceWrapper.className = "flex items-center gap-2 mt-1 md:mt-0 price-wrapper-node";
+            const mainPrice = cardNode.querySelector('.main-price-val');
+            if (mainPrice) mainPrice.className = "text-base font-bold text-blue-600 main-price-val";
+            const actionsBlock = cardNode.querySelector('.actions-container-node');
+            if (actionsBlock) actionsBlock.className = "flex gap-2 w-full md:w-auto mt-2 md:mt-0 border-t pt-3 md:pt-0 md:border-0 border-slate-100 dark:border-slate-800 actions-container-node";
+            const infoBtn = cardNode.querySelector('.btn-info-target');
+            if (infoBtn) infoBtn.className = "text-[11px] font-bold px-4 py-2 bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 transition flex-1 md:flex-none text-center btn-info-target";
+            const buyBtn = cardNode.querySelector('.btn-buy-target');
+            if (buyBtn) buyBtn.className = "text-[11px] font-bold px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 shadow-sm transition flex-1 md:flex-none text-center btn-buy-target";
+        }
+
+        function renderActiveViewEngine() {
+            const wrappers = document.querySelectorAll('.semester-wrapper');
+            const heading = document.getElementById('librarySectionHeading');
+            const subtext = document.getElementById('librarySectionSubtext');
+            const storeSearch = document.getElementById('storeSearchInput').value.toLowerCase().trim();
+            const globalSearch = document.getElementById('globalSearchInput').value.toLowerCase().trim();
+            
+            const integratedQuery = storeSearch || globalSearch;
+
+            if (selectedCategory === "popular" && integratedQuery === "") {
+                heading.innerText = "All Popular Notes";
+                subtext.innerText = "Explore our full repository of digital resource guides.";
+                
+                let popularVisibleCount = 0; 
+                
+                wrappers.forEach(wrap => {
+                    const headerNode = wrap.querySelector('.semester-header-title');
+                    headerNode.classList.add('hidden');
+                    const targetZone = wrap.querySelector('.library-items-target-zone');
+                    
+                    targetZone.className = "library-items-target-zone flex gap-4 overflow-x-auto pb-6 pt-2 snap-x hide-scrollbar slider-track w-full";
+                    
+                    // Allow auto scroll pause on hover/touch
+                    targetZone.addEventListener('mouseenter', () => targetZone.dataset.isHovered = 'true');
+                    targetZone.addEventListener('mouseleave', () => targetZone.dataset.isHovered = 'false');
+                    targetZone.addEventListener('touchstart', () => targetZone.dataset.isHovered = 'true', {passive: true});
+                    targetZone.addEventListener('touchend', () => targetZone.dataset.isHovered = 'false', {passive: true});
+
+                    const books = targetZone.querySelectorAll('.book-card');
+                    
+                    let wrapHasVisible = false;
+                    
+                    books.forEach(book => {
+                        if (popularVisibleCount < 15) {
+                            book.style.setProperty('display', 'flex', 'important');
+                            transformCardToSliderMarkup(book);
+                            popularVisibleCount++;
+                            wrapHasVisible = true;
+                        } else {
+                            book.style.setProperty('display', 'none', 'important');
+                        }
+                    });
+                    
+                    if (wrapHasVisible) {
+                        wrap.style.setProperty('display', 'block', 'important');
+                    } else {
+                        wrap.style.setProperty('display', 'none', 'important');
+                    }
+                });
+            } else {
+                if (integratedQuery !== "") {
+                    heading.innerText = "Search Results";
+                    subtext.innerText = `Showing matching assets for "${integratedQuery}"`;
+                } else {
+                    heading.innerText = `${selectedCategory.toUpperCase().replace('-', ' ').replace('_', ' ')} NOTES`;
+                    subtext.innerText = "Available resources arranged sequentially by Academic Semesters.";
+                }
+
+                wrappers.forEach(wrap => {
+                    const headerNode = wrap.querySelector('.semester-header-title');
+                    const labelPlaceholder = headerNode.querySelector('.header-text-placeholder');
+                    const currentSem = wrap.getAttribute('data-semester');
+                    labelPlaceholder.innerText = `${selectedCategory.toUpperCase().replace('-', ' ').replace('_', ' ')} — Semester ${currentSem}`;
+                    
+                    const targetZone = wrap.querySelector('.library-items-target-zone');
+                    targetZone.className = "library-items-target-zone flex flex-col gap-3 mt-4 w-full";
+                    
+                    let activeCount = 0;
+                    const books = targetZone.querySelectorAll('.book-card');
+                    books.forEach(book => {
+                        const cat = book.getAttribute('data-category');
+                        const keywords = book.getAttribute('data-searchable-keywords').toLowerCase();
+                        
+                        const matchCat = (selectedCategory === "popular" || cat === selectedCategory);
+                        const matchSearch = (integratedQuery === "" || keywords.includes(integratedQuery));
+                        
+                        if (matchCat && matchSearch) {
+                            book.style.setProperty('display', 'block', 'important');
+                            transformCardToTableRowMarkup(book);
+                            activeCount++;
+                        } else {
+                            book.style.setProperty('display', 'none', 'important');
+                        }
+                    });
+
+                    if (activeCount > 0) {
+                        wrap.style.setProperty('display', 'block', 'important');
+                        headerNode.classList.remove('hidden');
+                    } else {
+                        wrap.style.setProperty('display', 'none', 'important');
+                        headerNode.classList.add('hidden');
+                    }
+                });
+            }
+
+            let visibleTotal = 0;
+            document.querySelectorAll('.book-card').forEach(b => {
+                if(b.style.display !== 'none') visibleTotal++;
+            });
+            document.getElementById('searchEmptyState').classList.toggle('hidden', visibleTotal > 0);
+        }
+
+        function executeStoreFiltering() {
+            const searchQuery = document.getElementById('storeSearchInput').value.toLowerCase().trim();
+            const dropdown = document.getElementById('storeSearchDropdown');
+            const container = document.getElementById('storeDropdownItemsContainer');
+            container.innerHTML = "";
+            
+            if (searchQuery === "") {
+                dropdown.classList.add('hidden');
+                renderActiveViewEngine();
+                return;
+            }
+            
+            let matchPool = storeSearchIndex.filter(item => item.keywords.includes(searchQuery));
+            
+            if (matchPool.length > 0) {
+                dropdown.classList.remove('hidden');
+                matchPool.forEach(item => {
+                    const row = document.createElement('button');
+                    row.type = "button";
+                    row.className = "w-full text-left px-5 py-3 text-xs font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors flex items-center justify-between border-b border-slate-50 dark:border-slate-800/50 last:border-0";
+                    row.innerHTML = `
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-book text-blue-500 text-[10px]"></i>
+                            <span class="font-semibold">${item.title}</span>
+                        </div>
+                        <span class="text-[9px] bg-blue-50 text-blue-600 dark:bg-slate-800 dark:text-blue-400 px-2 py-0.5 rounded-full font-bold uppercase tracking-tight">${item.category} | Sem ${item.semester}</span>
+                    `;
+                    row.onclick = () => {
+                        document.getElementById('storeSearchInput').value = item.title;
+                        dropdown.classList.add('hidden');
+                        renderActiveViewEngine();
+                        const targetElement = document.getElementById(item.id);
+                        if (targetElement) {
+                            targetElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                            targetElement.classList.add('ring-2', 'ring-blue-500');
+                            setTimeout(() => targetElement.classList.remove('ring-2', 'ring-blue-500'), 2000);
+                        }
+                    };
+                    container.appendChild(row);
+                });
+            } else {
+                dropdown.classList.add('hidden');
+            }
+            
+            renderActiveViewEngine();
+        }
+
+        function executeLiveSearch() {
+            const searchQuery = document.getElementById('globalSearchInput').value.toLowerCase().trim();
+            const dropdown = document.getElementById('globalSearchDropdown');
+            const container = document.getElementById('dropdownItemsContainer');
+            container.innerHTML = "";
+            
+            if (searchQuery === "") {
+                dropdown.classList.add('hidden');
+                renderActiveViewEngine();
+                return;
+            }
+            
+            let matchPool = siteIndex.filter(item => item.keywords.includes(searchQuery));
+            
+            if (matchPool.length > 0) {
+                dropdown.classList.remove('hidden');
+                
+                const books = matchPool.filter(i => i.type === 'book');
+                const sections = matchPool.filter(i => i.type === 'section');
+                
+                if (sections.length > 0) {
+                    const header = document.createElement('div');
+                    header.className = "px-5 py-2 text-[10px] font-bold uppercase tracking-wider text-slate-400 bg-slate-50 dark:bg-slate-800 border-b border-slate-100 dark:border-slate-700";
+                    header.innerText = "Site Pages";
+                    container.appendChild(header);
+                    
+                    sections.forEach(item => {
+                        const row = document.createElement('button');
+                        row.type = "button";
+                        row.className = "w-full text-left px-5 py-3 text-xs font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors flex items-center justify-between border-b border-slate-50 dark:border-slate-800/50 last:border-0";
+                        row.innerHTML = `
+                            <div class="flex items-center gap-2">
+                                <i class="fas fa-file-alt text-slate-400 text-[10px]"></i>
+                                <span class="font-semibold">${item.title}</span>
+                            </div>
+                            <span class="text-[9px] bg-slate-100 text-slate-500 dark:bg-slate-800 dark:text-slate-400 px-2 py-0.5 rounded-full font-bold uppercase tracking-tight">Page</span>
+                        `;
+                        row.onclick = () => {
+                            document.getElementById('globalSearchInput').value = item.title;
+                            dropdown.classList.add('hidden');
+                            if (['about', 'instructions', 'pp', 'terms', 'rp', 'contact'].includes(item.id)) {
+                                showTab(item.id);
+                                setTimeout(() => {
+                                    document.getElementById('tab-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
+                                }, 100);
+                            } else {
+                                const targetElement = document.getElementById(item.id);
+                                if (targetElement) {
+                                    targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                                    targetElement.classList.add('ring-2', 'ring-blue-500');
+                                    setTimeout(() => targetElement.classList.remove('ring-2', 'ring-blue-500'), 2000);
+                                }
+                            }
+                        };
+                        container.appendChild(row);
+                    });
+                }
+                
+                if (books.length > 0) {
+                    const header = document.createElement('div');
+                    header.className = "px-5 py-2 text-[10px] font-bold uppercase tracking-wider text-slate-400 bg-slate-50 dark:bg-slate-800 border-b border-slate-100 dark:border-slate-700";
+                    header.innerText = "Books & Notes";
+                    container.appendChild(header);
+                    
+                    books.forEach(item => {
+                        const row = document.createElement('button');
+                        row.type = "button";
+                        row.className = "w-full text-left px-5 py-3 text-xs font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors flex items-center justify-between border-b border-slate-50 dark:border-slate-800/50 last:border-0";
+                        row.innerHTML = `
+                            <div class="flex items-center gap-2">
+                                <i class="fas fa-book text-blue-500 text-[10px]"></i>
+                                <span class="font-semibold">${item.title}</span>
+                            </div>
+                            <span class="text-[9px] bg-blue-50 text-blue-600 dark:bg-slate-800 dark:text-blue-400 px-2 py-0.5 rounded-full font-bold uppercase tracking-tight">${item.category} | Sem ${item.semester}</span>
+                        `;
+                        row.onclick = () => {
+                            document.getElementById('globalSearchInput').value = item.title;
+                            dropdown.classList.add('hidden');
+                            renderActiveViewEngine();
+                            const targetElement = document.getElementById(item.id);
+                            if (targetElement) {
+                                targetElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                                targetElement.classList.add('ring-2', 'ring-blue-500');
+                                setTimeout(() => targetElement.classList.remove('ring-2', 'ring-blue-500'), 2000);
+                            }
+                        };
+                        container.appendChild(row);
+                    });
+                }
+            } else {
+                dropdown.classList.add('hidden');
+            }
+            
+            renderActiveViewEngine();
+        }
+
+        function scrollTabs(direction) {
+            const container = document.getElementById('tabsContainer');
+            const scrollAmount = 150;
+            container.scrollLeft += direction * scrollAmount;
+        }
+
+        function toggleUtilityDropdown() {
+            const dropdown = document.getElementById('utilityMobileDropdown');
+            const arrow = document.getElementById('utilityArrowIcon');
+            if (dropdown.classList.contains('hidden')) {
+                dropdown.classList.remove('hidden');
+                arrow.classList.add('rotate-180');
+            } else {
+                dropdown.classList.add('hidden');
+                arrow.classList.remove('rotate-180');
+            }
+        }
+
+        function toggleDarkMode() {
+            const rootAttr = document.documentElement.getAttribute('data-theme');
+            if (rootAttr === 'dark') {
+                document.documentElement.removeAttribute('data-theme');
+            } else {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            }
+        }
+
+        let baseSize = 16;
+        function adjustFont(val) {
+            baseSize += val;
+            if(baseSize < 12) baseSize = 12;
+            if(baseSize > 24) baseSize = 24;
+            document.documentElement.style.setProperty('--base-font-size', baseSize + 'px');
+        }
+        function resetFont() {
+            baseSize = 16;
+            document.documentElement.style.setProperty('--base-font-size', '16px');
+        }
+
+        function showTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('border-blue-500', 'text-white');
+                btn.classList.add('border-transparent', 'text-slate-400');
+            });
+            document.getElementById(tabId).classList.add('active');
+            
+            const targetBtn = Array.from(document.querySelectorAll('.tab-btn')).find(btn =>
+                 btn.getAttribute('onclick').includes(`'${tabId}'`)
+            );
+            if(targetBtn) {
+                targetBtn.classList.add('border-blue-500', 'text-white');
+                targetBtn.classList.remove('border-transparent', 'text-slate-400');
+            }
+        }
+
+        function redirectBuy(url) {
+            openAuthModal('login');
+        }
+
+        function openPreviewModal(title, pdfSrc, quality, lang, format, buyUrl, madeBy, aboutBook) {
+            const modal = document.getElementById('previewModal');
+            const loader = document.getElementById('modalLoader');
+            const iframe = document.getElementById('pdfPreview');
+            const fallback = document.getElementById('noPreviewFallback');
+            
+            document.getElementById('modalTitle').innerText = title;
+            document.getElementById('modalQuality').innerText = quality;
+            document.getElementById('modalLang').innerText = lang;
+            document.getElementById('modalFormat').innerText = format;
+            document.getElementById('modalMadeBy').innerText = madeBy || "University Updates";
+            
+            document.getElementById('modalAboutBook').innerHTML = (aboutBook || "No description provided.").replace(/\\n/g, "<br>");
+            
+            document.getElementById('modalBuyBtn').onclick = () => {
+                closeModal();
+                redirectBuy(buyUrl);
+            };
+            if (!pdfSrc || pdfSrc.trim() === "" || pdfSrc.includes("missing-file")) {
+                loader.classList.add('modal-hidden');
+                iframe.classList.add('modal-hidden');
+                fallback.classList.remove('modal-hidden');
+                modal.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+                return;
+            }
+
+            loader.classList.remove('modal-hidden');
+            iframe.classList.add('modal-hidden');
+            fallback.classList.add('modal-hidden');
+            
+            let formattedPdfSrc = pdfSrc;
+            if (formattedPdfSrc && formattedPdfSrc.includes('drive.google.com')) {
+                const idMatch = formattedPdfSrc.match(/\/file\/d\/([a-zA-Z0-9_-]+)/);
+                if (idMatch && idMatch[1]) {
+                    formattedPdfSrc = `https://drive.google.com/file/d/${idMatch[1]}/preview`;
+                } else if (formattedPdfSrc.includes('id=')) {
+                    try {
+                        const urlObj = new URL(formattedPdfSrc);
+                        const fileId = urlObj.searchParams.get('id');
+                        if (fileId) {
+                            formattedPdfSrc = `https://drive.google.com/file/d/${fileId}/preview`;
+                        }
+                    } catch(e) {}
+                }
+            }
+
+            iframe.src = formattedPdfSrc;
+            
+            iframe.onload = function() {
+                loader.classList.add('modal-hidden');
+                iframe.classList.remove('modal-hidden');
+            };
+            
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+        function closeModal() {
+            document.getElementById('previewModal').style.display = 'none';
+            document.getElementById('pdfPreview').src = "";
+            document.getElementById('modalLoader').classList.add('modal-hidden');
+            document.getElementById('noPreviewFallback').classList.add('modal-hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        window.onclick = function(event) {
+            if (event.target == document.getElementById('previewModal')) closeModal();
+            if (event.target == document.getElementById('authModal')) closeAuthModal();
+            
+            const searchInput = document.getElementById('globalSearchInput');
+            const searchMenu = document.getElementById('globalSearchDropdown');
+            if (searchInput && searchMenu && event.target !== searchInput && !searchMenu.contains(event.target)) {
+                searchMenu.classList.add('hidden');
+            }
+            
+            const storeSearchInput = document.getElementById('storeSearchInput');
+            const storeSearchMenu = document.getElementById('storeSearchDropdown');
+            if (storeSearchInput && storeSearchMenu && event.target !== storeSearchInput && !storeSearchMenu.contains(event.target)) {
+                storeSearchMenu.classList.add('hidden');
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const counters = document.querySelectorAll('.counter');
+            counters.forEach(counter => {
+                counter.innerText = "0";
+                 const target = parseInt(counter.getAttribute('data-target'), 10);
+                const suffix = counter.getAttribute('data-suffix') || "";
+                const duration = 7000;
+                 const startTime = performance.now();
+
+                const updateCounter = (currentTime) => {
+                    const elapsedTime = currentTime - startTime;
+                    const progress = Math.min(elapsedTime / duration, 1);
+                    const easeOutProgress = progress * (2 - progress);
+                    const currentValue = Math.floor(easeOutProgress * target);
+                    counter.innerText = currentValue + suffix;
+
+                    if (progress < 1) {
+                        requestAnimationFrame(updateCounter);
+                    } else {
+                        counter.innerText = target + suffix;
+                    }
+                };
+                requestAnimationFrame(updateCounter);
+            });
+        });
+        
+        function toggleFaq(button) {
+            const icon = button.querySelector('i');
+            const panel = button.nextElementSibling;
+            
+            document.querySelectorAll('.faq-panel').forEach(p => {
+                if (p !== panel) {
+                    p.classList.add('hidden');
+                    p.previousElementSibling.querySelector('i').classList.remove('rotate-180');
+                }
+            });
+
+            if (panel.classList.contains('hidden')) {
+                panel.classList.remove('hidden');
+                icon.classList.add('rotate-180');
+            } else {
+                panel.classList.add('hidden');
+                icon.classList.remove('rotate-180');
+            }
+        }
+    </script>
+</body>
+</html>
