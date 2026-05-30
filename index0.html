@@ -241,22 +241,6 @@
         .btnPrevious { left: 4px; }
         .btnNext { right: 4px; }
 
-        /* Auth Modal Specific Styles from Provided Prompt */
-        .auth-left-bg {
-            background-color: #ffecd2;
-            background-image: radial-gradient(at 0% 0%, rgba(252, 182, 159, 0.8) 0px, transparent 50%), radial-gradient(at 100% 100%, rgba(251, 146, 60, 0.4) 0px, transparent 50%);
-        }
-        .auth-tab { cursor: pointer; transition: 0.2s; }
-        .auth-tab.active { background: white; box-shadow: 0 4px 10px rgba(0,0,0,0.05); color: #fb923c; }
-        [data-theme="dark"] .auth-tab.active { background: #1e293b; color: #fb923c; }
-        
-        .auth-input { width: 100%; padding: 14px; margin: 8px 0; border-radius: 12px; border: 1px solid #e2e8f0; background: #fcfdfe; transition: 0.3s; font-family: inherit; font-size: 14px;}
-        .auth-input:focus { outline: none; border-color: #fb923c; box-shadow: 0 0 0 4px rgba(251, 146, 60, 0.1); }
-        .auth-btn { width: 100%; padding: 16px; border: none; border-radius: 12px; background: #1e293b; color: white; font-size: 16px; font-weight: 600; cursor: pointer; margin-top: 15px; transition: 0.3s; }
-        .auth-btn:hover { background: #0f172a; transform: translateY(-1px); }
-        [data-theme="dark"] .auth-btn { background: #fb923c; }
-        [data-theme="dark"] .auth-btn:hover { background: #ea580c; }
-
         @media (max-width: 640px) {
             .tabviewNLparent::after {
                 content: ''; position: absolute; right: 0; top: 0; bottom: 0; width: 30px;
@@ -387,8 +371,8 @@
             </div>
 
             <div class="bg-slate-100 border border-red-400 p-1.5 rounded-full flex items-center gap-1 shadow-inner dark:bg-slate-800 dark:border-slate-700 flex-shrink-0">
-                <button onclick="openAuthModal('login')" class="text-xs font-semibold px-6 py-1.5 rounded-full text-slate-700 dark:text-slate-300 hover:text-slate-950 dark:hover:text-white transition">Login</button>
-                <button onclick="openAuthModal('register')" class="text-xs font-semibold px-6 py-1.5 rounded-full bg-blue-600 text-white shadow-sm hover:bg-blue-700 transition">Register</button>
+                <a href="https://universityupdates.pythonanywhere.com/" class="text-xs font-semibold px-6 py-1.5 rounded-full text-slate-700 dark:text-slate-300 hover:text-slate-950 dark:hover:text-white transition">Login</a>
+                <a href="https://universityupdates.pythonanywhere.com/" class="text-xs font-semibold px-6 py-1.5 rounded-full bg-blue-600 text-white shadow-sm hover:bg-blue-700 transition">Register</a>
             </div>
         </div>
     </header>
@@ -790,56 +774,6 @@
         </div>
     </section>
 
-    <div id="authModal" class="fixed inset-0 z-[1002] hidden items-center justify-center bg-black/80 backdrop-blur-sm p-4">
-        <div class="flex flex-col md:flex-row w-full max-w-4xl bg-white dark:bg-slate-900 rounded-3xl overflow-hidden relative shadow-2xl max-h-[95vh]">
-            <button onclick="closeAuthModal()" class="absolute top-4 right-4 z-50 text-slate-400 hover:text-slate-900 dark:hover:text-white text-3xl">&times;</button>
-            
-            <div class="hidden md:flex md:w-5/12 auth-left-bg flex-col justify-center items-center text-center p-8 relative overflow-hidden">
-                <div class="absolute inset-0 z-0" style="background-image: url('data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'100%25\' height=\\'100%25\' viewBox=\'0 0 1600 800\'%3E%3Cpath fill=\'%237c2d12\' fill-opacity=\'0.04\' d=\'M-150,400 Q150,100 400,400 T800,400 T1200,400 T1600,400 L1600,800 L-150,800 Z\'/%3E%3C/svg%3E'); background-size: cover;"></div>
-                <img src="https://i.ibb.co/nMC0877T/UNIVERSITY-UPDATES-LOGO-removebg-preview.png" alt="Logo" class="w-28 mb-6 z-10 drop-shadow-xl">
-                <h3 class="font-semibold text-[#7c2d12] tracking-[2px] text-xs uppercase z-10 opacity-70 m-0">Established Excellence</h3>
-                <h1 class="font-bold italic leading-none text-[#7c2d12] z-10 mt-2 font-serif text-5xl">Welcome!</h1>
-            </div>
-
-            <div class="w-full md:w-7/12 p-8 md:p-12 overflow-y-auto bg-white dark:bg-slate-900">
-                <div class="max-w-sm mx-auto">
-                    <h2 class="m-0 mb-2 font-bold text-2xl text-slate-900 dark:text-white" id="authFormTitle">Create Account</h2>
-                    <p class="text-slate-500 dark:text-slate-400 text-sm mb-6" id="authFormSub">Start your academic journey today.</p>
-
-                    <div class="flex bg-slate-100 dark:bg-slate-800 p-1 rounded-2xl mb-8">
-                        <div id="loginTabBtn" onclick="switchAuthTab('login')" class="flex-1 p-2.5 font-semibold text-center rounded-xl text-sm auth-tab text-slate-500">Login</div>
-                        <div id="registerTabBtn" onclick="switchAuthTab('register')" class="flex-1 p-2.5 font-semibold text-center rounded-xl text-sm auth-tab active">Register</div>
-                    </div>
-
-                    <form id="registerForm" class="space-y-1 block">
-                        <input type="text" placeholder="Full Name" class="auth-input dark:bg-slate-800 dark:border-slate-700 dark:text-white" required>
-                        <input type="tel" placeholder="Mobile Number" class="auth-input dark:bg-slate-800 dark:border-slate-700 dark:text-white" pattern="[0-9]{10}" required>
-                        <input type="email" placeholder="E-Mail Address" class="auth-input dark:bg-slate-800 dark:border-slate-700 dark:text-white" required>
-                        <input type="password" placeholder="Password" class="auth-input dark:bg-slate-800 dark:border-slate-700 dark:text-white" required>
-                        
-                        <div class="flex items-start gap-2 mt-4 text-left">
-                            <input type="checkbox" required class="mt-1 accent-orange-400">
-                            <label class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
-                                I agree to the <span class="text-orange-400 font-semibold underline cursor-pointer">Terms & Conditions</span> and <span class="text-orange-400 font-semibold underline cursor-pointer">Privacy Policy</span>.
-                            </label>
-                        </div>
-                        <button type="submit" class="auth-btn dark:bg-orange-500 dark:hover:bg-orange-600">Create Account</button>
-                    </form>
-
-                    <form id="loginForm" class="space-y-1 hidden">
-                        <input type="tel" placeholder="Mobile Number" class="auth-input dark:bg-slate-800 dark:border-slate-700 dark:text-white" required>
-                        <input type="password" placeholder="Password" class="auth-input dark:bg-slate-800 dark:border-slate-700 dark:text-white" required>
-                        <button type="submit" class="auth-btn dark:bg-orange-500 dark:hover:bg-orange-600">Secure Login</button>
-                        <a href="#" class="block text-red-500 text-sm font-semibold mt-5 text-center">Forgot Password?</a>
-                        <div style="margin-top: 30px; border-top: 1px solid var(--border); padding-top: 20px; font-size: 11px; color: var(--muted); text-align: center;">
-                            <b>Protected by Secure Access</b>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <div id="previewModal">
         <div class="bg-white rounded-2xl w-full max-w-3xl overflow-hidden flex flex-col md:flex-row shadow-2xl relative transition-colors dark:bg-slate-900 max-h-[90vh] overflow-y-auto md:overflow-visible">
             <button onclick="closeModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-900 dark:hover:text-white text-2xl z-20">&times;</button>
@@ -914,49 +848,6 @@
                 btn.style.display = 'none';
             }
         });
-
-        // Authentication Modal Logic
-        function openAuthModal(tab) {
-            document.getElementById('authModal').style.display = 'flex';
-            document.body.style.overflow = 'hidden';
-            switchAuthTab(tab);
-        }
-
-        function closeAuthModal() {
-            document.getElementById('authModal').style.display = 'none';
-            document.body.style.overflow = 'auto';
-        }
-
-        function switchAuthTab(tab) {
-            const title = document.getElementById('authFormTitle');
-            const sub = document.getElementById('authFormSub');
-            
-            if(tab === 'login') {
-                document.getElementById('loginForm').style.display = 'block';
-                document.getElementById('registerForm').style.display = 'none';
-                
-                document.getElementById('loginTabBtn').classList.add('active', 'bg-white', 'shadow-sm', 'text-orange-400');
-                document.getElementById('loginTabBtn').classList.remove('text-slate-500');
-                
-                document.getElementById('registerTabBtn').classList.remove('active', 'bg-white', 'shadow-sm', 'text-orange-400');
-                document.getElementById('registerTabBtn').classList.add('text-slate-500');
-                
-                title.innerText = "Account Login";
-                sub.innerText = "Access your digital study resources.";
-            } else {
-                document.getElementById('loginForm').style.display = 'none';
-                document.getElementById('registerForm').style.display = 'block';
-                
-                document.getElementById('registerTabBtn').classList.add('active', 'bg-white', 'shadow-sm', 'text-orange-400');
-                document.getElementById('registerTabBtn').classList.remove('text-slate-500');
-                
-                document.getElementById('loginTabBtn').classList.remove('active', 'bg-white', 'shadow-sm', 'text-orange-400');
-                document.getElementById('loginTabBtn').classList.add('text-slate-500');
-                
-                title.innerText = "Create Account";
-                sub.innerText = "Start your academic journey today.";
-            }
-        }
 
         document.addEventListener("DOMContentLoaded", () => {
             loadBooksFromSheet();
@@ -1172,8 +1063,9 @@
             document.querySelectorAll('.slider-track').forEach(track => {
                 if(track.dataset.isHovered !== 'true') {
                     track.scrollLeft += 1;
-                    if(track.scrollLeft >= (track.scrollWidth - track.clientWidth)) {
-                        // Loop back smoothly or snap
+                    
+                    // -1 added to prevent layout snags on fractional pixel devices
+                    if(track.scrollLeft >= (track.scrollWidth - track.clientWidth - 1)) {
                         track.scrollLeft = 0; 
                     }
                 }
@@ -1221,7 +1113,8 @@
         }
 
         function transformCardToSliderMarkup(cardNode) {
-            cardNode.className = "book-card bg-white dark:bg-slate-900 rounded-2xl overflow-hidden flex flex-col transition-colors flex-none w-[260px] snap-center shrink-0 border border-slate-200 dark:border-slate-700";
+            // Removed snap-center class to prevent stuttering scroll
+            cardNode.className = "book-card bg-white dark:bg-slate-900 rounded-2xl overflow-hidden flex flex-col transition-colors flex-none w-[260px] shrink-0 border border-slate-200 dark:border-slate-700";
             
             const imgBlock = cardNode.querySelector('.img-container-node');
             if (imgBlock) imgBlock.className = "h-48 bg-slate-100 dark:bg-slate-800 p-4 relative flex items-center justify-center img-container-node";
@@ -1315,7 +1208,8 @@
                     headerNode.classList.add('hidden');
                     const targetZone = wrap.querySelector('.library-items-target-zone');
                     
-                    targetZone.className = "library-items-target-zone flex gap-4 overflow-x-auto pb-6 pt-2 snap-x hide-scrollbar slider-track w-full";
+                    // Removed snap-x to prevent stuttering scroll
+                    targetZone.className = "library-items-target-zone flex gap-4 overflow-x-auto pb-6 pt-2 hide-scrollbar slider-track w-full";
                     
                     // Allow auto scroll pause on hover/touch
                     targetZone.addEventListener('mouseenter', () => targetZone.dataset.isHovered = 'true');
@@ -1597,7 +1491,7 @@
         }
 
         function redirectBuy(url) {
-            openAuthModal('login');
+            window.location.href = url;
         }
 
         function openPreviewModal(title, pdfSrc, quality, lang, format, buyUrl, madeBy, aboutBook) {
@@ -1667,7 +1561,6 @@
 
         window.onclick = function(event) {
             if (event.target == document.getElementById('previewModal')) closeModal();
-            if (event.target == document.getElementById('authModal')) closeAuthModal();
             
             const searchInput = document.getElementById('globalSearchInput');
             const searchMenu = document.getElementById('globalSearchDropdown');
