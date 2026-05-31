@@ -8,8 +8,48 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="CSS/Viva.css">
+    <style>
+        :root {
+            --base-font-size: 16px;
+        }
+        html {
+            font-size: var(--base-font-size);
+            transition: font-size 0.2s ease;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        
+        /* Dark Mode Strict Colors override */
+        body.dark-mode {
+            background-color: #121827 !important;
+            color: #f3f4f6 !important;
+        }
+        body.dark-mode #mainContent, 
+        body.dark-mode .bg-white,
+        body.dark-mode aside {
+            background-color: #1f2937 !important;
+            color: #f3f4f6 !important;
+            border-color: #374151 !important;
+        }
+        body.dark-mode .main-title-text,
+        body.dark-mode .aside-title-text {
+            color: #ffffff !important;
+        }
+        body.dark-mode .text-gray-800,
+        body.dark-mode .text-gray-700,
+        body.dark-mode .text-gray-600 {
+            color: #e5e7eb !important;
+        }
+        body.dark-mode select {
+            background-color: #374151 !important;
+            color: #ffffff !important;
+            border-color: #4b5563 !important;
+        }
+    </style>
 </head>
-<body>
+<body class="flex flex-col min-h-screen bg-gray-50 text-gray-900">
     <div class="background-icons">
         <i class="fas fa-map-marker-alt icon-1"></i>
         <i class="fas fa-university icon-2"></i>
@@ -17,45 +57,86 @@
         <i class="fas fa-file-alt icon-4"></i>
     </div>
 
-    <header class="utility-bar bg-gray-900 text-white py-2 px-4 relative z-50">
-        <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center">
-            <div class="flex items-center justify-between w-full md:w-auto">
+    <!-- UTILITY BAR CONTAINER -->
+    <header class="utility-bar bg-black text-white px-4 py-2.5 relative z-50 border-b border-gray-800">
+        <div class="max-w-8xl mx-auto">
+            
+            <!-- Core Navbar Main Line Element -->
+            <div class="flex items-center justify-between w-full">
                 <div class="flex items-center space-x-3">
-                    <a href="https://t.me/HelpforDMBot" class="utility-link text-sm hover:text-gray-300 transition"><i class="fas fa-headset mr-1"></i> Contact Us</a>
-                    <button onclick="openQuickCenterModal()" class="bg-blue-600 hover:bg-blue-500 text-white text-xs md:text-sm px-3 py-1.5 rounded shadow-sm transition flex items-center font-semibold">
+                    <a href="https://t.me/HelpforDMBot" class="utility-link text-sm font-medium hover:text-gray-300 transition flex items-center">
+                        <i class="fas fa-headset mr-1.5 text-blue-400"></i> Contact Us
+                    </a>
+                    <button onclick="openQuickCenterModal()" class="hidden sm:flex bg-blue-600 hover:bg-blue-500 text-white text-xs px-2.5 py-1.5 rounded font-semibold shadow-sm transition items-center">
                         <i class="fas fa-building mr-1"></i> View by Viva Center
                     </button>
                 </div>
-                <button id="mobileSocialToggle" class="md:hidden text-gray-300 hover:text-white focus:outline-none ml-4 text-lg" onclick="toggleSocialMenu()">
-                    <i id="socialToggleIcon" class="fas fa-chevron-down transition-transform duration-300"></i>
-                </button>
+                
+                <!-- Unified Dropdown Settings Controller Button Box -->
+                <div>
+                    <button onclick="toggleSettingsDropdown()" class="bg-zinc-900 border border-zinc-800 text-gray-300 hover:text-white px-3 py-1.5 rounded-md text-sm font-medium flex items-center space-x-2 focus:outline-none transition">
+                        <i class="fas fa-cog text-gray-400"></i>
+                        <span>Settings</span>
+                        <i id="settingsChevronIcon" class="fas fa-chevron-down text-xs text-gray-500 transition-transform duration-200"></i>
+                    </button>
+                </div>
             </div>
 
-            <div id="socialLinksDropdown" class="hidden md:flex w-full md:w-auto items-center space-x-2 mt-3 md:mt-0 justify-center border-t md:border-t-0 border-gray-700 pt-3 md:pt-0 transition-all duration-300">
-                <a href="https://t.me/CCSUniversityMRT" class="social-icon text-sm hover:text-gray-300 transition"><i class="fab fa-telegram"></i></a>
-                <span class="mx-2 hidden md:inline">|</span>
-                <a href="https://whatsapp.com/channel/0029Va9jtav4tRrmKPxos138" class="social-icon text-sm hover:text-gray-300 transition"><i class="fab fa-whatsapp"></i></a>
-                <span class="mx-2 hidden md:inline">|</span>
-                <a href="https://www.instagram.com/UniversityUpdates_UU" class="social-icon text-sm hover:text-gray-300 transition"><i class="fab fa-instagram"></i></a>
-                <span class="mx-2 hidden md:inline">|</span>
-                <a href="https://www.x.com/Uni_Updates08" class="social-icon text-sm hover:text-gray-300 transition"><i class="fab fa-x"></i></a>
-                <span class="mx-2 hidden md:inline">|</span>
-                <a href="https://www.youtube.com/@University-Updates-UU" class="social-icon text-sm hover:text-gray-300 transition"><i class="fab fa-youtube"></i></a>
+            <!-- Unified Dropdown Menu Panel Area (Matches Image Verbatim) -->
+            <div id="unifiedSettingsDropdown" class="hidden flex-col mt-4 pt-3 border-t border-zinc-800 transition-all duration-300 max-w-4xl mx-auto space-y-4">
+                
+                <!-- Line Box Item One: Social Media Dynamic Routing Module -->
+                <div class="flex items-center justify-between w-full">
+                    <span class="text-xs uppercase font-bold tracking-wider text-gray-500">Follow Us</span>
+                    <div class="flex items-center space-x-4">
+                        <a href="https://whatsapp.com/channel/0029Va9jtav4tRrmKPxos138" class="text-gray-300 hover:text-green-400 text-lg transition" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                        <a href="https://www.youtube.com/@University-Updates-UU" class="text-gray-300 hover:text-red-500 text-lg transition" target="_blank"><i class="fab fa-youtube"></i></a>
+                        <a href="https://www.instagram.com/UniversityUpdates_UU" class="text-gray-300 hover:text-pink-400 text-lg transition" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="https://t.me/CCSUniversityMRT" class="text-gray-300 hover:text-blue-400 text-lg transition" target="_blank"><i class="fab fa-telegram"></i></a>
+                    </div>
+                </div>
+
+                <hr class="border-zinc-800 opacity-50 my-1">
+
+                <!-- Line Box Item Two: User System Layout Preference Choices Modifiers -->
+                <div class="flex items-center justify-between w-full">
+                    <span class="text-xs uppercase font-bold tracking-wider text-gray-500">Preferences</span>
+                    <div class="flex items-center space-x-2">
+                        <!-- Font Scaling Device Interfacer Units -->
+                        <button onclick="adjustFontSize(-1)" class="w-9 h-8 bg-zinc-800 hover:bg-zinc-700 active:bg-zinc-600 text-white text-xs font-bold rounded-md flex items-center justify-center transition" title="Decrease font size">A-</button>
+                        <button onclick="resetFontSize()" class="w-9 h-8 bg-zinc-800 hover:bg-zinc-700 active:bg-zinc-600 text-white text-xs font-bold rounded-md flex items-center justify-center transition" title="Reset default font size">A</button>
+                        <button onclick="adjustFontSize(1)" class="w-9 h-8 bg-zinc-800 hover:bg-zinc-700 active:bg-zinc-600 text-white text-xs font-bold rounded-md flex items-center justify-center transition" title="Increase font size">A+</button>
+                        
+                        <!-- Theme Toggle Device Controller Interfacer Module Wrapper -->
+                        <button onclick="toggleDarkModeButton()" id="themeActionButton" class="h-8 bg-blue-600 hover:bg-blue-500 px-3 rounded-md text-white font-semibold text-xs flex items-center space-x-1.5 shadow-sm transition">
+                            <i id="themeActionIcon" class="fas fa-moon"></i>
+                            <span id="themeActionText">Theme</span>
+                        </button>
+                    </div>
+                </div>
+
             </div>
         </div>
     </header>
 
+    <!-- MOBILE EMERGENCY VIEW CENTER OVERRIDE BUTTON BOX LINK -->
+    <div class="p-3 sm:hidden max-w-6xl mx-auto w-full">
+        <button onclick="openQuickCenterModal()" class="w-full bg-blue-600 hover:bg-blue-500 text-white text-xs py-2 rounded-lg font-semibold shadow flex items-center justify-center transition">
+            <i class="fas fa-building mr-2"></i> View by Viva Center
+        </button>
+    </div>
+
+    <!-- CENTER LOOKUP PORTAL OVERLAY CONTAINER OVERVIEW -->
     <div id="quickCenterModal" class="fixed inset-0 bg-black bg-opacity-60 z-[100] hidden flex justify-center items-center p-4 backdrop-blur-sm">
-        <div class="bg-white rounded-xl shadow-2xl w-full max-w-3xl max-h-[90vh] flex flex-col overflow-hidden animate-fade-in-up">
+        <div class="bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 rounded-xl shadow-2xl w-full max-w-3xl max-h-[90vh] flex flex-col overflow-hidden animate-fade-in-up">
             <div class="bg-blue-900 text-white p-4 flex justify-between items-center shadow-md z-10">
                 <h2 class="text-xl font-bold flex items-center"><i class="fas fa-building mr-2 text-blue-300"></i> All Subjects by Center</h2>
                 <button onclick="closeQuickCenterModal()" class="text-white hover:text-red-400 focus:outline-none transition">
                     <i class="fas fa-times text-2xl"></i>
                 </button>
             </div>
-            <div class="p-6 overflow-y-auto flex-grow bg-gray-50">
-                <label class="block text-sm font-bold text-gray-700 uppercase mb-2">Select Viva Center</label>
-                
+            <div class="p-6 overflow-y-auto flex-grow bg-gray-50 dark:bg-gray-900">
+                <label class="block text-sm font-bold text-gray-700 dark:text-gray-300 uppercase mb-2">Select Viva Center</label>
                 <div class="relative mb-6">
                     <select id="quickCenterSelect" onchange="renderCenterDetails()" class="w-full p-3 border border-gray-300 rounded-lg outline-none focus:ring-2 focus:ring-blue-500 text-black bg-white shadow-sm appearance-none cursor-pointer disabled:bg-gray-100 disabled:cursor-not-allowed">
                         <option value="">-- Loading Centers... --</option>
@@ -64,32 +145,33 @@
                         <i class="fas fa-chevron-down"></i>
                     </div>
                 </div>
-
-                <div id="quickCenterResults" class="hidden bg-white border border-gray-200 p-5 rounded-lg shadow-sm text-black transition-all">
-                    <h3 id="selectedCenterTitle" class="font-bold text-blue-900 text-lg mb-4 border-b border-gray-200 pb-2"></h3>
-                    <div id="quickCenterContent" class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    </div>
+                <div id="quickCenterResults" class="hidden bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 p-5 rounded-lg shadow-sm text-black dark:text-white transition-all">
+                    <h3 id="selectedCenterTitle" class="font-bold text-blue-900 dark:text-blue-400 text-lg mb-4 border-b border-gray-200 dark:border-gray-700 pb-2"></h3>
+                    <div id="quickCenterContent" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="max-w-6xl mx-auto flex flex-row items-end justify-center p-4 relative z-10 gap-4">
+    <!-- BRAND PLATFORM HEADER GRAPHICS CONTEXT -->
+    <div class="max-w-6xl mx-auto flex flex-row items-end justify-center p-4 relative z-10 gap-4 mt-2">
         <img src="https://i.ibb.co/nMC0877T/UNIVERSITY-UPDATES-LOGO-removebg-preview.png" alt="Logo" class="w-24 md:w-32">
         <div class="h-12 border-l-2 border-gray-300 mx-4 md:mx-6"></div>
         <div class="mb-2">
-            <h1 class="text-2xl md:text-3xl font-extrabold text-gray-800 flex items-center">
+            <h1 class="text-2xl md:text-3xl font-extrabold text-gray-800 flex items-center main-title-text transition-colors duration-200">
                 <i class="fas fa-search-location text-blue-600 mr-2"></i> Viva Finder
             </h1>
         </div>
     </div>
-    
+
+    <!-- PUBLIC INFORMATION RUNNING TICKER INFOBAR -->
     <p style="color: white; font-style: italic; font-size: 15px; background-color: crimson; display: flex; align-items: center; height: 25px;">
         <marquee onmouseover="this.stop();" direction="left" onmouseout="this.start();">
             <b style="color: white">➤</b> 📢 Designed for CCSU Private Courses - Viva Voce Center Finder 2026
         </marquee>
     </p>
 
+    <!-- MAIN HOUSING WORKSPACE FRAMEWORK -->
     <main class="flex-grow w-full flex flex-col justify-center items-center p-4 md:p-8">
         <div id="initialLoader" class="text-center p-8">
             <svg class="animate-spin h-12 w-12 text-blue-600 mx-auto" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -98,27 +180,26 @@
             </svg>
             <p class="text-gray-600 text-lg mt-4 font-semibold">Initializing...</p>
         </div>
-        
+                
         <div id="portalWrapper" class="a-tab-hidden w-full max-w-6xl">
             <div id="upcomingAlerts" class="mb-8 shadow-xl rounded-2xl overflow-hidden"></div>
-            
-            <a href="https://whatsapp.com/channel/0029Va9jtav4tRrmKPxos138" class="side-admission-btn">
+                        
+            <a href="https://whatsapp.com/channel/0029Va9jtav4tRrmKPxos138" class="side-admission-btn z-40">
                 <i class="fab fa-whatsapp mb-2 text-xl"></i> Join us on Whatsapp
             </a>
-            
+                        
             <div id="mainContent" class="bg-white shadow-2xl rounded-2xl overflow-hidden w-full max-w-6xl flex flex-col border border-gray-100">
                 <div class="p-6 md:p-10 grid md:grid-cols-3 gap-8">
-                    
+                                        
                     <section class="md:col-span-2 flex flex-col">
-                        
-                        <div class="flex border-b mb-6 rounded-lg overflow-hidden border border-gray-200">
+                        <div class="flex border-b mb-6 rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700">
                             <div id="tabCollege" class="tab-btn active" onclick="switchMode('college')">Search by College</div>
                             <div id="tabCenter" class="tab-btn" onclick="switchMode('center')">Search by Viva Center</div>
                         </div>
 
                         <div class="space-y-6">
                             <div>
-                                <label class="block text-xs font-bold text-gray-500 uppercase mb-1">1. Select Course</label>
+                                <label class="block text-xs font-bold text-gray-500 dark:text-gray-400 uppercase mb-1">1. Select Course</label>
                                 <select id="courseSelect" class="w-full p-3 border border-gray-300 rounded-lg outline-none focus:ring-2 focus:ring-blue-500">
                                     <option value="">-- Select Course --</option>
                                     <option value="M.Com.">M.Com.</option>
@@ -127,49 +208,44 @@
                             </div>
 
                             <div id="subjectGroup" class="a-tab-hidden">
-                                <label class="block text-xs font-bold text-gray-500 uppercase mb-1">2. Select Subject</label>
+                                <label class="block text-xs font-bold text-gray-500 dark:text-gray-400 uppercase mb-1">2. Select Subject</label>
                                 <select id="subjectSelect" class="w-full p-3 border border-gray-300 rounded-lg outline-none focus:ring-2 focus:ring-blue-500"></select>
                             </div>
 
                             <div id="collegeFlow" class="space-y-6">
                                 <div id="districtGroup" class="a-tab-hidden">
-                                    <label class="block text-xs font-bold text-gray-500 uppercase mb-1">3. Select District</label>
+                                    <label class="block text-xs font-bold text-gray-500 dark:text-gray-400 uppercase mb-1">3. Select District</label>
                                     <select id="districtSelect" class="w-full p-3 border border-gray-300 rounded-lg outline-none focus:ring-2 focus:ring-blue-500"></select>
                                 </div>
                                 <div id="collegeGroup" class="a-tab-hidden">
-                                    <label class="block text-xs font-bold text-gray-500 uppercase mb-1">4. Select Your College</label>
+                                    <label class="block text-xs font-bold text-gray-500 dark:text-gray-400 uppercase mb-1">4. Select Your College</label>
                                     <select id="collegeSelect" class="w-full p-3 border border-gray-300 rounded-lg outline-none focus:ring-2 focus:ring-blue-500"></select>
                                 </div>
                             </div>
 
                             <div id="centerFlow" class="a-tab-hidden">
-                                <label class="block text-xs font-bold text-gray-500 uppercase mb-1">3. Select Viva Center</label>
+                                <label class="block text-xs font-bold text-gray-500 dark:text-gray-400 uppercase mb-1">3. Select Viva Center</label>
                                 <select id="centerSelect" class="w-full p-3 border border-gray-300 rounded-lg outline-none focus:ring-2 focus:ring-blue-500"></select>
                             </div>
                         </div>
 
-                        <div id="resultsCard" class="a-tab-hidden mt-10 bg-blue-50 border-l-4 border-blue-600 p-6 rounded-lg shadow-inner">
-                            <h2 class="text-xl font-bold text-blue-900 mb-4 flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> Examination Details</h2>
-                            <div id="resultOutput" class="space-y-3 text-sm text-gray-800"></div>
+                        <div id="resultsCard" class="a-tab-hidden mt-10 bg-blue-50 dark:bg-slate-800 border-l-4 border-blue-600 p-6 rounded-lg shadow-inner">
+                            <h2 class="text-xl font-bold text-blue-900 dark:text-blue-300 mb-4 flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> Examination Details</h2>
+                            <div id="resultOutput" class="space-y-3 text-sm text-gray-800 dark:text-gray-200"></div>
                         </div>
 
-                        <div id="errorCard" class="a-tab-hidden mt-8 bg-red-50 border-l-4 border-red-500 p-6 rounded-lg">
-                            <h2 class="text-lg font-bold text-red-800 mb-1">Notice</h2>
-                            <p id="errorMessage" class="text-red-700"></p>
+                        <div id="errorCard" class="a-tab-hidden mt-8 bg-red-50 dark:bg-red-950/40 border-l-4 border-red-500 p-6 rounded-lg">
+                            <h2 class="text-lg font-bold text-red-800 dark:text-red-400 mb-1">Notice</h2>
+                            <p id="errorMessage" class="text-red-700 dark:text-red-300"></p>
                         </div>
                     </section>
 
-                    <aside class="bg-gray-50 p-0 rounded-xl border border-gray-100 h-fit">
-                        <h3 class="font-bold p-4 text-lg mb-4 text-blue-900 border-b pb-2"><i class="fas fa-bullhorn text-red-500 mr-2"></i>Latest Notifications</h3>
+                    <aside class="bg-gray-50 dark:bg-gray-800 p-0 rounded-xl border border-gray-100 dark:border-gray-700 h-fit">
+                        <h3 class="font-bold p-4 text-lg mb-4 text-blue-900 border-b dark:border-gray-700 pb-2 flex items-center aside-title-text transition-colors duration-200"><i class="fas fa-bullhorn text-red-500 mr-2"></i>Latest Notifications</h3>
                         <div class="rounded-lg overflow-hidden max-w-6xl w-full">
-                            <div class="bg-white shadow-2xl overflow-hidden border border-gray-100">
+                            <div class="bg-white dark:bg-gray-900 shadow-2xl overflow-hidden border border-gray-100 dark:border-gray-800">
                                 <div class="relative w-full h-[400px]">
-                                    <iframe
-                                        src="https://universityupdates08.github.io/UU/VivaUpdates.html"
-                                        class="absolute top-0 left-0 w-full h-full border-none"
-                                        title="External Portal"
-                                        loading="lazy">
-                                    </iframe>
+                                    <iframe src="https://universityupdates08.github.io/UU/VivaUpdates.html" class="absolute top-0 left-0 w-full h-full border-none" title="External Portal" loading="lazy"></iframe>
                                 </div>
                             </div>
                         </div>
@@ -178,24 +254,14 @@
             </div>
         </div>
     </main>
-    
-    <div class="fixed bottom-4 right-4 z-50 bg-white dark:bg-gray-800 p-2 rounded-full shadow-lg border border-gray-200">
-        <label class="flex items-center cursor-pointer">
-            <i class="fas fa-sun mr-2 text-yellow-500"></i>
-            <input type="checkbox" id="themeToggle" onchange="toggleDarkMode()" class="hidden">
-            <div class="w-10 h-5 bg-gray-300 rounded-full relative">
-                <div id="toggleCircle" class="w-5 h-5 bg-blue-600 rounded-full absolute transition-all duration-300 left-0"></div>
-            </div>
-            <i class="fas fa-moon ml-2 text-gray-600"></i>
-        </label>
-    </div>
-    
-    <footer class="footer">
+
+    <!-- FOOTER PRESENTATION BLOCK -->
+    <footer class="footer mt-auto bg-gray-900 text-white pt-8 pb-4 px-4">
         <div class="max-w-7xl mx-auto">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-6">
                 <div>
                     <div class="text-center md:text-left">
-                        <h3 class="text-xl font-bold mb-3 border-b-2 border-primary-color pb-1 inline-block">Disclaimer</h3>
+                        <h3 class="text-xl font-bold mb-3 border-b-2 border-blue-600 pb-1 inline-block">Disclaimer</h3>
                         <div class="text-justify">
                             <p class="text-sm opacity-90">
                                 The Viva Center and Date information provided here is sourced from the college's & center's recent official notices and is for informational purposes only. Students must <b>always confirm</b> the details from their respective college administration. We are not responsible for any last-minute changes or inaccuracies. We are an independent platform Not affiliated with or endorsed by CCSU.
@@ -206,22 +272,22 @@
 
                 <div>
                     <div class="text-center">
-                        <h3 class="text-xl font-bold mb-3 border-b-2 border-primary-color pb-1 inline-block">Quick Links</h3>
+                        <h3 class="text-xl font-bold mb-3 border-b-2 border-blue-600 pb-1 inline-block">Quick Links</h3>
                         <ul class="space-y-1 text-sm">
-                            <li><i class="fas fa-circle-notch text-xs text-yellow-500 mr-2"></i><a href="https://ccsuniversity.blr1.cdn.digitaloceanspaces.com/public/pdf/2026/05/Scan%20Copy%20M.Com%20M.A.%20Private%20June-2026.pdf" class="hover:text-primary-color transition"><b>Download Private Viva-Voce Center List - 2026</b></a></li>
-                            <li><i class="fas fa-circle-notch text-xs text-yellow-500 mr-2"></i><a href="https://t.me/HelpforDMBot" class="hover:text-primary-color transition"><b>Contact Support</b></a></li>
+                            <li><i class="fas fa-circle-notch text-xs text-yellow-500 mr-2"></i><a href="https://ccsuniversity.blr1.cdn.digitaloceanspaces.com/public/pdf/2026/05/Scan%20Copy%20M.Com%20M.A.%20Private%20June-2026.pdf" class="hover:text-blue-400 transition" target="_blank"><b>Download Private Viva-Voce Center List - 2026</b></a></li>
+                            <li><i class="fas fa-circle-notch text-xs text-yellow-500 mr-2"></i><a href="https://t.me/HelpforDMBot" class="hover:text-blue-400 transition" target="_blank"><b>Contact Support</b></a></li>
                         </ul>
                     </div>
                 </div>
 
                 <div>
                     <div class="text-center">
-                        <h3 class="text-xl font-bold mb-3 border-b-2 border-primary-color pb-1 inline-block">Connect With Us</h3>
+                        <h3 class="text-xl font-bold mb-3 border-b-2 border-blue-600 pb-1 inline-block">Connect With Us</h3>
                         <div class="flex space-x-4 justify-center">
-                            <a href="https://whatsapp.com/channel/0029Va9jtav4tRrmKPxos138" class="social-icon" title="Whatsapp"><i class="fab fa-whatsapp"></i></a>
-                            <a href="https://t.me/CCSUniversityMRT" class="social-icon" title="Telegram"><i class="fab fa-telegram-plane"></i></a>
-                            <a href="https://instagram.com/universityupdates_uu" class="social-icon" title="Instagram"><i class="fab fa-instagram"></i></a>
-                            <a href="https://x.com/uni_updates08" class="social-icon" title="X"><i class="fab fa-x"></i></a>
+                            <a href="https://whatsapp.com/channel/0029Va9jtav4tRrmKPxos138" class="text-xl hover:text-green-400 transition" title="Whatsapp" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                            <a href="https://t.me/CCSUniversityMRT" class="text-xl hover:text-blue-400 transition" title="Telegram" target="_blank"><i class="fab fa-telegram-plane"></i></a>
+                            <a href="https://instagram.com/universityupdates_uu" class="text-xl hover:text-pink-400 transition" title="Instagram" target="_blank"><i class="fab fa-instagram"></i></a>
+                            <a href="https://x.com/uni_updates08" class="text-xl hover:text-gray-400 transition" title="X" target="_blank"><i class="fab fa-x"></i></a>
                         </div>
                         <div class="mt-4">
                             <p id="live-footer-time" class="text-sm text-gray-200 font-medium tracking-wide flex items-center justify-center gap-2"></p>
@@ -232,46 +298,78 @@
                             <span id="new-count" class="font-bold text-slate-800 bg-slate-200 px-2 py-0.5 rounded">0</span>
                         </div>
                         <div class="flex items-center justify-center gap-2 mt-4 text-white text-xs">
-                            <i class="text-yellow-500"></i>
+                            <i class="fas fa-calendar-alt text-yellow-500"></i>
                             <span>Last Updated on: Tuesday, 12 May, 2026, 11:57 AM</span>
                         </div>
                     </div>
                 </div>
             </div>
-            
+
             <div class="text-center pt-4 border-t border-white border-opacity-30">
                 <p class="text-sm opacity-70">&copy; 2025-2026 University Updates. All rights reserved.</p>
             </div>
         </div>
     </footer>
-    
+
+    <!-- EXECUTION ARCHITECTURE INTERACTIVE SYSTEM MECHANICS -->
     <script>
         const GOOGLE_SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRZiv_e1A0gciQkWuUvmcsf-efhajUNQWUYF2-5JIljXgkM7iFTz5LOlEVklVALuZY1HuQ-T4SpcXDa/pub?output=csv";
-        
         let globalCenterData = []; 
         let centersLoaded = false;
+        let currentFontSize = 16;
+        let isDarkModeActive = false;
 
-        function toggleDarkMode() {
-            const isDark = document.getElementById('themeToggle').checked;
-            document.body.classList.toggle('dark-mode', isDark);
-            document.getElementById('toggleCircle').style.left = isDark ? '20px' : '0';
-            localStorage.setItem('theme', isDark ? 'dark' : 'light');
-        }
-
-        function toggleSocialMenu() {
-            const dropdown = document.getElementById('socialLinksDropdown');
-            const icon = document.getElementById('socialToggleIcon');
-            dropdown.classList.toggle('hidden');
-            if(dropdown.classList.contains('hidden')) {
-                icon.classList.remove('rotate-180');
-            } else {
+        // UNIFIED ACCESSIBILITY CONFIG PANEL DRAWER SWITCH
+        function toggleSettingsDropdown() {
+            const dropdown = document.getElementById('unifiedSettingsDropdown');
+            const icon = document.getElementById('settingsChevronIcon');
+            
+            if (dropdown.classList.contains('hidden')) {
+                dropdown.classList.remove('hidden');
+                dropdown.classList.add('flex');
                 icon.classList.add('rotate-180');
+            } else {
+                dropdown.classList.add('hidden');
+                dropdown.classList.remove('flex');
+                icon.classList.remove('rotate-180');
             }
         }
 
+        // TEXT SCALING SYSTEM MODIFIER MOTOR
+        function adjustFontSize(direction) {
+            currentFontSize = Math.max(12, Math.min(22, currentFontSize + direction));
+            document.documentElement.style.setProperty('--base-font-size', currentFontSize + 'px');
+            localStorage.setItem('preferredFontSize', currentFontSize);
+        }
+
+        function resetFontSize() {
+            currentFontSize = 16;
+            document.documentElement.style.setProperty('--base-font-size', '16px');
+            localStorage.setItem('preferredFontSize', currentFontSize);
+        }
+
+        // STYLING DESIGN PATTERNS SWITCH (BLUE BUTTON STYLE)
+        function toggleDarkModeButton() {
+            isDarkModeActive = !isDarkModeActive;
+            const btnText = document.getElementById('themeActionText');
+            const btnIcon = document.getElementById('themeActionIcon');
+
+            if (isDarkModeActive) {
+                document.body.classList.add('dark-mode');
+                btnIcon.className = "fas fa-sun text-yellow-400";
+                localStorage.setItem('theme', 'dark');
+            } else {
+                document.body.classList.remove('dark-mode');
+                btnIcon.className = "fas fa-moon";
+                localStorage.setItem('theme', 'light');
+            }
+        }
+
+        // CSV DATA STORAGE PARSER
         function parseCSVForModal(csv) {
             const lines = csv.split(/\r?\n/);
-            const headers = lines[0].split(',').map(h => h.trim());
+            if (lines.length === 0 || !lines[0]) return [];
+            const headers = lines[0].split(',').map(h => h.trim().replace(/"/g, ''));
             const result = [];
             
             for(let i=1; i<lines.length; i++) {
@@ -293,11 +391,12 @@
                         val += char;
                     }
                 }
-                row.push(val); 
+                row.push(val);
                 
                 headers.forEach((h, index) => {
-                    obj[h.toLowerCase()] = (row[index] || '').trim();
-                    obj[h] = (row[index] || '').trim(); 
+                    let cellVal = (row[index] || '').trim().replace(/^"|"$/g, '');
+                    obj[h.toLowerCase()] = cellVal;
+                    obj[h] = cellVal; 
                 });
                 result.push(obj);
             }
@@ -306,20 +405,16 @@
 
         async function fetchGoogleSheetData() {
             const selectElement = document.getElementById('quickCenterSelect');
-            
             selectElement.innerHTML = '<option value="">Fetching centers...</option>';
             selectElement.disabled = true;
 
             try {
-                // IMPORTANT: We check if `config.allData` (from your main script) has already 
-                // fetched the multi-sheet data. If yes, we combine it so ALL subjects load!
                 globalCenterData = [];
                 if (typeof config !== 'undefined' && config.allData && Object.keys(config.allData).length > 0) {
                     Object.values(config.allData).forEach(sheetData => {
                         globalCenterData = globalCenterData.concat(sheetData);
                     });
                 } else if (GOOGLE_SHEET_CSV_URL) {
-                    // Fallback to single master CSV URL just in case
                     const response = await fetch(GOOGLE_SHEET_CSV_URL);
                     const csvData = await response.text();
                     globalCenterData = parseCSVForModal(csvData);
@@ -328,9 +423,7 @@
                     return;
                 }
                 
-                // Extract Unique Centers flexibly 
                 const centers = [...new Set(globalCenterData.map(item => item['Name of Center'] || item['name of center'] || item['Center'] || item['center']).filter(Boolean))];
-                
                 selectElement.innerHTML = '<option value="">-- Choose a Center --</option>';
                 
                 centers.sort().forEach(center => {
@@ -342,7 +435,6 @@
                 
                 centersLoaded = true;
                 selectElement.disabled = false;
-
             } catch (error) {
                 console.error("Error fetching Modal Data:", error);
                 selectElement.innerHTML = '<option value="">Failed to load centers.</option>';
@@ -373,45 +465,35 @@
                 return;
             }
 
-            // Find all matching data rows for this center
             const filteredData = globalCenterData.filter(item => 
                 (item['Name of Center'] === selectedCenter || item['name of center'] === selectedCenter || item['Center'] === selectedCenter || item['center'] === selectedCenter)
             );
 
-            // DEDUPLICATION LOGIC: Ensure a subject is only shown once for the center
             const uniqueSubjectsMap = new Map();
             filteredData.forEach(row => {
                 const subject = row['Subject'] || row['subject'] || 'All Subjects';
                 const subCode = row['Subject Code'] || row['subject code'] || '';
-                
-                // Create a unique key combining Subject Name and Code
                 const uniqueKey = `${subject.toLowerCase().trim()}-${subCode.toLowerCase().trim()}`;
                 
-                // Only add it if we haven't seen this subject yet, OR if the new row has better date data
                 if (!uniqueSubjectsMap.has(uniqueKey)) {
                     uniqueSubjectsMap.set(uniqueKey, row);
                 } else {
                     const existingRow = uniqueSubjectsMap.get(uniqueKey);
                     const existingDate = existingRow['Date'] || existingRow['date'] || '';
                     const newDate = row['Date'] || row['date'] || '';
-                    
-                    // If the existing entry was TBA but this duplicate entry has a real date, replace it
                     if ((!existingDate || existingDate.toLowerCase().includes('tba')) && newDate && !newDate.toLowerCase().includes('tba')) {
                         uniqueSubjectsMap.set(uniqueKey, row);
                     }
                 }
             });
             
-            // Convert map values back to an array for rendering
             const deduplicatedData = Array.from(uniqueSubjectsMap.values());
-
             titleElement.innerHTML = `<i class="fas fa-map-marker-alt text-blue-500 mr-2"></i> ${selectedCenter}`;
             contentDiv.innerHTML = ""; 
 
             if(deduplicatedData.length === 0) {
                 contentDiv.innerHTML = `<p class="text-gray-500">No subjects found. Please select a valid center from the list.</p>`;
             } else {
-                // Render the Deduplicated Data
                 deduplicatedData.forEach(row => {
                     const course = row['Course'] || row['course'] || 'N/A';
                     const subject = row['Subject'] || row['subject'] || 'All Subjects';
@@ -422,38 +504,32 @@
                     let rawTime = row['Time'] || row['time'] || '';
                     let rawNotice = row['Notice'] || row['notice'] || '';
 
-                    // Detect missing or TBA values
                     const isDateEmpty = !rawDate || rawDate.trim() === '' || rawDate.toLowerCase().includes('tba') || rawDate.toLowerCase().includes('not fixed');
                     const isTimeEmpty = !rawTime || rawTime.trim() === '' || rawTime.toLowerCase().includes('tba') || rawTime.toLowerCase().includes('not fixed');
                     const isNoticeEmpty = !rawNotice || rawNotice.trim() === '';
 
-                    // Apply Contact fallback
                     let displayDate = isDateEmpty ? '<span class="text-red-600 font-bold">Contact to Center</span>' : rawDate;
                     let displayTime = isTimeEmpty ? '<span class="text-red-600 font-bold">Contact to Center</span>' : rawTime;
 
                     let noticeHTML = '';
                     if (!isNoticeEmpty) {
                         if (rawNotice.startsWith('http')) {
-                            noticeHTML = `<div class="mt-3"><a href="${rawNotice}" target="_blank" class="bg-blue-100 text-blue-700 hover:bg-blue-200 font-bold py-1.5 px-3 rounded text-xs transition inline-flex items-center shadow-sm"><i class="fas fa-file-pdf mr-1"></i> View Official Notice</a></div>`;
+                            noticeHTML = `<div class="mt-3"><a href="${rawNotice}" target="_blank" class="bg-blue-100 text-blue-700 hover:bg-blue-200 dark:bg-blue-900/40 dark:text-blue-300 font-bold py-1.5 px-3 rounded text-xs transition inline-flex items-center shadow-sm"><i class="fas fa-file-pdf mr-1"></i> View Official Notice</a></div>`;
                         } else {
-                            noticeHTML = `<div class="mt-3 bg-yellow-50 text-yellow-800 p-2 rounded text-xs border border-yellow-200">
-                                            <strong><i class="fas fa-exclamation-triangle mr-1"></i> Notice:</strong> ${rawNotice}
-                                          </div>`;
+                            noticeHTML = `<div class="mt-3 bg-yellow-50 dark:bg-yellow-950/30 text-yellow-800 dark:text-yellow-300 p-2 rounded text-xs border border-yellow-200 dark:border-yellow-900"><strong><i class="fas fa-exclamation-triangle mr-1"></i> Notice:</strong> ${rawNotice}</div>`;
                         }
                     } else if (isDateEmpty || isTimeEmpty) {
-                        noticeHTML = `<div class="mt-3 bg-red-50 text-red-800 p-2.5 rounded text-xs border border-red-200 shadow-sm">
-                                        <strong><i class="fas fa-phone-alt mr-1"></i> Action Required:</strong> Schedule is not available online. Please visit or contact your Viva Center immediately to get your exam date.
-                                      </div>`;
+                        noticeHTML = `<div class="mt-3 bg-red-50 dark:bg-red-950/30 text-red-800 dark:text-red-300 p-2.5 rounded text-xs border border-red-200 dark:border-red-900 shadow-sm"><strong><i class="fas fa-phone-alt mr-1"></i> Action Required:</strong> Schedule is not available online. Please visit or contact your Viva Center immediately to get your exam date.</div>`;
                     }
 
                     const card = `
-                        <div class="bg-gray-50 p-4 rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-shadow relative overflow-hidden">
+                        <div class="bg-gray-50 p-4 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm hover:shadow-md transition-shadow relative overflow-hidden">
                             ${isDateEmpty ? '<div class="absolute top-0 right-0 bg-red-500 text-white text-[10px] font-bold px-2 py-1 rounded-bl-lg uppercase tracking-wider">Action Needed</div>' : ''}
                             <span class="inline-block px-2 py-1 bg-blue-100 text-blue-800 text-xs font-bold rounded mb-2">${course}</span>
-                            <p class="font-bold text-gray-800 text-lg mb-2">${subjectDisplay}</p>
+                            <p class="font-bold text-gray-800 dark:text-white text-lg mb-2">${subjectDisplay}</p>
                             <div class="space-y-1">
-                                <p class="text-sm text-gray-700"><i class="far fa-calendar-alt w-5 text-blue-500"></i> <span class="font-semibold">Date:</span> ${displayDate}</p>
-                                <p class="text-sm text-gray-700"><i class="far fa-clock w-5 text-blue-500"></i> <span class="font-semibold">Time:</span> ${displayTime}</p>
+                                <p class="text-sm text-gray-700 dark:text-gray-300"><i class="far fa-calendar-alt w-5 text-blue-500"></i> <span class="font-semibold">Date:</span> ${displayDate}</p>
+                                <p class="text-sm text-gray-700 dark:text-gray-300"><i class="far fa-clock w-5 text-blue-500"></i> <span class="font-semibold">Time:</span> ${displayTime}</p>
                             </div>
                             ${noticeHTML}
                         </div>
@@ -464,9 +540,10 @@
             resultsDiv.classList.remove('hidden');
         }
     </script>
-    
-    <script> 
-        const config = {
+
+    <!-- CORE SEARCH PIPELINE UTILITIES -->
+    <script>
+         const config = {
             currentMode: 'college',
             subjectMap: {
                 "M.Com.": [{ text: "M.Com. (I-304)", value: "I-304" }],
@@ -537,7 +614,6 @@
             mode === 'college' ? show(dom.collegeFlow) : hide(dom.collegeFlow);
             mode === 'center' ? show(dom.centerFlow) : hide(dom.centerFlow);
 
-            // Reset state
             dom.courseSelect.value = "";
             hide(dom.subjectGroup); hide(dom.resultsCard); hide(dom.errorCard);
             hide(dom.districtGroup); hide(dom.collegeGroup);
@@ -655,15 +731,24 @@
         }
 
         async function init() {
-            // Show main content instantly, unblocking the user
             hide(dom.initialLoader);
             show(dom.portalWrapper);
+                        
+            const savedTheme = localStorage.getItem('theme');
+            const savedFontSize = localStorage.getItem('preferredFontSize');
             
-            // Show loading state just for the alerts section
+            if (savedTheme === 'dark') {
+                isDarkModeActive = false; // logic switch initialization trick
+                toggleDarkModeButton();
+            }
+            if (savedFontSize) {
+                currentFontSize = parseInt(savedFontSize);
+                document.documentElement.style.setProperty('--base-font-size', currentFontSize + 'px');
+            }
+
             const alertContainer = document.getElementById('upcomingAlerts');
             alertContainer.innerHTML = `<div class="pending-box skeleton text-blue-600 font-bold">📢 Syncing Latest Viva Updates... Please wait.</div>`;
 
-            // Load data in the background concurrently
             const loadTasks = Object.keys(config.fileMap).map(async sub => {
                 try {
                     const url = config.fileMap[sub] + (config.fileMap[sub].includes('?') ? '&' : '?') + 't=' + new Date().getTime();
@@ -676,13 +761,11 @@
                     config.failedSubs.push(sub);
                 }
             });
-            
-            // Wait for all background tasks, then populate alerts
+                        
             await Promise.allSettled(loadTasks);
             loadUpcomingAlerts();
         }
 
-        // --- SEARCH EVENT HANDLERS ---
         dom.courseSelect.onchange = function() {
             const course = this.value;
             hide(dom.subjectGroup); hide(dom.resultsCard); hide(dom.errorCard);
@@ -706,7 +789,6 @@
 
             if (!subCode) return;
 
-            // If data isn't loaded yet (user is super fast), fetch it on demand
             if (!config.allData[subCode] && !config.failedSubs.includes(subCode)) {
                 dom.resultOutput.innerHTML = `<p class="skeleton p-3 text-center text-blue-700 font-bold rounded-lg shadow">Fetching specific data for ${subCode}...</p>`;
                 show(dom.resultsCard);
@@ -770,15 +852,15 @@
             if (mode === 'college') {
                 html = `<p><b>Student College:</b> ${data['Attached Colleges']}</p>
                         <hr class="my-2 opacity-20">
-                        <p><b>Assigned Viva Center:</b> <span class="text-blue-700 font-bold">${data['Name of Center']}</span></p>
-                        <p><b>Examination Date:</b> <span class="text-red-600 font-bold">${data.Date || 'Not Fixed (Contact to you college or center)'}</span></p>
+                        <p><b>Assigned Viva Center:</b> <span class="text-blue-700 font-bold dark:text-blue-400">${data['Name of Center']}</span></p>
+                        <p><b>Examination Date:</b> <span class="text-red-600 font-bold dark:text-red-400">${data.Date || 'Not Fixed (Contact to you college or center)'}</span></p>
                         <p><b>Reporting Time:</b> ${data.Time || 'Not Fixed'}</p>
                         ${data.Notice ? `<a href="${data.Notice}" target="_blank" class="mini-notice-btn">📄 View Notice</a>` : ''}`;
             } else {
                 const head = data[0];
                 const list = data.map(m => `<li>• ${m['Attached Colleges']}</li>`).join('');
-                html = `<p><b>Viva Center Name:</b> <span class="text-blue-700 font-bold">${head['Name of Center']}</span></p>
-                        <p><b>Examination Date:</b> <span class="text-red-600 font-bold">${head.Date || 'TBA (Contact to your college or viva center)'}</span></p>
+                html = `<p><b>Viva Center Name:</b> <span class="text-blue-700 font-bold dark:text-blue-400">${head['Name of Center']}</span></p>
+                        <p><b>Examination Date:</b> <span class="text-red-600 font-bold dark:text-red-400">${head.Date || 'TBA (Contact to your college or viva center)'}</span></p>
                         <p><b>Reporting Time:</b> ${head.Time || 'Not Fixed'}</p>
                         <hr class="my-2 opacity-20">
                         <p class="text-xs font-bold text-gray-400 uppercase">Attached Colleges:</p>
