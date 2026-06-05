@@ -7,7 +7,7 @@ from telegram.ext import Application, CommandHandler, ContextTypes
 # --- 1. CONFIGURATION ---
 # We pull these from environment variables for security
 BOT_TOKEN = os.environ.get("8783895942:AAEZAZy5MMw5yEFOu0JYdHVDrJDNGwK7304")
-MONGO_URI = os.environ.get("mongodb://universityupdates:Adi@1329@ac-z4chm7n-shard-00-00.eqyblxw.mongodb.net:27017,ac-z4chm7n-shard-00-01.eqyblxw.mongodb.net:27017,ac-z4chm7n-shard-00-02.eqyblxw.mongodb.net:27017/?ssl=true&replicaSet=atlas-hjxy0g-shard-0&authSource=admin&appName=UU")
+MONGO_URI = os.environ.get("mongodb://universityupdates:Adi%401329@ac-z4chm7n-shard-00-00.eqyblxw.mongodb.net:27017,ac-z4chm7n-shard-00-01.eqyblxw.mongodb.net:27017,ac-z4chm7n-shard-00-02.eqyblxw.mongodb.net:27017/?ssl=true&replicaSet=atlas-hjxy0g-shard-0&authSource=admin&appName=UU")
 
 # --- 2. DATABASE SETUP ---
 client = MongoClient(MONGO_URI)
