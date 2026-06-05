@@ -11,7 +11,7 @@ MONGO_URI = os.environ.get("mongodb://universityupdates:<Adi@1329>@ac-z4chm7n-sh
 
 # --- 2. DATABASE SETUP ---
 client = MongoClient(MONGO_URI)
-db = client["rss_telegram_bot"]
+db = client["UURSSBot"]
 feeds_collection = db["subscriptions"]
 
 # --- 3. TELEGRAM COMMANDS ---
