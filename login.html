@@ -1,0 +1,1175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Login | University Updates</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <style>
+        :root {
+            --text-dark: #1e293b;
+            --bg-light: #fdfcfb;
+            --white: #ffffff;
+            --accent: #fb923c;
+            --muted: #64748b;
+            --border: #e2e8f0;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.5;
+        }
+
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* --- LEFT SIDE --- */
+        .left {
+            flex: 1.2;
+            background-color: #ffecd2;
+            background-image:
+                radial-gradient(at 0% 0%, rgba(252, 182, 159, 0.8) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(251, 146, 60, 0.4) 0px, transparent 50%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .left-graphics {
+            position: absolute;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25' viewBox='0 0 1600 800'%3E%3Cpath fill='%237c2d12' fill-opacity='0.04' d='M-150,400 Q150,100 400,400 T800,400 T1200,400 T1600,400 L1600,800 L-150,800 Z'/%3E%3C/svg%3E");
+            background-size: cover;
+            z-index: 0;
+        }
+
+        .left img {
+            width: 90px;
+            margin-bottom: 24px;
+            z-index: 1;
+            filter: drop-shadow(0 8px 15px rgba(124, 45, 18, 0.1));
+        }
+
+        .left h3 {
+            margin: 0;
+            font-weight: 600;
+            color: #7c2d12;
+            letter-spacing: 2px;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            z-index: 1;
+            opacity: 0.6;
+        }
+
+        .left h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(45px, 6vw, 85px);
+            margin: 10px 0;
+            font-weight: 700;
+            font-style: italic;
+            line-height: 1;
+            color: #7c2d12;
+            z-index: 1;
+        }
+
+        /* --- RIGHT SIDE --- */
+        .right {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+            background: var(--white);
+            position: relative;
+            z-index: 2;
+        }
+
+        .login-box {
+            width: 100%;
+            max-width: 420px;
+            padding: 40px;
+            background: var(--white);
+            border-radius: 24px;
+            box-shadow: 0 20px 40px rgba(124, 45, 18, 0.08);
+            border: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .tabs {
+            display: flex;
+            background: #f1f5f9;
+            padding: 4px;
+            border-radius: 14px;
+            margin-bottom: 30px;
+        }
+
+        .tab {
+            flex: 1;
+            padding: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 11px;
+            font-size: 14px;
+            transition: 0.2s;
+        }
+
+        .tab.active {
+            background: white;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            color: var(--accent);
+        }
+
+        /* --- Input Styling --- */
+        .input-group {
+            position: relative;
+            margin-bottom: 10px;
+        }
+
+        .form-icon-left {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--muted);
+            font-size: 18px;
+            pointer-events: none;
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: var(--muted);
+            font-size: 18px;
+            transition: 0.2s;
+        }
+
+        .toggle-password:hover { color: var(--accent); }
+
+        input {
+            width: 100%;
+            padding: 16px 16px 16px 45px;
+            margin: 0;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            background: #fcfdfe;
+            font-family: inherit;
+            transition: 0.2s;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 4px rgba(251, 146, 60, 0.1);
+        }
+
+        /* --- Text CAPTCHA Styling (Updated for better visibility) --- */
+        .captcha-container {
+            display: flex;
+            align-items: center;
+            margin-top: 15px;
+            margin-bottom: 5px;
+            gap: 8px; /* Space between elements */
+            background: #f1f5f9;
+            padding: 8px;
+            border-radius: 14px;
+        }
+
+        .captcha-canvas-wrap {
+            background: var(--white);
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            overflow: hidden;
+            height: 50px;
+            flex: 0 0 110px; /* Fixed width for canvas area */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #captcha-canvas {
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .captcha-refresh {
+            background: var(--white);
+            border: 1px solid var(--border);
+            color: var(--muted);
+            cursor: pointer;
+            font-size: 18px;
+            border-radius: 10px;
+            width: 40px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.2s;
+            flex-shrink: 0;
+        }
+
+        .captcha-refresh:hover { 
+            color: var(--text-dark); 
+            background: #e2e8f0; 
+        }
+
+        .captcha-input {
+            flex: 1;
+            padding: 14px;
+            text-align: center;
+            font-weight: 600;
+            letter-spacing: 1px;
+            border-radius: 10px;
+            min-width: 0; /* Prevents overflow in flexbox */
+        }
+
+        .captcha-error {
+            color: #ef4444;
+            font-size: 12px;
+            font-weight: 600;
+            display: none;
+            text-align: left;
+            margin-bottom: 10px;
+            margin-top: 2px;
+            padding-left: 5px;
+        }
+
+        /* --- Buttons & Links --- */
+        .login-btn {
+            width: 100%;
+            padding: 16px;
+            border: none;
+            border-radius: 12px;
+            background: var(--text-dark);
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+
+        .login-btn:hover { background: #0f172a; }
+
+        .forgot {
+            color: #ef4444;
+            margin-top: 20px;
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        @media (max-width: 850px) {
+            .container { flex-direction: column; }
+            .left { padding: 80px 20px 100px 20px; min-height: 40vh; }
+            .right { padding: 20px; background: var(--bg-light); }
+            .login-box { margin-top: -80px; box-shadow: 0 15px 35px rgba(124, 45, 18, 0.15); }
+        }
+
+        #forgotModal {
+            display:none; position:fixed; inset:0;
+            background:rgba(15, 23, 42, 0.6); backdrop-filter: blur(4px);
+            z-index:999; align-items: center; justify-content: center;
+        }
+
+        .modal-content {
+            background:#fff; max-width:380px; width: 90%;
+            padding:30px; border-radius:24px; text-align: center;
+        }
+
+        /* ============================================
+           AI CHATBOT WIDGET STYLES
+           ============================================ */
+        .chat-widget-container {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            z-index: 1000;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .chat-launcher {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #fb923c 0%, #f97316 100%);
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 8px 24px rgba(251, 146, 60, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+        }
+
+        .chat-launcher:hover {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 12px 32px rgba(251, 146, 60, 0.5);
+        }
+
+        .chat-launcher i {
+            color: white;
+            font-size: 28px;
+        }
+
+        .chat-badge {
+            position: absolute;
+            top: -4px;
+            right: -4px;
+            background: #ef4444;
+            color: white;
+            font-size: 11px;
+            font-weight: 700;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid white;
+            animation: pulse-badge 2s infinite;
+        }
+
+        @keyframes pulse-badge {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        .chat-window {
+            position: absolute;
+            bottom: 76px;
+            right: 0;
+            width: 380px;
+            height: 520px;
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 20px 60px rgba(15, 23, 42, 0.2);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(20px) scale(0.95);
+            pointer-events: none;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .chat-window.open {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            pointer-events: all;
+        }
+
+        .chat-header {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            padding: 20px 24px;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .chat-avatar {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #fb923c 0%, #f97316 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .chat-header-info {
+            flex: 1;
+        }
+
+        .chat-header-info h4 {
+            margin: 0;
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        .chat-header-info span {
+            font-size: 12px;
+            opacity: 0.7;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: #22c55e;
+            border-radius: 50%;
+            animation: blink 2s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .chat-close {
+            background: rgba(255,255,255,0.1);
+            border: none;
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.2s;
+        }
+
+        .chat-close:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            background: #f8fafc;
+        }
+
+        .chat-messages::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .chat-messages::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 3px;
+        }
+
+        .message {
+            max-width: 85%;
+            padding: 12px 16px;
+            border-radius: 18px;
+            font-size: 13px;
+            line-height: 1.5;
+            animation: message-pop 0.3s ease-out;
+        }
+
+        @keyframes message-pop {
+            from {
+                opacity: 0;
+                transform: translateY(10px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .message.bot {
+            align-self: flex-start;
+            background: white;
+            color: var(--text-dark);
+            border-bottom-left-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+
+        .message.user {
+            align-self: flex-end;
+            background: linear-gradient(135deg, #fb923c 0%, #f97316 100%);
+            color: white;
+            border-bottom-right-radius: 4px;
+        }
+
+        .typing-indicator {
+            display: flex;
+            gap: 4px;
+            padding: 16px;
+            align-self: flex-start;
+            background: white;
+            border-radius: 18px;
+            border-bottom-left-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+
+        .typing-indicator span {
+            width: 8px;
+            height: 8px;
+            background: #cbd5e1;
+            border-radius: 50%;
+            animation: typing-bounce 1.4s infinite ease-in-out both;
+        }
+
+        .typing-indicator span:nth-child(1) { animation-delay: -0.32s; }
+        .typing-indicator span:nth-child(2) { animation-delay: -0.16s; }
+
+        @keyframes typing-bounce {
+            0%, 80%, 100% { transform: scale(0); }
+            40% { transform: scale(1); }
+        }
+
+        .quick-replies {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            padding: 0 20px 12px;
+            background: #f8fafc;
+        }
+
+        .quick-reply-btn {
+            background: white;
+            border: 1px solid #e2e8f0;
+            color: var(--text-dark);
+            padding: 8px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+
+        .quick-reply-btn:hover {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+            transform: translateY(-1px);
+        }
+
+        .chat-input-area {
+            padding: 16px 20px;
+            background: white;
+            border-top: 1px solid #f1f5f9;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .chat-input {
+            flex: 1;
+            padding: 12px 16px;
+            border: 1px solid #e2e8f0;
+            border-radius: 24px;
+            font-size: 13px;
+            font-family: inherit;
+            outline: none;
+            transition: 0.2s;
+        }
+
+        .chat-input:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(251, 146, 60, 0.1);
+        }
+
+        .chat-send {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #fb923c 0%, #f97316 100%);
+            border: none;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.2s;
+            flex-shrink: 0;
+        }
+
+        .chat-send:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 12px rgba(251, 146, 60, 0.3);
+        }
+
+        .chat-send:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Proactive message bubble */
+        .proactive-message {
+            position: absolute;
+            bottom: 76px;
+            right: 0;
+            background: white;
+            padding: 12px 16px;
+            border-radius: 16px;
+            border-bottom-right-radius: 4px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+            font-size: 13px;
+            max-width: 260px;
+            animation: proactive-slide 0.5s ease-out;
+            cursor: pointer;
+        }
+
+        .proactive-message::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            right: 20px;
+            width: 12px;
+            height: 12px;
+            background: white;
+            transform: rotate(45deg);
+        }
+
+        @keyframes proactive-slide {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .proactive-close {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            width: 20px;
+            height: 20px;
+            background: #ef4444;
+            color: white;
+            border: 2px solid white;
+            border-radius: 50%;
+            font-size: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        /* Mobile responsive */
+        @media (max-width: 480px) {
+            .chat-window {
+                width: calc(100vw - 32px);
+                height: 70vh;
+                right: -12px;
+            }
+            .chat-widget-container {
+                bottom: 16px;
+                right: 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <div class="left">
+        <div class="left-graphics"></div>
+        <img src="/static/logo.png" alt="University Updates Logo">
+        <h3>Established Excellence</h3>
+        <h1>Welcome Back</h1>
+    </div>
+
+    <div class="right">
+        <div class="login-box">
+            <h2 style="margin: 0 0 8px 0; font-weight: 700; font-size: 1.5rem;">Account Login</h2>
+            <p style="color: var(--muted); font-size: 14px; margin-bottom: 24px;">Access your digital study resources.</p>
+
+            <div class="tabs">
+                <div class="tab active">Login</div>
+                <div class="tab" onclick="window.location.href='/register'">Register</div>
+            </div>
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div style="color:#ef4444; font-size:13px; font-weight:600; margin-bottom:15px;">{{ message }}</div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+
+            <form method="POST" action="/login" onsubmit="return validateForm(event)">
+                <input type="hidden" name="device_id" id="device_id">
+
+                <div class="input-group">
+                    <i class="bi bi-person-fill form-icon-left"></i>
+                    <input type="text" name="mobile" placeholder="Mobile Number" required>
+                </div>
+
+                <div class="input-group">
+                    <i class="bi bi-lock-fill form-icon-left"></i>
+                    <input type="password" name="password" id="password" placeholder="Password" required>
+                    <i class="bi bi-eye-fill toggle-password" id="togglePasswordIcon" onclick="togglePassword()"></i>
+                </div>
+
+                <div class="captcha-container">
+                    <div class="captcha-canvas-wrap">
+                        <canvas id="captcha-canvas" width="110" height="50"></canvas>
+                    </div>
+                    <button type="button" class="captcha-refresh" onclick="generateCaptcha()" title="Refresh CAPTCHA">
+                        <i class="bi bi-arrow-clockwise"></i>
+                    </button>
+                    <input type="text" id="captcha-input" class="captcha-input" placeholder="Enter code" required autocomplete="off">
+                </div>
+                <div id="captcha-error" class="captcha-error">Code does not match. Try again.</div>
+
+                <button class="login-btn" type="submit">Login</button>
+            </form>
+
+            <a href="javascript:void(0)" class="forgot" onclick="openForgot()">Forgot Password?</a>
+        </div>
+    </div>
+</div>
+
+<div id="forgotModal">
+    <div class="modal-content">
+        <h3 style="margin-top:0">Recover Password</h3>
+        <p style="font-size:13px; color:var(--muted); margin-bottom:20px;">Enter your details to retrieve your access.</p>
+        <form method="POST" action="/forgot_password">
+            <div class="input-group">
+                <input type="text" name="mobile" placeholder="Mobile Number" required style="padding-left: 16px;">
+            </div>
+            <div class="input-group">
+                <input type="email" name="email" placeholder="Email Address" required style="padding-left: 16px;">
+            </div>
+            <button class="login-btn">Get Password</button>
+        </form>
+        <button onclick="closeForgot()" style="margin-top:10px; background:none; border:none; color:var(--muted); font-weight:600; cursor:pointer;">Cancel</button>
+    </div>
+</div>
+
+<!-- ============================================
+     AI CHATBOT WIDGET
+     ============================================ -->
+<div class="chat-widget-container" id="chatWidget">
+    <!-- Proactive greeting -->
+    <div class="proactive-message" id="proactiveMsg" style="display: none;">
+        <div class="proactive-close" onclick="dismissProactive(event)">✕</div>
+        <strong>👋 Need help logging in?</strong><br>
+        <span style="font-size: 12px; color: var(--muted);">I'm here to assist with any login issues!</span>
+    </div>
+
+    <!-- Chat window -->
+    <div class="chat-window" id="chatWindow">
+        <div class="chat-header">
+            <div class="chat-avatar">🤖</div>
+            <div class="chat-header-info">
+                <h4>UniBot Assistant</h4>
+                <span><span class="status-dot"></span> Online now</span>
+            </div>
+            <button class="chat-close" onclick="toggleChat()">
+                <i class="bi bi-x-lg"></i>
+            </button>
+        </div>
+
+        <div class="chat-messages" id="chatMessages">
+            <!-- Messages will be injected here -->
+        </div>
+
+        <div class="quick-replies" id="quickReplies">
+            <!-- Quick reply buttons injected here -->
+        </div>
+
+        <div class="chat-input-area">
+            <input type="text" class="chat-input" id="chatInput" placeholder="Type your question..." onkeypress="handleChatKeypress(event)">
+            <button class="chat-send" id="sendBtn" onclick="sendMessage()">
+                <i class="bi bi-send-fill"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Launcher button -->
+    <button class="chat-launcher" id="chatLauncher" onclick="toggleChat()" aria-label="Open chat">
+        <i class="bi bi-chat-dots-fill"></i>
+        <span class="chat-badge" id="chatBadge">1</span>
+    </button>
+</div>
+
+<script>
+    // --- Text Canvas CAPTCHA Logic ---
+    let currentCaptcha = "";
+
+    function generateCaptcha() {
+        const canvas = document.getElementById("captcha-canvas");
+        const ctx = canvas.getContext("2d");
+        const chars = "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghjkmnpqrstuvwxyz23456789"; 
+        const captchaLength = 5;
+
+        // Clear canvas
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        
+        // Background color
+        ctx.fillStyle = "#ffffff";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        // Add some noise (lines)
+        for (let i = 0; i < 4; i++) {
+            ctx.strokeStyle = `rgba(100, 116, 139, ${Math.random() * 0.5})`;
+            ctx.beginPath();
+            ctx.moveTo(Math.random() * canvas.width, Math.random() * canvas.height);
+            ctx.lineTo(Math.random() * canvas.width, Math.random() * canvas.height);
+            ctx.stroke();
+        }
+
+        // Generate and draw text
+        currentCaptcha = "";
+        ctx.font = "bold 22px 'Inter', sans-serif";
+        ctx.fillStyle = "#1e293b";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+
+        for (let i = 0; i < captchaLength; i++) {
+            const char = chars.charAt(Math.floor(Math.random() * chars.length));
+            currentCaptcha += char;
+            
+            // Randomly rotate each character slightly
+            ctx.save();
+            // Adjusted spacing to fit the new width perfectly
+            ctx.translate(15 + (i * 20), canvas.height / 2);
+            ctx.rotate((Math.random() - 0.5) * 0.6); 
+            ctx.fillText(char, 0, 0);
+            ctx.restore();
+        }
+    }
+
+    // Call it immediately on page load
+    window.onload = generateCaptcha;
+
+    // Validate form before submission
+    function validateForm(event) {
+        const userInput = document.getElementById("captcha-input").value;
+        const errorDiv = document.getElementById("captcha-error");
+
+        // STRICT MATCH: Must match exactly, including uppercase/lowercase
+        if (userInput !== currentCaptcha) {
+            event.preventDefault(); // Stop form submission
+            errorDiv.style.display = "block"; // Show error message
+            generateCaptcha(); // Generate a new code
+            document.getElementById("captcha-input").value = ""; // Clear input
+            return false;
+        }
+        
+        // Hide error and generate Device ID
+        errorDiv.style.display = "none";
+        generateDeviceId();
+        return true;
+    }
+    // ---------------------------------
+
+    function generateDeviceId() {
+        let device = localStorage.getItem("device_id");
+        if (!device) {
+            device = "DEV-" + Date.now() + "-" + Math.random().toString(36).substring(2, 10);
+            localStorage.setItem("device_id", device);
+        }
+        document.getElementById("device_id").value = device;
+    }
+
+    function togglePassword() {
+        const p = document.getElementById("password");
+        const icon = document.getElementById("togglePasswordIcon");
+
+        if (p.type === "password") {
+            p.type = "text";
+            icon.classList.replace("bi-eye-fill", "bi-eye-slash-fill");
+        } else {
+            p.type = "password";
+            icon.classList.replace("bi-eye-slash-fill", "bi-eye-fill");
+        }
+    }
+
+    function openForgot() { document.getElementById("forgotModal").style.display = "flex"; }
+    function closeForgot() { document.getElementById("forgotModal").style.display = "none"; }
+
+    // ============================================
+    // AI CHATBOT LOGIC
+    // ============================================
+    
+    const chatWindow = document.getElementById('chatWindow');
+    const chatMessages = document.getElementById('chatMessages');
+    const chatInput = document.getElementById('chatInput');
+    const quickReplies = document.getElementById('quickReplies');
+    const chatBadge = document.getElementById('chatBadge');
+    const proactiveMsg = document.getElementById('proactiveMsg');
+    const sendBtn = document.getElementById('sendBtn');
+    
+    let isChatOpen = false;
+    let chatHistory = [];
+    let hasInteracted = false;
+
+    // Knowledge base for login-related problems
+    const knowledgeBase = {
+        greeting: [
+            "Hello! 👋 I'm UniBot, your AI login assistant. I can help you with:",
+            "• Forgotten passwords",
+            "• Account lockouts",
+            "• CAPTCHA issues",
+            "• Registration problems",
+            "• Mobile number verification",
+            "How can I assist you today?"
+        ],
+        
+        forgot_password: {
+            keywords: ['forgot', 'password', 'reset', 'recover', 'lost password', 'can\'t remember'],
+            response: "No worries! To reset your password:\n\n1. Click **'Forgot Password?'** below the login form\n2. Enter your registered **mobile number**\n3. Enter your **email address**\n4. Click **'Get Password'**\n\nYou'll receive your password via email or SMS shortly. If you don't receive it within 5 minutes, check your spam folder or try again.",
+            quickReplies: ['Still not working', 'Change password', 'Back to menu']
+        },
+        
+        captcha_help: {
+            keywords: ['captcha', 'code', 'verification', 'not working', 'can\'t see', 'refresh'],
+            response: "Having trouble with the CAPTCHA? Here are some tips:\n\n📝 The code is **case-sensitive** — enter it exactly as shown\n🔄 Click the **refresh arrow** to get a new code if it's unclear\n👁️ Make sure you're not confusing: **0 (zero)** with **O (letter)** or **1** with **l/I**\n\nIf the CAPTCHA keeps failing, try refreshing the page for a new one.",
+            quickReplies: ['Still failing', 'Back to menu']
+        },
+        
+        account_locked: {
+            keywords: ['locked', 'blocked', 'suspended', 'access denied', 'can\'t login', 'unable to login'],
+            response: "If your account is locked, it might be due to:\n\n🔒 Too many failed login attempts (wait 15 minutes)\n🔒 Unusual activity detected\n🔒 Account verification pending\n\n**Solutions:**\n• Wait 15 minutes and try again\n• Use the **Forgot Password** option\n• Contact IT support at **support@university.edu**\n\nWould you like me to help with password recovery?",
+            quickReplies: ['Reset password', 'Contact support', 'Back to menu']
+        },
+        
+        mobile_issue: {
+            keywords: ['mobile', 'number', 'phone', 'not registered', 'invalid number', 'otp'],
+            response: "For mobile number issues:\n\n📱 Ensure you're using the **same number** you registered with\n📱 Format: Enter without country code (e.g., 9876543210)\n📱 If you changed your number recently, you may need to **re-register**\n\n**Not registered yet?** Click the **'Register'** tab at the top to create a new account.",
+            quickReplies: ['Go to Register', 'Back to menu']
+        },
+        
+        register_help: {
+            keywords: ['register', 'signup', 'new account', 'create account', 'sign up'],
+            response: "To create a new account:\n\n1. Click the **'Register'** tab at the top of the login box\n2. Fill in your details (Name, Mobile, Email)\n3. Create a strong password\n4. Verify your mobile number with OTP\n5. Complete your profile\n\nAlready have an account? Use the **'Login'** tab to sign in.",
+            quickReplies: ['Login issues', 'Back to menu']
+        },
+        
+        technical_issue: {
+            keywords: ['error', 'not working', 'bug', 'glitch', 'page not loading', 'site down'],
+            response: "If you're experiencing technical issues:\n\n🌐 **Clear your browser cache** and cookies\n🌐 **Try a different browser** (Chrome, Firefox, Safari)\n🌐 **Disable browser extensions** temporarily\n🌐 **Check your internet connection**\n🌐 **Try incognito/private mode**\n\nIf the problem persists, please contact technical support with a screenshot of the error.",
+            quickReplies: ['Still broken', 'Back to menu']
+        },
+        
+        password_tips: {
+            keywords: ['password tips', 'strong password', 'secure', 'password requirements'],
+            response: "For a secure password:\n\n✅ Use at least **8 characters**\n✅ Mix **uppercase**, **lowercase**, **numbers**, and **symbols**\n✅ Avoid common words or personal info\n✅ Don't reuse passwords from other sites\n\nExample of a strong password: `Uni$tuDy#2026`",
+            quickReplies: ['Forgot password', 'Back to menu']
+        },
+        
+        default: {
+            response: "I'm not sure I understood that correctly. I can help you with these login-related topics:\n\n• Forgotten passwords\n• CAPTCHA problems\n• Account lockouts\n• Registration help\n• Mobile number issues\n• Technical problems\n\nPlease select a topic or type your specific question.",
+            quickReplies: ['Forgot password', 'CAPTCHA help', 'Account locked', 'Register help', 'Technical issue']
+        }
+    };
+
+    // Toggle chat window
+    function toggleChat() {
+        isChatOpen = !isChatOpen;
+        chatWindow.classList.toggle('open', isChatOpen);
+        
+        if (isChatOpen && chatHistory.length === 0) {
+            // First time opening - show greeting
+            setTimeout(() => {
+                showTyping(() => {
+                    addBotMessage(knowledgeBase.greeting.join('\n'));
+                    showQuickReplies([
+                        'Forgot password',
+                        'CAPTCHA help',
+                        'Account locked',
+                        'Register help',
+                        'Technical issue'
+                    ]);
+                });
+            }, 300);
+        }
+        
+        if (isChatOpen) {
+            chatBadge.style.display = 'none';
+            proactiveMsg.style.display = 'none';
+            chatInput.focus();
+        }
+    }
+
+    // Show proactive message after delay
+    setTimeout(() => {
+        if (!isChatOpen && !hasInteracted) {
+            proactiveMsg.style.display = 'block';
+        }
+    }, 6000);
+
+    function dismissProactive(e) {
+        e.stopPropagation();
+        proactiveMsg.style.display = 'none';
+    }
+
+    proactiveMsg.addEventListener('click', () => {
+        toggleChat();
+    });
+
+    // Add message to chat
+    function addBotMessage(text) {
+        const msg = document.createElement('div');
+        msg.className = 'message bot';
+        // Convert markdown-style bold to HTML
+        msg.innerHTML = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br>');
+        chatMessages.appendChild(msg);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+        chatHistory.push({ type: 'bot', text: text });
+    }
+
+    function addUserMessage(text) {
+        const msg = document.createElement('div');
+        msg.className = 'message user';
+        msg.textContent = text;
+        chatMessages.appendChild(msg);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+        chatHistory.push({ type: 'user', text: text });
+        hasInteracted = true;
+    }
+
+    // Show typing indicator
+    function showTyping(callback) {
+        const typing = document.createElement('div');
+        typing.className = 'typing-indicator';
+        typing.id = 'typingIndicator';
+        typing.innerHTML = '<span></span><span></span><span></span>';
+        chatMessages.appendChild(typing);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+        
+        setTimeout(() => {
+            typing.remove();
+            if (callback) callback();
+        }, 1200 + Math.random() * 800);
+    }
+
+    // Show quick reply buttons
+    function showQuickReplies(options) {
+        quickReplies.innerHTML = '';
+        options.forEach(option => {
+            const btn = document.createElement('button');
+            btn.className = 'quick-reply-btn';
+            btn.textContent = option;
+            btn.onclick = () => handleQuickReply(option);
+            quickReplies.appendChild(btn);
+        });
+    }
+
+    // Handle quick reply click
+    function handleQuickReply(text) {
+        addUserMessage(text);
+        quickReplies.innerHTML = '';
+        processUserInput(text);
+    }
+
+    // Handle text input
+    function handleChatKeypress(e) {
+        if (e.key === 'Enter') {
+            sendMessage();
+        }
+    }
+
+    function sendMessage() {
+        const text = chatInput.value.trim();
+        if (!text) return;
+        
+        addUserMessage(text);
+        chatInput.value = '';
+        quickReplies.innerHTML = '';
+        processUserInput(text);
+    }
+
+    // AI processing logic
+    function processUserInput(input) {
+        sendBtn.disabled = true;
+        const lowerInput = input.toLowerCase();
+        
+        // Determine intent based on keywords
+        let matchedIntent = null;
+        let bestMatchScore = 0;
+        
+        for (const [intent, data] of Object.entries(knowledgeBase)) {
+            if (intent === 'greeting') continue;
+            
+            let matchScore = 0;
+            for (const keyword of data.keywords || []) {
+                if (lowerInput.includes(keyword.toLowerCase())) {
+                    matchScore++;
+                }
+            }
+            
+            if (matchScore > bestMatchScore) {
+                bestMatchScore = matchScore;
+                matchedIntent = intent;
+            }
+        }
+        
+        // Handle special navigation quick replies
+        if (input === 'Back to menu' || input === 'Main menu') {
+            showTyping(() => {
+                addBotMessage("What else can I help you with?");
+                showQuickReplies([
+                    'Forgot password',
+                    'CAPTCHA help',
+                    'Account locked',
+                    'Register help',
+                    'Technical issue'
+                ]);
+                sendBtn.disabled = false;
+            });
+            return;
+        }
+        
+        if (input === 'Still not working' || input === 'Still failing' || input === 'Still broken') {
+            showTyping(() => {
+                addBotMessage("I understand this is frustrating. Let me connect you with a human support agent who can assist you further.\n\n📧 **Email:** support@university.edu\n📞 **Phone:** +1 (555) 123-4567\n🕐 **Hours:** Mon-Fri, 9 AM - 5 PM\n\nYou can also try the **Forgot Password** link or contact your department's IT helpdesk.");
+                showQuickReplies(['Back to menu']);
+                sendBtn.disabled = false;
+            });
+            return;
+        }
+        
+        if (input === 'Contact support') {
+            showTyping(() => {
+                addBotMessage("Here are the support contact details:\n\n📧 **Email:** support@university.edu\n📞 **Phone:** +1 (555) 123-4567\n🕐 **Hours:** Mon-Fri, 9 AM - 5 PM\n\nFor urgent issues, please call directly. For non-urgent issues, email us and we'll respond within 24 hours.");
+                showQuickReplies(['Back to menu']);
+                sendBtn.disabled = false;
+            });
+            return;
+        }
+        
+        if (input === 'Go to Register') {
+            showTyping(() => {
+                addBotMessage("I'll redirect you to the registration page now...");
+                setTimeout(() => {
+                    window.location.href = '/register';
+                }, 1500);
+            });
+            return;
+        }
+        
+        // Get response
+        const responseData = matchedIntent ? knowledgeBase[matchedIntent] : knowledgeBase.default;
+        
+        showTyping(() => {
+            addBotMessage(responseData.response);
+            showQuickReplies(responseData.quickReplies || ['Back to menu']);
+            sendBtn.disabled = false;
+        });
+    }
+</script>
+
+</body>
+</html>
