@@ -1,0 +1,471 @@
+<html lang="hi"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>रानी लक्ष्मी बाई स्कूटी योजना - Topper List</title>
+    <!-- FontAwesome for Social Media Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Security: Text Copy & Selection Disable */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            user-select: none; 
+            -webkit-user-select: none;
+            -ms-user-select: none;
+        }
+
+        /* THEME COLORS: Inspired by University Gyaan Logo */
+        :root {
+            --primary-blue: #002d5a;
+            --accent-gold: #d4af37;
+            --bg-color: #f4f7f6;
+            --text-dark: #333;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            padding-bottom: 80px; /* Space for fixed disclaimer */
+        }
+
+        /* STRICT LEGAL DISCLAIMER (FIXED AT BOTTOM) */
+        .strict-legal-notice {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #b71c1c; 
+            color: #ffffff;
+            text-align: center;
+            padding: 10px 15px;
+            font-size: 11.5px;
+            font-weight: 600;
+            z-index: 9999;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.3);
+            line-height: 1.4;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 600px;
+            background: #fff;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            margin-top: 15px;
+            border-top: 5px solid var(--accent-gold);
+            border-radius: 8px;
+        }
+
+        .header {
+            text-align: center;
+            border-bottom: 2px solid var(--primary-blue);
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+        .header h1 { color: #d32f2f; font-size: 22px; margin-bottom: 5px; }
+        .header h2 { color: var(--primary-blue); font-size: 18px; }
+
+        .search-type-toggle {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        .search-type-toggle label { 
+            font-weight: bold; 
+            cursor: pointer; 
+            font-size: 15px; 
+            color: var(--primary-blue);
+        }
+
+        .search-box {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            position: relative;
+        }
+        input[type="text"] {
+            padding: 12px;
+            font-size: 16px;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            width: 100%;
+            user-select: auto; /* Allow typing */
+            -webkit-user-select: auto;
+            transition: border-color 0.3s;
+        }
+        input[type="text"]:focus {
+            border-color: var(--accent-gold);
+            outline: none;
+        }
+
+        /* Smart Dropdown */
+        .suggestions-box {
+            position: absolute;
+            top: 50px;
+            left: 0;
+            width: 100%;
+            background: #fff;
+            border: 1px solid #ccc;
+            border-top: none;
+            border-radius: 0 0 5px 5px;
+            max-height: 200px;
+            overflow-y: auto;
+            z-index: 1000;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            display: none;
+        }
+        .suggestion-item {
+            padding: 10px;
+            cursor: pointer;
+            border-bottom: 1px solid #eee;
+            font-size: 13px;
+        }
+        .suggestion-item:hover { 
+            background-color: #fdfaf0; 
+            color: var(--primary-blue); 
+            font-weight: bold; 
+        }
+
+        button {
+            padding: 12px;
+            font-size: 16px;
+            background-color: var(--primary-blue);
+            color: #fff;
+            border: 2px solid var(--primary-blue);
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+            margin-top: 5px;
+        }
+        button:hover { 
+            background-color: var(--accent-gold); 
+            border-color: var(--accent-gold);
+            color: var(--primary-blue);
+        }
+
+        .result-container { margin-top: 20px; width: 100%; }
+        
+        /* Card Layout for Roll Number */
+        .result-card {
+            background: #fdfaf0;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 5px solid var(--accent-gold);
+            margin-bottom: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        .result-item { margin-bottom: 8px; font-size: 14px; }
+        .result-item strong { color: var(--primary-blue); }
+        
+        /* Table Layout for College */
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto;
+            margin-top: 10px;
+        }
+        .result-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+            min-width: 600px;
+        }
+        .result-table th {
+            background-color: var(--primary-blue);
+            color: white;
+            padding: 10px;
+            text-align: left;
+            white-space: nowrap;
+        }
+        .result-table td {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+        .result-table tr:nth-child(even) { background-color: #f9f9f9; }
+        .result-table tr:hover { background-color: #fdfaf0; }
+
+        .topper-msg {
+            color: var(--primary-blue);
+            font-weight: bold;
+            margin-top: 15px;
+            font-size: 16px;
+            text-align: center;
+            background-color: #e6f2ff;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid var(--accent-gold);
+        }
+
+        .error-msg {
+            color: #d32f2f;
+            background: #ffebee;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        /* Animated Social Media Icons */
+        .social-section {
+            display: none;
+            margin-top: 25px;
+            text-align: center;
+            padding: 15px;
+            background: #f9f9f9;
+            border-radius: 8px;
+            border: 1px dashed var(--accent-gold);
+        }
+        .social-section p { font-weight: bold; color: var(--primary-blue); margin-bottom: 15px; font-size: 13px; }
+        .social-icons { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
+        .social-btn {
+            display: flex; align-items: center; justify-content: center;
+            width: 45px; height: 45px; border-radius: 50%; color: #fff;
+            text-decoration: none; font-size: 22px; animation: pulse 1.5s infinite;
+        }
+        .whatsapp { background-color: #25D366; }
+        .telegram { background-color: #0088cc; }
+        .instagram { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); }
+        .youtube { background-color: #FF0000; }
+
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.4); }
+            50% { transform: scale(1.1); box-shadow: 0 0 10px 0 rgba(212, 175, 55, 0.6); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); }
+        }
+
+        /* Updated Footer Design: Logo --- University Gyaan */
+        .footer { 
+            margin-top: auto; 
+            text-align: center; 
+            padding-top: 20px; 
+            border-top: 1px solid #eee; 
+            margin-bottom: 10px;
+        }
+        .footer p { font-size: 12px; color: #777; margin-bottom: 5px; }
+        .footer-brand {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px; /* Space between logo and text */
+            margin-top: 5px;
+        }
+        .footer-brand img { 
+            width: 45px; /* Adjust size here */
+            height: auto; 
+        }
+        .footer-brand strong {
+            font-size: 20px;
+            color: var(--primary-blue);
+        }
+    </style>
+</head>
+
+<!-- Prevent Right Click -->
+<body oncontextmenu="return false;">
+
+<div class="container">
+    <div class="header">
+        <h1>रानी लक्ष्मी बाई स्कूटी योजना - Topper List</h1>
+        <h2>CCS UNIVERSITY, MEERUT</h2>
+    </div>
+
+    <div class="search-type-toggle">
+        <label><input type="radio" name="searchType" value="roll" checked="" onchange="changeSearchType()"> Roll Number</label>
+        <label><input type="radio" name="searchType" value="college" onchange="changeSearchType()"> College Name</label>
+    </div>
+
+    <div class="search-box">
+        <input type="text" id="searchInput" placeholder="Type College Name (ex: SSV)" onkeyup="handleInput()" autocomplete="off">
+        <div id="suggestionsBox" class="suggestions-box" style="display: none;"><div class="suggestion-item" onclick="selectCollege('004 -J V COLLEGE BARAUT')">004 -J V COLLEGE BARAUT</div></div>
+        <button id="searchBtn" onclick="searchData()">Search Result</button>
+    </div>
+
+    <div id="resultArea" class="result-container"></div>
+
+    <div class="social-section" id="socialSection" style="display: none;">
+        <p>योजना से जुड़ी आगे की सभी आधिकारिक अपडेट्स के लिए अभी हमसे जुड़ें:</p>
+        <div class="social-icons">
+            <a href="https://whatsapp.com/channel/0029Va9jtav4tRrmKPxos138" target="_blank" class="social-btn whatsapp"><i class="fab fa-whatsapp"></i></a>
+            <a href="https://t.me/CCSUniversityMRT" target="_blank" class="social-btn telegram"><i class="fab fa-telegram-plane"></i></a>
+            <a href="https://instagram.com/universityupdates_uu" target="_blank" class="social-btn instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.youtube.com/@University-Updates-UU" target="_blank" class="social-btn youtube"><i class="fab fa-youtube"></i></a>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>Powered by</p>
+        <div class="footer-brand">
+            <img src="https://i.ibb.co/nMC0877T/UNIVERSITY-UPDATES-LOGO-removebg-preview.png" alt="University Updates Logo">
+            <strong>University Updates</strong>
+        </div>
+    </div>
+</div>
+
+<!-- STRICT LEGAL DISCLAIMER FIXED AT BOTTOM -->
+<div class="strict-legal-notice">
+    वैधानिक चेतावनी (Legal Disclaimer): यह वेबसाइट CCS University या UP सरकार की आधिकारिक वेबसाइट नहीं है। यह सूची केवल सामान्य सूचना मात्र है। इसमें नाम प्रदर्शित होना इस बात को किसी भी रूप में प्रमाणित नहीं करता कि आपको योजना का लाभ 100% मिलेगा। आधिकारिक और अंतिम पुष्टि के लिए अपने संबंधित महाविद्यालय में संपर्क करें। इस वेबसाइट के आधार पर कोई भी कानूनी दावा (Legal Claim) मान्य नहीं होगा।
+</div>
+
+<script>
+    // Aapki Google Apps Script Web App API Link YAHAN DALEIN
+    const API_URL = "https://script.google.com/macros/s/AKfycbzof9pVkOiDe-4G1k-W18xvycv3-w-MXVoRYcaYklfwAo_Rwjv8tpHJuaLizFU6u3juXw/exec"; 
+    
+    let collegeList = [];
+
+    // Background me college ki list mangwana Dropdown ke liye
+    window.onload = function() {
+        fetch(API_URL + "?type=getColleges")
+            .then(res => res.json())
+            .then(data => { collegeList = data; })
+            .catch(err => console.log("Error loading colleges"));
+    };
+
+    const cleanString = (str) => str.replace(/[^a-zA-Z0-9]/g, '').toLowerCase();
+
+    function changeSearchType() {
+        const type = document.querySelector('input[name="searchType"]:checked').value;
+        const inputField = document.getElementById('searchInput');
+        inputField.value = '';
+        document.getElementById('suggestionsBox').style.display = 'none';
+        document.getElementById('resultArea').innerHTML = '';
+        document.getElementById('socialSection').style.display = 'none';
+        
+        if(type === 'roll') {
+            inputField.placeholder = "Enter Roll Number (ex: 230001000402)";
+        } else {
+            inputField.placeholder = "Type College Name (ex: SSV)";
+        }
+    }
+
+    function handleInput() {
+        const type = document.querySelector('input[name="searchType"]:checked').value;
+        const inputVal = document.getElementById('searchInput').value;
+        const suggestionsBox = document.getElementById('suggestionsBox');
+
+        if(type === 'college' && inputVal.length > 0 && collegeList.length > 0) {
+            const cleanedInput = cleanString(inputVal);
+            const matchedColleges = collegeList.filter(c => cleanString(c).includes(cleanedInput));
+            
+            if(matchedColleges.length > 0) {
+                suggestionsBox.innerHTML = matchedColleges.map(c => 
+                    `<div class="suggestion-item" onclick="selectCollege('${c}')">${c}</div>`
+                ).join('');
+                suggestionsBox.style.display = 'block';
+            } else {
+                suggestionsBox.style.display = 'none';
+            }
+        } else {
+            suggestionsBox.style.display = 'none';
+        }
+    }
+
+    function selectCollege(collegeName) {
+        document.getElementById('searchInput').value = collegeName;
+        document.getElementById('suggestionsBox').style.display = 'none';
+    }
+
+    function searchData() {
+        const inputVal = document.getElementById('searchInput').value.trim();
+        const searchType = document.querySelector('input[name="searchType"]:checked').value;
+        const resultArea = document.getElementById('resultArea');
+        const socialSection = document.getElementById('socialSection');
+        document.getElementById('suggestionsBox').style.display = 'none';
+
+        if (inputVal === "") return;
+
+        resultArea.innerHTML = '<div style="text-align:center; font-weight:bold; color:var(--primary-blue);">Searching Secure Database... कृपया प्रतीक्षा करें...</div>';
+
+        // API se Data Fetch karna
+        fetch(`${API_URL}?type=${searchType}&search=${encodeURIComponent(inputVal)}`)
+            .then(res => res.json())
+            .then(results => {
+                if (results.length > 0) {
+                    let htmlContent = '';
+                    
+                    if(searchType === 'roll') {
+                        // Roll Number = Ek Result Card Design
+                        let data = results[0]; // Ek student
+                        htmlContent += `
+                            <div class="result-card">
+                                <div class="result-item"><strong>College:</strong> ${data.college}</div>
+                                <div class="result-item"><strong>Roll Number:</strong> ${data.roll}</div>
+                                <div class="result-item"><strong>Enrollment:</strong> ${data.enrollment}</div>
+                                <div class="result-item"><strong>Name:</strong> ${data.name}</div>
+                                <div class="result-item"><strong>Father:</strong> ${data.father}</div>
+                                <div class="result-item"><strong>Class:</strong> ${data.className}</div>
+                                <div class="result-item"><strong>Score:</strong> ${data.percentage} (${data.division})</div>
+                            </div>
+                        `;
+                    } else {
+                        // College = List Table Design
+                        htmlContent += `
+                            <div class="table-responsive">
+                                <table class="result-table">
+                                    <thead>
+                                        <tr>
+                                            <th>S.No.</th>
+                                            <th>Roll No.</th>
+                                            <th>Name</th>
+                                            <th>Father's Name</th>
+                                            <th>Class</th>
+                                            <th>%</th>
+                                            <th>Div</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                        `;
+                        results.forEach((data, index) => {
+                            htmlContent += `
+                                <tr>
+                                    <td>${index + 1}</td>
+                                    <td>${data.roll}</td>
+                                    <td>${data.name}</td>
+                                    <td>${data.father}</td>
+                                    <td>${data.className}</td>
+                                    <td>${data.percentage}</td>
+                                    <td>${data.division}</td>
+                                </tr>
+                            `;
+                        });
+                        htmlContent += `</tbody></table></div>`;
+                    }
+                    
+                    // Naya Message (Congratulations Hatakar)
+                    htmlContent += `<div class="topper-msg">Congratulations! Your name is on the topper list.</div>`;
+                    
+                    resultArea.innerHTML = htmlContent;
+                } else {
+                    resultArea.innerHTML = '<div class="error-msg">Sorry! इस जानकारी से जुड़ा कोई डेटा नहीं मिला।</div>';
+                }
+                socialSection.style.display = 'block';
+            })
+            .catch(err => {
+                resultArea.innerHTML = '<div class="error-msg">सर्वर से संपर्क करने में समस्या आई। कृपया थोड़ी देर बाद प्रयास करें।</div>';
+            });
+    }
+
+    // SECURITY: Disable F12, Ctrl+Shift+I, Ctrl+U, Ctrl+S, Ctrl+C (Inspect Element & Copy Block)
+    document.onkeydown = function(e) {
+        if(e.keyCode == 123) { return false; } // F12
+        if(e.ctrlKey && e.shiftKey && e.keyCode == 73) { return false; } // Ctrl+Shift+I
+        if(e.ctrlKey && e.shiftKey && e.keyCode == 74) { return false; } // Ctrl+Shift+J
+        if(e.ctrlKey && e.keyCode == 85) { return false; } // Ctrl+U (View Source)
+        if(e.ctrlKey && e.keyCode == 83) { return false; } // Ctrl+S (Save as)
+        if(e.ctrlKey && e.keyCode == 67) { return false; } // Ctrl+C (Copy)
+    }
+</script>
+
+
+
+</body></html>
